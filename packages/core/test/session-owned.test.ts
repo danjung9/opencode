@@ -105,6 +105,7 @@ const setup = Effect.fnUntraced(function* (options?: {
       }),
     awaitIdle: () => Effect.void,
     interrupt: () => Effect.succeed(false),
+    periodStartSeq: () => Effect.succeed(undefined),
     wake: (id) =>
       Effect.gen(function* () {
         const pending = yield* SessionInbox.list(database.db, id)
@@ -636,6 +637,7 @@ describe("Session-owned handles", () => {
             }),
           wake: coordinator.wake,
           awaitIdle: coordinator.awaitIdle,
+          periodStartSeq: () => Effect.succeed(undefined),
           interrupt: (id, options) =>
             Effect.sync(() => void interrupts.push({ sessionID: id, options })).pipe(
               Effect.andThen(coordinator.interrupt(id)),
