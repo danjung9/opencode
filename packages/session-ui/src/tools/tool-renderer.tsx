@@ -161,7 +161,6 @@ const toolMetadata = Schema.decodeUnknownSync(
     command: optional(Schema.String),
     shellID: optional(Schema.String),
     status: optional(Schema.String),
-    background: optional(Schema.Boolean),
     count: optional(Schema.Finite),
     matches: optional(Schema.Finite),
     files: optional(Schema.Array(Schema.Unknown)),
@@ -1758,15 +1757,7 @@ ToolRegistry.register({
 
     const view = createMemo(() => viewSubagentRun(run()))
 
-    const subtitle = createMemo(() => {
-      const value = input().description || childSessionId()
-
-      if (!value) return value
-
-      if (view().background) return `${value} (background)`
-
-      return value
-    })
+    const subtitle = createMemo(() => input().description || childSessionId())
 
     const href = createMemo(() => sessionLink(childSessionId(), data.sessionHref))
     const clickable = createMemo(() => !!(childSessionId() && (data.navigateToSession || href())))
