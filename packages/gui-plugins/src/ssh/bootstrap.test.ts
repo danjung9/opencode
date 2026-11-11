@@ -4,12 +4,12 @@ import { RemoteCli } from "./remote-cli"
 
 test("ignores stopped services and registrations that do not match the healthy endpoint", () => {
   const registration = { url: "http://127.0.0.1:1234", password: "secret", version: "2.0.0", pid: 42 }
-  const frame = `OPENCODE_SSH_REGISTRATION_BEGIN\n${JSON.stringify(registration)}\nOPENCODE_SSH_REGISTRATION_END\n`
-  expect(parseRegistration(`OPENCODE_SSH_STATUS=stopped\n${frame}`)).toBeUndefined()
-  expect(parseRegistration(`OPENCODE_SSH_STATUS=http://127.0.0.1:9999\n${frame}`)).toBeUndefined()
+  const frame = `WARCODE_SSH_REGISTRATION_BEGIN\n${JSON.stringify(registration)}\nWARCODE_SSH_REGISTRATION_END\n`
+  expect(parseRegistration(`WARCODE_SSH_STATUS=stopped\n${frame}`)).toBeUndefined()
+  expect(parseRegistration(`WARCODE_SSH_STATUS=http://127.0.0.1:9999\n${frame}`)).toBeUndefined()
   expect(
     parseRegistration(
-      `OPENCODE_SSH_STATUS=${registration.url}\nOPENCODE_SSH_REGISTRATION_BEGIN\ninvalid\nOPENCODE_SSH_REGISTRATION_END\n`,
+      `WARCODE_SSH_STATUS=${registration.url}\nWARCODE_SSH_REGISTRATION_BEGIN\ninvalid\nWARCODE_SSH_REGISTRATION_END\n`,
     ),
   ).toBeUndefined()
 })

@@ -1,28 +1,28 @@
 import { expect, test } from "bun:test"
 import { Cause, Deferred, Effect, Exit, Fiber, Schema } from "effect"
 import { eq } from "drizzle-orm"
-import { LLMEvent } from "@opencode/ai/effect"
-import { Money } from "@opencode/schema/money"
-import { Bus } from "@opencode/core/bus"
-import { Database } from "@opencode/core/database/database"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { EventTable } from "@opencode/core/event/sql"
-import { Event } from "@opencode/schema/event"
-import { Agent } from "@opencode/core/agent"
-import { SessionEvent } from "@opencode/core/session/event"
-import { SessionMessage } from "@opencode/core/session/message"
-import { Session } from "@opencode/core/session"
-import { SessionProjector } from "@opencode/core/session/projector"
-import { SessionMessageTable, SessionTable } from "@opencode/core/session/sql"
-import { Project } from "@opencode/core/project"
-import { ProjectTable } from "@opencode/core/project/sql"
-import { Model } from "@opencode/core/model"
-import { Provider } from "@opencode/core/provider"
-import { AbsolutePath, RelativePath } from "@opencode/core/schema"
-import { Snapshot } from "@opencode/core/snapshot"
-import { createLLMEventPublisher } from "@opencode/core/session/runner/publish-llm-event"
-import { SessionUsage } from "@opencode/core/session/usage"
-import { LayerNode } from "@opencode/util/effect/layer-node"
+import { LLMEvent } from "@warcode/ai/effect"
+import { Money } from "@warcode/schema/money"
+import { Bus } from "@warcode/core/bus"
+import { Database } from "@warcode/core/database/database"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { EventTable } from "@warcode/core/event/sql"
+import { Event } from "@warcode/schema/event"
+import { Agent } from "@warcode/core/agent"
+import { SessionEvent } from "@warcode/core/session/event"
+import { SessionMessage } from "@warcode/core/session/message"
+import { Session } from "@warcode/core/session"
+import { SessionProjector } from "@warcode/core/session/projector"
+import { SessionMessageTable, SessionTable } from "@warcode/core/session/sql"
+import { Project } from "@warcode/core/project"
+import { ProjectTable } from "@warcode/core/project/sql"
+import { Model } from "@warcode/core/model"
+import { Provider } from "@warcode/core/provider"
+import { AbsolutePath, RelativePath } from "@warcode/core/schema"
+import { Snapshot } from "@warcode/core/snapshot"
+import { createLLMEventPublisher } from "@warcode/core/session/runner/publish-llm-event"
+import { SessionUsage } from "@warcode/core/session/usage"
+import { LayerNode } from "@warcode/util/effect/layer-node"
 import { it, testEffect } from "./lib/effect"
 import { TestClock } from "effect/testing"
 
@@ -62,7 +62,7 @@ const capture = (
       agent: Agent.ID.make("build"),
       model: {
         id: Model.ID.make("model"),
-        providerID: Provider.ID.opencode,
+        providerID: Provider.ID.warcode,
       },
       providerMetadataKey,
       pendingSnapshot: options?.pendingSnapshot,
@@ -168,7 +168,7 @@ testEffect(
         sessionID,
         assistantMessageID,
         agent: Agent.defaultID,
-        model: { id: Model.ID.make("test-model"), providerID: Provider.ID.opencode },
+        model: { id: Model.ID.make("test-model"), providerID: Provider.ID.warcode },
         providerMetadataKey: "openai",
         started: 0,
       },

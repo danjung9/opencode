@@ -1,11 +1,11 @@
-import { Button } from "@opencode/ui/button"
-import { Dialog, DialogBody, DialogFooter, DialogHeader, DialogTitle } from "@opencode/ui/dialog"
-import { Divider } from "@opencode/ui/divider"
-import { TextInput } from "@opencode/ui/text-input"
-import { useDialog } from "@opencode/ui/context/dialog"
-import { uuid } from "@opencode/util/uuid"
+import { Button } from "@warcode/ui/button"
+import { Dialog, DialogBody, DialogFooter, DialogHeader, DialogTitle } from "@warcode/ui/dialog"
+import { Divider } from "@warcode/ui/divider"
+import { TextInput } from "@warcode/ui/text-input"
+import { useDialog } from "@warcode/ui/context/dialog"
+import { uuid } from "@warcode/util/uuid"
 import { createMemo, createSignal, onCleanup, onMount, Show, untrack } from "solid-js"
-import { createKeyed, usePlugin } from "@opencode/plugin/gui"
+import { createKeyed, usePlugin } from "@warcode/plugin/gui"
 import type { SshConfig } from "./contract"
 import {
   createSshDialogState,

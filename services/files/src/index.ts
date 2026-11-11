@@ -8,7 +8,7 @@ export default {
         "Range, If-Range, If-Match, If-None-Match, If-Modified-Since, If-Unmodified-Since",
       "Access-Control-Expose-Headers":
         "Accept-Ranges, Content-Length, Content-Range, Content-Disposition, ETag, Last-Modified",
-      // Like everything on dev.opencode.ai, dev's files ask search engines not to index them.
+      // Like everything on dev.warcode.ai, dev's files ask search engines not to index them.
       ...(env.STAGE === "dev" ? { "X-Robots-Tag": "noindex, nofollow" } : {}),
     }
 

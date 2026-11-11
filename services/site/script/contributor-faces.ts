@@ -9,7 +9,7 @@
 // look at the new ones (and at allowlisted ones whose picture changed).
 import { faces } from "../src/lib/contributor-faces"
 
-const repo = "anomalyco/opencode"
+const repo = "anomalyco/warcode"
 const out = Bun.argv[2] ?? `${process.env.TMPDIR ?? "/tmp"}/contributor-faces.html`
 const allowed = new Set(faces.map((face) => face.login))
 
@@ -18,7 +18,7 @@ type Contributor = { login: string; id: number; type: string; avatar_url: string
 const pages = await Promise.all(
   [1, 2].map((page) =>
     fetch(`https://api.github.com/repos/${repo}/contributors?per_page=100&page=${page}`, {
-      headers: { Accept: "application/vnd.github+json", "User-Agent": "OpenCode-Console" },
+      headers: { Accept: "application/vnd.github+json", "User-Agent": "Warcode-Console" },
     }).then((response) => {
       if (!response.ok) throw new Error(`GitHub answered ${response.status} for page ${page}`)
       return response.json() as Promise<Contributor[]>

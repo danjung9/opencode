@@ -80,7 +80,7 @@ const tones = {
 type Tone = keyof typeof tones
 
 /**
- * "OpenCode. Six letters.": the whole film as a pure function of `time`, in seconds. Every frame is
+ * "Warcode. Six letters.": the whole film as a pure function of `time`, in seconds. Every frame is
  * SVG built from the font's own outlines and module maps, so a recorder can step it frame by frame.
  * Wide is 1920 × 1080 letterboxed to 2:1; tall is 1080 × 1350 for social.
  */
@@ -106,7 +106,7 @@ export function Film(props: {
       style={{ width: `${outer}px`, height: `${full}px` }}
     >
       <div data-slot="film-bar">
-        <span>OpenCode Font — The film</span>
+        <span>Warcode Font — The film</span>
         <span>
           {props.poster
             ? "Pl. 00 · The film"
@@ -128,7 +128,7 @@ export function Film(props: {
       </svg>
       <div data-slot="film-bar">
         <span>TC {timecode(props.time())}</span>
-        <span>opencode.ai/font</span>
+        <span>warcode.ai/font</span>
       </div>
       {/* The ending: the whole frame, bars included, fades to black under "yours alone" and stays black. */}
       <Show when={!props.poster && ending() > 0}>
@@ -349,7 +349,7 @@ function PenHead(props: { x: number; y: number }) {
 
 function GridScene(props: { c: Ctx }) {
   const c = props.c
-  const word = placeRows(wordRows("opencode", c, 4), c, 0.86)
+  const word = placeRows(wordRows("warcode", c, 4), c, 0.86)
   const m = word.m
   const lock = c.at("grid", 1)
   const verticals = Array.from({ length: Math.ceil(c.W / m) + 1 }, (_, k) => word.ox + (k - Math.ceil(word.ox / m)) * m)
@@ -557,7 +557,7 @@ function ParadeScene(props: { c: Ctx }) {
   const m = Math.round(c.H * (c.tall ? 0.12 : 0.165))
   const pitch = 5 * m
   const speed = c.tall ? 900 : 1500
-  const run = [..."opencodeopencode"] as Letter[]
+  const run = [..."warcodewarcode"] as Letter[]
 
   return (
     <Stage tone="dark" c={c}>
@@ -1390,7 +1390,7 @@ function BytesScene(props: { c: Ctx }) {
   return (
     <Stage tone="blue" c={c} push={[1, 1.05]}>
       <Mono x={c.W / 2} y={c.H * 0.22} size={22} anchor="middle" fill="var(--ink)">
-        OPENCODE.OTF · OPENTYPE
+        WARCODE.OTF · OPENTYPE
       </Mono>
       <Mono x={c.W / 2} y={c.H * 0.5} size={c.tall ? 190 : 300} anchor="middle" fill="var(--ink)">
         {fmt(value())}
@@ -1555,7 +1555,7 @@ function TerminalScene(props: { c: Ctx }) {
       }),
     ),
   )
-  const word = layout("opencode")
+  const word = layout("warcode")
   // Notes stack upward from above line 0 (which holds the d's ascender), so none touches a glyph. The
   // o's bracket sits in line 0's empty cells just above the o.
   const above = oy + 2 * m - 18
@@ -1618,7 +1618,7 @@ function TerminalScene(props: { c: Ctx }) {
       </Show>
       <Show when={c.t() >= swap}>
         <Mono x={ox} y={note(1)} size={18} fill="var(--accent)">
-          OPENCODE.OTF · THE SAME GRID, CELL FOR CELL
+          WARCODE.OTF · THE SAME GRID, CELL FOR CELL
         </Mono>
       </Show>
     </Stage>
@@ -1718,7 +1718,7 @@ function VariantsScene(props: { c: Ctx }) {
           MAP {fmt(variant()).padStart(5, "0")}
         </Mono>
         <Mono x={c.W - INSET} y={INSET + 10} size={20} anchor="end">
-          OPENCODE-{signature(variant()).toUpperCase()}-REGULAR
+          WARCODE-{signature(variant()).toUpperCase()}-REGULAR
         </Mono>
       </Show>
       <Show when={c.t() >= wall}>
@@ -1746,7 +1746,7 @@ function VariantsScene(props: { c: Ctx }) {
 
 function YoursScene(props: { c: Ctx }) {
   const c = props.c
-  const word = placeRows(["opencode"], c, c.tall ? 0.86 : 0.6)
+  const word = placeRows(["warcode"], c, c.tall ? 0.86 : 0.6)
   // Just the word; the film fades to black under "yours alone" (see Film).
   return (
     <Stage tone="dark" c={c}>
@@ -1760,12 +1760,12 @@ function YoursScene(props: { c: Ctx }) {
 /* ───────────────────────── Poster ───────────────────────── */
 
 /**
- * The plate's start screen: "opencode" on its module grid, without the grid's tolerance line.
+ * The plate's start screen: "warcode" on its module grid, without the grid's tolerance line.
  * Inverted is white on black, the shade as white at the shade's opacity; light is the grid frame.
  */
 function PosterScene(props: { tone: "inverted" | "light"; c: Ctx }) {
   const c = props.c
-  const word = placeRows(wordRows("opencode", c, 4), c, 0.86)
+  const word = placeRows(wordRows("warcode", c, 4), c, 0.86)
   const m = word.m
   const verticals = Array.from({ length: Math.ceil(c.W / m) + 1 }, (_, k) => word.ox + (k - Math.ceil(word.ox / m)) * m)
   const horizontals = Array.from(

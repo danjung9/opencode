@@ -24,7 +24,7 @@ import { Cause, Data, Deferred, Effect, Option, Schema } from "effect"
 import { FetchHttpClient } from "effect/http"
 import type { ServerResponse } from "node:http"
 import type { AddressInfo } from "node:net"
-import { ConfigMCP } from "@opencode/schema/config/mcp"
+import { ConfigMCP } from "@warcode/schema/config/mcp"
 import { Credential } from "../credential.js"
 import { OauthCallbackPage } from "../oauth/page.js"
 import type { Integration } from "../integration.js"
@@ -224,7 +224,7 @@ const provider = (options: Options): OAuthClientProvider => {
     ...(redirect ? { state: () => redirect.state } : {}),
     clientMetadata: {
       redirect_uris: [redirectUrl],
-      client_name: "opencode",
+      client_name: "warcode",
       client_uri: "https://opencode.ai",
       logo_uri: "https://opencode.ai/web-app-manifest-512x512.png",
       grant_types: ["authorization_code", "refresh_token"],
@@ -525,7 +525,7 @@ export const authorize = (input: {
           jsonrpc: "2.0",
           id: 0,
           method: "initialize",
-          params: { protocolVersion: LATEST_PROTOCOL_VERSION, capabilities: {}, clientInfo: { name: "opencode" } },
+          params: { protocolVersion: LATEST_PROTOCOL_VERSION, capabilities: {}, clientInfo: { name: "warcode" } },
         }),
         signal,
       }),

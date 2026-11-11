@@ -1,7 +1,7 @@
 export * as SkillFile from "./skill-file.js"
 
 import path from "path"
-import { isRecord } from "@opencode/util/record"
+import { isRecord } from "@warcode/util/record"
 import { Result, Schema, type SchemaIssue, SchemaParser } from "effect"
 import { ConfigMarkdown } from "../markdown.js"
 import { AbsolutePath } from "../../schema.js"
@@ -45,9 +45,9 @@ export function parse(directory: string, filepath: string, content: string): Par
     path.dirname(filepath) === directory && path.basename(filepath) !== "SKILL.md"
       ? path.basename(filepath, ".md")
       : path.basename(path.dirname(filepath))
-  const opencodeAutoinvoke = metadataBoolean(frontmatter.metadata, "opencode/autoinvoke")
+  const warcodeAutoinvoke = metadataBoolean(frontmatter.metadata, "warcode/autoinvoke")
   const disableModelInvocation = booleanValue(frontmatter["disable-model-invocation"])
-  const autoinvoke = opencodeAutoinvoke ?? (disableModelInvocation ? false : undefined)
+  const autoinvoke = warcodeAutoinvoke ?? (disableModelInvocation ? false : undefined)
   return {
     _tag: "Parsed",
     skill: {

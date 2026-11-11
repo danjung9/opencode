@@ -71,7 +71,7 @@ export function transitionModelsReveal(state: ModelsRevealState, event: ModelsRe
 
     if (event.sectionReady) return scroll(state, state.expanded ? [] : [expand])
 
-    // A provider nested in a collapsed OpenCode Console group mounts only once the group expands.
+    // A provider nested in a collapsed Warcode Console group mounts only once the group expands.
     if (state.expanded) return unchanged(state)
 
     return { state: { ...state, expanded: true }, effects: [expand] }

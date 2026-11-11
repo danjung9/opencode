@@ -1,8 +1,8 @@
 import { describe, expect, jest, test } from "bun:test"
 import { createStore, produce } from "solid-js/store"
-import { ClientError, type PersistentPtyInfo } from "@opencode/client"
-import type { Layout, ServerRef, SessionRef, Storage, ToastOptions } from "@opencode/plugin/gui"
-import { PtyFeatureUnsupportedError, PtyNotFoundError, ServiceUnavailableError } from "@opencode/protocol/errors"
+import { ClientError, type PersistentPtyInfo } from "@warcode/client"
+import type { Layout, ServerRef, SessionRef, Storage, ToastOptions } from "@warcode/plugin/gui"
+import { PtyFeatureUnsupportedError, PtyNotFoundError, ServiceUnavailableError } from "@warcode/protocol/errors"
 import { TERMINAL_REQUEST_TIMEOUT_MS } from "./machine"
 import { createTerminalModel } from "./model"
 
@@ -305,8 +305,8 @@ describe("terminal model", () => {
   test("treats a server whose terminal daemon is unavailable like one without terminal support", async () => {
     const server = fakeServer()
     server.state.listError = new ServiceUnavailableError({
-      message: "opencode-pty is not available",
-      service: "opencode-pty",
+      message: "warcode-pty is not available",
+      service: "warcode-pty",
     })
     const { model, session } = setup(server)
 
@@ -373,8 +373,8 @@ describe("terminal model", () => {
     expect(terminal.all().map((item) => item.id)).toEqual(["pty_1", "pty_2"])
 
     server.state.listError = new ServiceUnavailableError({
-      message: "opencode-pty is not available",
-      service: "opencode-pty",
+      message: "warcode-pty is not available",
+      service: "warcode-pty",
     })
     slow.resolve()
     await flush()

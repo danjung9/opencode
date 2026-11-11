@@ -1,4 +1,4 @@
-/* Settings › Provider logos (provider-logos.tsx): monochrome provider marks in "What is OpenCode?".
+/* Settings › Provider logos (provider-logos.tsx): monochrome provider marks in "What is Warcode?".
    The marks are masks in the text colour, muted at rest; hover brings a mark to the ink and shows
    its name (the site's tooltip). */
 [data-site] [data-component="provider-logos"] {

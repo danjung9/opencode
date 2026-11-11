@@ -9,9 +9,9 @@ import {
   type ProviderConnectTransition,
 } from "./machine"
 
-// The OpenCode Console account is the `opencode` integration. OpenCode Go is its own integration
+// The Warcode Console account is the `warcode` integration. Warcode Go is its own integration
 // and connects with its own methods, the same as the TUI.
-export const CONSOLE_INTEGRATION = "opencode"
+export const CONSOLE_INTEGRATION = "warcode"
 
 export const CLAUDE_AGENT_INTEGRATION = "claude-agent"
 

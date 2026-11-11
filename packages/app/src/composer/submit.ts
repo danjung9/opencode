@@ -1,5 +1,5 @@
-import { SessionMessage } from "@opencode/schema/session-message"
-import type { SessionMessageUser } from "@opencode/client/promise"
+import { SessionMessage } from "@warcode/schema/session-message"
+import type { SessionMessageUser } from "@warcode/client/promise"
 import { createEffect, createSignal, onCleanup, untrack, type Accessor } from "solid-js"
 import type { PromptComment } from "./comment-note"
 import type { PromptHistoryComment } from "./history/entry"
@@ -13,7 +13,7 @@ import type {
   ComposerSubmissionHandle,
 } from "./adapter"
 import { buildPromptRequest, commentMentions, noteComment, quoteComment } from "./request"
-import { getDirectory, getFilename } from "@opencode/util/path"
+import { getDirectory, getFilename } from "@warcode/util/path"
 import { setCursorPosition } from "./editor/dom"
 import { blobDataUrl, resolveBlobUrl } from "@/runtime/persistence/drafts"
 import type { ModelSelection } from "@/providers/models/selection"

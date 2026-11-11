@@ -1,9 +1,9 @@
 import { createEffect, createMemo, createSignal, on, onCleanup, Show, untrack } from "solid-js"
 import { createEventListener } from "@solid-primitives/event-listener"
 import { createResizeObserver } from "@solid-primitives/resize-observer"
-import { observeReducedMotion, prefersReducedMotion } from "@opencode/ui/motion"
-import type { EmbedProps, Embeds } from "@opencode/plugin/gui"
-import type { Bridge } from "@opencode/plugin/gui/host"
+import { observeReducedMotion, prefersReducedMotion } from "@warcode/ui/motion"
+import type { EmbedProps, Embeds } from "@warcode/plugin/gui"
+import type { Bridge } from "@warcode/plugin/gui/host"
 import {
   createEmbedStillState,
   INITIAL_FLIGHT_STATE,

@@ -10,8 +10,8 @@ import {
   type Context,
   type JSX,
 } from "solid-js"
-import { DataContext, useData } from "@opencode/session-ui/context"
-import { MarkdownContext, useMarkdown } from "@opencode/session-ui/context/markdown"
+import { DataContext, useData } from "@warcode/session-ui/context"
+import { MarkdownContext, useMarkdown } from "@warcode/session-ui/context/markdown"
 import { createScopedCache } from "@/runtime/server/scoped-cache"
 import { useWorkspaceLocation, WorkspaceLocationContext } from "@/workspaces/location"
 import { createTimelineCacheEntryState, transitionTimelineCacheEntry } from "./cache-machine"

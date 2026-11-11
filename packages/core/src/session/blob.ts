@@ -4,8 +4,8 @@ import { createHash } from "node:crypto"
 import { and, eq, exists, gte, inArray, notExists, type SQL, sql } from "drizzle-orm"
 import { Cause, Context, Effect, Option, Schema } from "effect"
 import { map } from "effect/Array"
-import type { Attachment, FileAttachment } from "@opencode/schema/prompt"
-import type { Tool } from "@opencode/schema/tool"
+import type { Attachment, FileAttachment } from "@warcode/schema/prompt"
+import type { Tool } from "@warcode/schema/tool"
 import { DatabaseBatch } from "../database/batch.js"
 import type { Database } from "../database/database.js"
 import { Flag } from "../flag.js"
@@ -284,7 +284,7 @@ export const enabledFor = (instances: Instance.Interface, session: SessionSchema
  * Whether a fork's projection stores the child's copied media as blobs. `Session.fork` sets it from the parent's
  * location; the projection ignores the caller's own config, and a replayed fork without it copies media inline.
  */
-export const ForkMedia = Context.Reference<boolean>("@opencode/SessionBlob/ForkMedia", { defaultValue: () => false })
+export const ForkMedia = Context.Reference<boolean>("@warcode/SessionBlob/ForkMedia", { defaultValue: () => false })
 
 const DATA_URI = /^data:[^,]*;base64,(.*)$/s
 

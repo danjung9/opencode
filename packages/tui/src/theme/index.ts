@@ -4,11 +4,11 @@ import {
   parseThemeDocument,
   type ThemeDocument,
   type ModeDefinition,
-} from "@opencode/theme/tui"
+} from "@warcode/theme/tui"
 import { resolveThemeColors } from "./resolve"
 import { DEFAULT_THEMES, type Theme, type ThemeV1Json } from "./v1"
-import opencode from "./assets/v2/opencode.json" with { type: "json" }
-import opencode2 from "./assets/v2/opencode2.json" with { type: "json" }
+import warcode from "./assets/v2/warcode.json" with { type: "json" }
+import warcode2 from "./assets/v2/warcode2.json" with { type: "json" }
 
 export { DEFAULT_THEMES, type Theme, type ThemeV1Json } from "./v1"
 
@@ -18,37 +18,37 @@ let customThemes: Record<string, ThemeDocumentSource> = {}
 let systemTheme: ThemeDocumentSource | undefined
 const listeners = new Set<(themes: Record<string, ThemeDocumentSource>) => void>()
 const parsed = { current: new WeakMap<object, ThemeDocument>(), newDesigns: new WeakMap<object, ThemeDocument>() }
-let opencodeTheme: (ThemeDocument & {
+let warcodeTheme: (ThemeDocument & {
   readonly light: ModeDefinition
   readonly dark: ModeDefinition
 }) | undefined
 
-export function getOpenCodeTheme() {
-  if (opencodeTheme) return opencodeTheme
-  const document = parseThemeDocument(opencode, "opencode") as NonNullable<typeof opencodeTheme>
-  opencodeTheme = document
+export function getWarcodeTheme() {
+  if (warcodeTheme) return warcodeTheme
+  const document = parseThemeDocument(warcode, "warcode") as NonNullable<typeof warcodeTheme>
+  warcodeTheme = document
   return document
 }
 
-let opencode2Theme: ThemeDocument | undefined
+let warcode2Theme: ThemeDocument | undefined
 
 // Temporary theme for the "new-designs" experiment. It is not part of allThemes(), so only the
 // TUI theme context offers it, and only while the experiment is enabled.
-export function getOpenCode2Theme() {
-  opencode2Theme ??= parseThemeDocument(opencode2, "opencode2")
-  return opencode2Theme
+export function getWarcode2Theme() {
+  warcode2Theme ??= parseThemeDocument(warcode2, "warcode2")
+  return warcode2Theme
 }
 
 function listThemes(): Record<string, ThemeDocumentSource> {
   // Priority: defaults < custom files < generated system.
   const themes: Record<string, ThemeDocumentSource> = {
     ...DEFAULT_THEMES,
-    opencode: getOpenCodeTheme(),
+    warcode: getWarcodeTheme(),
     ...customThemes,
   }
   return {
     ...themes,
-    system: systemTheme ?? themes.system ?? themes.opencode,
+    system: systemTheme ?? themes.system ?? themes.warcode,
   }
 }
 

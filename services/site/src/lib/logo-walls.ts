@@ -2,7 +2,7 @@ import { logoMetrics } from "~/component/site/logo-metrics"
 
 /**
  * The logo row's logos under the home hero (LogoWall): company wordmarks (sources in
- * public/logos/companies/README.md), or the model providers OpenCode works with (marks from
+ * public/logos/companies/README.md), or the model providers Warcode works with (marks from
  * models.dev). Data only, with no strings to translate, so the static pages' script can cycle them
  * without loading any (home.ts).
  */

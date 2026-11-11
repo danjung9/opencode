@@ -67,7 +67,7 @@ test.each([true, false])(
         expect([html, ...scripts].join("\n")).not.toMatch(/\bimport(?:\s*\(\s*|\s*)["']virtual:/)
       }
 
-      const direct = await fetch(new URL("/__vite_opencode_picker_client.js", url))
+      const direct = await fetch(new URL("/__vite_warcode_picker_client.js", url))
       expect(direct.ok).toBe(true)
       expect(await direct.text()).toContain("opencodePickerUi")
     } finally {

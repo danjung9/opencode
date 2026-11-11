@@ -1185,11 +1185,11 @@ describe("OpenAI Responses route", () => {
       )
       const cases = [
         {
-          model: Azure.configure({ resourceName: "opencode-test", apiKey: "azure-key" }).responses("deployment"),
+          model: Azure.configure({ resourceName: "warcode-test", apiKey: "azure-key" }).responses("deployment"),
           headers: { "api-key": "azure-key", authorization: undefined },
         },
         {
-          model: Azure.configure({ resourceName: "opencode-test", auth: Auth.bearer("entra-token") }).responses(
+          model: Azure.configure({ resourceName: "warcode-test", auth: Auth.bearer("entra-token") }).responses(
             "deployment",
           ),
           headers: { "api-key": undefined, authorization: "Bearer entra-token" },
@@ -1201,7 +1201,7 @@ describe("OpenAI Responses route", () => {
           webSocket: {
             execute: (exchange) =>
               Effect.gen(function* () {
-                expect(exchange.connect.url).toBe("wss://opencode-test.openai.azure.com/openai/v1/responses")
+                expect(exchange.connect.url).toBe("wss://warcode-test.openai.azure.com/openai/v1/responses")
                 expect(exchange.connect.rotateAfterMs).toBe(55 * 60 * 1000)
                 expect(exchange.connect.headers.authorization).toBe(item.headers.authorization)
                 expect(exchange.connect.headers["api-key"]).toBe(item.headers["api-key"])
@@ -1230,7 +1230,7 @@ describe("OpenAI Responses route", () => {
       const cases = [
         {
           model: Azure.configure({
-            resourceName: "opencode-test",
+            resourceName: "warcode-test",
             apiKey: "azure-key",
             apiVersion: "2025-04-01-preview",
           }).responses("deployment"),
@@ -1238,7 +1238,7 @@ describe("OpenAI Responses route", () => {
         },
         {
           model: Azure.configure({
-            resourceName: "opencode-test",
+            resourceName: "warcode-test",
             apiKey: "azure-key",
             useDeploymentBasedUrls: true,
           }).responses("deployment"),
@@ -2321,7 +2321,7 @@ describe("OpenAI Responses route", () => {
           type: "response.completed",
           response: {
             id: "resp_1",
-            usage: { input_tokens: 5, output_tokens: 2, cost: 0, opencode: { allowance: 0.0042 } },
+            usage: { input_tokens: 5, output_tokens: 2, cost: 0, warcode: { allowance: 0.0042 } },
           },
         },
       )

@@ -1,4 +1,4 @@
-import type { SessionApi, SessionInfo, SessionListInput } from "@opencode/client/promise"
+import type { SessionApi, SessionInfo, SessionListInput } from "@warcode/client/promise"
 
 export async function listAllSessions(
   api: Pick<SessionApi, "list">,

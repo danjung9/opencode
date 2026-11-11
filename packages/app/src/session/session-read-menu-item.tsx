@@ -1,6 +1,6 @@
 import { createMemo, Show } from "solid-js"
-import type { SessionInfo } from "@opencode/client/promise"
-import { Menu } from "@opencode/ui/menu"
+import type { SessionInfo } from "@warcode/client/promise"
+import { Menu } from "@warcode/ui/menu"
 import { useLanguage } from "@/runtime/i18n/language"
 import { ServerConnection } from "@/runtime/server/registry"
 import { useGlobal } from "@/runtime/server/runtime"

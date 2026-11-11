@@ -100,7 +100,7 @@ const fixture = () => {
 
       return load.promise
     },
-    subscribed: () => ["opencode.servers.list"],
+    subscribed: () => ["warcode.servers.list"],
     log: () => {},
   })
 
@@ -126,7 +126,7 @@ describe("plugin host driver", () => {
     await expect(boot).rejects.toBe(eperm)
 
     // On dev the rejected load was kept, so every later use failed until the app relaunched.
-    plugins.driver.demand("opencode.servers.list")
+    plugins.driver.demand("warcode.servers.list")
     await flush()
     plugins.loads[1].resolve(plugins.build)
     await flush()
@@ -137,7 +137,7 @@ describe("plugin host driver", () => {
 
   test("a subscription made while the load failed activates its plugin once a later load succeeds", async () => {
     const plugins = fixture()
-    plugins.driver.demand("opencode.servers.list")
+    plugins.driver.demand("warcode.servers.list")
     await flush()
     plugins.loads[0].reject(eperm)
     await flush()
@@ -147,7 +147,7 @@ describe("plugin host driver", () => {
     plugins.loads[1].resolve(plugins.build)
     await list
 
-    expect(plugins.calls.demand).toEqual(["opencode.servers.list"])
+    expect(plugins.calls.demand).toEqual(["warcode.servers.list"])
     expect(plugins.calls.start).toBe(0)
   })
 

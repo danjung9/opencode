@@ -39,7 +39,7 @@ export function legalFeedEntries() {
 export function legalHubMarkdown(context: MarkdownContext) {
   return blocks(
     "# Legal",
-    "The legal documents for the OpenCode website and hosted services.",
+    "The legal documents for the Warcode website and hosted services.",
     legalPages
       .map(
         (document) =>

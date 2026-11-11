@@ -14,7 +14,7 @@ import { bundledLanguages, createCssVariablesTheme, createHighlighter, isSpecial
 // - `title="…"` in the fence's meta: the title as the label, with the file's icon when it names a file.
 // - anything else: its language as the label.
 // The `pre` is the funnel's `snippet` copy region, named by its language (lib/funnel.ts).
-const theme = createCssVariablesTheme({ name: "opencode-docs" })
+const theme = createCssVariablesTheme({ name: "warcode-docs" })
 // Shell, as in David's terminal samples: options and environment variables in the flag colour, and
 // unquoted arguments plain, leaving the command and quoted strings coloured.
 theme.tokenColors?.push(
@@ -146,7 +146,7 @@ async function highlightOnce(text: string, requested: string) {
       console.warn(`[Shiki] The language "${requested}" doesn't exist, falling back to "plaintext".`)
       return "plaintext"
     })
-  const pre = shiki.codeToHast(text, { theme: "opencode-docs", lang }).children[0] as Element
+  const pre = shiki.codeToHast(text, { theme: "warcode-docs", lang }).children[0] as Element
   pre.properties = {
     tabIndex: 0,
     dataLanguage: lang,

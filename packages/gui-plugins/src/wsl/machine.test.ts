@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import type { WslOpencodeCheck, WslServerConfig } from "./contract"
+import type { WslWarcodeCheck, WslServerConfig } from "./contract"
 import {
   createWslMachineState,
   toServersState,
@@ -14,10 +14,10 @@ const ubuntu: WslServerConfig = { id: "wsl:Ubuntu", distro: "Ubuntu" }
 
 const readyProbe = { name: "Debian", canExecute: true, hasBash: true, hasCurl: true, error: null }
 
-function check(distro: string, version: string): WslOpencodeCheck {
+function check(distro: string, version: string): WslWarcodeCheck {
   return {
     distro,
-    resolvedPath: "/usr/bin/opencode",
+    resolvedPath: "/usr/bin/warcode",
     version,
     expectedVersion: "2",
     matchesDesktop: version === "2",
@@ -37,7 +37,7 @@ function play(state: WslMachineState, ...events: WslMachineEvent[]) {
   )
 }
 
-// Ubuntu is added with its server up as start `s0`, reporting an older OpenCode than the desktop.
+// Ubuntu is added with its server up as start `s0`, reporting an older Warcode than the desktop.
 function readyUbuntu() {
   return play(
     createWslMachineState([ubuntu]),
@@ -222,7 +222,7 @@ describe("updates", () => {
 
     expect(spawns(updated.effects)).toEqual([])
     expect(updated.effects).toContainEqual({ type: "resolve", attempt: "u1" })
-    expect(toServersState(updated.state).opencodeChecks.Debian).toEqual(check("Debian", "2"))
+    expect(toServersState(updated.state).warcodeChecks.Debian).toEqual(check("Debian", "2"))
   })
 
   test("a failed update keeps the check it read and leaves the server stopped", () => {
@@ -240,7 +240,7 @@ describe("updates", () => {
     })
     expect(toServersState(failed.state).servers[0]?.runtime).toEqual({ kind: "stopped" })
     expect(wslRowView(toServersState(failed.state), "Ubuntu")).toMatchObject({
-      button: { label: "onboarding.updateOpencode", disabled: false },
+      button: { label: "onboarding.updateWarcode", disabled: false },
       retry: true,
     })
   })
@@ -261,7 +261,7 @@ describe("removal and shutdown", () => {
     expect(removed.effects).toContainEqual({ type: "stop", distro: "Ubuntu", attempt: "r1", server: "s1" })
     expect(removed.effects).toContainEqual({ type: "persist", servers: [] })
     expect(removed.effects).toContainEqual({ type: "resolve", attempt: "r1" })
-    expect(toServersState(removed.state)).toMatchObject({ servers: [], opencodeChecks: {}, distroJobs: {} })
+    expect(toServersState(removed.state)).toMatchObject({ servers: [], warcodeChecks: {}, distroJobs: {} })
   })
 
   test("closing answers every running job and turns away later requests", () => {

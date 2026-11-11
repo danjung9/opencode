@@ -1,5 +1,5 @@
 {
-  "name": "@opencode/ui",
+  "name": "@warcode/ui",
   "version": "2.2.7",
   "type": "module",
   "license": "MIT",
@@ -131,7 +131,7 @@
   "dependencies": {
     "@kitlangton/solid-motion": "0.2.2",
     "@kobalte/core": "catalog:",
-    "@opencode/util": "workspace:*",
+    "@warcode/util": "workspace:*",
     "@pierre/diffs": "catalog:",
     "@pierre/highlights": "catalog:",
     "@solid-primitives/event-listener": "catalog:",

@@ -24,12 +24,12 @@ export function requireVersion(version: string) {
 }
 
 export function discoverScript(options: { fromPath?: boolean; cache?: { directory: string; prefix: string } } = {}) {
-  return `cli=${options.fromPath ? "$(command -v opencode || true)" : '""'}
-if [ -z "$cli" ] && [ -x "$HOME/.opencode/bin/opencode" ]; then cli="$HOME/.opencode/bin/opencode"; fi
+  return `cli=${options.fromPath ? "$(command -v warcode || true)" : '""'}
+if [ -z "$cli" ] && [ -x "$HOME/.warcode/bin/warcode" ]; then cli="$HOME/.warcode/bin/warcode"; fi
 ${
   options.cache
     ? `if [ -z "$cli" ]; then
-  for binary in "$HOME"/${quote(options.cache.directory)}/${quote(options.cache.prefix)}*/opencode; do
+  for binary in "$HOME"/${quote(options.cache.directory)}/${quote(options.cache.prefix)}*/warcode; do
     if [ -x "$binary" ]; then cli="$binary"; fi
   done
 fi
@@ -69,7 +69,7 @@ if [ "$arch" = x64 ]; then target="$target-baseline"; fi
 if [ "$os" = linux ]; then
   if [ -f /etc/alpine-release ] || (ldd --version 2>&1 | grep -qi musl); then target="$target-musl"; fi
 fi
-printf 'OPENCODE_REMOTE_TARGET=%s\\n' "$target"
+printf 'WARCODE_REMOTE_TARGET=%s\\n' "$target"
 `
 
 export function archiveUrl(target: string, version: string) {
@@ -89,19 +89,19 @@ export function installScript(input: { version: string; directory?: string; sour
   if (input.source.type === "installer")
     return `set -eu
 curl -fsSL https://raw.githubusercontent.com/anomalyco/opencode/v2/install | bash -s -- ${input.source.binary ? `--binary ${input.source.binary}` : `--version ${quote(version)}`}
-${verifyScript('"$HOME/.opencode/bin/opencode"', version)}
+${verifyScript('"$HOME/.warcode/bin/warcode"', version)}
 `
 
   return `set -eu
 umask 077
-destination="$HOME"/${quote(`${input.directory ?? ".opencode/bin"}/opencode`)}
+destination="$HOME"/${quote(`${input.directory ?? ".warcode/bin"}/warcode`)}
 mkdir -p "$(dirname "$destination")"
 stage=$(mktemp -d "$(dirname "$destination")/.install-XXXXXX")
 trap 'rm -rf "$stage"' EXIT
 ${stageBinary(input.source)}
-chmod 755 "$stage/package/bin/opencode"
-${verifyScript('"$stage/package/bin/opencode"', version)}
-mv "$stage/package/bin/opencode" "$destination"
+chmod 755 "$stage/package/bin/warcode"
+${verifyScript('"$stage/package/bin/warcode"', version)}
+mv "$stage/package/bin/warcode" "$destination"
 `
 }
 

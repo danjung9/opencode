@@ -484,7 +484,7 @@ export interface ServerEntry {
   readonly http?: {
     /** The base URL. */
     readonly url: string
-    /** The HTTP basic password; the user name is always `opencode`. */
+    /** The HTTP basic password; the user name is always `warcode`. */
     readonly password?: string
   }
   /**

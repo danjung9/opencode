@@ -14,7 +14,7 @@ export interface Interface {
   readonly resume: Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("opencode/desktop/Shutdown") {}
+export class Service extends Context.Service<Service, Interface>()("warcode/desktop/Shutdown") {}
 
 export const layer = Layer.effect(
   Service,

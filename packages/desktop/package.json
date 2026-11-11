@@ -1,13 +1,13 @@
 {
-  "name": "@opencode/desktop",
+  "name": "@warcode/desktop",
   "private": true,
   "version": "2.2.7",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://opencode.ai",
+  "homepage": "https://github.com/danjung9/opencode",
   "author": {
-    "name": "OpenCode",
-    "email": "hello@opencode.ai"
+    "name": "danjung9",
+    "url": "https://github.com/danjung9"
   },
   "scripts": {
     "typecheck": "bun check --no-script -b",
@@ -32,12 +32,12 @@
     "@effect/platform-node": "catalog:",
     "@hona/strobe": "catalog:",
     "@lydell/node-pty": "catalog:",
-    "@opencode/app": "workspace:*",
-    "@opencode/gui-plugins": "workspace:*",
-    "@opencode/plugin": "workspace:*",
-    "@opencode/client": "workspace:*",
-    "@opencode/schema": "workspace:*",
-    "@opencode/ui": "workspace:*",
+    "@warcode/app": "workspace:*",
+    "@warcode/gui-plugins": "workspace:*",
+    "@warcode/plugin": "workspace:*",
+    "@warcode/client": "workspace:*",
+    "@warcode/schema": "workspace:*",
+    "@warcode/ui": "workspace:*",
     "@sentry/solid": "catalog:",
     "@solidjs/router": "catalog:",
     "@types/bun": "catalog:",

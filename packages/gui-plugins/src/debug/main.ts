@@ -3,7 +3,7 @@ import { Schema } from "effect"
 import { appendFile, mkdir, readFile, stat, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { getHeapSpaceStatistics, getHeapStatistics, writeHeapSnapshot } from "node:v8"
-import type { Plugin } from "@opencode/plugin/gui/main"
+import type { Plugin } from "@warcode/plugin/gui/main"
 import { HeapSnapshots, MemoryDiagnostics } from "./contract"
 import {
   createHeapCaptureState,
@@ -25,7 +25,7 @@ import {
 import { debugBuild, memoryLogInterval } from "./options"
 import { captureServer } from "./server-heap"
 import { signalIncludesServer, snapshotDirectory } from "./signal"
-import { ProcessSignal } from "@opencode/util/process-signal"
+import { ProcessSignal } from "@warcode/util/process-signal"
 
 /** A desktop process the manifest lists: the file written, or why there is none. */
 type Snapshot = { readonly process: "main" | "window"; readonly pid: number; readonly window?: number } & (
@@ -70,7 +70,7 @@ const pageStatsScript = `(() => {
 
 const setup: Plugin.MainSetup = (ctx) => {
   const capture = async (root: string, includeServer: boolean) => {
-    const directory = path.join(root, `opencode-heap-${new Date().toISOString().replace(/[:.]/g, "")}`)
+    const directory = path.join(root, `warcode-heap-${new Date().toISOString().replace(/[:.]/g, "")}`)
 
     // Snapshots hold prompts, file contents and credentials. Recursive, because Downloads can be missing on Linux.
     await mkdir(directory, { recursive: true, mode: 0o700 })
@@ -233,7 +233,7 @@ const setup: Plugin.MainSetup = (ctx) => {
   if (!debugBuild(ctx.app)) return
 
   // The environment turns diagnostics on for this launch; otherwise the debug bar's stored toggle does.
-  const envInterval = memoryLogInterval(process.env.OPENCODE_DESKTOP_MEMORY_LOG)
+  const envInterval = memoryLogInterval(process.env.WARCODE_DESKTOP_MEMORY_LOG)
   const interval = envInterval ?? 30_000
   // Without the launch switch, Chromium quantizes renderer heap sizes and refreshes them rarely.
   const precise = app.commandLine.hasSwitch("enable-precise-memory-info")

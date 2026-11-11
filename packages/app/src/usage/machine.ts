@@ -1,4 +1,4 @@
-import type { UsageLimitsInfo } from "@opencode/client/promise"
+import type { UsageLimitsInfo } from "@warcode/client/promise"
 
 /** How long one load of the usage limits may run before the dialog offers Try again. */
 export const USAGE_LOAD_TIMEOUT_MS = 15_000

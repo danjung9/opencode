@@ -1,7 +1,7 @@
 import { createEffect, createSignal, on } from "solid-js"
 import { getRequestEvent } from "solid-js/web"
 import { useLocation } from "@solidjs/router"
-import { createSimpleContext } from "@opencode/ui/context"
+import { createSimpleContext } from "@warcode/ui/context"
 import {
   LOCALES,
   type Locale,

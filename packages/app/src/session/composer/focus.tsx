@@ -8,7 +8,7 @@ import {
   type Accessor,
   type ParentProps,
 } from "solid-js"
-import { useDialog } from "@opencode/ui/context/dialog"
+import { useDialog } from "@warcode/ui/context/dialog"
 import { setCursorPosition } from "@/composer/editor/dom"
 import {
   createComposerFocusState,

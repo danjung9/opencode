@@ -50,7 +50,7 @@ const systemNames = {
   windows: "Windows",
   linux: "Linux",
 } as const
-const storageKey = "opencode-site-device-preview"
+const storageKey = "warcode-site-device-preview"
 const savedSchema = z.object({
   w: z.number().int().min(240).max(3840),
   h: z.number().int().min(240).max(2880),
@@ -185,7 +185,7 @@ export default function DevicePreviewPanel(props: { onClose: () => void }) {
         const doc = frameDocument(frame)
         if (!doc) return
         const site = doc.querySelector("[data-site]")
-        const wanted = theme() === "site" ? (localStorage.getItem("opencode-theme") ?? "system") : theme()
+        const wanted = theme() === "site" ? (localStorage.getItem("warcode-theme") ?? "system") : theme()
         if (site && site.getAttribute("data-theme") !== wanted) site.setAttribute("data-theme", wanted)
 
         const current = withoutPlatform(doc.location.pathname + doc.location.search + doc.location.hash)

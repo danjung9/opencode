@@ -1,9 +1,9 @@
 import type { SessionUpdate } from "@agentclientprotocol/sdk"
-import type { OpenCodeEvent } from "@opencode/client/effect"
-import type { SessionError } from "@opencode/schema/session-error"
-import { SessionMessage } from "@opencode/schema/session-message"
+import type { WarcodeEvent } from "@warcode/client/effect"
+import type { SessionError } from "@warcode/schema/session-error"
+import { SessionMessage } from "@warcode/schema/session-message"
 
-const MarkerMeta = "opencode/compaction"
+const MarkerMeta = "warcode/compaction"
 
 type Started = { readonly status: "started"; readonly messageId: string; readonly reason: "auto" | "manual" }
 
@@ -25,7 +25,7 @@ type Compaction =
 export type Tracked = ReadonlyMap<string, Started>
 
 type LifecycleEvent = Extract<
-  OpenCodeEvent,
+  WarcodeEvent,
   { readonly type: "session.compaction.started" | "session.compaction.ended" | "session.compaction.failed" }
 >
 type OpeningEvent = Extract<

@@ -1,4 +1,4 @@
-import type { SessionInfo } from "@opencode/client/promise"
+import type { SessionInfo } from "@warcode/client/promise"
 
 export const VIEW_RETRY_DELAY = 250
 

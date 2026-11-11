@@ -3,7 +3,7 @@
     <picture>
       <source srcset=".github/assets/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset=".github/assets/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src=".github/assets/logo-ornate-light.svg" alt="OpenCode logo">
+      <img src=".github/assets/logo-ornate-light.svg" alt="Warcode logo">
     </picture>
   </a>
 </p>
@@ -39,7 +39,7 @@
   <a href="README.vi.md">Tiếng Việt</a>
 </p>
 
-[![OpenCode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
+[![Warcode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
 
 ---
 
@@ -50,13 +50,13 @@
 curl -fsSL https://opencode.ai/v2/install | bash
 
 # ตัวจัดการแพ็กเกจ
-npm i -g @opencode/cli@latest      # หรือ bun/pnpm/yarn
-brew install anomalyco/tap/opencode-v2 # macOS และ Linux (แนะนำ อัปเดตเสมอ)
-brew install opencode              # macOS และ Linux (brew formula อย่างเป็นทางการ อัปเดตน้อยกว่า)
-sudo pacman -S opencode            # Arch Linux (Stable)
-paru -S opencode-beta              # Arch Linux (Latest from AUR)
-mise use -g opencode               # ระบบปฏิบัติการใดก็ได้
-nix run github:anomalyco/opencode  # Nix
+npm i -g @warcode/cli@latest      # หรือ bun/pnpm/yarn
+brew install anomalyco/tap/warcode-v2 # macOS และ Linux (แนะนำ อัปเดตเสมอ)
+brew install warcode              # macOS และ Linux (brew formula อย่างเป็นทางการ อัปเดตน้อยกว่า)
+sudo pacman -S warcode            # Arch Linux (Stable)
+paru -S warcode-beta              # Arch Linux (Latest from AUR)
+mise use -g warcode               # ระบบปฏิบัติการใดก็ได้
+nix run github:anomalyco/warcode  # Nix
 ```
 
 > [!TIP]
@@ -64,27 +64,27 @@ nix run github:anomalyco/opencode  # Nix
 
 ### แอปพลิเคชันเดสก์ท็อป (เบต้า)
 
-OpenCode มีให้ใช้งานเป็นแอปพลิเคชันเดสก์ท็อป ดาวน์โหลดจาก [opencode.ai/download](https://opencode.ai/download)
+Warcode มีให้ใช้งานเป็นแอปพลิเคชันเดสก์ท็อป ดาวน์โหลดจาก [warcode.ai/download](https://opencode.ai/download)
 
 | แพลตฟอร์ม             | ดาวน์โหลด                          |
 | --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `opencode-desktop-mac-x64.dmg`     |
-| Windows               | `opencode-desktop-win-x64.exe`     |
+| macOS (Apple Silicon) | `warcode-desktop-mac-arm64.dmg`   |
+| macOS (Intel)         | `warcode-desktop-mac-x64.dmg`     |
+| Windows               | `warcode-desktop-win-x64.exe`     |
 | Linux                 | `.deb`, `.rpm`, หรือ AppImage      |
 
 ```bash
 # macOS (Homebrew)
-brew install --cask opencode-desktop
+brew install --cask warcode-desktop
 ```
 
 #### ไดเรกทอรีการติดตั้ง
 
-สคริปต์การติดตั้งจะติดตั้ง OpenCode ไว้ที่ `$HOME/.opencode/bin`
+สคริปต์การติดตั้งจะติดตั้ง Warcode ไว้ที่ `$HOME/.warcode/bin`
 
 ### เอเจนต์
 
-OpenCode รวมเอเจนต์ในตัวสองตัวที่คุณสามารถสลับได้ด้วยปุ่ม `Tab`
+Warcode รวมเอเจนต์ในตัวสองตัวที่คุณสามารถสลับได้ด้วยปุ่ม `Tab`
 
 - **build** - เอเจนต์เริ่มต้น มีสิทธิ์เข้าถึงแบบเต็มสำหรับงานพัฒนา
 - **plan** - เอเจนต์อ่านอย่างเดียวสำหรับการวิเคราะห์และการสำรวจโค้ด
@@ -99,15 +99,15 @@ OpenCode รวมเอเจนต์ในตัวสองตัวที�
 
 ### เอกสารประกอบ
 
-สำหรับข้อมูลเพิ่มเติมเกี่ยวกับวิธีกำหนดค่า OpenCode [**ไปที่เอกสารของเรา**](https://opencode.ai/docs)
+สำหรับข้อมูลเพิ่มเติมเกี่ยวกับวิธีกำหนดค่า Warcode [**ไปที่เอกสารของเรา**](https://opencode.ai/docs)
 
 ### การมีส่วนร่วม
 
-หากคุณสนใจที่จะมีส่วนร่วมใน OpenCode โปรดอ่าน [เอกสารการมีส่วนร่วม](./CONTRIBUTING.md) ก่อนส่ง Pull Request
+หากคุณสนใจที่จะมีส่วนร่วมใน Warcode โปรดอ่าน [เอกสารการมีส่วนร่วม](./CONTRIBUTING.md) ก่อนส่ง Pull Request
 
-### การสร้างบน OpenCode
+### การสร้างบน Warcode
 
-หากคุณทำงานในโปรเจกต์ที่เกี่ยวข้องกับ OpenCode และใช้ "opencode" เป็นส่วนหนึ่งของชื่อ เช่น "opencode-dashboard" หรือ "opencode-mobile" โปรดเพิ่มหมายเหตุใน README ของคุณเพื่อชี้แจงว่าไม่ได้สร้างโดยทีม OpenCode และไม่ได้เกี่ยวข้องกับเราในทางใด
+หากคุณทำงานในโปรเจกต์ที่เกี่ยวข้องกับ Warcode และใช้ "warcode" เป็นส่วนหนึ่งของชื่อ เช่น "warcode-dashboard" หรือ "warcode-mobile" โปรดเพิ่มหมายเหตุใน README ของคุณเพื่อชี้แจงว่าไม่ได้สร้างโดยทีม Warcode และไม่ได้เกี่ยวข้องกับเราในทางใด
 
 ---
 

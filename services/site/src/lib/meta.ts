@@ -3,7 +3,7 @@
 // code. This builds the two documents that are generated per request, before any page middleware.
 
 const paths = {
-  client: "/oauth/opencode/client.json",
+  client: "/oauth/warcode/client.json",
   appleAppSiteAssociation: "/.well-known/apple-app-site-association",
 }
 
@@ -17,20 +17,20 @@ export function metaResponse(request: Request) {
   })
 }
 
-// OAuth Client ID Metadata Document for the opencode client.
+// OAuth Client ID Metadata Document for the warcode client.
 // Spec: https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/
 //
-// When an MCP server's authorization server supports this, opencode sends this URL as its OAuth client_id instead of
+// When an MCP server's authorization server supports this, warcode sends this URL as its OAuth client_id instead of
 // registering a new client. The authorization server fetches the document to learn our name and allowed redirect
 // URIs. The client_id field must equal the exact URL the document was fetched from, so it is built from the request
-// origin and stays valid on dev.opencode.ai as well as production.
+// origin and stays valid on dev.warcode.ai as well as production.
 //
-// redirect_uris have no port because opencode binds an ephemeral port per login. RFC 8252 section 7.3 has
+// redirect_uris have no port because warcode binds an ephemeral port per login. RFC 8252 section 7.3 has
 // authorization servers ignore the port when matching loopback redirects for native apps.
 function client(origin: string) {
   const document = {
     client_id: origin + paths.client,
-    client_name: "opencode",
+    client_name: "warcode",
     client_uri: origin,
     logo_uri: origin + "/web-app-manifest-512x512.png",
     application_type: "native",
@@ -54,12 +54,12 @@ function client(origin: string) {
   })
 }
 
-// Lets https://opencode.ai/pair links open the OpenCode iOS app. Only /pair may open the app.
+// Lets https://opencode.ai/pair links open the Warcode iOS app. Only /pair may open the app.
 const APPLE_APP_SITE_ASSOCIATION = JSON.stringify({
   applinks: {
     details: [
       {
-        appIDs: ["5NZ4Q7NXJ4.ai.opencode.mobilecode"],
+        appIDs: ["5NZ4Q7NXJ4.ai.warcode.mobilecode"],
         components: [{ "/": "/pair", comment: "pairing links, payload in the fragment" }, { "/": "/pair/*" }],
       },
     ],

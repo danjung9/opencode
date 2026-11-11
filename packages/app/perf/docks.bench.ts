@@ -2,14 +2,14 @@
 // composer into its dock, an MCP elicitation grows in above it and closes, and the answered permission morphs back
 // to the composer. Every frame of the four flights steps the docks' springs and writes their styles.
 import { bench, web } from "@hona/strobe"
-import type { OpenCodeEvent } from "@opencode/client/promise"
+import type { WarcodeEvent } from "@warcode/client/promise"
 import { cached } from "./fixtures/mock"
 import { composer, mockTimelineSession, timeline } from "./fixtures/timeline"
 
 // The session `mockTimelineSession` serves.
 const sessionID = "ses_timeline_state_regression"
 
-const location = { directory: "C:/OpenCode/TimelineStateRegression" }
+const location = { directory: "C:/Warcode/TimelineStateRegression" }
 
 const permission = '[data-component="dock-prompt"][data-kind="permission"]'
 
@@ -21,7 +21,7 @@ let round = 0
 export default bench({
   targets: {
     web: web({
-      expect: { title: "OpenCode" },
+      expect: { title: "Warcode" },
       viewport: { width: 1366, height: 768 },
       prepare: (ctx) =>
         mockTimelineSession(cached(ctx), {
@@ -81,7 +81,7 @@ function requestDocks() {
       ...envelope(0),
       type: "permission.asked",
       data: { id: permission, sessionID, action: "shell", resources: ["bun test"], metadata: {} },
-    } satisfies Extract<OpenCodeEvent, { type: "permission.asked" }>,
+    } satisfies Extract<WarcodeEvent, { type: "permission.asked" }>,
     elicited: {
       ...envelope(1),
       type: "form.created",
@@ -94,16 +94,16 @@ function requestDocks() {
           fields: [{ key: "answer", type: "string", title: "Continue?" }],
         },
       },
-    } satisfies Extract<OpenCodeEvent, { type: "form.created" }>,
+    } satisfies Extract<WarcodeEvent, { type: "form.created" }>,
     cancelled: {
       ...envelope(2),
       type: "form.cancelled",
       data: { sessionID, id: form },
-    } satisfies Extract<OpenCodeEvent, { type: "form.cancelled" }>,
+    } satisfies Extract<WarcodeEvent, { type: "form.cancelled" }>,
     replied: {
       ...envelope(3),
       type: "permission.replied",
       data: { sessionID, requestID: permission, reply: "once" },
-    } satisfies Extract<OpenCodeEvent, { type: "permission.replied" }>,
+    } satisfies Extract<WarcodeEvent, { type: "permission.replied" }>,
   }
 }

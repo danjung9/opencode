@@ -42,9 +42,9 @@
     "env": [],
     "models": {}
   },
-  "opencode": {
-    "id": "opencode",
-    "name": "OpenCode",
+  "warcode": {
+    "id": "warcode",
+    "name": "Warcode",
     "env": [],
     "models": {
       "gpt-5.5": {

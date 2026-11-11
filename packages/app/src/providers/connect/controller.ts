@@ -1,4 +1,4 @@
-import { useDialog } from "@opencode/ui/context/dialog"
+import { useDialog } from "@warcode/ui/context/dialog"
 import { createEffect, createMemo, createSignal, on, onCleanup, untrack } from "solid-js"
 import { consoleCatalogLoaded, consoleProviderGroup } from "@/providers/catalog/console"
 import { createConsoleCatalogSettler } from "@/providers/catalog/console-settle"
@@ -435,7 +435,7 @@ export function createProviderDialogController(options: {
         if (!isConsole || platform.platform !== "desktop")
           return result({ type: "oauth.started", attempt: effect.attempt, authorization: response.data })
         const url = new URL(response.data.url)
-        url.searchParams.set("client_id", "opencode-desktop")
+        url.searchParams.set("client_id", "warcode-desktop")
         // Lets the Console return link focus the window that started the sign-in.
         url.searchParams.set("return_window", platform.windowID)
         result({ type: "oauth.started", attempt: effect.attempt, authorization: { ...response.data, url: url.href } })

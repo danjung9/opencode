@@ -8,16 +8,16 @@ import { freeModels } from "~/lib/get-started"
 import { sdkInstalls } from "~/lib/install-commands"
 import { liteQuitKey } from "~/lib/console-stub"
 
-// window.opencode: a small console API for developers who open DevTools on the site. The page's
+// window.warcode: a small console API for developers who open DevTools on the site. The page's
 // stub (console-stub.ts, Settings › Other › Console API) loads this module when someone types
-// `opencode`. opencode.try() and opencode.install.pick() load Text.js console apps from /textjs/
+// `warcode`. warcode.try() and warcode.install.pick() load Text.js console apps from /textjs/
 // (services/site/textjs) on demand, so React and Text.js never enter the site's own bundles.
 //
-// OpenCode Lite also starts on its own once a visitor shows they want the console: DevTools docks,
+// Warcode Lite also starts on its own once a visitor shows they want the console: DevTools docks,
 // they press a DevTools shortcut on the page, or it already started in this tab. Text.js's
 // onConsoleIntent (in the stub) watches for that; its ~2 kB chunk is all a desktop visitor
 // downloads until then, and touch screens skip it. Quitting Lite turns this off for the browser
-// until opencode.try().
+// until warcode.try().
 
 const brand = {
   light: { open: "#626262", code: "#1f1f1f", inner: "#d2d2d2", text: "#333333", dim: "#737373", link: "#3b5cf6" },
@@ -72,7 +72,7 @@ export function install() {
 
   const manifest = {
     site: location.origin,
-    about: "OpenCode, the open source coding agent",
+    about: "Warcode, the open source coding agent",
     pages: {
       product: url("/product"),
       docs: url(docsTopics[0].href),
@@ -105,14 +105,14 @@ export function install() {
       say(["› ", dim], [found, strong])
       return found
     }
-    say([`Install OpenCode${os ? ` on ${os}` : ""}:`, dim])
+    say([`Install Warcode${os ? ` on ${os}` : ""}:`, dim])
     forThisComputer.forEach((id) => say(["› ", dim], [command(id) ?? "", strong], [`   # ${id}`, dim]))
-    say(["Others: opencode.install('npm' | 'bun' | 'brew' | 'paru' | 'curl'). Pick one: opencode.install.pick()", dim])
+    say(["Others: warcode.install('npm' | 'bun' | 'brew' | 'paru' | 'curl'). Pick one: warcode.install.pick()", dim])
     return command(forThisComputer[0])
   }
 
-  // One OpenCode Lite at a time. Quitting it brings the greeting back, and stops it from starting on
-  // its own in this browser (people who debug the site open DevTools all day) until opencode.try().
+  // One Warcode Lite at a time. Quitting it brings the greeting back, and stops it from starting on
+  // its own in this browser (people who debug the site open DevTools all day) until warcode.try().
   let lite: Promise<{ stop: () => void }> | undefined
   const startLite = (reason?: string) => {
     if (lite) return lite
@@ -135,7 +135,7 @@ export function install() {
           )
           greet(colors, say)
           say([
-            "OpenCode Lite won't start on its own in this browser again. Type opencode.try() to bring it back.",
+            "Warcode Lite won't start on its own in this browser again. Type warcode.try() to bring it back.",
             dim,
           ])
         },
@@ -146,7 +146,7 @@ export function install() {
   }
 
   const pick = async () => {
-    // Two apps can't share the console: the picker takes it from OpenCode Lite.
+    // Two apps can't share the console: the picker takes it from Warcode Lite.
     await lite?.then((app) => app.stop()).catch(() => undefined)
     lite = undefined
     say(["Click an empty part of the page, then use ↑ ↓ and Enter: keys reach the console app through the page.", dim])
@@ -175,20 +175,20 @@ export function install() {
   const api = {
     help() {
       console.table({
-        "opencode.install()": "the install command for this computer",
-        "opencode.install('brew')": "or one of: curl, npm, bun, brew, paru",
-        "opencode.install.pick()": "choose one with the arrow keys and copy it",
-        "opencode.download()": "desktop builds; download('mac-arm') starts one",
-        "opencode.mobile()": androidSoon
+        "warcode.install()": "the install command for this computer",
+        "warcode.install('brew')": "or one of: curl, npm, bun, brew, paru",
+        "warcode.install.pick()": "choose one with the arrow keys and copy it",
+        "warcode.download()": "desktop builds; download('mac-arm') starts one",
+        "warcode.mobile()": androidSoon
           ? "the iPhone beta on TestFlight, Android coming soon"
           : "the iPhone beta and the Android app",
-        "opencode.sdk()": "the TypeScript SDK",
-        "opencode.models()": "the free models, live from models.dev",
-        "opencode.docs('agents')": "open a docs page; docs() lists them",
-        "opencode.agents()": "this site, for agents",
-        "opencode.contribute()": "help build OpenCode",
-        "opencode.manifest": "all of the above, as one object",
-        "opencode.try()": "OpenCode Lite in this console: a sandbox, nothing to install",
+        "warcode.sdk()": "the TypeScript SDK",
+        "warcode.models()": "the free models, live from models.dev",
+        "warcode.docs('agents')": "open a docs page; docs() lists them",
+        "warcode.agents()": "this site, for agents",
+        "warcode.contribute()": "help build Warcode",
+        "warcode.manifest": "all of the above, as one object",
+        "warcode.try()": "Warcode Lite in this console: a sandbox, nothing to install",
       })
     },
     install: Object.assign(
@@ -212,16 +212,16 @@ export function install() {
     mobile() {
       const devices = (soon: boolean) =>
         mobileStores.filter((store) => store.soon === soon).map((store) => store.device)
-      say([`OpenCode Mobile for ${devices(false).join(" and ")}: ${url("/mobile")}`])
+      say([`Warcode Mobile for ${devices(false).join(" and ")}: ${url("/mobile")}`])
       for (const store of mobileStores.filter((item) => item.beta))
         say([`The ${store.device} app is a public beta on TestFlight: ${store.href}`, dim])
       if (devices(true).length > 0) say([`Coming soon to ${devices(true).join(" and ")}.`, dim])
-      say(["Pair it with your computer: run opencode pair in a terminal.", dim])
+      say(["Pair it with your computer: run warcode pair in a terminal.", dim])
       return url("/mobile")
     },
     sdk() {
       say(["› ", dim], [manifest.sdk.install, strong])
-      say(['import { OpenCode } from "@opencode/sdk"'])
+      say(['import { Warcode } from "@warcode/sdk"'])
       say([`Docs: ${manifest.sdk.docs}`, dim])
       return manifest.sdk.install
     },
@@ -229,7 +229,7 @@ export function install() {
       const live = await fetch("https://models.dev/api.json")
         .then((response) => response.json() as Promise<ModelsDev>)
         .then((data) =>
-          Object.values(data.opencode?.models ?? {}).filter(
+          Object.values(data.warcode?.models ?? {}).filter(
             (model) => model.cost?.input === 0 && model.cost?.output === 0 && model.status !== "deprecated",
           ),
         )
@@ -238,9 +238,9 @@ export function install() {
         say([`Free models include ${freeModels.join(", ")}. No account needed.`])
         return freeModels
       }
-      console.table(Object.fromEntries(live.map((model) => [model.name, { id: `opencode/${model.id}` }])))
-      say([`No account needed. Try one: opencode run -m opencode/${live[0].id} "hello"`, dim])
-      return live.map((model) => `opencode/${model.id}`)
+      console.table(Object.fromEntries(live.map((model) => [model.name, { id: `warcode/${model.id}` }])))
+      say([`No account needed. Try one: warcode run -m warcode/${live[0].id} "hello"`, dim])
+      return live.map((model) => `warcode/${model.id}`)
     },
     docs(topic?: string) {
       if (!topic) {
@@ -260,12 +260,12 @@ export function install() {
         "One page as Markdown": `${url("/desktop.md")} (or send Accept: text/markdown)`,
         Sitemap: manifest.agents.sitemap,
         Releases: `${manifest.agents.releases.rss}  ${manifest.agents.releases.json}`,
-        "OpenCode server API": manifest.agents.openapi,
+        "Warcode server API": manifest.agents.openapi,
       })
       return manifest.agents.llms
     },
     contribute() {
-      say(["OpenCode is open source (MIT). Come build it with us:"])
+      say(["Warcode is open source (MIT). Come build it with us:"])
       say([`  Good first issues  ${config.github.repoUrl}/contribute`, dim])
       say([`  Contributing       ${config.github.repoUrl}/blob/dev/CONTRIBUTING.md`, dim])
       say([`  Discord            ${config.social.discord}`, dim])
@@ -274,10 +274,10 @@ export function install() {
     manifest,
     async try() {
       localStorage.removeItem(liteQuitKey)
-      if (lite) return say(["OpenCode Lite is already running. Click an empty part of the page, then type.", dim])
+      if (lite) return say(["Warcode Lite is already running. Click an empty part of the page, then type.", dim])
       say(["Click an empty part of the page, then type: keys reach the console app through the page.", dim])
       if (["ios", "android"].includes(detectPlatform() ?? ""))
-        return say(["OpenCode Lite needs a desktop browser with DevTools. Try https://textjs.org/opencode", dim])
+        return say(["Warcode Lite needs a desktop browser with DevTools. Try https://textjs.org/opencode", dim])
       if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))
         say(["In Safari, turn on Settings › Advanced › Show features for web developers.", dim])
       const started = await startLite().then(
@@ -286,13 +286,13 @@ export function install() {
       )
       if (!started)
         return say([
-          "OpenCode Lite couldn't load here. Try it at https://textjs.org/opencode, or install OpenCode: opencode.install()",
+          "Warcode Lite couldn't load here. Try it at https://textjs.org/opencode, or install Warcode: warcode.install()",
           dim,
         ])
     },
-    toString: () => "opencode: type opencode.help()",
+    toString: () => "warcode: type warcode.help()",
   }
-  Object.defineProperty(window, "opencode", { value: api, configurable: true, writable: true })
+  Object.defineProperty(window, "warcode", { value: api, configurable: true, writable: true })
   return { api, startLite, greet: () => greet(colors, say) }
 }
 
@@ -309,7 +309,7 @@ async function textjs<T>(name: "lite" | "picker") {
 
 /** The view-source logo (the wordmark with a ░ drop shadow) in colour, then three lines. */
 function greet(colors: typeof brand.light, say: (...parts: [string, string?][]) => void) {
-  const word = [..."opencode"] as Letter[]
+  const word = [..."warcode"] as Letter[]
   const ink = (x: number, y: number) => {
     const letter = word[Math.floor(x / 10)]
     const column = Math.floor((x % 10) / 2)
@@ -336,13 +336,13 @@ function greet(colors: typeof brand.light, say: (...parts: [string, string?][]) 
     text += "\n"
   })
   console.log(text, ...styles)
-  say(["OpenCode, the open source coding agent.", `font-weight:bold;color:${colors.code}`])
+  say(["Warcode, the open source coding agent.", `font-weight:bold;color:${colors.code}`])
   say(
     ["Type ", `color:${colors.dim}`],
-    ["opencode.help()", `color:${colors.link}`],
+    ["warcode.help()", `color:${colors.link}`],
     [" to install, download or read the docs from here.", `color:${colors.dim}`],
   )
-  say(["Or try OpenCode right in this console: ", `color:${colors.dim}`], ["opencode.try()", `color:${colors.link}`])
+  say(["Or try Warcode right in this console: ", `color:${colors.dim}`], ["warcode.try()", `color:${colors.link}`])
   const links = [
     ["Contribute", config.github.repoUrl],
     ["Good first issues", `${config.github.repoUrl}/labels/good%20first%20issue`],

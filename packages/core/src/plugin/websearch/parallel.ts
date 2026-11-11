@@ -1,6 +1,6 @@
 export * as WebSearchParallel from "./parallel.js"
 
-import { define } from "@opencode/plugin/effect/plugin"
+import { define } from "@warcode/plugin/effect/plugin"
 import { Effect, Schema, Scope } from "effect"
 import { HttpClient } from "effect/http"
 import { App } from "../../app.js"
@@ -50,7 +50,7 @@ const McpOutput = Schema.Struct({
 })
 
 export const Plugin = define<HttpClient.HttpClient | Scope.Scope>({
-  id: "opencode.websearch.parallel",
+  id: "warcode.websearch.parallel",
   effect: Effect.fn("WebSearchParallel.Plugin")(function* (ctx) {
     const http = yield* HttpClient.HttpClient
     yield* WebSearchProvider.register(ctx, {

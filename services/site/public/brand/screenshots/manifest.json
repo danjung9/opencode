@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "opencodeVersion": "2.2.5",
+  "warcodeVersion": "2.2.5",
   "capturedAt": "2026-11-05T16:18:52.884Z",
   "generator": {
     "script": "packages/console/app/script/capture-assets.ts",

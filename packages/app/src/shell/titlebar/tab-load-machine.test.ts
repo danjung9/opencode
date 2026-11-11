@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import type { SessionInfo } from "@opencode/client/promise"
+import type { SessionInfo } from "@warcode/client/promise"
 import { ServerKey } from "@/runtime/server/persistence"
 import {
   INITIAL_SESSION_TAB_LOADS_STATE,

@@ -1,6 +1,6 @@
 import { createMemo, createSignal, onCleanup, runWithOwner, untrack } from "solid-js"
-import type { FormInfo, LocationRef } from "@opencode/client/promise"
-import type { Data } from "@opencode/client/solid"
+import type { FormInfo, LocationRef } from "@warcode/client/promise"
+import type { Data } from "@warcode/client/solid"
 import type { ServerSDK } from "@/runtime/server/client"
 import { ScopedKey } from "@/runtime/server/scope"
 import { showToast } from "@/shell/notifications/toast"

@@ -8,7 +8,7 @@ const MAX_TYPE_SIZE = 161
 const MIN_TYPE_SIZE = 49
 const GIF_REVEAL_DELAY = 700
 
-const initialLetters = [..."opencode"]
+const initialLetters = [..."warcode"]
   .map(
     (letter, index) =>
       `<span class="glyph" data-index="${index}" data-letter="${letter}">${glyphMarkup(letter as Letter)}</span>`,
@@ -34,7 +34,7 @@ type Confetti = {
 /**
  * The font page's hero: type anything and it is set in the six letters. The text is a real
  * (hidden) textarea; the letters are drawn beside it. Exports the typing as a GIF or the current
- * map as an installable font. A perfect anagram of "opencode" sets off confetti.
+ * map as an installable font. A perfect anagram of "warcode" sets off confetti.
  */
 export function Typewriter() {
   let canvas!: HTMLDivElement
@@ -65,7 +65,7 @@ export function Typewriter() {
 
     const isPerfectAnagram = (text: string) => {
       const letters = text.toLowerCase().replace(/\s/gu, "")
-      return letters !== "opencode" && letters.length === 8 && [...letters].sort().join("") === "cdeenoop"
+      return letters !== "warcode" && letters.length === 8 && [...letters].sort().join("") === "cdeenoop"
     }
 
     const keepCaretVisible = () => {
@@ -97,7 +97,7 @@ export function Typewriter() {
       if (!isPerfectAnagram(input.value)) {
         lastAnagram = ""
         clearCelebration()
-        if (text === "opencode") {
+        if (text === "warcode") {
           cancelAnimationFrame(confettiFrame)
           overlay.hidden = true
           anagramStatus.hidden = true
@@ -435,7 +435,7 @@ export function Typewriter() {
       }
 
       try {
-        composition.frames.push({ layout: measure("opencode"), delay: 900, caret: true })
+        composition.frames.push({ layout: measure("warcode"), delay: 900, caret: true })
         const typingFrames = Math.min(characters.length, 120)
         const counts = new Set(
           Array.from({ length: typingFrames }, (_, index) =>
@@ -511,7 +511,7 @@ export function Typewriter() {
           claim centred in the top bar and the downloads on its right. */}
       <div ref={canvas} data-slot="canvas" tabIndex={-1}>
         <label data-slot="sr-only" for="font-typing-input">
-          Type anything to create OpenCode logo letters
+          Type anything to create Warcode logo letters
         </label>
         <textarea
           ref={input}
@@ -521,7 +521,7 @@ export function Typewriter() {
           autocapitalize="off"
           spellcheck={false}
         >
-          opencode
+          warcode
         </textarea>
         {/* The server renders the starting wordmark, so the hero is never empty before hydration. */}
         <div ref={output} class="letter-output" aria-hidden="true" innerHTML={initialLetters} />

@@ -16,7 +16,7 @@ type Item = { readonly id: string }
 
 const openai = { id: "openai" }
 
-const opencode = { id: "opencode" }
+const warcode = { id: "warcode" }
 
 const consoleGoogle = { id: "console-google" }
 
@@ -29,9 +29,9 @@ const disconnectOpenAI: SettingsProvidersEvent<Item> = {
 
 const disconnectConsole: SettingsProvidersEvent<Item> = {
   type: "disconnect.requested",
-  providerIDs: ["opencode", "console-google"],
-  integrationID: "opencode",
-  providerName: "OpenCode",
+  providerIDs: ["warcode", "console-google"],
+  integrationID: "warcode",
+  providerName: "Warcode",
 }
 
 const work: ProviderAccount = { type: "credential", id: "cred_work", label: "Work", method: "oauth" }
@@ -39,14 +39,14 @@ const work: ProviderAccount = { type: "credential", id: "cred_work", label: "Wor
 const personal: ProviderAccount = { type: "credential", id: "cred_personal", label: "Personal", method: "oauth" }
 
 // The Console list before a switch, and the transient catalog in which the workspace providers dropped.
-const before = [opencode, consoleGoogle, openai]
+const before = [warcode, consoleGoogle, openai]
 
 const transient = [openai]
 
 const activate = (catalog: readonly Item[], account = personal): SettingsProvidersEvent<Item> => ({
   type: "account.activate.requested",
-  integrationID: "opencode",
-  providerName: "OpenCode",
+  integrationID: "warcode",
+  providerName: "Warcode",
   account,
   activeCredentialID: work.id,
   catalog,
@@ -54,8 +54,8 @@ const activate = (catalog: readonly Item[], account = personal): SettingsProvide
 
 const remove = (catalog: readonly Item[]): SettingsProvidersEvent<Item> => ({
   type: "account.remove.requested",
-  integrationID: "opencode",
-  providerName: "OpenCode",
+  integrationID: "warcode",
+  providerName: "Warcode",
   account: work,
   final: false,
   catalog,
@@ -100,9 +100,9 @@ test("a failed request restores every Console provider with one toast", () => {
     { type: "disconnect.failed", attempt: 1, reason: { kind: "request", error } },
   ])
 
-  expect(connectedProviders(result.state, [opencode, consoleGoogle])).toEqual([opencode, consoleGoogle])
+  expect(connectedProviders(result.state, [warcode, consoleGoogle])).toEqual([warcode, consoleGoogle])
   expect(result.effects.filter((effect) => effect.type === "toast.failed")).toEqual([
-    { type: "toast.failed", providerName: "OpenCode", reason: { kind: "request", error } },
+    { type: "toast.failed", providerName: "Warcode", reason: { kind: "request", error } },
   ])
 })
 
@@ -150,10 +150,10 @@ test("reconnecting the Console clears its providers only", () => {
     disconnectConsole,
     { type: "disconnect.succeeded", attempt: 1 },
     disconnectOpenAI,
-    { type: "provider.reconnected", providerID: "opencode" },
+    { type: "provider.reconnected", providerID: "warcode" },
   ])
 
-  expect(connectedProviders(result.state, [opencode, consoleGoogle, openai])).toEqual([opencode, consoleGoogle])
+  expect(connectedProviders(result.state, [warcode, consoleGoogle, openai])).toEqual([warcode, consoleGoogle])
   expect(providerRow(result.state, "openai")).toMatchObject({ status: "removing", attempt: 2 })
 })
 
@@ -177,8 +177,8 @@ test("the dialog's late catalog refresh does not unfreeze the list while an acco
     {
       type: "account.activate.run",
       attempt: 2,
-      integrationID: "opencode",
-      providerName: "OpenCode",
+      integrationID: "warcode",
+      providerName: "Warcode",
       account: personal,
     },
   ])
@@ -244,8 +244,8 @@ test("an account action closes a rename and blocks renames and other account act
     {
       type: "account.remove.run",
       attempt: 2,
-      integrationID: "opencode",
-      providerName: "OpenCode",
+      integrationID: "warcode",
+      providerName: "Warcode",
       account: work,
       final: false,
     },

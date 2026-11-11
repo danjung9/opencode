@@ -1,6 +1,6 @@
 /**
  * The cabinet's boot log, shared by the DOM screen (screen.tsx) and the canvas renderer
- * (screen-canvas.ts): a straight BIOS-style boot with OpenCode references. It always plays through.
+ * (screen-canvas.ts): a straight BIOS-style boot with Warcode references. It always plays through.
  */
 
 /** How long the boot runs before the start screen, in ms. */
@@ -9,7 +9,7 @@ export const bootDuration = 4600
 // [time in ms, text, status shown when the next line starts]. No line has a status now: the "OK"
 // markers read as noise on the small screen.
 const lines: [number, string, string?][] = [
-  [0, "OPENCODE BIOS v2.0.26"],
+  [0, "WARCODE BIOS v2.0.26"],
   [120, "(C) ANOMALY INNOVATIONS INC."],
   [380, ""],
   [420, "CPU .............. TERMINAL AGENT CORE"],

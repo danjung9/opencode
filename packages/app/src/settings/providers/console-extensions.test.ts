@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import type { ConfigEntry } from "@opencode/client/promise"
+import type { ConfigEntry } from "@warcode/client/promise"
 import { consoleMcpLinks, consoleMcps, consoleSkillLink, consoleWorkspace } from "./console-extensions"
 
 type ServerConfig = NonNullable<

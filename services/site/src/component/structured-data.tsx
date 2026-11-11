@@ -14,7 +14,7 @@ export function JsonLd(props: { data: Record<string, unknown> }) {
   )
 }
 
-/** Anomaly, the company behind OpenCode. Other blocks refer to it by its `@id`. */
+/** Anomaly, the company behind Warcode. Other blocks refer to it by its `@id`. */
 export const organizationData = {
   "@type": "Organization",
   "@id": organizationId,
@@ -28,7 +28,7 @@ export function websiteData(language: string) {
   return {
     "@type": "WebSite",
     "@id": `${config.baseUrl}/#website`,
-    name: "OpenCode",
+    name: "Warcode",
     url: `${config.baseUrl}/`,
     inLanguage: language,
     publisher: { "@id": organizationId },

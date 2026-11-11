@@ -28,7 +28,7 @@ import { noindexDev } from "~/lib/noindex"
 import { docsMiddleware } from "~/docs/middleware"
 import { staticPages } from "~/static/render"
 
-// dev.opencode.ai's noindex header on every response (lib/noindex.ts), then the docs (everything
+// dev.warcode.ai's noindex header on every response (lib/noindex.ts), then the docs (everything
 // under /docs and /v1/docs, and the V1 docs' old host, docs/middleware.ts), then the page middleware, then the HTML cache headers and edge
 // cache (lib/html-cache.ts), which see the request without its locale, then the page's head links
 // (lib/head-links.ts), inside the cache so cached pages carry them too, then the pages rendered
@@ -50,7 +50,7 @@ export default [
       // The V2 install script (`curl -fsSL https://opencode.ai/v2/install | bash`), always the latest.
       if (url.pathname === "/v2/install") return installScript()
       // The brand zip lived at the site root; it is in the files bucket now (src/lib/media.ts).
-      if (url.pathname === "/opencode-brand-assets.zip")
+      if (url.pathname === "/warcode-brand-assets.zip")
         return new Response(null, { status: 301, headers: { Location: mediaUrl(url.pathname) } })
       const requested = url.pathname
       const locale = fromPathname(url.pathname)
@@ -115,7 +115,7 @@ export default [
         return new Response(event.request.method === "HEAD" ? null : await robotsTxt(), {
           headers: textHeaders,
         })
-      // The people behind OpenCode (https://humanstxt.org). Served here because public/ files get no
+      // The people behind Warcode (https://humanstxt.org). Served here because public/ files get no
       // charset, and without one browsers garble its block characters.
       if (path === "/humans.txt")
         return new Response(event.request.method === "HEAD" ? null : humansTxt, {

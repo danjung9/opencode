@@ -1,11 +1,11 @@
-import type { OpenCodeEvent } from "@opencode/client/promise"
+import type { WarcodeEvent } from "@warcode/client/promise"
 import { expect, test, type Page } from "@playwright/test"
 import { SERVER, sessionHref } from "../utils/app"
 import { installSseTransport } from "../utils/sse-transport"
 import { expectSessionTitle } from "../utils/waits"
 import { mockWorkspace, type WorkspaceInput } from "../utils/workspace"
 
-const directory = "C:/OpenCode/RequestDocks"
+const directory = "C:/Warcode/RequestDocks"
 
 const sessionID = "ses_request_docks"
 
@@ -423,7 +423,7 @@ test("gives a Location elicitation's hung reply back after 30 s and closes it on
   // The server takes the reply and never answers it.
   await page.route(/\/api\/session\/global\/form\/frm_mcp_global\/reply(\?|$)/, (route) => {
     if (route.request().method() !== "POST") return route.fallback()
-    replies.push({ body: route.request().postDataJSON(), directory: route.request().headers()["x-opencode-directory"] })
+    replies.push({ body: route.request().postDataJSON(), directory: route.request().headers()["x-warcode-directory"] })
   })
 
   await page.goto(sessionHref(sessionID))
@@ -537,14 +537,14 @@ test("loads a running subagent's question without polling idle subagents on ever
   await workspace.push(
     [...idleIDs, sessionID].map(
       (id, index) =>
-        // SAFETY: the fixture event matches the generated OpenCodeEvent shape for its type.
+        // SAFETY: the fixture event matches the generated WarcodeEvent shape for its type.
         ({
           id: `evt_request_rename_${index}`,
           created: index + 2,
           type: "session.renamed",
           durable: { aggregateID: id, seq: 1, version: 1 },
           data: { sessionID: id, title: id === sessionID ? "Renamed request docks" : `${id} renamed` },
-        }) as OpenCodeEvent,
+        }) as WarcodeEvent,
     ),
   )
   await expect(page.getByRole("heading", { name: "Renamed request docks", exact: true })).toBeVisible()

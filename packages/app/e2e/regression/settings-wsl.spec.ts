@@ -1,13 +1,13 @@
-import { base64Encode } from "@opencode/util/encode"
+import { base64Encode } from "@warcode/util/encode"
 import { expect, test, type Locator } from "@playwright/test"
 import { NO_PROVIDER, REMOTE_SERVER, SERVER, holdRoute, project, provider, session } from "../utils/app"
-import { mockOpenCodeServer, mockServers } from "../utils/mock-server"
+import { mockWarcodeServer, mockServers } from "../utils/mock-server"
 import { expectSessionTitle } from "../utils/waits"
 
 test.use({ viewport: { width: 1280, height: 900 } })
 
 test("WSL distribution radios stay inset and aligned in both add-server lists", async ({ page }) => {
-  await mockOpenCodeServer(page, {
+  await mockWarcodeServer(page, {
     directory: "/repo",
     project: project({ id: "proj_wsl_alignment", directory: "/repo", name: "WSL project" }),
     provider: NO_PROVIDER,
@@ -27,10 +27,10 @@ test("WSL distribution radios stay inset and aligned in both add-server lists", 
   await settings.getByRole("button", { name: "Add server", exact: true }).press("Enter")
   await page.getByRole("menuitem", { name: "Add WSL server", exact: true }).click()
   const dialog = page.getByRole("dialog")
-  const ubuntu = dialog.getByRole("radio", { name: "Ubuntu-24.04 OpenCode not installed", exact: true })
-  const alma = dialog.getByRole("radio", { name: "AlmaLinux-9 OpenCode not installed", exact: true })
+  const ubuntu = dialog.getByRole("radio", { name: "Ubuntu-24.04 Warcode not installed", exact: true })
+  const alma = dialog.getByRole("radio", { name: "AlmaLinux-9 Warcode not installed", exact: true })
   await expect(ubuntu).toBeEnabled()
-  await expect(dialog.getByText("OpenCode not installed", { exact: true })).toHaveCount(2)
+  await expect(dialog.getByText("Warcode not installed", { exact: true })).toHaveCount(2)
   await expect(dialog.getByRole("radio", { name: "Debian-WSL1 Unsupported · Use WSL 2", exact: true })).toBeDisabled()
   await expectDistroLayout(dialog)
   await dialog
@@ -88,7 +88,7 @@ async function expectDistroLayout(dialog: Locator) {
 
 for (const mode of ["failed", "stopped", "ready"] as const) {
   test(`manages a ${mode} configured WSL server from the Servers page`, async ({ page }) => {
-    await mockOpenCodeServer(page, {
+    await mockWarcodeServer(page, {
       directory: "/repo",
       project: project({ id: "proj_wsl_settings", directory: "/repo", name: "WSL project" }),
       provider: NO_PROVIDER,
@@ -118,9 +118,9 @@ for (const mode of ["failed", "stopped", "ready"] as const) {
     await expect(switcher).toHaveText("ServerUbuntu")
     await expect(unavailable).toHaveCount(0)
     await settings.getByRole("tab", { name: "Servers", exact: true }).click()
-    await connection.getByRole("button", { name: "Update OpenCode", exact: true }).click()
+    await connection.getByRole("button", { name: "Update Warcode", exact: true }).click()
     await expect(page.getByLabel("WSL actions")).toContainText("update:Ubuntu")
-    await expect(connection.getByRole("button", { name: "Update OpenCode", exact: true })).toHaveCount(0)
+    await expect(connection.getByRole("button", { name: "Update Warcode", exact: true })).toHaveCount(0)
 
     await connection.getByRole("button", { name: "More options", exact: true }).click()
     await page.getByRole("menuitem", { name: "Remove", exact: true }).click()
@@ -131,7 +131,7 @@ for (const mode of ["failed", "stopped", "ready"] as const) {
 }
 
 test("adding a WSL server while the WSL plugin is down shows that WSL is unavailable", async ({ page }) => {
-  await mockOpenCodeServer(page, {
+  await mockWarcodeServer(page, {
     directory: "/repo",
     project: project({ id: "proj_wsl_unavailable", directory: "/repo", name: "WSL project" }),
     provider: NO_PROVIDER,
@@ -148,12 +148,12 @@ test("adding a WSL server while the WSL plugin is down shows that WSL is unavail
   await page.getByRole("menuitem", { name: "Add WSL server", exact: true }).click()
   const dialog = page.getByRole("dialog")
   await expect(dialog.getByRole("heading", { name: "WSL unavailable", exact: true })).toBeVisible()
-  await expect(dialog.getByText("OpenCode could not verify WSL on this machine.", { exact: true })).toBeVisible()
+  await expect(dialog.getByText("Warcode could not verify WSL on this machine.", { exact: true })).toBeVisible()
   await expect(dialog.getByText("WSL is unavailable", { exact: true })).toBeVisible()
 })
 
 test("adding an SSH server while the SSH plugin is down fails instead of connecting forever", async ({ page }) => {
-  await mockOpenCodeServer(page, {
+  await mockWarcodeServer(page, {
     directory: "/repo",
     project: project({ id: "proj_ssh_unavailable", directory: "/repo", name: "SSH project" }),
     provider: NO_PROVIDER,
@@ -281,7 +281,7 @@ test("an open session moves to the controller a new SSH sign-in creates", async 
     id: "ses_ssh",
     directory,
     title: "SSH session",
-    model: { id: model.id, providerID: "opencode" },
+    model: { id: model.id, providerID: "warcode" },
   })
 
   const remote = { password: "ssh-1" }

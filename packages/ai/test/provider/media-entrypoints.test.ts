@@ -83,7 +83,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "openai-compatible",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/openai-compatible/images")
+      const { model } = await import("@warcode/ai/providers/openai-compatible/images")
       return model("qwen-image", {
         ...shared,
         apiKey: "regolo-key",
@@ -98,7 +98,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "openai",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/openai/images")
+      const { model } = await import("@warcode/ai/providers/openai/images")
       return model("gpt-image-2", { ...shared, apiKey: "openai-key", organization: "org-1" })
     },
     url: "https://api.openai.com/v1/images/generations",
@@ -108,7 +108,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "openrouter",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/openrouter/images")
+      const { model } = await import("@warcode/ai/providers/openrouter/images")
       return model("openai/gpt-image-2", { ...shared, apiKey: "openrouter-key" })
     },
     url: "https://openrouter.ai/api/v1/images/generations",
@@ -118,7 +118,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "vercel-ai-gateway",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/vercel-ai-gateway/images")
+      const { model } = await import("@warcode/ai/providers/vercel-ai-gateway/images")
       return model("openai/gpt-image-2", { ...shared, apiKey: "vercel-key" })
     },
     url: "https://ai-gateway.vercel.sh/v1/images/generations",
@@ -128,7 +128,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "digitalocean",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/digitalocean/images")
+      const { model } = await import("@warcode/ai/providers/digitalocean/images")
       return model("openai-gpt-image-1", { ...shared, apiKey: "do-key" })
     },
     url: "https://inference.do-ai.run/v1/images/generations",
@@ -138,7 +138,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "azure",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/azure/images")
+      const { model } = await import("@warcode/ai/providers/azure/images")
       return model("gpt-image-2", { ...shared, apiKey: "azure-key", resourceName: "fixture" })
     },
     url: "https://fixture.openai.azure.com/openai/v1/images/generations?api-version=v1",
@@ -149,7 +149,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "meta",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/meta/images")
+      const { model } = await import("@warcode/ai/providers/meta/images")
       return model("muse-image-1.0", { ...shared, apiKey: "meta-key" })
     },
     url: "https://api.meta.ai/v1/images/generations",
@@ -158,7 +158,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "xai",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/xai/images")
+      const { model } = await import("@warcode/ai/providers/xai/images")
       return model("grok-imagine-image", { ...shared, apiKey: "xai-key" })
     },
     url: "https://api.x.ai/v1/images/generations",
@@ -167,7 +167,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "zai",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/zai/images")
+      const { model } = await import("@warcode/ai/providers/zai/images")
       return model("glm-image", { ...shared, apiKey: "zai-key", baseURL: "https://open.bigmodel.test/api/paas/v4" })
     },
     url: "https://open.bigmodel.test/api/paas/v4/images/generations",
@@ -176,7 +176,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "minimax",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/minimax/images")
+      const { model } = await import("@warcode/ai/providers/minimax/images")
       return model("image-01", { ...shared, apiKey: "minimax-key", baseURL: "https://api.minimax.cn/v1" })
     },
     url: "https://api.minimax.cn/v1/image_generation",
@@ -185,7 +185,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "alibaba",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/alibaba/images")
+      const { model } = await import("@warcode/ai/providers/alibaba/images")
       return model("qwen-image-2.0", {
         ...shared,
         apiKey: "dashscope-key",
@@ -198,7 +198,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "google",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/google/images")
+      const { model } = await import("@warcode/ai/providers/google/images")
       return model("gemini-2.5-flash-image", { ...shared, apiKey: "google-key" })
     },
     url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent",
@@ -208,7 +208,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "google-vertex",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/google-vertex/images")
+      const { model } = await import("@warcode/ai/providers/google-vertex/images")
       return model("gemini-2.5-flash-image", { ...shared, apiKey: "vertex-key" })
     },
     url: "https://aiplatform.googleapis.com/v1/publishers/google/models/gemini-2.5-flash-image:generateContent",
@@ -218,7 +218,7 @@ const images: ReadonlyArray<Case<ImageModel>> = [
   {
     name: "cloudflare-workers-ai",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/cloudflare-workers-ai/images")
+      const { model } = await import("@warcode/ai/providers/cloudflare-workers-ai/images")
       return model("@cf/leonardo/lucid-origin", { ...shared, apiKey: "cloudflare-key", accountId: "account-1" })
     },
     url: "https://api.cloudflare.com/client/v4/accounts/account-1/ai/run/@cf/leonardo/lucid-origin",
@@ -231,7 +231,7 @@ const decisions: ReadonlyArray<Case<DecisionModel>> = [
   {
     name: "typesafe-ai",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/typesafe-ai/decisions")
+      const { model } = await import("@warcode/ai/providers/typesafe-ai/decisions")
       return model("typesafe/jev", {
         ...shared,
         apiKey: "amd-key",
@@ -244,20 +244,20 @@ const decisions: ReadonlyArray<Case<DecisionModel>> = [
     provider: "typesafe-ai",
   },
   {
-    name: "opencode",
+    name: "warcode",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/opencode/decisions")
+      const { model } = await import("@warcode/ai/providers/warcode/decisions")
       return model("jev", { ...shared, apiKey: "zen-key", baseURL: "https://opencode.ai/inference/systemone/v1" })
     },
     url: "https://opencode.ai/inference/systemone/v1/systemone",
     auth: ["authorization", "Bearer zen-key"],
     headers: { "typesafe-danger-zone-images": "true" },
-    provider: "opencode",
+    provider: "warcode",
   },
   {
     name: "openrouter",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/openrouter/decisions")
+      const { model } = await import("@warcode/ai/providers/openrouter/decisions")
       return model("cloudflare/clef-omni", { ...shared, apiKey: "openrouter-key" })
     },
     url: "https://openrouter.ai/api/v1/systemone",
@@ -267,7 +267,7 @@ const decisions: ReadonlyArray<Case<DecisionModel>> = [
   {
     name: "baseten",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/baseten/decisions")
+      const { model } = await import("@warcode/ai/providers/baseten/decisions")
       return model("decision-models/baseten-elephant-9b-latest", { ...shared, apiKey: "baseten-key" })
     },
     url: "https://inference.baseten.co/v1/systemone",
@@ -277,7 +277,7 @@ const decisions: ReadonlyArray<Case<DecisionModel>> = [
   {
     name: "digitalocean",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/digitalocean/decisions")
+      const { model } = await import("@warcode/ai/providers/digitalocean/decisions")
       return model("typesafe-jev", { ...shared, apiKey: "do-key" })
     },
     url: "https://inference.do-ai.run/v1/systemone",
@@ -287,7 +287,7 @@ const decisions: ReadonlyArray<Case<DecisionModel>> = [
   {
     name: "vercel-ai-gateway",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/vercel-ai-gateway/decisions")
+      const { model } = await import("@warcode/ai/providers/vercel-ai-gateway/decisions")
       return model("typesafe/jev", { ...shared, apiKey: "vercel-key" })
     },
     url: "https://ai-gateway.vercel.sh/v1/decisions",
@@ -297,7 +297,7 @@ const decisions: ReadonlyArray<Case<DecisionModel>> = [
   {
     name: "cloudflare-workers-ai",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/cloudflare-workers-ai/decisions")
+      const { model } = await import("@warcode/ai/providers/cloudflare-workers-ai/decisions")
       return model("@cf/cloudflare/clef-omni", { ...shared, apiKey: "cloudflare-key", accountId: "account-1" })
     },
     url: "https://api.cloudflare.com/client/v4/accounts/account-1/ai/run",
@@ -308,7 +308,7 @@ const decisions: ReadonlyArray<Case<DecisionModel>> = [
   {
     name: "cloudflare-ai-gateway",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/cloudflare-ai-gateway/decisions")
+      const { model } = await import("@warcode/ai/providers/cloudflare-ai-gateway/decisions")
       return model("@cf/cloudflare/clef-omni", {
         ...shared,
         apiKey: "gateway-key",
@@ -328,7 +328,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "openai",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/openai/embeddings")
+      const { model } = await import("@warcode/ai/providers/openai/embeddings")
       return model("text-embedding-3-small", { ...shared, apiKey: "openai-key", organization: "org-1" })
     },
     url: "https://api.openai.com/v1/embeddings",
@@ -339,7 +339,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "openai-compatible",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/openai-compatible/embeddings")
+      const { model } = await import("@warcode/ai/providers/openai-compatible/embeddings")
       return model("nvidia/nemotron-3.5-embed-1b", {
         ...shared,
         apiKey: "nvidia-key",
@@ -354,7 +354,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "openrouter",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/openrouter/embeddings")
+      const { model } = await import("@warcode/ai/providers/openrouter/embeddings")
       return model("openai/text-embedding-3-small", { ...shared, apiKey: "openrouter-key" })
     },
     url: "https://openrouter.ai/api/v1/embeddings",
@@ -364,7 +364,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "vercel-ai-gateway",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/vercel-ai-gateway/embeddings")
+      const { model } = await import("@warcode/ai/providers/vercel-ai-gateway/embeddings")
       return model("openai/text-embedding-3-small", { ...shared, apiKey: "vercel-key" })
     },
     url: "https://ai-gateway.vercel.sh/v1/embeddings",
@@ -374,7 +374,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "deepinfra",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/deepinfra/embeddings")
+      const { model } = await import("@warcode/ai/providers/deepinfra/embeddings")
       return model("BAAI/bge-m3", { ...shared, apiKey: "deepinfra-key" })
     },
     url: "https://api.deepinfra.com/v1/openai/embeddings",
@@ -384,7 +384,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "fireworks",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/fireworks/embeddings")
+      const { model } = await import("@warcode/ai/providers/fireworks/embeddings")
       return model("nomic-ai/nomic-embed-text-v1.5", { ...shared, apiKey: "fireworks-key" })
     },
     url: "https://api.fireworks.ai/inference/v1/embeddings",
@@ -394,7 +394,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "cohere",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/cohere/embeddings")
+      const { model } = await import("@warcode/ai/providers/cohere/embeddings")
       return model("embed-v4.0", { ...shared, apiKey: "cohere-key" })
     },
     url: "https://api.cohere.ai/compatibility/v1/embeddings",
@@ -404,7 +404,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "digitalocean",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/digitalocean/embeddings")
+      const { model } = await import("@warcode/ai/providers/digitalocean/embeddings")
       return model("bge-m3", { ...shared, apiKey: "do-key" })
     },
     url: "https://inference.do-ai.run/v1/embeddings",
@@ -414,7 +414,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "alibaba",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/alibaba/embeddings")
+      const { model } = await import("@warcode/ai/providers/alibaba/embeddings")
       return model("text-embedding-v4", { ...shared, apiKey: "dashscope-key", region: "ap-southeast-1" })
     },
     url: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/embeddings",
@@ -424,7 +424,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "azure",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/azure/embeddings")
+      const { model } = await import("@warcode/ai/providers/azure/embeddings")
       return model("text-embedding-3-small", { ...shared, apiKey: "azure-key", resourceName: "fixture" })
     },
     url: "https://fixture.openai.azure.com/openai/v1/embeddings?api-version=v1",
@@ -435,7 +435,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "google",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/google/embeddings")
+      const { model } = await import("@warcode/ai/providers/google/embeddings")
       return model("gemini-embedding-001", { ...shared, apiKey: "google-key" })
     },
     url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents",
@@ -446,7 +446,7 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
   {
     name: "google-vertex",
     load: async () => {
-      const { model } = await import("@opencode/ai/providers/google-vertex/embeddings")
+      const { model } = await import("@warcode/ai/providers/google-vertex/embeddings")
       return model("text-embedding-005", { ...shared, apiKey: "vertex-key" })
     },
     url: "https://aiplatform.googleapis.com/v1/publishers/google/models/text-embedding-005:predict",

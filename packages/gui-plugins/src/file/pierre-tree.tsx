@@ -1,9 +1,9 @@
 import "@pierre/trees/web-components"
 import { FileTree, type FileTreeDirectoryHandle, type FileTreeItemHandle } from "@pierre/trees"
-import { getIcon } from "@opencode/ui/icons/catalog"
+import { getIcon } from "@warcode/ui/icons/catalog"
 import { createMemo, createSignal, onCleanup, onMount, untrack } from "solid-js"
-import type { ChangeKind } from "@opencode/plugin/gui/review"
-import { createKeyed, usePlugin, type FileNode, type MountedSession, type SessionScreen } from "@opencode/plugin/gui"
+import type { ChangeKind } from "@warcode/plugin/gui/review"
+import { createKeyed, usePlugin, type FileNode, type MountedSession, type SessionScreen } from "@warcode/plugin/gui"
 import { startFileDrag } from "./drag"
 import { OpenInAppContextMenuV2, useOpenInApp } from "./open-in-app"
 import { resolveOpenInAppPath } from "./path"
@@ -387,7 +387,7 @@ export default function PierreFileTree(props: {
     if (effect.collapse.length > 0) run({ type: "sync-expansion", expand: [], collapse: effect.collapse })
     created.render({ containerWrapper: wrapper })
     widthHost = created.getFileTreeContainer()
-    widthHost?.classList.add("opencode-pierre-file-tree")
+    widthHost?.classList.add("warcode-pierre-file-tree")
     const list = widthHost?.shadowRoot?.querySelector<HTMLElement>("[data-file-tree-virtualized-list]")
     const scroller = list?.closest<HTMLElement>("[data-file-tree-virtualized-scroll]")
 

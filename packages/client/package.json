@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode/client",
+  "name": "@warcode/client",
   "version": "2.2.7",
   "type": "module",
   "license": "MIT",
@@ -36,8 +36,8 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@opencode/schema": "workspace:*",
-    "@opencode/protocol": "workspace:*"
+    "@warcode/schema": "workspace:*",
+    "@warcode/protocol": "workspace:*"
   },
   "peerDependencies": {
     "effect": "catalog:",
@@ -54,7 +54,7 @@
   "devDependencies": {
     "@effect/platform-node": "catalog:",
     "@modelcontextprotocol/client": "2.4.0",
-    "@opencode/httpapi-codegen": "workspace:*",
+    "@warcode/httpapi-codegen": "workspace:*",
     "@tsconfig/bun": "catalog:",
     "@types/bun": "catalog:",
     "@typescript/native": "catalog:",

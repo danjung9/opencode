@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode/simulation",
+  "name": "@warcode/simulation",
   "version": "2.2.7",
   "type": "module",
   "license": "MIT",
@@ -31,11 +31,11 @@
     "typecheck:tsc": "tsc -b"
   },
   "dependencies": {
-    "@opencode/core": "workspace:*",
-    "@opencode/ai": "workspace:*",
-    "@opencode/plugin": "workspace:*",
-    "@opencode/protocol": "workspace:*",
-    "@opencode/util": "workspace:*",
+    "@warcode/core": "workspace:*",
+    "@warcode/ai": "workspace:*",
+    "@warcode/plugin": "workspace:*",
+    "@warcode/protocol": "workspace:*",
+    "@warcode/util": "workspace:*",
     "@opentui/core": "catalog:",
     "effect": "catalog:",
     "ws": "8.21.0"

@@ -4,18 +4,18 @@ import { mkdir, rm, utimes, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { Context, Effect, Fiber, Layer } from "effect"
 import { TestClock } from "effect/testing"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { PersistentPty } from "@opencode/core/persistent-pty"
-import { Config } from "@opencode/core/config"
-import { Environment } from "@opencode/core/environment/index"
-import { Location } from "@opencode/core/location"
-import { AbsolutePath } from "@opencode/core/schema"
-import { Shell } from "@opencode/core/shell"
-import { Bus } from "@opencode/core/bus"
-import { Global } from "@opencode/util/global"
-import { FSUtil } from "@opencode/util/fs-util"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { AppProcess } from "@opencode/util/process"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { PersistentPty } from "@warcode/core/persistent-pty"
+import { Config } from "@warcode/core/config"
+import { Environment } from "@warcode/core/environment/index"
+import { Location } from "@warcode/core/location"
+import { AbsolutePath } from "@warcode/core/schema"
+import { Shell } from "@warcode/core/shell"
+import { Bus } from "@warcode/core/bus"
+import { Global } from "@warcode/util/global"
+import { FSUtil } from "@warcode/util/fs-util"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { AppProcess } from "@warcode/util/process"
 import { hostEnvironmentLayer } from "./fixture/environment"
 import { location } from "./fixture/location"
 import { daemonShells, until } from "./fixture/shell-daemon"
@@ -35,8 +35,8 @@ describe("Shell on the process daemon", () => {
     Effect.gen(function* () {
       const env = yield* daemonShells()
       yield* Effect.promise(() => mkdir(path.join(env.directory, "sub")))
-      process.env.OPENCODE_TEST_REMOVED = "1"
-      yield* Effect.addFinalizer(() => Effect.sync(() => delete process.env.OPENCODE_TEST_REMOVED))
+      process.env.WARCODE_TEST_REMOVED = "1"
+      yield* Effect.addFinalizer(() => Effect.sync(() => delete process.env.WARCODE_TEST_REMOVED))
       yield* env.withShell(env.directory, (shell) =>
         Effect.gen(function* () {
           const info = yield* shell.create(
@@ -49,8 +49,8 @@ describe("Shell on the process daemon", () => {
             },
             (invocation) =>
               Effect.sync(() => {
-                delete invocation.env.OPENCODE_TEST_REMOVED
-                invocation.env.OPENCODE_TEST_UNSET = undefined
+                delete invocation.env.WARCODE_TEST_REMOVED
+                invocation.env.WARCODE_TEST_UNSET = undefined
               }),
           )
           const [request] = env.created()
@@ -68,9 +68,9 @@ describe("Shell on the process daemon", () => {
               timeoutDeadline: expect.any(Number),
             },
           })
-          expect(request?.env).toMatchObject({ TERM: "xterm-256color", OPENCODE_TERMINAL: "1" })
-          expect(request?.env).not.toHaveProperty("OPENCODE_TEST_REMOVED")
-          expect(request?.env).not.toHaveProperty("OPENCODE_TEST_UNSET")
+          expect(request?.env).toMatchObject({ TERM: "xterm-256color", WARCODE_TERMINAL: "1" })
+          expect(request?.env).not.toHaveProperty("WARCODE_TEST_REMOVED")
+          expect(request?.env).not.toHaveProperty("WARCODE_TEST_UNSET")
           expect(info).toMatchObject({ status: "running", pid: 1001, cwd: path.join(env.directory, "sub") })
           expect(env.spawned()).toBe(0)
 
@@ -484,8 +484,8 @@ describe("Shell on the process daemon", () => {
     }))
 })
 
-// Against the real opencode-pty, like server/test/persistent-pty.test.ts.
-const binary = unix ? (process.env.OPENCODE_PTY_BIN ?? binaryPath) : undefined
+// Against the real warcode-pty, like server/test/persistent-pty.test.ts.
+const binary = unix ? (process.env.WARCODE_PTY_BIN ?? binaryPath) : undefined
 const real = binary !== undefined && existsSync(binary) ? it.live : it.live.skip
 
 describe("Shell on a real process daemon", () => {
@@ -498,8 +498,8 @@ describe("Shell on a real process daemon", () => {
         const state = path.join(data, "state")
         const global = Global.layerWith({ data, state })
         const started = () => existsSync(path.join(state, "pty")) && readdirSync(path.join(state, "pty")).length > 0
-        process.env.OPENCODE_TEST_REMOVED = "1"
-        yield* Effect.addFinalizer(() => Effect.sync(() => delete process.env.OPENCODE_TEST_REMOVED))
+        process.env.WARCODE_TEST_REMOVED = "1"
+        yield* Effect.addFinalizer(() => Effect.sync(() => delete process.env.WARCODE_TEST_REMOVED))
         yield* Effect.gen(function* () {
           const shell = yield* Shell.Service
           yield* Shell.cleanup()
@@ -507,11 +507,11 @@ describe("Shell on a real process daemon", () => {
           const info = yield* shell.create(
             {
               shell: "/bin/sh",
-              command: 'printf "%s|%s|%s\\n" "${OPENCODE_TEST_REMOVED:-unset}" "$TERM" "$(pwd)"; printf tail',
+              command: 'printf "%s|%s|%s\\n" "${WARCODE_TEST_REMOVED:-unset}" "$TERM" "$(pwd)"; printf tail',
             },
             (invocation) =>
               Effect.sync(() => {
-                delete invocation.env.OPENCODE_TEST_REMOVED
+                delete invocation.env.WARCODE_TEST_REMOVED
               }),
           )
           expect(started()).toBe(true)

@@ -1,8 +1,8 @@
-import type { EnableState } from "@opencode/plugin/gui/host"
+import type { EnableState } from "@warcode/plugin/gui/host"
 
 export const IpcTransportPort = "desktop-rpc-port"
 
-export const DragCancelEvent = "opencode:drag-cancel"
+export const DragCancelEvent = "warcode:drag-cancel"
 
 export const WindowSnapshotChannel = "desktop-window-snapshot"
 
@@ -34,9 +34,9 @@ export type WindowSnapshot = {
 // runs so the first render already has them; mirrors windowStorage() in
 // packages/app/src/runtime/persistence/storage.ts.
 export function storageSnapshotNames(windowID: string) {
-  return ["opencode.global.dat", "default.dat", windowDataFile(windowID)]
+  return ["warcode.global.dat", "default.dat", windowDataFile(windowID)]
 }
 
 export function windowDataFile(id: string) {
-  return `opencode.window.${id.replace(/[^a-zA-Z0-9._-]/g, "-")}.dat`
+  return `warcode.window.${id.replace(/[^a-zA-Z0-9._-]/g, "-")}.dat`
 }

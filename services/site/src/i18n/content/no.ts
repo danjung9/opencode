@@ -17,10 +17,10 @@ export const content = {
       body: "Et raskt terminalgrensesnitt som fungerer i alle skall, editorer og eksterne servere.",
       action: "Installer",
     },
-    sdk: { body: "Styr OpenCode fra dine egne skript, CI-jobber og verktøy.", action: "Les docs" },
+    sdk: { body: "Styr Warcode fra dine egne skript, CI-jobber og verktøy.", action: "Les docs" },
     ide: {
       name: "IDE-utvidelser",
-      body: "Åpne OpenCode i VS Code, Cursor og Windsurf, eller i Zed og JetBrains-IDE-er via ACP.",
+      body: "Åpne Warcode i VS Code, Cursor og Windsurf, eller i Zed og JetBrains-IDE-er via ACP.",
       action: "Installer",
     },
     mini: {
@@ -30,9 +30,9 @@ export const content = {
   },
   productDetails: {
     desktop: {
-      title: "OpenCode | Skrivebordsapp for macOS, Windows og Linux",
+      title: "Warcode | Skrivebordsapp for macOS, Windows og Linux",
       description:
-        "Kjør så mange OpenCode-agenter du vil parallelt, se hver endring i en nettleser ved siden av og fortsett på hvilken som helst enhet. For macOS, Windows og Linux.",
+        "Kjør så mange Warcode-agenter du vil parallelt, se hver endring i en nettleser ved siden av og fortsett på hvilken som helst enhet. For macOS, Windows og Linux.",
       intro:
         "Kjør flere agenter samtidig, hver sesjon i sin egen fane. Gå gjennom hver endring som en diff, kommenter hvilken som helst linje og sjekk resultatet i den innebygde nettleseren. For macOS, Windows og Linux.",
       showcase: {
@@ -50,16 +50,16 @@ export const content = {
         },
         "extend-it": {
           title: "Utvid den",
-          body: "Koble til verktøyene og tjenestene dine så agenten kan jobbe med hva som helst. Eller la OpenCode bygge plugins til seg selv, med eget grensesnitt i sidepanelet.",
+          body: "Koble til verktøyene og tjenestene dine så agenten kan jobbe med hva som helst. Eller la Warcode bygge plugins til seg selv, med eget grensesnitt i sidepanelet.",
         },
       },
     },
     mobile: {
-      title: "OpenCode | Mobile, kodesesjonene dine på telefonen",
+      title: "Warcode | Mobile, kodesesjonene dine på telefonen",
       description:
-        "Start og styr OpenCode-økter fra telefonen. Snakk med agenten mens den kjører på datamaskinen din.",
+        "Start og styr Warcode-økter fra telefonen. Snakk med agenten mens den kjører på datamaskinen din.",
       intro:
-        "Start og styr økter fra telefonen, uansett hvor du er. Ring en økt og snakk med agenten, eller åpne en økt og fortsett der du slapp, alt med OpenCode på din egen datamaskin.",
+        "Start og styr økter fra telefonen, uansett hvor du er. Ring en økt og snakk med agenten, eller åpne en økt og fortsett der du slapp, alt med Warcode på din egen datamaskin.",
       features: {
         "notify-when-done": {
           title: "Varsel når ferdig",
@@ -67,7 +67,7 @@ export const content = {
         },
         "pair-from-anywhere": {
           title: "Koble fra overalt",
-          body: "Koble til fra hvilket som helst nettverk med opencode pair --remote.",
+          body: "Koble til fra hvilket som helst nettverk med warcode pair --remote.",
         },
         "every-computer": {
           title: "Alle maskiner",
@@ -78,7 +78,7 @@ export const content = {
           body: "Start en samtale eller en sesjon fra Siri eller Kontrollsenter.",
         },
         "follow-along": { title: "Følg med", body: "Se tidslinjen oppdatere seg mens agenten jobber." },
-        "your-computer": { title: "Din datamaskin", body: "Kobler til OpenCode som kjører på din egen maskin." },
+        "your-computer": { title: "Din datamaskin", body: "Kobler til Warcode som kjører på din egen maskin." },
         "share-sheet": { title: "Delingsark", body: "Del hva som helst til en sesjon uten å åpne appen." },
         "mute-sessions": { title: "Demp sesjoner", body: "Behold en sesjon i listen uten å få varslene fra den." },
       },
@@ -90,9 +90,9 @@ export const content = {
       },
     },
     terminal: {
-      title: "OpenCode | Terminal-UI for kodeagenten med åpen kildekode",
+      title: "Warcode | Terminal-UI for kodeagenten med åpen kildekode",
       description:
-        "Et raskt terminalgrensesnitt for OpenCode som fungerer i alle skall, editorer og eksterne servere. Beskriv hva du vil, se hver endring som en diff og godkjenn kommandoer.",
+        "Et raskt terminalgrensesnitt for Warcode som fungerer i alle skall, editorer og eksterne servere. Beskriv hva du vil, se hver endring som en diff og godkjenn kommandoer.",
       intro:
         "Et raskt terminalgrensesnitt som fungerer i alle skall, editorer og eksterne servere. Beskriv med vanlige ord hva du vil, se hver endring komme som en diff, og velg hvilke kommandoer som kjører av seg selv.",
       features: {
@@ -108,7 +108,7 @@ export const content = {
           title: "Fortsett senere",
           body: "Fortsett den siste sesjonen med -c, eller en hvilken som helst med -s.",
         },
-        "one-off-runs": { title: "Enkeltkjøringer", body: "opencode run sender én melding og skriver ut svaret." },
+        "one-off-runs": { title: "Enkeltkjøringer", body: "warcode run sender én melding og skriver ut svaret." },
         "agents-and-commands": {
           title: "Agenter og kommandoer",
           body: "Bytt agent med shift+tab og åpne alle kommandoer med ctrl+p.",
@@ -117,8 +117,8 @@ export const content = {
           title: "Autogodkjenn",
           body: "Kjør med --auto for å tillate alle handlinger du ikke har avvist.",
         },
-        "any-server": { title: "Alle servere", body: "Koble til en OpenCode-server via URL med --server." },
-        "usage-stats": { title: "Bruksstatistikk", body: "opencode stats viser bruksstatistikk du kan dele." },
+        "any-server": { title: "Alle servere", body: "Koble til en Warcode-server via URL med --server." },
+        "usage-stats": { title: "Bruksstatistikk", body: "warcode stats viser bruksstatistikk du kan dele." },
       },
       showcase: {
         "ask-in-plain-words": {
@@ -133,30 +133,30 @@ export const content = {
           title: "Gjør det til ditt",
           body: "Bytt tema med ett tastetrykk, fra standard til tokyonight og flere.",
         },
-        mini: { title: "Mini", body: "Kjør opencode mini, så skrives svarene inn i din egen scrollback." },
+        mini: { title: "Mini", body: "Kjør warcode mini, så skrives svarene inn i din egen scrollback." },
       },
     },
     sdk: {
-      title: "OpenCode | TypeScript-SDK for skript, CI-jobber og verktøy",
+      title: "Warcode | TypeScript-SDK for skript, CI-jobber og verktøy",
       description:
-        "Styr OpenCode fra dine egne skript, CI-jobber og verktøy. Den typede TypeScript-klienten oppretter sesjoner, sender prompter og strømmer alle hendelser idet de skjer.",
+        "Styr Warcode fra dine egne skript, CI-jobber og verktøy. Den typede TypeScript-klienten oppretter sesjoner, sender prompter og strømmer alle hendelser idet de skjer.",
       intro:
-        "Styr OpenCode fra dine egne skript, CI-jobber og verktøy. SDK-et kjører OpenCode i din egen prosess, med konfigurasjonen og modellene dine, og den typede klienten oppretter sesjoner, sender prompter og strømmer alle hendelser.",
+        "Styr Warcode fra dine egne skript, CI-jobber og verktøy. SDK-et kjører Warcode i din egen prosess, med konfigurasjonen og modellene dine, og den typede klienten oppretter sesjoner, sender prompter og strømmer alle hendelser.",
       features: {
         "typescript-client": {
           title: "TypeScript-klient",
-          body: "Typede forespørsler og hendelser, med de samme verdiene som @opencode/client.",
+          body: "Typede forespørsler og hendelser, med de samme verdiene som @warcode/client.",
         },
         "sessions-from-code": {
           title: "Sesjoner fra kode",
           body: "Opprett sesjoner og send prompter fra et hvilket som helst skript.",
         },
-        "any-model": { title: "Alle modeller", body: "Bruker modellene OpenCode-oppsettet ditt har." },
+        "any-model": { title: "Alle modeller", body: "Bruker modellene Warcode-oppsettet ditt har." },
         "npm-or-bun": {
           title: "npm eller bun",
-          body: "Installer med npm i @opencode/sdk eller bun add @opencode/sdk.",
+          body: "Installer med npm i @warcode/sdk eller bun add @warcode/sdk.",
         },
-        "in-process-host": { title: "In-process-vert", body: "Kjører OpenCode i minnet, uten nettverkshopp." },
+        "in-process-host": { title: "In-process-vert", body: "Kjører Warcode i minnet, uten nettverkshopp." },
         "your-plugins": { title: "Dine plugins", body: "Send inn egne plugins når du oppretter in-process-verten." },
         "promise-or-effect": {
           title: "Promise eller Effect",
@@ -164,13 +164,13 @@ export const content = {
         },
         "cloudflare-workers": {
           title: "Cloudflare Workers",
-          body: "Kjør OpenCode i et Cloudflare Durable Object på Workers.",
+          body: "Kjør Warcode i et Cloudflare Durable Object på Workers.",
         },
       },
       showcase: {
         "fix-ci-from-code": {
           title: "Fiks CI fra kode",
-          body: "Et kort skript ber OpenCode fikse tester som feiler, og kjører dem så på nytt.",
+          body: "Et kort skript ber Warcode fikse tester som feiler, og kjører dem så på nytt.",
         },
         "follow-every-step": {
           title: "Følg hvert steg",
@@ -178,40 +178,40 @@ export const content = {
         },
         "build-your-own-tools": {
           title: "Lag egne verktøy",
-          body: "Koble OpenCode inn i boter, dashbord og arbeidsflyter med noen få linjer.",
+          body: "Koble Warcode inn i boter, dashbord og arbeidsflyter med noen få linjer.",
         },
         "in-your-process": {
           title: "I prosessen din",
-          body: "Kjører OpenCode i prosessen din, med konfigurasjonen og modellene dine.",
+          body: "Kjører Warcode i prosessen din, med konfigurasjonen og modellene dine.",
         },
       },
     },
     ide: {
-      title: "OpenCode | Editorintegrasjoner for VS Code, Cursor og Zed",
+      title: "Warcode | Editorintegrasjoner for VS Code, Cursor og Zed",
       description:
-        "Bruk OpenCode i editoren din, med utvidelsen for VS Code, Cursor, Windsurf og VSCodium, og opencode acp for Zed, JetBrains-IDE-er og andre ACP-editorer.",
+        "Bruk Warcode i editoren din, med utvidelsen for VS Code, Cursor, Windsurf og VSCodium, og warcode acp for Zed, JetBrains-IDE-er og andre ACP-editorer.",
       intro:
-        "Bruk OpenCode i editoren din. I VS Code, Cursor, Windsurf og VSCodium kjører du opencode i den integrerte terminalen, så installerer utvidelsen seg selv. Zed, JetBrains-IDE-er og andre editorer som støtter Agent Client Protocol, kjører OpenCode med opencode acp.",
+        "Bruk Warcode i editoren din. I VS Code, Cursor, Windsurf og VSCodium kjører du warcode i den integrerte terminalen, så installerer utvidelsen seg selv. Zed, JetBrains-IDE-er og andre editorer som støtter Agent Client Protocol, kjører Warcode med warcode acp.",
       features: {
-        "quick-launch": { title: "Hurtigstart", body: "Cmd+Esc eller Ctrl+Esc åpner OpenCode i en delt terminal." },
+        "quick-launch": { title: "Hurtigstart", body: "Cmd+Esc eller Ctrl+Esc åpner Warcode i en delt terminal." },
         "new-session": { title: "Ny sesjon", body: "Cmd+Shift+Esc eller Ctrl+Shift+Esc starter en ny sesjon." },
-        context: { title: "Kontekst", body: "Deler gjeldende utvalg eller fane med OpenCode." },
+        context: { title: "Kontekst", body: "Deler gjeldende utvalg eller fane med Warcode." },
         "file-references": { title: "Filreferanser", body: "Cmd+Option+K eller Alt+Ctrl+K setter inn @File#L37-42." },
         "installs-itself": {
           title: "Installerer seg",
-          body: "Kjør opencode i den integrerte terminalen for å legge den til.",
+          body: "Kjør warcode i den integrerte terminalen for å legge den til.",
         },
         "acp-editors": { title: "ACP-editorer", body: "Zed, JetBrains-IDE-er, Avante.nvim og CodeCompanion.nvim." },
         "open-vsx": { title: "Open VSX", body: "Også på Open VSX for Cursor, Windsurf og VSCodium." },
-        "same-agent": { title: "Samme agent", body: "OpenCode du kjører i terminalen, ved siden av koden din." },
+        "same-agent": { title: "Samme agent", body: "Warcode du kjører i terminalen, ved siden av koden din." },
       },
     },
     mini: {
-      title: "OpenCode | Mini, et minimalt terminalgrensesnitt for agenten",
+      title: "Warcode | Mini, et minimalt terminalgrensesnitt for agenten",
       description:
-        "Mini kjører OpenCode i et minimalt terminalgrensesnitt. Svarene skrives inn i terminalens egen scrollback, og bare en prompt og en statuslinje blir igjen nederst.",
+        "Mini kjører Warcode i et minimalt terminalgrensesnitt. Svarene skrives inn i terminalens egen scrollback, og bare en prompt og en statuslinje blir igjen nederst.",
       intro:
-        "Et minimalt terminalgrensesnitt for OpenCode. Kjør opencode mini, så skrives svarene rett inn i terminalens egen scrollback, og du kan rulle, søke og kopiere dem som all annen utdata. Bare prompten og en statuslinje blir igjen nederst.",
+        "Et minimalt terminalgrensesnitt for Warcode. Kjør warcode mini, så skrives svarene rett inn i terminalens egen scrollback, og du kan rulle, søke og kopiere dem som all annen utdata. Bare prompten og en statuslinje blir igjen nederst.",
       features: {
         "your-scrollback": { title: "Din scrollback", body: "Svarene blir vanlig terminalhistorikk." },
         "one-prompt": { title: "Én prompt", body: "Agent, modell, kontekst og kostnad på én statuslinje." },
@@ -224,7 +224,7 @@ export const content = {
           title: "Fortsett senere",
           body: "Fortsett den siste sesjonen med -c, eller en hvilken som helst med -s.",
         },
-        "same-opencode": { title: "Samme OpenCode", body: "Samme server, agenter og modeller som de andre appene." },
+        "same-warcode": { title: "Samme Warcode", body: "Samme server, agenter og modeller som de andre appene." },
         agents: { title: "Agenter", body: "Bytt agent rett fra prompten." },
         compact: { title: "Kompakt", body: "Krymp en lang sesjon med /compact." },
       },
@@ -232,15 +232,15 @@ export const content = {
   },
   extensionCard: {
     name: "Utvidelser",
-    body: "Bruk OpenCode i VS Code, eller i Zed og andre editorer via ACP.",
+    body: "Bruk Warcode i VS Code, eller i Zed og andre editorer via ACP.",
     action: "Installer",
   },
   extensions: {
     browse: {
       body: "La agenter bruke den ekte nettleseren din.",
-      title: "OpenCode | Browse, den ekte nettleseren din for kodeagenter",
+      title: "Warcode | Browse, den ekte nettleseren din for kodeagenter",
       description:
-        "Browse lar OpenCode og andre MCP-klienter bruke den ekte nettleseren din. Agenter styrer faner i bakgrunnen med Playwright og gir innlogging og 2FA tilbake til deg.",
+        "Browse lar Warcode og andre MCP-klienter bruke den ekte nettleseren din. Agenter styrer faner i bakgrunnen med Playwright og gir innlogging og 2FA tilbake til deg.",
       intro:
         "En MCP-server og en Chromium-utvidelse som lar agentene dine bruke den ekte nettleseren din, med fanene, innloggingene og utvidelsene dine. De åpner og styrer faner med Playwright, tar skjermbilder og tar opp skjermen, i bakgrunnsfaner som er gruppert og ute av veien. Når det er din tur, for en innlogging, en 2FA-forespørsel eller en betaling, gir de fanen tilbake til deg og fortsetter når du klikker på Continue.",
       features: {
@@ -260,7 +260,7 @@ export const content = {
         },
         "any-mcp-client": {
           title: "Alle MCP-klienter",
-          body: "OpenCode, Claude Code, Cursor, Codex, Zed og mange flere.",
+          body: "Warcode, Claude Code, Cursor, Codex, Zed og mange flere.",
         },
         "all-your-logins": {
           title: "Alle innloggingene dine",
@@ -283,9 +283,9 @@ export const content = {
   },
   getStarted: {
     title: "Kom i gang",
-    lead: "Den enkleste måten å starte på er å laste ned OpenCode og bruke de gratis modellene. Ingen konto trengs. Vil du ha mer, kan du ta med ditt eget abonnement eller bruke OpenCode Go.",
+    lead: "Den enkleste måten å starte på er å laste ned Warcode og bruke de gratis modellene. Ingen konto trengs. Vil du ha mer, kan du ta med ditt eget abonnement eller bruke Warcode Go.",
     phrases: {
-      "download-opencode": { text: "laste ned OpenCode" },
+      "download-warcode": { text: "laste ned Warcode" },
       "free-models": { text: "gratis modellene" },
       "your-own-subscription": { text: "ditt eget abonnement" },
       "a-subscription-you-already-have": { text: "et abonnement du allerede har" },
@@ -295,30 +295,30 @@ export const content = {
       download: { title: "Last ned", line: "Desktop, terminal eller mobil." },
       "use-free-models": {
         title: "Bruk gratis modeller",
-        line: "OpenCode har et sett gratis modeller. Ingen konto trengs.",
+        line: "Warcode har et sett gratis modeller. Ingen konto trengs.",
       },
       "add-more-models": {
         title: "Flere modeller",
-        line: "Ta med ditt eget abonnement, eller bruk de utvalgte modellene i OpenCode Go fra $10/mnd.",
+        line: "Ta med ditt eget abonnement, eller bruk de utvalgte modellene i Warcode Go fra $10/mnd.",
       },
     },
     sentence:
-      "Last ned OpenCode, start med gratis modeller, og ta med ditt eget abonnement eller OpenCode Go når du vil ha mer.",
+      "Last ned Warcode, start med gratis modeller, og ta med ditt eget abonnement eller Warcode Go når du vil ha mer.",
   },
   byos: {
     title: "Ta med eget abonnement",
     headline: "Bruk abonnementene du allerede har.",
-    line: "Logg inn med ChatGPT Plus eller Pro eller med GitHub Copilot. Eller bruk et OpenCode-abonnement.",
+    line: "Logg inn med ChatGPT Plus eller Pro eller med GitHub Copilot. Eller bruk et Warcode-abonnement.",
     yours: { label: "Ditt abonnement", items: { "chatgpt-plus-pro": { name: "ChatGPT Plus/Pro" } } },
-    planLinks: ["OpenCode-abonnement"],
-    ours: { label: "OpenCode-abonnementer" },
+    planLinks: ["Warcode-abonnement"],
+    ours: { label: "Warcode-abonnementer" },
   },
   brand: {
     hero: { copy: { text: "Regler for agent", copied: "Regler kopiert" } },
     naming: {
       title: "Navn",
-      body: "Skriv OpenCode som ett ord, med stor O og stor C. Ikke skriv Opencode, Open Code, OpenCode AI eller Open-Code.",
-      code: "Bruk `opencode` med små bokstaver bare i kode og pakkenavn, som `opencode-figma` eller `@acme/opencode-plugin`.",
+      body: "Skriv Warcode som ett ord, med stor O og stor C. Ikke skriv Warcode, Open Code, Warcode AI eller Open-Code.",
+      code: "Bruk `warcode` med små bokstaver bare i kode og pakkenavn, som `warcode-figma` eller `@acme/warcode-plugin`.",
     },
     families: {
       logo: {
@@ -333,7 +333,7 @@ export const content = {
       },
       wordmark: {
         title: "Ordmerke",
-        body: "Hele navnet i OpenCode-bokstavformene. Bruk det der det er plass til å skrive ut navnet.",
+        body: "Hele navnet i Warcode-bokstavformene. Bruk det der det er plass til å skrive ut navnet.",
         assets: { light: { name: "Lys" }, dark: { name: "Mørk" } },
       },
       "simple-wordmark": {
@@ -433,52 +433,52 @@ export const content = {
     },
     integrations: {
       title: "Integrasjoner",
-      body: "Plugins, leverandører og verktøy som fungerer med OpenCode, og prosjekter som er bygget med det, kan si det. Bruk et merke eller en partnerlockup, og gi prosjektet et navn som gjør det tydelig at det er ditt.",
+      body: "Plugins, leverandører og verktøy som fungerer med Warcode, og prosjekter som er bygget med det, kan si det. Bruk et merke eller en partnerlockup, og gi prosjektet et navn som gjør det tydelig at det er ditt.",
       badges: {
-        body: "Sett et merke i README-en, dokumentasjonen eller på nettstedet ditt, og lenk det til opencode.ai. Velg den lyse eller mørke filen for bakgrunnen din (HTML-en bytter av seg selv), og ikke endre fargene eller teksten.",
+        body: "Sett et merke i README-en, dokumentasjonen eller på nettstedet ditt, og lenk det til warcode.ai. Velg den lyse eller mørke filen for bakgrunnen din (HTML-en bytter av seg selv), og ikke endre fargene eller teksten.",
         sizes: "Alle stiler finnes i 20, 32 og 44px (Shields bare i 20px), som SVG og som PNG i 2×.",
-        mono: "Hver fil finnes også med tekst i OpenTUI Mono. Legg til -mono før filtypen, som i opencode-works-with-a-light-20-mono.svg, eller -mono-caps for OpenTUI Mono med store bokstaver.",
+        mono: "Hver fil finnes også med tekst i OpenTUI Mono. Legg til -mono før filtypen, som i warcode-works-with-a-light-20-mono.svg, eller -mono-caps for OpenTUI Mono med store bokstaver.",
         groups: {
           "works-with": {
             title: "Virker med",
-            alt: "Virker med OpenCode",
-            body: "For plugins, leverandører og verktøy som kjører med OpenCode.",
+            alt: "Virker med Warcode",
+            body: "For plugins, leverandører og verktøy som kjører med Warcode.",
           },
-          "built-with": { title: "Bygget med", alt: "Bygget med OpenCode", body: "For prosjekter laget med OpenCode." },
+          "built-with": { title: "Bygget med", alt: "Bygget med Warcode", body: "For prosjekter laget med Warcode." },
         },
         styles: { a: { name: "Ramme" }, c: { name: "Celler" }, f: { name: "Helfarge" }, g: { name: "Shields" } },
       },
       lockup: {
         title: "Partnerlockup",
-        body: "Sett OpenCode-logoen og partnerlogoen side om side, med en × mellom. Hold 3 streker avstand på hver side av ×, skaler partnerlogoen så den ser like høy ut som OpenCode-logoen, og hold frirom rundt hele lockupen.",
+        body: "Sett Warcode-logoen og partnerlogoen side om side, med en × mellom. Hold 3 streker avstand på hver side av ×, skaler partnerlogoen så den ser like høy ut som Warcode-logoen, og hold frirom rundt hele lockupen.",
       },
       naming: {
         title: "Navngi prosjektet",
         body: "Start med ditt eget navn, så det er tydelig at prosjektet er ditt.",
-        rule: "Skriv `Linear for OpenCode`, eller gi pakken navnet `opencode-linear`. Ikke skriv `OpenCode Linear` eller `Linear by OpenCode`.",
+        rule: "Skriv `Linear for Warcode`, eller gi pakken navnet `warcode-linear`. Ikke skriv `Warcode Linear` eller `Linear by Warcode`.",
       },
     },
     trademarks: {
       title: "Varemerker",
-      body: "OpenCode og OpenCode-logoen er varemerker som tilhører Anomaly. Ikke bruk dem til å antyde at Anomaly støtter eller sponser deg, i produkt- eller firmanavnet ditt eller på merchandise uten tillatelse.",
+      body: "Warcode og Warcode-logoen er varemerker som tilhører Anomaly. Ikke bruk dem til å antyde at Anomaly støtter eller sponser deg, i produkt- eller firmanavnet ditt eller på merchandise uten tillatelse.",
       contact: { before: "Spørsmål kan sendes til " },
     },
   },
   press: {
-    title: "OpenCode | Pressesett med fakta om selskapet og merkevareressurser",
+    title: "Warcode | Pressesett med fakta om selskapet og merkevareressurser",
     description:
-      "Pressesettet til OpenCode, med fakta om OpenCode og Anomaly, selskapet bak, logoer og ordmerker å laste ned og en kontakt for spørsmål fra pressen.",
+      "Pressesettet til Warcode, med fakta om Warcode og Anomaly, selskapet bak, logoer og ordmerker å laste ned og en kontakt for spørsmål fra pressen.",
     hero: {
       title: "Presse",
-      body: "Fakta, merkevareressurser og kontakter for deg som skriver om OpenCode og Anomaly.",
+      body: "Fakta, merkevareressurser og kontakter for deg som skriver om Warcode og Anomaly.",
     },
     company: {
       title: "Om Anomaly",
-      lead: "Anomaly er selskapet bak OpenCode. Det lager verktøy med åpen kildekode for utviklere.",
+      lead: "Anomaly er selskapet bak Warcode. Det lager verktøy med åpen kildekode for utviklere.",
       more: "Andre prosjekter er blant annet SST og OpenTUI, alle med åpen kildekode på [GitHub](github).",
       learnMore: "Les mer på [anoma.ly](site).",
       projects: {
-        opencode: {
+        warcode: {
           body: "Kodeagenten med åpen kildekode, med apper for skrivebord, terminal og mobil og et SDK. MIT-lisensiert, over 220 000 GitHub-stjerner.",
         },
         sst: {
@@ -486,7 +486,7 @@ export const content = {
         },
         opentui: {
           name: "OpenTUI",
-          body: "Et bibliotek for terminalgrensesnitt i TypeScript, React eller Solid, med en kjerne i Zig. OpenCode bruker det i produksjon. Over 13 000 GitHub-stjerner.",
+          body: "Et bibliotek for terminalgrensesnitt i TypeScript, React eller Solid, med en kjerne i Zig. Warcode bruker det i produksjon. Over 13 000 GitHub-stjerner.",
         },
         "models-dev": {
           body: "En database med åpen kildekode over spesifikasjoner, priser og egenskaper for AI-modeller, med et offentlig API. Den har over 8 900 modeller fra over 200 leverandører.",
@@ -500,30 +500,30 @@ export const content = {
       },
     },
     about: {
-      title: "Om OpenCode",
-      body: "Beskrivelser av OpenCode og produktene i lang og kort versjon, klare til å kopieres.",
+      title: "Om Warcode",
+      body: "Beskrivelser av Warcode og produktene i lang og kort versjon, klare til å kopieres.",
       boilerplate: {
-        long: "OpenCode er en kodeagent med åpen kildekode. Den finnes som skrivebordsapp, terminal-UI, mobilapp og SDK, og fungerer med modeller fra alle leverandører, blant annet Claude, GPT og Gemini. OpenCode er MIT-lisensiert og laget av Anomaly. Den har over 220 000 GitHub-stjerner og mer enn 1 000 bidragsytere, og over 22 millioner utviklere bruker den hver måned.",
+        long: "Warcode er en kodeagent med åpen kildekode. Den finnes som skrivebordsapp, terminal-UI, mobilapp og SDK, og fungerer med modeller fra alle leverandører, blant annet Claude, GPT og Gemini. Warcode er MIT-lisensiert og laget av Anomaly. Den har over 220 000 GitHub-stjerner og mer enn 1 000 bidragsytere, og over 22 millioner utviklere bruker den hver måned.",
         short:
-          "OpenCode er en kodeagent med åpen kildekode fra Anomaly, med apper for skrivebord, terminal og mobil og et SDK.",
+          "Warcode er en kodeagent med åpen kildekode fra Anomaly, med apper for skrivebord, terminal og mobil og et SDK.",
       },
       products: {
-        "opencode-console": {
-          name: "OpenCode Console",
-          long: "OpenCode Console er nettappen der utviklere og team kjøper og administrerer tilgang til AI-modeller for OpenCode og andre kodeagenter. Den tilbyr betal-etter-bruk-inferens for frontier- og open weight-modeller, belastet per forespørsel fra forhåndsbetalt kreditt, og abonnementer på OpenCode Go. Team får arbeidsområder med rollene Member, Admin og Owner, forbruksgrenser for arbeidsområdet og per bruker, single sign-on med Okta, Microsoft Entra ID eller Google Workspace, og SCIM. Console støtter mer enn 30 leverandører, så team kan koble til leverandørkontoer de allerede har, og den egne inferensen er valgfri. Den finnes på opencode.ai/console.",
+        "warcode-console": {
+          name: "Warcode Console",
+          long: "Warcode Console er nettappen der utviklere og team kjøper og administrerer tilgang til AI-modeller for Warcode og andre kodeagenter. Den tilbyr betal-etter-bruk-inferens for frontier- og open weight-modeller, belastet per forespørsel fra forhåndsbetalt kreditt, og abonnementer på Warcode Go. Team får arbeidsområder med rollene Member, Admin og Owner, forbruksgrenser for arbeidsområdet og per bruker, single sign-on med Okta, Microsoft Entra ID eller Google Workspace, og SCIM. Console støtter mer enn 30 leverandører, så team kan koble til leverandørkontoer de allerede har, og den egne inferensen er valgfri. Den finnes på warcode.ai/console.",
           short:
-            "OpenCode Console er nettappen fra Anomaly for betal-etter-bruk-tilgang til AI-modeller, abonnementer på OpenCode Go og teamkontroller som budsjetter og single sign-on.",
+            "Warcode Console er nettappen fra Anomaly for betal-etter-bruk-tilgang til AI-modeller, abonnementer på Warcode Go og teamkontroller som budsjetter og single sign-on.",
         },
-        "opencode-go": {
-          long: "OpenCode Go er et abonnement for utviklere som vil ha en fast månedspris for kodemodeller. Go koster $10/mnd., Go Plus koster $40/mnd. med høyere grenser, og Go Teams koster $20/mnd. per medlem. Hvert abonnement har et utvalg modeller som er testet for agentisk koding. Bruksgrensene er månedlige dollarbeløp for hver modell, med rullerende kvoter for 5 timer og en uke på 20% og 50% av månedsgrensen. Abonnenter kan fylle på kreditt, falle tilbake på en betal-etter-bruk-saldo og si opp når som helst. Go fungerer med OpenCode og andre agenter. Det finnes på opencode.ai/console/go.",
+        "warcode-go": {
+          long: "Warcode Go er et abonnement for utviklere som vil ha en fast månedspris for kodemodeller. Go koster $10/mnd., Go Plus koster $40/mnd. med høyere grenser, og Go Teams koster $20/mnd. per medlem. Hvert abonnement har et utvalg modeller som er testet for agentisk koding. Bruksgrensene er månedlige dollarbeløp for hver modell, med rullerende kvoter for 5 timer og en uke på 20% og 50% av månedsgrensen. Abonnenter kan fylle på kreditt, falle tilbake på en betal-etter-bruk-saldo og si opp når som helst. Go fungerer med Warcode og andre agenter. Det finnes på warcode.ai/console/go.",
           short:
-            "OpenCode Go er et månedsabonnement fra Anomaly som gir utviklere månedlige bruksgrenser på et utvalg kodemodeller, fra $10/mnd.",
+            "Warcode Go er et månedsabonnement fra Anomaly som gir utviklere månedlige bruksgrenser på et utvalg kodemodeller, fra $10/mnd.",
         },
-        "opencode-data": {
-          name: "OpenCode Data",
-          long: "OpenCode Data er et offentlig dashbord som viser hvilke AI-modeller utviklere bruker i OpenCode, og hvordan fordelingen endrer seg over tid. Det publiserer en toppliste over modeller, tokenbruk, kostnader per sesjon og token, cache-andeler, markedsandeler og en fordeling etter land. Tallene samles hver time, med dager og uker i UTC. Antall brukere og sesjoner er omtrentlige, og kostnadene bruker listepriser fra modellkatalogen til OpenCode. Journalister kan sitere det som OpenCode Data (opencode.ai/data) med oppdateringstidspunktet som vises på siden.",
+        "warcode-data": {
+          name: "Warcode Data",
+          long: "Warcode Data er et offentlig dashbord som viser hvilke AI-modeller utviklere bruker i Warcode, og hvordan fordelingen endrer seg over tid. Det publiserer en toppliste over modeller, tokenbruk, kostnader per sesjon og token, cache-andeler, markedsandeler og en fordeling etter land. Tallene samles hver time, med dager og uker i UTC. Antall brukere og sesjoner er omtrentlige, og kostnadene bruker listepriser fra modellkatalogen til Warcode. Journalister kan sitere det som Warcode Data (warcode.ai/data) med oppdateringstidspunktet som vises på siden.",
           short:
-            "OpenCode Data er et offentlig dashbord på opencode.ai/data som rangerer AI-modeller etter faktisk bruk i OpenCode, med tokens, kostnader og markedsandeler, oppdatert hver time.",
+            "Warcode Data er et offentlig dashbord på warcode.ai/data som rangerer AI-modeller etter faktisk bruk i Warcode, med tokens, kostnader og markedsandeler, oppdatert hver time.",
         },
       },
     },
@@ -540,23 +540,23 @@ export const content = {
       items: {
         "first-release-v0-0-1": { date: "apr. 2025", text: "Første utgivelse, v0.0.1" },
         "1-million-downloads": { date: "okt. 2025", text: "Over 1 million nedlastinger" },
-        "opencode-1-0": { date: "okt. 2025", text: "OpenCode 1.0" },
+        "warcode-1-0": { date: "okt. 2025", text: "Warcode 1.0" },
         "desktop-app-ships": { date: "des. 2025", text: "Desktop-appen lanseres" },
         "10-million-downloads": { date: "jan. 2026", text: "Over 10 mill. nedlastinger" },
-        "opencode-2-0": { date: "sep. 2026", text: "OpenCode 2.0" },
+        "warcode-2-0": { date: "sep. 2026", text: "Warcode 2.0" },
         "220-000-github-stars": { date: "nov. 2026", text: "Over 220 000 GitHub-stjerner" },
       },
     },
     news: {
       title: "Siste utgivelser",
-      intro: "OpenCode kommer ofte med nye versjoner. Dette er de nyeste utgivelsene med nye funksjoner.",
+      intro: "Warcode kommer ofte med nye versjoner. Dette er de nyeste utgivelsene med nye funksjoner.",
       changelog: { text: "Hele endringsloggen" },
       feed: { text: "RSS-feed" },
     },
     media: {
       title: "Medier",
       intro:
-        "Stillbilder og korte videoer av hver app, tatt opp fra det ekte produktet. Du kan bruke dem når du skriver om OpenCode.",
+        "Stillbilder og korte videoer av hver app, tatt opp fra det ekte produktet. Du kan bruke dem når du skriver om Warcode.",
       note: "Alle opptak bruker det mørke temaet. Stillbilder og plakater er JPG-er opptil 1920 × 1080, eller 1080 × 1350 i stående format. Videoer er MP4-klipp uten lyd.",
       products: {
         desktop: {
@@ -631,10 +631,10 @@ export const content = {
     brand: {
       title: "Merke",
       before:
-        "Last ned OpenCode-logoene og -ordmerkene i én ZIP-fil. Enkeltfiler, varianter og regler for bruk finner du på ",
+        "Last ned Warcode-logoene og -ordmerkene i én ZIP-fil. Enkeltfiler, varianter og regler for bruk finner du på ",
       link: { text: "merkevaresiden" },
       usage:
-        "Du kan bruke disse filene når du skriver om OpenCode. Ikke endre dem, og ikke antyd at OpenCode støtter arbeidet ditt.",
+        "Du kan bruke disse filene når du skriver om Warcode. Ikke endre dem, og ikke antyd at Warcode støtter arbeidet ditt.",
     },
     product: {
       title: "Produkt",
@@ -645,7 +645,7 @@ export const content = {
         },
         mobile: {
           name: "Mobile",
-          body: "Den nyeste OpenCode-appen. Ring en sesjon for å snakke med agenten, og se gjennom og godkjenn endringene fra telefonen, hvor som helst.",
+          body: "Den nyeste Warcode-appen. Ring en sesjon for å snakke med agenten, og se gjennom og godkjenn endringene fra telefonen, hvor som helst.",
         },
         terminal: {
           name: "Terminal",
@@ -665,7 +665,7 @@ export const content = {
         },
         support: {
           title: "Hjelp",
-          body: "For hjelp med OpenCode kan du opprette en issue eller spørre fellesskapet. Send oss en e-post om konto og fakturering.",
+          body: "For hjelp med Warcode kan du opprette en issue eller spørre fellesskapet. Send oss en e-post om konto og fakturering.",
           links: { "github-issues": { text: "GitHub-issues" }, "help-anoma-ly": { text: "help@anoma.ly" } },
         },
         security: {
@@ -697,7 +697,7 @@ export const content = {
     terminal: { commands: { curl: { name: "Skript" } } },
     sdk: { more: { label: "Les SDK-dokumentasjonen" } },
     ide: {
-      lead: "Kjør opencode i den integrerte terminalen i editoren din, så installerer utvidelsen seg selv. Du kan også installere den selv.",
+      lead: "Kjør warcode i den integrerte terminalen i editoren din, så installerer utvidelsen seg selv. Du kan også installere den selv.",
       links: {
         "vs-code-marketplace": { label: "VS Code Marketplace" },
         "open-vsx-cursor-windsurf-vscodium": { label: "Open VSX (Cursor, Windsurf, VSCodium)" },
@@ -706,18 +706,18 @@ export const content = {
     },
     mini: {
       commands: { curl: { name: "Skript" } },
-      lead: "Mini følger med OpenCode CLI. Installer den på en av disse måtene, og kjør så opencode mini.",
+      lead: "Mini følger med Warcode CLI. Installer den på en av disse måtene, og kjør så warcode mini.",
     },
   },
   pair: {
     title: "Koble til telefonen",
     cardTitle: "Koble telefonen med én kommando",
     intro:
-      "OpenCode Mobile er en fjernkontroll for OpenCode på datamaskinen din. Sesjonene fortsetter å kjøre der, og appen viser dem og lar deg styre dem.",
+      "Warcode Mobile er en fjernkontroll for Warcode på datamaskinen din. Sesjonene fortsetter å kjøre der, og appen viser dem og lar deg styre dem.",
     steps: {
       "get-the-app": {
         title: "Hent appen",
-        body: "Installer OpenCode-betaen på iPhonen din fra TestFlight. Android-appen kommer snart.",
+        body: "Installer Warcode-betaen på iPhonen din fra TestFlight. Android-appen kommer snart.",
       },
       "run-this-on-your-computer": {
         title: "Kjør dette på datamaskinen",
@@ -728,12 +728,12 @@ export const content = {
         body: "Skann QR-koden med appen, eller lim inn lenken. De siste sesjonene fra datamaskinen åpnes på telefonen.",
       },
     },
-    note: "--remote kobler til via en OpenTunnel-adresse, så det fungerer fra hvilket som helst nettverk. På samme Wi-Fi kjører du opencode service set hostname 0.0.0.0 én gang og deretter opencode pair.",
+    note: "--remote kobler til via en OpenTunnel-adresse, så det fungerer fra hvilket som helst nettverk. På samme Wi-Fi kjører du warcode service set hostname 0.0.0.0 én gang og deretter warcode pair.",
     facts: [
       "Tilkoblingen fungerer fra alle nettverk, fordi --remote kobler til via en OpenTunnel-adresse.",
       "Lenken og koden virker én gang og utløper etter 5 minutter.",
       "La datamaskinen være på, for agenten kjører der og ikke på telefonen.",
-      "På samme Wi-Fi kjører du opencode service set hostname 0.0.0.0 én gang og deretter opencode pair.",
+      "På samme Wi-Fi kjører du warcode service set hostname 0.0.0.0 én gang og deretter warcode pair.",
     ],
   },
   announcements: {
@@ -743,7 +743,7 @@ export const content = {
     },
     "desktop-terminals-now-survive-restarts": { text: "Terminaler i Desktop overlever nå omstart.", link: "Se v2.2.4" },
     "agents-can-now-generate-images": { text: "Agenter kan nå lage bilder.", link: "Se v2.2.1" },
-    "steer-your-sessions-from-your-phone": { text: "Styr sesjonene dine fra telefonen.", link: "Møt OpenCode Mobile" },
+    "steer-your-sessions-from-your-phone": { text: "Styr sesjonene dine fra telefonen.", link: "Møt Warcode Mobile" },
     "a-refreshed-desktop-app": { text: "En fornyet skrivebordsapp.", link: "Se nytt i 2.2" },
   },
 } satisfies ContentOverlay

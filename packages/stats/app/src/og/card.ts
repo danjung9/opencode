@@ -136,7 +136,7 @@ function stat(value: string, label: string) {
   )
 }
 
-// The OpenCode mark and DATA, the Data site's header lockup.
+// The Warcode mark and DATA, the Data site's header lockup.
 function brand() {
   const size = 24
   return el(
@@ -176,7 +176,7 @@ function dots() {
   return { type: "img", props: { width, height, src: svgUri(svg), style: { position: "absolute", left: 0, top: 0 } } }
 }
 
-// A standalone SVG for one icon of @opencode/ui's provider sprite, drawn in one colour.
+// A standalone SVG for one icon of @warcode/ui's provider sprite, drawn in one colour.
 export function iconSvg(sprite: string, id: string, color: string) {
   const match = sprite.match(new RegExp(`<symbol([^>]*)id="${id}"([^>]*)>([\\s\\S]*?)</symbol>`))
   if (!match) return ""

@@ -15,78 +15,78 @@ import {
   InvalidRequestError,
   RateLimitError,
   UnknownProviderError,
-} from "@opencode/ai/effect"
-import { OpenAIChat } from "@opencode/ai/protocols/openai-chat"
-import { AnthropicMessages, OpenAIResponses } from "@opencode/ai/protocols"
-import { TestLLM, compileRequest } from "@opencode/ai/testing"
-import { RequestExecutor } from "@opencode/ai/route"
-import type { SessionHooks } from "@opencode/plugin/effect/session"
-import { Database } from "@opencode/core/database/database"
-import { makeLocationNode } from "@opencode/util/effect/app-node"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { LayerNodePlatform } from "@opencode/core/effect/app-node-platform"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Bus } from "@opencode/core/bus"
-import { Event } from "@opencode/schema/event"
-import { App } from "@opencode/core/app"
-import { Permission } from "@opencode/core/permission"
-import { EventTable } from "@opencode/core/event/sql"
-import { Project } from "@opencode/core/project"
-import { ProjectTable } from "@opencode/core/project/sql"
-import { Form } from "@opencode/core/form"
-import { Job } from "@opencode/core/job"
-import { AbsolutePath } from "@opencode/core/schema"
-import { Session } from "@opencode/core/session"
-import { Snapshot } from "@opencode/core/snapshot"
-import { SessionEvent } from "@opencode/core/session/event"
-import { SessionCompaction } from "@opencode/core/session/compaction"
-import { SessionInbox } from "@opencode/core/session/inbox"
-import { SessionMessage } from "@opencode/core/session/message"
-import { SessionModelTransport } from "@opencode/core/session/model-transport"
-import { Money } from "@opencode/schema/money"
-import { SessionProjector } from "@opencode/core/session/projector"
-import { SessionExecution } from "@opencode/core/session/execution"
-import { SessionRunCoordinator } from "@opencode/core/session/run-coordinator"
-import { SessionRunner } from "@opencode/core/session/runner/index"
-import { SessionRunnerLLM } from "@opencode/core/session/runner/llm"
-import { SessionRunnerModel } from "@opencode/core/session/runner/model"
-import { SessionUsage } from "@opencode/core/session/usage"
-import { PluginSupervisor } from "@opencode/core/plugin/supervisor"
-import { Plugin } from "@opencode/core/plugin"
-import { PluginHooks } from "@opencode/core/plugin/hooks"
-import { PluginPromise } from "@opencode/core/plugin/promise"
-import { OptimizePlugin } from "@opencode/core/plugin/optimize"
-import { IdentityPlugin } from "@opencode/core/plugin/identity"
-import { QuestionTool } from "@opencode/core/tool/plugin/question"
-import { Agent } from "@opencode/core/agent"
-import { Config } from "@opencode/core/config"
-import { Document, Info } from "@opencode/schema/config"
-import { ConfigCompaction } from "@opencode/schema/config/compaction"
-import { Tool } from "@opencode/core/tool"
-import type { Info as ToolInfo } from "@opencode/schema/tool"
-import { InstructionStateTable, SessionInboxTable, SessionMessageTable, SessionTable } from "@opencode/core/session/sql"
-import { InstructionEntry } from "@opencode/core/session/instruction-entry"
-import { SessionStore } from "@opencode/core/session/store"
-import { Instructions } from "@opencode/core/instructions/index"
-import { InstructionBuiltIns } from "@opencode/core/instructions/builtins"
-import { InstructionDiscovery } from "@opencode/core/instruction-discovery"
-import { SkillInstructions } from "@opencode/core/skill/instructions"
-import { ReferenceInstructions } from "@opencode/core/reference/instructions"
-import { McpInstructions } from "@opencode/core/mcp/instructions"
-import { SessionSystemPrompt } from "@opencode/core/session/system-prompt"
-import { ID, Model } from "@opencode/core/model"
-import { Location } from "@opencode/core/location"
-import { Provider } from "@opencode/core/provider"
+} from "@warcode/ai/effect"
+import { OpenAIChat } from "@warcode/ai/protocols/openai-chat"
+import { AnthropicMessages, OpenAIResponses } from "@warcode/ai/protocols"
+import { TestLLM, compileRequest } from "@warcode/ai/testing"
+import { RequestExecutor } from "@warcode/ai/route"
+import type { SessionHooks } from "@warcode/plugin/effect/session"
+import { Database } from "@warcode/core/database/database"
+import { makeLocationNode } from "@warcode/util/effect/app-node"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { LayerNodePlatform } from "@warcode/core/effect/app-node-platform"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Bus } from "@warcode/core/bus"
+import { Event } from "@warcode/schema/event"
+import { App } from "@warcode/core/app"
+import { Permission } from "@warcode/core/permission"
+import { EventTable } from "@warcode/core/event/sql"
+import { Project } from "@warcode/core/project"
+import { ProjectTable } from "@warcode/core/project/sql"
+import { Form } from "@warcode/core/form"
+import { Job } from "@warcode/core/job"
+import { AbsolutePath } from "@warcode/core/schema"
+import { Session } from "@warcode/core/session"
+import { Snapshot } from "@warcode/core/snapshot"
+import { SessionEvent } from "@warcode/core/session/event"
+import { SessionCompaction } from "@warcode/core/session/compaction"
+import { SessionInbox } from "@warcode/core/session/inbox"
+import { SessionMessage } from "@warcode/core/session/message"
+import { SessionModelTransport } from "@warcode/core/session/model-transport"
+import { Money } from "@warcode/schema/money"
+import { SessionProjector } from "@warcode/core/session/projector"
+import { SessionExecution } from "@warcode/core/session/execution"
+import { SessionRunCoordinator } from "@warcode/core/session/run-coordinator"
+import { SessionRunner } from "@warcode/core/session/runner/index"
+import { SessionRunnerLLM } from "@warcode/core/session/runner/llm"
+import { SessionRunnerModel } from "@warcode/core/session/runner/model"
+import { SessionUsage } from "@warcode/core/session/usage"
+import { PluginSupervisor } from "@warcode/core/plugin/supervisor"
+import { Plugin } from "@warcode/core/plugin"
+import { PluginHooks } from "@warcode/core/plugin/hooks"
+import { PluginPromise } from "@warcode/core/plugin/promise"
+import { OptimizePlugin } from "@warcode/core/plugin/optimize"
+import { IdentityPlugin } from "@warcode/core/plugin/identity"
+import { QuestionTool } from "@warcode/core/tool/plugin/question"
+import { Agent } from "@warcode/core/agent"
+import { Config } from "@warcode/core/config"
+import { Document, Info } from "@warcode/schema/config"
+import { ConfigCompaction } from "@warcode/schema/config/compaction"
+import { Tool } from "@warcode/core/tool"
+import type { Info as ToolInfo } from "@warcode/schema/tool"
+import { InstructionStateTable, SessionInboxTable, SessionMessageTable, SessionTable } from "@warcode/core/session/sql"
+import { InstructionEntry } from "@warcode/core/session/instruction-entry"
+import { SessionStore } from "@warcode/core/session/store"
+import { Instructions } from "@warcode/core/instructions/index"
+import { InstructionBuiltIns } from "@warcode/core/instructions/builtins"
+import { InstructionDiscovery } from "@warcode/core/instruction-discovery"
+import { SkillInstructions } from "@warcode/core/skill/instructions"
+import { ReferenceInstructions } from "@warcode/core/reference/instructions"
+import { McpInstructions } from "@warcode/core/mcp/instructions"
+import { SessionSystemPrompt } from "@warcode/core/session/system-prompt"
+import { ID, Model } from "@warcode/core/model"
+import { Location } from "@warcode/core/location"
+import { Provider } from "@warcode/core/provider"
 import { Cause, Context, DateTime, Deferred, Effect, Exit, Fiber, Layer, Queue, Schema, Scope, Stream, Tracer } from "effect"
 import { TestClock } from "effect/testing"
 import { and, asc, desc, eq, sql } from "drizzle-orm"
 import { testEffect } from "./lib/effect"
 import { promptLocationNode } from "./fixture/prompt-location"
-import { LocationServiceMap } from "@opencode/core/location-service-map"
+import { LocationServiceMap } from "@warcode/core/location-service-map"
 import { Expected } from "./lib/session-message"
 import { permissionLayer } from "./lib/permission"
 import { agentHost, modelHost, host, noProviders } from "./plugin/host"
-import { CodeModeInstructions } from "@opencode/core/codemode/instructions"
+import { CodeModeInstructions } from "@warcode/core/codemode/instructions"
 
 const emptyCodeMode = `${CodeModeInstructions.render({ total: 0, namespaces: [] })}\n\n`
 type ToolBarrier = {
@@ -5279,13 +5279,13 @@ describe("SessionRunnerLLM", () => {
     yield* s.runPrompt("Run correlated request")
 
     expect(s.requests[0]?.headers).toEqual({
-      "x-opencode-session-id": sessionID,
+      "x-warcode-session-id": sessionID,
       "x-session-affinity": sessionID,
       "X-Session-Id": sessionID,
       "User-Agent": App.useragent(App.make()),
-      "x-opencode-project": Project.ID.global,
-      "x-opencode-session": sessionID,
-      "x-opencode-client": "opencode",
+      "x-warcode-project": Project.ID.global,
+      "x-warcode-session": sessionID,
+      "x-warcode-client": "warcode",
     })
   })
 
@@ -5301,12 +5301,12 @@ describe("SessionRunnerLLM", () => {
     yield* s.runPrompt("Run child request")
 
     expect(s.requests[0]?.headers).toMatchObject({
-      "x-opencode-session-id": sessionID,
-      "x-opencode-parent-session-id": parentID,
+      "x-warcode-session-id": sessionID,
+      "x-warcode-parent-session-id": parentID,
       "x-session-affinity": parentID,
       "X-Session-Id": parentID,
       "x-parent-session-id": parentID,
-      "x-opencode-session": parentID,
+      "x-warcode-session": parentID,
     })
     expect(s.requests[0]?.promptCacheKey).toBe(parentID)
   })
@@ -6233,7 +6233,7 @@ describe("SessionRunnerLLM", () => {
           .filter((span) => span.name === "SessionStep.attempt")
           .map((span) => ({
             error: span.attributes.get("error.type"),
-            attempt: span.attributes.get("opencode.retry.attempt"),
+            attempt: span.attributes.get("warcode.retry.attempt"),
           })),
       ).toEqual([
         { error: "Transport", attempt: undefined },
@@ -6826,7 +6826,7 @@ describe("SessionRunnerLLM", () => {
     expect(yield* recordedEventTypes(sessionID)).not.toContain("session.retry.scheduled.1")
   })
 
-  scenario("records OpenCode Console's Go usage limit 429 as a typed step failure without retrying", function* (s) {
+  scenario("records Warcode Console's Go usage limit 429 as a typed step failure without retrying", function* (s) {
     // The exact refusal Console sends a Go subscriber at a limit.
     const body = JSON.stringify({
       type: "error",
@@ -6854,7 +6854,7 @@ describe("SessionRunnerLLM", () => {
           error: {
             type: "provider.go-limit",
             message:
-              "OpenCode Go 5 hour usage limit reached. Switch to a free model, or turn on Extra Usage on the Go page in OpenCode Console to keep going.",
+              "Warcode Go 5 hour usage limit reached. Switch to a free model, or turn on Extra Usage on the Go page in Warcode Console to keep going.",
             status: 429,
             response: { body },
             retryAfterMs: 3_600_000,

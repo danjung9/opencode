@@ -1,6 +1,6 @@
 // The footer's theme switch on the pages that never hydrate: the static pages (src/client/theme.ts)
 // and the docs (src/docs/client.ts). Site (site.tsx) renders the same from its theme signal
-// (ThemeCycle, themeColor). The choice is saved as `opencode-theme`, which both share; the inline
+// (ThemeCycle, themeColor). The choice is saved as `warcode-theme`, which both share; the inline
 // theme script (preload-settings.ts themeScript) applied it before first paint.
 
 export const themes = ["system", "light", "dark"] as const
@@ -22,7 +22,7 @@ export function startThemeSwitch(
   document.addEventListener("click", (event) => {
     if (!(event.target as Element).closest?.('[data-component="theme-toggle"] [data-slot="cycle"]')) return
     const next = themes[(themes.indexOf(site.dataset.theme as Theme) + 1) % 3]
-    localStorage.setItem("opencode-theme", next)
+    localStorage.setItem("warcode-theme", next)
     show(next)
   })
   return show

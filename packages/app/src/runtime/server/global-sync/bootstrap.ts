@@ -1,6 +1,6 @@
 import type { Config, Path } from "@/runtime/server/types"
-import type { LocationGetInput, LocationGetOutput, ProjectListOutput } from "@opencode/client/promise"
-import { retry } from "@opencode/util/retry"
+import type { LocationGetInput, LocationGetOutput, ProjectListOutput } from "@warcode/client/promise"
+import { retry } from "@warcode/util/retry"
 import type { SetStoreFunction } from "solid-js/store"
 import type { GlobalStore } from "./types"
 import { normalizeProjectInfo } from "./utils"

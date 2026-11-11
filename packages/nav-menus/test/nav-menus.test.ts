@@ -6,7 +6,7 @@ let stop: () => void
 beforeEach(() => {
   document.body.innerHTML = `
     <header>
-      <a href="/" data-nav-logo aria-label="OpenCode home"><svg width="20" height="25"></svg></a>
+      <a href="/" data-nav-logo aria-label="Warcode home"><svg width="20" height="25"></svg></a>
       <span><a href="/data" data-nav-product="data" aria-haspopup="menu" aria-expanded="false">Data</a></span>
     </header>
     <main><a href="#elsewhere">Elsewhere</a></main>`
@@ -47,7 +47,7 @@ describe("logo menu", () => {
       "https://example.test/brand",
       "https://example.test/press",
     ])
-    expect(items(menu)[0]!.getAttribute("download")).toBe("opencode-logo-transparent-light.svg")
+    expect(items(menu)[0]!.getAttribute("download")).toBe("warcode-logo-transparent-light.svg")
     expect(items(menu)[0]!.querySelector("svg")).not.toBeNull()
   })
 
@@ -87,7 +87,7 @@ describe("product menu", () => {
     press(name(), "ArrowDown")
 
     expect(items(menus()[0]!).map((item) => [item.textContent, item.getAttribute("aria-current")])).toEqual([
-      ["OpenCode", null],
+      ["Warcode", null],
       ["Console", null],
       ["Data", "page"],
       ["Docs", null],
@@ -155,7 +155,7 @@ describe("one menu at a time", () => {
 
   test("tells the host when one opens, so it can close its own menus", () => {
     const opened: string[] = []
-    document.addEventListener("opencode-nav-menu-open", () => opened.push("open"), { once: true })
+    document.addEventListener("warcode-nav-menu-open", () => opened.push("open"), { once: true })
 
     press(logo(), "ContextMenu")
 

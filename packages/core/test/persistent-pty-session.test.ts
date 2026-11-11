@@ -1,23 +1,23 @@
 import { describe, expect } from "bun:test"
 import { Effect, Fiber, Layer, Option, Stream } from "effect"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Database } from "@opencode/core/database/database"
-import { Bus } from "@opencode/core/bus"
-import { Instance } from "@opencode/core/instance/service"
-import { Location } from "@opencode/core/location"
-import { PersistentPty } from "@opencode/core/persistent-pty"
-import { Project } from "@opencode/core/project"
-import { AbsolutePath } from "@opencode/core/schema"
-import { Session } from "@opencode/core/session"
-import { SessionExecution } from "@opencode/core/session/execution"
-import { SessionModelTransport } from "@opencode/core/session/model-transport"
-import { SessionProjector } from "@opencode/core/session/projector"
-import { SessionStore } from "@opencode/core/session/store"
-import { SessionEnvironment } from "@opencode/core/session/environment"
-import { LocationServiceMap } from "@opencode/core/location-services"
-import { Removed, Updated } from "@opencode/schema/persistent-pty"
-import { Pty } from "@opencode/schema/pty"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Database } from "@warcode/core/database/database"
+import { Bus } from "@warcode/core/bus"
+import { Instance } from "@warcode/core/instance/service"
+import { Location } from "@warcode/core/location"
+import { PersistentPty } from "@warcode/core/persistent-pty"
+import { Project } from "@warcode/core/project"
+import { AbsolutePath } from "@warcode/core/schema"
+import { Session } from "@warcode/core/session"
+import { SessionExecution } from "@warcode/core/session/execution"
+import { SessionModelTransport } from "@warcode/core/session/model-transport"
+import { SessionProjector } from "@warcode/core/session/projector"
+import { SessionStore } from "@warcode/core/session/store"
+import { SessionEnvironment } from "@warcode/core/session/environment"
+import { LocationServiceMap } from "@warcode/core/location-services"
+import { Removed, Updated } from "@warcode/schema/persistent-pty"
+import { Pty } from "@warcode/schema/pty"
 import { fakeDaemon } from "./fixture/persistent-pty-daemon"
 import { it } from "./lib/effect"
 import { globalProjectNode } from "./lib/project"
@@ -110,7 +110,7 @@ describe("PersistentPty rename", () => {
   )
 })
 
-// Pipe mode is Unix-only: Windows daemons reject create_pipe, so OpenCode keeps spawning shell commands there.
+// Pipe mode is Unix-only: Windows daemons reject create_pipe, so Warcode keeps spawning shell commands there.
 describe.skipIf(process.platform === "win32")("PersistentPty pipe processes", () => {
   const input = {
     program: "/bin/sh",

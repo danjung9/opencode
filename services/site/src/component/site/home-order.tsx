@@ -33,7 +33,7 @@ const selectors: Record<HomeSection, string> = {
 const labels: Record<HomeSection, string> = {
   logos: "Logo row",
   products: "Product carousel",
-  what: "What is OpenCode?",
+  what: "What is Warcode?",
   getStarted: "Get started",
   byos: "Bring your own subs",
   tools: "Bring your own tools",
@@ -82,7 +82,7 @@ function orderRules(order: readonly string[], options: OrderOptions, sel: Record
  * Design mode's, so the script is empty outside the development server.
  */
 export const homeOrderScript = import.meta.env.DEV
-  ? `(()=>{try{const s=JSON.parse(localStorage.getItem("opencode-site-settings-v3")||"null");const o=s&&Array.isArray(s.homeOrder)?s.homeOrder:[];const ids=${JSON.stringify(homeSections)};const k=o.filter((id,i)=>ids.includes(id)&&o.indexOf(id)===i);const order=ids.reduce((o,id,i)=>{if(o.includes(id))return o;const b=ids.slice(0,i).reverse().find((x)=>o.includes(x));const at=b===undefined?0:o.indexOf(b)+1;return[...o.slice(0,at),id,...o.slice(at)]},k);const e=document.getElementById("${styleId}")||document.head.appendChild(Object.assign(document.createElement("style"),{id:"${styleId}"}));e.textContent=(${String(orderRules)})(order,{toolsOff:!!s&&s.toolsSection==="off",logosShown:!(s&&s.logoWall==="off"),logoDividers:!!s&&s.logoDividers==="on"},${JSON.stringify(selectors)},${JSON.stringify(scope)})}catch{}})()`
+  ? `(()=>{try{const s=JSON.parse(localStorage.getItem("warcode-site-settings-v3")||"null");const o=s&&Array.isArray(s.homeOrder)?s.homeOrder:[];const ids=${JSON.stringify(homeSections)};const k=o.filter((id,i)=>ids.includes(id)&&o.indexOf(id)===i);const order=ids.reduce((o,id,i)=>{if(o.includes(id))return o;const b=ids.slice(0,i).reverse().find((x)=>o.includes(x));const at=b===undefined?0:o.indexOf(b)+1;return[...o.slice(0,at),id,...o.slice(at)]},k);const e=document.getElementById("${styleId}")||document.head.appendChild(Object.assign(document.createElement("style"),{id:"${styleId}"}));e.textContent=(${String(orderRules)})(order,{toolsOff:!!s&&s.toolsSection==="off",logosShown:!(s&&s.logoWall==="off"),logoDividers:!!s&&s.logoDividers==="on"},${JSON.stringify(selectors)},${JSON.stringify(scope)})}catch{}})()`
   : ""
 
 /**

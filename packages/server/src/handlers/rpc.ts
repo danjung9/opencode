@@ -1,5 +1,5 @@
-import { Rpc } from "@opencode/core/rpc"
-import { RpcError, RpcInternalError } from "@opencode/protocol/errors"
+import { Rpc } from "@warcode/core/rpc"
+import { RpcError, RpcInternalError } from "@warcode/protocol/errors"
 import { Effect } from "effect"
 import { HttpApiBuilder } from "effect/http-api"
 import { Api } from "../api"

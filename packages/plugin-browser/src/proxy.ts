@@ -87,7 +87,7 @@ export async function make(transport: Transport) {
     void (async () => {
       if (!authorized(incoming.headers["proxy-authorization"])) {
         socket.end(
-          'HTTP/1.1 407 Proxy Authentication Required\r\nProxy-Authenticate: Basic realm="OpenCode Browser Proxy"\r\nContent-Length: 0\r\nConnection: close\r\n\r\n',
+          'HTTP/1.1 407 Proxy Authentication Required\r\nProxy-Authenticate: Basic realm="Warcode Browser Proxy"\r\nContent-Length: 0\r\nConnection: close\r\n\r\n',
         )
         return
       }
@@ -177,7 +177,7 @@ async function forward(
   authorized: (value: string | undefined) => boolean,
 ) {
   if (!authorized(incoming.headers["proxy-authorization"])) {
-    response.writeHead(407, { "Proxy-Authenticate": 'Basic realm="OpenCode Browser Proxy"' })
+    response.writeHead(407, { "Proxy-Authenticate": 'Basic realm="Warcode Browser Proxy"' })
     response.end()
     return
   }

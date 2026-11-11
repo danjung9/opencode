@@ -28,7 +28,7 @@ export interface Interface {
   readonly install: Effect.Effect<string, Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("opencode/desktop/DesktopCli") {}
+export class Service extends Context.Service<Service, Interface>()("warcode/desktop/DesktopCli") {}
 
 export const layer = Layer.effect(
   Service,
@@ -48,7 +48,7 @@ export const layer = Layer.effect(
       const home = app.getPath("home")
       yield* runInstaller(cli.binary, home)
 
-      return path.join(home, ".opencode", "bin", "opencode")
+      return path.join(home, ".warcode", "bin", "warcode")
     })
 
     return Service.of({ resolve, install })
@@ -56,8 +56,8 @@ export const layer = Layer.effect(
 )
 
 const make = Effect.fn("DesktopCli.resolve")(function* () {
-  const development = !app.isPackaged && process.env.OPENCODE_DESKTOP_CLI_DEV
-  const version = process.env.OPENCODE_VERSION ?? "local"
+  const development = !app.isPackaged && process.env.WARCODE_DESKTOP_CLI_DEV
+  const version = process.env.WARCODE_VERSION ?? "local"
 
   const cli = development
     ? {
@@ -69,12 +69,12 @@ const make = Effect.fn("DesktopCli.resolve")(function* () {
           "run",
           "--cwd",
           development,
-          "--define=OPENCODE_VERSION=process.env.OPENCODE_VERSION",
+          "--define=WARCODE_VERSION=process.env.WARCODE_VERSION",
           "src/index.ts",
         ],
         binary: undefined,
       }
-    : yield* resolveBundledCli(!app.isPackaged && process.env.OPENCODE_DESKTOP_ISOLATED_SERVER === "1")
+    : yield* resolveBundledCli(!app.isPackaged && process.env.WARCODE_DESKTOP_ISOLATED_SERVER === "1")
 
   return cli satisfies Resolved
 })
@@ -106,7 +106,7 @@ const bundledVersion = Effect.fn("DesktopCli.bundledVersion")(function* (bundled
   // async read waits behind everything else the main thread is doing at that moment.
   const shipped = yield* Effect.sync(() => {
     try {
-      return readFileSync(path.join(path.dirname(bundled), "opencode-cli.version"), "utf8").trim()
+      return readFileSync(path.join(path.dirname(bundled), "warcode-cli.version"), "utf8").trim()
     } catch {
       return ""
     }
@@ -193,7 +193,7 @@ const run = Effect.fn("DesktopCli.run")(function* (binary: string, args: string[
   return stdout
 })
 
-// The installer runs `opencode --version`, which can take several seconds on first run while Gatekeeper scans it.
+// The installer runs `warcode --version`, which can take several seconds on first run while Gatekeeper scans it.
 const INSTALL_TIMEOUT_MS = 60_000
 
 const runInstaller = Effect.fn("DesktopCli.installForUser")(function* (binary: string, home: string) {
@@ -214,7 +214,7 @@ const runInstaller = Effect.fn("DesktopCli.installForUser")(function* (binary: s
     child.stdin.on("error", () => {})
     child.stdin.end(installer)
 
-    // A timeout or the app quitting leaves no installer writing into ~/.opencode behind.
+    // A timeout or the app quitting leaves no installer writing into ~/.warcode behind.
     return Effect.sync(() => {
       if (child.exitCode === null && child.signalCode === null) child.kill("SIGKILL")
     })
@@ -227,9 +227,9 @@ const runInstaller = Effect.fn("DesktopCli.installForUser")(function* (binary: s
 })
 
 function executableName() {
-  return process.platform === "win32" ? "opencode-cli.exe" : "opencode-cli"
+  return process.platform === "win32" ? "warcode-cli.exe" : "warcode-cli"
 }
 
 function developmentExecutableName() {
-  return process.platform === "win32" ? "opencode-cli-dev.exe" : "opencode-cli-dev"
+  return process.platform === "win32" ? "warcode-cli-dev.exe" : "warcode-cli-dev"
 }

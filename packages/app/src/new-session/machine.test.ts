@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import { Session } from "@opencode/schema/session"
+import { Session } from "@warcode/schema/session"
 import {
   NEW_SESSION_CREATE_TIMEOUT_MS,
   NEW_SESSION_WORKTREE_TIMEOUT_MS,

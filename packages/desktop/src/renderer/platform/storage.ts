@@ -4,7 +4,7 @@ import {
   flushPersisted,
   type NamespaceStorage,
   type Platform,
-} from "@opencode/app/desktop"
+} from "@warcode/app/desktop"
 import { getOwner, onCleanup } from "solid-js"
 import type { ElectronAPI } from "../api-types"
 import { onBeforeDispose } from "../ipc-client"

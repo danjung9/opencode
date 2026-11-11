@@ -1,5 +1,6 @@
-import { Logo } from "@opencode/ui/logo"
-import { prefersReducedMotion } from "@opencode/ui/motion"
+import { Logo } from "@warcode/ui/logo"
+import { wordmarkLetters } from "@warcode/ui/wordmark"
+import { prefersReducedMotion } from "@warcode/ui/motion"
 import { type Accessor, createEffect, For, onCleanup, onMount, Show } from "solid-js"
 import { PinSound } from "./pin-sound"
 import {
@@ -16,57 +17,7 @@ import {
 } from "./wordmark-machine"
 import "./wordmark.css"
 
-// Each letter in the 234×42 logo viewBox, with its counter shadow, stem, and bottom-centre pivot.
-const LETTERS = [
-  {
-    cx: 12,
-    weak: "M18 30H6V18H18V30Z",
-    fill: "var(--icon-base)",
-    stem: "M18 12H6V30H18V12ZM24 36H0V6H24V36Z",
-  },
-  {
-    cx: 42,
-    weak: "M48 30H36V18H48V30Z",
-    fill: "var(--icon-base)",
-    stem: "M36 30H48V12H36V30ZM54 36H36V42H30V6H54V36Z",
-  },
-  {
-    cx: 72,
-    weak: "M84 24V30H66V24H84Z",
-    fill: "var(--icon-base)",
-    stem: "M84 24H66V30H84V36H60V6H84V24ZM66 18H78V12H66V18Z",
-  },
-  {
-    cx: 102,
-    weak: "M108 36H96V18H108V36Z",
-    fill: "var(--icon-base)",
-    stem: "M108 12H96V36H90V6H108V12ZM114 36H108V12H114V36Z",
-  },
-  {
-    cx: 132,
-    weak: "M144 30H126V18H144V30Z",
-    fill: "var(--icon-strong-base)",
-    stem: "M144 12H126V30H144V36H120V6H144V12Z",
-  },
-  {
-    cx: 162,
-    weak: "M168 30H156V18H168V30Z",
-    fill: "var(--icon-strong-base)",
-    stem: "M168 12H156V30H168V12ZM174 36H150V6H174V36Z",
-  },
-  {
-    cx: 192,
-    weak: "M198 30H186V18H198V30Z",
-    fill: "var(--icon-strong-base)",
-    stem: "M198 12H186V30H198V12ZM204 36H180V6H198V0H204V36Z",
-  },
-  {
-    cx: 222,
-    weak: "M234 24V30H216V24H234Z",
-    fill: "var(--icon-strong-base)",
-    stem: "M216 12V18H228V12H216ZM234 24H216V30H234V36H210V6H234V24Z",
-  },
-] as const
+const LETTERS = wordmarkLetters
 
 // Lodger geometry, in the logo's 234×42 viewBox units. The lodger is drawn from its bottom centre.
 const W = 234
@@ -241,7 +192,7 @@ function WordmarkLodger(props: {
                   <path d={item.weak} fill="var(--icon-weak-base)" />
                   <path d={item.stem} fill={item.fill} />
                 </g>
-                <Show when={i() === 7}>
+                <Show when={i() === LETTERS.length - 1}>
                   <rect
                     ref={notch}
                     x="224.6"

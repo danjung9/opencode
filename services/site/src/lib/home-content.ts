@@ -63,7 +63,7 @@ export function homeContent(t: Translate, route: (path: string) => string) {
       label: t("home.providers.label"),
       items: logoWalls.providers,
     },
-    // Services with official MCP servers (icons from Simple Icons), and the ways to extend OpenCode.
+    // Services with official MCP servers (icons from Simple Icons), and the ways to extend Warcode.
     tools: {
       title: t("home.tools.title"),
       lead: rich(t("home.tools.lead"), {

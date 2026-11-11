@@ -169,22 +169,22 @@ export function architectLayout(coverConcept: CoverConcept, interiorConcept: Int
 
 /** The default labels and static text the editor can change. */
 export const defaultText = {
-  kicker: "OpenCode legal",
+  kicker: "Warcode legal",
   project: "Project",
   number: "Number",
   name: "Name",
   date: "Date",
   versionLabel: "Version",
   sections: "Sections",
-  projectValue: "OpenCode",
-  headerLeft: "opencode",
+  projectValue: "Warcode",
+  headerLeft: "warcode",
 }
 
 export type TextKey = keyof typeof defaultText
 export const label = (layout: ArchitectLayout, key: TextKey) => layout.text[key] ?? defaultText[key]
 
 /** Where the editor keeps a custom layout; the print style uses it when present. */
-export const layoutKey = "opencode-legal-architect-layout-v1"
+export const layoutKey = "warcode-legal-architect-layout-v1"
 
 export function savedLayout(): ArchitectLayout | undefined {
   try {
@@ -358,7 +358,7 @@ export function ruleTop(index: number, row: number, metrics: RowMetrics) {
   return index * row + metrics.baseline + (row - metrics.cap - rule) / 2
 }
 
-/** The OpenCode logo mark, ink version, in its 240 × 300 artwork. */
+/** The Warcode logo mark, ink version, in its 240 × 300 artwork. */
 const logoMark = `<path d="M180 240H60V120H180V240Z" fill="#D2D2D2"/><path d="M180 60H60V240H180V60ZM240 300H0V0H240V300Z" fill="#1F1F1F"/>`
 
 /**

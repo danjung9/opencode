@@ -1,25 +1,25 @@
 import { describe, expect } from "bun:test"
 import fs from "fs/promises"
 import path from "path"
-import { Bus } from "@opencode/core/bus"
-import { Config } from "@opencode/core/config"
-import { Generate } from "@opencode/core/generate"
-import { Job } from "@opencode/core/job"
-import { Location } from "@opencode/core/location"
-import { Model } from "@opencode/core/model"
-import { Permission } from "@opencode/core/permission"
-import { Plugin } from "@opencode/core/plugin"
-import { PluginHost } from "@opencode/core/plugin/host"
-import { Provider } from "@opencode/core/provider"
-import { Session } from "@opencode/core/session"
-import { SessionEvent } from "@opencode/core/session/event"
-import { Tool } from "@opencode/core/tool"
-import { ImageGenerateTool } from "@opencode/core/tool/plugin/image-generate"
-import { OpenCodeTools } from "@opencode/core/tool/plugin/opencode"
-import { Document, Event, Info } from "@opencode/schema/config"
-import { ConfigExperimental } from "@opencode/schema/config/experimental"
-import type { ImageRequest, ImageResult } from "@opencode/schema/generate"
-import { Global } from "@opencode/util/global"
+import { Bus } from "@warcode/core/bus"
+import { Config } from "@warcode/core/config"
+import { Generate } from "@warcode/core/generate"
+import { Job } from "@warcode/core/job"
+import { Location } from "@warcode/core/location"
+import { Model } from "@warcode/core/model"
+import { Permission } from "@warcode/core/permission"
+import { Plugin } from "@warcode/core/plugin"
+import { PluginHost } from "@warcode/core/plugin/host"
+import { Provider } from "@warcode/core/provider"
+import { Session } from "@warcode/core/session"
+import { SessionEvent } from "@warcode/core/session/event"
+import { Tool } from "@warcode/core/tool"
+import { ImageGenerateTool } from "@warcode/core/tool/plugin/image-generate"
+import { WarcodeTools } from "@warcode/core/tool/plugin/warcode"
+import { Document, Event, Info } from "@warcode/schema/config"
+import { ConfigExperimental } from "@warcode/schema/config/experimental"
+import type { ImageRequest, ImageResult } from "@warcode/schema/generate"
+import { Global } from "@warcode/util/global"
 import { Effect, Layer, Schedule, Stream } from "effect"
 import { testEffect } from "./lib/effect"
 import { permissionLayer } from "./lib/permission"
@@ -98,7 +98,7 @@ const setup = (providerID = "test") =>
     const location = yield* Location.Service
     const host = yield* PluginHost.make(plugins, "test")
     yield* ImageGenerateTool.Plugin.effect(host)
-    yield* OpenCodeTools.Plugin.effect(host)
+    yield* WarcodeTools.Plugin.effect(host)
     const session = yield* sessions.create({
       location: Location.Ref.make({ directory: location.directory }),
       model: Model.Ref.make({ providerID: Provider.ID.make(providerID), id: Model.ID.make("chat") }),
@@ -487,7 +487,7 @@ describe("experimental_image_generate", () => {
             type: "tool-call",
             id: `models-${JSON.stringify(input)}`,
             name: "execute",
-            input: { code: `return await tools.opencode.models(${JSON.stringify(input)})` },
+            input: { code: `return await tools.warcode.models(${JSON.stringify(input)})` },
           },
         }).pipe(
           Effect.map((result) =>

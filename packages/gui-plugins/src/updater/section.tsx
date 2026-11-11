@@ -1,5 +1,5 @@
 import { Show } from "solid-js"
-import { usePlugin } from "@opencode/plugin/gui"
+import { usePlugin } from "@warcode/plugin/gui"
 import type definition from "./index"
 import type en from "./i18n/en"
 

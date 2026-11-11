@@ -1,4 +1,4 @@
-import type { ServerRef } from "@opencode/plugin/gui"
+import type { ServerRef } from "@warcode/plugin/gui"
 import type { TerminalModel } from "./model"
 import type { TerminalQuoteTarget } from "./quote"
 

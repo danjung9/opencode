@@ -1,0 +1,145 @@
+Window: "Warcode", App: electron.exe.
+	0 window Warcode Secondary Actions: Raise
+		52 pane (disabled)
+		19 region Warcode
+			20 region
+				21 region
+					22 region
+						23 button Minimize
+						24 button Maximize
+						25 button Close
+					26 region
+						27 region
+							28 region
+								29 region
+									487 document Warcode Value: http://localhost:5173/index.html ID: RootWebArea
+										540 header
+											541 button Warcode menu ID: dropdownmenu-cl-28-trigger
+											542 button Toggle sidebar
+										492 complementary ID: vertical-tabs-sidebar
+											543 graphic Warcode
+											544 toggle button Home
+											545 button Search sessions
+											546 button New session ID: contextmenu-cl-30-trigger
+											547 link D Session Close tab
+												548 link D Session Value: http://localhost:5173/server/c2lkZWNhcg/session/ses_e37ba4885ffe1fKnS1fpgKM5WD ID: contextmenu-cl-32-trigger
+												549 button Close tab
+										497 main
+											566 group
+												567 complementary
+													568 button Back to app
+													569 combo box (settable, string) Search Description: Search
+													570 tab
+														571 tab item (selectable) Providers ID: tabs-cl-50-trigger-providers
+														572 tab item (selectable) Models ID: tabs-cl-50-trigger-models
+														573 tab item (selectable) Extensions ID: tabs-cl-50-trigger-extensions
+														574 tab item (selectable) Projects ID: tabs-cl-50-trigger-projects
+														575 tab item (selectable) Worktrees ID: tabs-cl-50-trigger-workspaces
+														576 tab item (selectable) Preferences ID: tabs-cl-50-trigger-general
+														577 tab item (selectable) Appearance ID: tabs-cl-50-trigger-appearance
+														578 tab item (selectable) Notifications ID: tabs-cl-50-trigger-notifications
+														579 tab item (selectable) Shortcuts ID: tabs-cl-50-trigger-shortcuts
+														580 tab item (selectable) Pairing ID: tabs-cl-50-trigger-pairing
+														581 tab item (selectable) Server ID: tabs-cl-50-trigger-servers
+														582 tab item (selectable) What's new ID: tabs-cl-50-trigger-whats-new
+														583 tab item (selectable) Experimental ID: tabs-cl-50-trigger-experimental
+														584 tab item (selectable) About ID: tabs-cl-50-trigger-about
+												703 tab panel About ID: tabs-cl-50-content-about
+													704 button Copy
+													705 text Released under the MIT License
+													706 graphic Warcode
+													707 text Written by
+													708 link thdxr Value: https://github.com/thdxr
+													709 text ,
+													710 link adamdotdev Value: https://github.com/adamdotdev
+													711 text ,
+													712 link rekram1-node Value: https://github.com/rekram1-node
+													713 text ,
+													714 link kitlangton Value: https://github.com/kitlangton
+													715 text ,
+													716 link iamdavidhill Value: https://github.com/iamdavidhill
+													717 text ,
+													718 link jayair Value: https://github.com/jayair
+													719 text ,
+													720 link fwang Value: https://github.com/fwang
+													721 text ,
+													722 link brendonovich Value: https://github.com/brendonovich
+													723 text ,
+													724 link nexxeln Value: https://github.com/nexxeln
+													725 text ,
+													726 link hona Value: https://github.com/hona
+													727 text ,
+													728 link kommander Value: https://github.com/kommander
+													729 text ,
+													730 link jlongster Value: https://github.com/jlongster
+													731 text ,
+													732 link vimtor Value: https://github.com/vimtor
+													733 text ,
+													734 link r44vcorp Value: https://github.com/R44VC0RP
+													735 text ,
+													736 link simonklee Value: https://github.com/simonklee
+													737 text ,
+													738 link arvsrn Value: https://github.com/arvsrn
+													739 text , and
+													740 link 1073 others Value: https://github.com/anomalyco/opencode/graphs/contributors
+													741 text Illustrated by
+													742 link usrnk1 Value: https://github.com/usrnk1
+													743 text ,
+													744 link ludvigrask_ Value: https://x.com/ludvigrask_
+													745 text ,
+													746 link arvsrn Value: https://github.com/arvsrn
+													747 text , and
+													748 link iamdavidhill Value: https://github.com/iamdavidhill
+													749 text First published in Missouri, USA
+													750 text First illustrated in London, England
+													751 link Warcode on GitHub Value: https://github.com/danjung9/opencode
+													752 text Warcode, the open source coding agent
+													753 text Typeset in Inter and IBM Plex Mono
+													754 button Third-party notices
+													755 text AI can’t build great software, without you
+													756 text © Anomaly Innovations, Inc.
+										498 region Notifications alt+T
+										488 group ID: sessions
+								30 region
+
+Document text: ```
+￼
+Home
+Search sessions
+New session
+D
+Session
+Close tab
+￼
+Back to app
+Search
+Providers
+Models
+Extensions
+Projects
+Worktrees
+Preferences
+Appearance
+Notifications
+Shortcuts
+Pairing
+Server
+What's new
+Experimental
+About
+Version 2.0.0-local-1794361315844
+Released under the MIT License
+￼
+Written by thdxr, adamdotdev, rekram1-node, kitlangton, iamdavidhill, jayair, fwang,brendonovich, nexxeln, hona, kommander, jlongster, vimtor, r44vcorp, simonklee, arvsrn, and 1073 others
+Illustrated by usrnk1, ludvigrask_, arvsrn, and iamdavidhill
+First published in Missouri, USA
+First illustrated in London, England
+Warcode on GitHub
+Warcode, the open source coding agent
+Typeset in Inter and IBM Plex Mono
+Third-party notices
+AI can’t build great software, without you
+© Anomaly Innovations, Inc.
+Notifications alt+T
+￼
+```

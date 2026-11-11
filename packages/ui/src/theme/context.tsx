@@ -3,7 +3,7 @@
 import { createMemo, createSignal, onCleanup, onMount, untrack } from "solid-js"
 import { makeEventListener } from "@solid-primitives/event-listener"
 import { createSimpleContext } from "../context/helper"
-import oc2ThemeJson from "./themes/oc-2.json"
+import workroomThemeJson from "./themes/workroom.json"
 import { resolveThemeVariant, themeToCss } from "./resolve"
 import { resolveThemeVariantV2, themeV2ToCss } from "./v2/resolve"
 import type { DesktopTheme } from "./types"
@@ -26,10 +26,10 @@ import {
 export type { ColorScheme } from "./machine"
 
 const STORAGE_KEYS = {
-  THEME_ID: "opencode-theme-id",
-  COLOR_SCHEME: "opencode-color-scheme",
-  THEME_CSS_LIGHT: "opencode-theme-css-light",
-  THEME_CSS_DARK: "opencode-theme-css-dark",
+  THEME_ID: "warcode-theme-id",
+  COLOR_SCHEME: "warcode-color-scheme",
+  THEME_CSS_LIGHT: "warcode-theme-css-light",
+  THEME_CSS_DARK: "warcode-theme-css-dark",
 } as const
 
 const THEME_STYLE_ID = "oc-theme"
@@ -65,7 +65,7 @@ function knownThemes() {
 
 const names = new Map(
   Object.entries({
-    "oc-2": "OpenCode",
+    "workroom": "Warcode Workroom",
     amoled: "AMOLED",
     aura: "Aura",
     ayu: "Ayu",
@@ -104,9 +104,9 @@ const names = new Map(
   }),
 )
 
-// SAFETY: oc-2.json follows desktop-theme.schema.json; JSON modules only widen its colors to `string`, and
+// SAFETY: workroom.json follows desktop-theme.schema.json; JSON modules only widen its colors to `string`, and
 // v2/resolve.test.ts resolves the same file as a DesktopTheme.
-const oc2Theme = oc2ThemeJson as DesktopTheme
+const workroomTheme = workroomThemeJson as DesktopTheme
 
 // Storage access throws where localStorage is missing or blocked; every caller treats that as no stored value.
 function read(key: string) {
@@ -196,9 +196,9 @@ export const { use: useTheme, provider: ThemeProvider } = createSimpleContext({
     // An id no theme has yet stays selected until `settle`: a registered theme can arrive after startup.
     const initial = createThemeState({
       themeId: read(STORAGE_KEYS.THEME_ID) || props.defaultTheme || DEFAULT_THEME_ID,
-      scheme: parseColorScheme(read(STORAGE_KEYS.COLOR_SCHEME)),
+      scheme: parseColorScheme(read(STORAGE_KEYS.COLOR_SCHEME) ?? "light"),
       systemMode: getSystemMode(),
-      defaultTheme: oc2Theme,
+      defaultTheme: workroomTheme,
       bundled: knownThemes(),
     })
 

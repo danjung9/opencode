@@ -1,7 +1,7 @@
 export * as AISDK from "./aisdk.js"
 
-import { makeLocationNode } from "@opencode/util/effect/app-node"
-import { httpFetch } from "@opencode/util/effect/app-node-platform"
+import { makeLocationNode } from "@warcode/util/effect/app-node"
+import { httpFetch } from "@warcode/util/effect/app-node-platform"
 import { APICallError } from "@ai-sdk/provider"
 import type {
   JSONSchema7,
@@ -31,9 +31,9 @@ import {
   type ToolDefinition,
   type ToolMessage,
   type UsageInput,
-} from "@opencode/ai/effect"
-import { Auth, Endpoint, ProviderShared, RequestExecutor, type AnyRoute, type HttpMiddleware } from "@opencode/ai/route"
-import { isRecord } from "@opencode/util/record"
+} from "@warcode/ai/effect"
+import { Auth, Endpoint, ProviderShared, RequestExecutor, type AnyRoute, type HttpMiddleware } from "@warcode/ai/route"
+import { isRecord } from "@warcode/util/record"
 import { Cause, Context, Effect, Layer, Option, Schema, Scope, Stream, Struct } from "effect"
 import { makeParser } from "effect/encoding/Sse"
 import { FetchHttpClient, HttpClientRequest, HttpClientResponse } from "effect/http"
@@ -252,7 +252,7 @@ export interface Interface {
   readonly model: (model: RuntimeInfo) => Effect.Effect<LanguageModel, InitError>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode/AISDK") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/AISDK") {}
 
 export const locationLayer = Layer.effect(
   Service,

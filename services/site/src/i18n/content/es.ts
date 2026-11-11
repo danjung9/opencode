@@ -18,12 +18,12 @@ export const content = {
       action: "Instalar",
     },
     sdk: {
-      body: "Controla OpenCode desde tus scripts, jobs de CI y herramientas.",
+      body: "Controla Warcode desde tus scripts, jobs de CI y herramientas.",
       action: "Ver docs",
     },
     ide: {
       name: "Extensiones IDE",
-      body: "Abre OpenCode en VS Code, Cursor y Windsurf, o en Zed y los IDE de JetBrains mediante ACP.",
+      body: "Abre Warcode en VS Code, Cursor y Windsurf, o en Zed y los IDE de JetBrains mediante ACP.",
       action: "Instalar",
     },
     mini: {
@@ -33,9 +33,9 @@ export const content = {
   },
   productDetails: {
     desktop: {
-      title: "OpenCode | App de escritorio para macOS, Windows y Linux",
+      title: "Warcode | App de escritorio para macOS, Windows y Linux",
       description:
-        "Ejecuta en paralelo todos los agentes de OpenCode que quieras, ve cada cambio en un navegador al lado y retómalos en cualquier dispositivo. Para macOS, Windows y Linux.",
+        "Ejecuta en paralelo todos los agentes de Warcode que quieras, ve cada cambio en un navegador al lado y retómalos en cualquier dispositivo. Para macOS, Windows y Linux.",
       intro:
         "Ejecuta varios agentes a la vez, cada sesión en su propia pestaña. Revisa cada cambio como diff, comenta cualquier línea y comprueba el resultado en el navegador integrado. Para macOS, Windows y Linux.",
       showcase: {
@@ -53,16 +53,16 @@ export const content = {
         },
         "extend-it": {
           title: "Extiéndelo",
-          body: "Conecta tus herramientas y servicios para que el agente trabaje con cualquier cosa. O pide a OpenCode que cree plugins para sí mismo, con su propia interfaz en la barra lateral.",
+          body: "Conecta tus herramientas y servicios para que el agente trabaje con cualquier cosa. O pide a Warcode que cree plugins para sí mismo, con su propia interfaz en la barra lateral.",
         },
       },
     },
     mobile: {
-      title: "OpenCode | Mobile, tus sesiones de programación en el móvil",
+      title: "Warcode | Mobile, tus sesiones de programación en el móvil",
       description:
-        "Inicia y dirige sesiones de OpenCode desde el móvil. Habla con el agente mientras se ejecuta en tu ordenador.",
+        "Inicia y dirige sesiones de Warcode desde el móvil. Habla con el agente mientras se ejecuta en tu ordenador.",
       intro:
-        "Inicia y dirige sesiones desde el móvil, estés donde estés. Llama a una sesión y habla con el agente, o abre cualquier sesión para continuar donde lo dejaste, todo con OpenCode en tu propio ordenador.",
+        "Inicia y dirige sesiones desde el móvil, estés donde estés. Llama a una sesión y habla con el agente, o abre cualquier sesión para continuar donde lo dejaste, todo con Warcode en tu propio ordenador.",
       features: {
         "notify-when-done": {
           title: "Aviso al terminar",
@@ -70,7 +70,7 @@ export const content = {
         },
         "pair-from-anywhere": {
           title: "Vincula desde donde sea",
-          body: "Conéctate desde cualquier red con opencode pair --remote.",
+          body: "Conéctate desde cualquier red con warcode pair --remote.",
         },
         "every-computer": {
           title: "Cada ordenador",
@@ -86,7 +86,7 @@ export const content = {
         },
         "your-computer": {
           title: "Tu ordenador",
-          body: "Se conecta a OpenCode en tu propia máquina.",
+          body: "Se conecta a Warcode en tu propia máquina.",
         },
         "share-sheet": {
           title: "Compartir",
@@ -117,9 +117,9 @@ export const content = {
       },
     },
     terminal: {
-      title: "OpenCode | Interfaz de terminal del agente de código abierto",
+      title: "Warcode | Interfaz de terminal del agente de código abierto",
       description:
-        "Una interfaz de terminal rápida para OpenCode que funciona en cualquier shell, editor o servidor remoto. Describe lo que quieres, mira cada edición como diff y aprueba los comandos.",
+        "Una interfaz de terminal rápida para Warcode que funciona en cualquier shell, editor o servidor remoto. Describe lo que quieres, mira cada edición como diff y aprueba los comandos.",
       intro:
         "Una interfaz de terminal rápida que funciona en cualquier shell, editor o servidor remoto. Describe lo que quieres con tus palabras, mira cómo llega cada edición como diff y elige qué comandos se ejecutan solos.",
       features: {
@@ -137,7 +137,7 @@ export const content = {
         },
         "one-off-runs": {
           title: "Ejecución única",
-          body: "opencode run envía un mensaje e imprime la respuesta.",
+          body: "warcode run envía un mensaje e imprime la respuesta.",
         },
         "agents-and-commands": {
           title: "Agentes y comandos",
@@ -149,11 +149,11 @@ export const content = {
         },
         "any-server": {
           title: "Todo servidor",
-          body: "Conéctate a un servidor de OpenCode por URL con --server.",
+          body: "Conéctate a un servidor de Warcode por URL con --server.",
         },
         "usage-stats": {
           title: "Estadísticas",
-          body: "opencode stats muestra estadísticas de uso para compartir.",
+          body: "warcode stats muestra estadísticas de uso para compartir.",
         },
       },
       showcase: {
@@ -171,20 +171,20 @@ export const content = {
         },
         mini: {
           title: "Mini",
-          body: "Con opencode mini, las respuestas van a tu propio historial.",
+          body: "Con warcode mini, las respuestas van a tu propio historial.",
         },
       },
     },
     sdk: {
-      title: "OpenCode | SDK de TypeScript para scripts, jobs de CI y herramientas",
+      title: "Warcode | SDK de TypeScript para scripts, jobs de CI y herramientas",
       description:
-        "Controla OpenCode desde tus scripts, jobs de CI y herramientas. El cliente tipado de TypeScript crea sesiones, envía prompts y transmite cada evento al momento.",
+        "Controla Warcode desde tus scripts, jobs de CI y herramientas. El cliente tipado de TypeScript crea sesiones, envía prompts y transmite cada evento al momento.",
       intro:
-        "Controla OpenCode desde tus scripts, jobs de CI y herramientas. El SDK ejecuta OpenCode dentro de tu proceso, con tu configuración y tus modelos, y su cliente tipado crea sesiones, envía prompts y transmite cada evento.",
+        "Controla Warcode desde tus scripts, jobs de CI y herramientas. El SDK ejecuta Warcode dentro de tu proceso, con tu configuración y tus modelos, y su cliente tipado crea sesiones, envía prompts y transmite cada evento.",
       features: {
         "typescript-client": {
           title: "Cliente TypeScript",
-          body: "Peticiones y eventos tipados, con los mismos valores que @opencode/client.",
+          body: "Peticiones y eventos tipados, con los mismos valores que @warcode/client.",
         },
         "sessions-from-code": {
           title: "Sesiones con código",
@@ -192,15 +192,15 @@ export const content = {
         },
         "any-model": {
           title: "Todo modelo",
-          body: "Usa los modelos que tenga configurados tu OpenCode.",
+          body: "Usa los modelos que tenga configurados tu Warcode.",
         },
         "npm-or-bun": {
           title: "npm o bun",
-          body: "Instálalo con npm i @opencode/sdk o bun add @opencode/sdk.",
+          body: "Instálalo con npm i @warcode/sdk o bun add @warcode/sdk.",
         },
         "in-process-host": {
           title: "Host en proceso",
-          body: "Ejecuta OpenCode en memoria, sin pasar por la red.",
+          body: "Ejecuta Warcode en memoria, sin pasar por la red.",
         },
         "your-plugins": {
           title: "Tus plugins",
@@ -212,13 +212,13 @@ export const content = {
         },
         "cloudflare-workers": {
           title: "Cloudflare Workers",
-          body: "Ejecuta OpenCode dentro de un Durable Object de Cloudflare en Workers.",
+          body: "Ejecuta Warcode dentro de un Durable Object de Cloudflare en Workers.",
         },
       },
       showcase: {
         "fix-ci-from-code": {
           title: "Arregla la CI",
-          body: "Un script corto pide a OpenCode corregir los tests fallidos y los repite.",
+          body: "Un script corto pide a Warcode corregir los tests fallidos y los repite.",
         },
         "follow-every-step": {
           title: "Sigue cada paso",
@@ -226,24 +226,24 @@ export const content = {
         },
         "build-your-own-tools": {
           title: "Crea tus herramientas",
-          body: "Integra OpenCode en bots, paneles y flujos de trabajo con unas pocas líneas.",
+          body: "Integra Warcode en bots, paneles y flujos de trabajo con unas pocas líneas.",
         },
         "in-your-process": {
           title: "En tu proceso",
-          body: "Ejecuta OpenCode dentro de tu proceso, con tu configuración y modelos.",
+          body: "Ejecuta Warcode dentro de tu proceso, con tu configuración y modelos.",
         },
       },
     },
     ide: {
-      title: "OpenCode | Integraciones de editor para VS Code, Cursor y Zed",
+      title: "Warcode | Integraciones de editor para VS Code, Cursor y Zed",
       description:
-        "Usa OpenCode dentro de tu editor, con la extensión para VS Code, Cursor, Windsurf y VSCodium, y opencode acp para Zed, los IDE de JetBrains y otros editores ACP.",
+        "Usa Warcode dentro de tu editor, con la extensión para VS Code, Cursor, Windsurf y VSCodium, y warcode acp para Zed, los IDE de JetBrains y otros editores ACP.",
       intro:
-        "Usa OpenCode dentro de tu editor. En VS Code, Cursor, Windsurf y VSCodium, ejecuta opencode en la terminal integrada y la extensión se instala sola. Zed, los IDE de JetBrains y otros editores compatibles con el Agent Client Protocol ejecutan OpenCode con opencode acp.",
+        "Usa Warcode dentro de tu editor. En VS Code, Cursor, Windsurf y VSCodium, ejecuta warcode en la terminal integrada y la extensión se instala sola. Zed, los IDE de JetBrains y otros editores compatibles con el Agent Client Protocol ejecutan Warcode con warcode acp.",
       features: {
         "quick-launch": {
           title: "Inicio rápido",
-          body: "Cmd+Esc o Ctrl+Esc abre OpenCode en una terminal dividida.",
+          body: "Cmd+Esc o Ctrl+Esc abre Warcode en una terminal dividida.",
         },
         "new-session": {
           title: "Nueva sesión",
@@ -251,7 +251,7 @@ export const content = {
         },
         context: {
           title: "Contexto",
-          body: "Comparte tu selección o pestaña actual con OpenCode.",
+          body: "Comparte tu selección o pestaña actual con Warcode.",
         },
         "file-references": {
           title: "Citar archivos",
@@ -259,7 +259,7 @@ export const content = {
         },
         "installs-itself": {
           title: "Se instala sola",
-          body: "Ejecuta opencode en la terminal integrada para añadirla.",
+          body: "Ejecuta warcode en la terminal integrada para añadirla.",
         },
         "acp-editors": {
           title: "Editores ACP",
@@ -271,16 +271,16 @@ export const content = {
         },
         "same-agent": {
           title: "Mismo agente",
-          body: "El OpenCode que usas en la terminal, junto a tu código.",
+          body: "El Warcode que usas en la terminal, junto a tu código.",
         },
       },
     },
     mini: {
-      title: "OpenCode | Mini, una interfaz de terminal mínima para el agente",
+      title: "Warcode | Mini, una interfaz de terminal mínima para el agente",
       description:
-        "Mini ejecuta OpenCode en una interfaz de terminal mínima. Las respuestas se imprimen en el historial de tu terminal, y abajo solo quedan un prompt y una línea de estado.",
+        "Mini ejecuta Warcode en una interfaz de terminal mínima. Las respuestas se imprimen en el historial de tu terminal, y abajo solo quedan un prompt y una línea de estado.",
       intro:
-        "Una interfaz de terminal mínima para OpenCode. Ejecuta opencode mini y las respuestas se imprimen directamente en el historial de tu terminal, para desplazarte, buscar y copiarlas como cualquier otra salida. Abajo solo quedan el prompt y una línea de estado.",
+        "Una interfaz de terminal mínima para Warcode. Ejecuta warcode mini y las respuestas se imprimen directamente en el historial de tu terminal, para desplazarte, buscar y copiarlas como cualquier otra salida. Abajo solo quedan el prompt y una línea de estado.",
       features: {
         "your-scrollback": {
           title: "Tu historial",
@@ -302,8 +302,8 @@ export const content = {
           title: "Retoma luego",
           body: "Continúa la última sesión con -c, o cualquiera con -s.",
         },
-        "same-opencode": {
-          title: "El mismo OpenCode",
+        "same-warcode": {
+          title: "El mismo Warcode",
           body: "El mismo servidor, agentes y modelos que las otras apps.",
         },
         agents: {
@@ -319,15 +319,15 @@ export const content = {
   },
   extensionCard: {
     name: "Extensiones",
-    body: "Usa OpenCode dentro de VS Code, o en Zed y otros editores mediante ACP.",
+    body: "Usa Warcode dentro de VS Code, o en Zed y otros editores mediante ACP.",
     action: "Instalar",
   },
   extensions: {
     browse: {
       body: "Deja que los agentes usen tu navegador real.",
-      title: "OpenCode | Browse, tu navegador real para agentes de programación",
+      title: "Warcode | Browse, tu navegador real para agentes de programación",
       description:
-        "Browse permite a OpenCode y otros clientes MCP usar tu navegador real. Los agentes controlan pestañas en segundo plano con Playwright y te devuelven los inicios de sesión y el 2FA.",
+        "Browse permite a Warcode y otros clientes MCP usar tu navegador real. Los agentes controlan pestañas en segundo plano con Playwright y te devuelven los inicios de sesión y el 2FA.",
       intro:
         "Un servidor MCP y una extensión de Chromium que permiten a tus agentes usar tu navegador real, con tus pestañas, tus sesiones iniciadas y tus extensiones. Abren y controlan pestañas con Playwright, hacen capturas y graban la pantalla, en pestañas en segundo plano agrupadas para no molestarte. Cuando te toca a ti, para iniciar sesión, un código 2FA o un pago, te devuelven la pestaña y siguen en cuanto haces clic en Continuar.",
       features: {
@@ -353,7 +353,7 @@ export const content = {
         },
         "any-mcp-client": {
           title: "Todo cliente MCP",
-          body: "OpenCode, Claude Code, Cursor, Codex, Zed y muchos más.",
+          body: "Warcode, Claude Code, Cursor, Codex, Zed y muchos más.",
         },
         "all-your-logins": {
           title: "Todas tus sesiones iniciadas",
@@ -388,10 +388,10 @@ export const content = {
   },
   getStarted: {
     title: "Empieza",
-    lead: "La forma más fácil de empezar es descargar OpenCode y usar los modelos gratuitos. No necesitas cuenta. Para más, usa tu propia suscripción u OpenCode Go.",
+    lead: "La forma más fácil de empezar es descargar Warcode y usar los modelos gratuitos. No necesitas cuenta. Para más, usa tu propia suscripción u Warcode Go.",
     phrases: {
-      "download-opencode": {
-        text: "descargar OpenCode",
+      "download-warcode": {
+        text: "descargar Warcode",
       },
       "free-models": {
         text: "modelos gratuitos",
@@ -415,20 +415,20 @@ export const content = {
       },
       "use-free-models": {
         title: "Modelos gratis",
-        line: "OpenCode incluye un conjunto de modelos gratuitos. No necesitas cuenta.",
+        line: "Warcode incluye un conjunto de modelos gratuitos. No necesitas cuenta.",
       },
       "add-more-models": {
         title: "Más modelos",
-        line: "Usa tu propia suscripción o los modelos seleccionados de OpenCode Go desde 10 $/mes.",
+        line: "Usa tu propia suscripción o los modelos seleccionados de Warcode Go desde 10 $/mes.",
       },
     },
     sentence:
-      "Descarga OpenCode, empieza con modelos gratuitos y añade tu propia suscripción u OpenCode Go cuando quieras más.",
+      "Descarga Warcode, empieza con modelos gratuitos y añade tu propia suscripción u Warcode Go cuando quieras más.",
   },
   byos: {
     title: "Trae tu suscripción",
     headline: "Usa las suscripciones que ya tienes.",
-    line: "Inicia sesión con ChatGPT Plus o Pro, o con GitHub Copilot. O usa una suscripción de OpenCode.",
+    line: "Inicia sesión con ChatGPT Plus o Pro, o con GitHub Copilot. O usa una suscripción de Warcode.",
     yours: {
       label: "Tu suscripción",
       items: {
@@ -437,9 +437,9 @@ export const content = {
         },
       },
     },
-    planLinks: ["suscripción de OpenCode"],
+    planLinks: ["suscripción de Warcode"],
     ours: {
-      label: "Planes de OpenCode",
+      label: "Planes de Warcode",
     },
   },
   brand: {
@@ -451,8 +451,8 @@ export const content = {
     },
     naming: {
       title: "Nombre",
-      body: "Escribe OpenCode en una sola palabra, con O y C mayúsculas. No escribas Opencode, Open Code, OpenCode AI ni Open-Code.",
-      code: "Usa `opencode` en minúsculas solo en el código y en nombres de paquetes, como `opencode-figma` o `@acme/opencode-plugin`.",
+      body: "Escribe Warcode en una sola palabra, con O y C mayúsculas. No escribas Warcode, Open Code, Warcode AI ni Open-Code.",
+      code: "Usa `warcode` en minúsculas solo en el código y en nombres de paquetes, como `warcode-figma` o `@acme/warcode-plugin`.",
     },
     families: {
       logo: {
@@ -475,7 +475,7 @@ export const content = {
       },
       wordmark: {
         title: "Logotipo",
-        body: "El nombre completo con las letras de OpenCode. Úsalo siempre que haya espacio para escribir el nombre entero.",
+        body: "El nombre completo con las letras de Warcode. Úsalo siempre que haya espacio para escribir el nombre entero.",
         assets: {
           light: {
             name: "Claro",
@@ -680,21 +680,21 @@ export const content = {
     },
     integrations: {
       title: "Integraciones",
-      body: "Los plugins, proveedores y herramientas que funcionan con OpenCode, y los proyectos creados con él, pueden decirlo. Usa una insignia o un lockup de partner, y pon a tu proyecto un nombre que deje claro que es tuyo.",
+      body: "Los plugins, proveedores y herramientas que funcionan con Warcode, y los proyectos creados con él, pueden decirlo. Usa una insignia o un lockup de partner, y pon a tu proyecto un nombre que deje claro que es tuyo.",
       badges: {
-        body: "Pon una insignia en tu README, tu documentación o tu web y enlázala a opencode.ai. Elige el archivo claro u oscuro según tu fondo (el HTML cambia solo), y no cambies los colores ni el texto.",
+        body: "Pon una insignia en tu README, tu documentación o tu web y enlázala a warcode.ai. Elige el archivo claro u oscuro según tu fondo (el HTML cambia solo), y no cambies los colores ni el texto.",
         sizes: "Cada estilo está disponible en 20, 32 y 44px (Shields solo en 20px), en SVG y en PNG a 2×.",
-        mono: "Cada archivo también existe con texto en OpenTUI Mono. Añade -mono antes de la extensión, como en opencode-works-with-a-light-20-mono.svg, o -mono-caps para OpenTUI Mono en mayúsculas.",
+        mono: "Cada archivo también existe con texto en OpenTUI Mono. Añade -mono antes de la extensión, como en warcode-works-with-a-light-20-mono.svg, o -mono-caps para OpenTUI Mono en mayúsculas.",
         groups: {
           "works-with": {
             title: "Funciona con",
-            alt: "Funciona con OpenCode",
-            body: "Para plugins, proveedores y herramientas que funcionan con OpenCode.",
+            alt: "Funciona con Warcode",
+            body: "Para plugins, proveedores y herramientas que funcionan con Warcode.",
           },
           "built-with": {
             title: "Hecho con",
-            alt: "Hecho con OpenCode",
-            body: "Para proyectos hechos con OpenCode.",
+            alt: "Hecho con Warcode",
+            body: "Para proyectos hechos con Warcode.",
           },
         },
         styles: {
@@ -714,36 +714,36 @@ export const content = {
       },
       lockup: {
         title: "Lockup de partner",
-        body: "Pon el logo de OpenCode y el del partner uno al lado del otro, con una × entre ambos. Deja 3 trazos de espacio a cada lado de la ×, ajusta el logo del partner para que parezca tan alto como el de OpenCode y deja espacio libre alrededor de todo el conjunto.",
+        body: "Pon el logo de Warcode y el del partner uno al lado del otro, con una × entre ambos. Deja 3 trazos de espacio a cada lado de la ×, ajusta el logo del partner para que parezca tan alto como el de Warcode y deja espacio libre alrededor de todo el conjunto.",
       },
       naming: {
         title: "Nombra tu proyecto",
         body: "Empieza por tu propio nombre, para que quede claro que el proyecto es tuyo.",
-        rule: "Escribe `Linear for OpenCode` o llama al paquete `opencode-linear`. No escribas `OpenCode Linear` ni `Linear by OpenCode`.",
+        rule: "Escribe `Linear for Warcode` o llama al paquete `warcode-linear`. No escribas `Warcode Linear` ni `Linear by Warcode`.",
       },
     },
     trademarks: {
       title: "Marcas",
-      body: "OpenCode y el logo de OpenCode son marcas de Anomaly. No las uses para dar a entender que Anomaly te respalda o patrocina, ni en el nombre de tu producto o empresa, ni en merchandising sin permiso.",
+      body: "Warcode y el logo de Warcode son marcas de Anomaly. No las uses para dar a entender que Anomaly te respalda o patrocina, ni en el nombre de tu producto o empresa, ni en merchandising sin permiso.",
       contact: {
         before: "Si tienes preguntas, escribe a ",
       },
     },
   },
   press: {
-    title: "OpenCode | Kit de prensa con datos de la empresa y recursos",
+    title: "Warcode | Kit de prensa con datos de la empresa y recursos",
     description:
-      "El kit de prensa de OpenCode, con datos sobre OpenCode y Anomaly, la empresa que lo crea, además de logos y logotipos para descargar y un contacto para prensa.",
+      "El kit de prensa de Warcode, con datos sobre Warcode y Anomaly, la empresa que lo crea, además de logos y logotipos para descargar y un contacto para prensa.",
     hero: {
       title: "Prensa",
-      body: "Datos, recursos de marca y contactos para escribir sobre OpenCode y Anomaly.",
+      body: "Datos, recursos de marca y contactos para escribir sobre Warcode y Anomaly.",
     },
     company: {
       title: "Sobre Anomaly",
-      lead: "Anomaly es la empresa detrás de OpenCode. Crea herramientas de código abierto para desarrolladores.",
+      lead: "Anomaly es la empresa detrás de Warcode. Crea herramientas de código abierto para desarrolladores.",
       more: "Otros proyectos son SST y OpenTUI, todos de código abierto en [GitHub](github).",
       projects: {
-        opencode: {
+        warcode: {
           body: "El agente de programación de código abierto, con apps para escritorio, terminal y móvil, y un SDK. Licencia MIT, más de 220.000 estrellas en GitHub.",
         },
         sst: {
@@ -751,7 +751,7 @@ export const content = {
         },
         opentui: {
           name: "OpenTUI",
-          body: "Una librería para interfaces de terminal en TypeScript, React o Solid, con un núcleo en Zig. OpenCode la usa en producción. Más de 13.000 estrellas en GitHub.",
+          body: "Una librería para interfaces de terminal en TypeScript, React o Solid, con un núcleo en Zig. Warcode la usa en producción. Más de 13.000 estrellas en GitHub.",
         },
         "models-dev": {
           body: "Una base de datos de código abierto con especificaciones, precios y capacidades de modelos de IA, con una API pública. Incluye más de 8.900 modelos de más de 200 proveedores.",
@@ -766,30 +766,30 @@ export const content = {
       learnMore: "Para saber más, visita [anoma.ly](site).",
     },
     about: {
-      title: "Sobre OpenCode",
-      body: "Descripciones de OpenCode y sus productos en versión larga y corta, listas para copiar.",
+      title: "Sobre Warcode",
+      body: "Descripciones de Warcode y sus productos en versión larga y corta, listas para copiar.",
       boilerplate: {
-        long: "OpenCode es un agente de programación de código abierto. Está disponible como app de escritorio, interfaz de terminal, app móvil y SDK, y funciona con modelos de cualquier proveedor, incluidos Claude, GPT y Gemini. OpenCode tiene licencia MIT y lo crea Anomaly. Tiene más de 220.000 estrellas en GitHub y más de 1.000 colaboradores, y más de 22 millones de desarrolladores lo usan cada mes.",
+        long: "Warcode es un agente de programación de código abierto. Está disponible como app de escritorio, interfaz de terminal, app móvil y SDK, y funciona con modelos de cualquier proveedor, incluidos Claude, GPT y Gemini. Warcode tiene licencia MIT y lo crea Anomaly. Tiene más de 220.000 estrellas en GitHub y más de 1.000 colaboradores, y más de 22 millones de desarrolladores lo usan cada mes.",
         short:
-          "OpenCode es un agente de programación de código abierto de Anomaly, con apps para escritorio, terminal y móvil, y un SDK.",
+          "Warcode es un agente de programación de código abierto de Anomaly, con apps para escritorio, terminal y móvil, y un SDK.",
       },
       products: {
-        "opencode-console": {
-          name: "OpenCode Console",
-          long: "OpenCode Console es la app web donde desarrolladores y equipos compran y gestionan el acceso a modelos de IA para OpenCode y otros agentes de programación. Ofrece inferencia de pago por uso para modelos frontier y de pesos abiertos, cobrada por petición con créditos prepago, y suscripciones a OpenCode Go. Los equipos tienen espacios de trabajo con los roles Member, Admin y Owner, límites de gasto por espacio y por usuario, inicio de sesión único con Okta, Microsoft Entra ID o Google Workspace, y SCIM. Console admite más de 30 proveedores, así que los equipos pueden conectar las cuentas que ya tienen, y su propia inferencia es opcional. Está en opencode.ai/console.",
+        "warcode-console": {
+          name: "Warcode Console",
+          long: "Warcode Console es la app web donde desarrolladores y equipos compran y gestionan el acceso a modelos de IA para Warcode y otros agentes de programación. Ofrece inferencia de pago por uso para modelos frontier y de pesos abiertos, cobrada por petición con créditos prepago, y suscripciones a Warcode Go. Los equipos tienen espacios de trabajo con los roles Member, Admin y Owner, límites de gasto por espacio y por usuario, inicio de sesión único con Okta, Microsoft Entra ID o Google Workspace, y SCIM. Console admite más de 30 proveedores, así que los equipos pueden conectar las cuentas que ya tienen, y su propia inferencia es opcional. Está en warcode.ai/console.",
           short:
-            "OpenCode Console es la app web de Anomaly para acceder a modelos de IA con pago por uso, suscripciones a OpenCode Go y controles de equipo como presupuestos e inicio de sesión único.",
+            "Warcode Console es la app web de Anomaly para acceder a modelos de IA con pago por uso, suscripciones a Warcode Go y controles de equipo como presupuestos e inicio de sesión único.",
         },
-        "opencode-go": {
-          long: "OpenCode Go es una suscripción para desarrolladores que quieren un precio mensual fijo para modelos de programación. Go cuesta 10 $/mes, Go Plus 40 $/mes con límites más altos y Go Teams 20 $/mes por miembro. Cada plan incluye una selección de modelos probados para programación agéntica. Los límites de uso son importes mensuales en dólares por modelo, con cupos móviles de 5 horas y semanales del 20% y el 50% del límite mensual. Los suscriptores pueden recargar crédito, pasar a un saldo de pago por uso y cancelar cuando quieran. Go funciona con OpenCode y otros agentes. Está en opencode.ai/console/go.",
+        "warcode-go": {
+          long: "Warcode Go es una suscripción para desarrolladores que quieren un precio mensual fijo para modelos de programación. Go cuesta 10 $/mes, Go Plus 40 $/mes con límites más altos y Go Teams 20 $/mes por miembro. Cada plan incluye una selección de modelos probados para programación agéntica. Los límites de uso son importes mensuales en dólares por modelo, con cupos móviles de 5 horas y semanales del 20% y el 50% del límite mensual. Los suscriptores pueden recargar crédito, pasar a un saldo de pago por uso y cancelar cuando quieran. Go funciona con Warcode y otros agentes. Está en warcode.ai/console/go.",
           short:
-            "OpenCode Go es una suscripción mensual de Anomaly que da a los desarrolladores límites de uso mensuales en una selección de modelos de programación, desde 10 $/mes.",
+            "Warcode Go es una suscripción mensual de Anomaly que da a los desarrolladores límites de uso mensuales en una selección de modelos de programación, desde 10 $/mes.",
         },
-        "opencode-data": {
-          name: "OpenCode Data",
-          long: "OpenCode Data es un panel público que muestra qué modelos de IA usan los desarrolladores en OpenCode y cómo cambia esa combinación con el tiempo. Publica una clasificación de los mejores modelos, el uso de tokens, los costes por sesión y por token, las tasas de caché, la cuota de mercado y un desglose por país. Las cifras se agregan cada hora, con días y semanas en UTC. Los recuentos de usuarios y sesiones son aproximados, y los costes usan los precios de lista del catálogo de modelos de OpenCode. Los periodistas pueden citarlo como OpenCode Data (opencode.ai/data), con la hora de actualización que muestra la página.",
+        "warcode-data": {
+          name: "Warcode Data",
+          long: "Warcode Data es un panel público que muestra qué modelos de IA usan los desarrolladores en Warcode y cómo cambia esa combinación con el tiempo. Publica una clasificación de los mejores modelos, el uso de tokens, los costes por sesión y por token, las tasas de caché, la cuota de mercado y un desglose por país. Las cifras se agregan cada hora, con días y semanas en UTC. Los recuentos de usuarios y sesiones son aproximados, y los costes usan los precios de lista del catálogo de modelos de Warcode. Los periodistas pueden citarlo como Warcode Data (warcode.ai/data), con la hora de actualización que muestra la página.",
           short:
-            "OpenCode Data es un panel público en opencode.ai/data que clasifica los modelos de IA por su uso real en OpenCode, con tokens, costes y cuota de mercado actualizados cada hora.",
+            "Warcode Data es un panel público en warcode.ai/data que clasifica los modelos de IA por su uso real en Warcode, con tokens, costes y cuota de mercado actualizados cada hora.",
         },
       },
     },
@@ -818,9 +818,9 @@ export const content = {
           date: "Oct 2025",
           text: "1 millón+ de descargas",
         },
-        "opencode-1-0": {
+        "warcode-1-0": {
           date: "Oct 2025",
-          text: "OpenCode 1.0",
+          text: "Warcode 1.0",
         },
         "desktop-app-ships": {
           date: "Dic 2025",
@@ -830,9 +830,9 @@ export const content = {
           date: "Ene 2026",
           text: "10 millones+ de descargas",
         },
-        "opencode-2-0": {
+        "warcode-2-0": {
           date: "Sep 2026",
-          text: "OpenCode 2.0",
+          text: "Warcode 2.0",
         },
         "220-000-github-stars": {
           date: "Nov 2026",
@@ -842,7 +842,7 @@ export const content = {
     },
     news: {
       title: "Últimas versiones",
-      intro: "OpenCode publica a menudo. Estas son las versiones más recientes con funciones nuevas.",
+      intro: "Warcode publica a menudo. Estas son las versiones más recientes con funciones nuevas.",
       changelog: {
         text: "Todas las novedades",
       },
@@ -853,7 +853,7 @@ export const content = {
     media: {
       title: "Medios",
       intro:
-        "Imágenes y vídeos cortos de cada app, grabados del producto real. Puedes usarlos para escribir sobre OpenCode.",
+        "Imágenes y vídeos cortos de cada app, grabados del producto real. Puedes usarlos para escribir sobre Warcode.",
       note: "Todas las capturas usan el tema oscuro. Las imágenes y pósteres son JPG de hasta 1920 × 1080, o 1080 × 1350 en vertical. Los vídeos son clips MP4 sin sonido.",
       products: {
         desktop: {
@@ -1012,12 +1012,12 @@ export const content = {
     brand: {
       title: "Marca",
       before:
-        "Descarga los logos y logotipos de OpenCode en un solo archivo ZIP. Para archivos sueltos, variantes y reglas de uso, ve a la ",
+        "Descarga los logos y logotipos de Warcode en un solo archivo ZIP. Para archivos sueltos, variantes y reglas de uso, ve a la ",
       link: {
         text: "página Marca",
       },
       usage:
-        "Puedes usar estos archivos para escribir sobre OpenCode. No los modifiques ni des a entender que OpenCode respalda tu trabajo.",
+        "Puedes usar estos archivos para escribir sobre Warcode. No los modifiques ni des a entender que Warcode respalda tu trabajo.",
     },
     product: {
       title: "Producto",
@@ -1028,7 +1028,7 @@ export const content = {
         },
         mobile: {
           name: "Mobile",
-          body: "La app más reciente de OpenCode. Llama a una sesión para hablar con el agente y luego revisa y aprueba sus cambios desde el móvil, estés donde estés.",
+          body: "La app más reciente de Warcode. Llama a una sesión para hablar con el agente y luego revisa y aprueba sus cambios desde el móvil, estés donde estés.",
         },
         terminal: {
           name: "Terminal",
@@ -1048,7 +1048,7 @@ export const content = {
         },
         support: {
           title: "Soporte",
-          body: "Para ayuda con OpenCode, abre una issue o pregunta a la comunidad. Para cuestiones de cuenta y facturación, escríbenos.",
+          body: "Para ayuda con Warcode, abre una issue o pregunta a la comunidad. Para cuestiones de cuenta y facturación, escríbenos.",
           links: {
             "github-issues": {
               text: "Issues de GitHub",
@@ -1121,7 +1121,7 @@ export const content = {
       },
     },
     ide: {
-      lead: "Ejecuta opencode en la terminal integrada de tu editor y la extensión se instala sola, o instálala tú.",
+      lead: "Ejecuta warcode en la terminal integrada de tu editor y la extensión se instala sola, o instálala tú.",
       more: {
         label: "Configura Zed, los IDE de JetBrains y otros editores ACP",
       },
@@ -1135,7 +1135,7 @@ export const content = {
       },
     },
     mini: {
-      lead: "Mini viene con la CLI de OpenCode. Instálala con cualquiera de estos comandos y luego ejecuta opencode mini.",
+      lead: "Mini viene con la CLI de Warcode. Instálala con cualquiera de estos comandos y luego ejecuta warcode mini.",
       commands: {
         curl: {
           name: "Script",
@@ -1154,11 +1154,11 @@ export const content = {
     title: "Conecta tu móvil",
     cardTitle: "Vincula tu móvil con un comando",
     intro:
-      "OpenCode Mobile es un mando a distancia para OpenCode en tu ordenador. Tus sesiones siguen ejecutándose allí, y la app te las muestra y te permite guiarlas.",
+      "Warcode Mobile es un mando a distancia para Warcode en tu ordenador. Tus sesiones siguen ejecutándose allí, y la app te las muestra y te permite guiarlas.",
     steps: {
       "get-the-app": {
         title: "Consigue la app",
-        body: "Instala la beta de OpenCode en tu iPhone desde TestFlight. La app de Android llegará pronto.",
+        body: "Instala la beta de Warcode en tu iPhone desde TestFlight. La app de Android llegará pronto.",
       },
       "run-this-on-your-computer": {
         title: "Ejecuta esto en tu ordenador",
@@ -1169,12 +1169,12 @@ export const content = {
         body: "Escanea el código QR con la app o pega el enlace. Las sesiones recientes de tu ordenador se abren en el móvil.",
       },
     },
-    note: "--remote se conecta a través de una dirección de OpenTunnel, así que funciona desde cualquier red. En la misma Wi-Fi, ejecuta una vez opencode service set hostname 0.0.0.0 y luego opencode pair.",
+    note: "--remote se conecta a través de una dirección de OpenTunnel, así que funciona desde cualquier red. En la misma Wi-Fi, ejecuta una vez warcode service set hostname 0.0.0.0 y luego warcode pair.",
     facts: [
       "La vinculación funciona desde cualquier red, porque --remote se conecta a través de una dirección de OpenTunnel.",
       "El enlace y el código funcionan una vez y caducan en 5 minutos.",
       "Deja el ordenador encendido, porque el agente se ejecuta allí y no en el móvil.",
-      "En la misma Wi-Fi, ejecuta una vez opencode service set hostname 0.0.0.0 y luego opencode pair.",
+      "En la misma Wi-Fi, ejecuta una vez warcode service set hostname 0.0.0.0 y luego warcode pair.",
     ],
   },
   announcements: {
@@ -1192,7 +1192,7 @@ export const content = {
     },
     "steer-your-sessions-from-your-phone": {
       text: "Guía tus sesiones desde el móvil.",
-      link: "Conoce OpenCode Mobile",
+      link: "Conoce Warcode Mobile",
     },
     "a-refreshed-desktop-app": {
       text: "Una app de escritorio renovada.",

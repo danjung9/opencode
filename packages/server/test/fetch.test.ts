@@ -2,11 +2,11 @@ import { expect } from "bun:test"
 import fs from "node:fs/promises"
 import { createServer } from "node:http"
 import path from "node:path"
-import { Agent } from "@opencode/schema/agent"
-import { Integration } from "@opencode/schema/integration"
-import { ServerInfo } from "@opencode/protocol/groups/server"
+import { Agent } from "@warcode/schema/agent"
+import { Integration } from "@warcode/schema/integration"
+import { ServerInfo } from "@warcode/protocol/groups/server"
 import { Effect, Schedule, Schema } from "effect"
-import { Session } from "@opencode/schema/session"
+import { Session } from "@warcode/schema/session"
 import { tmpdir } from "../../core/test/fixture/tmpdir"
 import { it } from "../../core/test/lib/effect"
 import { ServerFetch } from "../src/fetch"
@@ -21,7 +21,7 @@ const options = {
 
 it.live("returns LocationNotFoundError for a missing folder and recovers once it exists", () =>
   Effect.gen(function* () {
-    const config = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("opencode-directory-errors-")))
+    const config = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("warcode-directory-errors-")))
     const directory = path.join(config.path, "project")
     const handler = yield* ServerFetch.make({ ...options, config: { directory: config.path } })
     // Session creation only resolves its placement; it does not boot the Location graph.
@@ -29,7 +29,7 @@ it.live("returns LocationNotFoundError for a missing folder and recovers once it
       handler(
         new Request("http://opencode.local/api/session", {
           method: "POST",
-          headers: { "content-type": "application/json", "x-opencode-directory": encodeURIComponent(directory) },
+          headers: { "content-type": "application/json", "x-warcode-directory": encodeURIComponent(directory) },
           body: JSON.stringify({ location: { directory } }),
         }),
       ),
@@ -48,7 +48,7 @@ it.live("returns LocationNotFoundError for a missing folder and recovers once it
       const response = yield* Effect.promise(() =>
         handler(
           new Request(`http://opencode.local${endpoint}`, {
-            headers: { "x-opencode-directory": encodeURIComponent(directory) },
+            headers: { "x-warcode-directory": encodeURIComponent(directory) },
           }),
         ),
       )
@@ -63,7 +63,7 @@ it.live("returns LocationNotFoundError for a missing folder and recovers once it
     const recovered = yield* Effect.promise(() =>
       handler(
         new Request("http://opencode.local/api/model", {
-          headers: { "x-opencode-directory": encodeURIComponent(directory) },
+          headers: { "x-warcode-directory": encodeURIComponent(directory) },
         }),
       ),
     )
@@ -73,7 +73,7 @@ it.live("returns LocationNotFoundError for a missing folder and recovers once it
 
 it.live("manages a session whose directory was deleted", () =>
   Effect.gen(function* () {
-    const config = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("opencode-deleted-directory-")))
+    const config = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("warcode-deleted-directory-")))
     const directory = path.join(config.path, "project")
     yield* Effect.promise(() => fs.mkdir(directory))
     const handler = yield* ServerFetch.make({ ...options, config: { directory: config.path } })
@@ -169,7 +169,7 @@ function occupy(port: number, cancel = false) {
 // A server without its own config directory reads the developer's global config, whose remote MCP servers would
 // reach the network.
 const isolated = Effect.gen(function* () {
-  const config = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("opencode-openai-oauth-")))
+  const config = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("warcode-openai-oauth-")))
   return yield* ServerFetch.make({ ...options, config: { ...options.config, directory: config.path } })
 })
 
@@ -213,7 +213,7 @@ it.live("serves the HttpApi and enforces Basic auth like the Node server", () =>
     const response = yield* Effect.promise(() =>
       handler(
         new Request("http://opencode.local/api/info", {
-          headers: { authorization: `Basic ${btoa("opencode:secret")}` },
+          headers: { authorization: `Basic ${btoa("warcode:secret")}` },
         }),
       ),
     )
@@ -222,7 +222,7 @@ it.live("serves the HttpApi and enforces Basic auth like the Node server", () =>
       Effect.flatMap(Schema.decodeUnknownEffect(ServerInfo)),
     )
     expect(body.version).toBe("test-version")
-    expect(body.paths.tmp).toEndWith("opencode")
+    expect(body.paths.tmp).toEndWith("warcode")
     expect(body.capabilities?.persistentPty).toBe(true)
   }),
 )
@@ -290,7 +290,7 @@ it.live("applies custom CORS origins to HTTP responses and PTY ticket checks", (
           const response = yield* Effect.promise(() =>
             handler(
               new Request("http://opencode.local/api/info", {
-                headers: { origin, authorization: `Basic ${btoa("opencode:secret")}` },
+                headers: { origin, authorization: `Basic ${btoa("warcode:secret")}` },
               }),
             ),
           )
@@ -301,7 +301,7 @@ it.live("applies custom CORS origins to HTTP responses and PTY ticket checks", (
             handler(
               new Request("http://opencode.local/api/experimental/persistent-pty/pty_missing/connect-token", {
                 method: "POST",
-                headers: { origin, authorization: `Basic ${btoa("opencode:secret")}`, "x-opencode-ticket": "1" },
+                headers: { origin, authorization: `Basic ${btoa("warcode:secret")}`, "x-warcode-ticket": "1" },
               }),
             ),
           )
@@ -332,7 +332,7 @@ it.live("applies custom CORS origins to HTTP responses and PTY ticket checks", (
           const connect = yield* Effect.promise(() =>
             handler(
               new Request("http://opencode.local/api/pty/pty_missing/connect", {
-                headers: { origin, authorization: `Basic ${btoa("opencode:secret")}` },
+                headers: { origin, authorization: `Basic ${btoa("warcode:secret")}` },
               }),
             ),
           )
@@ -341,7 +341,7 @@ it.live("applies custom CORS origins to HTTP responses and PTY ticket checks", (
           const persistentConnect = yield* Effect.promise(() =>
             handler(
               new Request("http://opencode.local/api/experimental/persistent-pty/pty_missing/connect?cursor=-1", {
-                headers: { origin, authorization: `Basic ${btoa("opencode:secret")}` },
+                headers: { origin, authorization: `Basic ${btoa("warcode:secret")}` },
               }),
             ),
           )
@@ -352,7 +352,7 @@ it.live("applies custom CORS origins to HTTP responses and PTY ticket checks", (
     const loaded = yield* Effect.promise(() =>
       handler(
         new Request("http://opencode.local/api/debug/location", {
-          headers: { authorization: `Basic ${btoa("opencode:secret")}` },
+          headers: { authorization: `Basic ${btoa("warcode:secret")}` },
         }),
       ).then((response) => response.json()),
     )
@@ -363,7 +363,7 @@ it.live("applies custom CORS origins to HTTP responses and PTY ticket checks", (
         new Request("http://opencode.local/api/pty", {
           method: "POST",
           headers: {
-            authorization: `Basic ${btoa("opencode:secret")}`,
+            authorization: `Basic ${btoa("warcode:secret")}`,
             "content-type": "application/json",
           },
           body: JSON.stringify({ command: process.execPath, args: ["-e", "setInterval(() => {}, 1000)"] }),
@@ -375,8 +375,8 @@ it.live("applies custom CORS origins to HTTP responses and PTY ticket checks", (
         new Request(`http://opencode.local/api/pty/${created.data.id}/connect-token`, {
           method: "POST",
           headers: {
-            authorization: `Basic ${btoa("opencode:secret")}`,
-            "x-opencode-ticket": "1",
+            authorization: `Basic ${btoa("warcode:secret")}`,
+            "x-warcode-ticket": "1",
           },
         }),
       ).then((response) => response.json()),
@@ -385,7 +385,7 @@ it.live("applies custom CORS origins to HTTP responses and PTY ticket checks", (
       handler(
         new Request(`http://opencode.local/api/pty/${created.data.id}`, {
           method: "DELETE",
-          headers: { authorization: `Basic ${btoa("opencode:secret")}` },
+          headers: { authorization: `Basic ${btoa("warcode:secret")}` },
         }),
       ),
     )
@@ -404,7 +404,7 @@ it.live("applies custom CORS origins to HTTP responses and PTY ticket checks", (
 
 it.live("returns 404 when a previously readable file is deleted", () =>
   Effect.acquireUseRelease(
-    Effect.promise(() => tmpdir("opencode-fs-read-endpoint-")),
+    Effect.promise(() => tmpdir("warcode-fs-read-endpoint-")),
     (tmp) =>
       Effect.gen(function* () {
         const handler = yield* ServerFetch.make(options)
@@ -526,7 +526,7 @@ it.live("serves the session view operation and missing-session error", () =>
 
 it.live("routes pending requests through the Session's instance", () =>
   Effect.gen(function* () {
-    const config = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("opencode-pending-read-")))
+    const config = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("warcode-pending-read-")))
     const handler = yield* ServerFetch.make({
       ...options,
       config: {
@@ -553,7 +553,7 @@ it.live("routes pending requests through the Session's instance", () =>
       )
 
     // Session routing must ignore the caller's unrelated Location.
-    const headers = { "x-opencode-directory": encodeURIComponent(config.path) }
+    const headers = { "x-warcode-directory": encodeURIComponent(config.path) }
     expect(yield* loaded()).toEqual([])
     for (const resource of ["permission", "form"]) {
       const response = yield* Effect.promise(() =>
@@ -570,7 +570,7 @@ it.live("routes pending requests through the Session's instance", () =>
     const global = yield* Effect.promise(() =>
       handler(
         new Request("http://opencode.local/api/session/global/form", {
-          headers: { "x-opencode-directory": encodeURIComponent(process.cwd()) },
+          headers: { "x-warcode-directory": encodeURIComponent(process.cwd()) },
         }),
       ),
     )
@@ -604,7 +604,7 @@ it.live("routes pending requests through the Session's instance", () =>
           method: "POST",
           headers: {
             "content-type": "application/json",
-            "x-opencode-directory": encodeURIComponent(process.cwd()),
+            "x-warcode-directory": encodeURIComponent(process.cwd()),
           },
           body: JSON.stringify({ title: "Global form", fields: [{ key: "answer", type: "string" }] }),
         }),
@@ -615,7 +615,7 @@ it.live("routes pending requests through the Session's instance", () =>
     const globalForms = yield* Effect.promise(() =>
       handler(
         new Request("http://opencode.local/api/session/global/form", {
-          headers: { "x-opencode-directory": encodeURIComponent(process.cwd()) },
+          headers: { "x-warcode-directory": encodeURIComponent(process.cwd()) },
         }),
       ),
     )

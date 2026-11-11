@@ -41,7 +41,7 @@
     }
   }
 
-  /* "What is OpenCode?": ten features in five rows of two, one feature per card column, under the
+  /* "What is Warcode?": ten features in five rows of two, one feature per card column, under the
      two-column lead. */
   &[data-site] [data-component="block"]:has([data-component="features"]) [data-slot="body"] {
     max-width: none;

@@ -16,9 +16,9 @@ const REMOTE = ServerConnection.Key.make("https://apollo.example.test")
 
 const REPO = { id: "proj_repo", worktree: "/srv/repo" }
 
-const API = { id: "proj_api", worktree: "C:/OpenCode/api" }
+const API = { id: "proj_api", worktree: "C:/Warcode/api" }
 
-const APP = { id: "proj_app", worktree: "C:/OpenCode/app" }
+const APP = { id: "proj_app", worktree: "C:/Warcode/app" }
 
 const server = (key: ServerConnection.Key, input: Partial<HomeServerSnapshot> = {}): HomeServerSnapshot => ({
   key,
@@ -116,7 +116,7 @@ describe("home selection machine", () => {
     const result = sync(
       INITIAL_HOME_SELECTION_STATE,
       env({
-        stored: { server: SIDECAR, directory: "C:\\OpenCode\\app\\" },
+        stored: { server: SIDECAR, directory: "C:\\Warcode\\app\\" },
         servers: [server(SIDECAR, { usedProjects: [APP] })],
       }),
     )
@@ -215,11 +215,11 @@ describe("home selection machine", () => {
       transitionHomeSelection(state, { type: "project.toggled", server: target, directory })
 
     expect(toggle(ready, REMOTE, REPO.worktree).state).toBe(ready)
-    expect(toggle(ready, SIDECAR, "C:/OpenCode/unused").state).toBe(ready)
+    expect(toggle(ready, SIDECAR, "C:/Warcode/unused").state).toBe(ready)
 
     const on = toggle(ready, SIDECAR, API.worktree)
     expect(on.effects).toEqual([{ type: "selection.persist", selection: { server: SIDECAR, directory: API.worktree } }])
-    const off = toggle(on.state, SIDECAR, "C:\\OpenCode\\api\\")
+    const off = toggle(on.state, SIDECAR, "C:\\Warcode\\api\\")
     expect(off.effects).toEqual([{ type: "selection.persist", selection: { server: SIDECAR } }])
   })
 

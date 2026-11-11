@@ -13,14 +13,14 @@ afterEach(async () => {
 
 describe("pack", () => {
   test("lists each TypeScript export's types before its import", async () => {
-    const directory = await mkdtemp(path.join(tmpdir(), "opencode-pack-"))
+    const directory = await mkdtemp(path.join(tmpdir(), "warcode-pack-"))
     cleanup.push(directory)
     await Bun.write(path.join(directory, "src/button.tsx"), "export const Button = 1\n")
     await Bun.write(path.join(directory, "src/button.css"), "button {}\n")
     await Bun.write(
       path.join(directory, "package.json"),
       JSON.stringify({
-        name: "@opencode/pack-fixture",
+        name: "@warcode/pack-fixture",
         version: "0.0.0-test",
         type: "module",
         scripts: { build: "true" },

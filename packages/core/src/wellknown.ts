@@ -1,11 +1,11 @@
 export * as WellKnown from "./wellknown.js"
 
-import { Integration } from "@opencode/schema/integration"
+import { Integration } from "@warcode/schema/integration"
 import { Context, Effect, Layer, Ref, Schema, Semaphore } from "effect"
 import { HttpClient, HttpClientRequest, HttpClientResponse } from "effect/http"
 import { isDeepStrictEqual } from "node:util"
-import { makeGlobalNode } from "@opencode/util/effect/app-node"
-import { httpClient } from "@opencode/util/effect/app-node-platform"
+import { makeGlobalNode } from "@warcode/util/effect/app-node"
+import { httpClient } from "@warcode/util/effect/app-node-platform"
 import { Bus } from "./bus.js"
 import { KV } from "./kv.js"
 
@@ -56,7 +56,7 @@ export interface Interface {
   readonly clearCached: (origin: string) => Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode/WellKnown") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/WellKnown") {}
 
 export const Event = {
   Updated: Bus.ephemeral({ type: "wellknown.updated", schema: {} }),
@@ -65,7 +65,7 @@ export const Event = {
 const requestTimeout = "15 seconds"
 
 export const inspect = Effect.fn("WellKnown.inspect")(function* (origin: string) {
-  const url = `${origin.replace(/\/+$/, "")}/.well-known/opencode`
+  const url = `${origin.replace(/\/+$/, "")}/.well-known/warcode`
   const http = HttpClient.filterStatusOk(yield* HttpClient.HttpClient)
   return yield* http.execute(HttpClientRequest.get(url).pipe(HttpClientRequest.acceptJson)).pipe(
     Effect.flatMap(HttpClientResponse.schemaBodyJson(Manifest)),

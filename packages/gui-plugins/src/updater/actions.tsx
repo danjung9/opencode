@@ -1,9 +1,9 @@
-import { Button } from "@opencode/ui/button"
-import { Dialog, DialogFooter, DialogHeader, DialogTitleGroup } from "@opencode/ui/dialog"
-import { Icon } from "@opencode/ui/icon"
-import { showToast, toaster } from "@opencode/ui/toast"
-import type { DialogHandle, IpcClient, SetupContext } from "@opencode/plugin/gui"
-import type { Updater } from "@opencode/plugin/gui/updater"
+import { Button } from "@warcode/ui/button"
+import { Dialog, DialogFooter, DialogHeader, DialogTitleGroup } from "@warcode/ui/dialog"
+import { Icon } from "@warcode/ui/icon"
+import { showToast, toaster } from "@warcode/ui/toast"
+import type { DialogHandle, IpcClient, SetupContext } from "@warcode/plugin/gui"
+import type { Updater } from "@warcode/plugin/gui/updater"
 import type definition from "./index"
 
 type Client = IpcClient<typeof Updater.spec>

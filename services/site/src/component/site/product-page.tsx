@@ -115,7 +115,7 @@ export function ProductPage(props: { slug: PageSlug }) {
       <Meta name="description" content={detail().description} />
       <JsonLd
         data={softwareData({
-          name: product().name.startsWith("OpenCode") ? product().name : `OpenCode ${product().name}`,
+          name: product().name.startsWith("Warcode") ? product().name : `Warcode ${product().name}`,
           description: detail().description,
           path: language.route(`/${props.slug}`),
           image: shareImage().src,

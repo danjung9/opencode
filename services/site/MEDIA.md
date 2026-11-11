@@ -18,7 +18,7 @@ The site's heavy media (product videos, arcade sounds, 3D models and download zi
 | `arcade3d/` | cabinet models (`*.glb`) |
 | `font/film/` | font film videos |
 | `press-media/zips/`, `press/anomaly/*.zip` | press kit downloads |
-| `brand/badges/*.zip`, `opencode-brand-assets.zip` | brand downloads |
+| `brand/badges/*.zip`, `warcode-brand-assets.zip` | brand downloads |
 
 ## Upload
 
@@ -26,9 +26,9 @@ Put the files in `public/` at their manifest paths, then:
 
 ```sh
 cd services/site
-bun ./script/upload-media.ts --mode dev          # dry run against opencode-dev-files
+bun ./script/upload-media.ts --mode dev          # dry run against warcode-dev-files
 bun ./script/upload-media.ts --mode dev --run    # upload to dev
-bun ./script/upload-media.ts --run               # upload to opencode-production-files
+bun ./script/upload-media.ts --run               # upload to warcode-production-files
 curl -sI https://dev.opencode.ai/files/site/2026-11/arcade3d/cabinet.glb   # expect 200
 ```
 

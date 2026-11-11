@@ -1,18 +1,18 @@
-import { base64Encode } from "@opencode/util/encode"
+import { base64Encode } from "@warcode/util/encode"
 import type {
   JsonValue,
-  OpenCodeEvent,
+  WarcodeEvent,
   SessionMessageAssistant,
   SessionMessageAssistantTool,
   SessionMessageInfo,
-} from "@opencode/client/promise"
+} from "@warcode/client/promise"
 import type { Page } from "@playwright/test"
-import { timelinePresets } from "@opencode/session-ui/timeline/detail"
+import { timelinePresets } from "@warcode/session-ui/timeline/detail"
 import { createTwoFilesPatch } from "diff"
-import { mockOpenCodeServer } from "../../e2e/utils/mock-server"
+import { mockWarcodeServer } from "../../e2e/utils/mock-server"
 import { eventSource } from "./events"
 
-const directory = "C:/OpenCode/TimelineStateRegression"
+const directory = "C:/Warcode/TimelineStateRegression"
 
 const projectID = "proj_timeline_state_regression"
 
@@ -26,7 +26,7 @@ const editPartID = "prt_0001_edit"
 
 const title = "Timeline collapse state regression"
 
-const model = { providerID: "opencode", modelID: "claude-opus-4-6", variant: "max" }
+const model = { providerID: "warcode", modelID: "claude-opus-4-6", variant: "max" }
 
 /** The session's scroll container. */
 export const timeline = ".scroll-view__viewport:has([data-timeline-row])"
@@ -121,7 +121,7 @@ export async function mockTimelineSession(page: Page, options: TimelineOptions) 
 
   const source = options.stream ? await eventSource(page, options.server) : undefined
 
-  await mockOpenCodeServer(page, {
+  await mockWarcodeServer(page, {
     server: options.server,
     directory,
     project: project(),
@@ -169,7 +169,7 @@ export function streamedReply(deltas: number) {
         type: "session.text.started",
         durable: { aggregateID: sessionID, seq: eventSequence, version: 1 },
         data: { sessionID, assistantMessageID, ordinal: 0 },
-      } satisfies Extract<OpenCodeEvent, { type: "session.text.started" }>,
+      } satisfies Extract<WarcodeEvent, { type: "session.text.started" }>,
       delta(`Streaming${streamChunk(0, deltas + 1)}\n\n\`\`\`ts\nconst initial = true\n\`\`\``),
     ],
     deltas: Array.from({ length: deltas }, (_, index) => delta(streamChunk(index + 1, deltas + 1))),
@@ -293,7 +293,7 @@ function delta(text: string) {
     ...envelope(),
     type: "session.text.delta",
     data: { sessionID, assistantMessageID, ordinal: 0, delta: text },
-  } satisfies Extract<OpenCodeEvent, { type: "session.text.delta" }>
+  } satisfies Extract<WarcodeEvent, { type: "session.text.delta" }>
 }
 
 function historicalMarkdown(index: number) {
@@ -440,12 +440,12 @@ function provider() {
   return {
     all: [
       {
-        id: "opencode",
-        name: "OpenCode",
+        id: "warcode",
+        name: "Warcode",
         models: { "claude-opus-4-6": { id: "claude-opus-4-6", name: "Claude Opus 4.6", limit: { context: 200_000 } } },
       },
     ],
-    connected: ["opencode"],
-    default: { providerID: "opencode", modelID: "claude-opus-4-6" },
+    connected: ["warcode"],
+    default: { providerID: "warcode", modelID: "claude-opus-4-6" },
   }
 }

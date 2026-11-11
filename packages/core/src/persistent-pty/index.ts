@@ -3,7 +3,7 @@ export * as PersistentPty from "./index.js"
 import { stat } from "node:fs/promises"
 import path from "node:path"
 import { Context, Effect, Layer, Schema, Stream } from "effect"
-import { makeGlobalNode } from "@opencode/util/effect/app-node"
+import { makeGlobalNode } from "@warcode/util/effect/app-node"
 import {
   Added,
   Handoff,
@@ -12,12 +12,12 @@ import {
   Removed,
   Updated,
   type ReadResult,
-} from "@opencode/schema/persistent-pty"
-import { Session } from "@opencode/schema/session"
-import { SessionEvent } from "@opencode/schema/session-event"
+} from "@warcode/schema/persistent-pty"
+import { Session } from "@warcode/schema/session"
+import { SessionEvent } from "@warcode/schema/session-event"
 import { Bus } from "../bus.js"
-import { Pty } from "@opencode/schema/pty"
-import { Global } from "@opencode/util/global"
+import { Pty } from "@warcode/schema/pty"
+import { Global } from "@warcode/util/global"
 import { ShellSelect } from "../shell/select.js"
 import {
   makeDaemonTransport,
@@ -35,7 +35,7 @@ import {
 import { resolveBinary } from "#persistent-pty-binary"
 
 export type { Metadata, Role, Signal, StreamEvent } from "./daemon.js"
-export { Handoff } from "@opencode/schema/persistent-pty"
+export { Handoff } from "@warcode/schema/persistent-pty"
 export { available } from "#persistent-pty-binary"
 
 export const Options = Schema.Struct({
@@ -193,7 +193,7 @@ export interface Interface {
   readonly listPipes: () => Effect.Effect<PipeInfo[], UnavailableError | RequestError>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode/PersistentPty") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/PersistentPty") {}
 
 const makeLayer = (options: Options = {}) =>
   Layer.effect(
@@ -241,7 +241,7 @@ const makeLayer = (options: Options = {}) =>
         input: Parameters<Interface["create"]>[1],
       ) {
         const cwd = path.resolve(input.cwd ?? "/")
-        // opencode-pty's PTY library silently falls back to $HOME when the cwd is not a directory.
+        // warcode-pty's PTY library silently falls back to $HOME when the cwd is not a directory.
         const directory = yield* Effect.promise(() =>
           stat(cwd).then(
             (info) => info.isDirectory(),
@@ -564,13 +564,13 @@ const lookup = (daemon: DaemonTransport, id: number) =>
     Effect.flatMap((response) => {
       if (!response) return Effect.succeed(undefined)
       if (response.type !== "process")
-        return Effect.fail(new Error(`unexpected opencode-pty response: ${response.type}`))
+        return Effect.fail(new Error(`unexpected warcode-pty response: ${response.type}`))
       return Effect.succeed(response.process)
     }),
   )
 
 const unexpected = (response: WireResponse) =>
-  Effect.fail(new UnavailableError({ message: `unexpected opencode-pty response: ${response.type}` }))
+  Effect.fail(new UnavailableError({ message: `unexpected warcode-pty response: ${response.type}` }))
 
 const unavailable = (error: unknown) =>
   new UnavailableError({ message: error instanceof Error ? error.message : String(error) })
@@ -582,10 +582,10 @@ const pipeError = (error: DaemonError) =>
     : new UnavailableError({ message: error.message })
 
 const unexpectedPipe = (response: WireResponse) =>
-  Effect.fail(new RequestError({ message: `unexpected opencode-pty response: ${response.type}` }))
+  Effect.fail(new RequestError({ message: `unexpected warcode-pty response: ${response.type}` }))
 
 function toInfo(value: ProcessInfo): Info {
-  if (!value.pty) throw new Error(`opencode-pty process ${value.id} is not a terminal`)
+  if (!value.pty) throw new Error(`warcode-pty process ${value.id} is not a terminal`)
   const status = value.lifecycle.status
   return {
     ...Pty.Info.make({
@@ -608,7 +608,7 @@ function toInfo(value: ProcessInfo): Info {
 }
 
 function toPipeInfo(value: ProcessInfo): PipeInfo {
-  if (!value.pipe) throw new Error(`opencode-pty process ${value.id} is not a pipe process`)
+  if (!value.pipe) throw new Error(`warcode-pty process ${value.id} is not a pipe process`)
   return {
     id: value.id,
     pid: value.pid ?? undefined,

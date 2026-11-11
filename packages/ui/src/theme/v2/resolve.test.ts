@@ -3,10 +3,10 @@ import { contrastRatio } from "../color"
 import type { DesktopTheme, HexColor, ResolvedV2Theme } from "../types"
 import { resolveThemeV2, resolveThemeVariantV2, themeV2ToCss } from "./resolve"
 
-const theme: DesktopTheme = await Bun.file(new URL("../themes/oc-2.json", import.meta.url)).json()
+const theme: DesktopTheme = await Bun.file(new URL("../themes/workroom.json", import.meta.url)).json()
 
 describe("icon emphasis", () => {
-  test.each(["light", "dark"] as const)("OC-2 %s icons increase in contrast from faint to base", (mode) => {
+  test.each(["light", "dark"] as const)("Workroom %s icons increase in contrast from faint to base", (mode) => {
     expectIconEmphasis(resolveThemeV2(theme)[mode])
   })
 
@@ -16,21 +16,16 @@ describe("icon emphasis", () => {
 })
 
 describe("contrast icon-button tokens", () => {
-  test("OC-2 dark mode uses a light background and an inverse icon matching the base surface", () => {
-    const tokens = resolveThemeV2(theme).dark
-    expect(tokens["v2-background-bg-icon-button-contrast"]).toBe("var(--v2-grey-400)")
-    expect(tokens["v2-grey-400"]).toBe("#dbdbdbff")
-    expect(tokens["v2-icon-icon-inverse"]).toBe(tokens["v2-background-bg-base"])
-    expect(tokens["v2-grey-1100"]).toBe("#161616ff")
-    expect(tokens["v2-background-bg-contrast"]).toBe("var(--v2-grey-700)")
-    expect(tokens["v2-text-text-contrast"]).toBe("var(--v2-grey-50)")
-  })
-
-  test("OC-2 light mode retains the existing contrast background and foreground", () => {
-    const tokens = resolveThemeV2(theme).light
-    expect(tokens["v2-background-bg-icon-button-contrast"]).toBe("var(--v2-background-bg-contrast)")
-    expect(tokens["v2-background-bg-contrast"]).toBe("var(--v2-grey-1000)")
-    expect(tokens["v2-text-text-contrast"]).toBe("var(--v2-grey-50)")
+  test.each([
+    { mode: "light", background: "#B94C2C", foreground: "#FFFFFF" },
+    { mode: "dark", background: "#DD865D", foreground: "#211F1B" },
+  ] as const)("Workroom $mode action icons and text retain readable contrast", ({ mode, background, foreground }) => {
+    const tokens = resolveThemeV2(theme)[mode]
+    expect(tokens["v2-background-bg-icon-button-contrast"]).toBe(background)
+    expect(tokens["v2-background-bg-contrast"]).toBe(background)
+    expect(tokens["v2-icon-icon-contrast"]).toBe(foreground)
+    expect(tokens["v2-text-text-contrast"]).toBe(foreground)
+    expect(contrastRatio(background, foreground)).toBeGreaterThanOrEqual(4.5)
   })
 
   test.each([false, true])("custom themes without the new token receive a fallback (dark: %s)", (dark) => {
@@ -53,7 +48,7 @@ describe("contrast icon-button tokens", () => {
     )
 
     expect(tokens["v2-background-bg-icon-button-contrast"]).toBe("#dddddd")
-    expect(tokens["v2-background-bg-contrast"]).toBe("var(--v2-grey-700)")
+    expect(tokens["v2-background-bg-contrast"]).toBe("#DD865D")
   })
 })
 
@@ -74,7 +69,7 @@ describe("input elevation", () => {
         "0px 1px 2px 0px var(--v2-alpha-dark-40), 0px 0px 0px 0.5px var(--v2-alpha-light-20), 0px -0.5px 0px 0px var(--v2-alpha-light-10)",
     },
   ] as const)(
-    "$mode matches Figma in OC-2 and custom-theme fallbacks without changing buttons",
+    "$mode preserves input elevation in Workroom and custom-theme fallbacks",
     ({ mode, input, button }) => {
       for (const tokens of [
         resolveThemeV2(theme)[mode],

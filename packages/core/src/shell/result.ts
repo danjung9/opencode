@@ -1,7 +1,7 @@
 export * as ShellResult from "./result.js"
 
 import os from "os"
-import type { Shell } from "@opencode/schema/shell"
+import type { Shell } from "@warcode/schema/shell"
 
 export type Result = {
   info: Shell.Info

@@ -1,6 +1,6 @@
-import { Service, type Endpoint, type EnsureOptions } from "@opencode/client/effect/service"
-import { ClientError, isUnauthorizedError, OpenCode } from "@opencode/client/promise"
-import { OPENCODE_VERSION } from "../version"
+import { Service, type Endpoint, type EnsureOptions } from "@warcode/client/effect/service"
+import { ClientError, isUnauthorizedError, Warcode } from "@warcode/client/promise"
+import { WARCODE_VERSION } from "../version"
 import { Effect, Option, Redacted } from "effect"
 import { Server as ServerFlag, Standalone as StandaloneFlag } from "../commands/commands"
 import { Env } from "../env"
@@ -35,16 +35,16 @@ export const resolve = Effect.fn("cli.server-connection.resolve")(function* (arg
     const password = yield* Env.password
     const endpoint = {
       url: server,
-      auth: password ? { type: "basic" as const, username: "opencode", password: Redacted.value(password) } : undefined,
+      auth: password ? { type: "basic" as const, username: "warcode", password: Redacted.value(password) } : undefined,
     } satisfies Endpoint
-    const client = OpenCode.make({ baseUrl: endpoint.url, headers: Service.headers(endpoint) })
+    const client = Warcode.make({ baseUrl: endpoint.url, headers: Service.headers(endpoint) })
     const health = yield* Effect.tryPromise({
       try: () => client.server.info({ signal: AbortSignal.timeout(5_000) }),
       catch: (cause) => connectError(endpoint, cause),
     })
-    if (health.version !== OPENCODE_VERSION)
+    if (health.version !== WARCODE_VERSION)
       process.stderr.write(
-        `Warning: Server at ${endpoint.url} has version ${health.version}; this client is ${OPENCODE_VERSION}. Continuing anyway.\n`,
+        `Warning: Server at ${endpoint.url} has version ${health.version}; this client is ${WARCODE_VERSION}. Continuing anyway.\n`,
       )
     return { endpoint } satisfies Resolved
   }
@@ -82,7 +82,7 @@ export const shutdownPersistentPty = Effect.fn("cli.server-connection.shutdown-p
 ) {
   const endpoint = yield* Service.discover({ ...options, version: undefined })
   if (!endpoint) return
-  const client = OpenCode.make({ baseUrl: endpoint.url, headers: Service.headers(endpoint) })
+  const client = Warcode.make({ baseUrl: endpoint.url, headers: Service.headers(endpoint) })
   yield* Effect.tryPromise(() => client.experimental.persistentPty.shutdown())
 })
 
@@ -102,7 +102,7 @@ function connectError(endpoint: Endpoint, cause: unknown) {
   if (isUnauthorizedError(cause)) {
     return new Error(
       endpoint.auth === undefined
-        ? `Server at ${endpoint.url} requires a password; set OPENCODE_PASSWORD`
+        ? `Server at ${endpoint.url} requires a password; set WARCODE_PASSWORD`
         : `Server at ${endpoint.url} rejected the password`,
       { cause },
     )

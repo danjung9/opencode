@@ -12,7 +12,7 @@ export { devicePreviewFrame, devicePreviewOpenEvent, inDevicePreview }
 export const devicePreviewAvailable = () => !inDevicePreview()
 
 // Open state for this tab, so a reload (or a hot update of the site) keeps the preview open.
-const openKey = "opencode-site-device-preview-open"
+const openKey = "warcode-site-device-preview-open"
 
 const DevicePreviewPanel = lazy(() => import("./device-preview-panel"))
 

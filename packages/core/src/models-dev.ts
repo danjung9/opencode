@@ -1,16 +1,16 @@
 import { Cause, Context, Duration, Effect, Layer, Option, Result, Schedule, Schema, Semaphore } from "effect"
 import { HttpClient, HttpClientError, HttpClientRequest, HttpClientResponse } from "effect/http"
-import { ConfigProvider } from "@opencode/schema/config/provider"
-import { MaxTokensField, MediaInput } from "@opencode/schema/model-compatibility"
-import { ModelsDev } from "@opencode/schema/models-dev"
-import { Money } from "@opencode/schema/money"
-import { FreeformFormat } from "@opencode/schema/tool"
+import { ConfigProvider } from "@warcode/schema/config/provider"
+import { MaxTokensField, MediaInput } from "@warcode/schema/model-compatibility"
+import { ModelsDev } from "@warcode/schema/models-dev"
+import { Money } from "@warcode/schema/money"
+import { FreeformFormat } from "@warcode/schema/tool"
 import { App } from "./app.js"
-import { Hash } from "@opencode/util/hash"
-import { FSUtil } from "@opencode/util/fs-util"
+import { Hash } from "@warcode/util/hash"
+import { FSUtil } from "@warcode/util/fs-util"
 import { Bus } from "./bus.js"
-import { makeGlobalNode } from "@opencode/util/effect/app-node"
-import { httpClient } from "@opencode/util/effect/app-node-platform"
+import { makeGlobalNode } from "@warcode/util/effect/app-node"
+import { httpClient } from "@warcode/util/effect/app-node-platform"
 import { Model } from "./model.js"
 import { AISDKNative } from "./aisdk-native.js"
 import { Provider } from "./provider.js"
@@ -19,7 +19,7 @@ import { KV } from "./kv.js"
 import snapshotText from "./models-dev/snapshot.txt" with { type: "text" }
 import { isV1, toV2 } from "./models-dev/v1.js"
 
-// Only the fields opencode reads are decoded. Unknown keys are ignored, and a model that
+// Only the fields warcode reads are decoded. Unknown keys are ignored, and a model that
 // doesn't match is skipped rather than failing the whole catalog.
 const Price = Money.USDPerMillionTokens
 const CacheWrite = Schema.Union([Price, Schema.Record(Schema.String, Price)])
@@ -132,7 +132,7 @@ const SourceProvider = Schema.Struct({
   models: Schema.Record(Schema.String, Schema.Unknown),
 })
 
-// The model types opencode keeps. Only chat models are offered for sessions; the others are listed on request.
+// The model types warcode keeps. Only chat models are offered for sessions; the others are listed on request.
 const TYPES: readonly string[] = ["chat", "decision", "image"]
 
 const ContextCondition = Schema.Struct({ gt: Schema.optional(Schema.Finite), gte: Schema.optional(Schema.Finite) })
@@ -162,19 +162,19 @@ type Route = {
 // These packages build their URL from provider settings (region, resource, account, project…), which
 // only happens when no baseURL is set. The catalog's URL for them is a template or SDK default.
 const BUILDS_OWN_URL = new Set([
-  "@opencode/ai/providers/amazon-bedrock",
-  "@opencode/ai/providers/azure/chat",
-  "@opencode/ai/providers/azure/images",
-  "@opencode/ai/providers/azure/messages",
-  "@opencode/ai/providers/azure/responses",
-  "@opencode/ai/providers/cloudflare-ai-gateway",
-  "@opencode/ai/providers/cloudflare-ai-gateway/decisions",
-  "@opencode/ai/providers/cloudflare-workers-ai",
-  "@opencode/ai/providers/cloudflare-workers-ai/decisions",
-  "@opencode/ai/providers/cloudflare-workers-ai/images",
-  "@opencode/ai/providers/google-vertex/gemini",
-  "@opencode/ai/providers/google-vertex/images",
-  "@opencode/ai/providers/google-vertex/messages",
+  "@warcode/ai/providers/amazon-bedrock",
+  "@warcode/ai/providers/azure/chat",
+  "@warcode/ai/providers/azure/images",
+  "@warcode/ai/providers/azure/messages",
+  "@warcode/ai/providers/azure/responses",
+  "@warcode/ai/providers/cloudflare-ai-gateway",
+  "@warcode/ai/providers/cloudflare-ai-gateway/decisions",
+  "@warcode/ai/providers/cloudflare-workers-ai",
+  "@warcode/ai/providers/cloudflare-workers-ai/decisions",
+  "@warcode/ai/providers/cloudflare-workers-ai/images",
+  "@warcode/ai/providers/google-vertex/gemini",
+  "@warcode/ai/providers/google-vertex/images",
+  "@warcode/ai/providers/google-vertex/messages",
   "aisdk:@jerome-benoit/sap-ai-provider-v2",
   "aisdk:watsonx-ai-provider",
 ])
@@ -185,7 +185,7 @@ const normalize = Effect.fnUntraced(function* (catalog: Record<string, unknown>)
   const snapshots = Object.values(isV1(catalog) ? toV2(catalog) : catalog).flatMap((value) => {
     const item = Option.getOrUndefined(decodeProvider(value))
     if (!item) return []
-    const providerID = Provider.ID.make(item.id)
+    const providerID = Provider.ID.make(item.id.replace(/^opencode(?=-|$)/, "warcode"))
     const sources = Object.entries(item.models).flatMap(([key, value]) => {
       const decoded = decodeModel(value)
       if (Result.isFailure(decoded)) failed.push({ model: `${item.id}/${key}`, issue: decoded.failure })
@@ -203,7 +203,7 @@ const normalize = Effect.fnUntraced(function* (catalog: Record<string, unknown>)
     const baseURL = urls.every((url) => url !== undefined) ? mostCommon(urls) : undefined
     const info = {
       id: providerID,
-      name: item.name,
+      name: item.name.replace(/OpenCode/g, "Warcode"),
       activation: "auto",
       package: packageName,
       ...(baseURL ? { settings: { baseURL } } : {}),
@@ -251,19 +251,19 @@ function entries<A>(record: Record<string, unknown> | undefined, decode: (input:
 
 function route(providerID: Provider.ID, model: SourceModel, unknown: Set<string>): Route | undefined {
   // A chat model uses its first API with a package. Other types (image, decision…) only run through the
-  // opencode entrypoint for their type (`providers/<P>/images`) that this build can load, and are skipped
+  // warcode entrypoint for their type (`providers/<P>/images`) that this build can load, and are skipped
   // without one: a chat entrypoint loads a chat model, which can't generate images or decisions.
   const apis = entries(model.api, decodeApi).map(
     ([protocol, entry]) => [protocol, entry, loadable(entry.sdk?.opencodeai, unknown)] as const,
   )
-  const [protocol, api, opencodeai] =
+  const [protocol, api, warcodeai] =
     (model.type === "chat"
-      ? apis.find(([, entry, opencodeai]) => opencodeai || entry.sdk?.aisdk)
-      : apis.find(([, , opencodeai]) => opencodeai?.endsWith(`/${model.type}s`))) ?? []
+      ? apis.find(([, entry, warcodeai]) => warcodeai || entry.sdk?.aisdk)
+      : apis.find(([, , warcodeai]) => warcodeai?.endsWith(`/${model.type}s`))) ?? []
   if (!protocol || !api) return undefined
   const aisdk = api.sdk?.aisdk
   const packageName =
-    opencodeai ??
+    warcodeai ??
     (aisdk &&
       (AISDKNative.native(aisdk, {
         providerID,
@@ -288,10 +288,11 @@ function route(providerID: Provider.ID, model: SourceModel, unknown: Set<string>
   }
 }
 
-// Newer catalogs may name @opencode/ai entrypoints that older builds don't ship, so those count as no package.
-function loadable(opencodeai: string | undefined, unknown: Set<string>) {
-  const name = Provider.packageName(opencodeai)
-  if (!name?.startsWith("@opencode/ai/") || Provider.builtinPackages.has(name)) return opencodeai
+// Newer catalogs may name @warcode/ai entrypoints that older builds don't ship, so those count as no package.
+function loadable(warcodeai: string | undefined, unknown: Set<string>) {
+  const entrypoint = AISDKNative.isAISDK(warcodeai) ? warcodeai : Provider.packageName(warcodeai)
+  const name = Provider.packageName(entrypoint)
+  if (!name?.startsWith("@warcode/ai/") || Provider.builtinPackages.has(name)) return entrypoint
   unknown.add(name)
   return undefined
 }
@@ -310,12 +311,12 @@ function released(date: string) {
   return Number.isFinite(time) ? time : 0
 }
 
-const COMPATIBLE = new Set(["@opencode/ai/providers/openai-compatible", "@opencode/ai/providers/anthropic-compatible"])
+const COMPATIBLE = new Set(["@warcode/ai/providers/openai-compatible", "@warcode/ai/providers/anthropic-compatible"])
 
 const zero = Money.USDPerMillionTokens.zero
 
 // Only per-token text prices are kept: per-image, per-second and similar prices have
-// no place in opencode's cost yet. Context overrides become tiers; other conditions
+// no place in warcode's cost yet. Context overrides become tiers; other conditions
 // (service tier, time of day…) are left out.
 function cost(input: SourceCost | undefined): Model.Info["cost"] {
   const text = input?.text
@@ -358,7 +359,7 @@ function cost(input: SourceCost | undefined): Model.Info["cost"] {
   return [base, ...tiers.values()]
 }
 
-// opencode has one cache write price: the first TTL listed, else the explicit cache's.
+// warcode has one cache write price: the first TTL listed, else the explicit cache's.
 function cacheWrite(cache: typeof CachePrices.Type | undefined) {
   const first = (write: typeof CacheWrite.Type | undefined) =>
     typeof write === "object" ? Object.values(write)[0] : write
@@ -402,12 +403,12 @@ function factorAt(factor: Factor, path: readonly string[]): number {
   )
   if (node === undefined) return 1
   if (typeof node === "number") return node
-  // A cache write factor is keyed by TTL; opencode keeps the first one.
+  // A cache write factor is keyed by TTL; warcode keeps the first one.
   const first = Object.values(node)[0]
   return typeof first === "number" ? first : 1
 }
 
-// v2 lists exact MIME types; opencode's capabilities use the broad kind.
+// v2 lists exact MIME types; warcode's capabilities use the broad kind.
 function modality(value: string) {
   if (value === "application/pdf") return "pdf"
   const kind = value.split("/")[0]
@@ -471,7 +472,7 @@ function modelInfo(
   }
 }
 
-export { Event } from "@opencode/schema/models-dev"
+export { Event } from "@warcode/schema/models-dev"
 
 export interface Interface {
   readonly get: () => Effect.Effect<readonly Snapshot[]>
@@ -486,7 +487,7 @@ export const Options = Schema.Struct({
 })
 export type Options = typeof Options.Type
 
-export class Service extends Context.Service<Service, Interface>()("@opencode/ModelsDev") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/ModelsDev") {}
 
 const CatalogJson = Schema.fromJsonString(Schema.Record(Schema.String, Schema.Unknown))
 const decodeCatalog = (text: string) => Schema.decodeUnknownEffect(CatalogJson)(text)
@@ -504,7 +505,7 @@ const CacheMeta = Schema.Struct({
 })
 const defaultSource = "https://models.opencode.ai"
 
-// The experimental v2 API, limited to the model types opencode keeps.
+// The experimental v2 API, limited to the model types warcode keeps.
 export const catalogPath = `/experimental/v2.0/api.json?type=${TYPES.join(",")}`
 
 export const decodeSnapshot = (text: string) => decodeCatalog(text).pipe(Effect.flatMap(normalize))

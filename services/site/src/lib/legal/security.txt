@@ -6,9 +6,9 @@
 # █  █ █  █ █▀▀▀ █  █ █    █  █ █  █ █▀▀▀
 # ▀▀▀▀ █▀▀▀ ▀▀▀▀ ▀  ▀ ▀▀▀▀ ▀▀▀▀ ▀▀▀▀ ▀▀▀▀
 #
-# OPENCODE.AI · SECURITY CONTACTS · RFC 9116
+# WARCODE.AI · SECURITY CONTACTS · RFC 9116
 # ------------------------------------------------------------------------------
-# OpenCode security contacts. Please report vulnerabilities privately.
+# Warcode security contacts. Please report vulnerabilities privately.
 # We do not accept AI-generated reports. Submitting one means an automatic ban.
 #
 # REPORTING CHANNELS

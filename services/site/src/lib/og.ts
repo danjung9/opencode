@@ -6,7 +6,7 @@ export type OgImage = { src: string; alt: string }
 const cards: Record<string, OgImage> =
   Object.values(import.meta.glob<Record<string, OgImage>>("./og-images.json", { eager: true, import: "default" }))[0] ??
   {}
-const fallback: OgImage = { src: "/social-share.png", alt: "OpenCode" }
+const fallback: OgImage = { src: "/social-share.png", alt: "Warcode" }
 
 /**
  * The card for a page, by its English path; every locale shares the English card. script/og.ts

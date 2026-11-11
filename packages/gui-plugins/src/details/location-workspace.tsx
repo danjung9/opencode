@@ -1,7 +1,7 @@
-import { Icon } from "@opencode/ui/icon"
-import { Menu } from "@opencode/ui/menu"
+import { Icon } from "@warcode/ui/icon"
+import { Menu } from "@warcode/ui/menu"
 import { Show } from "solid-js"
-import type { BuiltinSlotMap } from "@opencode/plugin/gui/builtin"
+import type { BuiltinSlotMap } from "@warcode/plugin/gui/builtin"
 import { SessionWorkspaceMenu, type WorkspaceMoveControllers } from "./workspace-menu"
 
 export default function SessionLocationWorkspace(

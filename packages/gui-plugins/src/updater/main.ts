@@ -1,8 +1,8 @@
 import { dialog } from "electron"
 import { Effect, Exit, Schema, Scope } from "effect"
-import { builtinMainContext } from "@opencode/plugin/gui/builtin"
-import { MenubarItem, type Plugin } from "@opencode/plugin/gui/main"
-import { Updater } from "@opencode/plugin/gui/updater"
+import { builtinMainContext } from "@warcode/plugin/gui/builtin"
+import { MenubarItem, type Plugin } from "@warcode/plugin/gui/main"
+import { Updater } from "@warcode/plugin/gui/updater"
 import { logContext } from "./log"
 import { make } from "./machine"
 
@@ -10,7 +10,7 @@ const setup: Plugin.MainSetup = async (ctx) => {
   const builtin = builtinMainContext(ctx)
   const build = ctx.app
   const lifecycle = builtin.lifecycle
-  const enabled = build.packaged
+  const enabled = build.packaged && !!process.env.WARCODE_UPDATE_URL
   // Holds no resources, so it needs no cleanup.
   const context = logContext(ctx.log.write)
   const runPromise = Effect.runPromiseWith(context)
@@ -20,7 +20,7 @@ const setup: Plugin.MainSetup = async (ctx) => {
   const ready = builtin.storage.store("ready", {
     schema: Schema.NullOr(Schema.Struct({ version: Schema.String })),
     initial: null,
-    from: { settings: "ready", file: "opencode.updater" },
+    from: { settings: "ready", file: "warcode.updater" },
   })
 
   // electron-updater loads only in packaged builds, after the first window is up.

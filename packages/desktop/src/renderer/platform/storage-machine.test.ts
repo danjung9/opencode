@@ -36,7 +36,7 @@ function answers(effects: readonly DesktopStorageEffect<Namespace>[]) {
   })
 }
 
-const windowFile = "opencode.window.1.dat"
+const windowFile = "warcode.window.1.dat"
 
 describe("preload snapshot seed", () => {
   test("a change made before the window opened its namespace reaches the first read", () => {
@@ -53,13 +53,13 @@ describe("preload snapshot seed", () => {
 
   test("changes that arrive before the snapshot fold in only when newer than it", () => {
     const run = replay([
-      { type: "items.requested", name: "opencode.global.dat", reply: reply() },
+      { type: "items.requested", name: "warcode.global.dat", reply: reply() },
       { type: "store.changed", name: "default.dat", insert: { theme: "older" }, remove: [], revision: 2 },
       { type: "store.changed", name: "default.dat", insert: { theme: "dark" }, remove: [], revision: 3 },
       {
         type: "snapshot.settled",
         snapshot: {
-          "opencode.global.dat": { items: { a: "1" }, revision: 2 },
+          "warcode.global.dat": { items: { a: "1" }, revision: 2 },
           "default.dat": { items: { theme: "light", font: "mono" }, revision: 2 },
         },
       },

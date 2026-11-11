@@ -13,28 +13,33 @@ import { CLI_BINARIES, nodePtyPackage } from "./script/utils"
 const { FileMatcher } = createRequire(import.meta.resolve("electron-builder"))("app-builder-lib/out/fileMatcher")
 
 const channels = [
-  { channel: "dev", appId: "ai.opencode.desktop.dev", feed: "dev" },
-  { channel: "beta", appId: "ai.opencode.desktop.beta", feed: "beta" },
-  { channel: "prod", appId: "ai.opencode.desktop", feed: "latest" },
+  { channel: "dev", appId: "ai.warcode.desktop.dev" },
+  { channel: "beta", appId: "ai.warcode.desktop.beta" },
+  { channel: "prod", appId: "ai.warcode.desktop" },
 ] as const
 
-function load(channel: string, target?: string): Configuration {
-  const previous = process.env.OPENCODE_CHANNEL
-  const previousTarget = process.env.OPENCODE_TARGET
-  process.env.OPENCODE_CHANNEL = channel
+function load(channel: string, target?: string, updateURL?: string): Configuration {
+  const previous = process.env.WARCODE_CHANNEL
+  const previousTarget = process.env.WARCODE_TARGET
+  const previousUpdateURL = process.env.WARCODE_UPDATE_URL
+  process.env.WARCODE_CHANNEL = channel
+  if (updateURL === undefined) delete process.env.WARCODE_UPDATE_URL
+  else process.env.WARCODE_UPDATE_URL = updateURL
 
-  if (target !== undefined) process.env.OPENCODE_TARGET = target
-  else delete process.env.OPENCODE_TARGET
+  if (target !== undefined) process.env.WARCODE_TARGET = target
+  else delete process.env.WARCODE_TARGET
 
   try {
     return getConfig()
   } finally {
-    delete process.env.OPENCODE_CHANNEL
-    delete process.env.OPENCODE_TARGET
+    delete process.env.WARCODE_CHANNEL
+    delete process.env.WARCODE_TARGET
+    delete process.env.WARCODE_UPDATE_URL
 
-    if (previous !== undefined) process.env.OPENCODE_CHANNEL = previous
+    if (previous !== undefined) process.env.WARCODE_CHANNEL = previous
 
-    if (previousTarget !== undefined) process.env.OPENCODE_TARGET = previousTarget
+    if (previousTarget !== undefined) process.env.WARCODE_TARGET = previousTarget
+    if (previousUpdateURL !== undefined) process.env.WARCODE_UPDATE_URL = previousUpdateURL
   }
 }
 
@@ -47,19 +52,19 @@ function trimFilter(dir: string, config: Configuration) {
   ]).createFilter()
 }
 
-test.each(channels)("channel identity for $channel", ({ channel, appId, feed }) => {
+test.each(channels)("channel identity for $channel", ({ channel, appId }) => {
   const config = load(channel)
   expect(config.appId).toBe(appId)
-  // Every published channel updates from its own feed on the update service.
-  expect(config.publish).toEqual({
+  expect(config.publish).toBeNull()
+  expect(load(channel, undefined, "https://updates.example/warcode/").publish).toEqual({
     provider: "generic",
-    url: `https://opencode.ai/update/api/${feed}/desktop/opencode/`,
+    url: "https://updates.example/warcode/",
     channel: "latest",
   })
   expect(config.extraMetadata?.desktopName).toBe(`${appId}.desktop`)
   // The executable must never end in `.desktop`: libappimage resolves the
   // AppImage's desktop entry by globbing `*.desktop`, and an ELF matching
-  // that glob breaks integration (anomalyco/opencode#51867).
+  // that glob breaks integration (anomalyco/warcode#51867).
   expect(config.linux?.executableName).toBe(appId.replace(/\.desktop$/, ""))
   expect(config.linux?.executableName).not.toMatch(/\.desktop$/)
   // The installed `.desktop` filename still derives from `desktopName` so
@@ -70,7 +75,7 @@ test.each(channels)("channel identity for $channel", ({ channel, appId, feed }) 
   for (const fpm of [config.deb?.fpm, config.rpm?.fpm]) {
     expect(fpm).toContainEqual(expect.stringContaining(`/usr/share/metainfo/${appId}.metainfo.xml`))
     expect(
-      fpm?.some((entry) => entry.endsWith("opencode-desktop.desktop=/usr/share/applications/opencode-desktop.desktop")),
+      fpm?.some((entry) => entry.endsWith("warcode-desktop.desktop=/usr/share/applications/warcode-desktop.desktop")),
     ).toBe(channel === "prod")
   }
 
@@ -81,10 +86,10 @@ test.each(channels)("channel identity for $channel", ({ channel, appId, feed }) 
 })
 
 test("legacy Linux launcher stays hidden", async () => {
-  const desktop = await Bun.file(path.join(import.meta.dirname, "resources/linux/opencode-desktop.desktop")).text()
-  expect(desktop).toContain("Exec=/opt/OpenCode/ai.opencode %U")
-  expect(desktop).toContain("Icon=ai.opencode")
-  expect(desktop).toContain("StartupWMClass=ai.opencode.desktop")
+  const desktop = await Bun.file(path.join(import.meta.dirname, "resources/linux/warcode-desktop.desktop")).text()
+  expect(desktop).toContain("Exec=/opt/Warcode/ai.warcode %U")
+  expect(desktop).toContain("Icon=ai.warcode")
+  expect(desktop).toContain("StartupWMClass=ai.warcode.desktop")
   expect(desktop).toContain("NoDisplay=true")
 })
 
@@ -124,9 +129,9 @@ test("shared packaging defaults", async () => {
   const include = path.join(import.meta.dirname, "resources/windows/installer.nsh")
   expect(config.nsis?.include).toBe(include)
   expect(await Bun.file(include).exists()).toBe(true)
-  expect(config.files).toContain("!resources/opencode-cli*")
+  expect(config.files).toContain("!resources/warcode-cli*")
   expect(config.extraResources).toEqual([
-    { from: "resources/", to: "", filter: ["opencode-cli", "opencode-cli.exe", "opencode-cli.version"] },
+    { from: "resources/", to: "", filter: ["warcode-cli", "warcode-cli.exe", "warcode-cli.version"] },
   ])
 })
 
@@ -199,7 +204,7 @@ test("trims external dependencies without excluding runtime files", () => {
 
 test("the trimmed Zip.js package can still export compressed logs", async () => {
   const config = load("dev")
-  const dir = await mkdtemp(path.join(os.tmpdir(), "opencode-zip-package-"))
+  const dir = await mkdtemp(path.join(os.tmpdir(), "warcode-zip-package-"))
   const source = path.dirname(fileURLToPath(import.meta.resolve("@zip.js/zip.js/package.json")))
   const filter = trimFilter(dir, config)
 

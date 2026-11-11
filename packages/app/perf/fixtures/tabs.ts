@@ -1,4 +1,4 @@
-import { base64Encode } from "@opencode/util/encode"
+import { base64Encode } from "@warcode/util/encode"
 import type { Page } from "@playwright/test"
 
 /**
@@ -14,7 +14,7 @@ export function installTabs(
       const tabs: object[] = sessions.map((sessionId) => ({ type: "session", server, dirBase64, sessionId }))
 
       if (draft) tabs.push({ type: "draft", draftID: draft, server, directory })
-      localStorage.setItem("opencode.window.browser.dat:tabs", JSON.stringify(tabs))
+      localStorage.setItem("warcode.window.browser.dat:tabs", JSON.stringify(tabs))
     },
     { ...input, dirBase64: base64Encode(input.directory) },
   )

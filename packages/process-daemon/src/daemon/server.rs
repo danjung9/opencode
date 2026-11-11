@@ -88,7 +88,7 @@ mod signals {
     pub(super) fn stop_on(signals: Blocked, control: &Arc<Control>) -> Result<()> {
         let control = Arc::clone(control);
         thread::Builder::new()
-            .name("opencode-pty-signals".into())
+            .name("warcode-pty-signals".into())
             .spawn(move || {
                 wait(&signals);
                 let stopped = Instant::now();
@@ -230,7 +230,7 @@ fn serve(
                             if let Err(error) =
                                 handle_connection(stream, &service, &registration, &control)
                             {
-                                eprintln!("opencode-pty request failed: {error:#}");
+                                eprintln!("warcode-pty request failed: {error:#}");
                             }
                         })
                     };
@@ -272,7 +272,7 @@ fn serve(
     let cleanup = runtime.cleanup.clone();
     let watchdog = thread::spawn(move || {
         if cleanup_rx.recv_timeout(Duration::from_secs(5)).is_err() {
-            eprintln!("opencode-pty cleanup timed out; forcing exit");
+            eprintln!("warcode-pty cleanup timed out; forcing exit");
             let _ = cleanup.run();
             std::process::exit(1);
         }
@@ -290,7 +290,7 @@ fn serve(
 }
 
 fn pause_accept(until: &mut Option<Instant>, error: &io::Error) {
-    eprintln!("opencode-pty accept paused: {error}");
+    eprintln!("warcode-pty accept paused: {error}");
     *until = Some(Instant::now() + ACCEPT_BACKOFF);
 }
 
@@ -762,7 +762,7 @@ mod tests {
         fn start(acquire: Duration, handoff: Duration, safety_net: Duration) -> Self {
             static NEXT: AtomicUsize = AtomicUsize::new(0);
             let root = std::env::temp_dir().join(format!(
-                "opencode-pty-server-{}-{}",
+                "warcode-pty-server-{}-{}",
                 std::process::id(),
                 NEXT.fetch_add(1, Ordering::Relaxed)
             ));

@@ -1,7 +1,7 @@
 import { initYoga } from "@textjs/core"
 import { Box, renderToConsole, Select, Text, useInput, type SelectOption } from "@textjs/react"
 
-// opencode.install.pick(): the install commands and desktop builds as a Text.js list in the
+// warcode.install.pick(): the install commands and desktop builds as a Text.js list in the
 // DevTools console. The site passes the options, so this bundle holds no site data.
 
 // Text.js 1.6 fetches Yoga's WebAssembly instead of carrying it inline; script/build.ts hashes the
@@ -31,7 +31,7 @@ function Picker(props: Input & { onDone: (value?: string) => void }) {
   })
   return (
     <Box flexDirection="column" paddingX={1} paddingY={1}>
-      <Text bold>Install OpenCode</Text>
+      <Text bold>Install Warcode</Text>
       <Text color="muted">↑ ↓ choose · Enter copies · Esc closes</Text>
       <Box marginTop={1}>
         <Select

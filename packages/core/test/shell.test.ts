@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test"
 import path from "path"
-import { ShellSelect } from "@opencode/core/shell/select"
-import { FSUtil } from "@opencode/util/fs-util"
-import { which } from "@opencode/core/util/which"
+import { ShellSelect } from "@warcode/core/shell/select"
+import { FSUtil } from "@warcode/util/fs-util"
+import { which } from "@warcode/core/util/which"
 import fs from "node:fs/promises"
 import { appExecutionAlias } from "./fixture/app-execution-alias"
 import { tmpdir } from "./fixture/tmpdir"
@@ -41,8 +41,8 @@ describe("shell", () => {
     await withShell(undefined, async () => {
       const configured = ShellSelect.resolve({ priority: "config" })
       const compatible = ShellSelect.resolve({ priority: "compat" })
-      expect(ShellSelect.resolve({ priority: "config" }, "opencode-missing-shell")).toBe(configured)
-      expect(ShellSelect.resolve({ priority: "compat" }, "opencode-missing-shell")).toBe(compatible)
+      expect(ShellSelect.resolve({ priority: "config" }, "warcode-missing-shell")).toBe(configured)
+      expect(ShellSelect.resolve({ priority: "compat" }, "warcode-missing-shell")).toBe(compatible)
     })
   })
 
@@ -68,8 +68,8 @@ describe("shell", () => {
   const zsh = which("zsh")
   test.skipIf(!zsh || process.platform === "win32")("passes an unmatched zsh glob through to the command", () => {
     if (!zsh) return
-    const result = Bun.spawnSync([zsh, ...ShellSelect.args(zsh, "echo opencode-missing-*.nope; echo after")])
-    expect(result.stdout.toString()).toBe("opencode-missing-*.nope\nafter\n")
+    const result = Bun.spawnSync([zsh, ...ShellSelect.args(zsh, "echo warcode-missing-*.nope; echo after")])
+    expect(result.stdout.toString()).toBe("warcode-missing-*.nope\nafter\n")
     expect(result.exitCode).toBe(0)
   })
 

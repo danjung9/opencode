@@ -12,7 +12,7 @@ type Tab = { readonly draftID: string }
 
 const tab: Tab = { draftID: "draft" }
 
-const directory = "/Users/me/Documents/OpenCode"
+const directory = "/Users/me/Documents/Warcode"
 
 const error = new Error("timed out")
 

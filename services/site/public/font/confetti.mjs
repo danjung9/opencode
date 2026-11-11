@@ -32,7 +32,7 @@ export function projectLetterSlice(y, height, motion) {
 
 export function isPerfectAnagram(text) {
   const letters = text.toLowerCase().replace(/\s/gu, '');
-  return letters !== 'opencode' && letters.length === 8 && [...letters].sort().join('') === 'cdeenoop';
+  return letters !== 'warcode' && letters.length === 8 && [...letters].sort().join('') === 'cdeenoop';
 }
 
 export function confettiColors() {

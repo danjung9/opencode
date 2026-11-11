@@ -1,4 +1,4 @@
-import type { SessionInfo } from "@opencode/client/promise"
+import type { SessionInfo } from "@warcode/client/promise"
 
 /** Merge live metadata into indexed roots. Only a completed run advances an indexed row's recency. */
 export function mergeRootSessionIndex(indexed: readonly SessionInfo[], known: readonly SessionInfo[]) {

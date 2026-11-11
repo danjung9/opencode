@@ -14,7 +14,7 @@ export const REMOTE_CHANGE_TIMEOUT_MS = 180_000
 
 /**
  * The service attaches the tunnel in the background after it starts, so the dialog asks again this many times, a
- * second apart, about three minutes, as `opencode pair --remote` waits.
+ * second apart, about three minutes, as `warcode pair --remote` waits.
  */
 export const TUNNEL_RETRIES = 180
 
@@ -828,7 +828,7 @@ export type DialogView =
   | {
       readonly kind: "ready"
       readonly url: string
-      /** The QR code's content, as `opencode pair --remote` prints it: {"code","urls"} JSON the app's scanner reads. */
+      /** The QR code's content, as `warcode pair --remote` prints it: {"code","urls"} JSON the app's scanner reads. */
       readonly qr: string
       readonly refreshing: boolean
     }

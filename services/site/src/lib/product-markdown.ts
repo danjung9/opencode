@@ -127,7 +127,7 @@ export function productActionMarkdown(slug: PageSlug, context: MarkdownContext) 
   if (slug === "mobile")
     return `Download: ${mobileStores.map((store) => storeMarkdown({ ...store, href: store.href.startsWith("/") ? context.route(store.href) : store.href })).join(", ")}`
   if (slug === "ide")
-    return `Install: ${link("VS Code Marketplace", extensions.href)}, or run \`opencode\` in your editor's integrated terminal. ACP editors: ${link("ACP docs", context.route(acpDocs))}`
+    return `Install: ${link("VS Code Marketplace", extensions.href)}, or run \`warcode\` in your editor's integrated terminal. ACP editors: ${link("ACP docs", context.route(acpDocs))}`
   if (slug === "terminal" || slug === "mini")
     return blocks(
       "Install with any of these:",

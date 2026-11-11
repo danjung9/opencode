@@ -106,7 +106,7 @@ export const additionalIcons = {
   notifications: `<path d="M14.8889 6.77778V9.11112C14.8889 10.093 14.8889 10.8889 14.8889 10.8889H11.3334M5.55558 10.8889H2C2 10.8889 2.00001 10.093 2.00001 9.11112V3.77778C2.00001 2.79594 2.00009 2 2.00009 2H9.44531M5.55558 10.8889V13.1111H8.44447H11.3334V10.8889M5.55558 10.8889H11.3334" stroke="currentColor"/><path d="M13 5C14.1046 5 15 4.10457 15 3C15 1.89543 14.1046 1 13 1C11.8954 1 11 1.89543 11 3C11 4.10457 11.8954 5 13 5Z" stroke="currentColor"/>`,
   extensions: `<path d="M8 6.75047V9.25047M10.668 6.75047V9.25047M5.33398 6.75047V9.25047M1.33398 2.44531V13.5553H14.6673V2.44531H1.33398Z" stroke="currentColor" stroke-linecap="square"/>`,
   cube: `<path d="M10 2.5L16.5 6.25V13.75L10 17.5L3.5 13.75V6.25L10 2.5Z" stroke="currentColor"/><path d="M10 10L16.5 6.25M10 10V17.5M10 10L3.5 6.25" stroke="currentColor"/>`,
-  // The open book OpenCode Console draws for a skill, so a skill looks the same in both.
+  // The open book Warcode Console draws for a skill, so a skill looks the same in both.
   "post-skill": `<path d="M8 4.5c-1.5-1-3.5-1.5-5.5-1.5v9c2 0 4 .5 5.5 1.5 1.5-1 3.5-1.5 5.5-1.5V3c-2 0-4 .5-5.5 1.5zM8 4.5v9" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round"/>`,
   "arrow-undo-down": `<path d="M4.08333 11.0859L1.75 8.7526L4.08333 6.41927M2.33333 8.7526L12.5417 8.7526L12.5417 3.21094L7 3.21094" stroke="currentColor" stroke-width="1" stroke-linecap="square"/>`,
 }

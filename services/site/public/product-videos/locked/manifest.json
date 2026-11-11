@@ -1,7 +1,7 @@
 {
   "id": "locked",
   "label": "Real UI · locked-off",
-  "tool": "Real OpenCode UI (Desktop app, TUI 2.2.5 via VHS, iOS app, SDK in nvim): every shot locked off (camera drift removed by registration, or a fixed-frame capture), joined by hard cuts. product-videos/cinematic/{lock.py,autocut.py} next to the checkout",
+  "tool": "Real Warcode UI (Desktop app, TUI 2.2.5 via VHS, iOS app, SDK in nvim): every shot locked off (camera drift removed by registration, or a fixed-frame capture), joined by hard cuts. product-videos/cinematic/{lock.py,autocut.py} next to the checkout",
   "style": "straight",
   "products": {
     "desktop": {

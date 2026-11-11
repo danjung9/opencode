@@ -1,5 +1,5 @@
 import type { Component, Owner } from "solid-js"
-import type { PluginInfo } from "@opencode/client/promise"
+import type { PluginInfo } from "@warcode/client/promise"
 import type {
   CodeBlockProps,
   Context,
@@ -9,9 +9,9 @@ import type {
   Live,
   SessionRef,
   SessionScreen,
-} from "@opencode/plugin/gui"
-import type { BuiltinPanelTab } from "@opencode/plugin/gui/builtin"
-import type { Bridge, BridgeMessage, EnableState, Installed } from "@opencode/plugin/gui/host"
+} from "@warcode/plugin/gui"
+import type { BuiltinPanelTab } from "@warcode/plugin/gui/builtin"
+import type { Bridge, BridgeMessage, EnableState, Installed } from "@warcode/plugin/gui/host"
 import type { JSHandle } from "@playwright/test"
 import type { mountCodeBlocks, mountThemes } from "./plugin-host.fixture"
 import { expect, sourceURL, story } from "../../stories/playwright/story"
@@ -523,7 +523,7 @@ story("ctx.ui renders the app's components in a contribution, a host menu and a 
   }, fixture)
 
   const root = page.getByTestId("ui-host")
-  await expect(root.locator('svg[data-slot="icon-svg"] > use[href="#opencode-v2-icon-branch"]')).toHaveCount(1)
+  await expect(root.locator('svg[data-slot="icon-svg"] > use[href="#warcode-v2-icon-branch"]')).toHaveCount(1)
   await expect(root.locator('svg[data-component="loader-v2"]')).toHaveAttribute("width", "20")
   await expect(root.locator('[data-component="keybind-v2"]')).toHaveText("CtrlK")
   await expect(root.locator('[data-component="markdown"] h1')).toHaveText("Fixture heading")
@@ -534,7 +534,7 @@ story("ctx.ui renders the app's components in a contribution, a host menu and a 
 
   const apply = root.getByRole("button", { name: "Apply" })
   await expect(apply).toHaveAttribute("data-component", "button-v2")
-  await expect(apply.locator('use[href="#opencode-v2-icon-check"]')).toHaveCount(1)
+  await expect(apply.locator('use[href="#warcode-v2-icon-check"]')).toHaveCount(1)
   await apply.click()
 
   const reload = root.getByRole("button", { name: "Reload" })
@@ -586,7 +586,7 @@ story("ctx.ui renders the app's components in a contribution, a host menu and a 
   await expect(project.getByRole("separator")).toHaveCount(1)
   const usage = project.getByRole("menuitem", { name: "Usage" })
   await expect(usage).toHaveAttribute("data-component", "menu-v2-item")
-  await expect(usage.locator('use[href="#opencode-v2-icon-status"]')).toHaveCount(1)
+  await expect(usage.locator('use[href="#warcode-v2-icon-status"]')).toHaveCount(1)
   await expect(usage.locator('[data-component="keybind-v2"]')).toHaveText("U")
   await usage.click()
   await expect(project).toHaveCount(0)
@@ -1390,7 +1390,7 @@ story("Extensions › Plugins merges the own server's plugins with the desktop G
         // A plugin without a GUI lists its name only.
         listed("lint-rules", { server: true }),
         // The server's own built-ins are not listed, as on every server.
-        { ...listed("opencode-builtin", { server: true }), source: { type: "builtin" } },
+        { ...listed("warcode-builtin", { server: true }), source: { type: "builtin" } },
       ],
       definitions: [
         { id: "review", windowEntry: async () => ({ default: () => {} }) },
@@ -1718,12 +1718,12 @@ story(
       await until(() => root.dataset.theme === "acme:midnight")
 
       host.disable("acme")
-      await until(() => root.dataset.theme === "oc-2")
+      await until(() => root.dataset.theme === "workroom")
 
       const withdrawn = {
         listed: host.options().some((option: { id: string }) => option.id === "acme:midnight"),
         selected: host.selected(),
-        stored: localStorage.getItem("opencode-theme-id"),
+        stored: localStorage.getItem("warcode-theme-id"),
       }
 
       host.enable()
@@ -1737,7 +1737,7 @@ story(
     expect(result).toEqual({
       // Alphabetical among the app's themes, not appended after them.
       neighbors: ["Mercury", "Midnight", "Monokai"],
-      withdrawn: { listed: false, selected: "oc-2", stored: "acme:midnight" },
+      withdrawn: { listed: false, selected: "workroom", stored: "acme:midnight" },
       restored: "acme:midnight",
     })
   },
@@ -1751,10 +1751,10 @@ story("a theme preview survives a system light/dark flip and a plugin theme arri
   const host: JSHandle<ThemesHost> = await page.evaluateHandle(async (fixture) => {
     const { mountThemes, Theme } = await import(fixture)
     // The frame's own provider saved its scheme; this window follows the system.
-    localStorage.setItem("opencode-color-scheme", "system")
-    localStorage.removeItem("opencode-theme-id")
-    localStorage.removeItem("opencode-theme-css-light")
-    localStorage.removeItem("opencode-theme-css-dark")
+    localStorage.setItem("warcode-color-scheme", "system")
+    localStorage.removeItem("warcode-theme-id")
+    localStorage.removeItem("warcode-theme-css-light")
+    localStorage.removeItem("warcode-theme-css-dark")
 
     const variant = {
       palette: {
@@ -1796,9 +1796,9 @@ story("a theme preview survives a system light/dark flip and a plugin theme arri
       theme: document.documentElement.dataset.theme,
       shown: document.documentElement.dataset.colorScheme,
       mode: host.mode(),
-      scheme: localStorage.getItem("opencode-color-scheme"),
-      id: localStorage.getItem("opencode-theme-id"),
-      cached: [localStorage.getItem("opencode-theme-css-light"), localStorage.getItem("opencode-theme-css-dark")].map(
+      scheme: localStorage.getItem("warcode-color-scheme"),
+      id: localStorage.getItem("warcode-theme-id"),
+      cached: [localStorage.getItem("warcode-theme-css-light"), localStorage.getItem("warcode-theme-css-dark")].map(
         (css) => css !== null,
       ),
     }))
@@ -1837,8 +1837,8 @@ story("a theme preview survives a system light/dark flip and a plugin theme arri
   await host.evaluate((host) => host.unmount())
 
   expect({ previewed, flipped, midnight, cancelled, committed }).toEqual({
-    previewed: { theme: "oc-2", shown: "light", mode: "light", scheme: "system", id: null, cached: [false, false] },
-    flipped: { theme: "oc-2", shown: "light", mode: "light", scheme: "system", id: null, cached: [false, false] },
+    previewed: { theme: "workroom", shown: "light", mode: "light", scheme: "system", id: null, cached: [false, false] },
+    flipped: { theme: "workroom", shown: "light", mode: "light", scheme: "system", id: null, cached: [false, false] },
     midnight: {
       theme: "acme:midnight",
       shown: "light",
@@ -1847,7 +1847,7 @@ story("a theme preview survives a system light/dark flip and a plugin theme arri
       id: null,
       cached: [false, false],
     },
-    cancelled: { theme: "oc-2", shown: "dark", mode: "dark", scheme: "system", id: null, cached: [false, false] },
+    cancelled: { theme: "workroom", shown: "dark", mode: "dark", scheme: "system", id: null, cached: [false, false] },
     committed: {
       theme: "acme:midnight",
       shown: "dark",
@@ -1864,9 +1864,9 @@ story("a selected plugin theme that never returns shows the default theme once p
     const { mountThemes, until } = await import(fixture)
     const root = document.documentElement
     // The last run picked a theme whose plugin is now uninstalled, and cached its colors.
-    localStorage.setItem("opencode-theme-id", "gone:midnight")
-    localStorage.setItem("opencode-theme-css-dark", "--background-base:#010203;")
-    localStorage.setItem("opencode-theme-css-light", "--background-base:#010203;")
+    localStorage.setItem("warcode-theme-id", "gone:midnight")
+    localStorage.setItem("warcode-theme-css-dark", "--background-base:#010203;")
+    localStorage.setItem("warcode-theme-css-light", "--background-base:#010203;")
 
     const host = mountThemes({ definitions: [], pending: true })
     // The window is ready to show on the cached colors while the plugin list is still on its way.
@@ -1876,12 +1876,12 @@ story("a selected plugin theme that never returns shows the default theme once p
     root.dataset.theme = "frame"
 
     host.load()
-    await until(() => root.dataset.theme === "oc-2")
+    await until(() => root.dataset.theme === "workroom")
 
     const settled = {
       selected: host.selected(),
-      stored: localStorage.getItem("opencode-theme-id"),
-      cached: localStorage.getItem("opencode-theme-css-dark") ?? localStorage.getItem("opencode-theme-css-light"),
+      stored: localStorage.getItem("warcode-theme-id"),
+      cached: localStorage.getItem("warcode-theme-css-dark") ?? localStorage.getItem("warcode-theme-css-light"),
     }
 
     host.unmount()
@@ -1891,7 +1891,7 @@ story("a selected plugin theme that never returns shows the default theme once p
 
   expect(result).toEqual({
     waiting: "gone:midnight",
-    settled: { selected: "oc-2", stored: "gone:midnight", cached: null },
+    settled: { selected: "workroom", stored: "gone:midnight", cached: null },
   })
 })
 

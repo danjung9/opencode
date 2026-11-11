@@ -1,18 +1,18 @@
 ---
 title: "Models"
-description: "Curated coding models, pay-as-you-go pricing, and API access through OpenCode Console."
+description: "Curated coding models, pay-as-you-go pricing, and API access through Warcode Console."
 ---
 
-OpenCode Console provides a list of models tested and verified by the OpenCode team. Sign in, add credits, and get an
-API key to use them with OpenCode or another coding agent.
+Warcode Console provides a list of models tested and verified by the Warcode team. Sign in, add credits, and get an
+API key to use them with Warcode or another coding agent.
 
-Console works like any other provider in OpenCode. It's **completely optional**, and you can use any other provider
-instead. For a subscription with included usage, see [OpenCode Go](/console/go).
+Console works like any other provider in Warcode. It's **completely optional**, and you can use any other provider
+instead. For a subscription with included usage, see [Warcode Go](/console/go).
 
 ## How it works
 
 1. Sign in to the [console](https://opencode.ai/console), add your billing details and credits, and copy your API key.
-2. Run `/connect` in the TUI, choose the OpenCode pay-as-you-go provider, and paste your API key.
+2. Run `/connect` in the TUI, choose the Warcode pay-as-you-go provider, and paste your API key.
 
    ```text
    /connect
@@ -28,7 +28,7 @@ You are charged per request and can add credits to your account.
 
 ## Endpoints
 
-You can also access the models directly through the following API endpoints. Free-tier chat models require OpenCode;
+You can also access the models directly through the following API endpoints. Free-tier chat models require Warcode;
 use paid models or [Go](/console/go) from other clients.
 
 Each model is listed with its native API, but every text model also works through the other APIs, which Console
@@ -131,13 +131,13 @@ translates. See [Base URLs](/console/harnesses#base-urls) for the full set.
 
 </div>
 
-These AI SDK packages are for applications calling the endpoints directly. To select a [model](/models) in OpenCode,
-use the format `opencode/<model-id>`:
+These AI SDK packages are for applications calling the endpoints directly. To select a [model](/models) in Warcode,
+use the format `warcode/<model-id>`:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode/gpt-6.1-sol",
+  "model": "warcode/gpt-6.1-sol",
 }
 ```
 
@@ -153,11 +153,11 @@ curl https://opencode.ai/inference/v1/models
 
 Jev is a System One model from TypeSafe AI for fast, structured decisions. Instead of generating text, it evaluates a `state` against typed questions and returns values and probabilities that your code can use directly. It supports yes/no (`noul`), multiple-choice (`choice`), and rubric-based (`score`) questions.
 
-Use your OpenCode Console API key with the `https://opencode.ai/inference/systemone/v1/systemone` endpoint. This example checks whether a support request is urgent:
+Use your Warcode Console API key with the `https://opencode.ai/inference/systemone/v1/systemone` endpoint. This example checks whether a support request is urgent:
 
 ```bash
 curl https://opencode.ai/inference/systemone/v1/systemone \
-  -H "Authorization: Bearer $OPENCODE_API_KEY" \
+  -H "Authorization: Bearer $WARCODE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "jev-1.13",
@@ -175,7 +175,7 @@ You can ask multiple questions in one request. Jev evaluates them in parallel an
 
 ```bash
 curl https://opencode.ai/inference/systemone/v1/systemone \
-  -H "Authorization: Bearer $OPENCODE_API_KEY" \
+  -H "Authorization: Bearer $WARCODE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "jev-1.13",
@@ -322,7 +322,7 @@ Console uses pay-as-you-go pricing. Below are the prices **per 1M tokens**.
 
 **Gemini 3.8 Flash, Gemini 3.7 Flash, and Gemini 3.6 Flash:** The 50% discount applies through December 31, 2026.
 
-You may notice [low-cost models](/models), such as Haiku, Nano, or Flash, in your usage history. OpenCode uses these
+You may notice [low-cost models](/models), such as Haiku, Nano, or Flash, in your usage history. Warcode uses these
 models to generate session titles.
 
 <Callout>
@@ -331,22 +331,22 @@ models to generate session titles.
 
 ### Free models
 
-- GLM-5.3-Flash Free is free on OpenCode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training.
-- DeepSeek V4.1 Flash Free is free on OpenCode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training.
-- MiniMax M3.1 Flash Free is free on OpenCode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training.
-- MiMo-V2.6-Flash Free is available on OpenCode for a limited time. The team is using this time to collect feedback and improve the model.
-- Nemotron 3 Ultra Free is available on OpenCode for a limited time. The team is using this time to collect feedback and improve the model.
-- Nemotron 3.5 Lightning Free is available on OpenCode for a limited time. The team is using this time to collect feedback and improve the model.
-- Nemotron 3.5 Super VL Free is available on OpenCode for a limited time. The team is using this time to collect feedback and improve the model.
-- Big Pickle is a stealth model that's free on OpenCode for a limited time. The team is using this time to collect feedback and improve the model.
-- Iceman Free is a stealth model that's free on OpenCode for a limited time. The team is using this time to collect feedback and improve the model.
-- Inkling 2 Small Free is free on OpenCode for a limited time. Its provider retains your data and may use it for model training; see [Privacy](#privacy). It's not available in the European Union, Iceland, Liechtenstein, Norway, Cuba, Iran, North Korea, Russia, Ukraine, or Venezuela.
-- Beam Free is free on OpenCode for a limited time. Its provider does not use your data for model training and retains it for 30 days for safety reasons. It's not available in Angola, Belarus, Cambodia, China (including Hong Kong and Macau), Cuba, the Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, or the Crimea, Donetsk, and Luhansk regions of Ukraine.
-- Flint 40B Free is free on OpenCode for a limited time. The team is using this time to collect feedback and improve the model.
-- LongCat 2.5 Free is free on OpenCode for a limited time, with a limit of 100 requests per day. Its provider follows a zero-retention policy and does not use your data for model training. It's hosted in China.
-- Jev 1.13 Free is available on OpenCode for a limited time.
+- GLM-5.3-Flash Free is free on Warcode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training.
+- DeepSeek V4.1 Flash Free is free on Warcode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training.
+- MiniMax M3.1 Flash Free is free on Warcode for a limited time. Its provider follows a zero-retention policy and does not use your data for model training.
+- MiMo-V2.6-Flash Free is available on Warcode for a limited time. The team is using this time to collect feedback and improve the model.
+- Nemotron 3 Ultra Free is available on Warcode for a limited time. The team is using this time to collect feedback and improve the model.
+- Nemotron 3.5 Lightning Free is available on Warcode for a limited time. The team is using this time to collect feedback and improve the model.
+- Nemotron 3.5 Super VL Free is available on Warcode for a limited time. The team is using this time to collect feedback and improve the model.
+- Big Pickle is a stealth model that's free on Warcode for a limited time. The team is using this time to collect feedback and improve the model.
+- Iceman Free is a stealth model that's free on Warcode for a limited time. The team is using this time to collect feedback and improve the model.
+- Inkling 2 Small Free is free on Warcode for a limited time. Its provider retains your data and may use it for model training; see [Privacy](#privacy). It's not available in the European Union, Iceland, Liechtenstein, Norway, Cuba, Iran, North Korea, Russia, Ukraine, or Venezuela.
+- Beam Free is free on Warcode for a limited time. Its provider does not use your data for model training and retains it for 30 days for safety reasons. It's not available in Angola, Belarus, Cambodia, China (including Hong Kong and Macau), Cuba, the Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, or the Crimea, Donetsk, and Luhansk regions of Ukraine.
+- Flint 40B Free is free on Warcode for a limited time. The team is using this time to collect feedback and improve the model.
+- LongCat 2.5 Free is free on Warcode for a limited time, with a limit of 100 requests per day. Its provider follows a zero-retention policy and does not use your data for model training. It's hosted in China.
+- Jev 1.13 Free is available on Warcode for a limited time.
 
-To hide free models in OpenCode, set `OPENCODE_DISABLE_FREE_MODELS=1`. See [free models](/models#free-models).
+To hide free models in Warcode, set `WARCODE_DISABLE_FREE_MODELS=1`. See [free models](/models#free-models).
 
 [Contact us](mailto:help@anoma.ly) if you have any questions.
 
@@ -412,7 +412,7 @@ Share Console models with your team from a [workspace](/console/workspaces). Own
 There are many models available, but only a few work well as coding agents. Providers also vary in configuration,
 performance, and quality, so a model accessed through a gateway such as OpenRouter may perform differently.
 
-<Callout type="tip">We tested a select group of models and providers that work well with OpenCode.</Callout>
+<Callout type="tip">We tested a select group of models and providers that work well with Warcode.</Callout>
 
 To build this catalog, we:
 
@@ -429,4 +429,4 @@ We built Console to:
 1. **Benchmark** the best models and providers for coding agents.
 2. Provide the **highest quality** options without downgrading performance or routing to cheaper providers.
 3. Pass along **price drops** by selling at cost, with markup only to cover processing fees.
-4. Have **no lock-in**: use Console with any coding agent, or use another provider with OpenCode.
+4. Have **no lock-in**: use Console with any coding agent, or use another provider with Warcode.

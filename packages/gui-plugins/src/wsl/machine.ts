@@ -2,7 +2,7 @@ import type {
   WslDistroProbe,
   WslInstalledDistro,
   WslOnlineDistro,
-  WslOpencodeCheck,
+  WslWarcodeCheck,
   WslRuntimeCheck,
   WslServerConfig,
   WslServerRuntime,
@@ -37,7 +37,7 @@ type Data = {
   readonly installed: readonly WslInstalledDistro[]
   readonly online: readonly WslOnlineDistro[]
   readonly distroProbes: Readonly<Record<string, WslDistroProbe>>
-  readonly opencodeChecks: Readonly<Record<string, WslOpencodeCheck>>
+  readonly warcodeChecks: Readonly<Record<string, WslWarcodeCheck>>
   readonly pendingRestart: boolean
   readonly configured: readonly WslServerConfig[]
 }
@@ -82,7 +82,7 @@ export type WslMachineEvent =
       readonly type: "cli.inspected"
       readonly distro: string
       readonly attempt: string
-      readonly check: WslOpencodeCheck
+      readonly check: WslWarcodeCheck
     }
   | {
       readonly type: "distro.installed"
@@ -96,14 +96,14 @@ export type WslMachineEvent =
       readonly type: "cli.installed"
       readonly distro: string
       readonly attempt: string
-      readonly check: WslOpencodeCheck
+      readonly check: WslWarcodeCheck
     }
   | {
       readonly type: "job.failed"
       readonly distro: string
       readonly attempt: string
       readonly message: string
-      readonly check?: WslOpencodeCheck
+      readonly check?: WslWarcodeCheck
     }
   | { readonly type: "server.stopped"; readonly distro: string; readonly attempt: string }
   | {
@@ -122,7 +122,7 @@ export type WslMachineEvent =
       readonly signal: string | null
       readonly message: string
     }
-  | { readonly type: "cli.checked"; readonly distro: string; readonly check: WslOpencodeCheck }
+  | { readonly type: "cli.checked"; readonly distro: string; readonly check: WslWarcodeCheck }
 
 export type WslFailure =
   | { readonly kind: "busy"; readonly distro: string }
@@ -172,7 +172,7 @@ export function createWslMachineState(configured: readonly WslServerConfig[]): W
     installed: [],
     online: [],
     distroProbes: {},
-    opencodeChecks: {},
+    warcodeChecks: {},
     pendingRestart: false,
     configured,
     host: { status: "idle" },
@@ -246,7 +246,7 @@ export function toServersState(state: WslMachineState): WslServersState {
     installed: state.installed,
     online: state.online,
     distroProbes: state.distroProbes,
-    opencodeChecks: state.opencodeChecks,
+    warcodeChecks: state.warcodeChecks,
     pendingRestart: state.pendingRestart,
     servers: state.configured.map((config) => ({
       config,
@@ -291,7 +291,7 @@ function close(state: OpenState): WslMachineTransition {
       installed: state.installed,
       online: state.online,
       distroProbes: state.distroProbes,
-      opencodeChecks: state.opencodeChecks,
+      warcodeChecks: state.warcodeChecks,
       pendingRestart: state.pendingRestart,
       configured: state.configured,
     },
@@ -347,7 +347,7 @@ function distroProbed(state: OpenState, event: { distro: string; attempt: string
   return next(put(probed, event.distro, { status: "idle", server: current.server }), [resolve(event.attempt)])
 }
 
-function cliInspected(state: OpenState, event: { distro: string; attempt: string; check: WslOpencodeCheck }) {
+function cliInspected(state: OpenState, event: { distro: string; attempt: string; check: WslWarcodeCheck }) {
   const current = distroOf(state, event.distro)
 
   if (current.status !== "probing" || current.attempt !== event.attempt) return next(state)
@@ -416,7 +416,7 @@ function update(state: OpenState, distro: string, attempt: string) {
 }
 
 // The update's caller hears once the restarted server is up or failed, as when main awaited the restart.
-function cliInstalled(state: OpenState, event: { distro: string; attempt: string; check: WslOpencodeCheck }) {
+function cliInstalled(state: OpenState, event: { distro: string; attempt: string; check: WslWarcodeCheck }) {
   const current = distroOf(state, event.distro)
 
   if (current.status !== "updating" || current.attempt !== event.attempt) return next(state)
@@ -433,7 +433,7 @@ function cliInstalled(state: OpenState, event: { distro: string; attempt: string
 // A failed update leaves the server stopped, so the row offers to start it again.
 function jobFailed(
   state: OpenState,
-  event: { distro: string; attempt: string; message: string; check?: WslOpencodeCheck },
+  event: { distro: string; attempt: string; message: string; check?: WslWarcodeCheck },
 ) {
   const current = distroOf(state, event.distro)
 
@@ -586,7 +586,7 @@ function serverExited(
 }
 
 // Background checks never overwrite what an update or removal decides for the distro.
-function cliChecked(state: OpenState, distro: string, check: WslOpencodeCheck) {
+function cliChecked(state: OpenState, distro: string, check: WslWarcodeCheck) {
   const status = distroOf(state, distro).status
 
   if (!configuredDistro(state, distro) || status === "updating" || status === "removing") return next(state)
@@ -614,7 +614,7 @@ function distroOf(state: OpenState, distro: string): WslDistro {
 function needsCliCheck(state: OpenState, distro: string) {
   const probe = state.distroProbes[distro]
 
-  return !!probe && probe.canExecute && probe.hasBash && probe.hasCurl && !state.opencodeChecks[distro]
+  return !!probe && probe.canExecute && probe.hasBash && probe.hasCurl && !state.warcodeChecks[distro]
 }
 
 function configuredDistro(state: OpenState, distro: string) {
@@ -625,8 +625,8 @@ function put(state: OpenState, distro: string, job: WslDistro): OpenState {
   return { ...state, distros: { ...state.distros, [distro]: job } }
 }
 
-function withCheck(state: OpenState, distro: string, check: WslOpencodeCheck): OpenState {
-  return { ...state, opencodeChecks: { ...state.opencodeChecks, [distro]: check } }
+function withCheck(state: OpenState, distro: string, check: WslWarcodeCheck): OpenState {
+  return { ...state, warcodeChecks: { ...state.warcodeChecks, [distro]: check } }
 }
 
 function withoutDistro(state: OpenState, distro: string): OpenState {
@@ -635,7 +635,7 @@ function withoutDistro(state: OpenState, distro: string): OpenState {
     configured: state.configured.filter((item) => item.distro !== distro),
     distros: Object.fromEntries(Object.entries(state.distros).filter(([name]) => name !== distro)),
     distroProbes: Object.fromEntries(Object.entries(state.distroProbes).filter(([name]) => name !== distro)),
-    opencodeChecks: Object.fromEntries(Object.entries(state.opencodeChecks).filter(([name]) => name !== distro)),
+    warcodeChecks: Object.fromEntries(Object.entries(state.warcodeChecks).filter(([name]) => name !== distro)),
   }
 }
 

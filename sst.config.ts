@@ -3,7 +3,7 @@
 export default $config({
   app(input) {
     return {
-      name: "opencode",
+      name: "warcode",
       removal: input?.stage === "production" ? "retain" : "remove",
       protect: ["production"].includes(input?.stage),
       home: "cloudflare",
@@ -20,7 +20,7 @@ export default $config({
   async run() {
     if ($app.stage === "beta") {
       const { createWebApp } = await import("./infra/webapp.js")
-      return { WebAppUrl: createWebApp("beta.opencode.ai").url }
+      return { WebAppUrl: createWebApp("beta.warcode.ai").url }
     }
 
     const stage = await import("./infra/stage.js")

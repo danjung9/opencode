@@ -3,7 +3,7 @@
     <picture>
       <source srcset=".github/assets/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset=".github/assets/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src=".github/assets/logo-ornate-light.svg" alt="OpenCode logo">
+      <img src=".github/assets/logo-ornate-light.svg" alt="Warcode logo">
     </picture>
   </a>
 </p>
@@ -39,7 +39,7 @@
   <a href="README.vi.md">Tiếng Việt</a>
 </p>
 
-[![OpenCode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
+[![Warcode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
 
 ---
 
@@ -50,13 +50,13 @@
 curl -fsSL https://opencode.ai/v2/install | bash
 
 # 套件管理員
-npm i -g @opencode/cli@latest      # 也可使用 bun/pnpm/yarn
-brew install anomalyco/tap/opencode-v2 # macOS 與 Linux（推薦，始終保持最新）
-brew install opencode              # macOS 與 Linux（官方 brew formula，更新頻率較低）
-sudo pacman -S opencode            # Arch Linux (Stable)
-paru -S opencode-beta              # Arch Linux (Latest from AUR)
-mise use -g opencode               # 任何作業系統
-nix run github:anomalyco/opencode  # Nix
+npm i -g @warcode/cli@latest      # 也可使用 bun/pnpm/yarn
+brew install anomalyco/tap/warcode-v2 # macOS 與 Linux（推薦，始終保持最新）
+brew install warcode              # macOS 與 Linux（官方 brew formula，更新頻率較低）
+sudo pacman -S warcode            # Arch Linux (Stable)
+paru -S warcode-beta              # Arch Linux (Latest from AUR)
+mise use -g warcode               # 任何作業系統
+nix run github:anomalyco/warcode  # Nix
 ```
 
 > [!TIP]
@@ -64,27 +64,27 @@ nix run github:anomalyco/opencode  # Nix
 
 ### 桌面應用程式 (BETA)
 
-OpenCode 也提供桌面版應用程式。您可以從 [opencode.ai/download](https://opencode.ai/download) 下載。
+Warcode 也提供桌面版應用程式。您可以從 [warcode.ai/download](https://opencode.ai/download) 下載。
 
 | 平台                  | 下載連結                           |
 | --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `opencode-desktop-mac-x64.dmg`     |
-| Windows               | `opencode-desktop-win-x64.exe`     |
+| macOS (Apple Silicon) | `warcode-desktop-mac-arm64.dmg`   |
+| macOS (Intel)         | `warcode-desktop-mac-x64.dmg`     |
+| Windows               | `warcode-desktop-win-x64.exe`     |
 | Linux                 | `.deb`, `.rpm`, 或 AppImage        |
 
 ```bash
 # macOS (Homebrew Cask)
-brew install --cask opencode-desktop
+brew install --cask warcode-desktop
 ```
 
 #### 安裝目錄
 
-安裝腳本將 OpenCode 安裝到 `$HOME/.opencode/bin`。
+安裝腳本將 Warcode 安裝到 `$HOME/.warcode/bin`。
 
 ### Agents
 
-OpenCode 內建了兩種 Agent，您可以使用 `Tab` 鍵快速切換。
+Warcode 內建了兩種 Agent，您可以使用 `Tab` 鍵快速切換。
 
 - **build** - 預設模式，具備完整權限的 Agent，適用於開發工作。
 - **plan** - 唯讀模式，適用於程式碼分析與探索。
@@ -92,21 +92,21 @@ OpenCode 內建了兩種 Agent，您可以使用 `Tab` 鍵快速切換。
   - 執行 bash 指令前會詢問權限。
   - 非常適合用來探索陌生的程式碼庫或規劃變更。
 
-此外，OpenCode 還包含一個 **general** 子 Agent，用於處理複雜搜尋與多步驟任務。此 Agent 供系統內部使用，亦可透過在訊息中輸入 `@general` 來呼叫。
+此外，Warcode 還包含一個 **general** 子 Agent，用於處理複雜搜尋與多步驟任務。此 Agent 供系統內部使用，亦可透過在訊息中輸入 `@general` 來呼叫。
 
 了解更多關於 [Agents](https://opencode.ai/docs/agents) 的資訊。
 
 ### 線上文件
 
-關於如何設定 OpenCode 的詳細資訊，請參閱我們的 [**官方文件**](https://opencode.ai/docs)。
+關於如何設定 Warcode 的詳細資訊，請參閱我們的 [**官方文件**](https://opencode.ai/docs)。
 
 ### 參與貢獻
 
-如果您有興趣參與 OpenCode 的開發，請在提交 Pull Request 前先閱讀我們的 [貢獻指南 (Contributing Docs)](./CONTRIBUTING.md)。
+如果您有興趣參與 Warcode 的開發，請在提交 Pull Request 前先閱讀我們的 [貢獻指南 (Contributing Docs)](./CONTRIBUTING.md)。
 
-### 基於 OpenCode 進行開發
+### 基於 Warcode 進行開發
 
-如果您正在開發與 OpenCode 相關的專案，並在名稱中使用了 "opencode"（例如 "opencode-dashboard" 或 "opencode-mobile"），請在您的 README 中加入聲明，說明該專案並非由 OpenCode 團隊開發，且與我們沒有任何隸屬關係。
+如果您正在開發與 Warcode 相關的專案，並在名稱中使用了 "warcode"（例如 "warcode-dashboard" 或 "warcode-mobile"），請在您的 README 中加入聲明，說明該專案並非由 Warcode 團隊開發，且與我們沒有任何隸屬關係。
 
 ---
 

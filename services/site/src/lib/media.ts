@@ -16,4 +16,4 @@ export function mediaUrl(path: string) {
 }
 
 /** Every logo and wordmark in one zip (the site's menus, the Brand and Press pages). */
-export const brandAssets = mediaUrl("/opencode-brand-assets.zip")
+export const brandAssets = mediaUrl("/warcode-brand-assets.zip")

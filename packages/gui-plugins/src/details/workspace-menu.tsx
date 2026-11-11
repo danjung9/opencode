@@ -1,11 +1,11 @@
-import { Button } from "@opencode/ui/button"
-import { Dialog, DialogBody, DialogFooter, DialogHeader, DialogTitleGroup } from "@opencode/ui/dialog"
-import { ErrorDetails } from "@opencode/ui/error-details"
-import { Icon } from "@opencode/ui/icon"
-import { Loader } from "@opencode/ui/loader"
-import { Menu } from "@opencode/ui/menu"
-import { MenuScroll } from "@opencode/ui/menu-scroll"
-import { getFilename } from "@opencode/util/path"
+import { Button } from "@warcode/ui/button"
+import { Dialog, DialogBody, DialogFooter, DialogHeader, DialogTitleGroup } from "@warcode/ui/dialog"
+import { ErrorDetails } from "@warcode/ui/error-details"
+import { Icon } from "@warcode/ui/icon"
+import { Loader } from "@warcode/ui/loader"
+import { Menu } from "@warcode/ui/menu"
+import { MenuScroll } from "@warcode/ui/menu-scroll"
+import { getFilename } from "@warcode/util/path"
 import {
   createMemo,
   createRoot,
@@ -24,7 +24,7 @@ import {
   type MountedSession,
   type Project,
   type ServerRef,
-} from "@opencode/plugin/gui"
+} from "@warcode/plugin/gui"
 import {
   createWorkspaceMoveState,
   transitionWorkspaceMove,

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import type { OpenCodeClient } from "@opencode/client/promise"
+import type { WarcodeClient } from "@warcode/client/promise"
 import { fetchSessionExport, sessionExportFilename } from "./export"
 
 /* oxlint-disable anti-slop/require-safety-comment-for-type-assertion, anti-slop/no-chained-type-assertions -- partial fixtures stand in for the client methods the export calls */
@@ -30,7 +30,7 @@ describe("fetchSessionExport", () => {
           return input.cursor ? { data: [], cursor: {} } : { data: [], cursor: { next: "page-2" } }
         },
       },
-    } as unknown as Pick<OpenCodeClient, "session" | "message">
+    } as unknown as Pick<WarcodeClient, "session" | "message">
 
     await fetchSessionExport({ sessionID: "ses_1", api, signal: controller.signal })
 

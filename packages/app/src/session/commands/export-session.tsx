@@ -1,4 +1,4 @@
-import { createSimpleContext } from "@opencode/ui/context"
+import { createSimpleContext } from "@warcode/ui/context"
 import { createSignal, onCleanup, untrack } from "solid-js"
 import { useLanguage } from "@/runtime/i18n/language"
 import { usePlatform } from "@/runtime/platform/platform"

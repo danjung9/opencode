@@ -30,7 +30,7 @@
 </head>
 <body>
 <h1>404 arcade sounds</h1>
-<p class="intro">Placeholder sounds (Kenney CC0 packs, BigSoundBank CC0 floppy recordings, the OpenCode 2.0 startup recipes and synthesis) until ElevenLabs has credits. Click ▶ to play, again to stop. The ambience loops. Sounds with several options list them in order; option 1 is the manifest default and <span class="inuse">in use</span> marks the take the arcade plays. Candidates from your OpenCode SFX library sit behind “Show more”.</p>
+<p class="intro">Placeholder sounds (Kenney CC0 packs, BigSoundBank CC0 floppy recordings, the Warcode 2.0 startup recipes and synthesis) until ElevenLabs has credits. Click ▶ to play, again to stop. The ambience loops. Sounds with several options list them in order; option 1 is the manifest default and <span class="inuse">in use</span> marks the take the arcade plays. Candidates from your Warcode SFX library sit behind “Show more”.</p>
 <ol id="list"></ol>
 <script>
 const order = ["ambience", "coin-pickup", "coin-insert", "coin-reject", "power-up", "glitch", "boot", "start", "menu-move", "menu-select"]
@@ -76,7 +76,7 @@ fetch("manifest.json").then((r) => r.json()).then((m) => {
     group.className = "group"
     const own = s.variants.filter((v) => !v.library)
     const library = s.variants.filter((v) => v.library)
-    group.innerHTML = `<div class="name">${labels[key]}</div><div class="meta">${s.variants.length} options${library.length ? ` · ${library.length} from the OpenCode SFX library` : ""}</div><ol class="options"></ol>`
+    group.innerHTML = `<div class="name">${labels[key]}</div><div class="meta">${s.variants.length} options${library.length ? ` · ${library.length} from the Warcode SFX library` : ""}</div><ol class="options"></ol>`
     const options = group.querySelector("ol")
     const label = (v, i) => `${i + 1}. ${v.label}${i === 0 ? " (default)" : ""}${inUse[key] === v.id ? ' <span class="inuse">in use</span>' : ""}`
     own.forEach((v, i) => options.append(row(label(v, i), v, s)))
@@ -97,7 +97,7 @@ fetch("manifest.json").then((r) => r.json()).then((m) => {
       })
       const more = document.createElement("button")
       more.className = "more"
-      const text = () => (more.textContent = extra.hidden ? `Show ${library.length} more (OpenCode SFX library)` : `Hide ${library.length} OpenCode SFX options`)
+      const text = () => (more.textContent = extra.hidden ? `Show ${library.length} more (Warcode SFX library)` : `Hide ${library.length} Warcode SFX options`)
       text()
       more.onclick = () => { extra.hidden = !extra.hidden; text() }
       group.append(more, extra)

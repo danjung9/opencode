@@ -1,7 +1,7 @@
-import { Browser } from "@opencode/plugin-browser/rpc"
-import { uuid } from "@opencode/util/uuid"
+import { Browser } from "@warcode/plugin-browser/rpc"
+import { uuid } from "@warcode/util/uuid"
 import { Schema } from "effect"
-import type { ComposerNote } from "@opencode/plugin/gui"
+import type { ComposerNote } from "@warcode/plugin/gui"
 import type { PaneElement } from "./ipc"
 
 /** A comment on a picked element. The ref is absent once the page navigated. */

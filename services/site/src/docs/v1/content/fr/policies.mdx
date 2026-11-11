@@ -1,15 +1,15 @@
 ---
 title: Politiques
-description: Contrôlez les ressources configurées qu'OpenCode peut utiliser.
+description: Contrôlez les ressources configurées qu'Warcode peut utiliser.
 ---
 
-:::caution[Nécessite OpenCode 2]
-Les politiques ne sont pas appliquées dans OpenCode 1. Les exemples de cette page nécessitent OpenCode 2. Dans OpenCode 1, utilisez [`disabled_providers`](/docs/config#disabled-providers) ou [`enabled_providers`](/docs/config#enabled-providers) pour contrôler la disponibilité des fournisseurs. Consultez la [documentation des politiques d'OpenCode 2](https://opencode.ai/docs/policies/) pour connaître l'usage actuel.
+:::caution[Nécessite Warcode 2]
+Les politiques ne sont pas appliquées dans Warcode 1. Les exemples de cette page nécessitent Warcode 2. Dans Warcode 1, utilisez [`disabled_providers`](/docs/config#disabled-providers) ou [`enabled_providers`](/docs/config#enabled-providers) pour contrôler la disponibilité des fournisseurs. Consultez la [documentation des politiques d'Warcode 2](https://opencode.ai/docs/policies/) pour connaître l'usage actuel.
 :::
 
-Les politiques déterminent si OpenCode peut effectuer une action sur une ressource nommée. Cette fonctionnalité d'OpenCode 2 est expérimentale et se configure avec le tableau `experimental.policies` dans `opencode.json`.
+Les politiques déterminent si Warcode peut effectuer une action sur une ressource nommée. Cette fonctionnalité d'Warcode 2 est expérimentale et se configure avec le tableau `experimental.policies` dans `warcode.json`.
 
-Les politiques sont distinctes des [autorisations](/docs/permissions). Les autorisations contrôlent ce que les outils peuvent faire pendant une session, tandis que les politiques déterminent si OpenCode peut utiliser une ressource telle qu'un fournisseur LLM.
+Les politiques sont distinctes des [autorisations](/docs/permissions). Les autorisations contrôlent ce que les outils peuvent faire pendant une session, tandis que les politiques déterminent si Warcode peut utiliser une ressource telle qu'un fournisseur LLM.
 
 ---
 
@@ -23,7 +23,7 @@ Chaque déclaration de politique comporte trois champs :
 
 Par exemple, pour refuser l'utilisation du fournisseur `openai` :
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -44,7 +44,7 @@ Un fournisseur refusé par une politique n'est pas disponible pour la sélection
 
 ## Politiques disponibles
 
-OpenCode prend actuellement en charge une seule action de politique :
+Warcode prend actuellement en charge une seule action de politique :
 
 | Action         | Ressource                         | Description                                            |
 | -------------- | --------------------------------- | ------------------------------------------------------ |
@@ -58,7 +58,7 @@ D'autres actions de politique pourront être ajoutées à l'avenir.
 
 Le champ `resource` prend en charge la correspondance par caractères génériques. Utilisez `*` pour correspondre à zéro ou plusieurs caractères et `?` pour correspondre à un caractère.
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -83,7 +83,7 @@ Lorsque plusieurs déclarations correspondent, la dernière déclaration corresp
 
 Par exemple, pour autoriser uniquement Anthropic :
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -111,11 +111,11 @@ Les politiques peuvent être définies à la fois dans votre configuration globa
 
 ## Listes de fournisseurs
 
-Dans OpenCode 2, utilisez les politiques plutôt que les anciens paramètres `disabled_providers` et `enabled_providers` pour contrôler l'accès aux fournisseurs. Continuez à utiliser ces listes de fournisseurs dans OpenCode 1.
+Dans Warcode 2, utilisez les politiques plutôt que les anciens paramètres `disabled_providers` et `enabled_providers` pour contrôler l'accès aux fournisseurs. Continuez à utiliser ces listes de fournisseurs dans Warcode 1.
 
 Pour remplacer `disabled_providers` :
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [
@@ -128,7 +128,7 @@ Pour remplacer `disabled_providers` :
 
 Pour remplacer `enabled_providers`, refusez d'abord tous les fournisseurs, puis autorisez les fournisseurs sélectionnés :
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [

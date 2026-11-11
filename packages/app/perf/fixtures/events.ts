@@ -1,4 +1,4 @@
-import type { OpenCodeEvent } from "@opencode/client/promise"
+import type { WarcodeEvent } from "@warcode/client/promise"
 import type { Page } from "@playwright/test"
 
 /**
@@ -6,7 +6,7 @@ import type { Page } from "@playwright/test"
  * reach the renderer over the network as they do from a server, so delivering them costs the measured page nothing,
  * and `stream` keeps its own pace like a model's reply: it never waits for the renderer to keep up.
  *
- * Install it before `mockOpenCodeServer`, which then leaves the event stream alone, and `stop` it in the bench file's
+ * Install it before `mockWarcodeServer`, which then leaves the event stream alone, and `stop` it in the bench file's
  * `teardown`.
  */
 export async function eventSource(page: Page, server: string) {
@@ -75,9 +75,9 @@ export async function eventSource(page: Page, server: string) {
   )
 
   return {
-    send: (events: readonly OpenCodeEvent[]) => events.forEach((event) => write(frame(event))),
+    send: (events: readonly WarcodeEvent[]) => events.forEach((event) => write(frame(event))),
     /** Sends one event every `every` milliseconds; resolves after the last. */
-    stream: (events: readonly OpenCodeEvent[], every: number) =>
+    stream: (events: readonly WarcodeEvent[], every: number) =>
       new Promise<void>((resolve) => {
         const queue = [...events]
 
@@ -103,4 +103,4 @@ type Connection = {
 
 const connected = `data: ${JSON.stringify({ id: "evt_source_connected", type: "server.connected", data: {} })}\n\n`
 
-const frame = (event: OpenCodeEvent) => `data: ${JSON.stringify(event)}\n\n`
+const frame = (event: WarcodeEvent) => `data: ${JSON.stringify(event)}\n\n`

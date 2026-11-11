@@ -8,7 +8,7 @@ import {
   type MainOnboardingState,
 } from "./onboarding-machine"
 
-const directory = "/Users/me/Documents/OpenCode"
+const directory = "/Users/me/Documents/Warcode"
 
 // Folds events through the machine and keeps the commands of each step.
 function replay(events: readonly MainOnboardingEvent[], from: MainOnboardingState = createMainOnboardingState()) {

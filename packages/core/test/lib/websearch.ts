@@ -2,12 +2,12 @@ export * as TestWebSearch from "./websearch"
 
 import { Context, Deferred, Effect, Layer } from "effect"
 import { HttpClientError, HttpClientRequest, HttpClientResponse } from "effect/http"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Bus } from "@opencode/core/bus"
-import { KV } from "@opencode/core/kv"
-import { WebSearch } from "@opencode/core/websearch"
-import type { Session } from "@opencode/schema/session"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Bus } from "@warcode/core/bus"
+import { KV } from "@warcode/core/kv"
+import { WebSearch } from "@warcode/core/websearch"
+import type { Session } from "@warcode/schema/session"
 
 export interface Interface extends WebSearch.Interface {
   readonly queries: readonly WebSearch.Input[]

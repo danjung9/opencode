@@ -1,11 +1,11 @@
 export * as SessionRunnerModel from "./model.js"
 
-import { makeLocationNode } from "@opencode/util/effect/app-node"
-import { LanguageModel } from "@opencode/ai/effect"
-import { Model } from "@opencode/schema/model"
-import { Provider } from "@opencode/schema/provider"
+import { makeLocationNode } from "@warcode/util/effect/app-node"
+import { LanguageModel } from "@warcode/ai/effect"
+import { Model } from "@warcode/schema/model"
+import { Provider } from "@warcode/schema/provider"
 import { Context, Effect, Layer, Schema } from "effect"
-import type { SessionRequestKind } from "@opencode/plugin/effect/session"
+import type { SessionRequestKind } from "@warcode/plugin/effect/session"
 import { Agent } from "../../agent.js"
 import { ModelResolver } from "../../model-resolver.js"
 import { PluginHooks } from "../../plugin/hooks.js"
@@ -44,7 +44,7 @@ export interface Interface {
   ) => Effect.Effect<Resolved, Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode/SessionRunnerModel") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/SessionRunnerModel") {}
 
 /** Builds a Resolved whose catalog identity mirrors the route model. Test or embedding seam. */
 export const resolved = (

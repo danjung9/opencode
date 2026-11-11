@@ -9,7 +9,7 @@ export const pong = { type: "pong", instance_id: "test", pid: process.pid, proto
 
 export function temporaryDirectory() {
   return Effect.acquireRelease(
-    Effect.promise(() => mkdtemp(path.join(os.tmpdir(), "opencode-pty-test-"))),
+    Effect.promise(() => mkdtemp(path.join(os.tmpdir(), "warcode-pty-test-"))),
     (directory) => Effect.promise(() => rm(directory, { recursive: true, force: true })),
   )
 }
@@ -125,7 +125,7 @@ type Process = {
   pipe?: { output_path: string; output_lines: number; output_error?: string; metadata: Record<string, unknown> }
 }
 
-// An in-process opencode-pty that a server adopts through a handoff, so no daemon is spawned. Pipe processes
+// An in-process warcode-pty that a server adopts through a handoff, so no daemon is spawned. Pipe processes
 // run nothing: they stay running until `exit` or a signal ends them (SIGTERM spares those in `trap`), and
 // write only what `output` gives them.
 export const fakeDaemon = Effect.fn(function* () {

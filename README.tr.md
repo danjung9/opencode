@@ -3,7 +3,7 @@
     <picture>
       <source srcset=".github/assets/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset=".github/assets/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src=".github/assets/logo-ornate-light.svg" alt="OpenCode logo">
+      <img src=".github/assets/logo-ornate-light.svg" alt="Warcode logo">
     </picture>
   </a>
 </p>
@@ -39,7 +39,7 @@
   <a href="README.vi.md">Tiếng Việt</a>
 </p>
 
-[![OpenCode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
+[![Warcode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
 
 ---
 
@@ -50,13 +50,13 @@
 curl -fsSL https://opencode.ai/v2/install | bash
 
 # Paket yöneticileri
-npm i -g @opencode/cli@latest      # veya bun/pnpm/yarn
-brew install anomalyco/tap/opencode-v2 # macOS ve Linux (önerilir, her zaman güncel)
-brew install opencode              # macOS ve Linux (resmi brew formülü, daha az güncellenir)
-sudo pacman -S opencode            # Arch Linux (Stable)
-paru -S opencode-beta              # Arch Linux (Latest from AUR)
-mise use -g opencode               # Tüm işletim sistemleri
-nix run github:anomalyco/opencode  # Nix
+npm i -g @warcode/cli@latest      # veya bun/pnpm/yarn
+brew install anomalyco/tap/warcode-v2 # macOS ve Linux (önerilir, her zaman güncel)
+brew install warcode              # macOS ve Linux (resmi brew formülü, daha az güncellenir)
+sudo pacman -S warcode            # Arch Linux (Stable)
+paru -S warcode-beta              # Arch Linux (Latest from AUR)
+mise use -g warcode               # Tüm işletim sistemleri
+nix run github:anomalyco/warcode  # Nix
 ```
 
 > [!TIP]
@@ -64,27 +64,27 @@ nix run github:anomalyco/opencode  # Nix
 
 ### Masaüstü Uygulaması (BETA)
 
-OpenCode ayrıca masaüstü uygulaması olarak da mevcuttur. [opencode.ai/download](https://opencode.ai/download) adresinden indirebilirsiniz.
+Warcode ayrıca masaüstü uygulaması olarak da mevcuttur. [warcode.ai/download](https://opencode.ai/download) adresinden indirebilirsiniz.
 
 | Platform              | İndirme                            |
 | --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `opencode-desktop-mac-x64.dmg`     |
-| Windows               | `opencode-desktop-win-x64.exe`     |
+| macOS (Apple Silicon) | `warcode-desktop-mac-arm64.dmg`   |
+| macOS (Intel)         | `warcode-desktop-mac-x64.dmg`     |
+| Windows               | `warcode-desktop-win-x64.exe`     |
 | Linux                 | `.deb`, `.rpm` veya AppImage       |
 
 ```bash
 # macOS (Homebrew)
-brew install --cask opencode-desktop
+brew install --cask warcode-desktop
 ```
 
 #### Kurulum Dizini (Installation Directory)
 
-Kurulum betiği, OpenCode'u `$HOME/.opencode/bin` dizinine kurar.
+Kurulum betiği, Warcode'u `$HOME/.warcode/bin` dizinine kurar.
 
 ### Ajanlar
 
-OpenCode, `Tab` tuşuyla aralarında geçiş yapabileceğiniz iki yerleşik (built-in) ajan içerir.
+Warcode, `Tab` tuşuyla aralarında geçiş yapabileceğiniz iki yerleşik (built-in) ajan içerir.
 
 - **build** - Varsayılan, geliştirme çalışmaları için tam erişimli ajan
 - **plan** - Analiz ve kod keşfi için salt okunur ajan
@@ -99,15 +99,15 @@ Bu dahili olarak kullanılır ve mesajlarda `@general` ile çağrılabilir.
 
 ### Dokümantasyon
 
-OpenCode'u nasıl yapılandıracağınız hakkında daha fazla bilgi için [**dokümantasyonumuza göz atın**](https://opencode.ai/docs).
+Warcode'u nasıl yapılandıracağınız hakkında daha fazla bilgi için [**dokümantasyonumuza göz atın**](https://opencode.ai/docs).
 
 ### Katkıda Bulunma
 
-OpenCode'a katkıda bulunmak istiyorsanız, lütfen bir pull request göndermeden önce [katkıda bulunma dokümanlarımızı](./CONTRIBUTING.md) okuyun.
+Warcode'a katkıda bulunmak istiyorsanız, lütfen bir pull request göndermeden önce [katkıda bulunma dokümanlarımızı](./CONTRIBUTING.md) okuyun.
 
-### OpenCode Üzerine Geliştirme
+### Warcode Üzerine Geliştirme
 
-OpenCode ile ilgili bir proje üzerinde çalışıyorsanız ve projenizin adının bir parçası olarak "opencode" kullanıyorsanız (örneğin, "opencode-dashboard" veya "opencode-mobile"), lütfen README dosyanıza projenin OpenCode ekibi tarafından geliştirilmediğini ve bizimle hiçbir şekilde bağlantılı olmadığını belirten bir not ekleyin.
+Warcode ile ilgili bir proje üzerinde çalışıyorsanız ve projenizin adının bir parçası olarak "warcode" kullanıyorsanız (örneğin, "warcode-dashboard" veya "warcode-mobile"), lütfen README dosyanıza projenin Warcode ekibi tarafından geliştirilmediğini ve bizimle hiçbir şekilde bağlantılı olmadığını belirten bir not ekleyin.
 
 ---
 

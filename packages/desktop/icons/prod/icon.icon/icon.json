@@ -1,10 +1,10 @@
 {
   "groups": [
     {
-      "name": "OpenCode",
+      "name": "Warcode",
       "layers": [
         {
-          "name": "OpenCode",
+          "name": "Warcode",
           "image-name": "icon.png",
           "glass": false
         }

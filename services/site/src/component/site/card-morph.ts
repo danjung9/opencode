@@ -93,7 +93,7 @@ export function showHeroPoster() {
 }
 
 /** Where the page being left says what the next one should do, for a few seconds. */
-export const cardMorphKey = "opencode-card-morph"
+export const cardMorphKey = "warcode-card-morph"
 
 /**
  * The arriving half, in a static page's head so it runs before the page's first frame, which the

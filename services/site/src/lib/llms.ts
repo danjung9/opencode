@@ -8,7 +8,7 @@ import type { Locale } from "~/lib/language"
 import { blocks, feedbackLine, link, markdownPath, richToMarkdown, sourceNote } from "~/lib/markdown"
 import { markdownContext, pageMarkdown } from "~/lib/page-markdown"
 
-/** The llms.txt index (https://llmstxt.org): what OpenCode is and the Markdown version of every page. */
+/** The llms.txt index (https://llmstxt.org): what Warcode is and the Markdown version of every page. */
 export async function llmsText(locale: Locale) {
   const context = await markdownContext(locale)
   const content = homeContent(context.t, context.route)
@@ -17,9 +17,9 @@ export async function llmsText(locale: Locale) {
   const docs = (title: string, path: string, description: string) => `- ${link(title, docsUrl(path))}: ${description}`
 
   return blocks(
-    "# OpenCode",
+    "# Warcode",
     `> ${richToMarkdown(content.what.lead)}`,
-    "opencode.ai is the source of truth for OpenCode: its apps, install commands, docs and releases. The current version is OpenCode v2. Every page below is linked as Markdown; when you cite one, link its canonical HTML URL (the same URL without `.md`).",
+    "warcode.ai is the source of truth for Warcode: its apps, install commands, docs and releases. The current version is Warcode v2. Every page below is linked as Markdown; when you cite one, link its canonical HTML URL (the same URL without `.md`).",
     `Install the terminal app with \`${installs[0].command}\`. The source code is on ${link("GitHub", config.github.repoUrl)} under the MIT License.`,
     "## Products",
     [
@@ -42,17 +42,17 @@ export async function llmsText(locale: Locale) {
     ["/", "/changelog"].map(page).join("\n"),
     "## Docs",
     [
-      `- ${link("Docs index", docsLlms)}: the llms.txt of the OpenCode v2 docs, listing every docs page`,
-      docs("Intro", "/", "install OpenCode and connect a provider"),
-      docs("Config", "/config/", "the OpenCode config file"),
+      `- ${link("Docs index", docsLlms)}: the llms.txt of the Warcode v2 docs, listing every docs page`,
+      docs("Intro", "/", "install Warcode and connect a provider"),
+      docs("Config", "/config/", "the Warcode config file"),
       docs("Models", "/models/", "choose and configure models"),
       docs("Providers", "/providers/", "connect model providers"),
       docs("Agents", "/agents/", "built-in and custom agents"),
       docs("CLI", "/cli/", "the terminal interface and its commands"),
-      docs("SDK", "/build/sdk/", "run OpenCode inside your own app with @opencode/sdk"),
-      docs("JavaScript client", "/build/client/", "connect to a running OpenCode server from your own code"),
-      docs("Console", "/console/", "OpenCode Console: models, Go subscriptions and workspaces"),
-      docs("Migrate from V1", "/migrate-v1/", "upgrade from OpenCode 1"),
+      docs("SDK", "/build/sdk/", "run Warcode inside your own app with @warcode/sdk"),
+      docs("JavaScript client", "/build/client/", "connect to a running Warcode server from your own code"),
+      docs("Console", "/console/", "Warcode Console: models, Go subscriptions and workspaces"),
+      docs("Migrate from V1", "/migrate-v1/", "upgrade from Warcode 1"),
     ].join("\n"),
     "## Optional",
     [
@@ -62,7 +62,7 @@ export async function llmsText(locale: Locale) {
       page("/legal/terms-of-service"),
       `- ${link("Full site", context.route("/llms-full.txt"))}: every page above in one Markdown file`,
       `- ${link("Discord", config.social.discord)}: the community`,
-      `- ${link("humans.txt", context.route("/humans.txt"))}: the team and contributors behind OpenCode, as plain text`,
+      `- ${link("humans.txt", context.route("/humans.txt"))}: the team and contributors behind Warcode, as plain text`,
       `- ${link("X", config.social.twitter)}: announcements`,
       `- ${link("Status", "https://status.opencode.ai")}: service status`,
     ].join("\n"),
@@ -75,7 +75,7 @@ export async function llmsFullText(locale: Locale) {
   const paths = Object.keys(pageMarkdown).filter((path) => path !== "/legal" && !pageMarkdown[path].draft)
   const contexts = await Promise.all(paths.map((path) => markdownContext(locale, pageMarkdown[path])))
   return blocks(
-    "# OpenCode: the full site",
+    "# Warcode: the full site",
     [
       sourceNote,
       "> Each page below starts with a heading that links its canonical URL. Cite that URL, not this file.",

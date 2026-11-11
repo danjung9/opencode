@@ -1,6 +1,6 @@
 import { Component, Show } from "solid-js"
-import { Select } from "@opencode/ui/select"
-import { TextInput } from "@opencode/ui/text-input"
+import { Select } from "@warcode/ui/select"
+import { TextInput } from "@warcode/ui/text-input"
 import { useLanguage } from "@/runtime/i18n/language"
 import { ExternalLink } from "@/runtime/platform/external-link"
 import { SettingsList } from "@/settings/list"
@@ -113,7 +113,7 @@ export const SettingsAppearance: Component = () => {
               description={
                 <>
                   {language.t("settings.general.row.theme.description")}{" "}
-                  <ExternalLink class="settings-link" href="https://opencode.ai/docs/themes">
+                  <ExternalLink class="settings-link" href="https://github.com/danjung9/opencode#readme">
                     {language.t("common.learnMore")}
                   </ExternalLink>
                 </>

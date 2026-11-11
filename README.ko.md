@@ -3,7 +3,7 @@
     <picture>
       <source srcset=".github/assets/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset=".github/assets/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src=".github/assets/logo-ornate-light.svg" alt="OpenCode logo">
+      <img src=".github/assets/logo-ornate-light.svg" alt="Warcode logo">
     </picture>
   </a>
 </p>
@@ -39,7 +39,7 @@
   <a href="README.vi.md">Tiếng Việt</a>
 </p>
 
-[![OpenCode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
+[![Warcode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
 
 ---
 
@@ -50,13 +50,13 @@
 curl -fsSL https://opencode.ai/v2/install | bash
 
 # 패키지 매니저
-npm i -g @opencode/cli@latest      # bun/pnpm/yarn 도 가능
-brew install anomalyco/tap/opencode-v2 # macOS 및 Linux (권장, 항상 최신)
-brew install opencode              # macOS 및 Linux (공식 brew formula, 업데이트 빈도 낮음)
-sudo pacman -S opencode            # Arch Linux (Stable)
-paru -S opencode-beta              # Arch Linux (Latest from AUR)
-mise use -g opencode               # 어떤 OS든
-nix run github:anomalyco/opencode  # Nix
+npm i -g @warcode/cli@latest      # bun/pnpm/yarn 도 가능
+brew install anomalyco/tap/warcode-v2 # macOS 및 Linux (권장, 항상 최신)
+brew install warcode              # macOS 및 Linux (공식 brew formula, 업데이트 빈도 낮음)
+sudo pacman -S warcode            # Arch Linux (Stable)
+paru -S warcode-beta              # Arch Linux (Latest from AUR)
+mise use -g warcode               # 어떤 OS든
+nix run github:anomalyco/warcode  # Nix
 ```
 
 > [!TIP]
@@ -64,27 +64,27 @@ nix run github:anomalyco/opencode  # Nix
 
 ### 데스크톱 앱 (BETA)
 
-OpenCode 는 데스크톱 앱으로도 제공됩니다. [opencode.ai/download](https://opencode.ai/download) 에서 다운로드하세요.
+Warcode 는 데스크톱 앱으로도 제공됩니다. [warcode.ai/download](https://opencode.ai/download) 에서 다운로드하세요.
 
 | 플랫폼                | 다운로드                           |
 | --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `opencode-desktop-mac-x64.dmg`     |
-| Windows               | `opencode-desktop-win-x64.exe`     |
+| macOS (Apple Silicon) | `warcode-desktop-mac-arm64.dmg`   |
+| macOS (Intel)         | `warcode-desktop-mac-x64.dmg`     |
+| Windows               | `warcode-desktop-win-x64.exe`     |
 | Linux                 | `.deb`, `.rpm`, 또는 AppImage      |
 
 ```bash
 # macOS (Homebrew)
-brew install --cask opencode-desktop
+brew install --cask warcode-desktop
 ```
 
 #### 설치 디렉터리
 
-설치 스크립트는 OpenCode를 `$HOME/.opencode/bin`에 설치합니다.
+설치 스크립트는 Warcode를 `$HOME/.warcode/bin`에 설치합니다.
 
 ### Agents
 
-OpenCode 에는 내장 에이전트 2개가 있으며 `Tab` 키로 전환할 수 있습니다.
+Warcode 에는 내장 에이전트 2개가 있으며 `Tab` 키로 전환할 수 있습니다.
 
 - **build** - 기본값, 개발 작업을 위한 전체 권한 에이전트
 - **plan** - 분석 및 코드 탐색을 위한 읽기 전용 에이전트
@@ -99,15 +99,15 @@ OpenCode 에는 내장 에이전트 2개가 있으며 `Tab` 키로 전환할 수
 
 ### 문서
 
-OpenCode 설정에 대한 자세한 내용은 [**문서**](https://opencode.ai/docs) 를 참고하세요.
+Warcode 설정에 대한 자세한 내용은 [**문서**](https://opencode.ai/docs) 를 참고하세요.
 
 ### 기여하기
 
-OpenCode 에 기여하고 싶다면, Pull Request 를 제출하기 전에 [contributing docs](./CONTRIBUTING.md) 를 읽어주세요.
+Warcode 에 기여하고 싶다면, Pull Request 를 제출하기 전에 [contributing docs](./CONTRIBUTING.md) 를 읽어주세요.
 
-### OpenCode 기반으로 만들기
+### Warcode 기반으로 만들기
 
-OpenCode 와 관련된 프로젝트를 진행하면서 이름에 "opencode"(예: "opencode-dashboard" 또는 "opencode-mobile") 를 포함한다면, README 에 해당 프로젝트가 OpenCode 팀이 만든 것이 아니며 어떤 방식으로도 우리와 제휴되어 있지 않다는 점을 명시해 주세요.
+Warcode 와 관련된 프로젝트를 진행하면서 이름에 "warcode"(예: "warcode-dashboard" 또는 "warcode-mobile") 를 포함한다면, README 에 해당 프로젝트가 Warcode 팀이 만든 것이 아니며 어떤 방식으로도 우리와 제휴되어 있지 않다는 점을 명시해 주세요.
 
 ---
 

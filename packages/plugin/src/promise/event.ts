@@ -1,10 +1,10 @@
-import type { OpenCodeEvent } from "@opencode/client"
-import type { SelectedEvent, SubscribeOptions } from "@opencode/client/promise/api"
+import type { WarcodeEvent } from "@warcode/client"
+import type { SelectedEvent, SubscribeOptions } from "@warcode/client/promise/api"
 
-type EventType = Exclude<OpenCodeEvent["type"], "server.connected">
+type EventType = Exclude<WarcodeEvent["type"], "server.connected">
 
 export interface EventDomain {
   readonly subscribe: <Type extends EventType = EventType>(
     options?: SubscribeOptions<Type>,
-  ) => AsyncIterable<SelectedEvent<OpenCodeEvent, Type>>
+  ) => AsyncIterable<SelectedEvent<WarcodeEvent, Type>>
 }

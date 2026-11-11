@@ -40,7 +40,7 @@ export function Plate(props: {
           {title}
         </h2>
         <span data-anno data-slot="plate-aside">
-          {props.aside ?? "OpenCode Font · Specimen 1.001"}
+          {props.aside ?? "Warcode Font · Specimen 1.001"}
         </span>
       </header>
       {props.lead && (

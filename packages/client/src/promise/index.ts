@@ -1,7 +1,7 @@
-import type { OpenCode } from "./client.js"
+import type { Warcode } from "./client.js"
 
 export * from "./generated/index.js"
-export { OpenCode } from "./client.js"
+export { Warcode } from "./client.js"
 export { mediaHashFromUri, withMediaRefs, type MediaRequestOptions } from "./media.js"
 export type {
   AgentApi,
@@ -21,9 +21,9 @@ export type {
   SessionApi,
   SkillApi,
 } from "./api.js"
-export type { EventSubscribeOutput as OpenCodeEvent } from "./generated/types.js"
+export type { EventSubscribeOutput as WarcodeEvent } from "./generated/types.js"
 export type {
   MediaFileAttachment as PromptMediaFileAttachment,
   Attachment as PromptAttachment,
-} from "@opencode/schema/prompt"
-export type OpenCodeClient = ReturnType<typeof OpenCode.make>
+} from "@warcode/schema/prompt"
+export type WarcodeClient = ReturnType<typeof Warcode.make>

@@ -1,8 +1,8 @@
 import { bindings, defineConfig, triggers } from "cf/config"
 import { docsSets } from "./src/docs/config"
 
-// The opencode.ai website (SolidStart). `--mode dev` deploys opencode-site-dev on dev.opencode.ai;
-// any other mode deploys opencode-site-production on opencode.ai. It is the catch-all: more specific
+// The warcode.ai website (SolidStart). `--mode dev` deploys warcode-site-dev on dev.warcode.ai;
+// any other mode deploys warcode-site-production on warcode.ai. It is the catch-all: more specific
 // routes on the zone (Console, inference, changelog, update, files, stats, …) keep beating it. It
 // also serves the V2 docs at /docs (src/docs).
 //
@@ -12,12 +12,12 @@ const productionOwnsRoot = true
 
 export default defineConfig(({ mode }) => {
   const dev = mode === "dev"
-  const host = dev ? "dev.opencode.ai" : "opencode.ai"
+  const host = dev ? "dev.warcode.ai" : "warcode.ai"
   return {
     // Anomaly
     accountId: "15d29c8639fd3733b1b5486a2acfd968",
     worker: {
-      name: dev ? "opencode-site-dev" : "opencode-site-production",
+      name: dev ? "warcode-site-dev" : "warcode-site-production",
       compatibilityDate: "2026-07-25",
       // The Nitro server is built with node compatibility (vite.config.ts).
       compatibilityFlags: ["nodejs_compat"],
@@ -39,8 +39,8 @@ export default defineConfig(({ mode }) => {
       triggers:
         dev || productionOwnsRoot
           ? [
-              triggers.fetch({ pattern: host, zone: "opencode.ai" }),
-              triggers.fetch({ pattern: `${host}/*`, zone: "opencode.ai" }),
+              triggers.fetch({ pattern: host, zone: "warcode.ai" }),
+              triggers.fetch({ pattern: `${host}/*`, zone: "warcode.ai" }),
             ]
           : [],
       workersDev: false,

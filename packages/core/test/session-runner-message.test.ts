@@ -1,15 +1,15 @@
 import { describe, expect, test } from "bun:test"
-import { Message, Media } from "@opencode/ai/effect"
-import { Model } from "@opencode/core/model"
-import { Provider } from "@opencode/core/provider"
-import { SessionMessage } from "@opencode/core/session/message"
-import { AgentAttachment, Base64, FileAttachment, SkillAttachment } from "@opencode/schema/prompt"
-import { Skill } from "@opencode/schema/skill"
-import { toLLMMessages } from "@opencode/core/session/runner/to-llm-message"
-import { Agent } from "@opencode/core/agent"
-import { Shell } from "@opencode/schema/shell"
-import { Location } from "@opencode/schema/location"
-import { AbsolutePath } from "@opencode/schema/schema"
+import { Message, Media } from "@warcode/ai/effect"
+import { Model } from "@warcode/core/model"
+import { Provider } from "@warcode/core/provider"
+import { SessionMessage } from "@warcode/core/session/message"
+import { AgentAttachment, Base64, FileAttachment, SkillAttachment } from "@warcode/schema/prompt"
+import { Skill } from "@warcode/schema/skill"
+import { toLLMMessages } from "@warcode/core/session/runner/to-llm-message"
+import { Agent } from "@warcode/core/agent"
+import { Shell } from "@warcode/schema/shell"
+import { Location } from "@warcode/schema/location"
+import { AbsolutePath } from "@warcode/schema/schema"
 import { DateTime } from "effect"
 import path from "path"
 import { pathToFileURL } from "url"
@@ -897,15 +897,15 @@ Earlier work
     ])
   })
 
-  test("replays flat state under an OpenCode hosted model's route key", () => {
-    const opencode = Model.Ref.make({ id: Model.ID.make("claude-fable-5"), providerID: Provider.ID.opencode })
+  test("replays flat state under an Warcode hosted model's route key", () => {
+    const warcode = Model.Ref.make({ id: Model.ID.make("claude-fable-5"), providerID: Provider.ID.warcode })
     const messages = toLLMMessages(
       [
         SessionMessage.Assistant.make({
-          id: id("assistant-opencode-reasoning"),
+          id: id("assistant-warcode-reasoning"),
           type: "assistant",
           agent: build,
-          model: opencode,
+          model: warcode,
           content: [
             SessionMessage.AssistantReasoning.make({
               type: "reasoning",
@@ -917,7 +917,7 @@ Earlier work
           time: { created, completed: created },
         }),
       ],
-      opencode,
+      warcode,
       "anthropic",
     )
 

@@ -1,15 +1,15 @@
-import { Instance } from "@opencode/core/instance/service"
-import { Session } from "@opencode/core/session"
-import { SessionStats } from "@opencode/core/session/stats"
-import { SessionTitle } from "@opencode/core/session/title"
-import { SessionTransfer } from "@opencode/core/session/transfer"
-import { InstructionEntry } from "@opencode/core/session/instruction-entry"
-import { Form } from "@opencode/core/form"
+import { Instance } from "@warcode/core/instance/service"
+import { Session } from "@warcode/core/session"
+import { SessionStats } from "@warcode/core/session/stats"
+import { SessionTitle } from "@warcode/core/session/title"
+import { SessionTransfer } from "@warcode/core/session/transfer"
+import { InstructionEntry } from "@warcode/core/session/instruction-entry"
+import { Form } from "@warcode/core/form"
 import { DateTime, Effect, Stream } from "effect"
 import { HttpServerResponse } from "effect/http"
 import { HttpApiBuilder, HttpApiSchema } from "effect/http-api"
-import { SessionMediaMessageResponse } from "@opencode/protocol/groups/message"
-import { SessionMediaInboxResponse } from "@opencode/protocol/groups/session"
+import { SessionMediaMessageResponse } from "@warcode/protocol/groups/message"
+import { SessionMediaInboxResponse } from "@warcode/protocol/groups/session"
 import { Api } from "../api"
 import { wantsMediaRefs } from "../media-uri"
 import {
@@ -25,8 +25,8 @@ import {
   ServiceUnavailableError,
   SessionBusyError,
   SkillNotFoundError,
-} from "@opencode/protocol/errors"
-import { AbsolutePath } from "@opencode/core/schema"
+} from "@warcode/protocol/errors"
+import { AbsolutePath } from "@warcode/core/schema"
 import { locationErrors } from "../location"
 import { failedMessageDecode, failedSnapshot, missingMessage, missingSession } from "./session-error"
 

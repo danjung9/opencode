@@ -1,5 +1,5 @@
 {
-  "name": "@opencode/session-ui",
+  "name": "@warcode/session-ui",
   "version": "2.2.7",
   "private": true,
   "type": "module",
@@ -71,10 +71,10 @@
   "dependencies": {
     "@kitlangton/solid-motion": "0.2.2",
     "@kobalte/core": "catalog:",
-    "@opencode/client": "workspace:*",
-    "@opencode/patchmark": "workspace:*",
-    "@opencode/ui": "workspace:*",
-    "@opencode/util": "workspace:*",
+    "@warcode/client": "workspace:*",
+    "@warcode/patchmark": "workspace:*",
+    "@warcode/ui": "workspace:*",
+    "@warcode/util": "workspace:*",
     "@pierre/diffs": "catalog:",
     "@pierre/highlights": "catalog:",
     "@solid-primitives/event-listener": "catalog:",

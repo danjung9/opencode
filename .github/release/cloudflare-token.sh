@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Mints a short-lived Cloudflare token for the current release job from the token issuer
 # (anomalyco/secrets). Run after aws-actions/configure-aws-credentials has assumed
-# arn:aws:iam::604439173067:role/github/opencode-release: the Lambda identifies the role from the
-# SigV4 signature and mints only the `opencode/release` token. No repo, stage, permission or TTL
+# arn:aws:iam::604439173067:role/github/warcode-release: the Lambda identifies the role from the
+# SigV4 signature and mints only the `warcode/release` token. No repo, stage, permission or TTL
 # is sent in the request, and the token is pinned to the runner's IP for 30 minutes.
 #
 # Step-scoped by default: the token goes to $GITHUB_OUTPUT and only steps that list

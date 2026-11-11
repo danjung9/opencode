@@ -52,7 +52,7 @@
 
     /* No backing behind the logo: over a dark or light surface it takes that scheme's artwork
        instead (surface.ts, github-link.css). That artwork is the brand's transparent logo
-       (public/brand/files/opencode-logo-transparent-*.svg): the ink at 20% (light) or 28% (dark)
+       (public/brand/files/warcode-logo-transparent-*.svg): the ink at 20% (light) or 28% (dark)
        for the inner square and 70% / 72% for the open letters, so they tint with what is behind. */
     [data-slot="logo"] {
       [data-slot="inner"] {
@@ -356,7 +356,7 @@
   }
 
   .letter-output {
-    /* Before the script sets --glyph-size, the same size its renderLetters gives "opencode" (the
+    /* Before the script sets --glyph-size, the same size its renderLetters gives "warcode" (the
        width's fit, capped at 161px, in whole multiples of 7px, at least 49px), so the server-rendered
        wordmark is already the size it keeps: on phones the 161px default wrapped it onto four lines,
        then it shrank to one (a 0.2 layout shift). */
@@ -2773,7 +2773,7 @@
   }
 
   /* Two halves of exactly 50%, each a label and its value, with the same 0.75rem either side of the
-     middle; wide enough that "OpenCode, OpenTUI Mono and Inter" stays on one line from 1280px. */
+     middle; wide enough that "Warcode, OpenTUI Mono and Inter" stays on one line from 1280px. */
   [data-slot="credits"] {
     max-width: 56rem;
 
@@ -2790,7 +2790,7 @@
       opacity: 0.75;
     }
 
-    /* Small phones: one credit a row, so "OpenCode 1.001" no longer runs into the next label. */
+    /* Small phones: one credit a row, so "Warcode 1.001" no longer runs into the next label. */
     @media (max-width: 24rem) {
       grid-template-columns: minmax(0, 1fr);
 

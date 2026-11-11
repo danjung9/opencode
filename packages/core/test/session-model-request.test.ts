@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import { Message, ToolMessage, ToolResultPart, Media, UserMessage } from "@opencode/ai/effect"
-import { boundImages, unsupportedParts } from "@opencode/core/session/model-request"
+import { Message, ToolMessage, ToolResultPart, Media, UserMessage } from "@warcode/ai/effect"
+import { boundImages, unsupportedParts } from "@warcode/core/session/model-request"
 
 const capabilities = (input: string[]) => ({ tools: true, input, output: ["text"] })
 

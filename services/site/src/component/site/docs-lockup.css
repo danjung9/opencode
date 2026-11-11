@@ -439,8 +439,8 @@
   }
 }
 
-/* The section word also opens the OpenCode product menu on hover (packages/nav-menus), so hovered, open and pressed it
-   takes the one name fill every OpenCode nav shares (--nav-name-hover), never a darker one; the chevron keeps its own
+/* The section word also opens the Warcode product menu on hover (packages/nav-menus), so hovered, open and pressed it
+   takes the one name fill every Warcode nav shares (--nav-name-hover), never a darker one; the chevron keeps its own
    states for the sections menu. */
 [data-site] [data-component="docs-lockup"] [data-slot="word"][data-nav-product] {
   @media (hover: hover) and (pointer: fine) {

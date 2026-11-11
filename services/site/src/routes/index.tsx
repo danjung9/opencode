@@ -217,7 +217,7 @@ export default function Home() {
       <JsonLd data={websiteData(tag(language.locale()))} />
       <JsonLd
         data={softwareData({
-          name: "OpenCode",
+          name: "Warcode",
           description: description(),
           path: language.route("/"),
           image: ogImage("/").src,
@@ -827,7 +827,7 @@ function AgentIcon() {
 
 // For the agent action above the carousel: the Terminal section of the download page's Markdown lists every
 // install command.
-const agentPrompt = `Install the OpenCode terminal app on this machine. Follow the Download section of https://opencode.ai/terminal.md and pick the method that fits this system (for example \`${installs[0].command}\`), then run \`opencode --version\` to check that it works.`
+const agentPrompt = `Install the Warcode terminal app on this machine. Follow the Download section of https://opencode.ai/terminal.md and pick the method that fits this system (for example \`${installs[0].command}\`), then run \`warcode --version\` to check that it works.`
 
 function CopyIcon() {
   return (
@@ -947,7 +947,7 @@ function stripTags(html: string) {
 
 /**
  * "Get started", before "Bring your own subs": download, start with the free models, then bring a
- * subscription or use OpenCode Go (lib/get-started.ts). Laid out like the sections below it, with
+ * subscription or use Warcode Go (lib/get-started.ts). Laid out like the sections below it, with
  * the tools' column settings. Settings › Get started style explores five treatments of the body;
  * every one renders in development and the section's data-style (set before first paint for a saved
  * value) shows one; production renders only the default's (script/fold-settings.ts).
@@ -959,10 +959,10 @@ function GetStarted() {
   // On a phone or tablet, Download is that device's app; on a computer, the desktop build.
   const platform = useDevicePlatform()
   const downloadSlug = () => (isMobile(platform()) ? "mobile" : "desktop")
-  // On a phone or tablet the lead links only "OpenCode Go"; the other phrases stay plain words (no
+  // On a phone or tablet the lead links only "Warcode Go"; the other phrases stay plain words (no
   // link to tab to or announce), decided from the request's platform so the server renders it.
   const leadPhrases = () =>
-    isMobile(platform()) ? content().phrases.filter((phrase) => phrase.text === "OpenCode Go") : content().phrases
+    isMobile(platform()) ? content().phrases.filter((phrase) => phrase.text === "Warcode Go") : content().phrases
   const [copied, setCopied] = createSignal(false)
   let timer: ReturnType<typeof setTimeout> | undefined
   onCleanup(() => clearTimeout(timer))
@@ -1026,7 +1026,7 @@ function GetStarted() {
                       </Match>
                       <Match when={index() === 2}>
                         <a href={content().links.go} data-slot="more">
-                          OpenCode Go
+                          Warcode Go
                           <ChevronRight />
                         </a>
                       </Match>
@@ -1076,7 +1076,7 @@ function GetStarted() {
             </li>
             <li>
               <a href={content().links.go}>
-                <span data-slot="rung">OpenCode Go</span>
+                <span data-slot="rung">Warcode Go</span>
                 <span data-slot="detail">{i18n.t("home.getStarted.goDetail")}</span>
                 <span data-slot="price">$10 / $40</span>
                 <ChevronRight />
@@ -1116,13 +1116,13 @@ function GetStarted() {
                     {installs[0].command}
                   </span>
                   {"\n"}
-                  <span data-slot="input">opencode</span>
+                  <span data-slot="input">warcode</span>
                   {"\n"}
                   <span data-slot="input">/models</span>
                   {"\n\n"}
                   <span data-slot="output">Select model</span>
                   {"\n"}
-                  <span data-slot="output">OpenCode</span>
+                  <span data-slot="output">Warcode</span>
                   <For each={content().freeModels}>
                     {(model, index) => (
                       <>
@@ -1175,7 +1175,7 @@ function GetStarted() {
 
 /**
  * "Bring your own subs", before "Bring your own tools": log in with a subscription you have, or use
- * an OpenCode plan (lib/byos.ts). Laid out like that section, and the logos are its grid's tiles
+ * an Warcode plan (lib/byos.ts). Laid out like that section, and the logos are its grid's tiles
  * (logos only, the names as tooltips), so they arrive with the same entrance. Settings ›
  * Subscriptions style explores three arrangements; every one renders in development and the
  * section's data-style (set before first paint for a saved value) shows one; production renders only
@@ -1233,7 +1233,7 @@ function BringYourOwnSubs() {
           <div data-slot="grid">{providers()}</div>
         </Show>
 
-        {/* "split": your subscriptions beside the models in OpenCode's plans. */}
+        {/* "split": your subscriptions beside the models in Warcode's plans. */}
         <Show when={import.meta.env.DEV || siteSettings.subsStyle === "split"}>
           <div data-slot="split">
             <div>
@@ -1281,7 +1281,7 @@ function BringYourOwnSubs() {
           </div>
         </Show>
 
-        {/* A, B and C: showing that OpenCode works with nearly every subscription, provider and model. */}
+        {/* A, B and C: showing that Warcode works with nearly every subscription, provider and model. */}
         <Show
           when={
             import.meta.env.DEV ||

@@ -1,11 +1,11 @@
 export * as ShellTool from "./shell.js"
 
-import { ToolFailure } from "@opencode/ai/effect"
-import type { Context } from "@opencode/plugin/effect/plugin"
-import type { SessionHooks } from "@opencode/plugin/effect/session"
-import type { ShellCreateBefore } from "@opencode/plugin/effect/shell"
-import type { Shell as ShellSchema } from "@opencode/schema/shell"
-import type { Tool } from "@opencode/schema/tool"
+import { ToolFailure } from "@warcode/ai/effect"
+import type { Context } from "@warcode/plugin/effect/plugin"
+import type { SessionHooks } from "@warcode/plugin/effect/session"
+import type { ShellCreateBefore } from "@warcode/plugin/effect/shell"
+import type { Shell as ShellSchema } from "@warcode/schema/shell"
+import type { Tool } from "@warcode/schema/tool"
 import { Deferred, Effect, Fiber, Option, Schema } from "effect"
 import { Environment } from "../../environment/index.js"
 import { Job } from "../../job.js"
@@ -253,7 +253,7 @@ export const reattach = Effect.fnUntraced(function* (input: {
 })
 
 export const Plugin = {
-  id: "opencode.tool.shell",
+  id: "warcode.tool.shell",
   effect: Effect.fn("ShellTool.Plugin")(function* (ctx: Context) {
     const sessions = yield* Session.Service
     const jobs = yield* Job.Service
@@ -368,9 +368,9 @@ export const Plugin = {
                     (invocation) =>
                       Effect.gen(function* () {
                         invocation.env.AGENT = "1"
-                        invocation.env.OPENCODE = "1"
-                        invocation.env.AI_AGENT ||= "opencode"
-                        invocation.env.OPENCODE_SESSION_ID = context.sessionID
+                        invocation.env.WARCODE = "1"
+                        invocation.env.AI_AGENT ||= "warcode"
+                        invocation.env.WARCODE_SESSION_ID = context.sessionID
                         // Asking for permission can take a while; a stop then ends the call before any command starts.
                         finalTimeout = yield* restore(
                           Effect.raceFirst(
@@ -454,7 +454,7 @@ export const Plugin = {
               // Shell spans, including the job that waits for a backgrounded command, name the call that started them.
               Effect.annotateSpans({
                 "gen_ai.tool.call.id": context.id,
-                ...(input.background === true ? { "opencode.shell.background": true } : {}),
+                ...(input.background === true ? { "warcode.shell.background": true } : {}),
               }),
               Effect.map((output) => toolResult(output, finalTimeout)),
               Effect.mapError(toolFailure(`Unable to execute command: ${input.command}`)),

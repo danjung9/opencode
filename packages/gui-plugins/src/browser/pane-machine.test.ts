@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import { Browser } from "@opencode/plugin-browser/rpc"
-import { SessionNotFoundError } from "@opencode/protocol/errors"
+import { Browser } from "@warcode/plugin-browser/rpc"
+import { SessionNotFoundError } from "@warcode/protocol/errors"
 import {
   attachmentFailure,
   createPaneState,

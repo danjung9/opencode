@@ -20,7 +20,7 @@ describe("voice API with voice mode off", () => {
   test("the flag is off", () => expect(voiceMode).toBe(false))
 
   test("every route is a 404", async () => {
-    process.env.OPENCODE_API_KEY = "test"
+    process.env.WARCODE_API_KEY = "test"
     process.env.ELEVENLABS_API_KEY = "test"
     const calls: string[] = []
     const realFetch = globalThis.fetch
@@ -30,7 +30,7 @@ describe("voice API with voice mode off", () => {
     }) as typeof fetch
     try {
       const responses = await Promise.all([
-        answer(event({ question: "What is OpenCode?" })),
+        answer(event({ question: "What is Warcode?" })),
         speech(event({ text: "Hello" })),
         transcribe(event({})),
         capabilities(),
@@ -39,7 +39,7 @@ describe("voice API with voice mode off", () => {
       expect(calls).toEqual([])
     } finally {
       globalThis.fetch = realFetch
-      delete process.env.OPENCODE_API_KEY
+      delete process.env.WARCODE_API_KEY
       delete process.env.ELEVENLABS_API_KEY
     }
   })

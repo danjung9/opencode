@@ -1,1 +1,1 @@
-export { createPluginSources } from "@opencode/plugin/source"
+export { createPluginSources } from "@warcode/plugin/source"

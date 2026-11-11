@@ -1,12 +1,12 @@
 export * as ClaudeSessionHooks from "./session.js"
 
-import { AssistantMessage, ToolMessage, type ToolResultPart } from "@opencode/ai/effect"
-import type { Context } from "@opencode/plugin/effect/plugin"
+import { AssistantMessage, ToolMessage, type ToolResultPart } from "@warcode/ai/effect"
+import type { Context } from "@warcode/plugin/effect/plugin"
 import { Effect, Schema } from "effect"
 import { RequestKind } from "./language-model/request-kind.js"
 import { ClaudeProvider } from "./provider.js"
 
-// OpenCode records stopped tools (including a plain permission rejection) with this structured error.
+// Warcode records stopped tools (including a plain permission rejection) with this structured error.
 const isAborted = Schema.is(Schema.Struct({ error: Schema.Struct({ type: Schema.Literal("aborted") }) }))
 
 const flagToolError = (part: ToolResultPart): ToolResultPart => {
@@ -36,7 +36,7 @@ export const register = Effect.fn("ClaudeSessionHooks.register")(function* (ctx:
     (event) =>
       Effect.sync(() => {
         // Let Claude choose its normal output budget. Later hooks can still set an explicit maxTokens.
-        // Compaction has its own hook, so it keeps OpenCode's summary budget.
+        // Compaction has its own hook, so it keeps Warcode's summary budget.
         delete event.options.maxTokens
         // Preserve tool error status before the AI SDK bridge flattens error results to plain text.
         event.messages = event.messages.map((message) => {

@@ -12,6 +12,6 @@ export const binaryPath =
     ? path.join(
         path.dirname(require.resolve(`@opencode/pty-${suffix}/package.json`)),
         "bin",
-        process.platform === "win32" ? "opencode-pty.exe" : "opencode-pty",
+        process.platform === "win32" ? "warcode-pty.exe" : "warcode-pty",
       )
     : undefined

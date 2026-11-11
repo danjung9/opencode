@@ -1,12 +1,13 @@
 import { createEffect, createMemo, createSignal, Match, on, onCleanup, Show, Switch, untrack } from "solid-js"
 import { Portal } from "solid-js/web"
 import { useLocation } from "@solidjs/router"
-import { uuid } from "@opencode/util/uuid"
-import { useDialog } from "@opencode/ui/context/dialog"
-import { IconButton } from "@opencode/ui/icon-button"
-import { Icon } from "@opencode/ui/icon"
-import { Keybind } from "@opencode/ui/keybind"
-import { Tooltip } from "@opencode/ui/tooltip"
+import { uuid } from "@warcode/util/uuid"
+import { useDialog } from "@warcode/ui/context/dialog"
+import { IconButton } from "@warcode/ui/icon-button"
+import { Icon } from "@warcode/ui/icon"
+import { Logo, Mark } from "@warcode/ui/logo"
+import { Keybind } from "@warcode/ui/keybind"
+import { Tooltip } from "@warcode/ui/tooltip"
 
 import { useLayout } from "@/shell/state/layout"
 import { usePlatform } from "@/runtime/platform/platform"
@@ -33,7 +34,7 @@ import { MobileDrawer, MobileDrawerContent, MobileDrawerLabel, MobileDrawerTrigg
 import { sessionTabTitle } from "./tab-title"
 import { SessionTabAvatarView } from "@/shell/layout/session-tab-avatar"
 import { useSessionTabAvatarState } from "@/shell/layout/project-avatar-state"
-import { ActivityRing } from "@opencode/ui/activity-ring"
+import { ActivityRing } from "@warcode/ui/activity-ring"
 import { RecentlyClosedTabsMenu } from "./recently-closed-tabs-menu"
 import { useSettingsDialog } from "@/settings/command"
 import { TitlebarItems, useTitlebarItems } from "@/runtime/plugin/titlebar-items"
@@ -208,7 +209,8 @@ export function Titlebar(props: { verticalTabs?: { mount?: HTMLElement } }) {
             createEffect(() => {
               if (
                 settings.appearance.tabLayout() === "vertical" &&
-                (settings.general.sidebarOrganize() === "projects" || settings.general.sidebarOrganize() === "customize") &&
+                (settings.general.sidebarOrganize() === "projects" ||
+                  settings.general.sidebarOrganize() === "customize") &&
                 !mobile()
               )
                 return
@@ -712,7 +714,7 @@ export function Titlebar(props: { verticalTabs?: { mount?: HTMLElement } }) {
                                 class="flex h-7 shrink-0 items-center gap-2 rounded-[6px] px-2 text-[13px] leading-4 text-v2-text-text-faint hover:bg-v2-background-bg-layer-02 focus-visible:outline-none focus-visible:bg-v2-background-bg-layer-02"
                                 onClick={() => {
                                   closeMobileTabs()
-                                  platform.openExternal("https://opencode.ai/desktop-feedback")
+                                  platform.openExternal("https://github.com/danjung9/opencode/issues")
                                 }}
                               >
                                 <Icon name="help" size="small" />
@@ -763,6 +765,15 @@ export function Titlebar(props: { verticalTabs?: { mount?: HTMLElement } }) {
                             mount={mount}
                             ref={(element) => (element.className = "flex size-full min-h-0 flex-col")}
                           >
+                            <Show when={windows()}>
+                              <div
+                                class="flex h-12 w-full shrink-0 items-center gap-2.5 px-2"
+                                data-slot="warcode-brand"
+                              >
+                                <Mark class="h-6 w-5 shrink-0" />
+                                <Logo class="h-7 w-auto max-w-[140px]" />
+                              </div>
+                            </Show>
                             <Show when={!windows()}>
                               {/* Shares the session header's 48px center line. Without traffic lights, Home fills the
                                   start so the row doesn't leave an empty band. */}
@@ -791,7 +802,14 @@ export function Titlebar(props: { verticalTabs?: { mount?: HTMLElement } }) {
                                     aria-hidden="true"
                                   />
                                 </Show>
-                                <Show when={homeInSidebarHeader()} fallback={<div class="flex-1" />}>
+                                <Show
+                                  when={homeInSidebarHeader()}
+                                  fallback={
+                                    <div class="flex min-w-0 flex-1 items-center px-2">
+                                      <Logo class="h-5 w-auto max-w-full" />
+                                    </div>
+                                  }
+                                >
                                   <div class="min-w-0 flex-1">{homeButton(true)}</div>
                                 </Show>
                                 <SidebarToggle handoff="out" />

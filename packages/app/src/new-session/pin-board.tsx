@@ -1,7 +1,7 @@
 import { createEffect, onCleanup, onMount } from "solid-js"
 import { createQuads, type Quads, type Rgba } from "./pin-quads"
 import { PinSound } from "./pin-sound"
-import { prefersReducedMotion } from "@opencode/ui/motion"
+import { prefersReducedMotion } from "@warcode/ui/motion"
 import {
   acceptsGameInput,
   acceptsPointer,

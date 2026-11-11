@@ -1,8 +1,8 @@
 export * as ArtifactTools from "./artifact.js"
 
-import { ToolFailure } from "@opencode/ai/effect"
-import type { Context } from "@opencode/plugin/effect/plugin"
-import { optional } from "@opencode/schema/schema"
+import { ToolFailure } from "@warcode/ai/effect"
+import type { Context } from "@warcode/plugin/effect/plugin"
+import { optional } from "@warcode/schema/schema"
 import { Effect, Schema, Stream } from "effect"
 import { Artifact } from "../../artifact.js"
 import { Config } from "../../config.js"
@@ -45,7 +45,7 @@ const DeleteToolOutput = Schema.Struct({
 })
 
 export const Plugin = {
-  id: "opencode.tool.artifact",
+  id: "warcode.tool.artifact",
   effect: Effect.fn("ArtifactTools.Plugin")(function* (ctx: Context) {
     const config = yield* Config.Service
     const artifacts = yield* Artifact.Service
@@ -75,7 +75,7 @@ export const Plugin = {
           description: promptSnapshot.text,
           input: CreateToolInput,
           output: Artifact.Info,
-          options: { namespace: "opencode", codemode: true },
+          options: { namespace: "warcode", codemode: true },
           execute: (input, context) =>
             artifacts
               .create({
@@ -99,7 +99,7 @@ export const Plugin = {
           description: "Read an artifact's metadata and file contents so you can inspect or update it.",
           input: ReadToolInput,
           output: Artifact.Content,
-          options: { namespace: "opencode", codemode: true },
+          options: { namespace: "warcode", codemode: true },
           execute: (input) =>
             artifacts.get(input.id).pipe(
               Effect.map((content) => ({
@@ -115,7 +115,7 @@ export const Plugin = {
           description: "Replace an existing artifact's files at the same ID and URL.",
           input: UpdateToolInput,
           output: Artifact.Info,
-          options: { namespace: "opencode", codemode: true },
+          options: { namespace: "warcode", codemode: true },
           execute: (input, context) =>
             artifacts
               .update(input.id, {
@@ -138,7 +138,7 @@ export const Plugin = {
           description: "Delete an artifact and remove its stored copy.",
           input: DeleteToolInput,
           output: DeleteToolOutput,
-          options: { namespace: "opencode", codemode: true },
+          options: { namespace: "warcode", codemode: true },
           execute: (input) =>
             artifacts.remove(input.id).pipe(
               Effect.map(() => ({

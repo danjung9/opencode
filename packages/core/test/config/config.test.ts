@@ -2,33 +2,33 @@ import path from "path"
 import fs from "fs/promises"
 import { describe, expect, test } from "bun:test"
 import { Arbitrary, Effect, Fiber, Layer, Logger, Schema, Stream } from "effect"
-import { Config } from "@opencode/core/config"
-import { ConfigDiscovery } from "@opencode/core/config/discovery"
-import { ConfigIntegration } from "@opencode/core/config/integration"
-import { Directory, Document, type Entry, Event, Info } from "@opencode/schema/config"
-import { ConfigModel } from "@opencode/schema/config/model"
-import { ConfigProvider } from "@opencode/schema/config/provider"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { makeGlobalNode } from "@opencode/util/effect/app-node"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Credential } from "@opencode/core/credential"
+import { Config } from "@warcode/core/config"
+import { ConfigDiscovery } from "@warcode/core/config/discovery"
+import { ConfigIntegration } from "@warcode/core/config/integration"
+import { Directory, Document, type Entry, Event, Info } from "@warcode/schema/config"
+import { ConfigModel } from "@warcode/schema/config/model"
+import { ConfigProvider } from "@warcode/schema/config/provider"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { makeGlobalNode } from "@warcode/util/effect/app-node"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Credential } from "@warcode/core/credential"
 import { ConfigV1 } from "../fixture/v1-config/config"
-import { ConfigPermissionV1 } from "@opencode/core/v1/config/permission"
-import { ConfigNormalize } from "@opencode/core/config/normalize"
-import { ConfigVariable } from "@opencode/core/config/variable"
-import { FSUtil } from "@opencode/util/fs-util"
-import { Watcher } from "@opencode/core/filesystem/watcher"
-import { Bus } from "@opencode/core/bus"
-import { Global } from "@opencode/util/global"
-import { Location } from "@opencode/core/location"
-import { Project } from "@opencode/core/project"
-import { Provider } from "@opencode/core/provider"
-import { AbsolutePath } from "@opencode/core/schema"
-import { WellKnown } from "@opencode/core/wellknown"
-import { KV } from "@opencode/core/kv"
-import { ManagedPolicy } from "@opencode/core/managed-policy"
-import { Wildcard } from "@opencode/core/util/wildcard"
-import { Integration } from "@opencode/schema/integration"
+import { ConfigPermissionV1 } from "@warcode/core/v1/config/permission"
+import { ConfigNormalize } from "@warcode/core/config/normalize"
+import { ConfigVariable } from "@warcode/core/config/variable"
+import { FSUtil } from "@warcode/util/fs-util"
+import { Watcher } from "@warcode/core/filesystem/watcher"
+import { Bus } from "@warcode/core/bus"
+import { Global } from "@warcode/util/global"
+import { Location } from "@warcode/core/location"
+import { Project } from "@warcode/core/project"
+import { Provider } from "@warcode/core/provider"
+import { AbsolutePath } from "@warcode/core/schema"
+import { WellKnown } from "@warcode/core/wellknown"
+import { KV } from "@warcode/core/kv"
+import { ManagedPolicy } from "@warcode/core/managed-policy"
+import { Wildcard } from "@warcode/core/util/wildcard"
+import { Integration } from "@warcode/schema/integration"
 import { emptyCredentialNode, emptyWellknownNode } from "../fixture/config-nodes"
 import { withEnv } from "../fixture/env"
 import { location } from "../fixture/location"
@@ -187,12 +187,12 @@ describe("Config", () => {
     Effect.acquireDisposable(Effect.promise(() => tmpdir())).pipe(
       Effect.flatMap((tmp) => {
         // The location sits BENEATH the global config dir, so the upward walk
-        // reaches the global opencode.json as a direct file.
+        // reaches the global warcode.json as a direct file.
         const global = path.join(tmp.path, "global")
         const project = path.join(global, "plugins", "demo")
         return Effect.promise(async () => {
           await fs.mkdir(project, { recursive: true })
-          await fs.writeFile(path.join(global, "opencode.json"), JSON.stringify({ shell: "global-sentinel" }))
+          await fs.writeFile(path.join(global, "warcode.json"), JSON.stringify({ shell: "global-sentinel" }))
         }).pipe(
           Effect.andThen(
             // Fixture control: with global enabled the file loads.
@@ -228,9 +228,9 @@ describe("Config", () => {
         return Effect.promise(async () => {
           await fs.mkdir(path.join(locked, "agents"), { recursive: true })
           await fs.mkdir(project, { recursive: true })
-          await fs.writeFile(path.join(project, "opencode.json"), JSON.stringify({ shell: "project" }))
+          await fs.writeFile(path.join(project, "warcode.json"), JSON.stringify({ shell: "project" }))
           await fs.symlink(path.join(locked, "agents"), path.join(home, ".agents"))
-          await fs.symlink(path.join(locked, "agents"), path.join(project, ".opencode"))
+          await fs.symlink(path.join(locked, "agents"), path.join(project, ".warcode"))
           await fs.chmod(locked, 0o000)
         }).pipe(
           Effect.andThen(Effect.addFinalizer(() => Effect.promise(() => fs.chmod(locked, 0o755)))),
@@ -252,13 +252,13 @@ describe("Config", () => {
   it.live("discovers the global config directory once when the project walk reaches it", () =>
     Effect.acquireDisposable(Effect.promise(() => tmpdir())).pipe(
       Effect.flatMap((tmp) => {
-        // The global config dir is the project's own .opencode (as isolated
-        // hosts pin OPENCODE_CONFIG_DIR), and the location is the project under
+        // The global config dir is the project's own .warcode (as isolated
+        // hosts pin WARCODE_CONFIG_DIR), and the location is the project under
         // a symlinked spelling, so the walk reaches the same directory under a
         // different string than the global root.
         const real = path.join(tmp.path, "real")
         const link = path.join(tmp.path, "link")
-        const global = AbsolutePath.make(path.join(real, ".opencode"))
+        const global = AbsolutePath.make(path.join(real, ".warcode"))
         const once = Effect.gen(function* () {
           const config = yield* Config.Service
           const watcher = yield* Watcher.Test
@@ -272,13 +272,13 @@ describe("Config", () => {
           ).toEqual([global])
           expect(
             (yield* watcher.subscriptions()).filter((subscription) =>
-              subscription.path.includes(`${path.sep}.opencode${path.sep}`),
+              subscription.path.includes(`${path.sep}.warcode${path.sep}`),
             ),
           ).toEqual([])
         })
         return Effect.promise(async () => {
           await fs.mkdir(global, { recursive: true })
-          await fs.writeFile(path.join(global, "opencode.json"), JSON.stringify({ shell: "global" }))
+          await fs.writeFile(path.join(global, "warcode.json"), JSON.stringify({ shell: "global" }))
           await fs.symlink(real, link, process.platform === "win32" ? "junction" : undefined)
         }).pipe(
           Effect.andThen(once.pipe(Effect.provide(testLayer(link, global, real)))),
@@ -300,12 +300,12 @@ describe("Config", () => {
           await fs.mkdir(global, { recursive: true })
           await fs.mkdir(project, { recursive: true })
           await fs.writeFile(
-            path.join(system, "opencode.json"),
+            path.join(system, "warcode.json"),
             JSON.stringify({ shell: "system", username: "system-user", experimental: { policies: [tool("deny")] } }),
           )
-          await fs.writeFile(path.join(global, "opencode.json"), JSON.stringify({ shell: "global" }))
+          await fs.writeFile(path.join(global, "warcode.json"), JSON.stringify({ shell: "global" }))
           await fs.writeFile(
-            path.join(project, "opencode.json"),
+            path.join(project, "warcode.json"),
             JSON.stringify({ shell: "project", experimental: { policies: [tool("allow")] } }),
           )
         }).pipe(
@@ -353,21 +353,21 @@ describe("Config", () => {
 
   test("resolves the system configuration directory per platform", () => {
     expect(ConfigDiscovery.systemDirectory("darwin", {})).toBe(
-      AbsolutePath.make("/Library/Application Support/opencode"),
+      AbsolutePath.make("/Library/Application Support/warcode"),
     )
-    expect(ConfigDiscovery.systemDirectory("linux", {})).toBe(AbsolutePath.make("/etc/opencode"))
+    expect(ConfigDiscovery.systemDirectory("linux", {})).toBe(AbsolutePath.make("/etc/warcode"))
     expect(ConfigDiscovery.systemDirectory("win32", { ProgramData: "D:\\ProgramData" })).toBe(
-      AbsolutePath.make(path.join("D:\\ProgramData", "opencode")),
+      AbsolutePath.make(path.join("D:\\ProgramData", "warcode")),
     )
     expect(ConfigDiscovery.systemDirectory("win32", {})).toBe(
-      AbsolutePath.make(path.join("C:\\ProgramData", "opencode")),
+      AbsolutePath.make(path.join("C:\\ProgramData", "warcode")),
     )
   })
 
   test("resolves macOS managed preferences with user-specific profiles first", () => {
     expect(ConfigDiscovery.preferencePaths("alice")).toEqual([
-      AbsolutePath.make(path.join("/Library/Managed Preferences", "alice", "ai.opencode.managed.plist")),
-      AbsolutePath.make("/Library/Managed Preferences/ai.opencode.managed.plist"),
+      AbsolutePath.make(path.join("/Library/Managed Preferences", "alice", "ai.warcode.managed.plist")),
+      AbsolutePath.make("/Library/Managed Preferences/ai.warcode.managed.plist"),
     ])
   })
 
@@ -376,9 +376,9 @@ describe("Config", () => {
       JSON.parse(
         ConfigDiscovery.stripPreferenceMetadata(
           JSON.stringify({
-            PayloadDisplayName: "OpenCode",
-            PayloadIdentifier: "ai.opencode.managed",
-            PayloadType: "ai.opencode.managed",
+            PayloadDisplayName: "Warcode",
+            PayloadIdentifier: "ai.warcode.managed",
+            PayloadType: "ai.warcode.managed",
             PayloadUUID: "00000000-0000-0000-0000-000000000000",
             PayloadVersion: 1,
             _manualProfile: true,
@@ -398,9 +398,9 @@ describe("Config", () => {
         return Effect.promise(async () => {
           await fs.mkdir(global, { recursive: true })
           await fs.mkdir(project, { recursive: true })
-          await fs.writeFile(path.join(global, "opencode.json"), JSON.stringify({ shell: "global" }))
+          await fs.writeFile(path.join(global, "warcode.json"), JSON.stringify({ shell: "global" }))
           await fs.writeFile(explicit, JSON.stringify({ shell: "explicit" }))
-          await fs.writeFile(path.join(project, "opencode.json"), JSON.stringify({ shell: "project" }))
+          await fs.writeFile(path.join(project, "warcode.json"), JSON.stringify({ shell: "project" }))
         }).pipe(
           Effect.andThen(
             Effect.gen(function* () {
@@ -433,8 +433,8 @@ describe("Config", () => {
         yield* Effect.promise(async () => {
           await fs.mkdir(global, { recursive: true })
           await fs.mkdir(project, { recursive: true })
-          await fs.writeFile(path.join(global, "opencode.json"), JSON.stringify(named("global")))
-          await fs.writeFile(path.join(project, "opencode.json"), JSON.stringify(named("project")))
+          await fs.writeFile(path.join(global, "warcode.json"), JSON.stringify(named("global")))
+          await fs.writeFile(path.join(project, "warcode.json"), JSON.stringify(named("project")))
         })
         const integrationID = Integration.ID.make("https://example.com")
         const credentialNode = makeGlobalNode({
@@ -480,7 +480,7 @@ describe("Config", () => {
             expect(yield* Fiber.join(event)).toHaveLength(1)
             return names(yield* config.entries())
           })
-          const integration = Integration.ID.make("opencode")
+          const integration = Integration.ID.make("warcode")
           expect(names(yield* config.entries())).toEqual(["wellknown", "global", "project"])
           expect(
             yield* updated(
@@ -488,7 +488,7 @@ describe("Config", () => {
                 integration,
                 ConfigIntegration.make({
                   integrationID: integration,
-                  connection: { type: "env", name: "OPENCODE_API_KEY" },
+                  connection: { type: "env", name: "WARCODE_API_KEY" },
                   info: decodeInfo(named("console")),
                 }),
               ),
@@ -516,7 +516,7 @@ describe("Config", () => {
         const write = (directory: string, policies: unknown[]) =>
           fs
             .mkdir(directory, { recursive: true })
-            .then(() => fs.writeFile(path.join(directory, "opencode.json"), JSON.stringify({ policies })))
+            .then(() => fs.writeFile(path.join(directory, "warcode.json"), JSON.stringify({ policies })))
         return Effect.promise(() =>
           Promise.all([
             write(system, [shell("shell:rm*", "deny")]),
@@ -527,12 +527,12 @@ describe("Config", () => {
           Effect.andThen(
             Effect.gen(function* () {
               const config = yield* Config.Service
-              const integration = Integration.ID.make("opencode")
+              const integration = Integration.ID.make("warcode")
               yield* config.integration!(
                 integration,
                 ConfigIntegration.make({
                   integrationID: integration,
-                  connection: { type: "env", name: "OPENCODE_API_KEY" },
+                  connection: { type: "env", name: "WARCODE_API_KEY" },
                   organization: "Acme",
                   info: decodeInfo({ policies: [shell("shell:rm*", "allow"), shell("shell:*", "deny")] }),
                 }),
@@ -567,7 +567,7 @@ describe("Config", () => {
         const global = path.join(tmp.path, "global")
         const project = path.join(tmp.path, "project")
         const allowed = "org_allowed"
-        const opencode = Integration.ID.make("opencode")
+        const warcode = Integration.ID.make("warcode")
         const origin = "https://ai.acme.com"
         const credentialID = Credential.ID.create()
         let org = "org_personal"
@@ -587,7 +587,7 @@ describe("Config", () => {
               Effect.succeed(
                 new Credential.Info({
                   id,
-                  integrationID: opencode,
+                  integrationID: warcode,
                   label: "Console",
                   value: Credential.Key.make({ type: "key", key: "secret", metadata: { orgID: org } }),
                 }),
@@ -624,11 +624,11 @@ describe("Config", () => {
         return Effect.promise(() =>
           fs.mkdir(system, { recursive: true }).then(() =>
             fs.writeFile(
-              path.join(system, "opencode.json"),
+              path.join(system, "warcode.json"),
               JSON.stringify({
                 policies: [
                   { action: "integration.use", resource: "*", effect: "deny" },
-                  { action: "integration.use", resource: `opencode#${allowed}`, effect: "allow" },
+                  { action: "integration.use", resource: `warcode#${allowed}`, effect: "allow" },
                 ],
               }),
             ),
@@ -639,9 +639,9 @@ describe("Config", () => {
               const config = yield* Config.Service
               const install = () =>
                 config.integration!(
-                  opencode,
+                  warcode,
                   ConfigIntegration.make({
-                    integrationID: opencode,
+                    integrationID: warcode,
                     connection: { type: "credential", id: credentialID, label: "Console", method: "key" },
                     organization: org,
                     info: decodeInfo({
@@ -657,7 +657,7 @@ describe("Config", () => {
                 { servers: [], policies: 1 },
               ])
               org = allowed
-              yield* config.integration!(opencode, undefined)
+              yield* config.integration!(warcode, undefined)
               yield* install()
               expect(supplied(yield* config.entries())).toEqual([
                 { servers: ["docs"], policies: 1 },
@@ -684,8 +684,8 @@ describe("Config", () => {
         return Effect.promise(async () => {
           await fs.mkdir(global, { recursive: true })
           await fs.mkdir(project, { recursive: true })
-          await fs.writeFile(path.join(global, "opencode.json"), JSON.stringify({ shell: "global" }))
-          await fs.writeFile(path.join(project, "opencode.json"), JSON.stringify({ shell: "project" }))
+          await fs.writeFile(path.join(global, "warcode.json"), JSON.stringify({ shell: "global" }))
+          await fs.writeFile(path.join(project, "warcode.json"), JSON.stringify({ shell: "project" }))
         }).pipe(
           Effect.andThen(
             Effect.gen(function* () {
@@ -712,7 +712,7 @@ describe("Config", () => {
         Effect.gen(function* () {
           const global = path.join(tmp.path, "global")
           const project = path.join(tmp.path, "project")
-          const file = path.join(global, "opencode.json")
+          const file = path.join(global, "warcode.json")
           const source = path.join(global, "shell.txt")
           yield* Effect.promise(async () => {
             await fs.mkdir(global, { recursive: true })
@@ -807,7 +807,7 @@ describe("Config", () => {
         Effect.gen(function* () {
           const global = path.join(tmp.path, "global")
           const project = path.join(tmp.path, "project")
-          const file = path.join(project, "opencode.json")
+          const file = path.join(project, "warcode.json")
           yield* Effect.promise(async () => {
             await fs.mkdir(global, { recursive: true })
             await fs.mkdir(project, { recursive: true })
@@ -898,8 +898,8 @@ describe("Config", () => {
         yield* Effect.promise(async () => {
           await fs.mkdir(global, { recursive: true })
           await fs.mkdir(project, { recursive: true })
-          await fs.writeFile(path.join(global, "opencode.json"), JSON.stringify({ shell: "global" }))
-          await fs.writeFile(path.join(project, "opencode.json"), JSON.stringify({ shell: "project" }))
+          await fs.writeFile(path.join(global, "warcode.json"), JSON.stringify({ shell: "global" }))
+          await fs.writeFile(path.join(project, "warcode.json"), JSON.stringify({ shell: "project" }))
         })
 
         const integrationID = Integration.ID.make("https://example.com")
@@ -994,7 +994,7 @@ describe("Config", () => {
         port: 0,
         fetch(request) {
           const url = new URL(request.url)
-          if (url.pathname === "/.well-known/opencode") {
+          if (url.pathname === "/.well-known/warcode") {
             if (manifestStatus !== 200) return new Response("Unavailable", { status: manifestStatus })
             return Response.json({
               auth: { command: ["login"], env: "TOKEN" },
@@ -1069,7 +1069,7 @@ describe("Config", () => {
             const updated = yield* bus
               .subscribe(Event.Updated)
               .pipe(Stream.take(1), Stream.runCollect, Effect.forkScoped({ startImmediately: true }))
-            yield* Effect.promise(() => fs.writeFile(path.join(project, "opencode.json"), JSON.stringify({ shell })))
+            yield* Effect.promise(() => fs.writeFile(path.join(project, "warcode.json"), JSON.stringify({ shell })))
             yield* trigger
             yield* Fiber.join(updated)
             return remote(yield* config.entries())
@@ -1138,8 +1138,8 @@ describe("Config", () => {
         yield* Effect.promise(async () => {
           await fs.mkdir(global, { recursive: true })
           await fs.mkdir(project, { recursive: true })
-          await fs.writeFile(path.join(global, "opencode.json"), "null")
-          await fs.writeFile(path.join(project, "opencode.json"), "")
+          await fs.writeFile(path.join(global, "warcode.json"), "null")
+          await fs.writeFile(path.join(project, "warcode.json"), "")
           await fs.writeFile(malformed, '{ "credential": "file-secret"')
         })
         const integrationID = Integration.ID.make("https://invalid.example.com")
@@ -1203,11 +1203,11 @@ describe("Config", () => {
 
         expect(output.map((item) => `${item.source}:${item.path}:${item.kind}`).toSorted()).toEqual(
           [
-            `${path.join(global, "opencode.json")}:$:invalid`,
-            `${path.join(project, "opencode.json")}:$:invalid`,
+            `${path.join(global, "warcode.json")}:$:invalid`,
+            `${path.join(project, "warcode.json")}:$:invalid`,
             `${malformed}:$:invalid`,
             "https://invalid.example.com:$:invalid",
-            "OPENCODE_CONFIG_CONTENT:$:invalid",
+            "WARCODE_CONFIG_CONTENT:$:invalid",
           ].toSorted(),
         )
         expect(JSON.stringify(output)).not.toContain("secret")
@@ -1559,7 +1559,7 @@ describe("Config", () => {
               {
                 type: "entries",
                 path: tmp.path,
-                names: [".agents", ".claude", ".opencode", "opencode.json", "opencode.jsonc"],
+                names: [".agents", ".claude", ".warcode", "warcode.json", "warcode.jsonc"],
               },
             ])
           }).pipe(Effect.provide(testLayer(tmp.path, undefined, undefined, undefined, Watcher.testLayer)))
@@ -1568,18 +1568,18 @@ describe("Config", () => {
     ),
   )
 
-  it.live("loads opencode JSON and JSONC files from lowest to highest priority", () =>
+  it.live("loads warcode JSON and JSONC files from lowest to highest priority", () =>
     Effect.acquireDisposable(Effect.promise(() => tmpdir())).pipe(
       Effect.flatMap((tmp) =>
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             Promise.all([
               fs.writeFile(
-                path.join(tmp.path, "opencode.json"),
+                path.join(tmp.path, "warcode.json"),
                 JSON.stringify({ $schema: "base", providers: { base: provider } }),
               ),
               fs.writeFile(
-                path.join(tmp.path, "opencode.jsonc"),
+                path.join(tmp.path, "warcode.jsonc"),
                 `{
                   // Later global files override scalar fields while retaining providers.
                   "$schema": "last",
@@ -1596,11 +1596,11 @@ describe("Config", () => {
             expect(documents.map((document) => document.type)).toEqual(["document", "document"])
             expect(documents.map((document) => document.info.$schema)).toEqual(["base", "last"])
             expect(documents[0]).toBeInstanceOf(Document)
-            expect(documents[0]?.path).toBe(AbsolutePath.make(path.join(tmp.path, "opencode.json")))
+            expect(documents[0]?.path).toBe(AbsolutePath.make(path.join(tmp.path, "warcode.json")))
             expect(documents[1]?.info.providers?.last).toBeInstanceOf(ConfigProvider.Info)
 
             yield* Effect.promise(() =>
-              fs.writeFile(path.join(tmp.path, "opencode.jsonc"), JSON.stringify({ $schema: "changed" })),
+              fs.writeFile(path.join(tmp.path, "warcode.jsonc"), JSON.stringify({ $schema: "changed" })),
             )
             expect(
               (yield* config.entries())
@@ -1616,9 +1616,9 @@ describe("Config", () => {
   it.live("substitutes environment variables and relative file contents", () =>
     withEnv(
       {
-        OPENCODE_TEST_FLAG: "false",
-        OPENCODE_TEST_MCP_TOKEN: String.raw`C:\Users\new\"secret"`,
-        OPENCODE_TEST_MISSING: undefined,
+        WARCODE_TEST_FLAG: "false",
+        WARCODE_TEST_MCP_TOKEN: String.raw`C:\Users\new\"secret"`,
+        WARCODE_TEST_MISSING: undefined,
       },
       () =>
         withTempDir((tmp) =>
@@ -1627,20 +1627,20 @@ describe("Config", () => {
               Promise.all([
                 fs.writeFile(path.join(tmp.path, "token.txt"), 'file\n"token"\n'),
                 fs.writeFile(
-                  path.join(tmp.path, "opencode.jsonc"),
+                  path.join(tmp.path, "warcode.jsonc"),
                   `{
                       // Ignored reference: {file:.}
-                      "username": "user-{env:OPENCODE_TEST_MISSING}",
-                      "snapshots": {env:OPENCODE_TEST_FLAG},
+                      "username": "user-{env:WARCODE_TEST_MISSING}",
+                      "snapshots": {env:WARCODE_TEST_FLAG},
                       "mcp": {
                         "servers": {
                           "remote": {
                             "type": "remote",
                             "url": "https://example.com/mcp",
                             "headers": {
-                              "Authorization": "Bearer {env:OPENCODE_TEST_MCP_TOKEN}",
+                              "Authorization": "Bearer {env:WARCODE_TEST_MCP_TOKEN}",
                               "X-Token": "{file:token.txt}",
-                              "X-Missing": "Bearer {file:~/.opencode-test-missing/key}",
+                              "X-Missing": "Bearer {file:~/.warcode-test-missing/key}",
                               "X-Folder": "{file:.}"
                             }
                           }
@@ -1707,7 +1707,7 @@ describe("Config", () => {
     Effect.acquireDisposable(Effect.promise(() => tmpdir())).pipe(
       Effect.flatMap((tmp) =>
         Effect.gen(function* () {
-          const file = path.join(tmp.path, "opencode.json")
+          const file = path.join(tmp.path, "warcode.json")
           const contents = JSON.stringify({
             shell: "/bin/zsh",
             providers: { local: provider },
@@ -1733,7 +1733,7 @@ describe("Config", () => {
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             fs.writeFile(
-              path.join(tmp.path, "opencode.json"),
+              path.join(tmp.path, "warcode.json"),
               JSON.stringify({
                 shell: "/bin/bash",
                 model: "anthropic/claude",
@@ -1915,7 +1915,7 @@ describe("Config", () => {
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             fs.writeFile(
-              path.join(tmp.path, "opencode.json"),
+              path.join(tmp.path, "warcode.json"),
               JSON.stringify({
                 reference: {
                   local: { path: "../library" },
@@ -1948,7 +1948,7 @@ describe("Config", () => {
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             fs.writeFile(
-              path.join(tmp.path, "opencode.json"),
+              path.join(tmp.path, "warcode.json"),
               JSON.stringify({
                 shell: "/bin/zsh",
                 default_agent: "reviewer",
@@ -2132,8 +2132,8 @@ describe("Config", () => {
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             Promise.all([
-              fs.writeFile(path.join(tmp.path, "opencode.json"), JSON.stringify({ $schema: "base" })),
-              fs.writeFile(path.join(tmp.path, "opencode.jsonc"), "{ invalid"),
+              fs.writeFile(path.join(tmp.path, "warcode.json"), JSON.stringify({ $schema: "base" })),
+              fs.writeFile(path.join(tmp.path, "warcode.jsonc"), "{ invalid"),
             ]),
           )
           return yield* Effect.gen(function* () {
@@ -2145,7 +2145,7 @@ describe("Config", () => {
             expect(yield* watcher.subscriptions()).toContainEqual({
               path: tmp.path,
               type: "entries",
-              names: [".agents", ".claude", ".opencode", "opencode.json", "opencode.jsonc"],
+              names: [".agents", ".claude", ".warcode", "warcode.json", "warcode.jsonc"],
             })
           }).pipe(Effect.provide(testLayer(tmp.path)))
         }),
@@ -2170,19 +2170,19 @@ describe("Config", () => {
             await fs.mkdir(directory, { recursive: true })
             await fs.mkdir(path.join(root, ".agents"), { recursive: true })
             await fs.mkdir(path.join(root, ".claude"), { recursive: true })
-            await fs.mkdir(path.join(root, ".opencode"), { recursive: true })
+            await fs.mkdir(path.join(root, ".warcode"), { recursive: true })
             await fs.mkdir(path.join(directory, ".agents"), { recursive: true })
             await fs.mkdir(path.join(directory, ".claude"), { recursive: true })
-            await fs.mkdir(path.join(directory, ".opencode"), { recursive: true })
+            await fs.mkdir(path.join(directory, ".warcode"), { recursive: true })
             await Promise.all([
-              fs.writeFile(path.join(tmp.path, "opencode.json"), JSON.stringify({ $schema: "outside" })),
-              fs.writeFile(path.join(global, "opencode.json"), JSON.stringify({ $schema: "global" })),
-              fs.writeFile(path.join(root, "opencode.json"), JSON.stringify({ $schema: "root" })),
-              fs.writeFile(path.join(parent, "opencode.jsonc"), JSON.stringify({ $schema: "parent" })),
-              fs.writeFile(path.join(directory, "opencode.json"), JSON.stringify({ $schema: "directory" })),
-              fs.writeFile(path.join(root, ".opencode", "opencode.json"), JSON.stringify({ $schema: "root-dot" })),
+              fs.writeFile(path.join(tmp.path, "warcode.json"), JSON.stringify({ $schema: "outside" })),
+              fs.writeFile(path.join(global, "warcode.json"), JSON.stringify({ $schema: "global" })),
+              fs.writeFile(path.join(root, "warcode.json"), JSON.stringify({ $schema: "root" })),
+              fs.writeFile(path.join(parent, "warcode.jsonc"), JSON.stringify({ $schema: "parent" })),
+              fs.writeFile(path.join(directory, "warcode.json"), JSON.stringify({ $schema: "directory" })),
+              fs.writeFile(path.join(root, ".warcode", "warcode.json"), JSON.stringify({ $schema: "root-dot" })),
               fs.writeFile(
-                path.join(directory, ".opencode", "opencode.jsonc"),
+                path.join(directory, ".warcode", "warcode.jsonc"),
                 JSON.stringify({ $schema: "directory-dot" }),
               ),
             ])
@@ -2196,8 +2196,8 @@ describe("Config", () => {
 
             expect(entries.filter((entry) => entry.type === "directory").map((entry) => entry.path)).toEqual([
               AbsolutePath.make(global),
-              AbsolutePath.make(path.join(root, ".opencode")),
-              AbsolutePath.make(path.join(directory, ".opencode")),
+              AbsolutePath.make(path.join(root, ".warcode")),
+              AbsolutePath.make(path.join(directory, ".warcode")),
             ])
             expect(compatibility.agents.filter((path) => inFixture(tmp.path, path))).toEqual([
               AbsolutePath.make(globalAgents),
@@ -2226,9 +2226,9 @@ describe("Config", () => {
               "parent",
               "directory",
               "root-dot",
-              AbsolutePath.make(path.join(root, ".opencode")),
+              AbsolutePath.make(path.join(root, ".warcode")),
               "directory-dot",
-              AbsolutePath.make(path.join(directory, ".opencode")),
+              AbsolutePath.make(path.join(directory, ".warcode")),
             ])
           }).pipe(
             Effect.provide(

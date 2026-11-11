@@ -39,7 +39,7 @@ function startShell() {
   revealHandedOff()
 
   const idle = window.requestIdleCallback ?? ((run: () => void) => setTimeout(run, 1500))
-  // window.opencode and its hint for developers who open DevTools (lib/console-stub.ts).
+  // window.warcode and its hint for developers who open DevTools (lib/console-stub.ts).
   idle(() => installConsoleStub())
   // The corner orb, after the page.
   addEventListener("load", () => idle(() => void import("./overlays/orb").then((module) => module.default())), {

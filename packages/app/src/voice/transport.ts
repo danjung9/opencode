@@ -1,5 +1,5 @@
-import type { OpenCodeClient } from "@opencode/client/promise"
-import { uuid } from "@opencode/util/uuid"
+import type { WarcodeClient } from "@warcode/client/promise"
+import { uuid } from "@warcode/util/uuid"
 import { decodeEvent, type VoiceEvent } from "./protocol"
 import { delegatorInstructions, liveInstructions, tools } from "./spec"
 import {
@@ -52,7 +52,7 @@ export class VoiceTransport {
 
   constructor(
     private readonly inputOptions: {
-      voice: OpenCodeClient["experimental"]["voice"]
+      voice: WarcodeClient["experimental"]["voice"]
       event: (event: VoiceEvent) => void
       levels: (input: number, output: number) => void
       dropped: () => void

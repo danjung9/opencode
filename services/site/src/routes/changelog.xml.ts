@@ -27,10 +27,10 @@ export async function GET(event: APIEvent) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <channel>
-<title>${escape(`OpenCode changelog${labels.length > 0 ? `: ${labels.join(", ")}` : ""}`)}</title>
+<title>${escape(`Warcode changelog${labels.length > 0 ? `: ${labels.join(", ")}` : ""}`)}</title>
 <link>${escape(page)}</link>
 <atom:link href="${escape(`${config.baseUrl}/changelog.xml${changelogQuery({ filter: view.filter })}`)}" rel="self" type="application/rss+xml"/>
-<description>New updates and improvements to OpenCode</description>
+<description>New updates and improvements to Warcode</description>
 <language>en</language>
 ${view.entries.map(item).join("\n")}
 </channel>

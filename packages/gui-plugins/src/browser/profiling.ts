@@ -1,5 +1,5 @@
 import type { WebContents } from "electron"
-import { Browser } from "@opencode/plugin-browser/rpc"
+import { Browser } from "@warcode/plugin-browser/rpc"
 import { gzipSync, gunzipSync } from "node:zlib"
 import { Schema } from "effect"
 import type { Cdp } from "./cdp"
@@ -228,7 +228,7 @@ export function createProfiling(
         gzipSync(
           JSON.stringify({
             traceEvents,
-            metadata: { source: "opencode", scope: "renderer-process", processId: effect.pid },
+            metadata: { source: "warcode", scope: "renderer-process", processId: effect.pid },
           }),
         ),
         [...effect.resources],

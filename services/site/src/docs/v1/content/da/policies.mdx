@@ -1,15 +1,15 @@
 ---
 title: Politikker
-description: Styr, hvilke konfigurerede ressourcer OpenCode må bruge.
+description: Styr, hvilke konfigurerede ressourcer Warcode må bruge.
 ---
 
-:::caution[Kræver OpenCode 2]
-Politikker håndhæves ikke i OpenCode 1. Eksemplerne på denne side kræver OpenCode 2. I OpenCode 1 skal du bruge [`disabled_providers`](/docs/config#disabled-providers) eller [`enabled_providers`](/docs/config#enabled-providers) til at styre, hvilke udbydere der er tilgængelige. Se [dokumentationen om politikker i OpenCode 2](https://opencode.ai/docs/policies/) for den aktuelle brug.
+:::caution[Kræver Warcode 2]
+Politikker håndhæves ikke i Warcode 1. Eksemplerne på denne side kræver Warcode 2. I Warcode 1 skal du bruge [`disabled_providers`](/docs/config#disabled-providers) eller [`enabled_providers`](/docs/config#enabled-providers) til at styre, hvilke udbydere der er tilgængelige. Se [dokumentationen om politikker i Warcode 2](https://opencode.ai/docs/policies/) for den aktuelle brug.
 :::
 
-Politikker styrer, om OpenCode må udføre en handling på en navngiven ressource. Denne funktion i OpenCode 2 er eksperimentel og konfigureres med arrayet `experimental.policies` i `opencode.json`.
+Politikker styrer, om Warcode må udføre en handling på en navngiven ressource. Denne funktion i Warcode 2 er eksperimentel og konfigureres med arrayet `experimental.policies` i `warcode.json`.
 
-Politikker er adskilt fra [tilladelser](/docs/permissions). Tilladelser styrer, hvad værktøjer kan gøre under en session, mens politikker styrer, om OpenCode må bruge en ressource som en LLM-udbyder.
+Politikker er adskilt fra [tilladelser](/docs/permissions). Tilladelser styrer, hvad værktøjer kan gøre under en session, mens politikker styrer, om Warcode må bruge en ressource som en LLM-udbyder.
 
 ---
 
@@ -23,7 +23,7 @@ Hver politikerklæring har tre felter:
 
 Afvis for eksempel brugen af udbyderen `openai`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -44,7 +44,7 @@ En udbyder, der er afvist af en politik, er ikke tilgængelig til modelvalg elle
 
 ## Tilgængelige politikker
 
-OpenCode understøtter i øjeblikket én politikhandling:
+Warcode understøtter i øjeblikket én politikhandling:
 
 | Handling       | Ressource                   | Beskrivelse                                |
 | -------------- | --------------------------- | ------------------------------------------ |
@@ -58,7 +58,7 @@ Flere politikhandlinger kan blive tilføjet i fremtiden.
 
 Feltet `resource` understøtter jokertegn-matchning. Brug `*` til at matche nul eller flere tegn og `?` til at matche ét tegn.
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -83,7 +83,7 @@ Når flere erklæringer matcher, vinder den sidste matchende erklæring. Sæt br
 
 Tillad for eksempel kun Anthropic:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -111,11 +111,11 @@ Politikker kan angives i både din globale konfiguration og din projektkonfigura
 
 ## Udbyderlister
 
-I OpenCode 2 skal du bruge politikker i stedet for de ældre indstillinger `disabled_providers` og `enabled_providers`, når du styrer adgangen til udbydere. Bliv ved med at bruge disse udbyderlister i OpenCode 1.
+I Warcode 2 skal du bruge politikker i stedet for de ældre indstillinger `disabled_providers` og `enabled_providers`, når du styrer adgangen til udbydere. Bliv ved med at bruge disse udbyderlister i Warcode 1.
 
 Sådan erstatter du `disabled_providers`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [
@@ -128,7 +128,7 @@ Sådan erstatter du `disabled_providers`:
 
 Sådan erstatter du `enabled_providers`: afvis først alle udbydere, og tillad derefter de valgte udbydere:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [

@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test"
-import { mockOpenCodeServer } from "../../e2e/utils/mock-server"
+import { mockWarcodeServer } from "../../e2e/utils/mock-server"
 import { fixture as stress } from "../../e2e/utils/session-fixture"
 
 // Home shows the newest 64 root sessions.
@@ -28,7 +28,7 @@ type HomeIndexDirectory = {
 }
 
 const repos = [
-  "opencode",
+  "warcode",
   "storefront-api",
   "billing-worker",
   "design-system",
@@ -237,7 +237,7 @@ function hex(random: () => number, length: number) {
 export async function mockHome(page: Page, input: { server: string; count: number }) {
   const home = createHomeIndexFixture({ count: input.count, now: Date.now() })
   const primary = home.directories[0]
-  await mockOpenCodeServer(page, {
+  await mockWarcodeServer(page, {
     server: input.server,
     directory: primary.directory,
     project: {
@@ -264,7 +264,7 @@ export async function mockHome(page: Page, input: { server: string; count: numbe
 export function installProjects(page: Page, projects: string[]) {
   return page.addInitScript((projects) => {
     localStorage.setItem(
-      "opencode.global.dat:server",
+      "warcode.global.dat:server",
       JSON.stringify({
         projects: { local: projects.map((worktree, index) => ({ worktree, expanded: index === 0 })) },
         lastProject: { local: projects[0] },

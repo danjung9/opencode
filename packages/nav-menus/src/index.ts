@@ -1,20 +1,20 @@
 import { brandSvgs } from "./brand"
 
 /**
- * The OpenCode nav menus, for every OpenCode site: opencode.ai and its docs, OpenCode Data, the Console's pages and
+ * The Warcode nav menus, for every Warcode site: warcode.ai and its docs, Warcode Data, the Console's pages and
  * the status page. Framework-free, so pages that never hydrate (the docs) and plain HTML (the status page) can use it.
  *
  * Mark the elements and call `installNavMenus()` once in the browser:
- * - `data-nav-logo` on the OpenCode logo link: right-click (or Shift+F10, the menu key or a long press) opens the
- *   logo menu, the brand files to download and the Brand, brand assets and Press links, as on opencode.ai.
+ * - `data-nav-logo` on the Warcode logo link: right-click (or Shift+F10, the menu key or a long press) opens the
+ *   logo menu, the brand files to download and the Brand, brand assets and Press links, as on warcode.ai.
  * - `data-nav-product="data"` on the product's name beside the logo: hovering it (a 150ms intent delay; it closes 200ms
  *   after the pointer leaves the name and the menu), ArrowDown on it, Shift+F10 or the menu key opens the product menu,
- *   the OpenCode products with the page's own one current. On touch screens, which have no hover, the name stays a plain
+ *   the Warcode products with the page's own one current. On touch screens, which have no hover, the name stays a plain
  *   link and a chevron after it (added here, `data-nav-product-toggle`) opens the menu.
  * - `data-nav-name` instead on a name that opens no menu (the status page's, which isn't one of the products): the
  *   lockup's look alone (nav-menus.css).
  *
- * One menu is open at a time: opening one closes the other at once, and the `opencode-nav-menu-open` event tells the
+ * One menu is open at a time: opening one closes the other at once, and the `warcode-nav-menu-open` event tells the
  * host to close its own menus. Both menus open on the same line, 8px under the lockup's highlight, their inline-start
  * edge on the logo's or the name's, and keep 16px from the window's sides.
  *
@@ -24,20 +24,20 @@ import { brandSvgs } from "./brand"
  * when it opens.
  */
 
-export type Product = "opencode" | "console" | "data" | "docs"
+export type Product = "warcode" | "console" | "data" | "docs"
 
 /**
- * The OpenCode products, in the menu's order, each at a `path` on opencode.ai (the host's `link` resolves it).
+ * The Warcode products, in the menu's order, each at a `path` on warcode.ai (the host's `link` resolves it).
  */
 export const products: { id: Product; name: string; path: string }[] = [
-  { id: "opencode", name: "OpenCode", path: "/" },
+  { id: "warcode", name: "Warcode", path: "/" },
   { id: "console", name: "Console", path: "/console" },
   { id: "data", name: "Data", path: "/data" },
   { id: "docs", name: "Docs", path: "/docs" },
 ]
 
-/** Every logo and wordmark in one zip, in opencode.ai's files bucket (services/site/src/lib/media.ts). */
-export const brandAssetsPath = "/files/site/2026-11/opencode-brand-assets.zip"
+/** Every logo and wordmark in one zip, in warcode.ai's files bucket (services/site/src/lib/media.ts). */
+export const brandAssetsPath = "/files/site/2026-11/warcode-brand-assets.zip"
 
 /** The logo menu's files: the light ones first, then the dark, each default (transparent) then simple (solid). */
 export const logoFiles = (["light", "dark"] as const).flatMap((tone) =>
@@ -47,15 +47,15 @@ export const logoFiles = (["light", "dark"] as const).flatMap((tone) =>
       tone,
       style,
       name: style === "solid" ? `Simple ${kind}` : kind === "logo" ? "Logo" : "Wordmark",
-      file: `opencode-${kind}-${style}-${tone}.svg`,
+      file: `warcode-${kind}-${style}-${tone}.svg`,
       svg: brandSvgs[`${kind}-${style}-${tone}`] ?? "",
     })),
   ),
 )
 
 export type NavMenusOptions = {
-  /** A path on opencode.ai to the URL this page should link: by default the absolute https://opencode.ai URL. Hosts on
-   * opencode.ai pass a same-host path (and opencode.ai its own locale route). */
+  /** A path on warcode.ai to the URL this page should link: by default the absolute https://opencode.ai URL. Hosts on
+   * warcode.ai pass a same-host path (and warcode.ai its own locale route). */
   link?: (path: string) => string
 }
 
@@ -82,7 +82,7 @@ const tokens = [
   "--nav-menu-mono",
 ]
 
-// The logo fan's motion (opencode.ai, fan-motion.ts): each card drops a little further than the one before, starts a
+// The logo fan's motion (warcode.ai, fan-motion.ts): each card drops a little further than the one before, starts a
 // touch small and turned, and settles on a tight damped spring, one after another.
 const start = (index: number) => `translateY(-${Math.min(12 + index * 6, 42)}px) rotate(-1deg) scale(0.97)`
 const spring = `linear(${Array.from({ length: 48 }, (_, index) => {
@@ -147,9 +147,9 @@ export function installNavMenus(options: NavMenusOptions = {}) {
     const menu = document.createElement("div")
     menu.dataset.navMenu = kind
     menu.setAttribute("role", "menu")
-    menu.setAttribute("aria-label", kind === "logo" ? "Brand assets" : "OpenCode products")
+    menu.setAttribute("aria-label", kind === "logo" ? "Brand assets" : "Warcode products")
     menu.id = `nav-menu-${kind}`
-    // Counts as an open menu for the host's floating things (opencode.ai's menu-open.ts).
+    // Counts as an open menu for the host's floating things (warcode.ai's menu-open.ts).
     menu.setAttribute("data-menu-open", "")
     const style = getComputedStyle(trigger)
     menu.style.colorScheme = style.colorScheme
@@ -194,7 +194,7 @@ export function installNavMenus(options: NavMenusOptions = {}) {
         ),
       )
       card(
-        { href: link(brandAssetsPath), download: "opencode-brand-assets.zip" },
+        { href: link(brandAssetsPath), download: "warcode-brand-assets.zip" },
         slot("thumb", { kind: "zip" }, icons.zip),
         "Brand assets",
         "ZIP",
@@ -252,7 +252,7 @@ export function installNavMenus(options: NavMenusOptions = {}) {
     // Hand over at once: the open menu and any still folding away go before the new one comes, so two never overlap.
     close(false, true)
     document.querySelectorAll("[data-nav-menu][data-closing]").forEach((menu) => menu.remove())
-    document.dispatchEvent(new CustomEvent("opencode-nav-menu-open"))
+    document.dispatchEvent(new CustomEvent("warcode-nav-menu-open"))
     const kind = kindOf(trigger)
     const menu = build(kind, trigger)
     document.body.append(menu)
@@ -281,7 +281,7 @@ export function installNavMenus(options: NavMenusOptions = {}) {
     if (focus) items()[0]?.focus()
   }
 
-  // The cards fold back, the last first, as on opencode.ai; `now` removes the menu at once (another one is opening).
+  // The cards fold back, the last first, as on warcode.ai; `now` removes the menu at once (another one is opening).
   const close = (refocus = false, now = false) => {
     clearTimeout(openTimer)
     clearTimeout(closeTimer)
@@ -467,7 +467,7 @@ export function addProductToggles() {
     chevron.dataset.navProductToggle = ""
     chevron.setAttribute("aria-haspopup", "menu")
     chevron.setAttribute("aria-expanded", "false")
-    chevron.setAttribute("aria-label", "OpenCode products")
+    chevron.setAttribute("aria-label", "Warcode products")
     chevron.innerHTML = `<svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg>`
     name.after(chevron)
   })

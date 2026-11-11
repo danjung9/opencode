@@ -11,7 +11,7 @@ import { Rich } from "./rich-text"
 
 /**
  * Settings › Subscriptions style A, B and C in "Bring your own subs" (lib/byos-options.ts): ways
- * to show that OpenCode works with nearly every subscription, provider and model. Like the section's
+ * to show that Warcode works with nearly every subscription, provider and model. Like the section's
  * other styles, every option renders in development and the section's data-style shows one
  * (byos-options.css); production renders none while the default is "grid" (script/fold-settings.ts).
  */
@@ -94,10 +94,10 @@ export function ByosOptions() {
           </dd>
         </div>
         <div>
-          <dt>{byosOptions.rows.opencode}</dt>
+          <dt>{byosOptions.rows.warcode}</dt>
           <dd>
             <ul data-slot="names">
-              <For each={byosOptions.opencode}>
+              <For each={byosOptions.warcode}>
                 {(item) => (
                   <li>
                     <a href={item.href}>{item.name}</a>

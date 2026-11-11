@@ -5,7 +5,7 @@ import { bench, script } from "@hona/strobe"
 // to a session's wall time; compare base and head for whether a change moved either.
 export default bench({
   targets: { core: script("./snapshot.ts") },
-  params: { snapshots: ["on", "off"], fixture: { run: ["opencode"], more: ["medium"] } },
+  params: { snapshots: ["on", "off"], fixture: { run: ["warcode"], more: ["medium"] } },
   async setup(ctx) {
     await ctx.call("prepare", ctx.params.fixture)
   },

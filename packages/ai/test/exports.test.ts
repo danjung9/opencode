@@ -13,10 +13,10 @@ import {
   LLMEvent,
   Media,
   RawEvent,
-} from "@opencode/ai/effect"
-import { AI } from "@opencode/ai"
-import { Speech, SpeechClient, SpeechEvent, TranscriptionClient, Video, VideoClient } from "@opencode/ai/experimental"
-import { Route, Protocol, RequestExecutor, WebSocketTransport } from "@opencode/ai/route"
+} from "@warcode/ai/effect"
+import { AI } from "@warcode/ai"
+import { Speech, SpeechClient, SpeechEvent, TranscriptionClient, Video, VideoClient } from "@warcode/ai/experimental"
+import { Route, Protocol, RequestExecutor, WebSocketTransport } from "@warcode/ai/route"
 import {
   Alibaba,
   AssemblyAI,
@@ -32,7 +32,7 @@ import {
   Google,
   Meta,
   MiniMax,
-  OpenCode,
+  Warcode,
   OpenAI,
   OpenAICompatible,
   OpenRouter,
@@ -41,7 +41,7 @@ import {
   VercelAIGateway,
   XAI,
   ZAI,
-} from "@opencode/ai/providers"
+} from "@warcode/ai/providers"
 import {
   AnthropicMessages,
   OpenAIChat,
@@ -50,8 +50,8 @@ import {
   OpenAIResponses,
   OpenResponses,
   OpenResponsesChannel,
-} from "@opencode/ai/protocols"
-import { TestLLM } from "@opencode/ai/testing"
+} from "@warcode/ai/protocols"
+import { TestLLM } from "@warcode/ai/testing"
 
 describe("public exports", () => {
   test("modality, provider, and protocol entrypoints load first in a fresh process", async () => {
@@ -131,7 +131,7 @@ describe("public exports", () => {
   })
 
   test("provider barrels expose user-facing facades", async () => {
-    const { OpenAICompatibleResponses } = await import("@opencode/ai/providers")
+    const { OpenAICompatibleResponses } = await import("@warcode/ai/providers")
 
     expect(OpenAI.model).toBeFunction()
     expect(OpenAI.embedding).toBeFunction()
@@ -154,7 +154,7 @@ describe("public exports", () => {
     expect(OpenRouter.model).toBeFunction()
     expect(OpenRouter.decision).toBeFunction()
     expect(TypeSafeAI.decision).toBeFunction()
-    expect(OpenCode.decision).toBeFunction()
+    expect(Warcode.decision).toBeFunction()
     expect(VercelAIGateway.decision("typesafe-ai/jev").route.id).toBe("openai-decisions")
     expect(Baseten.decision).toBeFunction()
     expect(DigitalOcean.decision).toBeFunction()

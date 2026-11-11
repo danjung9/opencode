@@ -5,7 +5,7 @@ import type { SearchItem } from "./search-index"
 // load (a static page, or any page from one) is handed to that page through session storage.
 
 type Target = SearchItem["target"]
-const key = "opencode-search-reveal"
+const key = "warcode-search-reveal"
 
 /** Hands a result's place to the next page, in case it opens with a full page load. */
 export function handOff(path: string, target: Target) {

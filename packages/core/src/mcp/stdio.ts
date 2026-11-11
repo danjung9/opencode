@@ -37,7 +37,7 @@ export interface Options {
 
 /**
  * Resolves a local server's configured `cwd` against the workspace directory, expanding `~` to the
- * opencode host's home. Environments do not expose their own home, so a workspace-backed location
+ * warcode host's home. Environments do not expose their own home, so a workspace-backed location
  * gets the host's home too.
  */
 export const resolveCwd = (directory: string, cwd: string | undefined) =>

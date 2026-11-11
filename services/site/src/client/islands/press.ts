@@ -42,7 +42,7 @@ export default function press() {
   })
 }
 
-// The boilerplate accordion (faq.tsx, opened and closed by src/client/faq.ts), OpenCode's row open
+// The boilerplate accordion (faq.tsx, opened and closed by src/client/faq.ts), Warcode's row open
 // from the server. A row grows open only once one has been toggled (data-ready), so a row a link
 // opens doesn't animate.
 function accordion(list: HTMLElement) {

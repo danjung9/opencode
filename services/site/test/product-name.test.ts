@@ -4,16 +4,16 @@ import { Glob } from "bun"
 import ts from "typescript"
 
 /*
- * The pay-as-you-go models product is "OpenCode Models". Its old name, "Zen" or "OpenCode Zen", must
+ * The pay-as-you-go models product is "Warcode Models". Its old name, "Zen" or "Warcode Zen", must
  * not come back into the site's copy. This reads the text a reader can see (string literals, template
  * text and JSX text in src, the site's JSON data and the public text files) and fails on the old name.
  * Code identifiers (ZenData, zenApiKey), i18n keys ("zen.faq.q1"), the /zen redirect and the
  * zen/v1 API paths are lowercase or part of a longer word, so they don't match.
  */
 const root = path.join(import.meta.dir, "..")
-// "Zen" as a word with a capital, or "OpenCode Zen" in any case. Lowercase "zen" alone is an identifier or a path.
+// "Zen" as a word with a capital, or "Warcode Zen" in any case. Lowercase "zen" alone is an identifier or a path.
 const matches = (text: string) =>
-  /(?<![A-Za-z\u00C0-\u024F])Zen(?![A-Za-z\u00C0-\u024F])/u.test(text) || /opencode[\s-]+zen/i.test(text)
+  /(?<![A-Za-z\u00C0-\u024F])Zen(?![A-Za-z\u00C0-\u024F])/u.test(text) || /warcode[\s-]+zen/i.test(text)
 
 // Each entry is a file, and the text in it that may keep the old name, with the reason.
 const allowed: { file: string; text?: string; reason: string }[] = [
@@ -28,7 +28,7 @@ const allowed: { file: string; text?: string; reason: string }[] = [
   },
   {
     file: "src/lib/voice-answers.ts",
-    text: "opencode zen",
+    text: "warcode zen",
     reason: "a question the voice assistant matches, so people who ask for the old name get the answer",
   },
 ]
@@ -72,7 +72,7 @@ async function scan(pattern: string, read: (file: string, source: string) => str
 describe("product name", () => {
   test("the matcher finds the old name and skips identifiers", () => {
     expect(
-      ["Zen", "OpenCode Zen", "opencode zen", "Use Zen with", "Zenを使用", "Zen'i", "将 Zen 与"].every(matches),
+      ["Zen", "Warcode Zen", "warcode zen", "Use Zen with", "Zenを使用", "Zen'i", "将 Zen 与"].every(matches),
     ).toBe(true)
     expect(
       ["zen.faq.q1", "/zen", "/zen/v1/chat/completions", "ZenData", "zenApiKey", "Zenburn", "citizen", "frozen"].some(

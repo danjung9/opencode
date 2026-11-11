@@ -1,7 +1,7 @@
 import { expect, test, type Locator, type Page } from "@playwright/test"
 import { SERVER, holdRoute, seed, sessionHref } from "../utils/app"
 import { openWithDirection } from "../utils/direction"
-import { mockOpenCodeServer } from "../utils/mock-server"
+import { mockWarcodeServer } from "../utils/mock-server"
 import { fixture, installStressSessionTabs, mockStressTimeline, pageMessages } from "../utils/session-fixture"
 import { fileDiff, openSession } from "../utils/workspace"
 
@@ -128,7 +128,7 @@ test("the project menu loads changes on demand and opens review", async ({ page 
     "main",
     /1 Changed file.*\+7.*-3/,
     "",
-    "C:/OpenCode/ProjectChanges",
+    "C:/Warcode/ProjectChanges",
     "",
     "Edit project",
   ])
@@ -176,7 +176,7 @@ test("the project menu shows a failed changes load and loads again in place", as
 })
 
 test("a session in a worktree subfolder names its worktree and lists cached worktrees at once", async ({ page }) => {
-  const root = "C:/OpenCode/SmokeWorktrees"
+  const root = "C:/Warcode/SmokeWorktrees"
   await mockStressTimeline(page, {
     sessions: fixture.sessions.map((item) =>
       item.id === fixture.targetID ? { ...item, directory: `${root}/feature/packages/app` } : { ...item },
@@ -216,7 +216,7 @@ test("a session in a worktree subfolder names its worktree and lists cached work
 })
 
 test("a subagent shows its details but cannot move to another worktree", async ({ page }) => {
-  const root = "C:/OpenCode/SmokeWorktrees"
+  const root = "C:/Warcode/SmokeWorktrees"
 
   await mockStressTimeline(page, {
     sessions: fixture.sessions.map((item) =>
@@ -243,7 +243,7 @@ test("a subagent shows its details but cannot move to another worktree", async (
 })
 
 test("the details follow the routed session when it moves to another worktree", async ({ page }) => {
-  const root = "C:/OpenCode/SmokeWorktrees"
+  const root = "C:/Warcode/SmokeWorktrees"
 
   const sessions = fixture.sessions.map((item) =>
     item.id === fixture.targetID ? { ...item, directory: `${root}/feature` } : { ...item },
@@ -289,7 +289,7 @@ test("the details follow the routed session when it moves to another worktree", 
 test("a new worktree that does not receive the session offers Retry and Delete worktree after the menu closes", async ({
   page,
 }) => {
-  const created = "C:/OpenCode/worktrees/quiet-river"
+  const created = "C:/Warcode/worktrees/quiet-river"
   const creates: unknown[] = []
   const removes: unknown[] = []
   const moves: unknown[] = []
@@ -340,7 +340,7 @@ test("a new worktree that does not receive the session offers Retry and Delete w
 })
 
 test("a session that starts running while its new worktree is created stays put until Retry", async ({ page }) => {
-  const created = "C:/OpenCode/worktrees/calm-lake"
+  const created = "C:/Warcode/worktrees/calm-lake"
   const moves: unknown[] = []
 
   const view = await openSession(page, {
@@ -487,7 +487,7 @@ test("summary catalogs load, refresh while cached, and tell errors from empty", 
             { id: "builtin", source: { type: "builtin" }, features: {}, state: { status: "active" } },
             {
               id: "supermemory",
-              source: { type: "package", target: "opencode-supermemory" },
+              source: { type: "package", target: "warcode-supermemory" },
               features: { server: true },
               state: { status: "active" },
             },
@@ -501,7 +501,7 @@ test("summary catalogs load, refresh while cached, and tell errors from empty", 
               ? [
                   {
                     id: "daytona",
-                    source: { type: "package", target: "opencode-daytona" },
+                    source: { type: "package", target: "warcode-daytona" },
                     features: {},
                     state: { status: "active" },
                   },
@@ -752,7 +752,7 @@ test("Extensions lists open on hover, hold course into the open list, and follow
     plugins: [
       {
         id: "supermemory",
-        source: { type: "package", target: "opencode-supermemory" },
+        source: { type: "package", target: "warcode-supermemory" },
         features: {},
         state: { status: "active" },
       },
@@ -810,15 +810,15 @@ test("Extensions lists open on hover, hold course into the open list, and follow
 })
 
 test("Extensions lists open config files and skills in a side tab and start setup sessions", async ({ page }) => {
-  const global = "C:/Users/kit/.config/opencode/opencode.jsonc"
-  const skill = `${fixture.directory}/.opencode/skills/release-notes/SKILL.md`
+  const global = "C:/Users/kit/.config/warcode/warcode.jsonc"
+  const skill = `${fixture.directory}/.warcode/skills/release-notes/SKILL.md`
   let builtinReads = 0
 
   await mockStressTimeline(page, {
     mcp: [{ name: "atlas-search", status: { status: "connected" } }],
     plugins: [],
     skills: [
-      { id: "opencode", name: "OpenCode", path: "skill://opencode/SKILL.md", content: "# Built-in OpenCode guide" },
+      { id: "warcode", name: "Warcode", path: "skill://warcode/SKILL.md", content: "# Built-in Warcode guide" },
       { id: "release-notes", name: "release-notes", path: skill, content: "Release notes" },
     ],
     configEntries: [
@@ -828,7 +828,7 @@ test("Extensions lists open config files and skills in a side tab and start setu
         info: { mcp: { servers: { "atlas-search": { type: "remote", url: "https://atlas.example" } } } },
       },
       // An empty project override used to win, so the servers' own file never opened.
-      { type: "document", path: `${fixture.directory}/.opencode/opencode.jsonc`, info: { mcp: {} } },
+      { type: "document", path: `${fixture.directory}/.warcode/warcode.jsonc`, info: { mcp: {} } },
     ],
     fileContent: (path) => ({ type: "text", content: `contents:${path}` }),
   })
@@ -838,7 +838,7 @@ test("Extensions lists open config files and skills in a side tab and start setu
 
     return route.fulfill({
       status: 404,
-      json: { message: "Location not found: skill://opencode" },
+      json: { message: "Location not found: skill://warcode" },
       headers: cors,
     })
   })
@@ -851,19 +851,19 @@ test("Extensions lists open config files and skills in a side tab and start setu
   await trigger.click()
   await row("MCP").hover()
   // A file outside the workspace is read by name from its own directory.
-  const read = page.waitForRequest((request) => new URL(request.url()).pathname.endsWith("/api/fs/read/opencode.jsonc"))
+  const read = page.waitForRequest((request) => new URL(request.url()).pathname.endsWith("/api/fs/read/warcode.jsonc"))
   await list("MCP").getByRole("button", { name: "Configuration file", exact: true }).click()
-  expect(new URL((await read).url()).searchParams.get("location[directory]")).toBe("C:/Users/kit/.config/opencode/")
+  expect(new URL((await read).url()).searchParams.get("location[directory]")).toBe("C:/Users/kit/.config/warcode/")
   await expect(summary).toBeHidden()
-  await expect(page.getByRole("tab", { name: "opencode.jsonc", exact: true })).toHaveAttribute("aria-selected", "true")
-  await expect(page.getByText("contents:opencode.jsonc", { exact: true })).toBeVisible()
+  await expect(page.getByRole("tab", { name: "warcode.jsonc", exact: true })).toHaveAttribute("aria-selected", "true")
+  await expect(page.getByText("contents:warcode.jsonc", { exact: true })).toBeVisible()
 
   await trigger.click()
   await row("Skills").hover()
-  await list("Skills").getByRole("button", { name: "OpenCode", exact: true }).click()
+  await list("Skills").getByRole("button", { name: "Warcode", exact: true }).click()
   await expect(summary).toBeHidden()
   await expect(page.getByRole("tab", { name: "SKILL.md", exact: true })).toHaveAttribute("aria-selected", "true")
-  await expect(page.getByRole("heading", { name: "Built-in OpenCode guide", exact: true })).toBeVisible()
+  await expect(page.getByRole("heading", { name: "Built-in Warcode guide", exact: true })).toBeVisible()
   await expect(page.getByText("Failed to load file", { exact: true })).toHaveCount(0)
   expect(builtinReads).toBe(0)
 
@@ -872,15 +872,15 @@ test("Extensions lists open config files and skills in a side tab and start setu
   await list("Skills").getByRole("button", { name: "release-notes", exact: true }).click()
   await expect(summary).toBeHidden()
   await expect(page.getByRole("tab", { name: "SKILL.md", selected: true, exact: true })).toBeVisible()
-  await expect(page.getByText("contents:.opencode/skills/release-notes/SKILL.md", { exact: true })).toBeVisible()
+  await expect(page.getByText("contents:.warcode/skills/release-notes/SKILL.md", { exact: true })).toBeVisible()
 
   // An empty list offers a draft session in the global configuration's directory, its prompt filled in.
   await trigger.click()
   await row("Plugins").hover()
-  await list("Plugins").getByRole("button", { name: "Add a plugin with OpenCode", exact: true }).click()
+  await list("Plugins").getByRole("button", { name: "Add a plugin with Warcode", exact: true }).click()
   await expect(page).toHaveURL(/\/new-session\?/)
   await expect(page.locator('[data-component="composer-editor"]')).toContainText(
-    "Help me add a plugin to my global OpenCode config.",
+    "Help me add a plugin to my global Warcode config.",
   )
 })
 
@@ -888,7 +888,7 @@ test("multiple desktop connections show the session's server name", async ({ pag
   await mockStressTimeline(page)
   await page.route("http://secondary.test/**", (route) =>
     route.fulfill({
-      json: { version: "2.0.0", pid: 1, urls: ["http://secondary.test"], paths: { tmp: "/tmp/opencode" } },
+      json: { version: "2.0.0", pid: 1, urls: ["http://secondary.test"], paths: { tmp: "/tmp/warcode" } },
     }),
   )
   await seed(page, {
@@ -909,17 +909,17 @@ test.describe("remote configuration", () => {
 
   test("remote servers copy each service's configuration path", async ({ page }) => {
     const remote = "http://summary-remote.test:4096"
-    const home = "/home/remote/.config/opencode"
+    const home = "/home/remote/.config/warcode"
 
     const entries = [
       { type: "document", path: `${home}/mcp.jsonc`, info: { mcp: { servers: {} } } },
       { type: "document", path: `${home}/plugins.json`, info: { plugins: [] } },
       { type: "document", path: `${home}/skills.jsonc`, info: { skills: [] } },
-      { type: "document", path: `${fixture.directory}/opencode.json`, info: {} },
-      { type: "document", path: `${fixture.directory}/.opencode/agents/review.md`, info: {} },
+      { type: "document", path: `${fixture.directory}/warcode.json`, info: {} },
+      { type: "document", path: `${fixture.directory}/.warcode/agents/review.md`, info: {} },
     ]
 
-    await mockOpenCodeServer(page, {
+    await mockWarcodeServer(page, {
       server: remote,
       sessions: fixture.sessions,
       provider: fixture.provider,
@@ -995,7 +995,7 @@ test("long MCP lists stay in the viewport in a real RTL locale", async ({ page }
       status: { status: "connected" },
     })),
   })
-  await seed(page, { locale: "he", theme: { id: "oc-2", scheme: "dark" } })
+  await seed(page, { locale: "he", theme: { id: "workroom", scheme: "dark" } })
   await page.goto(sessionHref(fixture.targetID))
   await page.getByRole("button", { name: "פרטי ההפעלה", exact: true }).click()
   const summary = page.getByRole("dialog", { name: "פרטי ההפעלה", exact: true })

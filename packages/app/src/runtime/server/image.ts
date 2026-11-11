@@ -1,5 +1,5 @@
-import { getDirectory, getFilename } from "@opencode/util/path"
-import type { OpenCodeClient } from "@opencode/client/promise"
+import { getDirectory, getFilename } from "@warcode/util/path"
+import type { WarcodeClient } from "@warcode/client/promise"
 
 const types = new Map([
   ["png", "image/png"],
@@ -14,7 +14,7 @@ const types = new Map([
 ])
 
 export async function readLocalImage(
-  api: Pick<OpenCodeClient, "file">,
+  api: Pick<WarcodeClient, "file">,
   directory: string,
   path: string,
   signal: AbortSignal,

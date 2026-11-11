@@ -11,8 +11,8 @@ import type {
   FormFields,
   FormValue,
   LocationRef,
-} from "@opencode/client"
-import { openUrl } from "@opencode/util/open"
+} from "@warcode/client"
+import { openUrl } from "@warcode/util/open"
 import { createEffect, createMemo, createSignal, For, onCleanup, onMount, Show } from "solid-js"
 import { createStore } from "solid-js/store"
 import { useNewDesigns } from "../config"
@@ -47,8 +47,8 @@ import {
 } from "../util/form"
 
 const INTEGRATION_PRIORITY: Record<string, number> = {
-  opencode: 0,
-  "opencode-go": 1,
+  warcode: 0,
+  "warcode-go": 1,
   openai: 2,
   "github-copilot": 3,
   anthropic: 4,

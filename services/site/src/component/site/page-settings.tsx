@@ -73,7 +73,7 @@ import { SettingsSelect, SettingsSlider, type SettingsSectionID } from "./site"
 import { videoSetIds } from "./videos"
 
 const sectionColumnSettings = [
-  { key: "whatColumns", label: "What is OpenCode?", copy: "whatCopyColumns" },
+  { key: "whatColumns", label: "What is Warcode?", copy: "whatCopyColumns" },
   { key: "toolsColumns", label: "Bring your own tools", copy: "toolsCopyColumns" },
   { key: "openSourceColumns", label: "Open source", copy: "openSourceCopyColumns" },
   { key: "consoleColumns", label: "Console", copy: "consoleCopyColumns" },
@@ -707,7 +707,7 @@ export default function PageSettings(props: { home?: boolean; terminal?: boolean
             onChange={(value) => setSiteSetting("productFeatureColumns", value)}
           />
           <SettingsSelect
-            label="Works great with OpenCode"
+            label="Works great with Warcode"
             options={companionStyles}
             value={siteSettings.companionStyle}
             onChange={(value) => setSiteSetting("companionStyle", value)}

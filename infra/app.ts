@@ -16,7 +16,7 @@ export const api = new sst.cloudflare.Worker("Api", {
   },
 })
 
-// docs.opencode.ai and docs.dev.opencode.ai belong to the site Worker (services/site), which sends the old docs
+// docs.warcode.ai and docs.dev.warcode.ai belong to the site Worker (services/site), which sends the old docs
 // URLs there to the same path on the V1 docs at /v1/docs. Their custom domain was the V1 docs app's and is moved to
 // the site Worker by hand in place, keeping its ID: every input of a custom domain forces a replacement, which would
 // create the same ID and then delete it. DocsDomain adopts that resource so SST never deletes the live hostname: it
@@ -27,7 +27,7 @@ if ($app.stage === "production" || $app.stage === "dev") {
     {
       accountId: "15d29c8639fd3733b1b5486a2acfd968",
       hostname: `docs.${domain}`,
-      service: `opencode-site-${$app.stage}`,
+      service: `warcode-site-${$app.stage}`,
       zoneId: zoneID,
       environment: "production",
     },

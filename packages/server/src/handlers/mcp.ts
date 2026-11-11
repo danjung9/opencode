@@ -1,9 +1,9 @@
-import { Location } from "@opencode/core/location"
-import { LocationServiceMap } from "@opencode/core/location-service-map"
-import { Mcp } from "@opencode/core/mcp/index"
-import { PtyTicket } from "@opencode/core/pty/ticket"
-import { ForbiddenError, McpServerNotFoundError } from "@opencode/protocol/errors"
-import { PTY_CONNECT_TOKEN_HEADER, PTY_CONNECT_TOKEN_HEADER_VALUE } from "@opencode/protocol/groups/pty"
+import { Location } from "@warcode/core/location"
+import { LocationServiceMap } from "@warcode/core/location-service-map"
+import { Mcp } from "@warcode/core/mcp/index"
+import { PtyTicket } from "@warcode/core/pty/ticket"
+import { ForbiddenError, McpServerNotFoundError } from "@warcode/protocol/errors"
+import { PTY_CONNECT_TOKEN_HEADER, PTY_CONNECT_TOKEN_HEADER_VALUE } from "@warcode/protocol/groups/pty"
 import { Effect, Queue } from "effect"
 import { HttpServerResponse } from "effect/http"
 import { HttpApiBuilder, HttpApiSchema } from "effect/http-api"
@@ -109,7 +109,7 @@ export const McpHandler = HttpApiBuilder.group(Api, "server.mcp", (handlers) =>
 
           return yield* Effect.gen(function* () {
             const mcp = yield* Mcp.Service
-            const { McpSocketClient } = yield* Effect.promise(() => import("@opencode/core/mcp/socket-client"))
+            const { McpSocketClient } = yield* Effect.promise(() => import("@warcode/core/mcp/socket-client"))
             const socket = yield* Effect.orDie(ctx.request.upgrade)
             const outbox = yield* Queue.unbounded<Outbound>()
             yield* holdLocation(outbox)

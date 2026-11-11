@@ -1,9 +1,9 @@
 [package]
-name = "opencode-pty"
+name = "warcode-pty"
 version = "0.5.0"
 edition = "2024"
 rust-version = "1.90"
-description = "Persistent PTY service for OpenCode"
+description = "Persistent PTY service for Warcode"
 license = "MIT"
 repository = "https://github.com/anomalyco/opencode"
 links = "ghostty-vt"

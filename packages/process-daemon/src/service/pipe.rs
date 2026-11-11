@@ -175,7 +175,7 @@ impl TerminalHandle {
         let mut joins = vec![actor.thread];
         let reader_actor_tx = actor.actor_tx.clone();
         let started = thread::Builder::new()
-            .name(format!("opencode-pty-reader-{id}"))
+            .name(format!("warcode-pty-reader-{id}"))
             .spawn(move || read_output(output, sink, cancel, exited, reader_actor_tx))
             .context("failed to spawn terminal reader")
             .and_then(|reader| {
@@ -184,7 +184,7 @@ impl TerminalHandle {
                 let pid = process.pid;
                 // Spawned last: the waiter must be joined before `reap`.
                 thread::Builder::new()
-                    .name(format!("opencode-pty-wait-{id}"))
+                    .name(format!("warcode-pty-wait-{id}"))
                     .spawn(move || {
                         let message = match wait_exit(pid) {
                             Ok(Exit::Code(code)) => ActorMessage::ChildExited(Ok(Some(code))),

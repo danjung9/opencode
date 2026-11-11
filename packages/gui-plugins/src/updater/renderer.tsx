@@ -1,8 +1,8 @@
-import { showToast } from "@opencode/ui/toast"
+import { showToast } from "@warcode/ui/toast"
 import { createSignal, lazy, onCleanup, Suspense, untrack } from "solid-js"
-import { Command, createKeyed, SettingsPage, TitlebarItem, type SetupContext, type Plugin } from "@opencode/plugin/gui"
-import { onIdle } from "@opencode/plugin/gui/builtin"
-import { Updater } from "@opencode/plugin/gui/updater"
+import { Command, createKeyed, SettingsPage, TitlebarItem, type SetupContext, type Plugin } from "@warcode/plugin/gui"
+import { onIdle } from "@warcode/plugin/gui/builtin"
+import { Updater } from "@warcode/plugin/gui/updater"
 import { updaterAction } from "./action"
 import {
   ACTION_CHUNK_TIMEOUT_MS,
@@ -129,7 +129,7 @@ const setup: Plugin.Setup<typeof definition> = (ctx) => {
  * have it: beta builds and the desktop dev server.
  */
 function betaNotes(ctx: SetupContext<typeof definition>) {
-  if (!import.meta.env.OPENCODE_BETA_NOTES) return
+  if (!import.meta.env.WARCODE_BETA_NOTES) return
 
   const Page = lazy(() => import("./beta-page"))
 
@@ -161,7 +161,7 @@ function whatsNew(ctx: SetupContext<typeof definition>) {
 
   const start = initWhatsNew({
     version: ctx.app.version,
-    commit: import.meta.env.OPENCODE_COMMIT,
+    commit: import.meta.env.WARCODE_COMMIT,
     channel: ctx.app.channel === "beta" ? "beta" : "stable",
     previousVersion: seen.value.version,
     previousCommit: seen.value.commit,

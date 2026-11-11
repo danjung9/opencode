@@ -13,13 +13,13 @@ import { mediaUrl } from "~/lib/media"
 /** The press kit copy, shared by the page and its Markdown version. `route` localizes a site path. */
 export function pressContent(t: Translate, route: (path: string) => string) {
   return {
-    title: "OpenCode | Press kit with company facts and brand assets",
+    title: "Warcode | Press kit with company facts and brand assets",
     description:
-      "The OpenCode press kit, with facts about OpenCode and Anomaly, the company behind it, plus logos and wordmarks to download and a contact for press questions.",
-    hero: { title: "Press", body: "Facts, brand assets and contacts for writing about OpenCode and Anomaly." },
+      "The Warcode press kit, with facts about Warcode and Anomaly, the company behind it, plus logos and wordmarks to download and a contact for press questions.",
+    hero: { title: "Press", body: "Facts, brand assets and contacts for writing about Warcode and Anomaly." },
     company: {
       title: "About Anomaly",
-      lead: "Anomaly is the company behind OpenCode. It builds open source tools for developers.",
+      lead: "Anomaly is the company behind Warcode. It builds open source tools for developers.",
       more: "Other projects include SST and OpenTUI, all open source on [GitHub](github).",
       // Facts checked on 2026-11-02 against each project's site, README and the GitHub API
       // (gh api repos/anomalyco/<repo>): stars, MIT licence and repo creation date. Star counts
@@ -28,7 +28,7 @@ export function pressContent(t: Translate, route: (path: string) => string) {
       // wide (378 and 330px columns); re-measure after changing the copy.
       projects: [
         {
-          name: "OpenCode",
+          name: "Warcode",
           body: "The open source coding agent, with apps for desktop, the terminal and mobile, and an SDK. MIT licensed, 220,000+ GitHub stars.",
           href: "https://opencode.ai",
         },
@@ -39,7 +39,7 @@ export function pressContent(t: Translate, route: (path: string) => string) {
         },
         {
           name: "OpenTUI",
-          body: "A library for terminal UIs in TypeScript, React or Solid, with a core in Zig. OpenCode uses it in production. Over 13,000 GitHub stars.",
+          body: "A library for terminal UIs in TypeScript, React or Solid, with a core in Zig. Warcode uses it in production. Over 13,000 GitHub stars.",
           href: "https://opentui.com",
         },
         {
@@ -62,36 +62,36 @@ export function pressContent(t: Translate, route: (path: string) => string) {
       links: { github: "https://github.com/anomalyco", site: "https://anoma.ly" },
     },
     about: {
-      title: "About OpenCode",
-      body: "Descriptions of OpenCode and its products in long and short versions, ready to copy.",
+      title: "About Warcode",
+      body: "Descriptions of Warcode and its products in long and short versions, ready to copy.",
       // Both versions name the products in the site's order (products in product-data.ts): desktop,
       // terminal, mobile, SDK.
       boilerplate: {
-        long: `OpenCode is an open source coding agent. It comes as a desktop app, a terminal UI, a mobile app and an SDK, and it works with models from any provider, including Claude, GPT and Gemini. OpenCode is MIT licensed and made by Anomaly. It has over ${config.github.starsFormatted.full} GitHub stars and more than ${config.stats.contributors.replace("+", "")} contributors, and over ${config.stats.monthlyUsers.replace("M", " million")} developers use it every month.`,
+        long: `Warcode is an open source coding agent. It comes as a desktop app, a terminal UI, a mobile app and an SDK, and it works with models from any provider, including Claude, GPT and Gemini. Warcode is MIT licensed and made by Anomaly. It has over ${config.github.starsFormatted.full} GitHub stars and more than ${config.stats.contributors.replace("+", "")} contributors, and over ${config.stats.monthlyUsers.replace("M", " million")} developers use it every month.`,
         short:
-          "OpenCode is an open source coding agent by Anomaly, with apps for desktop, the terminal and mobile, and an SDK.",
+          "Warcode is an open source coding agent by Anomaly, with apps for desktop, the terminal and mobile, and an SDK.",
       },
-      // More products, checked on 2026-11-04 against the live opencode.ai/console, /console/go and /data pages,
+      // More products, checked on 2026-11-04 against the live warcode.ai/console, /console/go and /data pages,
       // the Console docs (/docs/go, /docs/zen and the Console section's SSO, SCIM and Budgets pages)
       // and the go.* strings in i18n/en.ts. No colons, per the site's copy rules.
       products: [
         {
-          name: "OpenCode Console",
-          long: "OpenCode Console is the web app where developers and teams buy and manage AI model access for OpenCode and other coding agents. It offers pay-as-you-go inference for frontier and open-weight models, charged per request from prepaid credits, and OpenCode Go subscriptions. Teams get workspaces with Member, Admin and Owner roles, workspace and per-user spending limits, single sign-on with Okta, Microsoft Entra ID or Google Workspace, and SCIM. Console supports more than 30 providers, so teams can connect provider accounts they already have, and its own inference is optional. It is at opencode.ai/console.",
+          name: "Warcode Console",
+          long: "Warcode Console is the web app where developers and teams buy and manage AI model access for Warcode and other coding agents. It offers pay-as-you-go inference for frontier and open-weight models, charged per request from prepaid credits, and Warcode Go subscriptions. Teams get workspaces with Member, Admin and Owner roles, workspace and per-user spending limits, single sign-on with Okta, Microsoft Entra ID or Google Workspace, and SCIM. Console supports more than 30 providers, so teams can connect provider accounts they already have, and its own inference is optional. It is at warcode.ai/console.",
           short:
-            "OpenCode Console is Anomaly's web app for pay-as-you-go AI model access, OpenCode Go subscriptions and team controls such as budgets and single sign-on.",
+            "Warcode Console is Anomaly's web app for pay-as-you-go AI model access, Warcode Go subscriptions and team controls such as budgets and single sign-on.",
         },
         {
-          name: "OpenCode Go",
-          long: "OpenCode Go is a subscription for developers who want a fixed monthly price for coding models. Go costs $10/month, Go Plus costs $40/month with higher limits, and Go Teams costs $20/month per member. Each plan includes a curated set of models tested for agentic coding. Usage limits are monthly dollar amounts for each model, with rolling 5-hour and weekly allowances of 20% and 50% of the monthly limit. Subscribers can top up credit, fall back to a pay-as-you-go balance and cancel any time. Go works with OpenCode and other agents. It is at opencode.ai/console/go.",
+          name: "Warcode Go",
+          long: "Warcode Go is a subscription for developers who want a fixed monthly price for coding models. Go costs $10/month, Go Plus costs $40/month with higher limits, and Go Teams costs $20/month per member. Each plan includes a curated set of models tested for agentic coding. Usage limits are monthly dollar amounts for each model, with rolling 5-hour and weekly allowances of 20% and 50% of the monthly limit. Subscribers can top up credit, fall back to a pay-as-you-go balance and cancel any time. Go works with Warcode and other agents. It is at warcode.ai/console/go.",
           short:
-            "OpenCode Go is a monthly subscription from Anomaly that gives developers monthly usage limits on a curated set of coding models, from $10/month.",
+            "Warcode Go is a monthly subscription from Anomaly that gives developers monthly usage limits on a curated set of coding models, from $10/month.",
         },
         {
-          name: "OpenCode Data",
-          long: "OpenCode Data is a public dashboard that shows which AI models developers use in OpenCode and how that mix changes over time. It publishes a leaderboard of top models, token usage, session and token costs, cache ratios, market share and a breakdown by country. The figures are aggregated every hour, with days and weeks in UTC. User and session counts are approximate, and costs use list prices from the OpenCode model catalog. Journalists can cite it as OpenCode Data (opencode.ai/data) with the update time shown on the page.",
+          name: "Warcode Data",
+          long: "Warcode Data is a public dashboard that shows which AI models developers use in Warcode and how that mix changes over time. It publishes a leaderboard of top models, token usage, session and token costs, cache ratios, market share and a breakdown by country. The figures are aggregated every hour, with days and weeks in UTC. User and session counts are approximate, and costs use list prices from the Warcode model catalog. Journalists can cite it as Warcode Data (warcode.ai/data) with the update time shown on the page.",
           short:
-            "OpenCode Data is a public dashboard at opencode.ai/data that ranks AI models by real usage in OpenCode, with tokens, costs and market share updated hourly.",
+            "Warcode Data is a public dashboard at warcode.ai/data that ranks AI models by real usage in Warcode, with tokens, costs and market share updated hourly.",
         },
       ],
     },
@@ -113,34 +113,34 @@ export function pressContent(t: Translate, route: (path: string) => string) {
       title: "Milestones",
       // Sources: the v0.0.1 and v2.0.0 git tags; STATS.md (1,005,287 GitHub and npm downloads on
       // 2025-10-19, 10,190,453 on 2026-01-29); the v1.0.0 GitHub release (2025-10-31); the v1.0.147
-      // GitHub release (2025-12-11), the first with a desktop installer (OpenCode_1.0.146_aarch64.dmg);
+      // GitHub release (2025-12-11), the first with a desktop installer (Warcode_1.0.146_aarch64.dmg);
       // and the GitHub API star count on 2026-11-02. Each line fits on one line at 1280 and 1440 wide.
       items: [
         { date: "Apr 2025", text: "First release, v0.0.1" },
         { date: "Oct 2025", text: "1 million+ downloads" },
-        { date: "Oct 2025", text: "OpenCode 1.0" },
+        { date: "Oct 2025", text: "Warcode 1.0" },
         { date: "Dec 2025", text: "Desktop app ships" },
         { date: "Jan 2026", text: "10 million+ downloads" },
-        { date: "Sep 2026", text: "OpenCode 2.0" },
+        { date: "Sep 2026", text: "Warcode 2.0" },
         { date: "Nov 2026", text: `${config.github.starsFormatted.full}+ GitHub stars` },
       ],
     },
     news: {
       title: "Latest releases",
-      intro: "OpenCode ships often. These are the newest releases with new features.",
+      intro: "Warcode ships often. These are the newest releases with new features.",
       changelog: { text: "Full changelog", href: route("/changelog") },
       feed: { text: "RSS feed", href: "/changelog.xml" },
     },
     media: {
       title: "Media",
       intro:
-        "Stills and short videos of each app, recorded from the real product. You can use them to write about OpenCode.",
+        "Stills and short videos of each app, recorded from the real product. You can use them to write about Warcode.",
       note: "All captures use the dark theme. Stills and posters are JPGs up to 1920 × 1080, or 1080 × 1350 in portrait. Videos are MP4 clips with no sound.",
       products: products.map((product) => ({
         name: product.name,
         slug: product.slug,
         zip: {
-          href: mediaUrl(`/press-media/zips/opencode-${product.slug}-media.zip`),
+          href: mediaUrl(`/press-media/zips/warcode-${product.slug}-media.zip`),
           size: megabytes(pressMedia[product.slug].zipBytes),
         },
         items: mediaItems(product.slug, product.name),
@@ -190,11 +190,11 @@ export function pressContent(t: Translate, route: (path: string) => string) {
     brand: {
       title: "Brand",
       before:
-        "Download the OpenCode logos and wordmarks in one ZIP file. For individual files, variants and usage rules, go to the ",
+        "Download the Warcode logos and wordmarks in one ZIP file. For individual files, variants and usage rules, go to the ",
       link: { text: "Brand page", href: route("/brand") },
       after: ".",
       usage:
-        "You can use these files to write about OpenCode. Do not change them, and do not suggest that OpenCode endorses your work.",
+        "You can use these files to write about Warcode. Do not change them, and do not suggest that Warcode endorses your work.",
       all: { text: t("brand.downloadAll"), href: brandAssets },
     },
     product: {
@@ -217,7 +217,7 @@ export function pressContent(t: Translate, route: (path: string) => string) {
         },
         {
           title: "Support",
-          body: "For help with OpenCode, open an issue or ask the community. For account and billing questions, email us.",
+          body: "For help with Warcode, open an issue or ask the community. For account and billing questions, email us.",
           links: [
             { text: "GitHub issues", href: `${config.github.repoUrl}/issues` },
             { text: "Discord", href: config.social.discord },
@@ -252,7 +252,7 @@ export type PressMediaItem = {
 /**
  * A product's media, all from the real product: stills (script/press-media.sh picks the frames),
  * then the films and showcase clips with their posters. The films are the "locked" set: real
- * OpenCode UI (and the native iOS app for Mobile) in locked-off shots joined by hard cuts; the
+ * Warcode UI (and the native iOS app for Mobile) in locked-off shots joined by hard cuts; the
  * showcase clips are the product page's feature clips.
  */
 function mediaItems(slug: ProductSlug, name: string): PressMediaItem[] {
@@ -326,7 +326,7 @@ const productPress: Record<ProductSlug, string> = {
   terminal:
     "A terminal UI that works in any shell, editor or remote server. See each edit as a diff and choose which commands run on their own.",
   mobile:
-    "The newest OpenCode app. Call a session to talk to the agent, then review and approve its changes from your phone, anywhere.",
+    "The newest Warcode app. Call a session to talk to the agent, then review and approve its changes from your phone, anywhere.",
   sdk: "A typed TypeScript client for scripts, CI jobs and your own tools. Create sessions, send prompts and stream every event as it lands.",
 }
 
@@ -340,7 +340,7 @@ export function pressMarkdown(context: MarkdownContext) {
     content.hero.body,
     `## ${content.about.title}`,
     content.about.body,
-    ...[{ name: "OpenCode", ...content.about.boilerplate }, ...content.about.products].flatMap((product) => [
+    ...[{ name: "Warcode", ...content.about.boilerplate }, ...content.about.products].flatMap((product) => [
       `### ${product.name}`,
       "#### Long version",
       product.long,

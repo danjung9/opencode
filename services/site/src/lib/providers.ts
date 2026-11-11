@@ -1,6 +1,6 @@
 /**
- * Model providers shown on the home page (What is OpenCode? and the subscriptions section), in the
- * order they appear. Each ID is a provider in OpenCode's bundled models.dev catalog
+ * Model providers shown on the home page (What is Warcode? and the subscriptions section), in the
+ * order they appear. Each ID is a provider in Warcode's bundled models.dev catalog
  * (packages/core/src/models-dev/snapshot.txt, 226 providers); Ollama and LM Studio also run locally.
  * The marks are in public/providers (see its README).
  */

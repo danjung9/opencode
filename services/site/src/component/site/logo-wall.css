@@ -31,7 +31,7 @@
     visibility: hidden;
   }
 
-  /* Set like the other home section titles ("What is OpenCode?"), in the logos' own colour (the
+  /* Set like the other home section titles ("What is Warcode?"), in the logos' own colour (the
      strong text at the logo opacity), so the label reads as part of the row. */
   [data-slot="label"] {
     margin: 0;

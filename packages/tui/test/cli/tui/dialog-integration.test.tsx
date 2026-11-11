@@ -1,6 +1,6 @@
 /** @jsxImportSource @opentui/solid */
 import { InputRenderable, TextareaRenderable } from "@opentui/core"
-import type { FormFields, LocationRef } from "@opencode/client"
+import type { FormFields, LocationRef } from "@warcode/client"
 import { testRender } from "@opentui/solid"
 import { expect, test } from "bun:test"
 import { onMount } from "solid-js"
@@ -266,7 +266,7 @@ test("still offers an MCP integration when the MCP dialog asks for it", async ()
 async function renderMenu(integrationID?: string) {
   const calls = createFetch(async (url, request) => {
     if (url.pathname !== "/api/integration") return undefined
-    const directory = decodeURIComponent(request.headers.get("x-opencode-directory") ?? process.cwd())
+    const directory = decodeURIComponent(request.headers.get("x-warcode-directory") ?? process.cwd())
     return json({
       location: { directory, project: { id: "proj_test", directory, canonical: directory } },
       data: [
@@ -339,7 +339,7 @@ async function renderIntegration(activeLocation?: LocationRef, form?: FormFields
   const calls = createFetch(async (url, request) => {
     const directory =
       url.searchParams.get("location[directory]") ??
-      decodeURIComponent(request.headers.get("x-opencode-directory") ?? process.cwd())
+      decodeURIComponent(request.headers.get("x-warcode-directory") ?? process.cwd())
     const requestedLocation = { directory }
     const location = {
       ...requestedLocation,
@@ -510,7 +510,7 @@ test("keeps the OAuth paste prompt layout without new designs", async () => {
 
 async function renderOAuth(input: { paste?: true; newDesigns: boolean }) {
   const calls = createFetch(async (url, request) => {
-    const directory = decodeURIComponent(request.headers.get("x-opencode-directory") ?? process.cwd())
+    const directory = decodeURIComponent(request.headers.get("x-warcode-directory") ?? process.cwd())
     const location = { directory, project: { id: "proj_test", directory, canonical: directory } }
     if (url.pathname === "/api/integration")
       return json({

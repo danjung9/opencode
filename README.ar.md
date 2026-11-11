@@ -3,7 +3,7 @@
     <picture>
       <source srcset=".github/assets/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset=".github/assets/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src=".github/assets/logo-ornate-light.svg" alt="شعار OpenCode">
+      <img src=".github/assets/logo-ornate-light.svg" alt="شعار Warcode">
     </picture>
   </a>
 </p>
@@ -39,7 +39,7 @@
   <a href="README.vi.md">Tiếng Việt</a>
 </p>
 
-[![OpenCode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
+[![Warcode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
 
 ---
 
@@ -50,13 +50,13 @@
 curl -fsSL https://opencode.ai/v2/install | bash
 
 # مديري الحزم
-npm i -g @opencode/cli@latest      # او bun/pnpm/yarn
-brew install anomalyco/tap/opencode-v2 # macOS و Linux (موصى به، دائما محدث)
-brew install opencode              # macOS و Linux (صيغة brew الرسمية، تحديث اقل)
-sudo pacman -S opencode            # Arch Linux (Stable)
-paru -S opencode-beta              # Arch Linux (Latest from AUR)
-mise use -g opencode               # اي نظام
-nix run github:anomalyco/opencode  # Nix
+npm i -g @warcode/cli@latest      # او bun/pnpm/yarn
+brew install anomalyco/tap/warcode-v2 # macOS و Linux (موصى به، دائما محدث)
+brew install warcode              # macOS و Linux (صيغة brew الرسمية، تحديث اقل)
+sudo pacman -S warcode            # Arch Linux (Stable)
+paru -S warcode-beta              # Arch Linux (Latest from AUR)
+mise use -g warcode               # اي نظام
+nix run github:anomalyco/warcode  # Nix
 ```
 
 > [!TIP]
@@ -64,27 +64,27 @@ nix run github:anomalyco/opencode  # Nix
 
 ### تطبيق سطح المكتب (BETA)
 
-يتوفر OpenCode ايضا كتطبيق سطح مكتب. قم بالتنزيل من [opencode.ai/download](https://opencode.ai/download).
+يتوفر Warcode ايضا كتطبيق سطح مكتب. قم بالتنزيل من [warcode.ai/download](https://opencode.ai/download).
 
 | المنصة                | التنزيل                            |
 | --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `opencode-desktop-mac-x64.dmg`     |
-| Windows               | `opencode-desktop-win-x64.exe`     |
+| macOS (Apple Silicon) | `warcode-desktop-mac-arm64.dmg`   |
+| macOS (Intel)         | `warcode-desktop-mac-x64.dmg`     |
+| Windows               | `warcode-desktop-win-x64.exe`     |
 | Linux                 | `.deb` او `.rpm` او AppImage       |
 
 ```bash
 # macOS (Homebrew)
-brew install --cask opencode-desktop
+brew install --cask warcode-desktop
 ```
 
 #### مجلد التثبيت
 
-يثبت سكربت التثبيت OpenCode في `$HOME/.opencode/bin`.
+يثبت سكربت التثبيت Warcode في `$HOME/.warcode/bin`.
 
 ### Agents
 
-يتضمن OpenCode وكيليْن (Agents) مدمجين يمكنك التبديل بينهما باستخدام زر `Tab`.
+يتضمن Warcode وكيليْن (Agents) مدمجين يمكنك التبديل بينهما باستخدام زر `Tab`.
 
 - **build** - الافتراضي، وكيل بصلاحيات كاملة لاعمال التطوير
 - **plan** - وكيل للقراءة فقط للتحليل واستكشاف الكود
@@ -99,15 +99,15 @@ brew install --cask opencode-desktop
 
 ### التوثيق
 
-لمزيد من المعلومات حول كيفية ضبط OpenCode، [**راجع التوثيق**](https://opencode.ai/docs).
+لمزيد من المعلومات حول كيفية ضبط Warcode، [**راجع التوثيق**](https://opencode.ai/docs).
 
 ### المساهمة
 
-اذا كنت مهتما بالمساهمة في OpenCode، يرجى قراءة [contributing docs](./CONTRIBUTING.md) قبل ارسال pull request.
+اذا كنت مهتما بالمساهمة في Warcode، يرجى قراءة [contributing docs](./CONTRIBUTING.md) قبل ارسال pull request.
 
-### البناء فوق OpenCode
+### البناء فوق Warcode
 
-اذا كنت تعمل على مشروع مرتبط بـ OpenCode ويستخدم "opencode" كجزء من اسمه (مثل "opencode-dashboard" او "opencode-mobile")، يرجى اضافة ملاحظة في README توضح انه ليس مبنيا بواسطة فريق OpenCode ولا يرتبط بنا بأي شكل.
+اذا كنت تعمل على مشروع مرتبط بـ Warcode ويستخدم "warcode" كجزء من اسمه (مثل "warcode-dashboard" او "warcode-mobile")، يرجى اضافة ملاحظة في README توضح انه ليس مبنيا بواسطة فريق Warcode ولا يرتبط بنا بأي شكل.
 
 ---
 

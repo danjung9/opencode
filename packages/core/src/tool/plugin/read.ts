@@ -1,10 +1,10 @@
 export * as ReadTool from "./read.js"
 
-import type { Context } from "@opencode/plugin/effect/plugin"
+import type { Context } from "@warcode/plugin/effect/plugin"
 import { basename, dirname, extname, isAbsolute, join, relative } from "path"
-import { ToolFailure } from "@opencode/ai/effect"
+import { ToolFailure } from "@warcode/ai/effect"
 import { Effect, Schema } from "effect"
-import { FSUtil } from "@opencode/util/fs-util"
+import { FSUtil } from "@warcode/util/fs-util"
 import { Location } from "../../location.js"
 import { FileAccess } from "../../file-access.js"
 import { Permission } from "../../permission.js"
@@ -31,7 +31,7 @@ type Missing = { input: string; requested: FileAccess.Target; context: FileAcces
 const Output = Schema.Union([ReadToolFileSystem.FileContent, ReadToolFileSystem.TextPage, ReadToolFileSystem.ListPage])
 
 export const Plugin = {
-  id: "opencode.tool.read",
+  id: "warcode.tool.read",
   effect: Effect.fn("ReadTool.Plugin")(function* (ctx: Context) {
     const reader = yield* ReadToolFileSystem.Service
     const access = yield* FileAccess.Service

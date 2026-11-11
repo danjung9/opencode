@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import type { OpenCodeEvent, SessionInfo } from "@opencode/client/promise"
+import type { WarcodeEvent, SessionInfo } from "@warcode/client/promise"
 import { isSidebarSessionActivity, mergeSidebarSessions } from "./sidebar-sessions"
 
 const session: SessionInfo = {
@@ -88,7 +88,7 @@ test.each([
     },
     expected: true,
   },
-] satisfies { event: OpenCodeEvent; expected: boolean }[])(
+] satisfies { event: WarcodeEvent; expected: boolean }[])(
   "$event.type keeps a preview: $expected",
   ({ event, expected }) => {
     expect(isSidebarSessionActivity(event)).toBe(expected)

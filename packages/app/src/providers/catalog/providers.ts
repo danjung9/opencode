@@ -5,7 +5,7 @@ import { Iterable, pipe } from "effect"
 import { createEffect, createMemo, type Accessor } from "solid-js"
 import type { ProviderListResponse } from "@/runtime/server/types"
 import { useIntegrations } from "./integrations"
-import { popularProviders } from "./order"
+import { isOfferedProvider, popularProviders } from "./order"
 
 export { popularProviders } from "./order"
 
@@ -41,7 +41,14 @@ export function useProviders(directory: Accessor<string | undefined>) {
 
     if (!provider || !model) return emptyProviderCatalog
 
-    return normalizeProviderList(provider, model)
+    const catalog = normalizeProviderList(provider, model)
+    const all = new Map([...catalog.all].filter(([, provider]) => isOfferedProvider(provider)))
+
+    return {
+      all,
+      connected: catalog.connected.filter((id) => all.has(id)),
+      default: Object.fromEntries(Object.entries(catalog.default).filter(([id]) => all.has(id))),
+    }
   })
 
   const ready = () => {
@@ -82,7 +89,7 @@ export function useProviders(directory: Accessor<string | undefined>) {
         (v) => Array.from(v),
       )
     },
-    // Any stored or detected connection, or a provider with models beyond the keyless OpenCode catalog.
+    // Any stored or detected connection, or a provider with models beyond the keyless Warcode catalog.
     // Undefined until both catalogs load, so callers never mistake loading for a first run.
     anyConnection: () => {
       if (!integrations.ready() || !ready()) return undefined
@@ -90,7 +97,7 @@ export function useProviders(directory: Accessor<string | undefined>) {
       if (integrations.list().some((integration) => integration.connections.length > 0)) return true
 
       return providers().connected.some(
-        (id) => id !== "opencode" && Object.keys(providers().all.get(id)?.models ?? {}).length > 0,
+        (id) => id !== "warcode" && Object.keys(providers().all.get(id)?.models ?? {}).length > 0,
       )
     },
     paid: () => {
@@ -101,7 +108,7 @@ export function useProviders(directory: Accessor<string | undefined>) {
           providers().all,
           ([id]) =>
             connected.has(id) &&
-            (id !== "opencode" || Object.values(providers().all.get(id)?.models ?? {}).some((m) => m.cost?.input)),
+            (id !== "warcode" || Object.values(providers().all.get(id)?.models ?? {}).some((m) => m.cost?.input)),
         ),
       ]
 

@@ -33,7 +33,7 @@ export function docsRoute(url: URL, accept: string, slugs: Record<DocsSet["id"],
 }
 
 /**
- * docs.opencode.ai (and docs.dev.opencode.ai) served the V1 docs from their own app, under /docs and
+ * docs.warcode.ai (and docs.dev.warcode.ai) served the V1 docs from their own app, under /docs and
  * at its root: every address there is the same path on the V1 docs here, permanently.
  */
 export function docsHostRedirect(url: URL) {
@@ -72,7 +72,7 @@ function v1Fallback(slug: string, file: boolean, search: string) {
   if (locale !== undefined && locale !== first) return redirect(href(locale ? `${locale}/${page}` : page), 301)
   const target = moved.get(page)
   if (target) return redirect(docsHref(target, latestDocs), 301)
-  // Share links (docs.opencode.ai/s/<id>). Sharing is discontinued; opncd.ai explains it (lib/legacy.ts).
+  // Share links (docs.warcode.ai/s/<id>). Sharing is discontinued; opncd.ai explains it (lib/legacy.ts).
   if (first === "s" && rest.length === 1) return redirect(`https://opncd.ai/share/${rest[0]}`, 301)
   // The config schemas the V1 app served beside its pages are the site's.
   if (slug === "config.json" || slug === "tui.json") return redirect(`/${slug}`, 301)

@@ -1,13 +1,14 @@
 import { expect, test } from "bun:test"
 import { consoleProviderGroup, consoleProviderName } from "./console"
 
-test("groups only providers managed by the active Console workspace", () => {
+test.each(["warcode", "opencode"])("groups only providers managed by the active Console workspace with root %s", (root) => {
   const direct = { id: "openai", integrationID: "openai", name: "Anomaly / OpenAI" }
 
   const group = consoleProviderGroup([
-    { id: "opencode", integrationID: "opencode", name: "Anomaly / OpenCode" },
-    { id: "console-openai", integrationID: "opencode", name: "Anomaly / OpenAI" },
-    { id: "console-google", integrationID: "opencode", name: "Anomaly / Google" },
+    { id: "warcode", integrationID: "warcode", name: "Warcode" },
+    { id: root, integrationID: "warcode", name: "Anomaly / Warcode" },
+    { id: "console-openai", integrationID: "warcode", name: "Anomaly / OpenAI" },
+    { id: "console-google", integrationID: "warcode", name: "Anomaly / Google" },
     direct,
   ])
 
@@ -15,7 +16,7 @@ test("groups only providers managed by the active Console workspace", () => {
 
   if (!group) throw new Error("Expected Console provider group")
   expect(group.workspace).toBe("Anomaly")
-  expect(group.providers.map((provider) => provider.id)).toEqual(["opencode", "console-openai", "console-google"])
+  expect(group.providers.map((provider) => provider.id)).toEqual([root, "console-openai", "console-google"])
   expect(consoleProviderName(group, group.providers[1].name)).toBe("OpenAI")
   expect(group.providers).not.toContain(direct)
 })

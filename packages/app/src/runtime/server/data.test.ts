@@ -1,7 +1,7 @@
 import { afterEach, expect, setSystemTime, test } from "bun:test"
 import { createRoot } from "solid-js"
-import { createData, type CreateDataInput } from "@opencode/client/solid"
-import { OpenCode, type OpenCodeEvent, type SessionInfo } from "@opencode/client/promise"
+import { createData, type CreateDataInput } from "@warcode/client/solid"
+import { Warcode, type WarcodeEvent, type SessionInfo } from "@warcode/client/promise"
 import { createDesktopData, createSessionMutations, createSessionRecency, createSessionRefresh } from "./data"
 
 const session: SessionInfo = {
@@ -21,11 +21,11 @@ afterEach(() => setSystemTime())
 
 function setupDesktop(fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>) {
   const listeners = new Set<Parameters<CreateDataInput["event"]["listen"]>[0]>()
-  const handlers = new Map<string, Set<(event: OpenCodeEvent) => void>>()
+  const handlers = new Map<string, Set<(event: WarcodeEvent) => void>>()
   let seq = 0
 
   const setup = createRoot((dispose) => {
-    const api = OpenCode.make({
+    const api = Warcode.make({
       baseUrl: "http://opencode.local",
       fetch: Object.assign(fetch, { preconnect: () => {} }),
     })
@@ -33,7 +33,7 @@ function setupDesktop(fetch: (input: RequestInfo | URL, init?: RequestInit) => P
     const on: CreateDataInput["event"]["on"] = (type, handler) => {
       const set = handlers.get(type) ?? new Set()
       // SAFETY: this test emitter mirrors the SDK event API; handlers are invoked only for their own event type.
-      const erased = handler as (event: OpenCodeEvent) => void
+      const erased = handler as (event: WarcodeEvent) => void
       set.add(erased)
       handlers.set(type, set)
 
@@ -62,7 +62,7 @@ function setupDesktop(fetch: (input: RequestInfo | URL, init?: RequestInit) => P
     return { data, dispose }
   })
 
-  const emit = (type: OpenCodeEvent["type"], created: number, data: EventData = {}) => {
+  const emit = (type: WarcodeEvent["type"], created: number, data: EventData = {}) => {
     seq++
 
     // SAFETY: the envelope matches the event's wire shape; `emit` is only called with the payload for `type`.
@@ -72,7 +72,7 @@ function setupDesktop(fetch: (input: RequestInfo | URL, init?: RequestInit) => P
       created,
       durable: { aggregateID: session.id, seq, version: 1 },
       data: { sessionID: session.id, ...data },
-    } as OpenCodeEvent
+    } as WarcodeEvent
 
     listeners.forEach((listener) => listener({ name: type, details: event }))
     handlers.get(type)?.forEach((handler) => handler(event))

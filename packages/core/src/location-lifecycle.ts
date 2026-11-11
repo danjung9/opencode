@@ -1,8 +1,8 @@
 export * as LocationLifecycle from "./location-lifecycle.js"
 
 import { Context, Deferred, Effect, Layer, Schema, Scope } from "effect"
-import { makeLocationNode } from "@opencode/util/effect/app-node"
-import { LocationEvent } from "@opencode/schema/location-event"
+import { makeLocationNode } from "@warcode/util/effect/app-node"
+import { LocationEvent } from "@warcode/schema/location-event"
 import { Bus } from "./bus.js"
 import { Form } from "./form.js"
 import { Location } from "./location.js"
@@ -28,7 +28,7 @@ export class Service extends Context.Service<
     readonly retain: Effect.Effect<void, never, Scope.Scope>
     readonly isRetained: () => boolean
   }
->()("@opencode/LocationLifecycle") {}
+>()("@warcode/LocationLifecycle") {}
 
 const layer = Layer.effect(
   Service,

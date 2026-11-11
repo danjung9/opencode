@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, setSystemTime, test } from "bun:test"
-import type { UsageLimitsBudget, UsageLimitsInfo } from "@opencode/client"
+import type { UsageLimitsBudget, UsageLimitsInfo } from "@warcode/client"
 import {
   formatDollars,
   formatReset,
@@ -33,8 +33,8 @@ const info = (...budgets: UsageLimitsBudget[]): UsageLimitsInfo => ({
 })
 
 // One request that fills Sol's context costs $4, so $12 covers three.
-const sol = { id: "gpt-5.6-sol", providerID: "opencode", cost: [{ input: 4 }], limit: { context: 1_000_000 } }
-const served = { id: "opencode", integrationID: "opencode" }
+const sol = { id: "gpt-5.6-sol", providerID: "warcode", cost: [{ input: 4 }], limit: { context: 1_000_000 } }
+const served = { id: "warcode", integrationID: "warcode" }
 
 afterEach(() => setSystemTime())
 
@@ -49,8 +49,8 @@ describe("util.usage-limits", () => {
         limit: 50,
         spent: 50,
         models: [
-          { providerID: "opencode", modelID: "gpt-5.6-sol", name: "GPT 5.6 Sol", spent: 20 },
-          { providerID: "opencode", modelID: "claude-opus-5", name: "Claude Opus 5", spent: 50 },
+          { providerID: "warcode", modelID: "gpt-5.6-sol", name: "GPT 5.6 Sol", spent: 20 },
+          { providerID: "warcode", modelID: "claude-opus-5", name: "Claude Opus 5", spent: 50 },
         ],
       }),
     )
@@ -65,9 +65,9 @@ describe("util.usage-limits", () => {
       ],
     })
     expect(modelUsage(limits, { ...sol, id: "claude-opus-5" }, served)).toMatchObject({ left: 0, reached: true })
-    // Spend on all models covers what OpenCode Console serves, but not OpenCode Go, a direct provider or a free model.
+    // Spend on all models covers what Warcode Console serves, but not Warcode Go, a direct provider or a free model.
     expect(
-      modelUsage(limits, { ...sol, providerID: "opencode-go" }, { id: "opencode-go", integrationID: "opencode" }),
+      modelUsage(limits, { ...sol, providerID: "warcode-go" }, { id: "warcode-go", integrationID: "warcode" }),
     ).toBeUndefined()
     expect(modelUsage(limits, { ...sol, providerID: "openai" }, { id: "openai" })).toBeUndefined()
     expect(modelUsage(limits, { ...sol, cost: [{ input: 0 }] }, served)).toBeUndefined()
@@ -107,7 +107,7 @@ describe("util.usage-limits", () => {
           id: "d",
           coverage: "models",
           picked: true,
-          models: ["A", "B", "C", "D"].map((name) => ({ providerID: "opencode", modelID: name, name })),
+          models: ["A", "B", "C", "D"].map((name) => ({ providerID: "warcode", modelID: name, name })),
         }),
         "Acme",
       ),

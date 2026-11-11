@@ -1,6 +1,6 @@
 import { Effect } from "effect"
 import { HttpClient } from "effect/http"
-import { define } from "@opencode/plugin/effect/plugin"
+import { define } from "@warcode/plugin/effect/plugin"
 import { IntegrationConnection } from "../../integration/connection.js"
 import { ModalModels } from "../../modal/models.js"
 import { Provider } from "../../provider.js"
@@ -12,7 +12,7 @@ import { ProviderRefresh } from "./refresh.js"
 const providerID = Provider.ID.make("modal")
 
 export const ModalPlugin = define({
-  id: "opencode.provider.modal",
+  id: "warcode.provider.modal",
   effect: Effect.fn(function* (ctx) {
     const providers = yield* Provider.Service
     const cache = yield* SharedCache.Service

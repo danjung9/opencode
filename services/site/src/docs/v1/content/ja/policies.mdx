@@ -1,15 +1,15 @@
 ---
 title: ポリシー
-description: OpenCode が使用できる設定済みリソースを制御します。
+description: Warcode が使用できる設定済みリソースを制御します。
 ---
 
-:::caution[OpenCode 2 が必要です]
-OpenCode 1 ではポリシーは適用されません。このページの例には OpenCode 2 が必要です。OpenCode 1 では、[`disabled_providers`](/docs/config#disabled-providers) または [`enabled_providers`](/docs/config#enabled-providers) を使用してプロバイダーの利用可否を制御してください。現在の使い方については、[OpenCode 2 のポリシーのドキュメント](https://opencode.ai/docs/policies/)を参照してください。
+:::caution[Warcode 2 が必要です]
+Warcode 1 ではポリシーは適用されません。このページの例には Warcode 2 が必要です。Warcode 1 では、[`disabled_providers`](/docs/config#disabled-providers) または [`enabled_providers`](/docs/config#enabled-providers) を使用してプロバイダーの利用可否を制御してください。現在の使い方については、[Warcode 2 のポリシーのドキュメント](https://opencode.ai/docs/policies/)を参照してください。
 :::
 
-ポリシーは、OpenCode が名前付きリソースに対してアクションを実行できるかどうかを制御します。この OpenCode 2 の機能は実験的なもので、`opencode.json` の `experimental.policies` 配列で設定します。
+ポリシーは、Warcode が名前付きリソースに対してアクションを実行できるかどうかを制御します。この Warcode 2 の機能は実験的なもので、`warcode.json` の `experimental.policies` 配列で設定します。
 
-ポリシーは[権限](/docs/permissions)とは別のものです。権限はセッション中にツールが実行できることを制御し、ポリシーは OpenCode が LLM プロバイダーなどのリソースを使用できるかどうかを制御します。
+ポリシーは[権限](/docs/permissions)とは別のものです。権限はセッション中にツールが実行できることを制御し、ポリシーは Warcode が LLM プロバイダーなどのリソースを使用できるかどうかを制御します。
 
 ---
 
@@ -23,7 +23,7 @@ OpenCode 1 ではポリシーは適用されません。このページの例に
 
 たとえば、`openai` プロバイダーの使用を拒否するには、次のようにします。
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -44,7 +44,7 @@ OpenCode 1 ではポリシーは適用されません。このページの例に
 
 ## 利用可能なポリシー
 
-OpenCode は現在、1 つのポリシーアクションをサポートしています。
+Warcode は現在、1 つのポリシーアクションをサポートしています。
 
 | アクション     | リソース                        | 説明                                           |
 | -------------- | ------------------------------- | ---------------------------------------------- |
@@ -58,7 +58,7 @@ OpenCode は現在、1 つのポリシーアクションをサポートしてい
 
 `resource` フィールドはワイルドカードマッチングをサポートしています。`*` は 0 個以上の文字に一致し、`?` は 1 文字に一致します。
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -83,7 +83,7 @@ OpenCode は現在、1 つのポリシーアクションをサポートしてい
 
 たとえば、Anthropic のみを許可するには、次のようにします。
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -111,11 +111,11 @@ OpenCode は現在、1 つのポリシーアクションをサポートしてい
 
 ## プロバイダーリスト
 
-OpenCode 2 でプロバイダーへのアクセスを制御する場合は、古い `disabled_providers` および `enabled_providers` 設定の代わりにポリシーを使用してください。OpenCode 1 では、引き続きこれらのプロバイダーリストを使用してください。
+Warcode 2 でプロバイダーへのアクセスを制御する場合は、古い `disabled_providers` および `enabled_providers` 設定の代わりにポリシーを使用してください。Warcode 1 では、引き続きこれらのプロバイダーリストを使用してください。
 
 `disabled_providers` を置き換えるには、次のようにします。
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [
@@ -128,7 +128,7 @@ OpenCode 2 でプロバイダーへのアクセスを制御する場合は、古
 
 `enabled_providers` を置き換えるには、最初にすべてのプロバイダーを拒否し、その後で選択したプロバイダーを許可します。
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [

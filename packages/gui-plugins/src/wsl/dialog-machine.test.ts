@@ -19,7 +19,7 @@ function wsl(fields: Partial<typeof WslServersState.Encoded>) {
     installed: [],
     online: [],
     distroProbes: {},
-    opencodeChecks: {},
+    warcodeChecks: {},
     pendingRestart: false,
     servers: [],
     hostJob: "idle",
@@ -32,7 +32,7 @@ const probe = (name: string) => ({ name, canExecute: true, hasBash: true, hasCur
 
 const check = (distro: string, version: string | null) => ({
   distro,
-  resolvedPath: "/usr/bin/opencode",
+  resolvedPath: "/usr/bin/warcode",
   version,
   expectedVersion: "1.0",
   matchesDesktop: version === "1.0",
@@ -50,11 +50,11 @@ const distros = {
   ],
 }
 
-// Ubuntu is ready to add; Debian needs OpenCode; Fedora can be installed from the catalog. Main runs no job.
+// Ubuntu is ready to add; Debian needs Warcode; Fedora can be installed from the catalog. Main runs no job.
 const idle = wsl({
   ...distros,
   distroProbes: { Ubuntu: probe("Ubuntu"), Debian: probe("Debian") },
-  opencodeChecks: { Ubuntu: check("Ubuntu", "1.0"), Debian: check("Debian", "0.9") },
+  warcodeChecks: { Ubuntu: check("Ubuntu", "1.0"), Debian: check("Debian", "0.9") },
 })
 
 // The same distros before any probe, so the main view wants to probe them.
@@ -137,16 +137,16 @@ describe("wsl add-server dialog", () => {
 
   test("each action in the main view claims the dialog before its call leaves", () => {
     const main = createWslDialogState()
-    const opencode = transitionWslDialog(picked("Debian"), primary("Debian"))
+    const warcode = transitionWslDialog(picked("Debian"), primary("Debian"))
     const add = transitionWslDialog(main, primary("Ubuntu"))
     const refresh = transitionWslDialog(main, { type: "distros.refresh.requested", busy: false })
     const install = transitionWslDialog(main, { type: "wsl.install.requested", busy: false })
 
-    expect(opencode.effects).toEqual([
+    expect(warcode.effects).toEqual([
       {
         type: "action.run",
         attempt: 1,
-        action: { kind: "install-opencode", distro: "Debian" },
+        action: { kind: "install-warcode", distro: "Debian" },
         timeoutMs: WSL_INSTALL_TIMEOUT_MS,
       },
     ])
@@ -166,13 +166,13 @@ describe("wsl add-server dialog", () => {
       { type: "action.run", attempt: 1, action: { kind: "install-wsl" }, timeoutMs: WSL_INSTALL_TIMEOUT_MS },
     ])
 
-    // Install OpenCode spins at once; before, it waited for main's "updating" with every control still enabled.
-    expect(view(opencode.state).primaryButton).toMatchObject({
-      action: "install-opencode",
+    // Install Warcode spins at once; before, it waited for main's "updating" with every control still enabled.
+    expect(view(warcode.state).primaryButton).toMatchObject({
+      action: "install-warcode",
       loading: true,
     })
     expect(view(add.state)).toMatchObject({ adding: true, primaryButton: { action: "add", loading: true } })
-    ;[opencode, add, refresh, install].forEach((running) => {
+    ;[warcode, add, refresh, install].forEach((running) => {
       expect(running.state.status).toBe("main-running")
       expect(view(running.state).busy).toBe(true)
       ;(

@@ -1,5 +1,5 @@
-import { Button } from "@opencode/ui/button"
-import { useDialog } from "@opencode/ui/context/dialog"
+import { Button } from "@warcode/ui/button"
+import { useDialog } from "@warcode/ui/context/dialog"
 import { onMount } from "solid-js"
 import { DialogStoryRuntime, STORY_DIRECTORY } from "@/components-lab/dialog-story-runtime"
 import { DialogConnectProvider, useProviderConnectController } from "./dialog"
@@ -59,7 +59,7 @@ export const Picker = {
 }
 
 export const ChooseMethod = {
-  render: renderConnection("opencode"),
+  render: renderConnection("warcode"),
 }
 
 export const ApiKey = {

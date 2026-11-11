@@ -8,7 +8,7 @@ const attribute = "data-opencode-picker-source"
 
 export function pickerPlugin() {
   const plugin = picker()
-  const client = "/__vite_opencode_picker_client.js"
+  const client = "/__vite_warcode_picker_client.js"
 
   let workspaceRoot = ""
 
@@ -21,10 +21,15 @@ export function pickerPlugin() {
     resolveId(id: string) {
       return plugin.resolveId(id === client ? "virtual:vite-opencode-picker/client" : id)
     },
+    load(id: string) {
+      return plugin.load(id)?.replaceAll("OpenCode", "Warcode")
+    },
     configureServer(server: Parameters<typeof plugin.configureServer>[0]) {
       server.middlewares.use(client, (_request, response) => {
         response.setHeader("content-type", "text/javascript")
-        response.end(plugin.load(plugin.resolveId("virtual:vite-opencode-picker/client")!))
+        response.end(
+          plugin.load(plugin.resolveId("virtual:vite-opencode-picker/client")!)?.replaceAll("OpenCode", "Warcode"),
+        )
       })
       plugin.configureServer(server)
     },

@@ -35,8 +35,8 @@ const output = path.resolve(root, args.values.out ?? ".output/public")
 const cache = path.join(root, "node_modules/.cache/docs")
 const alias = { "~": path.join(root, "src") }
 const inputs = { stylesheet: "src/docs/styles/docs.css", script: "src/docs/client.ts" }
-// llms.txt and the sitemap list opencode.ai's URLs on dev.opencode.ai too, as the pages' canonical links do:
-// search engines must not take dev.opencode.ai's for the real ones (src/lib/noindex.ts).
+// llms.txt and the sitemap list warcode.ai's URLs on dev.warcode.ai too, as the pages' canonical links do:
+// search engines must not take dev.warcode.ai's for the real ones (src/lib/noindex.ts).
 const site = new URL(config.baseUrl)
 // Every set's pages load the latest docs' stylesheet, script and fonts.
 const base = latestDocs.base

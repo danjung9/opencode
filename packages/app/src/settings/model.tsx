@@ -2,9 +2,9 @@ import { produce, reconcile, unwrap } from "solid-js/store"
 import { createEffect, createMemo } from "solid-js"
 import { createMediaQuery } from "@solid-primitives/media"
 import { Effect, Option, Predicate, Schema, SchemaGetter } from "effect"
-import { createSimpleContext } from "@opencode/ui/context"
-import { setNewIcons } from "@opencode/ui/icon"
-import { timelinePresets, type TimelineCategory, type TimelineDetail } from "@opencode/session-ui/timeline/detail"
+import { createSimpleContext } from "@warcode/ui/context"
+import { setNewIcons } from "@warcode/ui/icon"
+import { timelinePresets, type TimelineCategory, type TimelineDetail } from "@warcode/session-ui/timeline/detail"
 import { persisted } from "@/runtime/persistence/storage"
 import { Persistence } from "@/runtime/persistence/schema"
 import { usePlatform } from "@/runtime/platform/platform"
@@ -337,7 +337,7 @@ function withFallback<T>(read: () => T | undefined, fallback: T) {
 }
 
 /** Only local/dev desktop builds offer the Recent side-tab organization. */
-export function recentSessionsAvailable(platform: "web" | "desktop", channel: ImportMetaEnv["VITE_OPENCODE_CHANNEL"]) {
+export function recentSessionsAvailable(platform: "web" | "desktop", channel: ImportMetaEnv["VITE_WARCODE_CHANNEL"]) {
   return platform === "desktop" && (channel === "local" || channel === "dev")
 }
 
@@ -347,7 +347,7 @@ export const { use: useSettings, provider: SettingsProvider } = createSimpleCont
   init: () => {
     const [store, setStore, , ready] = persisted({ key: "settings.v3" }, settingsPersistence, defaultSettings)
 
-    const sidebarOrganizeOptions: SidebarOrganize[] = recentSessionsAvailable(usePlatform().platform, import.meta.env.VITE_OPENCODE_CHANNEL)
+    const sidebarOrganizeOptions: SidebarOrganize[] = recentSessionsAvailable(usePlatform().platform, import.meta.env.VITE_WARCODE_CHANNEL)
       ? ["list", "projects", "customize", "recent"]
       : ["list", "projects", "customize"]
 

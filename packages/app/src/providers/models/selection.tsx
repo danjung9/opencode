@@ -1,5 +1,5 @@
-import { createSimpleContext } from "@opencode/ui/context"
-import { base64Encode } from "@opencode/util/encode"
+import { createSimpleContext } from "@warcode/ui/context"
+import { base64Encode } from "@warcode/util/encode"
 import { useParams } from "@solidjs/router"
 import { batch, createEffect, createMemo, createRoot, createSignal, onCleanup, untrack } from "solid-js"
 import { Predicate, Schema, SchemaGetter } from "effect"

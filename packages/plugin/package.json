@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode/plugin",
+  "name": "@warcode/plugin",
   "version": "2.2.7",
   "type": "module",
   "license": "MIT",
@@ -42,15 +42,15 @@
   ],
   "dependencies": {
     "@ai-sdk/provider": "3.0.8",
-    "@opencode/ai": "workspace:*",
-    "@opencode/client": "workspace:*",
-    "@opencode/protocol": "workspace:*",
-    "@opencode/schema": "workspace:*",
-    "@opencode/util": "workspace:*",
+    "@warcode/ai": "workspace:*",
+    "@warcode/client": "workspace:*",
+    "@warcode/protocol": "workspace:*",
+    "@warcode/schema": "workspace:*",
+    "@warcode/util": "workspace:*",
     "effect": "catalog:"
   },
   "peerDependencies": {
-    "@opencode/theme": "workspace:*",
+    "@warcode/theme": "workspace:*",
     "@opentui/core": ">=0.8.4",
     "@opentui/solid": ">=0.8.4",
     "electron": "*",
@@ -59,7 +59,7 @@
     "vite-plugin-solid": ">=2.11"
   },
   "peerDependenciesMeta": {
-    "@opencode/theme": {
+    "@warcode/theme": {
       "optional": true
     },
     "@opentui/core": {
@@ -82,7 +82,7 @@
     }
   },
   "devDependencies": {
-    "@opencode/theme": "workspace:*",
+    "@warcode/theme": "workspace:*",
     "@opentui/core": "catalog:",
     "@opentui/solid": "catalog:",
     "@tsconfig/bun": "catalog:",

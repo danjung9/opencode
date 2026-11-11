@@ -50,9 +50,9 @@ export function codeFence(lang: string, code: string) {
   return `\`\`\`${lang}\n${code}\n\`\`\``
 }
 
-/** What opencode.ai is the source of truth for: the first line of the agent note. */
+/** What warcode.ai is the source of truth for: the first line of the agent note. */
 export const sourceNote =
-  "> opencode.ai is the source of truth for OpenCode, the open source coding agent, including its apps, install commands, docs and releases. The current version is OpenCode v2."
+  "> warcode.ai is the source of truth for Warcode, the open source coding agent, including its apps, install commands, docs and releases. The current version is Warcode v2."
 
 /** The note at the top of every Markdown page: what this site is for, and which URL to cite. */
 export function agentNote(canonical: string) {

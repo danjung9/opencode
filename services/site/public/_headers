@@ -52,9 +52,9 @@
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /arcade404/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-/opencode-press-media.zip
+/warcode-press-media.zip
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-/opencode-brand-assets.zip
+/warcode-brand-assets.zip
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /favicon*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800

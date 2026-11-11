@@ -795,7 +795,7 @@ function MonoFontSetting() {
         </select>
       </label>
       <p data-slot="mono-preview" aria-hidden="true">
-        [01] Docs · opencode run
+        [01] Docs · warcode run
       </p>
       <Show when={canQueryLocalFonts()}>
         <button
@@ -815,7 +815,7 @@ function MonoFontSetting() {
   )
 }
 
-const settingsSectionsKey = "opencode-site-settings-sections"
+const settingsSectionsKey = "warcode-site-settings-sections"
 
 /** A collapsible section of the settings panel. Its open state persists; sections with no rows hide. */
 function SettingsSection(props: { id: SettingsSectionID; title: string; children: JSX.Element }) {

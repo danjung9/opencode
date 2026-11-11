@@ -10,22 +10,22 @@ import {
   QuotaExceededError,
   RateLimitError,
   TransportError,
-} from "@opencode/ai/effect"
-import { RequestExecutor } from "@opencode/ai/route"
-import { OpenAIChat } from "@opencode/ai/protocols"
-import { TestLLM } from "@opencode/ai/testing"
-import { AISDK } from "@opencode/core/aisdk"
-import { Credential } from "@opencode/core/credential"
-import { Generate } from "@opencode/core/generate"
-import { Integration } from "@opencode/core/integration"
-import { IntegrationConnection } from "@opencode/core/integration/connection"
-import { ModelResolver } from "@opencode/core/model-resolver"
-import { ModelsDev } from "@opencode/core/models-dev"
-import { ID, Info, Model, Ref, VariantID } from "@opencode/core/model"
-import { Provider } from "@opencode/core/provider"
-import { Variant } from "@opencode/core/variant"
-import { Money } from "@opencode/schema/money"
-import { Npm } from "@opencode/util/npm"
+} from "@warcode/ai/effect"
+import { RequestExecutor } from "@warcode/ai/route"
+import { OpenAIChat } from "@warcode/ai/protocols"
+import { TestLLM } from "@warcode/ai/testing"
+import { AISDK } from "@warcode/core/aisdk"
+import { Credential } from "@warcode/core/credential"
+import { Generate } from "@warcode/core/generate"
+import { Integration } from "@warcode/core/integration"
+import { IntegrationConnection } from "@warcode/core/integration/connection"
+import { ModelResolver } from "@warcode/core/model-resolver"
+import { ModelsDev } from "@warcode/core/models-dev"
+import { ID, Info, Model, Ref, VariantID } from "@warcode/core/model"
+import { Provider } from "@warcode/core/provider"
+import { Variant } from "@warcode/core/variant"
+import { Money } from "@warcode/schema/money"
+import { Npm } from "@warcode/util/npm"
 import { Effect, Exit, Fiber, Layer } from "effect"
 import { TestClock } from "effect/testing"
 import { HttpClient, HttpClientResponse } from "effect/http"
@@ -228,7 +228,7 @@ testEffect(Layer.empty).effect("attributes each stateless completion without cre
       HttpClient.HttpClient,
       HttpClient.make((request) =>
         Effect.sync(() => {
-          const session = request.headers["x-opencode-session"]
+          const session = request.headers["x-warcode-session"]
           if (!session)
             return HttpClientResponse.fromWeb(
               request,
@@ -280,26 +280,26 @@ describe("image and decision generation", () => {
     Info.make({
       ...Info.default(Provider.ID.openai, ID.make("gpt-image-1-mini")),
       type: "image",
-      package: "@opencode/ai/providers/openai/images",
+      package: "@warcode/ai/providers/openai/images",
     }),
     Info.make({
-      ...Info.default(Provider.ID.opencode, ID.make("gpt-image-2.5-sunburst")),
+      ...Info.default(Provider.ID.warcode, ID.make("gpt-image-2.5-sunburst")),
       type: "image",
-      package: "@opencode/ai/providers/openai/images",
+      package: "@warcode/ai/providers/openai/images",
     }),
     Info.make({
       ...Info.default(Provider.ID.make("zai"), ID.make("glm-image")),
       type: "image",
-      package: "@opencode/ai/providers/zai/images",
+      package: "@warcode/ai/providers/zai/images",
     }),
     Info.make({
       ...Info.default(Provider.ID.openai, ID.make("gpt-5")),
-      package: "@opencode/ai/providers/openai/responses",
+      package: "@warcode/ai/providers/openai/responses",
     }),
     Info.make({
       ...Info.default(Provider.ID.make("openrouter"), ID.make("typesafe/jev-1.13")),
       type: "decision",
-      package: "@opencode/ai/providers/openrouter/decisions",
+      package: "@warcode/ai/providers/openrouter/decisions",
     }),
   ].concat(
     decisionCatalog(),
@@ -307,7 +307,7 @@ describe("image and decision generation", () => {
       const gemini = Info.make({
         ...Info.default(Provider.ID.make("google"), ID.make("gemini-3.1-flash-image")),
         type: "image",
-        package: "@opencode/ai/providers/google/images",
+        package: "@warcode/ai/providers/google/images",
       })
       return [{ ...gemini, variants: Variant.resolve(gemini, Variant.supports({ supported: true, effort: ["high"] })) }]
     })(),
@@ -331,13 +331,13 @@ describe("image and decision generation", () => {
       ),
     available: (types) => Effect.succeed(catalog.filter((model) => (types ?? ["chat"]).includes(model.type ?? "chat"))),
   })
-  // An OpenCode Console login keeps its server and organization as credential metadata.
+  // An Warcode Console login keeps its server and organization as credential metadata.
   const mediaIntegrations = Layer.mock(Integration.Service, {
     revision: () => 0,
     connection: {
       active: (id) =>
         Effect.succeed(
-          id === Integration.ID.make("opencode")
+          id === Integration.ID.make("warcode")
             ? IntegrationConnection.CredentialInfo.make({
                 type: "credential",
                 id: Credential.ID.make("console"),
@@ -452,7 +452,7 @@ describe("image and decision generation", () => {
     Effect.gen(function* () {
       requests.length = 0
       const generate = yield* Generate.Service
-      yield* generate.image({ model: ref("opencode", "gpt-image-2.5-sunburst"), prompt: "A black circle" })
+      yield* generate.image({ model: ref("warcode", "gpt-image-2.5-sunburst"), prompt: "A black circle" })
       expect(requests[0]).toMatchObject({
         url: "https://api.openai.com/v1/images/generations",
         headers: { authorization: "Bearer console-token" },
@@ -628,7 +628,7 @@ function decisionCatalog() {
     api: {
       systemone: {
         base_url: "https://api.typesafe.ai/v1",
-        sdk: { opencodeai: "@opencode/ai/providers/typesafe-ai/decisions" },
+        sdk: { opencodeai: "@warcode/ai/providers/typesafe-ai/decisions" },
         ...(compatibility ? { compatibility } : {}),
       },
     },

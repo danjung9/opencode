@@ -1,6 +1,6 @@
 # Rules for agents
 
-Design-system rules for the opencode.ai site (`services/site`), compiled from David's reviews and decisions. Read them before you change UI or copy. Every component they mention is live at [/dev/components](/dev/components) on the dev server.
+Design-system rules for the warcode.ai site (`services/site`), compiled from David's reviews and decisions. Read them before you change UI or copy. Every component they mention is live at [/dev/components](/dev/components) on the dev server.
 
 Version 2026-11-06. Last changed 2026-11-06, menus open on the side with room (`placeMenu`) and nothing moves the scroll position on load.
 
@@ -23,7 +23,7 @@ To add a rule, add one line under its group. Mark a rule that is still being dec
 
 - Set every font size from the `--fs-*` tokens. Nothing is smaller than 12px, and on phones nothing that carries meaning is smaller than 14px. → [Type scale](/dev/components#type-scale)
 - Use OpenTUI Mono (`--font-mono`), Anomaly's own font, for nav, labels, titles and code, and Inter (`--font-sans`) for body and reading text. → [Fonts](/dev/components#fonts)
-- Serve only fonts we own or that are openly licensed (OpenTUI Mono, the OpenCode font, Inter), never a commercial face. `test/fonts.test.ts` enforces it.
+- Serve only fonts we own or that are openly licensed (OpenTUI Mono, the Warcode font, Inter), never a commercial face. `test/fonts.test.ts` enforces it.
 - Step text once, at 960px. Only page titles (`--fs-h1`) and display titles are fluid. → [Type scale](/dev/components#type-scale)
 - Set inputs with `--fs-input`, 16px on touch, so iOS doesn't zoom.
 - Give section titles `--title-size` with the `--title-stroke` faux medium; the current nav item gets the same stroke.
@@ -34,10 +34,10 @@ To add a rule, add one line under its group. Mark a rule that is still being dec
 
 ## Copy
 
-- Use no colons in site copy (headings, leads, body, buttons, captions, alt text). Good "The easiest way to start is to download OpenCode". Bad "The easiest way to start: download OpenCode". Colons in code, commands, URLs, times and data labels are fine.
+- Use no colons in site copy (headings, leads, body, buttons, captions, alt text). Good "The easiest way to start is to download Warcode". Bad "The easiest way to start: download Warcode". Colons in code, commands, URLs, times and data labels are fine.
 - Write statements, not rhetorical questions. Good "For more, bring your own subscription". Bad "Want more? Bring your own subscription". Real reader questions, such as FAQ entries, are fine. One deliberate exception: the footer bar's "Like letters?" (`footer.wordmark.font`), which is David's chosen copy for the font teaser.
-- Call OpenCode an "open source coding agent", never an "AI coding agent". "AI models" and "AI providers" are fine.
-- Say "OpenCode Models", never "Zen" or "OpenCode Zen".
+- Call Warcode an "open source coding agent", never an "AI coding agent". "AI models" and "AI providers" are fine.
+- Say "Warcode Models", never "Zen" or "Warcode Zen".
 - Write prices per month as "/month", for example "$10/month".
 - Make any model named in copy, screenshots or footage read "Claude Opus 5.5".
 - Keep list descriptions to one line at desktop width. → [Product list](/dev/components#product-list)
@@ -79,7 +79,7 @@ To add a rule, add one line under its group. Mark a rule that is still being dec
 - Confirm copy actions in place ("Copied") through a live region; the site has no toasts. → [Copy buttons](/dev/components#copy-buttons)
 - On docs pages, the left nav's first item, the content's first item and the right rail's first item share one top line (text tops for the nav and the title, the box top for the search box).
 - A sidebar that scrolls under fixed chrome (the docs nav under the logo and lockup) fades out at its edges with a mask, only while items are under that edge; phones keep hard cuts on sticky bars.
-- Beside the sidebar, the OpenCode logo and the lockup beside it (DOCS) never move: fixed in the top-left corner at the same place on every page, at rest and scrolled. Whatever passes under them (a sidebar leaving with the article at the page's end) fades out under a strip of the page colour, shown only while something is under it. Phones keep their top bar.
+- Beside the sidebar, the Warcode logo and the lockup beside it (DOCS) never move: fixed in the top-left corner at the same place on every page, at rest and scrolled. Whatever passes under them (a sidebar leaving with the article at the page's end) fades out under a strip of the page colour, shown only while something is under it. Phones keep their top bar.
 - No flat greys inside callouts or other tinted surfaces; grey layers blend with the surface (mix-blend-mode), except code and table bodies, which stay solid. → [Code inside callouts](/dev/docs-components#blend)
 - Code blocks and tables inside a tinted surface blend their header and borders with mix-blend-mode, so they take the surface's hue; code and table bodies stay solid, on the code body colour. → [Code inside callouts](/dev/docs-components#blend)
 - Docs code blocks copy with a text-only button in the header: "Copy" turns to "Copied" (or "Failed"), right-aligned in the width of the longest label so nothing moves. → [Code blocks](/dev/docs-components#code-blocks)
@@ -133,7 +133,7 @@ Motion decisions follow Emil Kowalski's skills ([emilkowalski/skills](https://gi
 
 - Put new copy in `src/i18n/en.ts` (or `src/i18n/content`), never hard-coded in a component.
 - Name a key in full where the page shows it (`i18n.t("home.hero.title")`, or a template that starts it, such as `` `site.theme.${name}` ``): each page's browser bundle gets only the keys its code names (`script/i18n-slices.ts`).
-- Follow the translators' rules in `.opencode/agent/translator.md` (keep names, params, code and prices; stay within 140% in tight places), and check a locale with `bun src/i18n/check.ts <locale>`.
+- Follow the translators' rules in `.warcode/agent/translator.md` (keep names, params, code and prices; stay within 140% in tight places), and check a locale with `bun src/i18n/check.ts <locale>`.
 - Lay out with logical properties (`padding-inline-start`, `inset-inline-end`), never left and right; the site ships 17 locales with right to left.
 - Keep the locale prefix on internal links with `language.route()`; it leaves the docs, the Console and the English-only pages unprefixed (`localized` in `src/lib/language.ts`).
 

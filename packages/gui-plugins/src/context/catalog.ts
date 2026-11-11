@@ -1,6 +1,6 @@
 import { onCleanup, type Accessor } from "solid-js"
-import { isServiceUnavailableError } from "@opencode/client/promise"
-import { createKeyed, type MountedSession } from "@opencode/plugin/gui"
+import { isServiceUnavailableError } from "@warcode/client/promise"
+import { createKeyed, type MountedSession } from "@warcode/plugin/gui"
 import {
   CATALOG_LOAD_TIMEOUT_MS,
   createCatalogState,

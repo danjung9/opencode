@@ -3,11 +3,11 @@ title: Referanser
 description: Legg til lokale kataloger og Git-repositorier som prosjektreferanser.
 ---
 
-Referanser gir OpenCode tilgang til kataloger utenfor det gjeldende prosjektet. Bruk dem til å gjøre dokumentasjon, delte biblioteker, eksempler eller et annet repository tilgjengelig mens du jobber.
+Referanser gir Warcode tilgang til kataloger utenfor det gjeldende prosjektet. Bruk dem til å gjøre dokumentasjon, delte biblioteker, eksempler eller et annet repository tilgjengelig mens du jobber.
 
-Referanser konfigureres med et alias i `opencode.json` eller `opencode.jsonc`.
+Referanser konfigureres med et alias i `warcode.json` eller `warcode.jsonc`.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
   "references": {
@@ -16,7 +16,7 @@ Referanser konfigureres med et alias i `opencode.json` eller `opencode.jsonc`.
       "description": "Use for product behavior and documentation conventions",
     },
     "sdk": {
-      "repository": "anomalyco/opencode-sdk-js",
+      "repository": "anomalyco/warcode-sdk-js",
       "branch": "main",
       "description": "Use for JavaScript SDK implementation details",
     },
@@ -30,7 +30,7 @@ Referanser konfigureres med et alias i `opencode.json` eller `opencode.jsonc`.
 
 Bruk `path` for å referere til en lokal katalog.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": {
@@ -48,7 +48,7 @@ Baner kan være:
 
 Du kan også bruke en kortform som streng:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": "../docs",
@@ -60,9 +60,9 @@ Du kan også bruke en kortform som streng:
 
 ## Git-repositorier
 
-Bruk `repository` for å referere til et Git-repository. OpenCode henter repositoriet til sin lokale repository-hurtigbuffer og gjør den utsjekkede kildekoden tilgjengelig som en referansekatalog.
+Bruk `repository` for å referere til et Git-repository. Warcode henter repositoriet til sin lokale repository-hurtigbuffer og gjør den utsjekkede kildekoden tilgjengelig som en referansekatalog.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": {
@@ -73,11 +73,11 @@ Bruk `repository` for å referere til et Git-repository. OpenCode henter reposit
 }
 ```
 
-`repository` godtar Git-URL-er, referanser i formen vert/bane og GitHub-kortformen `owner/repo`. Det valgfrie feltet `branch` velger en gren eller ref. Uten `branch` bruker OpenCode standardgrenen til repositoriet.
+`repository` godtar Git-URL-er, referanser i formen vert/bane og GitHub-kortformen `owner/repo`. Det valgfrie feltet `branch` velger en gren eller ref. Uten `branch` bruker Warcode standardgrenen til repositoriet.
 
 Du kan bruke kortform som streng når du ikke trenger gren, beskrivelse eller andre alternativer:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": "Effect-TS/effect",
@@ -95,7 +95,7 @@ Git-referanser oppdateres asynkront. Det kan ta et øyeblikk før et nylig konfi
 
 Legg til `description` for å forklare når en agent bør bruke en referanse.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "design-system": {
@@ -106,7 +106,7 @@ Legg til `description` for å forklare når en agent bør bruke en referanse.
 }
 ```
 
-OpenCode tar med referanser som har beskrivelser i agentkonteksten. Beskrivelser bør være korte og presise nok til å skille mellom referanser med lignende innhold. Referanser uten beskrivelse er fortsatt tilgjengelige via autofullføring og direkte bruk, men blir ikke presentert for agenter.
+Warcode tar med referanser som har beskrivelser i agentkonteksten. Beskrivelser bør være korte og presise nok til å skille mellom referanser med lignende innhold. Referanser uten beskrivelse er fortsatt tilgjengelige via autofullføring og direkte bruk, men blir ikke presentert for agenter.
 
 ---
 
@@ -114,7 +114,7 @@ OpenCode tar med referanser som har beskrivelser i agentkonteksten. Beskrivelser
 
 Sett `hidden` til `true` for å utelate en referanse fra `@`-autofullføringen i TUI.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "internal": {
@@ -140,7 +140,7 @@ Compare this implementation with @sdk/src/client.ts
 
 Agenter får også de løste banene og beskrivelsene til konfigurerte referanser som har beskrivelser i systemkonteksten sin, slik at de kan undersøke en referanse når den er relevant uten at du må legge den ved manuelt.
 
-OpenCode tillater automatisk referansekataloger gjennom tillatelsesgrensen for eksterne kataloger. Vanlige verktøytillatelser gjelder fortsatt. For eksempel får ikke en agent som ikke kan redigere filer, redigeringstilgang fordi en katalog er konfigurert som referanse.
+Warcode tillater automatisk referansekataloger gjennom tillatelsesgrensen for eksterne kataloger. Vanlige verktøytillatelser gjelder fortsatt. For eksempel får ikke en agent som ikke kan redigere filer, redigeringstilgang fordi en katalog er konfigurert som referanse.
 
 ---
 

@@ -3,7 +3,7 @@ title: "Go"
 description: "Reliable access to open coding models with three plans, for one person or a whole team."
 ---
 
-OpenCode Go gives you reliable access to popular open coding models, with three monthly plans:
+Warcode Go gives you reliable access to popular open coding models, with three monthly plans:
 
 | Plan         | Price                | Included usage                                                             |
 | ------------ | -------------------- | -------------------------------------------------------------------------- |
@@ -11,14 +11,14 @@ OpenCode Go gives you reliable access to popular open coding models, with three 
 | **Go Plus**  | **$40/month**        | Higher usage limits across the models below                                |
 | **Go Teams** | **$20/member/month** | Every member gets their own limits, $5/month higher than Go on every model |
 
-Go works like any other provider in OpenCode. You subscribe to OpenCode Go and get your API key. It's **completely optional** and you don't need it to use OpenCode.
+Go works like any other provider in Warcode. You subscribe to Warcode Go and get your API key. It's **completely optional** and you don't need it to use Warcode.
 
 The service is designed primarily for international users and provides stable global access.
 
 ## How it works
 
-1. Sign in to the [OpenCode Console](https://opencode.ai/console), subscribe to Go, Go Plus, or Go Teams, add your billing details, and copy your API key.
-2. Run `/connect` in the TUI, select **OpenCode Go**, and paste your API key.
+1. Sign in to the [Warcode Console](https://opencode.ai/console), subscribe to Go, Go Plus, or Go Teams, add your billing details, and copy your API key.
+2. Run `/connect` in the TUI, select **Warcode Go**, and paste your API key.
 
    ```text
    /connect
@@ -103,7 +103,7 @@ the payment method when you subscribe, or later in **Manage subscription**. This
 
 ## Where can I use it?
 
-OpenCode Go is designed for [OpenCode](https://opencode.ai) and other coding agents
+Warcode Go is designed for [Warcode](https://opencode.ai) and other coding agents
 that produce similar types of requests. Traffic is monitored for abuse that
 degrades the experience for other users.
 
@@ -112,25 +112,25 @@ Your client should:
 1. Send typical coding agent traffic
 2. Identify itself with its own user agent, such as `my-coding-agent/1.0`, rather
    than a generic SDK or HTTP-library name.
-3. Send a stable session ID in `x-opencode-session` for each conversation so we can optimize routing and
+3. Send a stable session ID in `x-warcode-session` for each conversation so we can optimize routing and
    prompt caching.
 
 See [Harnesses](/console/harnesses) to set up Go in Claude Code, Codex, Hermes, Pi, and Raycast.
 
 ### Validated clients
 
-Besides OpenCode, the following clients have been validated to work properly
-with OpenCode Go, although we do not guarantee that they will continue to work in the future.
+Besides Warcode, the following clients have been validated to work properly
+with Warcode Go, although we do not guarantee that they will continue to work in the future.
 
 | Client            | Session support                                                                                                                                                                                                                             |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Hermes**        | Update to **v0.21.6 or later**, which sends the header on main and auxiliary OpenCode requests ([PR #101864](https://github.com/NousResearch/hermes-agent/pull/101864)).                                                                    |
+| **Hermes**        | Update to **v0.21.6 or later**, which sends the header on main and auxiliary Warcode requests ([PR #101864](https://github.com/NousResearch/hermes-agent/pull/101864)).                                                                    |
 | **Claude Code**   | Go recognizes its native session header. No custom-header wrapper is needed.                                                                                                                                                                |
 | **Codex**         | Go recognizes its native session header. Some versions and proxy setups still omit it; preserve the session header when forwarding requests.                                                                                                |
-| **ZCode**         | Go recognizes its native session header. Our [request for `x-opencode-session`](https://github.com/zai-org/feedback/issues/492) remains open, but it is no longer necessary to send that specific header.                                   |
-| **Pi**            | Current builds send session information for OpenCode. Update older installations.                                                                                                                                                           |
+| **ZCode**         | Go recognizes its native session header. Our [request for `x-warcode-session`](https://github.com/zai-org/feedback/issues/492) remains open, but it is no longer necessary to send that specific header.                                   |
+| **Pi**            | Current builds send session information for Warcode. Update older installations.                                                                                                                                                           |
 | **jcode**         | Update to **v0.81.6 or later**, which includes the [session-header fix](https://github.com/1jehuang/jcode/issues/1167).                                                                                                                     |
-| **Kilo Code CLI** | Builds containing [PR #13752](https://github.com/Kilo-Org/kilocode/pull/13752) restore OpenCode session headers. This fix covers the CLI, not the VS Code extension. See [issue #13723](https://github.com/Kilo-Org/kilocode/issues/13723). |
+| **Kilo Code CLI** | Builds containing [PR #13752](https://github.com/Kilo-Org/kilocode/pull/13752) restore Warcode session headers. This fix covers the CLI, not the VS Code extension. See [issue #13723](https://github.com/Kilo-Org/kilocode/issues/13723). |
 
 ### Known problematic clients
 
@@ -154,7 +154,7 @@ Each model has the following usage limits: 5-hour — 20% of the monthly limit;
 weekly — 50%; and monthly — 100%.
 
 Each model's monthly limit below determines how its usage counts toward those allowances. Each response reports how
-much the request counted, as [`opencode.allowance`](/console/api/inference#cost).
+much the request counted, as [`warcode.allowance`](/console/api/inference#cost).
 
 Token prices are per 1M tokens.
 
@@ -532,13 +532,13 @@ text model also works through the other APIs, which Console translates. See
 
 </div>
 
-These AI SDK packages are for applications calling Go directly. To use Go in OpenCode, connect with `/connect` and set
-the [model](/models) using the format `opencode-go/<model-id>`:
+These AI SDK packages are for applications calling Go directly. To use Go in Warcode, connect with `/connect` and set
+the [model](/models) using the format `warcode-go/<model-id>`:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode-go/kimi-k3",
+  "model": "warcode-go/kimi-k3",
 }
 ```
 
@@ -602,7 +602,7 @@ Open models have gotten really good. They now reach performance close to proprie
 
 However, getting reliable, low latency access to them can be difficult. Providers vary in quality and availability.
 
-<Callout type="tip">We tested a select group of models and providers that work well with OpenCode.</Callout>
+<Callout type="tip">We tested a select group of models and providers that work well with Warcode.</Callout>
 
 To fix this, we did a couple of things:
 
@@ -615,9 +615,9 @@ Teams to cover your whole team.
 
 ## Goals
 
-We created OpenCode Go to:
+We created Warcode Go to:
 
 1. Make AI coding **accessible** to more people with a low cost subscription.
 2. Provide **reliable** access to the best open coding models.
 3. Curate models that are **tested and benchmarked** for coding agent use.
-4. Have **no lock-in** by allowing you to use any other provider with OpenCode as well.
+4. Have **no lock-in** by allowing you to use any other provider with Warcode as well.

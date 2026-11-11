@@ -1,12 +1,12 @@
 import { describe, expect, test } from "bun:test"
-import { AIError, ProviderInternalError, TransportError } from "@opencode/ai/effect"
-import { ModelRetry } from "@opencode/core/model-retry"
-import { Agent } from "@opencode/schema/agent"
-import { Model } from "@opencode/schema/model"
-import { Provider } from "@opencode/core/provider"
-import { SessionSchema } from "@opencode/core/session/schema"
-import { SessionRunnerRetry } from "@opencode/core/session/runner/retry"
-import { toSessionError } from "@opencode/core/session/to-session-error"
+import { AIError, ProviderInternalError, TransportError } from "@warcode/ai/effect"
+import { ModelRetry } from "@warcode/core/model-retry"
+import { Agent } from "@warcode/schema/agent"
+import { Model } from "@warcode/schema/model"
+import { Provider } from "@warcode/core/provider"
+import { SessionSchema } from "@warcode/core/session/schema"
+import { SessionRunnerRetry } from "@warcode/core/session/runner/retry"
+import { toSessionError } from "@warcode/core/session/to-session-error"
 import { Clock, Duration, Effect } from "effect"
 import { TestClock } from "effect/testing"
 import { it } from "./lib/effect"
@@ -17,7 +17,7 @@ const timeout = new AIError({
 const internal = new AIError({ reason: new ProviderInternalError({ message: "internal" }) })
 const dnsFailure = new AIError({
   reason: new TransportError({
-    message: "getaddrinfo ENOTFOUND opencode.ai",
+    message: "getaddrinfo ENOTFOUND warcode.ai",
     transport: "http",
     operation: "request",
     code: "ENOTFOUND",
@@ -123,7 +123,7 @@ describe("toSessionError", () => {
   test("names the network when the provider's host can't be reached", () => {
     expect(toSessionError(dnsFailure)).toEqual({
       type: "provider.transport",
-      message: "Can't reach opencode.ai. Check the network connection. (getaddrinfo ENOTFOUND opencode.ai)",
+      message: "Can't reach warcode.ai. Check the network connection. (getaddrinfo ENOTFOUND warcode.ai)",
     })
     expect(toSessionError(refused)).toEqual({ type: "provider.transport", message: "Unable to connect" })
   })

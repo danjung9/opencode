@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { Base64 } from "effect/encoding"
 import { ai, AIError, Media, Message } from "../src/effect.js"
-import { OpenAI, OpenCode } from "../src/providers.js"
+import { OpenAI, Warcode } from "../src/providers.js"
 
 const PNG = Uint8Array.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 0])
 const PNG_BASE64 = Base64.encode(PNG)
@@ -86,7 +86,7 @@ describe("plain file input", () => {
 
   test("decision media parts accept plain data", () => {
     const request = ai.decision.request({
-      model: OpenCode.configure({ apiKey: "test" }).decision("jev-1.13"),
+      model: Warcode.configure({ apiKey: "test" }).decision("jev-1.13"),
       input: [
         { type: "text", text: "Is this a receipt?" },
         { type: "media", media: "AQID", mediaType: "image/png", filename: "a.png" },

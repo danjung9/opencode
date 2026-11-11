@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import type { SessionMessageUser } from "@opencode/client/promise"
+import type { SessionMessageUser } from "@warcode/client/promise"
 import {
   createSessionRevertState,
   selectCursorAfterRevert,

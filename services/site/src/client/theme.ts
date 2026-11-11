@@ -20,7 +20,7 @@ export function startTheme() {
 
 /** Shows and saves a theme (search's "Toggle theme"). */
 export function setTheme(theme: Theme) {
-  localStorage.setItem("opencode-theme", theme)
+  localStorage.setItem("warcode-theme", theme)
   show?.(theme)
 }
 

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, jest, test } from "bun:test"
-import type { OpenCodeClient } from "@opencode/client/promise"
+import type { WarcodeClient } from "@warcode/client/promise"
 import { CLOSE_TIMEOUT, DISCONNECT_GRACE, JOIN_TIMEOUT } from "./transport-machine"
 import { VoiceFailure, VoiceTransport } from "./transport"
 
@@ -144,7 +144,7 @@ afterEach(() => {
   Object.defineProperty(navigator, "mediaDevices", savedMediaDevices ?? missing)
 })
 
-type Voice = OpenCodeClient["experimental"]["voice"]
+type Voice = WarcodeClient["experimental"]["voice"]
 
 const live = { model: "gpt-live-1", provider: "openai", available: true, transports: ["webrtc" as const] }
 

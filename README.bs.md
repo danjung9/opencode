@@ -3,11 +3,11 @@
     <picture>
       <source srcset=".github/assets/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset=".github/assets/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src=".github/assets/logo-ornate-light.svg" alt="OpenCode logo">
+      <img src=".github/assets/logo-ornate-light.svg" alt="Warcode logo">
     </picture>
   </a>
 </p>
-<p align="center">OpenCode je open source AI agent za programiranje.</p>
+<p align="center">Warcode je open source AI agent za programiranje.</p>
 <p align="center">
   <a href="https://opencode.ai/discord"><img alt="Discord" src="https://img.shields.io/discord/1391832426048651334?style=flat-square&label=discord" /></a>
   <a href="https://www.npmjs.com/package/@opencode/cli"><img alt="npm" src="https://img.shields.io/npm/v/@opencode/cli?style=flat-square" /></a>
@@ -39,7 +39,7 @@
   <a href="README.vi.md">Tiếng Việt</a>
 </p>
 
-[![OpenCode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
+[![Warcode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
 
 ---
 
@@ -50,13 +50,13 @@
 curl -fsSL https://opencode.ai/v2/install | bash
 
 # Package manageri
-npm i -g @opencode/cli@latest      # ili bun/pnpm/yarn
-brew install anomalyco/tap/opencode-v2 # macOS i Linux (preporučeno, uvijek ažurno)
-brew install opencode              # macOS i Linux (zvanična brew formula, rjeđe se ažurira)
-sudo pacman -S opencode            # Arch Linux (Stable)
-paru -S opencode-beta              # Arch Linux (Latest from AUR)
-mise use -g opencode               # Bilo koji OS
-nix run github:anomalyco/opencode  # Nix
+npm i -g @warcode/cli@latest      # ili bun/pnpm/yarn
+brew install anomalyco/tap/warcode-v2 # macOS i Linux (preporučeno, uvijek ažurno)
+brew install warcode              # macOS i Linux (zvanična brew formula, rjeđe se ažurira)
+sudo pacman -S warcode            # Arch Linux (Stable)
+paru -S warcode-beta              # Arch Linux (Latest from AUR)
+mise use -g warcode               # Bilo koji OS
+nix run github:anomalyco/warcode  # Nix
 ```
 
 > [!TIP]
@@ -64,27 +64,27 @@ nix run github:anomalyco/opencode  # Nix
 
 ### Desktop aplikacija (BETA)
 
-OpenCode je dostupan i kao desktop aplikacija. Preuzmi je sa [opencode.ai/download](https://opencode.ai/download).
+Warcode je dostupan i kao desktop aplikacija. Preuzmi je sa [warcode.ai/download](https://opencode.ai/download).
 
 | Platforma             | Preuzimanje                        |
 | --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `opencode-desktop-mac-x64.dmg`     |
-| Windows               | `opencode-desktop-win-x64.exe`     |
+| macOS (Apple Silicon) | `warcode-desktop-mac-arm64.dmg`   |
+| macOS (Intel)         | `warcode-desktop-mac-x64.dmg`     |
+| Windows               | `warcode-desktop-win-x64.exe`     |
 | Linux                 | `.deb`, `.rpm`, ili AppImage       |
 
 ```bash
 # macOS (Homebrew)
-brew install --cask opencode-desktop
+brew install --cask warcode-desktop
 ```
 
 #### Instalacijski direktorij
 
-Instalacijska skripta instalira OpenCode u `$HOME/.opencode/bin`.
+Instalacijska skripta instalira Warcode u `$HOME/.warcode/bin`.
 
 ### Agenti
 
-OpenCode uključuje dva ugrađena agenta između kojih možeš prebacivati tasterom `Tab`.
+Warcode uključuje dva ugrađena agenta između kojih možeš prebacivati tasterom `Tab`.
 
 - **build** - Podrazumijevani agent sa punim pristupom za razvoj
 - **plan** - Agent samo za čitanje za analizu i istraživanje koda
@@ -99,15 +99,15 @@ Saznaj više o [agentima](https://opencode.ai/docs/agents).
 
 ### Dokumentacija
 
-Za više informacija o konfiguraciji OpenCode-a, [**pogledaj dokumentaciju**](https://opencode.ai/docs).
+Za više informacija o konfiguraciji Warcode-a, [**pogledaj dokumentaciju**](https://opencode.ai/docs).
 
 ### Doprinosi
 
-Ako želiš doprinositi OpenCode-u, pročitaj [upute za doprinošenje](./CONTRIBUTING.md) prije slanja pull requesta.
+Ako želiš doprinositi Warcode-u, pročitaj [upute za doprinošenje](./CONTRIBUTING.md) prije slanja pull requesta.
 
-### Gradnja na OpenCode-u
+### Gradnja na Warcode-u
 
-Ako radiš na projektu koji je povezan s OpenCode-om i koristi "opencode" kao dio naziva, npr. "opencode-dashboard" ili "opencode-mobile", dodaj napomenu u svoj README da projekat nije napravio OpenCode tim i da nije povezan s nama.
+Ako radiš na projektu koji je povezan s Warcode-om i koristi "warcode" kao dio naziva, npr. "warcode-dashboard" ili "warcode-mobile", dodaj napomenu u svoj README da projekat nije napravio Warcode tim i da nije povezan s nama.
 
 ---
 

@@ -1,9 +1,9 @@
-import type { FileDiffInfo } from "@opencode/client/promise"
-import type { SessionReviewLineComment } from "@opencode/session-ui/session-review"
-import { previewSelectedLines } from "@opencode/session-ui/pierre/selection-bridge"
-import { artifactMime } from "@opencode/util/artifact"
-import { bytesToBase64 } from "@opencode/util/base64"
-import { checksum } from "@opencode/util/encode"
+import type { FileDiffInfo } from "@warcode/client/promise"
+import type { SessionReviewLineComment } from "@warcode/session-ui/session-review"
+import { previewSelectedLines } from "@warcode/session-ui/pierre/selection-bridge"
+import { artifactMime } from "@warcode/util/artifact"
+import { bytesToBase64 } from "@warcode/util/base64"
+import { checksum } from "@warcode/util/encode"
 import { focusManager, useQueryClient } from "@tanstack/solid-query"
 import { debounce } from "@solid-primitives/scheduled"
 import { createMemo, createSignal, on, onCleanup, untrack, type Accessor } from "solid-js"
@@ -13,7 +13,7 @@ import {
   type MountedSession,
   type SessionScreen,
   type SetupContext,
-} from "@opencode/plugin/gui"
+} from "@warcode/plugin/gui"
 import type Review from "./index"
 import {
   filterRenderableDiff,

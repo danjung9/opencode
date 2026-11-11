@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     solidStart({ middleware: "./src/middleware.ts" }) as PluginOption,
     nitro({
-      // The Worker owns opencode.ai/data/* directly, so static assets are uploaded under /data like the pages that
+      // The Worker owns warcode.ai/data/* directly, so static assets are uploaded under /data like the pages that
       // reference them. Nitro's baseURL would do this too, but its router would then stop serving /<locale>/data.
       output: { publicDir: "{{ output.dir }}/public/data" },
       compatibilityDate: "2024-09-19",

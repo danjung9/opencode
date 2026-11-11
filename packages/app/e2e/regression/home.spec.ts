@@ -1,4 +1,4 @@
-import type { OpenCodeEvent } from "@opencode/client/promise"
+import type { WarcodeEvent } from "@warcode/client/promise"
 import { expect, test, type Page } from "@playwright/test"
 import {
   expectPath,
@@ -12,7 +12,7 @@ import {
   sessionHref,
   T0,
 } from "../utils/app"
-import { mockOpenCodeServer, mockServers } from "../utils/mock-server"
+import { mockWarcodeServer, mockServers } from "../utils/mock-server"
 import { fixture, mockStressTimeline } from "../utils/session-fixture"
 import { mockRemoteServer, mockWorkspace, newSessionLocation } from "../utils/workspace"
 import { APP_READY_TIMEOUT, expectAppVisible } from "../utils/waits"
@@ -79,7 +79,7 @@ test("Home lists projects and sessions when stored state hides every server", as
   await mockStressTimeline(page)
   await seed(page, { usedProjects: { local: [fixture.project.id] } })
   // A second seed merges into the server entry the first one wrote.
-  await seed(page, { storage: { "opencode.global.dat:server": { hidden: { [fixture.serverKey]: true } } } })
+  await seed(page, { storage: { "warcode.global.dat:server": { hidden: { [fixture.serverKey]: true } } } })
   await page.goto("/")
 
   await expect(
@@ -262,15 +262,15 @@ test("the Home shortcut focuses session search, and the Home button leaves focus
 const entry = (name: string, active: number, id = `proj_${name}`) =>
   project({
     id,
-    directory: `C:/OpenCode/${name}`,
+    directory: `C:/Warcode/${name}`,
     name,
     time: { created: T0, updated: T0, active: T0 + active },
   })
 
 async function homeProjects(page: Page, projects: unknown[]) {
-  const directory = "C:/OpenCode/home"
+  const directory = "C:/Warcode/home"
 
-  const server = await mockOpenCodeServer(page, {
+  const server = await mockWarcodeServer(page, {
     directory,
     project: project({ id: "proj_home", directory }),
     projects: () => projects,
@@ -300,7 +300,7 @@ test("Home lists the used server projects by recent activity, hides them, and li
   listed.splice(0, listed.length, fresh, active, listed[0]!, listed[1]!, listed[4]!)
   await view.server.push(
     [active, archived, fresh].map(
-      (data, index): OpenCodeEvent => ({
+      (data, index): WarcodeEvent => ({
         id: `evt_home_project_${index}`,
         created: T0 + index,
         type: "project.updated",
@@ -327,7 +327,7 @@ test("Home lists the used server projects by recent activity, hides them, and li
   await expect(options.locator(".command-palette-title")).toHaveText(["oldest", "Other projects", "Add project"])
   await options.filter({ hasText: "Other projects" }).click()
   await expect(options.locator(".command-palette-title")).toHaveText(["fresh", "unused", "recent"])
-  await options.filter({ hasText: "C:/OpenCode/recent" }).click()
+  await options.filter({ hasText: "C:/Warcode/recent" }).click()
   await expect(newSessionLocation(page)).toContainText("recent")
   await page.getByRole("button", { name: "Home", exact: true }).click()
   await expect(view.rows).toHaveText(["oldest", "recent"])
@@ -344,16 +344,16 @@ test("Home migrates the directories an older build listed to the server's curren
   await seed(page, {
     legacyProjects: {
       local: [
-        { worktree: "C:/OpenCode/api", expanded: true },
-        { worktree: "C:/OpenCode/web/packages/app" },
-        { worktree: "C:/OpenCode/gone" },
+        { worktree: "C:/Warcode/api", expanded: true },
+        { worktree: "C:/Warcode/web/packages/app" },
+        { worktree: "C:/Warcode/gone" },
       ],
     },
   })
   await page.goto("/")
   await expect(view.rows).toHaveText(["api", "web"])
   await expect
-    .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("opencode.global.dat:server") ?? "{}")))
+    .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("warcode.global.dat:server") ?? "{}")))
     .toMatchObject({ usedProjectIDs: { local: ["proj_api", "proj_web"] }, projects: {} })
 })
 
@@ -380,7 +380,7 @@ test("selecting a Home project lists its worktrees once, however often the proje
   await refreshed
 
   // Each update replaces the selected project's object in the store.
-  const renamed: OpenCodeEvent = {
+  const renamed: WarcodeEvent = {
     id: "evt_home_worktrees",
     created: T0,
     type: "project.updated",
@@ -420,7 +420,7 @@ test("Home keeps a restored remote selection while the desktop server list loads
   await seed(page, {
     servers: [{ url: REMOTE_SERVER, name: "Remote" }],
     usedProjects: { [REMOTE_SERVER]: ["proj_remote"] },
-    storage: { "opencode.global.dat:layout": { home: { selection } } },
+    storage: { "warcode.global.dat:layout": { home: { selection } } },
   })
   // Desktop storage is asynchronous; the stored servers load after the layout here.
   await page.goto(
@@ -437,7 +437,7 @@ test("Home keeps a restored remote selection while the desktop server list loads
   ).toHaveAttribute("data-selected", "")
   await expect(row(page, local.title)).toHaveCount(0)
   expect(
-    await page.evaluate(() => JSON.parse(localStorage.getItem("opencode.global.dat:layout") ?? "{}").home.selection),
+    await page.evaluate(() => JSON.parse(localStorage.getItem("warcode.global.dat:layout") ?? "{}").home.selection),
   ).toEqual(selection)
 })
 
@@ -474,7 +474,7 @@ test("adding a project to a signed-out server re-pairs it, then continues at the
   // The saved address rejects the new token, so saving moves the server to the link's address.
   const paired = "http://127.0.0.1:4098"
   await mockRemoteServer(page, { name: "Remote", password: "old-password" })
-  await mockOpenCodeServer(page, {
+  await mockWarcodeServer(page, {
     server: paired,
     directory: "/remote/paired",
     project: project({ id: "proj_paired", directory: "/remote/paired" }),
@@ -502,7 +502,7 @@ test("adding a project to a signed-out server re-pairs it, then continues at the
 
 test("a server whose saved password changes works with the new password", async ({ page }) => {
   const accepted = { password: "old-password" }
-  await mockOpenCodeServer(page, {
+  await mockWarcodeServer(page, {
     server: REMOTE_SERVER,
     directory: "/remote/project",
     project: project({ id: "proj_remote", directory: "/remote/project" }),
@@ -515,7 +515,7 @@ test("a server whose saved password changes works with the new password", async 
   // Saved with the password the server accepts until the test changes it.
   await seed(page, {
     storage: {
-      "opencode.global.dat:server": {
+      "warcode.global.dat:server": {
         list: [{ type: "http", displayName: "Remote", http: { url: REMOTE_SERVER, password: "old-password" } }],
       },
     },
@@ -534,7 +534,7 @@ test("a server whose saved password changes works with the new password", async 
   await page.getByRole("menuitem", { name: "Edit", exact: true }).click()
   const editor = page.getByRole("dialog", { name: "Edit server" })
   await editor.getByPlaceholder("password").fill("new-password")
-  // The server now rejects the old password, as after `opencode service set password`.
+  // The server now rejects the old password, as after `warcode service set password`.
   accepted.password = "new-password"
   await editor.getByRole("button", { name: "Save", exact: true }).click()
   await expect(editor).toHaveCount(0)
@@ -545,10 +545,10 @@ test("a server whose saved password changes works with the new password", async 
   await expect(picker.getByText("Unable to read this folder")).toHaveCount(0)
 })
 
-const recovery = "C:/OpenCode/Worktrees/project-menu-recovery"
+const recovery = "C:/Warcode/Worktrees/project-menu-recovery"
 
 const worktree =
-  "C:/OpenCode/Worktrees/project-42/long-folder-name-for-checking-wrapped-worktree-paths/another-long-folder-name"
+  "C:/Warcode/Worktrees/project-42/long-folder-name-for-checking-wrapped-worktree-paths/another-long-folder-name"
 
 for (const state of [
   { name: "local", directory: fixture.directory },

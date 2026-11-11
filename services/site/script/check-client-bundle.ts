@@ -14,14 +14,14 @@ import { Glob } from "bun"
 const root = path.resolve(process.argv[2] ?? path.join(import.meta.dir, "..", ".output"), "public")
 // Strings only the tools' own code contains, as they survive minification.
 const scriptMarkers = [
-  "opencode-site-design-mode", // design-mode.tsx: whether Design mode is on
-  "opencode-site-design-copy-v2", // design-mode.tsx: the saved copy choices
+  "warcode-site-design-mode", // design-mode.tsx: whether Design mode is on
+  "warcode-site-design-copy-v2", // design-mode.tsx: the saved copy choices
   "design-export", // design-overlay.tsx
   "settings-backdrop", // settings-panel.tsx
-  'opencode-site-device-preview"', // device-preview-panel.tsx: the saved device
+  'warcode-site-device-preview"', // device-preview-panel.tsx: the saved device
   "Toggle Design mode", // search-index.ts: the ⌘K action
   "Open Settings", // search-index.ts: the ⌘K action
-  "edge-cache.opencode.internal", // lib/edge-cache.ts
+  "edge-cache.warcode.internal", // lib/edge-cache.ts
   "api.github.com", // lib/changelog-releases.ts
 ]
 // The tools' styles (settings-panel.css, design-mode.css, device-preview.css).

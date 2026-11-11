@@ -1,17 +1,17 @@
 import { expect } from "bun:test"
 import path from "path"
-import { LanguageModel, LLMClient } from "@opencode/ai/effect"
-import { OpenAIChat } from "@opencode/ai/protocols"
-import { TestLLM } from "@opencode/ai/testing"
-import { llmClient } from "@opencode/core/effect/app-node-platform"
-import { makeMemoryDriver } from "@opencode/core/environment/index"
-import { SessionRunnerModel } from "@opencode/core/session/runner/model"
-import { WorkspaceDriver } from "@opencode/core/workspace/driver"
-import { Plugin } from "@opencode/plugin/effect"
+import { LanguageModel, LLMClient } from "@warcode/ai/effect"
+import { OpenAIChat } from "@warcode/ai/protocols"
+import { TestLLM } from "@warcode/ai/testing"
+import { llmClient } from "@warcode/core/effect/app-node-platform"
+import { makeMemoryDriver } from "@warcode/core/environment/index"
+import { SessionRunnerModel } from "@warcode/core/session/runner/model"
+import { WorkspaceDriver } from "@warcode/core/workspace/driver"
+import { Plugin } from "@warcode/plugin/effect"
 import { Context, Deferred, Effect, Exit, Layer, Schema, Scope } from "effect"
 import { tmpdirScoped } from "../../core/test/fixture/tmpdir"
 import { testEffect } from "../../core/test/lib/effect"
-import { AbsolutePath, Agent, Location, OpenCode } from "../src/effect"
+import { AbsolutePath, Agent, Location, Warcode } from "../src/effect"
 
 const it = testEffect(Layer.empty)
 const metadata = Schema.decodeUnknownSync(Schema.Struct({ threadID: Schema.String }))
@@ -38,7 +38,7 @@ it.live(
       const configured: string[] = []
       const closed: number[] = []
       const executed: number[] = []
-      const options: OpenCode.CreateOptions = {
+      const options: Warcode.CreateOptions = {
         database: { path: path.join(directory.path, "sessions.db") },
         app: { name: "instance-test", version: "1.2.3" },
         events: { persist: true },
@@ -105,7 +105,7 @@ it.live(
         ],
       }
       yield* llm.push(TestLLM.hangAfter())
-      const first = yield* OpenCode.create(options, embed).pipe(Scope.provide(firstScope))
+      const first = yield* Warcode.create(options, embed).pipe(Scope.provide(firstScope))
       const session = yield* first.sessions.create({
         title: "Recovery fixture",
         location: Location.Ref.make({ directory: AbsolutePath.make(directory.path) }),
@@ -121,7 +121,7 @@ it.live(
       yield* Scope.close(firstScope, Exit.void)
       expect(closed).toEqual([1])
       yield* llm.push(TestLLM.toolCall("recovered-tool", "thread_echo", {}), TestLLM.text("Recovered", "answer"))
-      const second = yield* OpenCode.create(options, embed).pipe(Scope.provide(secondScope))
+      const second = yield* Warcode.create(options, embed).pipe(Scope.provide(secondScope))
       yield* Deferred.await(started).pipe(Effect.timeout("5 seconds"))
       expect((yield* llm.requests()).length).toBe(1)
       yield* Deferred.succeed(release, undefined)
@@ -159,7 +159,7 @@ it.live(
         suspendForIdle: () => Effect.void,
         destroy: () => Effect.void,
       })
-      const opencode = yield* OpenCode.create(
+      const warcode = yield* Warcode.create(
         {
           config: { directory: directory.path, project: false, content: "{}" },
           models: { fetch: false },
@@ -198,37 +198,37 @@ it.live(
           ],
         },
       )
-      const firstWorkspace = yield* opencode.workspace.create({ provider: "memory" })
-      const secondWorkspace = yield* opencode.workspace.create({ provider: "memory" })
-      const first = yield* opencode.sessions.create({
+      const firstWorkspace = yield* warcode.workspace.create({ provider: "memory" })
+      const secondWorkspace = yield* warcode.workspace.create({ provider: "memory" })
+      const first = yield* warcode.sessions.create({
         title: "First placement",
         location: Location.Ref.make({ directory: AbsolutePath.make(directory.path), workspaceID: firstWorkspace }),
         model: model.ref,
         metadata: { threadID: "same-thread" },
       })
-      const second = yield* opencode.sessions.create({
+      const second = yield* warcode.sessions.create({
         title: "Second placement",
         location: Location.Ref.make({ directory: AbsolutePath.make(directory.path), workspaceID: secondWorkspace }),
         model: model.ref,
         metadata: { threadID: "same-thread" },
       })
       for (const session of [first, second]) {
-        const admitted = yield* opencode.sessions.prompt({ sessionID: session.id, text: "Hello" })
+        const admitted = yield* warcode.sessions.prompt({ sessionID: session.id, text: "Hello" })
         expect(admitted.payload.text).toBe(`Hello:${session.location.workspaceID}`)
-        yield* opencode.experimental.session.wait({ sessionID: session.id })
+        yield* warcode.experimental.session.wait({ sessionID: session.id })
       }
       expect(configured).toEqual(["same-thread", "same-thread"])
       expect(placements.map((location) => location.workspaceID)).toEqual([firstWorkspace, secondWorkspace])
 
-      yield* opencode.sessions.move({
+      yield* warcode.sessions.move({
         sessionID: first.id,
         directory: AbsolutePath.make(directory.path),
         workspaceID: secondWorkspace,
       })
-      yield* opencode.experimental.session.wait({ sessionID: first.id })
-      const moved = yield* opencode.sessions.get({ sessionID: first.id })
+      yield* warcode.experimental.session.wait({ sessionID: first.id })
+      const moved = yield* warcode.sessions.get({ sessionID: first.id })
       expect(moved.location.workspaceID).toBe(secondWorkspace)
-      const admitted = yield* opencode.sessions.prompt({ sessionID: first.id, text: "Moved", resume: false })
+      const admitted = yield* warcode.sessions.prompt({ sessionID: first.id, text: "Moved", resume: false })
       expect(admitted.payload.text).toBe(`Moved:${secondWorkspace}`)
       expect(configured).toEqual(["same-thread", "same-thread"])
     }),
@@ -247,7 +247,7 @@ it.live(
       const hostScope = yield* Scope.fork(yield* Effect.scope)
       const attempts: string[] = []
       const released: string[] = []
-      const layer = OpenCode.layer({
+      const layer = Warcode.layer({
         config: { directory: directory.path, project: false, content: "{}" },
         models: { fetch: false },
         fs: { filewatcher: false },
@@ -276,8 +276,8 @@ it.live(
             }),
         },
       }).pipe(Layer.provide(Layer.succeed(Personas, { of: (threadID) => Effect.succeed(`persona-for-${threadID}`) })))
-      const opencode = Context.get(yield* Layer.build(layer).pipe(Scope.provide(hostScope)), OpenCode.Service)
-      const session = yield* opencode.sessions.create({
+      const warcode = Context.get(yield* Layer.build(layer).pipe(Scope.provide(hostScope)), Warcode.Service)
+      const session = yield* warcode.sessions.create({
         title: "Service-configured fixture",
         location: Location.Ref.make({ directory: AbsolutePath.make(directory.path) }),
         metadata: { threadID: "thread-7" },
@@ -285,13 +285,13 @@ it.live(
 
       // A failed construction is discarded with what `configure` acquired, while the host lives on. Resources
       // bound to the Scope captured alongside the services would instead linger until the host closes.
-      const failed = yield* opencode.sessions
+      const failed = yield* warcode.sessions
         .prompt({ sessionID: session.id, text: "Hello", resume: false })
         .pipe(Effect.exit)
       expect(Exit.isFailure(failed)).toBe(true)
       expect(released).toEqual(["thread-7:1"])
 
-      const admitted = yield* opencode.sessions.prompt({ sessionID: session.id, text: "Hello", resume: false })
+      const admitted = yield* warcode.sessions.prompt({ sessionID: session.id, text: "Hello", resume: false })
       expect(admitted.payload.text).toBe("Hello:persona-for-thread-7")
       expect(attempts).toEqual(["thread-7", "thread-7"])
       expect(released).toEqual(["thread-7:1"])

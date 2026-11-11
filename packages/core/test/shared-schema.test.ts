@@ -1,32 +1,32 @@
 import { expect, test } from "bun:test"
 import { Schema } from "effect"
-import { Agent } from "@opencode/core/agent"
-import { Session } from "@opencode/core/session"
-import { SessionStore } from "@opencode/core/session/store"
-import { Location } from "@opencode/schema/location"
-import { Model } from "@opencode/schema/model"
-import { Provider } from "@opencode/schema/provider"
-import { Project } from "@opencode/schema/project"
-import { Worktree } from "@opencode/schema/worktree"
-import { Prompt } from "@opencode/schema/prompt"
-import { SessionInbox } from "@opencode/schema/session-inbox"
-import { SessionMessage } from "@opencode/schema/session-message"
-import { Workspace } from "@opencode/schema/workspace"
-import { Command } from "@opencode/schema/command"
-import { Connection } from "@opencode/schema/connection"
-import { Credential } from "@opencode/schema/credential"
-import { FileSystem } from "@opencode/schema/filesystem"
-import { Integration } from "@opencode/schema/integration"
-import { LLM } from "@opencode/schema/llm"
-import { Permission } from "@opencode/schema/permission"
-import { Pty } from "@opencode/schema/pty"
-import { Reference } from "@opencode/schema/reference"
-import { Skill } from "@opencode/schema/skill"
-import { AbsolutePath, optional, statics } from "@opencode/schema/schema"
+import { Agent } from "@warcode/core/agent"
+import { Session } from "@warcode/core/session"
+import { SessionStore } from "@warcode/core/session/store"
+import { Location } from "@warcode/schema/location"
+import { Model } from "@warcode/schema/model"
+import { Provider } from "@warcode/schema/provider"
+import { Project } from "@warcode/schema/project"
+import { Worktree } from "@warcode/schema/worktree"
+import { Prompt } from "@warcode/schema/prompt"
+import { SessionInbox } from "@warcode/schema/session-inbox"
+import { SessionMessage } from "@warcode/schema/session-message"
+import { Workspace } from "@warcode/schema/workspace"
+import { Command } from "@warcode/schema/command"
+import { Connection } from "@warcode/schema/connection"
+import { Credential } from "@warcode/schema/credential"
+import { FileSystem } from "@warcode/schema/filesystem"
+import { Integration } from "@warcode/schema/integration"
+import { LLM } from "@warcode/schema/llm"
+import { Permission } from "@warcode/schema/permission"
+import { Pty } from "@warcode/schema/pty"
+import { Reference } from "@warcode/schema/reference"
+import { Skill } from "@warcode/schema/skill"
+import { AbsolutePath, optional, statics } from "@warcode/schema/schema"
 
 test("Core reuses the canonical shared schemas", async () => {
-  const schemaAgent = await import("@opencode/schema/agent")
-  const schemaSession = await import("@opencode/schema/session")
+  const schemaAgent = await import("@warcode/schema/agent")
+  const schemaSession = await import("@warcode/schema/session")
   const [
     coreCommand,
     coreConnection,
@@ -48,25 +48,25 @@ test("Core reuses the canonical shared schemas", async () => {
     coreSchema,
     coreWorkspace,
   ] = await Promise.all([
-    import("@opencode/core/command"),
-    import("@opencode/core/integration/connection"),
-    import("@opencode/core/credential"),
-    import("@opencode/core/filesystem"),
-    import("@opencode/core/integration"),
-    import("@opencode/core/location"),
-    import("@opencode/ai/effect"),
-    import("@opencode/core/model"),
-    import("@opencode/core/permission"),
-    import("@opencode/core/worktree"),
-    import("@opencode/core/pty"),
-    import("@opencode/core/project/schema"),
-    import("@opencode/core/provider"),
-    import("@opencode/core/reference"),
-    import("@opencode/core/session/inbox"),
-    import("@opencode/core/session/message"),
-    import("@opencode/core/skill"),
-    import("@opencode/core/schema"),
-    import("@opencode/core/workspace"),
+    import("@warcode/core/command"),
+    import("@warcode/core/integration/connection"),
+    import("@warcode/core/credential"),
+    import("@warcode/core/filesystem"),
+    import("@warcode/core/integration"),
+    import("@warcode/core/location"),
+    import("@warcode/ai/effect"),
+    import("@warcode/core/model"),
+    import("@warcode/core/permission"),
+    import("@warcode/core/worktree"),
+    import("@warcode/core/pty"),
+    import("@warcode/core/project/schema"),
+    import("@warcode/core/provider"),
+    import("@warcode/core/reference"),
+    import("@warcode/core/session/inbox"),
+    import("@warcode/core/session/message"),
+    import("@warcode/core/skill"),
+    import("@warcode/core/schema"),
+    import("@warcode/core/workspace"),
   ])
 
   const schemas = [

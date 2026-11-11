@@ -1,4 +1,4 @@
-import type { ExperimentalMigrationV1StatusOutput } from "@opencode/client/promise"
+import type { ExperimentalMigrationV1StatusOutput } from "@warcode/client/promise"
 
 export const MIGRATION_POLL_MS = 1_000
 

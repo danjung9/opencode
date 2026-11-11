@@ -1,6 +1,6 @@
 export * as ToolSearch from "./search.js"
 
-import { ToolFailure } from "@opencode/ai/effect"
+import { ToolFailure } from "@warcode/ai/effect"
 import { Effect } from "effect"
 import { Environment } from "../environment/index.js"
 import { FileSystem } from "../filesystem.js"

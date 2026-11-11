@@ -20,7 +20,7 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
       </Item>
 
       <Item name="File name header" when="Tells the reader which file the code goes in.">
-        <CodeFrame variant="codeTitle" kind="file" label="opencode.jsonc" copy={configFile}>
+        <CodeFrame variant="codeTitle" kind="file" label="warcode.jsonc" copy={configFile}>
           <pre>
             <code>{configFile}</code>
           </pre>
@@ -69,7 +69,7 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
       </Item>
 
       <Item name="Terminal command" when="Something to paste into a shell; Copy drops the $ prompt.">
-        <Terminal lines={['$ opencode run "Explain this repository"']} />
+        <Terminal lines={['$ warcode run "Explain this repository"']} />
       </Item>
 
       <Show when={!props.reference}>
@@ -90,11 +90,11 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
               {([icon, name]) => (
                 <div>
                   <p data-slot="option-name">{name}</p>
-                  <CodeFrame variant="terminal" kind="terminal" label="Terminal" icon={icon} copy="$ opencode">
+                  <CodeFrame variant="terminal" kind="terminal" label="Terminal" icon={icon} copy="$ warcode">
                     <pre data-component="code-block">
                       <code>
                         <span data-token="prompt">$ </span>
-                        <span data-token="command">opencode</span>
+                        <span data-token="command">warcode</span>
                       </code>
                     </pre>
                   </CodeFrame>
@@ -108,13 +108,13 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
       <Item name="Command with output" when="What the reader should see after a command, so they can check it worked.">
         <Terminal
           lines={[
-            "$ opencode pair",
+            "$ warcode pair",
             "",
             "  Open a link to connect. Links work once and expire in 5 minutes.",
             "",
             "  http://127.0.0.1:49374/auth/connect/...",
           ]}
-          copy="opencode pair"
+          copy="warcode pair"
         />
       </Item>
 
@@ -123,27 +123,27 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
           lines={[
             "$ curl -fsSL https://opencode.ai/v2/install | bash",
             "$ cd my-app",
-            "$ opencode auth login",
-            '$ opencode run --model opencode/claude-opus-5-5 "Add a health check route"',
-            "$ opencode service restart",
+            "$ warcode auth login",
+            '$ warcode run --model warcode/claude-opus-5-5 "Add a health check route"',
+            "$ warcode service restart",
           ]}
         />
       </Item>
 
       <Item name="Line numbers" when="Only when the text refers to lines by number.">
-        <CodeFrame variant="codeLines" kind="file" label=".opencode/tools/count-lines.ts" copy={countLines.join("\n")}>
+        <CodeFrame variant="codeLines" kind="file" label=".warcode/tools/count-lines.ts" copy={countLines.join("\n")}>
           <CodeLines lines={countLines} />
         </CodeFrame>
       </Item>
 
       <Item name="Highlighted lines" when="Points at the lines that matter in a longer example.">
-        <CodeFrame variant="codeLines" kind="file" label=".opencode/tools/count-lines.ts" copy={countLines.join("\n")}>
+        <CodeFrame variant="codeLines" kind="file" label=".warcode/tools/count-lines.ts" copy={countLines.join("\n")}>
           <CodeLines lines={countLines} mark={[4, 5]} plain />
         </CodeFrame>
       </Item>
 
       <Item name="Diff" when="Shows a change, like a renamed key, a migration or a fix.">
-        <CodeFrame variant="codeDiff" kind="file" label="opencode.jsonc" copy={diffAfter}>
+        <CodeFrame variant="codeDiff" kind="file" label="warcode.jsonc" copy={diffAfter}>
           <pre data-component="code-diff">
             <For each={diff}>
               {([sign, line]) => (
@@ -162,7 +162,7 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
         <CodeFrame
           variant="codeLines"
           kind="file"
-          label="opencode.jsonc"
+          label="warcode.jsonc"
           copy={[...focusLines, ...hiddenLines].join("\n")}
         >
           <CodeCollapse
@@ -194,7 +194,7 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
                   <CodeFrame
                     variant="codeLines"
                     kind="file"
-                    label="opencode.jsonc"
+                    label="warcode.jsonc"
                     copy={[...focusLines, ...hiddenLines].join("\n")}
                   >
                     <CodeCollapse
@@ -214,13 +214,13 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
       <Item name="Long lines" when="Wider than the column, so the block scrolls sideways; code never wraps.">
         <Terminal
           lines={[
-            '$ opencode run --standalone --model opencode/claude-opus-5-5 "Review this repository for correctness and summarize any issues with file and line references"',
+            '$ warcode run --standalone --model warcode/claude-opus-5-5 "Review this repository for correctness and summarize any issues with file and line references"',
           ]}
         />
       </Item>
 
-      <Item name="Config (opencode.jsonc)" when="Config is JSON with comments; $schema gives editor completion.">
-        <CodeFrame variant="codeTitle" kind="file" label="opencode.jsonc" copy={permissionsFile}>
+      <Item name="Config (warcode.jsonc)" when="Config is JSON with comments; $schema gives editor completion.">
+        <CodeFrame variant="codeTitle" kind="file" label="warcode.jsonc" copy={permissionsFile}>
           <pre>
             <code>{permissionsFile}</code>
           </pre>
@@ -228,7 +228,7 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
       </Item>
 
       <Item name="YAML" when="Agent frontmatter and CI workflows.">
-        <CodeFrame variant="codeTitle" kind="file" label=".github/workflows/opencode.yml" copy={workflow}>
+        <CodeFrame variant="codeTitle" kind="file" label=".github/workflows/warcode.yml" copy={workflow}>
           <pre>
             <code>{workflow}</code>
           </pre>
@@ -250,9 +250,9 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
       </Item>
 
       <Item name="CLI reference" when="Each command, its flags and an example.">
-        <CodeFrame variant="cli" kind="usage" label="Usage" copy="opencode run [message..]">
+        <CodeFrame variant="cli" kind="usage" label="Usage" copy="warcode run [message..]">
           <pre>
-            <code>opencode run [message..]</code>
+            <code>warcode run [message..]</code>
           </pre>
         </CodeFrame>
         <Table
@@ -268,7 +268,7 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
       </Item>
 
       <Item name="Config reference table" when="Every option with its type, default and meaning.">
-        <CodeFrame variant="config" kind="config" label="opencode.jsonc options">
+        <CodeFrame variant="config" kind="config" label="warcode.jsonc options">
           <Table
             head={["Option", "Type", "Default", "Description"]}
             kinds={["code", "type", "code", "text"]}
@@ -291,7 +291,7 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
           <strong>Tip</strong>
           <div>
             <p>Skip project instructions for one run.</p>
-            <Terminal lines={["$ OPENCODE_DISABLE_PROJECT_CONFIG=1 opencode"]} />
+            <Terminal lines={["$ WARCODE_DISABLE_PROJECT_CONFIG=1 warcode"]} />
           </div>
         </aside>
       </Item>
@@ -300,9 +300,9 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
         <ol data-slot="gallery-steps">
           <li>
             <p>
-              <strong>Create the plugin.</strong> Add <code>.opencode/plugins/notify.ts</code>.
+              <strong>Create the plugin.</strong> Add <code>.warcode/plugins/notify.ts</code>.
             </p>
-            <CodeFrame variant="codeTitle" kind="file" label=".opencode/plugins/notify.ts" copy={notifyPlugin}>
+            <CodeFrame variant="codeTitle" kind="file" label=".warcode/plugins/notify.ts" copy={notifyPlugin}>
               <pre>
                 <code>{notifyPlugin}</code>
               </pre>
@@ -310,17 +310,17 @@ export function DocsCodeGallery(props: { reference?: boolean }) {
           </li>
           <li>
             <p>
-              <strong>Restart OpenCode.</strong> Plugins load on start.
+              <strong>Restart Warcode.</strong> Plugins load on start.
             </p>
-            <Terminal lines={["$ opencode service restart"]} />
+            <Terminal lines={["$ warcode service restart"]} />
           </li>
         </ol>
       </Item>
 
       <Item name="Inline code" when="Names in running text: files, keys, commands.">
         <p>
-          Set <code>model</code> to <code>opencode/claude-opus-5-5</code> in <code>opencode.jsonc</code>, then run{" "}
-          <code>opencode run "fix the tests"</code>.
+          Set <code>model</code> to <code>warcode/claude-opus-5-5</code> in <code>warcode.jsonc</code>, then run{" "}
+          <code>warcode run "fix the tests"</code>.
         </p>
       </Item>
     </div>
@@ -561,12 +561,12 @@ const permissionType = `type Permission = {
 
 const configFile = `{
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode/claude-opus-5-5",
+  "model": "warcode/claude-opus-5-5",
   "instructions": ["AGENTS.md"]
 }`
 
 const files = [
-  { label: "opencode.jsonc", code: configFile },
+  { label: "warcode.jsonc", code: configFile },
   {
     label: "AGENTS.md",
     code: `# Project instructions
@@ -575,11 +575,11 @@ const files = [
 - Keep database queries in \`src/database\`.`,
   },
   {
-    label: ".opencode/agents/reviewer.md",
+    label: ".warcode/agents/reviewer.md",
     code: `---
 description: Reviews changes for correctness and regressions
 mode: subagent
-model: opencode/claude-opus-5-5
+model: warcode/claude-opus-5-5
 ---
 
 Review the current changes. List findings in severity order.`,
@@ -587,7 +587,7 @@ Review the current changes. List findings in severity order.`,
 ]
 
 const countLines = [
-  'import { tool } from "@opencode-ai/plugin"',
+  'import { tool } from "@warcode-ai/plugin"',
   "",
   "export default tool({",
   '  description: "Count lines in a file",',
@@ -601,7 +601,7 @@ const countLines = [
 
 const diff = [
   [" ", "{"],
-  [" ", '  "model": "opencode/claude-opus-5-5",'],
+  [" ", '  "model": "warcode/claude-opus-5-5",'],
   ["+", '  "instructions": ["AGENTS.md"],'],
   [" ", '  "permissions": ['],
   ["-", '    { "action": "shell", "resource": "git push *", "effect": "allow" },'],
@@ -631,7 +631,7 @@ const hiddenLines = [
   '  "experimental": {',
   '    "policies": [',
   '      { "action": "provider.use", "resource": "*", "effect": "deny" },',
-  '      { "action": "provider.use", "resource": "opencode", "effect": "allow" },',
+  '      { "action": "provider.use", "resource": "warcode", "effect": "allow" },',
   "    ],",
   "  },",
   "}",
@@ -649,7 +649,7 @@ const permissionsFile = `{
   ],
 }`
 
-const workflow = `name: OpenCode review
+const workflow = `name: Warcode review
 on: [pull_request]
 
 jobs:
@@ -657,14 +657,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm install --global @opencode/cli
-      - run: opencode run --standalone --model opencode/claude-opus-5-5 "Review this repository"`
+      - run: npm install --global @warcode/cli
+      - run: warcode run --standalone --model warcode/claude-opus-5-5 "Review this repository"`
 
 const env = `# Loaded by your shell or CI, never committed
 ANTHROPIC_API_KEY=sk-ant-...
-OPENCODE_DISABLE_PROJECT_CONFIG=1`
+WARCODE_DISABLE_PROJECT_CONFIG=1`
 
-const tree = `.opencode/
+const tree = `.warcode/
 ├── agents/
 │   └── reviewer.md
 ├── commands/
@@ -673,13 +673,13 @@ const tree = `.opencode/
 │   └── notify.ts
 ├── tools/
 │   └── count-lines.ts
-└── opencode.jsonc`
+└── warcode.jsonc`
 
 const response = `[
   {
     "id": "msg_01JC4Y",
     "role": "assistant",
-    "model": "opencode/claude-opus-5-5",
+    "model": "warcode/claude-opus-5-5",
     "parts": [{ "type": "text", "text": "The tests pass." }]
   }
 ]`

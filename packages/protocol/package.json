@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode/protocol",
+  "name": "@warcode/protocol",
   "version": "2.2.7",
   "type": "module",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@opencode/schema": "workspace:*",
+    "@warcode/schema": "workspace:*",
     "effect": "catalog:"
   },
   "devDependencies": {

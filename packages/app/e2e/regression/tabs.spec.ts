@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test"
-import type { OpenCodeEvent, SessionMessageInfo } from "@opencode/client/promise"
+import type { WarcodeEvent, SessionMessageInfo } from "@warcode/client/promise"
 import {
   NO_PROVIDER,
   REMOTE_SERVER,
@@ -42,10 +42,10 @@ test("recently closed shows ten sessions and searches older closures in close or
       servers: [SERVER],
       tabs: [sessions[0]!.id],
       storage: {
-        "opencode.window.browser.dat:tabs.closed": sessions.slice(1).map((session, index) => ({
+        "warcode.window.browser.dat:tabs.closed": sessions.slice(1).map((session, index) => ({
           tab: { type: "session", server: SERVER, sessionId: session.id },
           index,
-          info: { title: session.title, directory: "C:/OpenCode/ClosedTabs", prompted: true },
+          info: { title: session.title, directory: "C:/Warcode/ClosedTabs", prompted: true },
         })),
       },
     },
@@ -98,10 +98,10 @@ test("recently closed keeps the keyboard-focused session in view when the menu o
       servers: [SERVER],
       tabs: [sessions[0]!.id],
       storage: {
-        "opencode.window.browser.dat:tabs.closed": sessions.slice(1).map((item, index) => ({
+        "warcode.window.browser.dat:tabs.closed": sessions.slice(1).map((item, index) => ({
           tab: { type: "session", server: SERVER, sessionId: item.id },
           index,
-          info: { title: item.title, directory: "C:/OpenCode/ClosedOverflow", prompted: true },
+          info: { title: item.title, directory: "C:/Warcode/ClosedOverflow", prompted: true },
         })),
       },
     },
@@ -137,10 +137,10 @@ test("recently closed fills remaining slots in Home order without open or duplic
       servers: [SERVER],
       tabs: [sessions[0]!.id, sessions[2]!.id],
       storage: {
-        "opencode.window.browser.dat:tabs.closed": sessions.slice(10).map((session, index) => ({
+        "warcode.window.browser.dat:tabs.closed": sessions.slice(10).map((session, index) => ({
           tab: { type: "session", server: SERVER, sessionId: session.id },
           index,
-          info: { title: session.title, directory: "C:/OpenCode/OtherTabs", prompted: true },
+          info: { title: session.title, directory: "C:/Warcode/OtherTabs", prompted: true },
         })),
       },
     },
@@ -170,7 +170,7 @@ test("tab strip keeps draft tabs as wide as session tabs and navigates on mouse 
   const workspace = await mockWorkspace(page, {
     name: "Tabs",
     sessions: [a, b],
-    seed: { tabs: [a.id, { draft: "draft_tab_width", directory: "C:/OpenCode/Tabs" }, b.id] },
+    seed: { tabs: [a.id, { draft: "draft_tab_width", directory: "C:/Warcode/Tabs" }, b.id] },
   })
 
   await page.goto(sessionHref(a.id))
@@ -267,16 +267,16 @@ test("inactive session attention dots share the close control without marking th
 test("the browser title names the open session and resets after leaving it", async ({ page }) => {
   await mockWorkspace(page, { name: "Tabs", sessions: [a, b] })
   await page.goto(sessionHref(a.id))
-  await expect(page).toHaveTitle(`${a.title} · OpenCode`)
+  await expect(page).toHaveTitle(`${a.title} · Warcode`)
 
   const tabB = page.locator(`[data-titlebar-tab-slot]:has(a[href="${sessionHref(b.id)}"])`)
   await tabB.locator("[data-titlebar-tab-link]").click()
   await expectPath(page, sessionHref(b.id))
-  await expect(page).toHaveTitle(`${b.title} · OpenCode`)
+  await expect(page).toHaveTitle(`${b.title} · Warcode`)
 
   await page.getByRole("button", { name: "Home", exact: true }).click()
   await expectPath(page, "/")
-  await expect(page).toHaveTitle("OpenCode")
+  await expect(page).toHaveTitle("Warcode")
 })
 
 for (const [tabLayout, direction, label] of [
@@ -289,7 +289,7 @@ for (const [tabLayout, direction, label] of [
       name: "Tabs",
       sessions: [a, b, c],
       seed: {
-        tabs: [a.id, { draft: "draft_bulk_close", directory: "C:/OpenCode/Tabs" }, b.id, c.id],
+        tabs: [a.id, { draft: "draft_bulk_close", directory: "C:/Warcode/Tabs" }, b.id, c.id],
         settings: { appearance: { tabLayout } },
       },
     })
@@ -765,7 +765,7 @@ test("an unfocused window preserves a restored manual unread reminder", async ({
   await mockWorkspace(page, {
     name: "BackgroundUnread",
     sessions: [a, { ...c, time: { created: T0, updated: T0, idle: T0, viewed: T0 } }],
-    seed: { storage: { "opencode.global.dat:notification.manual-unread": { sessions: [c.id] } } },
+    seed: { storage: { "warcode.global.dat:notification.manual-unread": { sessions: [c.id] } } },
   })
   await page.goto(sessionHref(c.id))
   await expectSessionTitle(page, c.title)
@@ -781,7 +781,7 @@ test("an unfocused window preserves a restored manual unread reminder", async ({
 
 test("vertical tabs resize, scroll, show shortcut hints, and navigate", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 480 })
-  const directory = "C:/OpenCode/Tabs"
+  const directory = "C:/Warcode/Tabs"
   await mockWorkspace(page, {
     name: "Tabs",
     sessions: [a, b],
@@ -944,7 +944,7 @@ for (const [screen, href] of [
       sessions: [a],
       seed: {
         settings: { appearance: { tabLayout: "vertical", sidebarOpen: false } },
-        tabs: [a.id, { draft: "draft_collapsed_sidebar", directory: "C:/OpenCode/Tabs" }],
+        tabs: [a.id, { draft: "draft_collapsed_sidebar", directory: "C:/Warcode/Tabs" }],
       },
     })
     await page.goto(href)
@@ -1243,7 +1243,7 @@ test("inactive tabs stay busy while work waits in their inbox, and pulse on a ne
         inboxID: "inb_tab_c_prompt",
         item: { type: "user", payload: { text: "Another client's prompt" }, delivery: "queue" },
       },
-    } satisfies Extract<OpenCodeEvent, { type: "session.inbox.enqueued" }>,
+    } satisfies Extract<WarcodeEvent, { type: "session.inbox.enqueued" }>,
   ])
 
   await expect(tab(c.id)).toHaveAttribute("data-test-pulsed", "")
@@ -1370,7 +1370,7 @@ test("inactive tabs load attention and inbox, but read the transcript only on se
           id: `msg_${id}_assistant`,
           type: "assistant",
           agent: "build",
-          model: { id: "claude-opus-4-6", providerID: "opencode" },
+          model: { id: "claude-opus-4-6", providerID: "warcode" },
           content: [{ type: "text", text: state.text }],
           time: { created: 2, completed: 3 },
         },
@@ -1442,7 +1442,7 @@ test("five loaded workspace tabs stay rendered and reactive through repeated swi
           id: `msg_assistant_${id}`,
           type: "assistant",
           agent: "build",
-          model: { id: "claude-opus-4-6", providerID: "opencode" },
+          model: { id: "claude-opus-4-6", providerID: "warcode" },
           time: { created: 2, completed: 3 },
           content: [{ type: "text", text: `Answer for ${id}` }],
         },
@@ -1484,10 +1484,10 @@ test("five loaded workspace tabs stay rendered and reactive through repeated swi
 
 test("each session tab shows its own file tab after a switch to a session in another folder", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
-  const directory = "C:/OpenCode/FolderSwitch"
+  const directory = "C:/Warcode/FolderSwitch"
   const alpha = { id: "ses_folderswitch_alpha", title: "Folder switch alpha" }
   const beta = { id: "ses_folderswitch_beta", title: "Folder switch beta" }
-  const other = { id: "ses_folderswitch_other", title: "Folder switch other", directory: "C:/OpenCode/FolderOther" }
+  const other = { id: "ses_folderswitch_other", title: "Folder switch other", directory: "C:/Warcode/FolderOther" }
   await openSession(page, {
     name: "FolderSwitch",
     sessions: [alpha, beta, other],
@@ -1534,7 +1534,7 @@ test("each session tab shows its own file tab after a switch to a session in ano
 
 test("tab shortcuts cycle side-panel tabs when the side panel is focused with multiple tabs", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
-  const directory = "C:/OpenCode/SidePanelTabs"
+  const directory = "C:/Warcode/SidePanelTabs"
   const alpha = { id: "ses_side_tabs_alpha", title: "Side tabs alpha" }
   const beta = { id: "ses_side_tabs_beta", title: "Side tabs beta" }
   await openSession(page, {
@@ -1729,7 +1729,7 @@ test("⌘W in the side panel closes its last New tab with the panel, and only th
 test("the Windows titlebar menu pastes through the desktop edit action", async ({ page }) => {
   await mockWorkspace(page, { name: "WindowsMenu", sessions: [] })
   await page.goto(`/e2e/utils/windows-menu.html?${new URLSearchParams({ server: SERVER })}`)
-  await page.getByRole("button", { name: "OpenCode menu", exact: true }).click()
+  await page.getByRole("button", { name: "Warcode menu", exact: true }).click()
   await page.getByRole("menuitem", { name: "Edit", exact: true }).click()
   const paste = page.getByRole("menuitem", { name: /^Paste/ })
   await expect(paste).toHaveText("PasteCtrl+V")
@@ -1745,7 +1745,7 @@ test("the Windows menu shares the vertical sidebar's icon lane", async ({ page }
   })
   await page.goto(`/e2e/utils/windows-menu.html?${new URLSearchParams({ server: SERVER })}`)
 
-  const menu = page.getByRole("button", { name: "OpenCode menu", exact: true }).locator("svg")
+  const menu = page.getByRole("button", { name: "Warcode menu", exact: true }).locator("svg")
 
   const home = page.locator('[data-action="vertical-tabs-home"] svg')
   await expect(home).toBeVisible()
@@ -1872,7 +1872,7 @@ test("with the side panel open, ⌘W closes its tabs from anywhere, ⌥⌘W the 
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
-  const directory = "C:/OpenCode/SideCloseAnywhere"
+  const directory = "C:/Warcode/SideCloseAnywhere"
   const alpha = { id: "ses_side_anywhere_alpha", title: "Side anywhere alpha" }
   const beta = { id: "ses_side_anywhere_beta", title: "Side anywhere beta" }
   await openSession(page, {
@@ -1927,7 +1927,7 @@ const holdClock = (page: Page) => page.evaluate(() => Date.now()).then((now) => 
 // Closes Alpha's side tabs with ⌘W until the side panel empties and collapses, as an overshooting hand would.
 async function emptySidePanel(page: Page, beforeLastClose?: () => Promise<void>) {
   await page.setViewportSize({ width: 1440, height: 900 })
-  const directory = "C:/OpenCode/SideCloseOvershoot"
+  const directory = "C:/Warcode/SideCloseOvershoot"
   const alpha = { id: "ses_side_close_alpha", title: "Side close alpha" }
   const beta = { id: "ses_side_close_beta", title: "Side close beta" }
   await openSession(page, {
@@ -1965,7 +1965,7 @@ test("opening a session from the inbox keeps the list's scroll position and rows
   const sessions = Array.from({ length: 24 }, (_, index) => ({
     id: `ses_inbox_${String(index).padStart(2, "0")}`,
     title: `Inbox session ${index}`,
-    directory: index === 14 ? "C:/OpenCode/Inbox/worktrees/unopened" : "C:/OpenCode/Inbox",
+    directory: index === 14 ? "C:/Warcode/Inbox/worktrees/unopened" : "C:/Warcode/Inbox",
     time: { created: T0, updated: T0 + 100 - index, idle: T0 + index, viewed: T0 + 100 },
   }))
 
@@ -1976,7 +1976,7 @@ test("opening a session from the inbox keeps the list's scroll position and rows
     seed: {
       settings: { appearance: { tabLayout: "inbox" } },
       tabs: [],
-      storage: { "opencode.global.dat:sidebar.inbox": { workingExpanded: true } },
+      storage: { "warcode.global.dat:sidebar.inbox": { workingExpanded: true } },
     },
   })
   await page.goto("/")
@@ -1990,7 +1990,7 @@ test("opening a session from the inbox keeps the list's scroll position and rows
   await list.evaluate((element) => element.scrollTo(0, element.scrollHeight))
   await expect(target).toBeInViewport({ ratio: 1 })
   // Git metadata must load for an unopened worktree, not only after selecting its session.
-  await target.locator('[data-component="tooltip-v2-trigger"]:has(use[href="#opencode-v2-icon-branch"])').hover()
+  await target.locator('[data-component="tooltip-v2-trigger"]:has(use[href="#warcode-v2-icon-branch"])').hover()
   await expect(page.getByRole("tooltip")).toHaveText("dev")
   const offset = await list.evaluate((element) => element.scrollTop)
   expect(offset).toBeGreaterThan(0)
@@ -2055,7 +2055,7 @@ test("the inbox Archived dialog searches only archived sessions and restores the
     seed: {
       settings: { appearance: { tabLayout: "inbox" } },
       tabs: [],
-      storage: { "opencode.global.dat:sidebar.inbox": { workingExpanded: true } },
+      storage: { "warcode.global.dat:sidebar.inbox": { workingExpanded: true } },
     },
   })
   await page.goto("/")
@@ -2156,7 +2156,7 @@ test("opening a working session expands its shelf and still allows manual collap
     sessionStatus: { ses_working_selected: { type: "running" } },
     seed: {
       settings: { appearance: { tabLayout: "inbox" } },
-      storage: { "opencode.global.dat:sidebar.inbox": { workingExpanded: false } },
+      storage: { "warcode.global.dat:sidebar.inbox": { workingExpanded: false } },
     },
   })
 
@@ -2209,7 +2209,7 @@ test("sessions opened from Home and Search get a temporary Current session row w
     seed: {
       settings: { appearance: { tabLayout: "inbox" } },
       tabs: [],
-      storage: { "opencode.global.dat:sidebar.inbox": { workingExpanded: true } },
+      storage: { "warcode.global.dat:sidebar.inbox": { workingExpanded: true } },
     },
   })
   await page.goto("/")
@@ -2389,7 +2389,7 @@ test("the inbox waits for initial requests and orders attention by waiting age r
           fields: [{ key: "library", type: "string", title: "Library" }],
         },
       },
-    } satisfies Extract<OpenCodeEvent, { type: "form.created" }>,
+    } satisfies Extract<WarcodeEvent, { type: "form.created" }>,
   ])
   await expect(needs).toContainText(["Oldest waiting session", "Newer waiting session", "New live question"])
   await expect(needs.filter({ hasText: "New live question" })).toContainText("2m")
@@ -2455,7 +2455,7 @@ async function mockGaveUpPermission(page: Page, tabLayout: "horizontal" | "inbox
     },
     seed: {
       settings: { appearance: { tabLayout }, permissions: { autoApprove: true } },
-      storage: { "opencode.global.dat:sidebar.inbox": { workingExpanded: true } },
+      storage: { "warcode.global.dat:sidebar.inbox": { workingExpanded: true } },
     },
   })
   await page.route(new RegExp(`/api/session/${b.id}/permission/${permissionID}/reply(\\?|$)`), async (route) => {

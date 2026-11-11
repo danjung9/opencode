@@ -15,7 +15,7 @@ import {
 } from "./machine"
 import type { DesktopTheme } from "./types"
 
-const bundled = new Set(["oc-2", "dracula", "nord", "tokyonight"])
+const bundled = new Set(["workroom", "dracula", "nord", "tokyonight"])
 
 function theme(id: string): DesktopTheme {
   const variant = {
@@ -33,7 +33,7 @@ function theme(id: string): DesktopTheme {
   return { name: id, id, light: variant, dark: variant }
 }
 
-const oc2 = theme("oc-2")
+const oc2 = theme("workroom")
 
 const dracula = theme("dracula")
 
@@ -45,7 +45,7 @@ const midnight = theme("acme:midnight")
 
 function start(input: { themeId?: string; scheme?: ColorScheme; systemMode?: ResolvedMode } = {}) {
   return createThemeState({
-    themeId: input.themeId ?? "oc-2",
+    themeId: input.themeId ?? "workroom",
     scheme: input.scheme ?? "dark",
     systemMode: input.systemMode ?? "dark",
     defaultTheme: oc2,
@@ -86,7 +86,7 @@ test("a system light/dark flip keeps a previewed scheme until the preview follow
     scheme: "light",
   })
 
-  expect(applied(previewed.effects)).toEqual([{ id: "oc-2", mode: "light", scheme: "light" }])
+  expect(applied(previewed.effects)).toEqual([{ id: "workroom", mode: "light", scheme: "light" }])
 
   const flipped = run(
     previewed.state,
@@ -100,9 +100,9 @@ test("a system light/dark flip keeps a previewed scheme until the preview follow
 
   const system = run(flipped.state, { type: "preview.scheme", scheme: "system" })
 
-  expect(applied(system.effects)).toEqual([{ id: "oc-2", mode: "dark", scheme: "system" }])
+  expect(applied(system.effects)).toEqual([{ id: "workroom", mode: "dark", scheme: "system" }])
   expect(applied(run(system.state, { type: "system.mode.changed", mode: "light" }).effects)).toEqual([
-    { id: "oc-2", mode: "light", scheme: "system" },
+    { id: "workroom", mode: "light", scheme: "system" },
   ])
 })
 
@@ -114,8 +114,8 @@ test("a previewed system scheme follows the system even when the saved scheme is
   )
 
   expect(applied(result.effects)).toEqual([
-    { id: "oc-2", mode: "dark", scheme: "system" },
-    { id: "oc-2", mode: "light", scheme: "system" },
+    { id: "workroom", mode: "dark", scheme: "system" },
+    { id: "workroom", mode: "light", scheme: "system" },
   ])
 })
 
@@ -128,7 +128,7 @@ test("registrations, settling and a finished load keep a preview on screen", () 
 
   const previewed = run(
     initial.state,
-    { type: "preview.theme", id: "oc-2" },
+    { type: "preview.theme", id: "workroom" },
     { type: "preview.scheme", scheme: "light" },
   )
 
@@ -170,16 +170,16 @@ test("another tab's theme choice becomes the saved theme behind a preview", () =
 test("a saved theme that finishes loading after cancel and a new preview stays behind the new preview", () => {
   const result = run(
     start({ themeId: "nord" }).state,
-    { type: "preview.theme", id: "oc-2" },
+    { type: "preview.theme", id: "workroom" },
     { type: "preview.cancelled" },
-    { type: "preview.theme", id: "oc-2" },
+    { type: "preview.theme", id: "workroom" },
   )
 
   const loaded = run(result.state, { type: "theme.loaded", id: "nord", attempt: 1, theme: nord })
 
-  expect(applied(result.effects)).toEqual([{ id: "oc-2", mode: "dark", scheme: "dark" }])
+  expect(applied(result.effects)).toEqual([{ id: "workroom", mode: "dark", scheme: "dark" }])
   expect(applied(loaded.effects)).toEqual([])
-  expect(selectThemeId(loaded.state, bundled)).toBe("oc-2")
+  expect(selectThemeId(loaded.state, bundled)).toBe("workroom")
 })
 
 test("selecting a theme ends its preview, and the previewed theme's late load does not paint", () => {
@@ -187,11 +187,11 @@ test("selecting a theme ends its preview, and the previewed theme's late load do
     start({ themeId: "nord" }).state,
     { type: "theme.loaded", id: "nord", attempt: 1, theme: nord },
     { type: "preview.theme", id: "dracula" },
-    { type: "theme.selected", id: "oc-2" },
+    { type: "theme.selected", id: "workroom" },
   )
 
   expect(selected.state.status).toBe("committed")
-  expect(applied(selected.effects).at(-1)).toEqual({ id: "oc-2", mode: "dark", scheme: "dark" })
+  expect(applied(selected.effects).at(-1)).toEqual({ id: "workroom", mode: "dark", scheme: "dark" })
 
   const late = run(selected.state, { type: "theme.loaded", id: "dracula", attempt: 2, theme: dracula })
 
@@ -204,11 +204,11 @@ test("selecting a theme keeps a previewed scheme", () => {
     start().state,
     { type: "preview.theme", id: "dracula" },
     { type: "preview.scheme", scheme: "light" },
-    { type: "theme.selected", id: "oc-2" },
+    { type: "theme.selected", id: "workroom" },
   )
 
   expect(result.state.status === "previewing" && result.state.preview).toEqual({ scheme: "light" })
-  expect(applied(result.effects)).toEqual([{ id: "oc-2", mode: "light", scheme: "light" }])
+  expect(applied(result.effects)).toEqual([{ id: "workroom", mode: "light", scheme: "light" }])
 })
 
 test("previews never touch storage; committing saves both axes without painting again", () => {
@@ -247,7 +247,7 @@ test("a plugin theme withdrawn and registered again caches both variants again",
 
   expect(withdrawn.effects).toEqual([
     { type: "clear-cache" },
-    expect.objectContaining({ type: "apply-theme", id: "oc-2" }),
+    expect.objectContaining({ type: "apply-theme", id: "workroom" }),
   ])
 
   const restored = run(withdrawn.state, { type: "theme.registered", theme: midnight })
@@ -259,7 +259,7 @@ test("a plugin theme withdrawn and registered again caches both variants again",
 })
 
 test("mode and theme id follow a preview and return on cancel; the saved scheme does not", () => {
-  const state = start({ themeId: "oc-2", scheme: "dark" }).state
+  const state = start({ themeId: "workroom", scheme: "dark" }).state
   const previewed = run(state, { type: "preview.scheme", scheme: "light" }, { type: "preview.theme", id: "dracula" })
 
   expect([
@@ -272,7 +272,7 @@ test("mode and theme id follow a preview and return on cancel; the saved scheme 
 
   expect([selectMode(cancelled), selectThemeId(cancelled, bundled), selectColorScheme(cancelled)]).toEqual([
     "dark",
-    "oc-2",
+    "workroom",
     "dark",
   ])
 
@@ -292,8 +292,8 @@ test("a slow import shows the default theme, keeps the cached colors, and still 
     attempt: 1,
   })
 
-  expect(selectThemeId(slow.state, bundled)).toBe("oc-2")
-  expect(slow.effects).toEqual([expect.objectContaining({ type: "apply-theme", id: "oc-2" })])
+  expect(selectThemeId(slow.state, bundled)).toBe("workroom")
+  expect(slow.effects).toEqual([expect.objectContaining({ type: "apply-theme", id: "workroom" })])
   expect(selectThemesLoading(slow.state)).toBe(false)
 
   const late = run(slow.state, { type: "theme.loaded", id: "tokyonight", attempt: 1, theme: tokyonight })
@@ -313,10 +313,10 @@ test("a failed import shows the default theme, keeps the cached colors, and load
     attempt: 1,
   })
 
-  expect(selectThemeId(failed.state, bundled)).toBe("oc-2")
+  expect(selectThemeId(failed.state, bundled)).toBe("workroom")
   expect(failed.effects).toEqual([
     { type: "cancel-load-timer", attempt: 1 },
-    expect.objectContaining({ type: "apply-theme", id: "oc-2" }),
+    expect.objectContaining({ type: "apply-theme", id: "workroom" }),
   ])
 
   const late = run(failed.state, { type: "theme.loaded", id: "tokyonight", attempt: 1, theme: tokyonight })
@@ -397,7 +397,7 @@ test("withdrawing a previewed plugin theme ends the preview; a replaced theme ig
   const withdrawn = run(previewed.state, { type: "theme.unregistered", theme: midnight })
 
   expect(withdrawn.state.status).toBe("committed")
-  expect(applied(withdrawn.effects)).toEqual([{ id: "oc-2", mode: "dark", scheme: "dark" }])
+  expect(applied(withdrawn.effects)).toEqual([{ id: "workroom", mode: "dark", scheme: "dark" }])
 
   const replacement = theme("acme:midnight")
   const replaced = run(previewed.state, { type: "theme.registered", theme: replacement })
@@ -415,10 +415,10 @@ test("a saved plugin theme keeps the cached colors until plugins settle without 
 
   const settled = run(initial.state, { type: "settled" })
 
-  expect(selectThemeId(settled.state, bundled)).toBe("oc-2")
+  expect(selectThemeId(settled.state, bundled)).toBe("workroom")
   expect(settled.effects).toEqual([
     { type: "clear-cache" },
-    expect.objectContaining({ type: "apply-theme", id: "oc-2" }),
+    expect.objectContaining({ type: "apply-theme", id: "workroom" }),
   ])
 })
 
@@ -448,7 +448,7 @@ test("events that change nothing return the same state", () => {
   const previewing = run(state, { type: "preview.scheme", scheme: "light" }).state
 
   const unchanged: [ThemeMachineState, ThemeEvent][] = [
-    [state, { type: "theme.selected", id: "oc-2" }],
+    [state, { type: "theme.selected", id: "workroom" }],
     [state, { type: "scheme.selected", scheme: "dark" }],
     [state, { type: "preview.theme", id: "missing" }],
     [state, { type: "preview.committed" }],
@@ -457,7 +457,7 @@ test("events that change nothing return the same state", () => {
     [state, { type: "theme.unregistered", theme: oc2 }],
     [state, { type: "settled" }],
     [state, { type: "system.mode.changed", mode: "dark" }],
-    [state, { type: "storage.theme.changed", id: "oc-2" }],
+    [state, { type: "storage.theme.changed", id: "workroom" }],
     [state, { type: "storage.scheme.changed", scheme: "dark" }],
     [state, { type: "theme.loaded", id: "nord", attempt: 9, theme: nord }],
     [state, { type: "theme.load.failed", id: "nord", attempt: 9 }],

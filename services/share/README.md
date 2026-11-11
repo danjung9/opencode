@@ -14,8 +14,8 @@ the Worker moved here.
 
 | Environment | Worker                      | URL                    |
 | ----------- | --------------------------- | ---------------------- |
-| Development | `opencode-share-dev`        | `https://dev.opncd.ai` |
-| Production  | `opencode-share-production` | `https://opncd.ai`     |
+| Development | `warcode-share-dev`        | `https://dev.opncd.ai` |
+| Production  | `warcode-share-production` | `https://opncd.ai`     |
 
 ```bash
 bun run typecheck

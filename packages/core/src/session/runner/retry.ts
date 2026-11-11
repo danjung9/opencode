@@ -1,9 +1,9 @@
 export * as SessionRunnerRetry from "./retry.js"
 
-import { AIError, isRetryable } from "@opencode/ai/effect"
-import { Agent } from "@opencode/schema/agent"
-import { Model } from "@opencode/schema/model"
-import { SessionError } from "@opencode/schema/session-error"
+import { AIError, isRetryable } from "@warcode/ai/effect"
+import { Agent } from "@warcode/schema/agent"
+import { Model } from "@warcode/schema/model"
+import { SessionError } from "@warcode/schema/session-error"
 import { Clock, Duration, Effect } from "effect"
 import { Bus } from "../../bus.js"
 import { ModelRetry } from "../../model-retry.js"

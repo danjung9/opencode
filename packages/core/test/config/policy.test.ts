@@ -1,21 +1,21 @@
 import { describe, expect } from "bun:test"
-import { Document, Event, Info, type Entry } from "@opencode/schema/config"
-import { ConfigPolicy } from "@opencode/schema/config/policy"
-import { Permission } from "@opencode/schema/permission"
-import { Config } from "@opencode/core/config"
-import { Integration } from "@opencode/core/integration"
-import { ConfigPolicyPlugin } from "@opencode/core/config/plugin/policy"
-import { Bus } from "@opencode/core/bus"
-import { Plugin } from "@opencode/core/plugin"
-import { PluginHooks } from "@opencode/core/plugin/hooks"
-import { PluginHost } from "@opencode/core/plugin/host"
-import { Provider } from "@opencode/core/provider"
-import { Session } from "@opencode/core/session"
-import { Credential } from "@opencode/core/credential"
-import { ConfigIntegration } from "@opencode/core/config/integration"
-import { WebSearch } from "@opencode/core/websearch"
-import { WebSearchExa } from "@opencode/core/plugin/websearch/exa"
-import { WebSearchTinyFish } from "@opencode/core/plugin/websearch/tinyfish"
+import { Document, Event, Info, type Entry } from "@warcode/schema/config"
+import { ConfigPolicy } from "@warcode/schema/config/policy"
+import { Permission } from "@warcode/schema/permission"
+import { Config } from "@warcode/core/config"
+import { Integration } from "@warcode/core/integration"
+import { ConfigPolicyPlugin } from "@warcode/core/config/plugin/policy"
+import { Bus } from "@warcode/core/bus"
+import { Plugin } from "@warcode/core/plugin"
+import { PluginHooks } from "@warcode/core/plugin/hooks"
+import { PluginHost } from "@warcode/core/plugin/host"
+import { Provider } from "@warcode/core/provider"
+import { Session } from "@warcode/core/session"
+import { Credential } from "@warcode/core/credential"
+import { ConfigIntegration } from "@warcode/core/config/integration"
+import { WebSearch } from "@warcode/core/websearch"
+import { WebSearchExa } from "@warcode/core/plugin/websearch/exa"
+import { WebSearchTinyFish } from "@warcode/core/plugin/websearch/tinyfish"
 import { Effect, Schema } from "effect"
 import { FetchHttpClient } from "effect/http"
 import { waitUntil } from "../lib/eventually"
@@ -49,9 +49,9 @@ const orgID = "org_01M3CAP8H43Z49CER6NT0Y3ZF1"
 const lockdown = () =>
   document(
     integration("integration.connect", "deny", "*"),
-    integration("integration.connect", "allow", "opencode"),
+    integration("integration.connect", "allow", "warcode"),
     integration("integration.use", "deny", "*"),
-    integration("integration.use", "allow", `opencode#${orgID}`),
+    integration("integration.use", "allow", `warcode#${orgID}`),
   )
 
 const consoleCredential = (org: string) =>
@@ -199,16 +199,16 @@ describe("ConfigPolicyPlugin.Plugin", () => {
       yield* catalog.transform((catalog) => {
         catalog.update(Provider.ID.openai, () => {})
         catalog.update(Provider.ID.anthropic, () => {})
-        catalog.update(Provider.ID.opencode, () => {})
+        catalog.update(Provider.ID.warcode, () => {})
       })
       yield* addPlugin([
-        organizationPolicy([provider("deny", "*"), provider("allow", "opencode")]),
+        organizationPolicy([provider("deny", "*"), provider("allow", "warcode")]),
         document(provider("allow", "anthropic")),
       ])
 
       expect(yield* catalog.get(Provider.ID.anthropic)).toBeUndefined()
       expect(yield* catalog.get(Provider.ID.openai)).toBeUndefined()
-      expect(yield* catalog.get(Provider.ID.opencode)).toBeDefined()
+      expect(yield* catalog.get(Provider.ID.warcode)).toBeDefined()
     }),
   )
 
@@ -244,16 +244,16 @@ describe("ConfigPolicyPlugin.Plugin", () => {
       const bus = yield* Bus.Service
       const test = yield* Config.Test
       const host = yield* PluginHost.make(yield* Plugin.Service, "test")
-      const opencode = Integration.ID.make("opencode")
+      const warcode = Integration.ID.make("warcode")
       yield* catalog.transform((catalog) => catalog.update(Provider.ID.openai, () => {}))
       yield* ConfigPolicyPlugin.Plugin.effect(host)
       expect(yield* catalog.get(Provider.ID.openai)).toBeDefined()
 
-      yield* test.integration?.(opencode, organizationPolicy([provider("deny", "openai")])) ?? Effect.void
+      yield* test.integration?.(warcode, organizationPolicy([provider("deny", "openai")])) ?? Effect.void
       yield* bus.publish(Event.Updated, {})
       yield* waitUntil(catalog.get(Provider.ID.openai).pipe(Effect.map((provider) => provider === undefined)))
 
-      yield* test.integration?.(opencode, undefined) ?? Effect.void
+      yield* test.integration?.(warcode, undefined) ?? Effect.void
       yield* bus.publish(Event.Updated, {})
       yield* waitUntil(catalog.get(Provider.ID.openai).pipe(Effect.map((provider) => provider !== undefined)))
     }).pipe(Effect.provide(Config.testLayer())),
@@ -273,25 +273,25 @@ describe("integration policy", () => {
         execute: () => Effect.succeed([]),
       })
       yield* catalog.transform((catalog) => {
-        // The signed-out free tier enables OpenCode without any connection.
-        catalog.update(Provider.ID.opencode, (provider) => {
+        // The signed-out free tier enables Warcode without any connection.
+        catalog.update(Provider.ID.warcode, (provider) => {
           provider.activation = "enabled"
         })
         // An env API key: Anthropic's integration with no account.
         catalog.update(Provider.ID.anthropic, (provider) => {
           provider.activation = "enabled"
         })
-        // A provider authored in opencode.json.
+        // A provider authored in warcode.json.
         catalog.update(Provider.ID.make("my-llm"), (provider) => {
           provider.activation = "enabled"
         })
         // A provider the Console organization supplies.
         catalog.update(Provider.ID.make("acme-gateway"), (provider) => {
-          provider.integrationID = Integration.ID.make("opencode")
+          provider.integrationID = Integration.ID.make("warcode")
         })
       })
       yield* websearch.transform((editor) => {
-        editor.add(search("opencode"))
+        editor.add(search("warcode"))
         editor.add(search("exa"))
       })
       yield* ConfigPolicyPlugin.Plugin.effect(host)
@@ -306,16 +306,16 @@ describe("integration policy", () => {
 
       // A personal Console account is a different account of the same integration.
       const personal = yield* credentials.create({
-        integrationID: Integration.ID.make("opencode"),
+        integrationID: Integration.ID.make("warcode"),
         value: consoleCredential("org_personal"),
       })
       expect(yield* available()).toEqual([])
 
       // Only the required organization's connection works, and with it everything that organization supplies.
-      yield* credentials.create({ integrationID: Integration.ID.make("opencode"), value: consoleCredential(orgID) })
+      yield* credentials.create({ integrationID: Integration.ID.make("warcode"), value: consoleCredential(orgID) })
       yield* waitUntil(available().pipe(Effect.map((ids) => ids.length > 0)))
-      expect(yield* available()).toEqual(["acme-gateway", "opencode"])
-      expect(yield* searches()).toEqual(["opencode"])
+      expect(yield* available()).toEqual(["acme-gateway", "warcode"])
+      expect(yield* searches()).toEqual(["warcode"])
 
       // Switching back to the personal account revokes it again.
       yield* credentials.activate(personal.id)
@@ -329,23 +329,23 @@ describe("integration policy", () => {
       const catalog = yield* Provider.Service
       const credentials = yield* Credential.Service
       yield* credentials.create({
-        integrationID: Integration.ID.make("opencode"),
+        integrationID: Integration.ID.make("warcode"),
         value: consoleCredential("org_other"),
       })
       yield* catalog.transform((catalog) => {
-        catalog.update(Provider.ID.opencode, () => {})
+        catalog.update(Provider.ID.warcode, () => {})
         catalog.update(Provider.ID.anthropic, () => {})
       })
       yield* addPlugin([
         document(
           integration("integration.use", "deny", "*"),
           integration("integration.use", "allow", "anthropic"),
-          integration("integration.use", "allow", "opencode"),
+          integration("integration.use", "allow", "warcode"),
         ),
       ])
       expect(yield* catalog.get(Provider.ID.anthropic)).toBeDefined()
-      // `opencode` names only account-less use; a connected account needs `opencode#*` or its own ID.
-      expect(yield* catalog.get(Provider.ID.opencode)).toBeUndefined()
+      // `warcode` names only account-less use; a connected account needs `warcode#*` or its own ID.
+      expect(yield* catalog.get(Provider.ID.warcode)).toBeUndefined()
     }),
   )
 
@@ -371,13 +371,13 @@ describe("integration policy", () => {
             type: "document",
             integrationID: origin,
             info: decode({
-              providers: { "acme-gateway": { package: "@opencode/ai/providers/openai-compatible", models: {} } },
+              providers: { "acme-gateway": { package: "@warcode/ai/providers/openai-compatible", models: {} } },
             }),
           }),
           new Document({
             type: "document",
             info: decode({
-              providers: { "my-llm": { package: "@opencode/ai/providers/openai-compatible", models: {} } },
+              providers: { "my-llm": { package: "@warcode/ai/providers/openai-compatible", models: {} } },
             }),
           }),
         ])

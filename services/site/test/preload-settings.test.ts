@@ -58,8 +58,8 @@ function run(script: string, saved: unknown, theme?: string, stored: Record<stri
   const root = element("div")
   const head = element("head")
   const observers: ((records: { addedNodes: unknown[] }[], observer: unknown) => void)[] = []
-  const storage = new Map<string, string>(Object.entries({ "opencode-site-settings-v3": JSON.stringify(saved) }))
-  if (theme) storage.set("opencode-theme", theme)
+  const storage = new Map<string, string>(Object.entries({ "warcode-site-settings-v3": JSON.stringify(saved) }))
+  if (theme) storage.set("warcode-theme", theme)
   Object.entries(stored).forEach(([key, value]) => storage.set(key, value))
   // The light and dark theme-color tags the theme script fills in.
   const metas = ["(prefers-color-scheme: light)", "(prefers-color-scheme: dark)"].map((media) =>
@@ -195,8 +195,8 @@ describe("pre-paint scripts in production", () => {
       const root = element("div")
       root.setAttribute("data-banner", "")
       const storage: Record<string, string> = {
-        "opencode-announcement-dismissed": dismissed,
-        "opencode-site-design-copy-v2": copy,
+        "warcode-announcement-dismissed": dismissed,
+        "warcode-site-design-copy-v2": copy,
       }
       runInNewContext(bannerDismissScript, {
         localStorage: { getItem: (key: string) => storage[key] ?? null },
@@ -210,8 +210,8 @@ describe("pre-paint scripts in production", () => {
 
   test("the scripts never read saved settings or Design mode copy", () => {
     for (const script of [themeScript(false), bannerDismissScript]) {
-      expect(script).not.toContain("opencode-site-settings-v3")
-      expect(script).not.toContain("opencode-site-design-copy-v2")
+      expect(script).not.toContain("warcode-site-settings-v3")
+      expect(script).not.toContain("warcode-site-design-copy-v2")
     }
   })
 })

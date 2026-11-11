@@ -29,7 +29,7 @@ The Worker holds no GitHub token. Stars, contributors and avatars come from the 
 (`script/github-snapshot.ts`, `src/lib/github-snapshot.json`). The changelog reads releases from the
 GitHub API without a token (`src/lib/changelog.ts`, `src/lib/github-api.ts`), cached for 15 minutes in
 memory and at the edge, with the snapshot as fallback. Without a token GitHub allows 60 calls an hour
-per IP; in dev the last good releases are kept in `$TMPDIR/opencode-site-github/`, so a restart while
+per IP; in dev the last good releases are kept in `$TMPDIR/warcode-site-github/`, so a restart while
 rate limited still has them. The snapshot script uses `GITHUB_TOKEN` when it is set (CI passes the
 workflow's own token):
 
@@ -43,8 +43,8 @@ Never commit a token.
 
 `bun run build -- --mode dev` builds the site (Nitro's `cloudflare-module` preset) into the Build Output
 Specification tree in `.cloudflare/output`; `bun run deploy:dev` builds and runs
-`cf deploy --prebuilt --mode dev`. `cloudflare.config.ts` defines the Worker (`opencode-site-dev` on
-dev.opencode.ai, `opencode-site-production` on opencode.ai), its bindings and its routes. CI deploys on
+`cf deploy --prebuilt --mode dev`. `cloudflare.config.ts` defines the Worker (`warcode-site-dev` on
+dev.warcode.ai, `warcode-site-production` on warcode.ai), its bindings and its routes. CI deploys on
 pushes to `dev` and `production` (`.github/workflows/deploy-site.yml`). Production takes no routes until
 `productionOwnsRoot` is switched on.
 

@@ -1,8 +1,8 @@
-import type { SessionInfo } from "@opencode/client/promise"
-import { useDialog } from "@opencode/ui/context/dialog"
-import { Button } from "@opencode/ui/button"
-import { DialogFooter, DialogHeader, DialogTitleGroup, Dialog } from "@opencode/ui/dialog"
-import { prefersReducedMotion } from "@opencode/ui/motion"
+import type { SessionInfo } from "@warcode/client/promise"
+import { useDialog } from "@warcode/ui/context/dialog"
+import { Button } from "@warcode/ui/button"
+import { DialogFooter, DialogHeader, DialogTitleGroup, Dialog } from "@warcode/ui/dialog"
+import { prefersReducedMotion } from "@warcode/ui/motion"
 import { hashKey, onlineManager, useQueryClient } from "@tanstack/solid-query"
 import {
   type Accessor,

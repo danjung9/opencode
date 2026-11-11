@@ -1,4 +1,4 @@
-/* The OpenCode nav menus (index.ts): the logo menu and the product menu, one card style, as opencode.ai's logo menu
+/* The Warcode nav menus (index.ts): the logo menu and the product menu, one card style, as warcode.ai's logo menu
    (cards, blue hover). No panel; each item is a card on the see-through pop-up surface, its thumbnail, a divider, then
    its label. The menus sit in the page's body (or the top layer), so only these rules style them. A host recolours
    them by setting these on an ancestor of its triggers (the menu copies them when it opens):
@@ -294,19 +294,19 @@
   }
 }
 
-/* The OpenCode bar's metrics, opencode.ai's (site.css: the logo 25px from the top and the start edge, in the box of
+/* The Warcode bar's metrics, warcode.ai's (site.css: the logo 25px from the top and the start edge, in the box of
    "[1]" at 15px; the 56px phone top bar with its 24 × 30 logo box), so a product's bar puts everything where
-   opencode.ai does and moving between them never jumps:
+   warcode.ai does and moving between them never jumps:
      --nav-bar-height     the bar, its 1px rule included (75 + 1; 56 on phones, the rule drawn inside)
      --nav-edge           the start edge of the logo's box
-     --nav-end            the end edge of the bar's last item (opencode.ai's GitHub mark; the phone menu button)
-     --nav-rule           the bar's rule colour (opencode.ai's --border) */
+     --nav-end            the end edge of the bar's last item (warcode.ai's GitHub mark; the phone menu button)
+     --nav-rule           the bar's rule colour (warcode.ai's --border) */
 :root {
   --nav-bar-height: 76px;
   --nav-edge: 24px;
   --nav-end: 17.5px;
   --nav-rule: light-dark(hsl(0 0% 88%), hsl(0 0% 18%));
-  /* The product name's one fill (hover, open and pressed), opencode.ai's lockup hover: half the mark's inner grey on
+  /* The product name's one fill (hover, open and pressed), warcode.ai's lockup hover: half the mark's inner grey on
      the docs page (#d2d2d2 over #fbfbfb, #4b4b4b over #0c0c0c). Fixed, so it is the same on every page background. */
   --nav-name-hover: light-dark(#e7e7e7, #2c2c2c);
   /* The chevron after a product name (and the docs' after DOCS): its box, the gap after the name's highlight, the glyph,
@@ -344,7 +344,7 @@
   }
 }
 
-/* The lockup: the logo (`data-nav-logo`, a 20 × 25 mark at whole pixels in its box, as on opencode.ai), then the
+/* The lockup: the logo (`data-nav-logo`, a 20 × 25 mark at whole pixels in its box, as on warcode.ai), then the
    product's name (`data-nav-product`) 12px after the box: OpenTUI Mono Bold 15px caps whose 6px padding is the
    highlight, --nav-name-hover while hovered, pressed or open (hovering opens the product menu, so it never steps darker).
    Placed at --nav-edge, centred in the bar. */

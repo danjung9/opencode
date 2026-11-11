@@ -1,4 +1,4 @@
-import { LocationLifecycle } from "@opencode/core/location-lifecycle"
+import { LocationLifecycle } from "@warcode/core/location-lifecycle"
 import { Effect, Queue } from "effect"
 import { Socket } from "effect/socket"
 

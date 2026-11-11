@@ -1,4 +1,4 @@
-// Normalized outlines from the official OpenCode SVG wordmark (24 × 42).
+// Normalized outlines from the official Warcode SVG wordmark (24 × 42).
 // https://github.com/anomalyco/opencode/blob/dev/packages/ui/src/components/logo.tsx
 export const GLYPHS = {
   o: { shadow: 'M18 30H6V18H18V30Z', ink: 'M18 12H6V30H18V12ZM24 36H0V6H24V36Z' },

@@ -1,4 +1,4 @@
-import type { SessionMessageAssistant, SessionMessageInfo } from "@opencode/client/promise"
+import type { SessionMessageAssistant, SessionMessageInfo } from "@warcode/client/promise"
 import { expect, test, type Page } from "@playwright/test"
 import { sessionHref } from "../utils/app"
 import { trackPageErrors } from "../utils/errors"
@@ -42,7 +42,7 @@ test.describe("timeline history", () => {
     const requests: (string | undefined)[] = []
     await openSession(page, {
       name: "HistoryRestore",
-      sessions: [{ id }, { id: other, directory: "C:/OpenCode/HistoryOther" }],
+      sessions: [{ id }, { id: other, directory: "C:/Warcode/HistoryOther" }],
       pageMessages: (session, _limit, before) => {
         if (session === other)
           return { items: [userMessage([textPart("prt_other", "Other session")], { id: "msg_other" })] }
@@ -329,7 +329,7 @@ test.describe("timeline history", () => {
           id,
           type: "assistant",
           time: { ...time, completed: time.created + 500 },
-          model: { id: "claude-opus-4-6", providerID: "opencode" },
+          model: { id: "claude-opus-4-6", providerID: "warcode" },
           agent: "build",
           content: [{ type: "text", text: index === 60 ? "## Hydrated tail\n\n**Ready.**" : `Answer ${index}` }],
         }

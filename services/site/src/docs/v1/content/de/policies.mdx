@@ -1,15 +1,15 @@
 ---
 title: Richtlinien
-description: Steuern Sie, welche konfigurierten Ressourcen OpenCode verwenden darf.
+description: Steuern Sie, welche konfigurierten Ressourcen Warcode verwenden darf.
 ---
 
-:::caution[Erfordert OpenCode 2]
-Richtlinien werden in OpenCode 1 nicht durchgesetzt. Die Beispiele auf dieser Seite erfordern OpenCode 2. Verwenden Sie in OpenCode 1 [`disabled_providers`](/docs/config#disabled-providers) oder [`enabled_providers`](/docs/config#enabled-providers), um die Verfügbarkeit von Anbietern zu steuern. Die aktuelle Verwendung finden Sie in der [Dokumentation zu Richtlinien in OpenCode 2](https://opencode.ai/docs/policies/).
+:::caution[Erfordert Warcode 2]
+Richtlinien werden in Warcode 1 nicht durchgesetzt. Die Beispiele auf dieser Seite erfordern Warcode 2. Verwenden Sie in Warcode 1 [`disabled_providers`](/docs/config#disabled-providers) oder [`enabled_providers`](/docs/config#enabled-providers), um die Verfügbarkeit von Anbietern zu steuern. Die aktuelle Verwendung finden Sie in der [Dokumentation zu Richtlinien in Warcode 2](https://opencode.ai/docs/policies/).
 :::
 
-Richtlinien legen fest, ob OpenCode eine Aktion auf einer benannten Ressource ausführen darf. Diese Funktion von OpenCode 2 ist experimentell und wird über das Array `experimental.policies` in `opencode.json` konfiguriert.
+Richtlinien legen fest, ob Warcode eine Aktion auf einer benannten Ressource ausführen darf. Diese Funktion von Warcode 2 ist experimentell und wird über das Array `experimental.policies` in `warcode.json` konfiguriert.
 
-Richtlinien sind von [Berechtigungen](/docs/permissions) getrennt. Berechtigungen steuern, was Tools während einer Sitzung tun dürfen, während Richtlinien steuern, ob OpenCode eine Ressource wie einen LLM-Anbieter verwenden darf.
+Richtlinien sind von [Berechtigungen](/docs/permissions) getrennt. Berechtigungen steuern, was Tools während einer Sitzung tun dürfen, während Richtlinien steuern, ob Warcode eine Ressource wie einen LLM-Anbieter verwenden darf.
 
 ---
 
@@ -23,7 +23,7 @@ Jede Richtlinienanweisung hat drei Felder:
 
 Verweigern Sie beispielsweise die Verwendung des Anbieters `openai`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -44,7 +44,7 @@ Ein durch eine Richtlinie verweigerter Anbieter steht weder für die Modellauswa
 
 ## Verfügbare Richtlinien
 
-OpenCode unterstützt derzeit eine Richtlinienaktion:
+Warcode unterstützt derzeit eine Richtlinienaktion:
 
 | Aktion         | Ressource                   | Beschreibung                                                 |
 | -------------- | --------------------------- | ------------------------------------------------------------ |
@@ -58,7 +58,7 @@ Weitere Richtlinienaktionen können künftig hinzukommen.
 
 Das Feld `resource` unterstützt Platzhalterabgleich. Verwenden Sie `*` für null oder mehr beliebige Zeichen und `?` für genau ein Zeichen.
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -83,7 +83,7 @@ Wenn mehrere Anweisungen übereinstimmen, gewinnt die letzte übereinstimmende A
 
 Erlauben Sie beispielsweise nur Anthropic:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -111,11 +111,11 @@ Richtlinien können sowohl in Ihrer globalen Konfiguration als auch in der Proje
 
 ## Anbieterlisten
 
-Verwenden Sie in OpenCode 2 Richtlinien statt der älteren Einstellungen `disabled_providers` und `enabled_providers`, um den Zugriff auf Anbieter zu steuern. In OpenCode 1 verwenden Sie weiterhin diese Anbieterlisten.
+Verwenden Sie in Warcode 2 Richtlinien statt der älteren Einstellungen `disabled_providers` und `enabled_providers`, um den Zugriff auf Anbieter zu steuern. In Warcode 1 verwenden Sie weiterhin diese Anbieterlisten.
 
 So ersetzen Sie `disabled_providers`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [
@@ -128,7 +128,7 @@ So ersetzen Sie `disabled_providers`:
 
 Um `enabled_providers` zu ersetzen, verweigern Sie zuerst alle Anbieter und erlauben danach die ausgewählten Anbieter:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [

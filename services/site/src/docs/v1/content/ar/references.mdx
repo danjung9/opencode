@@ -3,11 +3,11 @@ title: المراجع
 description: أضِف أدلة محلية ومستودعات Git كمراجع للمشروع.
 ---
 
-تمنح المراجع OpenCode وصولًا إلى أدلة خارج المشروع الحالي. استخدمها لإتاحة التوثيق، أو المكتبات المشتركة، أو الأمثلة، أو مستودع آخر أثناء عملك.
+تمنح المراجع Warcode وصولًا إلى أدلة خارج المشروع الحالي. استخدمها لإتاحة التوثيق، أو المكتبات المشتركة، أو الأمثلة، أو مستودع آخر أثناء عملك.
 
-تُضبط المراجع بأسماء مستعارة في `opencode.json` أو `opencode.jsonc`.
+تُضبط المراجع بأسماء مستعارة في `warcode.json` أو `warcode.jsonc`.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
   "references": {
@@ -16,7 +16,7 @@ description: أضِف أدلة محلية ومستودعات Git كمراجع ل
       "description": "Use for product behavior and documentation conventions",
     },
     "sdk": {
-      "repository": "anomalyco/opencode-sdk-js",
+      "repository": "anomalyco/warcode-sdk-js",
       "branch": "main",
       "description": "Use for JavaScript SDK implementation details",
     },
@@ -30,7 +30,7 @@ description: أضِف أدلة محلية ومستودعات Git كمراجع ل
 
 استخدم `path` للإشارة إلى دليل محلي.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": {
@@ -48,7 +48,7 @@ description: أضِف أدلة محلية ومستودعات Git كمراجع ل
 
 يمكنك أيضًا استخدام صيغة مختصرة على شكل نص:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": "../docs",
@@ -60,9 +60,9 @@ description: أضِف أدلة محلية ومستودعات Git كمراجع ل
 
 ## مستودعات Git
 
-استخدم `repository` للإشارة إلى مستودع Git. ينشئ OpenCode نسخة من المستودع في ذاكرة التخزين المؤقت المحلية للمستودعات، ويتيح الشيفرة المصدرية المسحوبة كدليل مرجعي.
+استخدم `repository` للإشارة إلى مستودع Git. ينشئ Warcode نسخة من المستودع في ذاكرة التخزين المؤقت المحلية للمستودعات، ويتيح الشيفرة المصدرية المسحوبة كدليل مرجعي.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": {
@@ -73,11 +73,11 @@ description: أضِف أدلة محلية ومستودعات Git كمراجع ل
 }
 ```
 
-يقبل `repository` عناوين URL الخاصة بـ Git، ومراجع host/path، والصيغة المختصرة `owner/repo` الخاصة بـ GitHub. يحدد الحقل الاختياري `branch` فرعًا أو ref. بدون `branch`، يستخدم OpenCode الفرع الافتراضي للمستودع.
+يقبل `repository` عناوين URL الخاصة بـ Git، ومراجع host/path، والصيغة المختصرة `owner/repo` الخاصة بـ GitHub. يحدد الحقل الاختياري `branch` فرعًا أو ref. بدون `branch`، يستخدم Warcode الفرع الافتراضي للمستودع.
 
 يمكنك استخدام الصيغة المختصرة على شكل نص عندما لا تحتاج إلى فرع أو وصف أو خيارات أخرى:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": "Effect-TS/effect",
@@ -95,7 +95,7 @@ description: أضِف أدلة محلية ومستودعات Git كمراجع ل
 
 أضِف `description` لتوضيح متى يجب على الوكيل استخدام مرجع ما.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "design-system": {
@@ -106,7 +106,7 @@ description: أضِف أدلة محلية ومستودعات Git كمراجع ل
 }
 ```
 
-يُضمّن OpenCode المراجع التي لها أوصاف في سياق الوكيل. يجب أن تكون الأوصاف قصيرة ومحددة بما يكفي للتمييز بين المراجع ذات المحتوى المتشابه. تبقى المراجع التي لا أوصاف لها متاحة عبر الإكمال التلقائي والاستخدام المباشر، لكن لا يُعلَن عنها للوكلاء.
+يُضمّن Warcode المراجع التي لها أوصاف في سياق الوكيل. يجب أن تكون الأوصاف قصيرة ومحددة بما يكفي للتمييز بين المراجع ذات المحتوى المتشابه. تبقى المراجع التي لا أوصاف لها متاحة عبر الإكمال التلقائي والاستخدام المباشر، لكن لا يُعلَن عنها للوكلاء.
 
 ---
 
@@ -114,7 +114,7 @@ description: أضِف أدلة محلية ومستودعات Git كمراجع ل
 
 اضبط `hidden` على `true` لاستبعاد مرجع من الإكمال التلقائي `@` في TUI.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "internal": {
@@ -140,7 +140,7 @@ Compare this implementation with @sdk/src/client.ts
 
 يتلقى الوكلاء أيضًا في سياق النظام المسارات المحلولة وأوصاف المراجع المُعدّة التي لها أوصاف، لذا يمكنهم فحص المرجع عندما يكون ذا صلة دون أن تحتاج إلى إرفاقه يدويًا.
 
-يسمح OpenCode تلقائيًا بأدلة المراجع ضمن حدود إذن الأدلة الخارجية. تظل أذونات الأدوات العادية سارية؛ فمثلًا، الوكيل الذي لا يستطيع تعديل الملفات لا يحصل على صلاحية التعديل لمجرد أن دليلًا ما مُعدّ كمرجع.
+يسمح Warcode تلقائيًا بأدلة المراجع ضمن حدود إذن الأدلة الخارجية. تظل أذونات الأدوات العادية سارية؛ فمثلًا، الوكيل الذي لا يستطيع تعديل الملفات لا يحصل على صلاحية التعديل لمجرد أن دليلًا ما مُعدّ كمرجع.
 
 ---
 

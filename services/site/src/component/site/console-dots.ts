@@ -1,4 +1,4 @@
-// The Console landing backdrop (dev.opencode.ai/console, preset "vertical" with dots): 2px dots
+// The Console landing backdrop (dev.warcode.ai/console, preset "vertical" with dots): 2px dots
 // where columns cross rows. Gaps are 24px at the centre and tighten to 8px at the edges
 // ("diverge", curve exponent 0.8), across and down. Every fourth column is an accent. The dots are
 // drawn once into a mask, so their colour and opacity come from CSS and follow the theme. No

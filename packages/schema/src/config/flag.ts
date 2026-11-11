@@ -1,11 +1,11 @@
 export * as ConfigFlag from "./flag.js"
 
-/** The `OPENCODE_FLAGS` entry that turns every flag on, as in `all,-media_blob`. It is not a flag key. */
+/** The `WARCODE_FLAGS` entry that turns every flag on, as in `all,-media_blob`. It is not a flag key. */
 export const wildcard = "all"
 
 /**
  * Every feature flag, by key, with what it turns on. A flag is on in local and dev builds and off in released ones;
- * `experimental.<key>` in config and `OPENCODE_FLAGS` override that, and `OPENCODE_FLAGS=all` or
+ * `experimental.<key>` in config and `WARCODE_FLAGS` override that, and `WARCODE_FLAGS=all` or
  * `experimental.all_flags: true` turn every flag on. Read one with Core's `Flag.enabled("<key>")`.
  */
 export const registry = {
@@ -18,6 +18,6 @@ export const registry = {
   codemode_vm: "Run the Code Mode execute tool on the experimental bytecode VM instead of the legacy interpreter.",
   shell_timeout_background: "Move foreground shell commands to the background when their timeout expires.",
   console_watches:
-    "Watch Slack threads, GitHub pull requests, issues, commits and Actions runs, and the workspace's MCP servers' events through OpenCode Console, and wake sessions when they change.",
+    "Watch Slack threads, GitHub pull requests, issues, commits and Actions runs, and the workspace's MCP servers' events through Warcode Console, and wake sessions when they change.",
 } as const satisfies Record<string, string>
 export type Key = keyof typeof registry

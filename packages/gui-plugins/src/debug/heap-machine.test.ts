@@ -14,7 +14,7 @@ import {
 
 const reply = (): HeapCaptureReply => ({ resolve: () => undefined, reject: () => undefined })
 
-const result = { directory: "/downloads/opencode-heap-1", complete: true }
+const result = { directory: "/downloads/warcode-heap-1", complete: true }
 
 const command = (value = reply()): HeapCaptureEvent => ({
   type: "command.requested",

@@ -56,7 +56,7 @@ if [ "$channel" = latest ]; then
     die "Invalid release version: $version"
   fi
   status=$(curl -sS -o /dev/null -w '%{http_code}' "https://registry.npmjs.org/@opencode%2fcli/$version")
-  [ "$status" != 200 ] || die "@opencode/cli@$version is already published"
+  [ "$status" != 200 ] || die "@warcode/cli@$version is already published"
 fi
 
 # What each channel builds and publishes.

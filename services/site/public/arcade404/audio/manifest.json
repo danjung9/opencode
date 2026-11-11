@@ -1,5 +1,5 @@
 {
-  "_note": "Placeholder sounds built from Kenney CC0 samples, BigSoundBank CC0 floppy recordings, the OpenCode 2.0 startup recipes and synthesis while ElevenLabs credits were unavailable. Each sound's top-level files are option 1 (the default); sounds with alternatives list them all, option 1 first, in variants. Swap for the ElevenLabs versions later (flow cbE44lmYNqiwvWHn6I85). Prefer .webm (Opus); .mp3 is the fallback. For a gapless ambience loop, decode with Web Audio (AudioBufferSourceNode.loop = true) rather than <audio loop>.",
+  "_note": "Placeholder sounds built from Kenney CC0 samples, BigSoundBank CC0 floppy recordings, the Warcode 2.0 startup recipes and synthesis while ElevenLabs credits were unavailable. Each sound's top-level files are option 1 (the default); sounds with alternatives list them all, option 1 first, in variants. Swap for the ElevenLabs versions later (flow cbE44lmYNqiwvWHn6I85). Prefer .webm (Opus); .mp3 is the fallback. For a gapless ambience loop, decode with Web Audio (AudioBufferSourceNode.loop = true) rather than <audio loop>.",
   "sounds": {
     "ambience": {
       "files": {
@@ -122,7 +122,7 @@
           },
           "duration": 5.27,
           "loudness_lufs": -18.0,
-          "source": "Floppy head seeks: BigSoundBank 1396 (3.5-inch floppy reading, 4.58-7.98 s, the region the OpenCode article uses); power switch: Kenney RPG Audio (metalClick); synthesised fan, hum, drive spin-up and PC-speaker beep",
+          "source": "Floppy head seeks: BigSoundBank 1396 (3.5-inch floppy reading, 4.58-7.98 s, the region the Warcode article uses); power switch: Kenney RPG Audio (metalClick); synthesised fan, hum, drive spin-up and PC-speaker beep",
           "licence": "BigSoundBank, Joseph Sardin, CC0 1.0 (bigsoundbank.com/licenses.html); Kenney (kenney.nl), CC0 1.0; rest Synthesised: original work"
         }
       ]

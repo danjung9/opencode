@@ -3,11 +3,11 @@ title: Referanslar
 description: Yerel dizinleri ve Git depolarını proje referansı olarak ekleyin.
 ---
 
-Referanslar, OpenCode'a mevcut projenin dışındaki dizinlere erişim sağlar. Çalışırken belgeleri, paylaşılan kütüphaneleri, örnekleri veya başka bir depoyu kullanılabilir hale getirmek için bunları kullanın.
+Referanslar, Warcode'a mevcut projenin dışındaki dizinlere erişim sağlar. Çalışırken belgeleri, paylaşılan kütüphaneleri, örnekleri veya başka bir depoyu kullanılabilir hale getirmek için bunları kullanın.
 
-Referanslar, `opencode.json` veya `opencode.jsonc` içinde bir takma adla yapılandırılır.
+Referanslar, `warcode.json` veya `warcode.jsonc` içinde bir takma adla yapılandırılır.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
   "references": {
@@ -16,7 +16,7 @@ Referanslar, `opencode.json` veya `opencode.jsonc` içinde bir takma adla yapıl
       "description": "Use for product behavior and documentation conventions",
     },
     "sdk": {
-      "repository": "anomalyco/opencode-sdk-js",
+      "repository": "anomalyco/warcode-sdk-js",
       "branch": "main",
       "description": "Use for JavaScript SDK implementation details",
     },
@@ -30,7 +30,7 @@ Referanslar, `opencode.json` veya `opencode.jsonc` içinde bir takma adla yapıl
 
 Yerel bir dizine referans vermek için `path` kullanın.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": {
@@ -48,7 +48,7 @@ Yollar şunlar olabilir:
 
 Kısa bir dize gösterimi de kullanabilirsiniz:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": "../docs",
@@ -60,9 +60,9 @@ Kısa bir dize gösterimi de kullanabilirsiniz:
 
 ## Git depoları
 
-Bir Git deposuna referans vermek için `repository` kullanın. OpenCode depoyu yerel depo önbelleğinde oluşturur ve checkout edilen kaynak kodu bir referans dizini olarak kullanılabilir hale getirir.
+Bir Git deposuna referans vermek için `repository` kullanın. Warcode depoyu yerel depo önbelleğinde oluşturur ve checkout edilen kaynak kodu bir referans dizini olarak kullanılabilir hale getirir.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": {
@@ -73,11 +73,11 @@ Bir Git deposuna referans vermek için `repository` kullanın. OpenCode depoyu y
 }
 ```
 
-`repository`; Git URL'lerini, host/path referanslarını ve GitHub `owner/repo` kısa gösterimini kabul eder. İsteğe bağlı `branch` alanı bir dal veya ref seçer. `branch` belirtilmezse OpenCode deponun varsayılan dalını kullanır.
+`repository`; Git URL'lerini, host/path referanslarını ve GitHub `owner/repo` kısa gösterimini kabul eder. İsteğe bağlı `branch` alanı bir dal veya ref seçer. `branch` belirtilmezse Warcode deponun varsayılan dalını kullanır.
 
 Dal, açıklama veya başka seçeneklere ihtiyacınız yoksa kısa dize gösterimini kullanabilirsiniz:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": "Effect-TS/effect",
@@ -95,7 +95,7 @@ Git referansları eşzamansız olarak yenilenir. Yeni yapılandırılmış bir d
 
 Bir agent'ın bir referansı ne zaman kullanması gerektiğini açıklamak için `description` ekleyin.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "design-system": {
@@ -106,7 +106,7 @@ Bir agent'ın bir referansı ne zaman kullanması gerektiğini açıklamak için
 }
 ```
 
-OpenCode, açıklaması olan referansları agent bağlamına ekler. Açıklamalar, benzer içeriğe sahip referansları ayırt edecek kadar kısa ve belirgin olmalıdır. Açıklaması olmayan referanslar otomatik tamamlama ve doğrudan kullanım yoluyla erişilebilir kalır, ancak agent'lara bildirilmez.
+Warcode, açıklaması olan referansları agent bağlamına ekler. Açıklamalar, benzer içeriğe sahip referansları ayırt edecek kadar kısa ve belirgin olmalıdır. Açıklaması olmayan referanslar otomatik tamamlama ve doğrudan kullanım yoluyla erişilebilir kalır, ancak agent'lara bildirilmez.
 
 ---
 
@@ -114,7 +114,7 @@ OpenCode, açıklaması olan referansları agent bağlamına ekler. Açıklamala
 
 Bir referansı TUI'deki `@` otomatik tamamlamasından çıkarmak için `hidden` değerini `true` olarak ayarlayın.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "internal": {
@@ -140,7 +140,7 @@ Compare this implementation with @sdk/src/client.ts
 
 Agent'lar ayrıca açıklaması olan yapılandırılmış referansların çözümlenmiş yollarını ve açıklamalarını sistem bağlamlarında alır. Böylece bir referans ilgili olduğunda, siz elle eklemeden onu inceleyebilirler.
 
-OpenCode, referans dizinlerine harici dizin izin sınırı üzerinden otomatik olarak izin verir. Normal araç izinleri yine geçerlidir; örneğin dosya düzenleyemeyen bir agent, bir dizin referans olarak yapılandırıldı diye düzenleme erişimi kazanmaz.
+Warcode, referans dizinlerine harici dizin izin sınırı üzerinden otomatik olarak izin verir. Normal araç izinleri yine geçerlidir; örneğin dosya düzenleyemeyen bir agent, bir dizin referans olarak yapılandırıldı diye düzenleme erişimi kazanmaz.
 
 ---
 

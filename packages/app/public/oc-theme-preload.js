@@ -1,22 +1,22 @@
 ;(function () {
-  var key = "opencode-theme-id"
-  var themeId = localStorage.getItem(key) || "oc-2"
+  var key = "warcode-theme-id"
+  var themeId = localStorage.getItem(key) || "workroom"
 
-  var scheme = localStorage.getItem("opencode-color-scheme") || "system"
+  var scheme = localStorage.getItem("warcode-color-scheme") || "light"
   var isDark = scheme === "dark" || (scheme === "system" && matchMedia("(prefers-color-scheme: dark)").matches)
   var mode = isDark ? "dark" : "light"
 
   document.documentElement.dataset.theme = themeId
   document.documentElement.dataset.colorScheme = mode
-  document.documentElement.style.backgroundColor = isDark ? "#080808" : "#fafafa"
+  document.documentElement.style.backgroundColor = isDark ? "#211F1B" : "#F3F0E8"
 
   // Update theme-color meta tag to match app color scheme
   var metas = document.querySelectorAll("meta[name='theme-color']")
-  if (metas.length > 0) metas[0].setAttribute("content", isDark ? "#080808" : "#fafafa")
+  if (metas.length > 0) metas[0].setAttribute("content", isDark ? "#211F1B" : "#F3F0E8")
 
-  if (themeId === "oc-2") return
+  if (themeId === "workroom") return
 
-  var css = localStorage.getItem("opencode-theme-css-" + mode)
+  var css = localStorage.getItem("warcode-theme-css-" + mode)
   if (css) {
     var style = document.createElement("style")
     style.id = "oc-theme-preload"

@@ -7,9 +7,9 @@ import { setVoicePhase, voiceLevel, voicePhase, voiceSessionKey } from "./state"
 import { siteSettings } from "../settings"
 
 /**
- * Voice mode: ask OpenCode questions out loud. The footer's voice button (or, with Design mode's
+ * Voice mode: ask Warcode questions out loud. The footer's voice button (or, with Design mode's
  * voiceOrb "always", the resting orb) asks the browser for the microphone; then the orb from
- * OpenCode Mobile sits alone in the bottom-right corner, and Hex's Dot scope shows the voice at the
+ * Warcode Mobile sits alone in the bottom-right corner, and Hex's Dot scope shows the voice at the
  * top of the window, with the status and captions in one line under it. The scope links to Hex.
  *
  * Hearing: the browser's SpeechRecognition; without it, a recording sent to /api/voice/transcribe
@@ -51,12 +51,12 @@ const failures: Record<Failure, [string, string]> = {
   ],
   "in-app": [
     "This app's browser can't use the microphone",
-    ios ? "Open this page in Safari to talk to OpenCode." : "Open this page in Chrome to talk to OpenCode.",
+    ios ? "Open this page in Safari to talk to Warcode." : "Open this page in Chrome to talk to Warcode.",
   ],
   insecure: ["Voice needs a secure connection", "Open this page over HTTPS to use the microphone."],
   "no-mic": ["No microphone", "Connect a microphone, then try again."],
   disconnected: ["Microphone disconnected", "Connect your microphone again, then try again."],
-  unsupported: ["Voice isn't supported in this browser", "Try Chrome, Edge or Safari to talk to OpenCode."],
+  unsupported: ["Voice isn't supported in this browser", "Try Chrome, Edge or Safari to talk to Warcode."],
   service: [
     "Speech recognition isn't responding",
     "Your browser's speech service didn't answer. Try again in a moment.",
@@ -65,9 +65,9 @@ const failures: Record<Failure, [string, string]> = {
 }
 
 const hexUrl = "https://anoma.ly/hex"
-const hexKey = "opencode-voice-hex-line-shown"
-const hexDismissedKey = "opencode-voice-hex-dismissed"
-const examples = ["What is OpenCode?", "Which models can I use?", "Is there a mobile app?"]
+const hexKey = "warcode-voice-hex-line-shown"
+const hexDismissedKey = "warcode-voice-hex-dismissed"
+const examples = ["What is Warcode?", "Which models can I use?", "Is there a mobile app?"]
 
 export default function VoiceMode() {
   const i18n = useI18n()
@@ -941,7 +941,7 @@ export default function VoiceMode() {
                   when={heard()}
                   fallback={
                     <Show when={status() === "connecting"}>
-                      <p>Allow the microphone to talk to OpenCode.</p>
+                      <p>Allow the microphone to talk to Warcode.</p>
                     </Show>
                   }
                 >
@@ -995,7 +995,7 @@ export default function VoiceMode() {
             onPointerLeave={(event) => event.pointerType !== "touch" && hideExplainer()}
           >
             <div data-slot="body" id="voice-orb-explainer">
-              <p data-slot="intro">Talk to OpenCode</p>
+              <p data-slot="intro">Talk to Warcode</p>
               <p>Allow microphone access to talk.</p>
             </div>
           </section>
@@ -1020,7 +1020,7 @@ export default function VoiceMode() {
                 )}
               </Show>
               <Show when={!failure() && !heard() && !answer() && !asked()}>
-                <p data-slot="intro">Ask me anything about OpenCode</p>
+                <p data-slot="intro">Ask me anything about Warcode</p>
                 <div data-slot="examples">
                   <For each={examples}>
                     {(question) => (

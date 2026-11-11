@@ -1,4 +1,4 @@
-import type { Scope } from "@opencode/plugin/gui/host"
+import type { Scope } from "@warcode/plugin/gui/host"
 
 /** Runs once every other plugin stopped, e.g. quitAndInstall. */
 export type Handoff = () => void | Promise<void>

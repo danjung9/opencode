@@ -1,11 +1,11 @@
-import logoTransparentLight from "../../asset/brand/opencode-logo-transparent-light.svg?no-inline"
-import logoTransparentDark from "../../asset/brand/opencode-logo-transparent-dark.svg?no-inline"
-import logoSolidLight from "../../asset/brand/opencode-logo-solid-light.svg?no-inline"
-import logoSolidDark from "../../asset/brand/opencode-logo-solid-dark.svg?no-inline"
-import wordmarkTransparentLight from "../../asset/brand/opencode-wordmark-transparent-light.svg?no-inline"
-import wordmarkTransparentDark from "../../asset/brand/opencode-wordmark-transparent-dark.svg?no-inline"
-import wordmarkSolidLight from "../../asset/brand/opencode-wordmark-solid-light.svg?no-inline"
-import wordmarkSolidDark from "../../asset/brand/opencode-wordmark-solid-dark.svg?no-inline"
+import logoTransparentLight from "../../asset/brand/warcode-logo-transparent-light.svg?no-inline"
+import logoTransparentDark from "../../asset/brand/warcode-logo-transparent-dark.svg?no-inline"
+import logoSolidLight from "../../asset/brand/warcode-logo-solid-light.svg?no-inline"
+import logoSolidDark from "../../asset/brand/warcode-logo-solid-dark.svg?no-inline"
+import wordmarkTransparentLight from "../../asset/brand/warcode-wordmark-transparent-light.svg?no-inline"
+import wordmarkTransparentDark from "../../asset/brand/warcode-wordmark-transparent-dark.svg?no-inline"
+import wordmarkSolidLight from "../../asset/brand/warcode-wordmark-solid-light.svg?no-inline"
+import wordmarkSolidDark from "../../asset/brand/warcode-wordmark-solid-dark.svg?no-inline"
 
 /**
  * The extra logo files for the logo menus, by style, logo or wordmark, and tone. "transparent" lets the

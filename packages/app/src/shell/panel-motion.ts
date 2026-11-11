@@ -1,6 +1,6 @@
 import { batch, createEffect, createMemo, createSignal, on, onCleanup, untrack, type Accessor } from "solid-js"
-import { ease, frameLoop, prefersReducedMotion, Spring, type DurationOptions } from "@opencode/ui/motion"
-import { motionTimeScale } from "@opencode/ui/motion-tuning"
+import { ease, frameLoop, prefersReducedMotion, Spring, type DurationOptions } from "@warcode/ui/motion"
+import { motionTimeScale } from "@warcode/ui/motion-tuning"
 import {
   createPanelMotionState,
   PANEL_FLIGHT_TIMEOUT_MS,

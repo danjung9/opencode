@@ -1,6 +1,6 @@
-import type { IntegrationOAuthMethodRegistration } from "@opencode/plugin/effect/integration"
-import type { SessionRequestKind, SessionTitle } from "@opencode/plugin/effect/session"
-import { isRecord } from "@opencode/util/record"
+import type { IntegrationOAuthMethodRegistration } from "@warcode/plugin/effect/integration"
+import type { SessionRequestKind, SessionTitle } from "@warcode/plugin/effect/session"
+import { isRecord } from "@warcode/util/record"
 import { Clock, Effect, Option, Schema } from "effect"
 import { FetchHttpClient, HttpClient, HttpClientRequest, HttpClientResponse } from "effect/http"
 import { IntegrationConnection } from "../../integration/connection.js"
@@ -10,10 +10,10 @@ import { App } from "../../app.js"
 import { Integration } from "../../integration.js"
 import { Model } from "../../model.js"
 import { Agent } from "../../agent.js"
-import { define } from "@opencode/plugin/effect/plugin"
+import { define } from "@warcode/plugin/effect/plugin"
 import { Provider } from "../../provider.js"
 import { SessionAffinity } from "../../session/affinity.js"
-import type { Session } from "@opencode/schema/session"
+import type { Session } from "@warcode/schema/session"
 import { SharedCache } from "../../shared-cache.js"
 import { activeCredential, credentialSettings } from "./credential-settings.js"
 import { ProviderRefresh } from "./refresh.js"
@@ -164,7 +164,7 @@ const oauth = (app: App.Info) =>
   }) satisfies IntegrationOAuthMethodRegistration
 
 export const GithubCopilotPlugin = define({
-  id: "opencode.provider.github.copilot",
+  id: "warcode.provider.github.copilot",
   effect: Effect.fn(function* (ctx) {
     const providers = yield* Provider.Service
     const cache = yield* SharedCache.Service
@@ -279,9 +279,9 @@ export const GithubCopilotPlugin = define({
         evt.models.update(item.provider.id, id, (model) => {
           const route = CopilotModels.routeFor(
             model.modelID ?? model.id,
-            model.package === "@opencode/ai/providers/anthropic"
+            model.package === "@warcode/ai/providers/anthropic"
               ? "messages"
-              : model.package === "@opencode/ai/providers/openai"
+              : model.package === "@warcode/ai/providers/openai"
                 ? "responses"
                 : undefined,
             url,

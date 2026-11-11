@@ -1,10 +1,10 @@
-/** Ceiling for `opencode service get remote`. Every command has one, so a hung command never holds the queue. */
+/** Ceiling for `warcode service get remote`. Every command has one, so a hung command never holds the queue. */
 export const SERVICE_READ_TIMEOUT_MS = 20_000
 
-/** `opencode service set remote`, which creates the tunnel the first time it turns on. */
+/** `warcode service set remote`, which creates the tunnel the first time it turns on. */
 export const SERVICE_SET_TIMEOUT_MS = 180_000
 
-/** `opencode service start`, after a change. */
+/** `warcode service start`, after a change. */
 export const SERVICE_START_TIMEOUT_MS = 60_000
 
 /** The display sleep blocker main holds, if any. The OS can drop a held one; `started` reports what it still holds. */
@@ -30,7 +30,7 @@ export type PendingServiceJob = {
 }
 
 /**
- * A change restarts the background service, so `opencode service` commands run one at a time: `active` runs and
+ * A change restarts the background service, so `warcode service` commands run one at a time: `active` runs and
  * `pending` waits in order. A change's `set` and `start` run as one job, so no read lands between them.
  */
 export type PairingMainState =

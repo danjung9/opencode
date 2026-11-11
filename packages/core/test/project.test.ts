@@ -3,15 +3,15 @@ import { $ } from "bun"
 import fs from "fs/promises"
 import path from "path"
 import { Effect, Layer, Stream } from "effect"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Bus } from "@opencode/core/bus"
-import { Database } from "@opencode/core/database/database"
-import { Project } from "@opencode/core/project"
-import { ProjectSchema } from "@opencode/core/project/schema"
-import { ProjectTable } from "@opencode/core/project/sql"
-import { AbsolutePath } from "@opencode/core/schema"
-import { Hash } from "@opencode/util/hash"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Bus } from "@warcode/core/bus"
+import { Database } from "@warcode/core/database/database"
+import { Project } from "@warcode/core/project"
+import { ProjectSchema } from "@warcode/core/project/schema"
+import { ProjectTable } from "@warcode/core/project/sql"
+import { AbsolutePath } from "@warcode/core/schema"
+import { Hash } from "@warcode/util/hash"
 import { initGit } from "./fixture/git"
 import { countingSpawner } from "./fixture/spawn"
 import { tmpdirScoped } from "./fixture/tmpdir"
@@ -252,19 +252,19 @@ describe("Project archiving", () => {
         .values([
           {
             id: Project.ID.make("updated"),
-            worktree: abs("/opencode-missing-updated"),
+            worktree: abs("/warcode-missing-updated"),
             sandboxes: [],
             time_active: old,
           },
           {
             id: Project.ID.make("active"),
-            worktree: abs("/opencode-missing-active"),
+            worktree: abs("/warcode-missing-active"),
             sandboxes: [],
             time_updated: old,
           },
           {
             id: Project.ID.make("idle"),
-            worktree: abs("/opencode-missing-idle"),
+            worktree: abs("/warcode-missing-idle"),
             sandboxes: [],
             time_updated: old,
             time_active: old,
@@ -289,7 +289,7 @@ describe("Project archiving", () => {
         .insert(ProjectTable)
         .values({
           id: Project.ID.global,
-          worktree: abs("/opencode-missing-global"),
+          worktree: abs("/warcode-missing-global"),
           sandboxes: [],
           time_updated: 1,
           time_active: 1,
@@ -541,7 +541,7 @@ describe("Project.resolve", () => {
     Effect.gen(function* () {
       const tmp = yield* tmpdirScoped()
       yield* Effect.promise(() => initRepo(tmp.path, { commit: true, remote: "git@github.com:owner/repo.git" }))
-      yield* Effect.promise(() => Bun.write(path.join(tmp.path, ".git", "opencode"), "old-id"))
+      yield* Effect.promise(() => Bun.write(path.join(tmp.path, ".git", "warcode"), "old-id"))
       const project = yield* Project.Service
 
       const result = yield* project.resolve(abs(tmp.path))
@@ -559,7 +559,7 @@ describe("Project.resolve", () => {
 
       yield* project.resolve(abs(tmp.path))
 
-      expect(yield* Effect.promise(() => Bun.file(path.join(tmp.path, ".git", "opencode")).exists())).toBe(false)
+      expect(yield* Effect.promise(() => Bun.file(path.join(tmp.path, ".git", "warcode")).exists())).toBe(false)
     }),
   )
 
@@ -646,7 +646,7 @@ describe("Project.resolve", () => {
         Effect.promise(() => $`rm -rf ${worktree}`.quiet().nothrow()).pipe(Effect.ignore),
       )
       yield* Effect.promise(() => initRepo(tmp.path, { commit: true, remote: "git@github.com:owner/repo.git" }))
-      yield* Effect.promise(() => Bun.write(path.join(tmp.path, ".git", "opencode"), "old-id"))
+      yield* Effect.promise(() => Bun.write(path.join(tmp.path, ".git", "warcode"), "old-id"))
       yield* Effect.promise(() => $`git worktree add ${worktree} -b test-${Date.now()}`.cwd(tmp.path).quiet())
       const project = yield* Project.Service
       const db = (yield* Database.Service).db
@@ -753,7 +753,7 @@ describe("Project.resolve", () => {
         const project = yield* Project.Service
         expect((yield* project.resolve(abs(tmp.path))).id).toBe(Project.ID.global)
         yield* Effect.promise(() =>
-          $`git -c user.name=Test -c user.email=test@opencode.test -c commit.gpgsign=false commit --allow-empty -qm root`
+          $`git -c user.name=Test -c user.email=test@warcode.test -c commit.gpgsign=false commit --allow-empty -qm root`
             .cwd(tmp.path)
             .quiet(),
         )

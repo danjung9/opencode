@@ -1,6 +1,6 @@
-import { showToast, toaster } from "@opencode/ui/toast"
+import { showToast, toaster } from "@warcode/ui/toast"
 import { createMemo, createSignal, lazy, onCleanup, Show, Suspense } from "solid-js"
-import { createKeyed, Command, Slot, type Plugin } from "@opencode/plugin/gui"
+import { createKeyed, Command, Slot, type Plugin } from "@warcode/plugin/gui"
 import type Debug from "./index"
 import { HeapSnapshots, MemoryDiagnostics } from "./contract"
 import {
@@ -16,7 +16,7 @@ const setup: Plugin.Setup<typeof Debug> = (ctx) => {
   const DebugBar = lazy(() => import("./bar"))
   // Motion tuning lives only in the debug bar, on the dev server and in Beta. Both are fixed at build time, so other
   // builds, prod included, drop the import and never contain knobs.
-  const motionTools = import.meta.env.DEV || import.meta.env.VITE_OPENCODE_CHANNEL === "beta"
+  const motionTools = import.meta.env.DEV || import.meta.env.VITE_WARCODE_CHANNEL === "beta"
   const Motion = motionTools ? lazy(() => import("./motion")) : undefined
   const bar = ctx.stores.bar
 

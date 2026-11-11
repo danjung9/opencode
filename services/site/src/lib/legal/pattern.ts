@@ -195,7 +195,7 @@ export const cover = {
   /** Inter 34pt, weight 500, line-height 1, −0.03em. */
   titleSize: 34,
   titleBaseline: 222.25,
-  /** "OpenCode legal": OpenTUI Mono 8pt × 1.05, 11px (2.910mm) above the title. */
+  /** "Warcode legal": OpenTUI Mono 8pt × 1.05, 11px (2.910mm) above the title. */
   labelSize: 8,
   labelCapTop: 205.359,
   form: { x: 15, y: 240, w: 90, h: 42 },
@@ -295,7 +295,7 @@ const preset = (name: string, params: Partial<PatternParams>) => ({ name, params
 
 export const presets = [
   // The site's c3 grid: 53 × 48 squares, the outer ones 0.8875mm from the sheet's sides and top, the last row ending at 189.3125mm.
-  preset("OpenCode grid", { field: { x: 0, y: 0, w: 210.2, h: 189.3125 }, count: 53, cy: 93.1 / 189.3125 }),
+  preset("Warcode grid", { field: { x: 0, y: 0, w: 210.2, h: 189.3125 }, count: 53, cy: 93.1 / 189.3125 }),
   preset("Aligned grid", {
     align: "text",
     // Its last row on the fitted 2.494mm pitch ends at 187.518mm, the last one above 189.3mm.

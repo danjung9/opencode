@@ -19,12 +19,12 @@ export const content = {
     },
     sdk: {
       name: "SDK",
-      body: "自分のスクリプト、CIジョブ、ツールからOpenCodeを操作できます。",
+      body: "自分のスクリプト、CIジョブ、ツールからWarcodeを操作できます。",
       action: "ドキュメント",
     },
     ide: {
       name: "IDE拡張機能",
-      body: "VS Code、Cursor、WindsurfでOpenCodeを開けます。ZedやJetBrains IDEではACP経由で使えます。",
+      body: "VS Code、Cursor、WindsurfでWarcodeを開けます。ZedやJetBrains IDEではACP経由で使えます。",
       action: "インストール",
     },
     mini: {
@@ -35,9 +35,9 @@ export const content = {
   },
   productDetails: {
     desktop: {
-      title: "OpenCode | macOS、Windows、Linux向けデスクトップアプリ",
+      title: "Warcode | macOS、Windows、Linux向けデスクトップアプリ",
       description:
-        "OpenCodeエージェントを好きなだけ並列で実行し、すべての変更を横のブラウザで確認して、どのデバイスからでも再開できます。macOS、Windows、Linuxに対応。",
+        "Warcodeエージェントを好きなだけ並列で実行し、すべての変更を横のブラウザで確認して、どのデバイスからでも再開できます。macOS、Windows、Linuxに対応。",
       intro:
         "複数のエージェントを同時に実行し、セッションごとに専用のタブで管理できます。すべての変更を差分で確認し、任意の行にコメントして、内蔵ブラウザで結果をチェックできます。macOS、Windows、Linuxに対応しています。",
       showcase: {
@@ -55,21 +55,21 @@ export const content = {
         },
         "extend-it": {
           title: "拡張する",
-          body: "ツールやサービスを接続すれば、エージェントはどんなものでも扱えます。OpenCodeに自分用のプラグインを作らせ、サイドバーに専用のUIを表示することもできます。",
+          body: "ツールやサービスを接続すれば、エージェントはどんなものでも扱えます。Warcodeに自分用のプラグインを作らせ、サイドバーに専用のUIを表示することもできます。",
         },
       },
     },
     mobile: {
-      title: "OpenCode | Mobile、スマートフォンで操作するコーディングセッション",
+      title: "Warcode | Mobile、スマートフォンで操作するコーディングセッション",
       description:
-        "スマートフォンからOpenCodeのセッションを開始して操作できます。エージェントがコンピューターで動く間も、会話できます。",
+        "スマートフォンからWarcodeのセッションを開始して操作できます。エージェントがコンピューターで動く間も、会話できます。",
       intro:
-        "どこにいても、スマートフォンからセッションを開始して操作できます。セッションに通話してエージェントと話したり、セッションを開いて続きから再開できます。すべて自分のコンピューターで動くOpenCode上で行われます。",
+        "どこにいても、スマートフォンからセッションを開始して操作できます。セッションに通話してエージェントと話したり、セッションを開いて続きから再開できます。すべて自分のコンピューターで動くWarcode上で行われます。",
       features: {
         "notify-when-done": { title: "完了を通知", body: "開始したセッションが終わると、短い要約が届きます。" },
         "pair-from-anywhere": {
           title: "どこからでも接続",
-          body: "opencode pair --remote で、どのネットワークからでも接続できます。",
+          body: "warcode pair --remote で、どのネットワークからでも接続できます。",
         },
         "every-computer": { title: "すべてのPC", body: "ペアリングしたコンピューターをワンタップで切り替えられます。" },
         "siri-and-shortcuts": {
@@ -77,7 +77,7 @@ export const content = {
           body: "Siriやコントロールセンターから通話やセッションを開始できます。",
         },
         "follow-along": { title: "進捗を追う", body: "エージェントの作業に合わせてタイムラインが更新されます。" },
-        "your-computer": { title: "自分のPC", body: "自分のマシンで動くOpenCodeに接続します。" },
+        "your-computer": { title: "自分のPC", body: "自分のマシンで動くWarcodeに接続します。" },
         "share-sheet": { title: "共有シート", body: "アプリを開かずに、何でもセッションに共有できます。" },
         "mute-sessions": { title: "ミュート", body: "通知を受け取らずに、セッションをリストに残せます。" },
       },
@@ -89,9 +89,9 @@ export const content = {
       },
     },
     terminal: {
-      title: "OpenCode | オープンソースのコーディングエージェントのターミナルUI",
+      title: "Warcode | オープンソースのコーディングエージェントのターミナルUI",
       description:
-        "どのシェル、エディタ、リモートサーバーでも動く、OpenCodeの高速なターミナルUI。やりたいことを伝えれば、各編集を差分で確認し、コマンドを承認できます。",
+        "どのシェル、エディタ、リモートサーバーでも動く、Warcodeの高速なターミナルUI。やりたいことを伝えれば、各編集を差分で確認し、コマンドを承認できます。",
       intro:
         "どのシェル、エディタ、リモートサーバーでも動く高速なターミナルUI。やりたいことを普段の言葉で伝え、各編集が差分として反映される様子を確認し、どのコマンドを自動で実行するかを選べます。",
       features: {
@@ -107,7 +107,7 @@ export const content = {
           title: "後から再開",
           body: "-c で前回のセッションを、-s で任意のセッションを再開できます。",
         },
-        "one-off-runs": { title: "単発の実行", body: "opencode run でメッセージを1つ送り、返答を出力します。" },
+        "one-off-runs": { title: "単発の実行", body: "warcode run でメッセージを1つ送り、返答を出力します。" },
         "agents-and-commands": {
           title: "エージェントとコマンド",
           body: "shift+tab でエージェントを切り替え、ctrl+p ですべてのコマンドを開けます。",
@@ -116,8 +116,8 @@ export const content = {
           title: "自動承認",
           body: "--auto を付けて実行すると、拒否していないすべての操作を許可します。",
         },
-        "any-server": { title: "任意のサーバー", body: "--server でURLを指定してOpenCodeサーバーに接続できます。" },
-        "usage-stats": { title: "利用統計", body: "opencode stats で、共有できる利用統計を表示します。" },
+        "any-server": { title: "任意のサーバー", body: "--server でURLを指定してWarcodeサーバーに接続できます。" },
+        "usage-stats": { title: "利用統計", body: "warcode stats で、共有できる利用統計を表示します。" },
       },
       showcase: {
         "ask-in-plain-words": {
@@ -132,32 +132,32 @@ export const content = {
           title: "自分好みに",
           body: "デフォルトからtokyonightまで、キー1つでテーマを切り替えられます。",
         },
-        mini: { title: "Mini", body: "opencode mini を実行すると、返答が自分のスクロールバックに出力されます。" },
+        mini: { title: "Mini", body: "warcode mini を実行すると、返答が自分のスクロールバックに出力されます。" },
       },
     },
     sdk: {
-      title: "OpenCode | スクリプト、CIジョブ、ツールのためのTypeScript SDK",
+      title: "Warcode | スクリプト、CIジョブ、ツールのためのTypeScript SDK",
       description:
-        "自分のスクリプト、CIジョブ、ツールからOpenCodeを操作できます。型付きのTypeScriptクライアントで、セッションの作成、プロンプトの送信、すべてのイベントのストリーミングを行えます。",
+        "自分のスクリプト、CIジョブ、ツールからWarcodeを操作できます。型付きのTypeScriptクライアントで、セッションの作成、プロンプトの送信、すべてのイベントのストリーミングを行えます。",
       intro:
-        "自分のスクリプト、CIジョブ、ツールからOpenCodeを操作できます。SDKはあなたの設定とモデルでOpenCodeをプロセス内で実行し、型付きクライアントでセッションの作成、プロンプトの送信、すべてのイベントのストリーミングを行えます。",
+        "自分のスクリプト、CIジョブ、ツールからWarcodeを操作できます。SDKはあなたの設定とモデルでWarcodeをプロセス内で実行し、型付きクライアントでセッションの作成、プロンプトの送信、すべてのイベントのストリーミングを行えます。",
       features: {
         "typescript-client": {
           title: "TypeScriptクライアント",
-          body: "型付きのリクエストとイベント。@opencode/client と同じ値を使います。",
+          body: "型付きのリクエストとイベント。@warcode/client と同じ値を使います。",
         },
         "sessions-from-code": {
           title: "コードでセッション",
           body: "どのスクリプトからでもセッションを作成し、プロンプトを送れます。",
         },
-        "any-model": { title: "任意のモデル", body: "OpenCodeの設定にあるモデルをそのまま使います。" },
+        "any-model": { title: "任意のモデル", body: "Warcodeの設定にあるモデルをそのまま使います。" },
         "npm-or-bun": {
           title: "npmまたはbun",
-          body: "npm i @opencode/sdk または bun add @opencode/sdk でインストールできます。",
+          body: "npm i @warcode/sdk または bun add @warcode/sdk でインストールできます。",
         },
         "in-process-host": {
           title: "インプロセスホスト",
-          body: "ネットワークを介さず、メモリ内でOpenCodeを実行します。",
+          body: "ネットワークを介さず、メモリ内でWarcodeを実行します。",
         },
         "your-plugins": {
           title: "自分のプラグイン",
@@ -166,13 +166,13 @@ export const content = {
         "promise-or-effect": { title: "PromiseかEffect", body: "同じ値を返すPromise APIとEffect API。" },
         "cloudflare-workers": {
           title: "Cloudflare Workers",
-          body: "Workers上のCloudflare Durable Object内でOpenCodeを実行できます。",
+          body: "Workers上のCloudflare Durable Object内でWarcodeを実行できます。",
         },
       },
       showcase: {
         "fix-ci-from-code": {
           title: "コードでCIを修正",
-          body: "短いスクリプトで、失敗したテストをOpenCodeに直させて再実行します。",
+          body: "短いスクリプトで、失敗したテストをWarcodeに直させて再実行します。",
         },
         "follow-every-step": {
           title: "すべてのステップを追う",
@@ -180,46 +180,46 @@ export const content = {
         },
         "build-your-own-tools": {
           title: "独自のツールを作る",
-          body: "数行のコードで、ボット、ダッシュボード、ワークフローにOpenCodeを組み込めます。",
+          body: "数行のコードで、ボット、ダッシュボード、ワークフローにWarcodeを組み込めます。",
         },
         "in-your-process": {
           title: "プロセス内で実行",
-          body: "あなたの設定とモデルで、OpenCodeをプロセス内で実行します。",
+          body: "あなたの設定とモデルで、Warcodeをプロセス内で実行します。",
         },
       },
     },
     ide: {
-      title: "OpenCode | VS Code、Cursor、Zed向けのエディタ連携",
+      title: "Warcode | VS Code、Cursor、Zed向けのエディタ連携",
       description:
-        "エディタの中でOpenCodeを使えます。VS Code、Cursor、Windsurf、VSCodiumには拡張機能があり、Zed、JetBrains IDE、その他のACP対応エディタでは opencode acp を使います。",
+        "エディタの中でWarcodeを使えます。VS Code、Cursor、Windsurf、VSCodiumには拡張機能があり、Zed、JetBrains IDE、その他のACP対応エディタでは warcode acp を使います。",
       intro:
-        "エディタの中でOpenCodeを使えます。VS Code、Cursor、Windsurf、VSCodiumでは、統合ターミナルで opencode を実行すると拡張機能が自動でインストールされます。Zed、JetBrains IDE、その他のAgent Client Protocol対応エディタでは、opencode acp でOpenCodeを実行します。",
+        "エディタの中でWarcodeを使えます。VS Code、Cursor、Windsurf、VSCodiumでは、統合ターミナルで warcode を実行すると拡張機能が自動でインストールされます。Zed、JetBrains IDE、その他のAgent Client Protocol対応エディタでは、warcode acp でWarcodeを実行します。",
       features: {
         "quick-launch": {
           title: "すばやく起動",
-          body: "Cmd+Esc または Ctrl+Esc で、分割したターミナルにOpenCodeを開きます。",
+          body: "Cmd+Esc または Ctrl+Esc で、分割したターミナルにWarcodeを開きます。",
         },
         "new-session": {
           title: "新規セッション",
           body: "Cmd+Shift+Esc または Ctrl+Shift+Esc で別のセッションを開始します。",
         },
-        context: { title: "コンテキスト", body: "現在の選択範囲やタブをOpenCodeと共有します。" },
+        context: { title: "コンテキスト", body: "現在の選択範囲やタブをWarcodeと共有します。" },
         "file-references": {
           title: "ファイル参照",
           body: "Cmd+Option+K または Alt+Ctrl+K で @File#L37-42 を挿入します。",
         },
-        "installs-itself": { title: "自動インストール", body: "統合ターミナルで opencode を実行すると追加されます。" },
+        "installs-itself": { title: "自動インストール", body: "統合ターミナルで warcode を実行すると追加されます。" },
         "acp-editors": { title: "ACPエディタ", body: "Zed、JetBrains IDE、Avante.nvim、CodeCompanion.nvim。" },
         "open-vsx": { title: "Open VSX", body: "Cursor、Windsurf、VSCodium向けにOpen VSXでも公開しています。" },
-        "same-agent": { title: "同じエージェント", body: "ターミナルで使うOpenCodeを、コードのすぐ横で。" },
+        "same-agent": { title: "同じエージェント", body: "ターミナルで使うWarcodeを、コードのすぐ横で。" },
       },
     },
     mini: {
-      title: "OpenCode | Mini、エージェントのための最小限のターミナルUI",
+      title: "Warcode | Mini、エージェントのための最小限のターミナルUI",
       description:
-        "MiniはOpenCodeを最小限のターミナルインターフェースで実行します。返答はターミナル自体のスクロールバックに出力され、下にはプロンプトとステータス行だけが残ります。",
+        "MiniはWarcodeを最小限のターミナルインターフェースで実行します。返答はターミナル自体のスクロールバックに出力され、下にはプロンプトとステータス行だけが残ります。",
       intro:
-        "OpenCodeのための最小限のターミナルインターフェース。opencode mini を実行すると、返答がターミナル自体のスクロールバックに直接出力されるので、ほかの出力と同じようにスクロール、検索、コピーできます。下部に残るのはプロンプトとステータス行だけです。",
+        "Warcodeのための最小限のターミナルインターフェース。warcode mini を実行すると、返答がターミナル自体のスクロールバックに直接出力されるので、ほかの出力と同じようにスクロール、検索、コピーできます。下部に残るのはプロンプトとステータス行だけです。",
       features: {
         "your-scrollback": { title: "スクロールバック", body: "返答は通常のターミナル履歴になります。" },
         "one-prompt": {
@@ -235,7 +235,7 @@ export const content = {
           title: "後から再開",
           body: "-c で前回のセッションを、-s で任意のセッションを再開できます。",
         },
-        "same-opencode": { title: "同じOpenCode", body: "ほかのアプリと同じサーバー、エージェント、モデル。" },
+        "same-warcode": { title: "同じWarcode", body: "ほかのアプリと同じサーバー、エージェント、モデル。" },
         agents: { title: "エージェント", body: "プロンプトから直接エージェントを切り替えられます。" },
         compact: { title: "圧縮", body: "/compact で長いセッションを縮められます。" },
       },
@@ -243,16 +243,16 @@ export const content = {
   },
   extensionCard: {
     name: "拡張機能",
-    body: "VS CodeでOpenCodeを使えます。ZedなどのエディタではACP経由で使えます。",
+    body: "VS CodeでWarcodeを使えます。ZedなどのエディタではACP経由で使えます。",
     action: "インストール",
   },
   extensions: {
     browse: {
       name: "Browse",
       body: "エージェントが普段のブラウザを使えます。",
-      title: "OpenCode | Browse、コーディングエージェントが使う普段のブラウザ",
+      title: "Warcode | Browse、コーディングエージェントが使う普段のブラウザ",
       description:
-        "Browseを使うと、OpenCodeやほかのMCPクライアントが普段のブラウザを使えます。エージェントはPlaywrightでバックグラウンドのタブを操作し、ログインや2FAはあなたに任せます。",
+        "Browseを使うと、WarcodeやほかのMCPクライアントが普段のブラウザを使えます。エージェントはPlaywrightでバックグラウンドのタブを操作し、ログインや2FAはあなたに任せます。",
       intro:
         "MCPサーバーとChromium拡張機能で、エージェントが普段のブラウザを使えるようにします。あなたのタブ、ログイン、拡張機能をそのまま使えます。エージェントはPlaywrightでタブを開いて操作し、スクリーンショットを撮り、画面を録画します。タブはバックグラウンドでグループにまとめられ、作業の邪魔になりません。ログイン、2FAの入力、支払いなどあなたの番になると、エージェントはタブをあなたに渡し、「Continue」をクリックすると作業を再開します。",
       features: {
@@ -273,7 +273,7 @@ export const content = {
           title: "録画と記録",
           body: "スクリーンショット、画面録画、HAR形式のネットワーク通信。",
         },
-        "any-mcp-client": { title: "全MCPクライアント", body: "OpenCode、Claude Code、Cursor、Codex、Zedなど多数。" },
+        "any-mcp-client": { title: "全MCPクライアント", body: "Warcode、Claude Code、Cursor、Codex、Zedなど多数。" },
         "all-your-logins": {
           title: "ログインはそのまま",
           body: "エージェントは、すでにサインインしているサイトをそのまま使います。キーも設定も不要です。",
@@ -295,43 +295,43 @@ export const content = {
   },
   getStarted: {
     title: "はじめる",
-    lead: "いちばん簡単な始め方は、OpenCodeをダウンロードして無料モデルを使うことです。アカウントは不要です。もっと使いたいときは、お使いのサブスクリプションを持ち込むか、OpenCode Goを使えます。",
+    lead: "いちばん簡単な始め方は、Warcodeをダウンロードして無料モデルを使うことです。アカウントは不要です。もっと使いたいときは、お使いのサブスクリプションを持ち込むか、Warcode Goを使えます。",
     phrases: {
-      "download-opencode": { text: "OpenCodeをダウンロード" },
+      "download-warcode": { text: "Warcodeをダウンロード" },
       "free-models": { text: "無料モデル" },
       "your-own-subscription": { text: "お使いのサブスクリプション" },
       "a-subscription-you-already-have": { text: "すでにお持ちのサブスクリプション" },
-      "opencode-go": { text: "OpenCode Go" },
+      "warcode-go": { text: "Warcode Go" },
     },
     subscriptions: { "chatgpt-plus-pro": { name: "ChatGPT Plus/Pro" } },
     steps: {
       download: { title: "ダウンロード", line: "デスクトップ、ターミナル、モバイル。" },
       "use-free-models": {
         title: "無料モデルを使う",
-        line: "OpenCodeには無料モデルが付属しています。アカウントは不要です。",
+        line: "Warcodeには無料モデルが付属しています。アカウントは不要です。",
       },
       "add-more-models": {
         title: "モデルを追加",
-        line: "お使いのサブスクリプションを持ち込むか、月額$10からのOpenCode Goの厳選モデルを使えます。",
+        line: "お使いのサブスクリプションを持ち込むか、月額$10からのWarcode Goの厳選モデルを使えます。",
       },
     },
     sentence:
-      "OpenCodeをダウンロードして無料モデルから始め、もっと使いたくなったら、お使いのサブスクリプションかOpenCode Goを使えます。",
+      "Warcodeをダウンロードして無料モデルから始め、もっと使いたくなったら、お使いのサブスクリプションかWarcode Goを使えます。",
   },
   byos: {
     title: "サブスクリプションを持ち込む",
     headline: "すでにお持ちのサブスクリプションを使えます。",
-    line: "ChatGPT PlusまたはPro、あるいはGitHub Copilotでログインできます。OpenCodeのサブスクリプションも使えます。",
+    line: "ChatGPT PlusまたはPro、あるいはGitHub Copilotでログインできます。Warcodeのサブスクリプションも使えます。",
     yours: { label: "お使いのサブスクリプション", items: { "chatgpt-plus-pro": { name: "ChatGPT Plus/Pro" } } },
-    planLinks: ["OpenCodeのサブスクリプション", "OpenCode Go"],
-    ours: { label: "OpenCodeのプラン" },
+    planLinks: ["Warcodeのサブスクリプション", "Warcode Go"],
+    ours: { label: "Warcodeのプラン" },
   },
   brand: {
     hero: { copy: { text: "エージェント用ルール", copied: "コピーしました" } },
     naming: {
       title: "表記",
-      body: "OpenCodeは、大文字のOと大文字のCを使って1語で書きます。Opencode、Open Code、OpenCode AI、Open-Codeとは書きません。",
-      code: "小文字の `opencode` は、`opencode-figma` や `@acme/opencode-plugin` のように、コードとパッケージ名でのみ使います。",
+      body: "Warcodeは、大文字のOと大文字のCを使って1語で書きます。Warcode、Open Code、Warcode AI、Open-Codeとは書きません。",
+      code: "小文字の `warcode` は、`warcode-figma` や `@acme/warcode-plugin` のように、コードとパッケージ名でのみ使います。",
     },
     families: {
       logo: {
@@ -346,7 +346,7 @@ export const content = {
       },
       wordmark: {
         title: "ワードマーク",
-        body: "OpenCodeの字形で書いた正式名称。名前を書ききるスペースがある場所で使います。",
+        body: "Warcodeの字形で書いた正式名称。名前を書ききるスペースがある場所で使います。",
         assets: { light: { name: "ライト" }, dark: { name: "ダーク" } },
       },
       "simple-wordmark": {
@@ -443,51 +443,51 @@ export const content = {
     },
     integrations: {
       title: "連携",
-      body: "OpenCodeと連携するプラグイン、プロバイダー、ツールや、OpenCodeで作ったプロジェクトは、そのことを表示できます。バッジかパートナーロックアップを使い、プロジェクトがあなたのものだとわかる名前を付けてください。",
+      body: "Warcodeと連携するプラグイン、プロバイダー、ツールや、Warcodeで作ったプロジェクトは、そのことを表示できます。バッジかパートナーロックアップを使い、プロジェクトがあなたのものだとわかる名前を付けてください。",
       badges: {
-        body: "README、ドキュメント、Webサイトにバッジを置き、opencode.aiにリンクしてください。背景に合わせてライトかダークのファイルを選び（HTMLは自動で切り替わります）、色やテキストは変更しないでください。",
+        body: "README、ドキュメント、Webサイトにバッジを置き、warcode.aiにリンクしてください。背景に合わせてライトかダークのファイルを選び（HTMLは自動で切り替わります）、色やテキストは変更しないでください。",
         sizes: "どのスタイルも20、32、44px（Shieldsは20pxのみ）で、SVGと2倍サイズのPNGがあります。",
-        mono: "各ファイルには、テキストをOpenTUI Monoにした版もあります。opencode-works-with-a-light-20-mono.svg のように拡張子の前に -mono を付けます。大文字のOpenTUI Monoなら -mono-caps を付けます。",
+        mono: "各ファイルには、テキストをOpenTUI Monoにした版もあります。warcode-works-with-a-light-20-mono.svg のように拡張子の前に -mono を付けます。大文字のOpenTUI Monoなら -mono-caps を付けます。",
         groups: {
           "works-with": {
             title: "Works with",
-            alt: "Works with OpenCode",
-            body: "OpenCodeと一緒に動くプラグイン、プロバイダー、ツール向け。",
+            alt: "Works with Warcode",
+            body: "Warcodeと一緒に動くプラグイン、プロバイダー、ツール向け。",
           },
-          "built-with": { title: "Built with", alt: "Built with OpenCode", body: "OpenCodeで作ったプロジェクト向け。" },
+          "built-with": { title: "Built with", alt: "Built with Warcode", body: "Warcodeで作ったプロジェクト向け。" },
         },
         styles: { a: { name: "フレーム" }, c: { name: "セル" }, f: { name: "ソリッド" }, g: { name: "Shields" } },
       },
       lockup: {
         title: "パートナーロックアップ",
-        body: "OpenCodeのロゴとパートナーのロゴを、間に×を挟んで横に並べます。×の両側に3ストローク分の余白をとり、パートナーのロゴはOpenCodeのロゴと同じ高さに見えるように調整し、ロックアップ全体のまわりに余白を確保してください。",
+        body: "Warcodeのロゴとパートナーのロゴを、間に×を挟んで横に並べます。×の両側に3ストローク分の余白をとり、パートナーのロゴはWarcodeのロゴと同じ高さに見えるように調整し、ロックアップ全体のまわりに余白を確保してください。",
         partners: { github: { name: "GitHub" } },
       },
       naming: {
         title: "プロジェクトの名前",
         body: "プロジェクトがあなたのものだとわかるように、自分の名前を先に置きます。",
-        rule: "`Linear for OpenCode` と書くか、パッケージ名を `opencode-linear` にします。`OpenCode Linear` や `Linear by OpenCode` とは書きません。",
+        rule: "`Linear for Warcode` と書くか、パッケージ名を `warcode-linear` にします。`Warcode Linear` や `Linear by Warcode` とは書きません。",
       },
     },
     trademarks: {
       title: "商標",
-      body: "OpenCodeとOpenCodeのロゴはAnomalyの商標です。Anomalyがあなたを推奨または支援していると受け取られる使い方、製品名や会社名への使用、許可のない商品への使用はしないでください。",
+      body: "WarcodeとWarcodeのロゴはAnomalyの商標です。Anomalyがあなたを推奨または支援していると受け取られる使い方、製品名や会社名への使用、許可のない商品への使用はしないでください。",
       contact: { before: "ご質問は", after: "までメールでお送りください。" },
     },
   },
   press: {
-    title: "OpenCode | 企業情報とブランド素材のプレスキット",
+    title: "Warcode | 企業情報とブランド素材のプレスキット",
     description:
-      "OpenCodeのプレスキットです。OpenCodeと開発元のAnomalyに関する情報、ダウンロードできるロゴとワードマーク、報道関係のお問い合わせ先をまとめています。",
-    hero: { title: "プレス", body: "OpenCodeとAnomalyについて書くための情報、ブランド素材、連絡先。" },
+      "Warcodeのプレスキットです。Warcodeと開発元のAnomalyに関する情報、ダウンロードできるロゴとワードマーク、報道関係のお問い合わせ先をまとめています。",
+    hero: { title: "プレス", body: "WarcodeとAnomalyについて書くための情報、ブランド素材、連絡先。" },
     company: {
       title: "Anomalyについて",
-      lead: "AnomalyはOpenCodeを開発している会社です。開発者向けのオープンソースツールを作っています。",
+      lead: "AnomalyはWarcodeを開発している会社です。開発者向けのオープンソースツールを作っています。",
       more: "ほかにもSSTやOpenTUIなどのプロジェクトがあり、すべて[GitHub](github)でオープンソースとして公開しています。",
       learnMore: "詳しくは[anoma.ly](site)をご覧ください。",
       projects: {
-        opencode: {
-          name: "OpenCode",
+        warcode: {
+          name: "Warcode",
           body: "オープンソースのコーディングエージェント。デスクトップ、ターミナル、モバイル向けのアプリとSDKがあります。MITライセンス、GitHubスター220,000以上。",
         },
         sst: {
@@ -496,7 +496,7 @@ export const content = {
         },
         opentui: {
           name: "OpenTUI",
-          body: "TypeScript、React、Solidでターミナル UIを作るためのライブラリで、コアはZigで書かれています。OpenCodeが本番環境で使っています。GitHubスターは13,000以上。",
+          body: "TypeScript、React、Solidでターミナル UIを作るためのライブラリで、コアはZigで書かれています。Warcodeが本番環境で使っています。GitHubスターは13,000以上。",
         },
         "models-dev": {
           name: "Models.dev",
@@ -513,31 +513,31 @@ export const content = {
       },
     },
     about: {
-      title: "OpenCodeについて",
-      body: "OpenCodeと各製品の紹介文です。長文版と短文版があり、そのままコピーして使えます。",
+      title: "Warcodeについて",
+      body: "Warcodeと各製品の紹介文です。長文版と短文版があり、そのままコピーして使えます。",
       boilerplate: {
-        long: "OpenCodeはオープンソースのコーディングエージェントです。デスクトップアプリ、ターミナルUI、モバイルアプリ、SDKとして提供され、Claude、GPT、Geminiなど、あらゆるプロバイダーのモデルで動作します。OpenCodeはMITライセンスで、Anomalyが開発しています。GitHubスターは220,000以上、コントリビューターは1,000人以上で、毎月2,200万人以上の開発者が利用しています。",
+        long: "Warcodeはオープンソースのコーディングエージェントです。デスクトップアプリ、ターミナルUI、モバイルアプリ、SDKとして提供され、Claude、GPT、Geminiなど、あらゆるプロバイダーのモデルで動作します。WarcodeはMITライセンスで、Anomalyが開発しています。GitHubスターは220,000以上、コントリビューターは1,000人以上で、毎月2,200万人以上の開発者が利用しています。",
         short:
-          "OpenCodeはAnomalyが開発するオープンソースのコーディングエージェントで、デスクトップ、ターミナル、モバイル向けのアプリとSDKがあります。",
+          "WarcodeはAnomalyが開発するオープンソースのコーディングエージェントで、デスクトップ、ターミナル、モバイル向けのアプリとSDKがあります。",
       },
       products: {
-        "opencode-console": {
-          name: "OpenCode Console",
-          long: "OpenCode Consoleは、開発者やチームがOpenCodeやほかのコーディングエージェントで使うAIモデルへのアクセスを購入、管理するWebアプリです。フロンティアモデルとオープンウェイトモデルの従量課金制の推論（前払いクレジットからリクエストごとに課金）と、OpenCode Goのサブスクリプションを提供しています。チームは、Member、Admin、Ownerのロールを持つワークスペース、ワークスペース単位とユーザー単位の利用上限、Okta、Microsoft Entra ID、Google Workspaceによるシングルサインオン、SCIMを利用できます。Consoleは30以上のプロバイダーに対応しているため、チームはすでに持っているプロバイダーのアカウントを接続でき、Console自体の推論は任意です。URLはopencode.ai/consoleです。",
+        "warcode-console": {
+          name: "Warcode Console",
+          long: "Warcode Consoleは、開発者やチームがWarcodeやほかのコーディングエージェントで使うAIモデルへのアクセスを購入、管理するWebアプリです。フロンティアモデルとオープンウェイトモデルの従量課金制の推論（前払いクレジットからリクエストごとに課金）と、Warcode Goのサブスクリプションを提供しています。チームは、Member、Admin、Ownerのロールを持つワークスペース、ワークスペース単位とユーザー単位の利用上限、Okta、Microsoft Entra ID、Google Workspaceによるシングルサインオン、SCIMを利用できます。Consoleは30以上のプロバイダーに対応しているため、チームはすでに持っているプロバイダーのアカウントを接続でき、Console自体の推論は任意です。URLはwarcode.ai/consoleです。",
           short:
-            "OpenCode Consoleは、従量課金制のAIモデルアクセス、OpenCode Goのサブスクリプション、予算やシングルサインオンなどのチーム管理機能を提供するAnomalyのWebアプリです。",
+            "Warcode Consoleは、従量課金制のAIモデルアクセス、Warcode Goのサブスクリプション、予算やシングルサインオンなどのチーム管理機能を提供するAnomalyのWebアプリです。",
         },
-        "opencode-go": {
-          name: "OpenCode Go",
-          long: "OpenCode Goは、コーディングモデルを月額固定で使いたい開発者向けのサブスクリプションです。Goは月額$10、上限が高いGo Plusは月額$40、Go Teamsはメンバー1人あたり月額$20です。各プランには、エージェント型コーディング向けにテストした厳選モデルが含まれます。利用上限はモデルごとの月額のドル建てで、5時間ごとと週ごとに、月間上限の20%と50%の枠が順次回復します。サブスクライバーはクレジットを追加でき、従量課金の残高に切り替えることも、いつでも解約することもできます。GoはOpenCodeとほかのエージェントで使えます。URLはopencode.ai/console/goです。",
+        "warcode-go": {
+          name: "Warcode Go",
+          long: "Warcode Goは、コーディングモデルを月額固定で使いたい開発者向けのサブスクリプションです。Goは月額$10、上限が高いGo Plusは月額$40、Go Teamsはメンバー1人あたり月額$20です。各プランには、エージェント型コーディング向けにテストした厳選モデルが含まれます。利用上限はモデルごとの月額のドル建てで、5時間ごとと週ごとに、月間上限の20%と50%の枠が順次回復します。サブスクライバーはクレジットを追加でき、従量課金の残高に切り替えることも、いつでも解約することもできます。GoはWarcodeとほかのエージェントで使えます。URLはwarcode.ai/console/goです。",
           short:
-            "OpenCode Goは、厳選したコーディングモデルを月間の利用上限つきで使える、Anomalyの月額サブスクリプションです。月額$10からです。",
+            "Warcode Goは、厳選したコーディングモデルを月間の利用上限つきで使える、Anomalyの月額サブスクリプションです。月額$10からです。",
         },
-        "opencode-data": {
-          name: "OpenCode Data",
-          long: "OpenCode Dataは、開発者がOpenCodeでどのAIモデルを使っているか、その構成が時間とともにどう変わるかを示す公開ダッシュボードです。上位モデルのランキング、トークン使用量、セッションとトークンのコスト、キャッシュ率、市場シェア、国別の内訳を公開しています。数値は1時間ごとに集計され、日と週はUTCで区切られます。ユーザー数とセッション数は概算で、コストはOpenCodeのモデルカタログの定価を使っています。報道関係者は、ページに表示される更新時刻とともに、OpenCode Data（opencode.ai/data）として引用できます。",
+        "warcode-data": {
+          name: "Warcode Data",
+          long: "Warcode Dataは、開発者がWarcodeでどのAIモデルを使っているか、その構成が時間とともにどう変わるかを示す公開ダッシュボードです。上位モデルのランキング、トークン使用量、セッションとトークンのコスト、キャッシュ率、市場シェア、国別の内訳を公開しています。数値は1時間ごとに集計され、日と週はUTCで区切られます。ユーザー数とセッション数は概算で、コストはWarcodeのモデルカタログの定価を使っています。報道関係者は、ページに表示される更新時刻とともに、Warcode Data（warcode.ai/data）として引用できます。",
           short:
-            "OpenCode Dataは、opencode.ai/dataで公開しているダッシュボードです。OpenCodeでの実際の利用量に基づいてAIモデルをランク付けし、トークン、コスト、市場シェアを1時間ごとに更新しています。",
+            "Warcode Dataは、warcode.ai/dataで公開しているダッシュボードです。Warcodeでの実際の利用量に基づいてAIモデルをランク付けし、トークン、コスト、市場シェアを1時間ごとに更新しています。",
         },
       },
     },
@@ -554,22 +554,22 @@ export const content = {
       items: {
         "first-release-v0-0-1": { date: "2025年4月", text: "初回リリース、v0.0.1" },
         "1-million-downloads": { date: "2025年10月", text: "ダウンロード数100万突破" },
-        "opencode-1-0": { date: "2025年10月", text: "OpenCode 1.0" },
+        "warcode-1-0": { date: "2025年10月", text: "Warcode 1.0" },
         "desktop-app-ships": { date: "2025年12月", text: "Desktopアプリ公開" },
         "10-million-downloads": { date: "2026年1月", text: "ダウンロード数1,000万突破" },
-        "opencode-2-0": { date: "2026年9月", text: "OpenCode 2.0" },
+        "warcode-2-0": { date: "2026年9月", text: "Warcode 2.0" },
         "220-000-github-stars": { date: "2026年11月", text: "GitHubスター220,000突破" },
       },
     },
     news: {
       title: "最新リリース",
-      intro: "OpenCodeは頻繁にリリースしています。新機能を含む最新のリリースを紹介します。",
+      intro: "Warcodeは頻繁にリリースしています。新機能を含む最新のリリースを紹介します。",
       changelog: { text: "変更履歴の全文" },
       feed: { text: "RSS" },
     },
     media: {
       title: "メディア",
-      intro: "実際の製品から収録した、各アプリの静止画と短い動画です。OpenCodeについて書く際にご利用いただけます。",
+      intro: "実際の製品から収録した、各アプリの静止画と短い動画です。Warcodeについて書く際にご利用いただけます。",
       note: "すべてダークテーマで収録しています。静止画とポスターは最大1920 × 1080（縦向きは1080 × 1350）のJPGです。動画は音声なしのMP4です。",
       products: {
         desktop: {
@@ -645,11 +645,11 @@ export const content = {
     brand: {
       title: "ブランド",
       before:
-        "OpenCodeのロゴとワードマークを1つのZIPファイルでダウンロードできます。個別のファイル、バリエーション、使用ルールについては、",
+        "Warcodeのロゴとワードマークを1つのZIPファイルでダウンロードできます。個別のファイル、バリエーション、使用ルールについては、",
       link: { text: "ブランドページ" },
       after: "をご覧ください。",
       usage:
-        "これらのファイルは、OpenCodeについて書くために使えます。ファイルを変更したり、OpenCodeがあなたの活動を推奨しているかのように示したりしないでください。",
+        "これらのファイルは、Warcodeについて書くために使えます。ファイルを変更したり、Warcodeがあなたの活動を推奨しているかのように示したりしないでください。",
     },
     product: {
       title: "製品",
@@ -660,7 +660,7 @@ export const content = {
         },
         mobile: {
           name: "Mobile",
-          body: "最新のOpenCodeアプリ。セッションに通話してエージェントと話し、どこにいてもスマートフォンから変更を確認、承認できます。",
+          body: "最新のWarcodeアプリ。セッションに通話してエージェントと話し、どこにいてもスマートフォンから変更を確認、承認できます。",
         },
         terminal: {
           name: "Terminal",
@@ -682,7 +682,7 @@ export const content = {
         support: {
           links: { "github-issues": { text: "GitHubのissue" }, "help-anoma-ly": { text: "help@anoma.ly" } },
           title: "サポート",
-          body: "OpenCodeについてのヘルプは、issueを作成するか、コミュニティで質問してください。アカウントや請求に関するご質問はメールでお送りください。",
+          body: "Warcodeについてのヘルプは、issueを作成するか、コミュニティで質問してください。アカウントや請求に関するご質問はメールでお送りください。",
         },
         security: {
           links: {
@@ -710,8 +710,8 @@ export const content = {
     },
     faq: {
       items: {
-        "how-do-i-use-opencode": { answer: [undefined, undefined, undefined] },
-        "can-i-use-my-existing-ai-subscriptions-with-opencode": { answer: [undefined, undefined, undefined] },
+        "how-do-i-use-warcode": { answer: [undefined, undefined, undefined] },
+        "can-i-use-my-existing-ai-subscriptions-with-warcode": { answer: [undefined, undefined, undefined] },
         "what-about-data-and-privacy": { answer: [undefined, undefined, undefined] },
       },
     },
@@ -720,7 +720,7 @@ export const content = {
     terminal: { commands: { curl: { name: "スクリプト" } } },
     sdk: { more: { label: "SDKのドキュメントを読む" } },
     ide: {
-      lead: "エディタの統合ターミナルで opencode を実行すると拡張機能が自動でインストールされます。手動でインストールすることもできます。",
+      lead: "エディタの統合ターミナルで warcode を実行すると拡張機能が自動でインストールされます。手動でインストールすることもできます。",
       links: {
         "vs-code-marketplace": { label: "VS Code Marketplace" },
         "open-vsx-cursor-windsurf-vscodium": { label: "Open VSX（Cursor、Windsurf、VSCodium）" },
@@ -729,18 +729,18 @@ export const content = {
     },
     mini: {
       commands: { curl: { name: "スクリプト" } },
-      lead: "MiniはOpenCode CLIに含まれています。次のいずれかでインストールし、opencode mini を実行してください。",
+      lead: "MiniはWarcode CLIに含まれています。次のいずれかでインストールし、warcode mini を実行してください。",
     },
   },
   pair: {
     title: "スマートフォンを接続",
     cardTitle: "1つのコマンドでスマートフォンとペアリング",
     intro:
-      "OpenCode Mobileは、コンピューター上のOpenCodeのリモコンです。セッションはコンピューターで動き続け、アプリはそれを表示して操作できるようにします。",
+      "Warcode Mobileは、コンピューター上のWarcodeのリモコンです。セッションはコンピューターで動き続け、アプリはそれを表示して操作できるようにします。",
     steps: {
       "get-the-app": {
         title: "アプリを入手",
-        body: "TestFlightからiPhoneにOpenCodeのベータ版をインストールします。Androidアプリは近日公開予定です。",
+        body: "TestFlightからiPhoneにWarcodeのベータ版をインストールします。Androidアプリは近日公開予定です。",
       },
       "run-this-on-your-computer": {
         title: "コンピューターで実行",
@@ -751,12 +751,12 @@ export const content = {
         body: "アプリでQRコードを読み取るか、リンクを貼り付けます。コンピューターの最近のセッションがスマートフォンで開きます。",
       },
     },
-    note: "--remote はOpenTunnelのアドレス経由で接続するので、どのネットワークからでも使えます。同じWi-Fiにいる場合は、opencode service set hostname 0.0.0.0 を1回実行してから、opencode pair を実行します。",
+    note: "--remote はOpenTunnelのアドレス経由で接続するので、どのネットワークからでも使えます。同じWi-Fiにいる場合は、warcode service set hostname 0.0.0.0 を1回実行してから、warcode pair を実行します。",
     facts: [
       "--remote はOpenTunnelのアドレス経由で接続するので、ペアリングはどのネットワークからでも使えます。",
       "リンクとコードは1回だけ使え、5分で期限が切れます。",
       "エージェントはスマートフォンではなくコンピューターで動くので、コンピューターの電源は入れたままにしてください。",
-      "同じWi-Fiでは、opencode service set hostname 0.0.0.0 を1回実行してから、opencode pair を実行します。",
+      "同じWi-Fiでは、warcode service set hostname 0.0.0.0 を1回実行してから、warcode pair を実行します。",
     ],
   },
   announcements: {
@@ -774,7 +774,7 @@ export const content = {
     },
     "steer-your-sessions-from-your-phone": {
       text: "スマートフォンからセッションを操作できます。",
-      link: "OpenCode Mobileを見る",
+      link: "Warcode Mobileを見る",
     },
     "a-refreshed-desktop-app": { text: "デスクトップアプリを刷新しました。", link: "2.2の新機能を見る" },
   },

@@ -1,7 +1,7 @@
 import { For, Show, createMemo, onCleanup, onMount } from "solid-js"
 import { createStore } from "solid-js/store"
 import type { ModelSelection } from "@/providers/models/selection"
-import { STORY_MODEL } from "@opencode/session-ui/storybook"
+import { STORY_MODEL } from "@warcode/session-ui/storybook"
 import { Composer } from "./composer"
 import type { ComposerModel } from "./model"
 import { createComposerEditor } from "./editor/interaction"
@@ -61,7 +61,7 @@ const selectedModel = {
   headers: {},
   release_date: "2026-05-22",
   variants: { medium: {}, high: {} },
-  provider: { id: STORY_MODEL.providerID, name: "OpenCode", source: "custom", env: [], options: {}, models: {} },
+  provider: { id: STORY_MODEL.providerID, name: "Warcode", source: "custom", env: [], options: {}, models: {} },
   latest: true,
 } satisfies NonNullable<ReturnType<ModelSelection["current"]>>
 
@@ -198,7 +198,7 @@ function TouchComposer(props: { state: State }) {
       <div class="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4 py-3" data-scrollable>
         <Show
           when={!session.fresh}
-          fallback={<p class="m-auto text-14-regular text-v2-text-text-faint">New session · opencode / dev</p>}
+          fallback={<p class="m-auto text-14-regular text-v2-text-text-faint">New session · warcode / dev</p>}
         >
           <p class="text-14-regular text-v2-text-text-base">
             Recorded the session-layer split as deferred, so it won't come up again as an open question.
@@ -274,7 +274,7 @@ function TouchStates(props: { state: State }) {
 }
 
 export default {
-  title: "OpenCode/Composer/Touch",
+  title: "Warcode/Composer/Touch",
   parameters: { layout: "fullscreen" },
   args: { state: "steer" },
   argTypes: { state: { control: "select", options: states.map((state) => state.id) } },

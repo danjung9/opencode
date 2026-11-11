@@ -1,4 +1,4 @@
-# OpenCode Stats
+# Warcode Stats
 
 Stats is a separate site from the console. Runtime, database, and domain services live in `core`; the SolidStart website lives in `app`; the Cloudflare Workers that sync stats live in `server`.
 
@@ -28,7 +28,7 @@ The `StatsSyncCron` Worker starts runs on two schedules:
 
 Times and IDs are in UTC. Before starting a run, the Cron checks this slot's ID and the recent IDs of the same kind: the five previous hours for an hourly run, the two previous days for a history run. It skips the run if any of them is queued, running, waiting or paused, or if this slot's instance already exists, and logs the reason. Hourly and history runs can overlap, since they cover different periods and their writes are idempotent.
 
-To start a run by hand, find the Workflow's name with `bunx wrangler workflows list` (it is `opencode-<stage>-statssyncworkflowworkflow-<suffix>`), then trigger it with an ID from the Cron's convention so scheduled runs of the same kind see it and wait:
+To start a run by hand, find the Workflow's name with `bunx wrangler workflows list` (it is `warcode-<stage>-statssyncworkflowworkflow-<suffix>`), then trigger it with an ID from the Cron's convention so scheduled runs of the same kind see it and wait:
 
 ```sh
 bunx wrangler workflows trigger <workflow-name> '{"history":true}' --id stats-history-2026-11-03

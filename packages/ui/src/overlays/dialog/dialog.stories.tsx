@@ -1,11 +1,11 @@
 import { Overlay, Portal, Root, Trigger } from "@kobalte/core/dialog"
 import { Dialog, DialogBody, DialogFooter, DialogHeader, DialogTitle, DialogTitleGroup } from "./dialog"
-import { Button } from "@opencode/ui/button"
-import { useDialog, useDialogLayer } from "@opencode/ui/context/dialog"
-import { Menu } from "@opencode/ui/menu"
-import { Select } from "@opencode/ui/select"
-import { Toast, showToast } from "@opencode/ui/toast"
-import { Tooltip } from "@opencode/ui/tooltip"
+import { Button } from "@warcode/ui/button"
+import { useDialog, useDialogLayer } from "@warcode/ui/context/dialog"
+import { Menu } from "@warcode/ui/menu"
+import { Select } from "@warcode/ui/select"
+import { Toast, showToast } from "@warcode/ui/toast"
+import { Tooltip } from "@warcode/ui/tooltip"
 import { createSignal, onMount, type JSX, type ParentProps } from "solid-js"
 
 const docs = `### Overview

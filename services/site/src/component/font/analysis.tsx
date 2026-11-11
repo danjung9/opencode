@@ -414,7 +414,7 @@ export function Performance() {
   })
 
   const stats = [
-    { value: number(performance.otf), unit: "bytes", label: "OpenCode.otf" },
+    { value: number(performance.otf), unit: "bytes", label: "Warcode.otf" },
     { value: number(performance.brotli), unit: "bytes", label: "Brotli" },
     { value: number(performance.gzip), unit: "bytes", label: "Gzip" },
     { value: String(performance.glyphs), unit: "glyphs", label: "Including .notdef, .null and space" },

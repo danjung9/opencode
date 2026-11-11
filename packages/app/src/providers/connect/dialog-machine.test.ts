@@ -107,7 +107,7 @@ function waitingOAuth(name: string, methods = [oauth]) {
 
 // Signs in to the Console with OAuth until the catalogs refresh; returns the refresh attempt.
 function refreshingConsole() {
-  const opened = replay([selected("opencode", false)])
+  const opened = replay([selected("warcode", false)])
   const choosing = replay([loaded(opened.state, [oauth, key])], opened.state)
   const started = replay([{ type: "connect.input", event: { type: "method.selected", index: 0 } }], choosing.state)
   const start = connectEffect(started.effects, "start")
@@ -538,14 +538,14 @@ test("confirming a model closes once and keeps the outcome through disposal", ()
       result(
         refreshing.state,
         { type: "refresh.succeeded", attempt: connectEffect(refreshing.effects, "refresh").attempt },
-        { pending: false, firstModel: "opencode:big" },
+        { pending: false, firstModel: "warcode:big" },
       ),
-      { type: "model.selected", modelKey: "opencode:small" },
+      { type: "model.selected", modelKey: "warcode:small" },
     ],
     refreshing.state,
   )
 
-  const selection = { providerID: "opencode", modelID: "small" }
+  const selection = { providerID: "warcode", modelID: "small" }
 
   const confirmed = replay([{ type: "model.confirmed", selection }], models.state)
   expect(confirmed.effects).toEqual([{ type: "dialog.close" }, { type: "model.apply", selection }])
@@ -602,7 +602,7 @@ test("a lone method waits on the accounts list and starts once Add account is ch
 })
 
 test("a standalone dialog has no way back to the provider list", () => {
-  const opened = replay([selected("opencode-go", false)], createProviderDialogState({ standalone: true }))
+  const opened = replay([selected("warcode-go", false)], createProviderDialogState({ standalone: true }))
   const entering = replay([loaded(opened.state, [key])], opened.state)
 
   expect(selectProviderDialogView(entering.state).canBack).toBe(false)
@@ -610,7 +610,7 @@ test("a standalone dialog has no way back to the provider list", () => {
 })
 
 test("the Console sign-in link copy result belongs to its attempt", () => {
-  const opened = replay([selected("opencode", false)])
+  const opened = replay([selected("warcode", false)])
   const choosing = replay([loaded(opened.state, [oauth, key])], opened.state)
   const started = replay([{ type: "connect.input", event: { type: "method.selected", index: 0 } }], choosing.state)
 

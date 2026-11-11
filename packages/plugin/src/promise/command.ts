@@ -1,7 +1,7 @@
-import type { CommandApi } from "@opencode/client/promise/api"
-import type { PromptInput } from "@opencode/schema/prompt-input"
-import type { Session } from "@opencode/schema/session"
-import type { SessionInbox } from "@opencode/schema/session-inbox"
+import type { CommandApi } from "@warcode/client/promise/api"
+import type { PromptInput } from "@warcode/schema/prompt-input"
+import type { Session } from "@warcode/schema/session"
+import type { SessionInbox } from "@warcode/schema/session-inbox"
 import type { Transform } from "./registration.js"
 
 export interface CommandInvocation {

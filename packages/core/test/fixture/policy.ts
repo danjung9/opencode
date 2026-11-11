@@ -1,23 +1,23 @@
-import { Config } from "@opencode/core/config"
-import { ConfigIntegration } from "@opencode/core/config/integration"
-import { ConfigPolicyPlugin } from "@opencode/core/config/plugin/policy"
-import { Integration } from "@opencode/core/integration"
-import { Mcp } from "@opencode/core/mcp/index"
-import { Skill } from "@opencode/core/skill"
-import { Info } from "@opencode/schema/config"
-import { ConfigPolicy } from "@opencode/schema/config/policy"
-import { ID } from "@opencode/schema/event"
-import { Credential } from "@opencode/core/credential"
-import { WebSearch } from "@opencode/core/websearch"
+import { Config } from "@warcode/core/config"
+import { ConfigIntegration } from "@warcode/core/config/integration"
+import { ConfigPolicyPlugin } from "@warcode/core/config/plugin/policy"
+import { Integration } from "@warcode/core/integration"
+import { Mcp } from "@warcode/core/mcp/index"
+import { Skill } from "@warcode/core/skill"
+import { Info } from "@warcode/schema/config"
+import { ConfigPolicy } from "@warcode/schema/config/policy"
+import { ID } from "@warcode/schema/event"
+import { Credential } from "@warcode/core/credential"
+import { WebSearch } from "@warcode/core/websearch"
 import { Effect, Schema, Stream } from "effect"
 import { host } from "../plugin/host"
 
-/** A connected organization's policy as the OpenCode Console delivers it: an integration config document. */
+/** A connected organization's policy as the Warcode Console delivers it: an integration config document. */
 export function organizationPolicy(policies: ConfigPolicy.Info[], organization?: string) {
   return new ConfigIntegration.Document({
     type: "document",
-    integrationID: Integration.ID.make("opencode"),
-    connection: { type: "env", name: "OPENCODE_API_KEY" },
+    integrationID: Integration.ID.make("warcode"),
+    connection: { type: "env", name: "WARCODE_API_KEY" },
     organization,
     info: Schema.decodeUnknownSync(Info)({ policies }),
   })
@@ -26,7 +26,7 @@ export function organizationPolicy(policies: ConfigPolicy.Info[], organization?:
 /** Replaces the connected organization's policy, or removes it; publish `Event.Updated` to make plugins reload. */
 export const setOrganizationPolicy = Effect.fn(function* (policies: ConfigPolicy.Info[] | undefined) {
   const config = yield* Config.Service
-  yield* config.integration?.(Integration.ID.make("opencode"), policies && organizationPolicy(policies)) ?? Effect.void
+  yield* config.integration?.(Integration.ID.make("warcode"), policies && organizationPolicy(policies)) ?? Effect.void
 })
 
 // Exercise the real policy plugin against supplied catalogs without unrelated provider/permission setup.

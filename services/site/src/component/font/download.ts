@@ -15,7 +15,7 @@ export function downloadFile(file: Blob, filename: string) {
   setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 
-/** Builds OpenCode.otf with this visit's character map and downloads it. Returns a status message. */
+/** Builds Warcode.otf with this visit's character map and downloads it. Returns a status message. */
 export async function downloadFont() {
   try {
     const [opentype, font] = await Promise.all([
@@ -24,7 +24,7 @@ export async function downloadFont() {
     ])
     const file = font.createLogoFont(opentype, mapCharacter)
     downloadFile(new Blob([file.toArrayBuffer()], { type: "font/otf" }), font.FONT_FILENAME)
-    return "Font downloaded. Open the file to install it, then select OpenCode in your app."
+    return "Font downloaded. Open the file to install it, then select Warcode in your app."
   } catch (error) {
     console.error("Font export failed:", error)
     return "Could not create the font. Please try again."

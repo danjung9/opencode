@@ -1,10 +1,10 @@
 export * as WarmingPlugin from "./warming.js"
 
-import { define } from "@opencode/plugin/effect/plugin"
-import type { SessionHooks } from "@opencode/plugin/effect/session"
-import type { Provider } from "@opencode/schema/provider"
-import type { Session } from "@opencode/schema/session"
-import { ConfigWarming } from "@opencode/schema/config/warming"
+import { define } from "@warcode/plugin/effect/plugin"
+import type { SessionHooks } from "@warcode/plugin/effect/session"
+import type { Provider } from "@warcode/schema/provider"
+import type { Session } from "@warcode/schema/session"
+import { ConfigWarming } from "@warcode/schema/config/warming"
 import { Cause, Clock, Data, Deferred, Duration, Effect, FiberMap, Option, Schema, Stream } from "effect"
 import { Config } from "../config.js"
 import { resolveModel } from "./optimize.js"
@@ -37,7 +37,7 @@ const fallbackInterval = Duration.minutes(4)
 const fallbackTTL = Duration.minutes(5)
 
 export const Plugin = define({
-  id: "opencode.warming",
+  id: "warcode.warming",
   effect: Effect.fn(function* (ctx) {
     const config = yield* Config.Service
     // A model's or provider's `cache.warming` overrides the top-level `warming`.

@@ -1,4 +1,4 @@
-import type { SessionInfo } from "@opencode/client/promise"
+import type { SessionInfo } from "@warcode/client/promise"
 import { ServerConnection } from "@/runtime/server/registry"
 import { mergeHomeSessionIndex } from "@/home/sessions/index"
 

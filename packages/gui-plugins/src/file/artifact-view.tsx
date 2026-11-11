@@ -13,19 +13,19 @@ import {
 import { createStore } from "solid-js/store"
 import { Dynamic } from "solid-js/web"
 import { createResizeObserver } from "@solid-primitives/resize-observer"
-import { PreviewControls } from "@opencode/ui/preview-controls"
-import { useDialog } from "@opencode/ui/context/dialog"
-import { FileIcon } from "@opencode/ui/file-icon"
-import { Icon } from "@opencode/ui/icon"
-import { IconButton } from "@opencode/ui/icon-button"
-import { ImagePreview } from "@opencode/ui/image-preview"
-import { Loader } from "@opencode/ui/loader"
-import { showToast } from "@opencode/ui/toast"
-import { Markdown } from "@opencode/session-ui/markdown"
-import { MarkdownProvider, useMarkdown } from "@opencode/session-ui/context/markdown"
-import { artifactKind } from "@opencode/util/artifact"
-import { getDirectory, getFilename } from "@opencode/util/path"
-import { createKeyed, usePlugin, type FileContent, type MountedSession, type SessionScreen } from "@opencode/plugin/gui"
+import { PreviewControls } from "@warcode/ui/preview-controls"
+import { useDialog } from "@warcode/ui/context/dialog"
+import { FileIcon } from "@warcode/ui/file-icon"
+import { Icon } from "@warcode/ui/icon"
+import { IconButton } from "@warcode/ui/icon-button"
+import { ImagePreview } from "@warcode/ui/image-preview"
+import { Loader } from "@warcode/ui/loader"
+import { showToast } from "@warcode/ui/toast"
+import { Markdown } from "@warcode/session-ui/markdown"
+import { MarkdownProvider, useMarkdown } from "@warcode/session-ui/context/markdown"
+import { artifactKind } from "@warcode/util/artifact"
+import { getDirectory, getFilename } from "@warcode/util/path"
+import { createKeyed, usePlugin, type FileContent, type MountedSession, type SessionScreen } from "@warcode/plugin/gui"
 import {
   blobUrlFromContent,
   bytesFromContent,
@@ -35,8 +35,8 @@ import {
   splitFrontmatter,
   type FrontmatterProperty,
 } from "./artifact"
-import { FileViewer } from "@opencode/plugin/gui/file"
-import { uuid } from "@opencode/util/uuid"
+import { FileViewer } from "@warcode/plugin/gui/file"
+import { uuid } from "@warcode/util/uuid"
 import { ArtifactToolbar } from "./artifact-toolbar"
 import {
   createArtifactViewerState,

@@ -2,7 +2,7 @@ import { onCleanup, onMount } from "solid-js"
 import { buildOrder, cells, contours, type Letter } from "~/lib/font-content"
 import { prefersReducedMotion } from "./plate"
 
-const WORD = "opencode"
+const WORD = "warcode"
 const COLS = WORD.length * 5 - 1
 // Canvas margins, in modules: room for registration marks, dimension ticks and the counter.
 const LEFT = 1
@@ -448,7 +448,7 @@ export function CoverTitle() {
 
   return (
     <span data-slot="cover-word" ref={root}>
-      <canvas ref={canvas} role="img" aria-label="OpenCode" />
+      <canvas ref={canvas} role="img" aria-label="Warcode" />
     </span>
   )
 }

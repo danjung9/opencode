@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 # publish-desktop.sh <sign-macos dir> <sign-desktop-windows-installer dir> <build-desktop-linux-x64 dir>
-# <build-desktop-linux-arm64 dir>: uploads the desktop builds to opencode.ai/files and registers the desktop update
+# <build-desktop-linux-arm64 dir>: uploads the desktop builds to warcode.ai/files and registers the desktop update
 # artifact. The electron-updater feeds (latest*.yml) are computed here from the final signed files.
 . "$(dirname "$0")/lib.sh"
 
 macos=$1 windows=$2 linux_x64=$3 linux_arm64=$4
-win=("$windows/opencode-desktop-win-arm64.exe" "$windows/opencode-desktop-win-x64.exe")
-mac=("$macos/opencode-desktop-mac-arm64.zip" "$macos/opencode-desktop-mac-arm64.dmg" "$macos/opencode-desktop-mac-x64.zip" "$macos/opencode-desktop-mac-x64.dmg")
-linux=("$linux_x64/opencode-desktop-linux-x86_64.AppImage" "$linux_x64/opencode-desktop-linux-amd64.deb" "$linux_x64/opencode-desktop-linux-x86_64.rpm")
-linux_arm=("$linux_arm64/opencode-desktop-linux-arm64.AppImage" "$linux_arm64/opencode-desktop-linux-arm64.deb" "$linux_arm64/opencode-desktop-linux-aarch64.rpm")
+win=("$windows/warcode-desktop-win-arm64.exe" "$windows/warcode-desktop-win-x64.exe")
+mac=("$macos/warcode-desktop-mac-arm64.zip" "$macos/warcode-desktop-mac-arm64.dmg" "$macos/warcode-desktop-mac-x64.zip" "$macos/warcode-desktop-mac-x64.dmg")
+linux=("$linux_x64/warcode-desktop-linux-x86_64.AppImage" "$linux_x64/warcode-desktop-linux-amd64.deb" "$linux_x64/warcode-desktop-linux-x86_64.rpm")
+linux_arm=("$linux_arm64/warcode-desktop-linux-arm64.AppImage" "$linux_arm64/warcode-desktop-linux-arm64.deb" "$linux_arm64/warcode-desktop-linux-aarch64.rpm")
 # Dev and beta skip the .app.tar.gz, which only the retired Tauri updater feed read.
 bundles=()
-case "$OPENCODE_CHANNEL" in
+case "$WARCODE_CHANNEL" in
   dev | beta) ;;
-  *) bundles=("$macos/opencode-desktop-mac-arm64.app.tar.gz" "$macos/opencode-desktop-mac-x64.app.tar.gz") ;;
+  *) bundles=("$macos/warcode-desktop-mac-arm64.app.tar.gz" "$macos/warcode-desktop-mac-x64.app.tar.gz") ;;
 esac
 
 feed() {
@@ -28,4 +28,4 @@ files=$(upload_files "${win[@]}" "${mac[@]}" "${linux[@]}" "${linux_arm[@]}" "${
 manifests=$(jq -n --argjson win "$(feed "${win[@]}")" --argjson mac "$(feed "${mac[@]}")" \
   --argjson linux "$(feed "${linux[@]}")" --argjson linux_arm64 "$(feed "${linux_arm[@]}")" \
   '{"desktop.yml": $win, "desktop-mac.yml": $mac, "desktop-linux.yml": $linux, "desktop-linux-arm64.yml": $linux_arm64}')
-publish_update desktop opencode "$(jq -n --argjson files "$files" --argjson manifests "$manifests" '{files: $files, manifests: $manifests}')"
+publish_update desktop warcode "$(jq -n --argjson files "$files" --argjson manifests "$manifests" '{files: $files, manifests: $manifests}')"

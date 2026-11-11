@@ -1,0 +1,220 @@
+{
+  "title": "Choose the new Warcode look",
+  "question": "Choose the direction to carry into Warcode. The previews use illustrative coding content.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Control room",
+      "lineage": "Flight director workstations",
+      "thesis": "A graphite coding workspace with amber actions and clear change review.",
+      "palette": [
+        "#101418",
+        "#1B2229",
+        "#E9EDF0",
+        "#F4B544"
+      ],
+      "materials": [
+        "matte graphite",
+        "precise separators"
+      ],
+      "viewport": "Project navigation on the left, conversation in the center, and file changes on the right.",
+      "risk": "Amber must stay reserved for actions to keep the workspace calm.",
+      "raised": [
+        {
+          "from": "Gate board",
+          "raise": "Session activity stays attached to its row."
+        },
+        {
+          "from": "Reference manual",
+          "raise": "Consistent spacing carries dense settings and the main session."
+        },
+        {
+          "from": "Transit diagram",
+          "raise": "Collapsed panels preserve project context."
+        },
+        {
+          "from": "Data field",
+          "raise": "Code and status use aligned values and readable contrast."
+        },
+        {
+          "from": "Dense utility",
+          "raise": "Secondary actions stay beside their content."
+        },
+        {
+          "from": "Catalog wall",
+          "raise": "Keyboard focus is unmistakable."
+        }
+      ],
+      "comp": ".impeccable/mocks/decision/control-room.png"
+    },
+    {
+      "id": "model-pick",
+      "label": "Workroom",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Editorial production desks",
+      "thesis": "A warm light coding workspace with ink typography and orange actions.",
+      "palette": [
+        "#F3F0E8",
+        "#E8E3D8",
+        "#252821",
+        "#B94C2C"
+      ],
+      "materials": [
+        "warm neutral surfaces",
+        "editorial alignment"
+      ],
+      "viewport": "A quiet session list frames a spacious conversation and file review.",
+      "risk": "Its layout is familiar, with character carried by typography and color.",
+      "comp": ".impeccable/mocks/decision/workroom.png"
+    },
+    {
+      "id": "ikeda-datamatics",
+      "label": "Data field",
+      "verdict": "declined",
+      "lineage": "Data field",
+      "thesis": "Indexed coding columns",
+      "palette": [
+        "#000000",
+        "#ffffff"
+      ],
+      "materials": [
+        "precise type",
+        "functional structure"
+      ],
+      "viewport": "Indexed coding columns",
+      "risk": "Strict monochrome scanning competes with syntax and conversation.",
+      "case": "Strict monochrome scanning competes with syntax and conversation.",
+      "kept": "Aligned status values.",
+      "hero": "https://impeccable.style/worlds/cards/ikeda-datamatics-hero.webp"
+    },
+    {
+      "id": "vernacular-ephemera-boarding-pass-and-gate-board",
+      "label": "Gate board",
+      "verdict": "declined",
+      "lineage": "Gate board",
+      "thesis": "Sessions as ranked activity rows",
+      "palette": [
+        "#fafafa",
+        "#202020"
+      ],
+      "materials": [
+        "precise type",
+        "functional structure"
+      ],
+      "viewport": "Sessions as ranked activity rows",
+      "risk": "Time-ranked travel semantics obscure project navigation.",
+      "case": "Time-ranked travel semantics obscure project navigation.",
+      "kept": "Stable rows with persistent activity.",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-boarding-pass-and-gate-board-hero.webp"
+    },
+    {
+      "id": "japanese-high-density-web",
+      "label": "Dense utility",
+      "verdict": "declined",
+      "lineage": "Dense utility",
+      "thesis": "A dense module grid of coding controls",
+      "palette": [
+        "#ffffff",
+        "#a52a25"
+      ],
+      "materials": [
+        "precise type",
+        "functional structure"
+      ],
+      "viewport": "A dense module grid of coding controls",
+      "risk": "A mosaic leaves too little room for sustained reading and review.",
+      "case": "A mosaic leaves too little room for sustained reading and review.",
+      "kept": "Actions beside content.",
+      "hero": "https://impeccable.style/worlds/cards/japanese-high-density-web-hero.webp"
+    },
+    {
+      "id": "pop-culture-shelf-streaming-title-card-wall",
+      "label": "Catalog wall",
+      "verdict": "declined",
+      "lineage": "Catalog wall",
+      "thesis": "Projects as focusable visual tiles",
+      "palette": [
+        "#141414",
+        "#e8e8e8"
+      ],
+      "materials": [
+        "precise type",
+        "functional structure"
+      ],
+      "viewport": "Projects as focusable visual tiles",
+      "risk": "Artwork adds little to the existing coding workflow.",
+      "case": "Artwork adds little to the existing coding workflow.",
+      "kept": "Strong keyboard focus.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-streaming-title-card-wall-hero.webp"
+    },
+    {
+      "id": "rw-manual-acetate-tab-board",
+      "label": "Reference manual",
+      "verdict": "declined",
+      "lineage": "Reference manual",
+      "thesis": "Project sections as reference leaves",
+      "palette": [
+        "#f0e8ce",
+        "#167477"
+      ],
+      "materials": [
+        "precise type",
+        "functional structure"
+      ],
+      "viewport": "Project sections as reference leaves",
+      "risk": "Layering adds an indirect metaphor to direct coding tasks.",
+      "case": "Layering adds an indirect metaphor to direct coding tasks.",
+      "kept": "Disciplined reading typography.",
+      "hero": "https://impeccable.style/worlds/cards/rw-manual-acetate-tab-board-hero.webp"
+    },
+    {
+      "id": "wayfinding-cartography-signage-midnight-transit-diagram",
+      "label": "Transit diagram",
+      "verdict": "declined",
+      "lineage": "Transit diagram",
+      "thesis": "Sessions as branching project paths",
+      "palette": [
+        "#10283c",
+        "#e5d4a5"
+      ],
+      "materials": [
+        "precise type",
+        "functional structure"
+      ],
+      "viewport": "Sessions as branching project paths",
+      "risk": "Route metaphors obscure files and conversation state.",
+      "case": "Route metaphors obscure files and conversation state.",
+      "kept": "Context-preserving navigation.",
+      "hero": "https://impeccable.style/worlds/cards/wayfinding-cartography-signage-midnight-transit-diagram-hero.webp"
+    }
+  ],
+  "reroll": {
+    "registers": [
+      "safer",
+      "bolder"
+    ]
+  },
+  "buildPath": {
+    "value": "comp",
+    "toggle": true
+  },
+  "canon": true,
+  "canonCard": {
+    "label": "Familiar editor",
+    "thesis": "A conventional dark coding workspace with blue actions.",
+    "palette": [
+      "#191C22",
+      "#242933",
+      "#E4E8EF",
+      "#7CA8F8"
+    ],
+    "materials": [
+      "flat editor panels",
+      "compact controls"
+    ],
+    "viewport": "A project sidebar, conversation, and changes panel.",
+    "risk": "It will resemble other coding editors.",
+    "comp": ".impeccable/mocks/decision/familiar-editor.png"
+  },
+  "steer": true
+}

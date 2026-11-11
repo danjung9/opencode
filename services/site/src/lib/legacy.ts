@@ -24,7 +24,7 @@ export function legacyRedirect(request: Legacy): Response | undefined {
     const channel = download[1] === "stable" ? "latest" : download[1]
     return redirect(
       302,
-      `${updateApi}/${channel}/desktop/opencode/${desktopAssets[platform as keyof typeof desktopAssets]}`,
+      `${updateApi}/${channel}/desktop/warcode/${desktopAssets[platform as keyof typeof desktopAssets]}`,
     )
   }
 
@@ -39,7 +39,7 @@ export function legacyRedirect(request: Legacy): Response | undefined {
   if (/^\/(auth|workspace)(\/|$)/.test(request.path))
     return redirect(302, "https://opencode.ai/console/login", "no-store")
 
-  // OpenCode Black was discontinued; its subscriptions moved to Go. Old links, about 100 a day.
+  // Warcode Black was discontinued; its subscriptions moved to Go. Old links, about 100 a day.
   if (/^\/black(\/|$)/.test(request.path)) return redirect(301, "/console/go")
 
   // The stats site's old name: it lives at /data (the Stats Worker). Old links, about 130 a day.
@@ -51,7 +51,7 @@ export function legacyRedirect(request: Legacy): Response | undefined {
   if (share) return redirect(301, `https://opncd.ai/share/${share[1]}`)
 
   // The V2 docs' first address, before they moved to /docs in Nov 2026. Apps up to v2.2.5 (Help menu,
-  // settings links, the opencode skill), the READMEs and install script of those releases, search
+  // settings links, the warcode skill), the READMEs and install script of those releases, search
   // engines and outside links. Pages, Markdown twins and the docs' files (llms.txt, the sitemap,
   // openapi.json) keep their path under /docs. The install script and the V2 config schema
   // (/v2/install, /v2/cli.json) are not docs and stay at /v2.

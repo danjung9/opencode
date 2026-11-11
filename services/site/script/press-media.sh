@@ -51,7 +51,7 @@ for slug in desktop mobile terminal sdk; do
 
   # The product's zip: every still and poster in images/, every video in videos/, with plain names.
   staging=$(mktemp -d)
-  root="$staging/opencode-$slug"
+  root="$staging/warcode-$slug"
   mkdir -p "$root/images" "$root/videos"
   cp "$out"/frames/"$slug"-frame-*.jpg "$root/images/"
   for set in locked; do
@@ -65,20 +65,20 @@ for slug in desktop mobile terminal sdk; do
     cp "$videos/features/$slug-$clip.jpg" "$root/images/$slug-feature-$clip.jpg"
     cp "$videos/features/$slug-$clip.mp4" "$root/videos/$slug-feature-$clip.mp4"
   done
-  (cd "$staging" && zip -q -X -r "$OLDPWD/$out/zips/opencode-$slug-media.zip" "opencode-$slug")
+  (cd "$staging" && zip -q -X -r "$OLDPWD/$out/zips/warcode-$slug-media.zip" "warcode-$slug")
   mkdir -p "$out/all"
-  mv "$staging/opencode-$slug" "$out/all/"
+  mv "$staging/warcode-$slug" "$out/all/"
   rm -rf "$staging"
 
-  bytes=$(stat -f %z "$out/zips/opencode-$slug-media.zip")
+  bytes=$(stat -f %z "$out/zips/warcode-$slug-media.zip")
   times=$(frames "$slug" | sed 's/ /, /g')
   manifest+="\"$slug\": { \"frames\": [$times], \"zipBytes\": $bytes },"
 done
 
-rm -f public/opencode-press-media.zip
-(cd "$out/all" && zip -q -X -r "$OLDPWD/public/opencode-press-media.zip" .)
+rm -f public/warcode-press-media.zip
+(cd "$out/all" && zip -q -X -r "$OLDPWD/public/warcode-press-media.zip" .)
 rm -rf "$out/all"
-all=$(stat -f %z public/opencode-press-media.zip)
+all=$(stat -f %z public/warcode-press-media.zip)
 manifest+="\"allZipBytes\": $all }"
 echo "$manifest" > "$out/manifest.json"
-echo "Wrote $out and public/opencode-press-media.zip"
+echo "Wrote $out and public/warcode-press-media.zip"

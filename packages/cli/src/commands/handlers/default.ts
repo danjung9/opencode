@@ -1,6 +1,6 @@
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Global } from "@opencode/util/global"
-import { run } from "@opencode/tui"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Global } from "@warcode/util/global"
+import { run } from "@warcode/tui"
 import { Commands } from "../commands"
 import { Runtime } from "../../framework/runtime"
 import { Config } from "../../config"
@@ -8,11 +8,11 @@ import { Context, Effect, FileSystem, Option, Queue, Schedule, Semaphore } from 
 import { ServerConnection } from "../../services/server-connection"
 import { Updater } from "../../services/updater"
 import { UpdatePreflight } from "../../services/update-preflight"
-import { Npm } from "@opencode/util/npm"
-import { OPENCODE_ARTIFACT, OPENCODE_CHANNEL, OPENCODE_HIGHLIGHTS, OPENCODE_VERSION } from "../../version"
+import { Npm } from "@warcode/util/npm"
+import { WARCODE_ARTIFACT, WARCODE_CHANNEL, WARCODE_HIGHLIGHTS, WARCODE_VERSION } from "../../version"
 import { Env } from "../../env"
-import { Service } from "@opencode/client/effect/service"
-import { OpenCode } from "@opencode/client/promise"
+import { Service } from "@warcode/client/effect/service"
+import { Warcode } from "@warcode/client/promise"
 import { findSession } from "../../session-target"
 import { errorMessage } from "../../util/error"
 
@@ -47,7 +47,7 @@ export default Runtime.handler(Commands, (input) =>
       },
     }).pipe(
       Effect.tapError(() =>
-        Effect.promise(() => preflight.fail("OpenCode update could not start the new background service")),
+        Effect.promise(() => preflight.fail("Warcode update could not start the new background service")),
       ),
     )
     const session = Option.getOrUndefined(input.session)
@@ -56,7 +56,7 @@ export default Runtime.handler(Commands, (input) =>
       session !== undefined &&
       (yield* Effect.tryPromise({
         try: () =>
-          findSession(OpenCode.make({ baseUrl: server.endpoint.url, headers: Service.headers(server.endpoint) }), session),
+          findSession(Warcode.make({ baseUrl: server.endpoint.url, headers: Service.headers(server.endpoint) }), session),
         catch: (cause) => new Error(errorMessage(cause)),
       })) !== undefined
     const updater = yield* Updater.Service
@@ -95,10 +95,10 @@ export default Runtime.handler(Commands, (input) =>
     const service = server.service
     yield* run({
       app: {
-        name: process.env.OPENCODE_CLIENT ?? OPENCODE_ARTIFACT,
-        version: OPENCODE_VERSION,
-        channel: process.env.OPENCODE_TUI_CHANNEL ?? OPENCODE_CHANNEL,
-        highlights: OPENCODE_HIGHLIGHTS,
+        name: process.env.WARCODE_CLIENT ?? WARCODE_ARTIFACT,
+        version: WARCODE_VERSION,
+        channel: process.env.WARCODE_TUI_CHANNEL ?? WARCODE_CHANNEL,
+        highlights: WARCODE_HIGHLIGHTS,
       },
       server: {
         endpoint: server.endpoint,

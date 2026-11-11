@@ -1090,10 +1090,10 @@ describe("Anthropic Messages route", () => {
       const codingPrepared = yield* compileUnsignedReasoning(coding.model({ id: "k3" }))
       const moonshotPrepared = yield* compileUnsignedReasoning(moonshot)
       const qwenPrepared = yield* compileUnsignedReasoning(
-        coding.with({ provider: "opencode" }).model({ id: "qwen3.8-flash" }),
+        coding.with({ provider: "warcode" }).model({ id: "qwen3.8-flash" }),
       )
       const minimaxPrepared = yield* compileUnsignedReasoning(
-        coding.with({ provider: "opencode-go" }).model({ id: "minimax-m3" }),
+        coding.with({ provider: "warcode-go" }).model({ id: "minimax-m3" }),
       )
 
       for (const prepared of [codingPrepared, moonshotPrepared, qwenPrepared, minimaxPrepared]) {
@@ -1348,7 +1348,7 @@ describe("Anthropic Messages route", () => {
               {
                 type: "message_delta",
                 delta: { stop_reason: "end_turn" },
-                usage: { output_tokens: 2, cost: 0, opencode: { allowance: 0.0042 } },
+                usage: { output_tokens: 2, cost: 0, warcode: { allowance: 0.0042 } },
               },
               { type: "message_stop" },
             ),

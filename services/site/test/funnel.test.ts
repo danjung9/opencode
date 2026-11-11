@@ -96,11 +96,11 @@ describe("funnel config", () => {
       downloadOf(new URL("https://opencode.ai/update/api/latest/desktop/opencode/opencode-desktop-mac-arm64.dmg")),
     ).toEqual({
       target: "desktop",
-      properties: { file: "opencode-desktop-mac-arm64.dmg", channel: "latest", os_match: expect.any(Boolean) },
+      properties: { file: "warcode-desktop-mac-arm64.dmg", channel: "latest", os_match: expect.any(Boolean) },
     })
     expect(downloadOf(new URL("https://opencode.ai/update/api/beta/cli/opencode/opencode-linux-x64.tar.gz"))).toEqual({
       target: "cli",
-      properties: { file: "opencode-linux-x64.tar.gz", channel: "beta", os_match: expect.any(Boolean) },
+      properties: { file: "warcode-linux-x64.tar.gz", channel: "beta", os_match: expect.any(Boolean) },
     })
     expect(downloadOf(new URL("https://testflight.apple.com/join/M9eFEE1q"))).toEqual({
       target: "mobile",
@@ -121,7 +121,7 @@ describe("funnel markup", () => {
       type: "element",
       tagName: "code",
       properties: { className: ["language-bash"] },
-      children: [{ type: "text", value: "npm i -g opencode" }],
+      children: [{ type: "text", value: "npm i -g warcode" }],
     }
     const tree: Root = {
       type: "root",

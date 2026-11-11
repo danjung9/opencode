@@ -57,7 +57,7 @@ const angled = (file: string, crop: Shot["crop"], height: number): Shot => ({
 const cards: Card[] = [
   {
     path: "/",
-    title: "OpenCode",
+    title: "Warcode",
     description: "The open source coding agent for your desktop, the terminal, your phone and your own code.",
     shows: "the home page with the desktop, terminal, mobile and SDK product cards, at an angle",
     shot: angled(`${stills}/home.jpg`, [290, 20, 1150, 860], 470),
@@ -93,22 +93,22 @@ const cards: Card[] = [
   {
     path: "/sdk",
     title: "SDK",
-    description: "Drive OpenCode from your own scripts, CI jobs and tools in TypeScript.",
-    shows: "TypeScript code that creates an OpenCode client with the SDK, at an angle",
+    description: "Drive Warcode from your own scripts, CI jobs and tools in TypeScript.",
+    shows: "TypeScript code that creates an Warcode client with the SDK, at an angle",
     shot: angled(`${covers}/sdk.webp`, [100, 420, 964, 440], 300),
   },
   {
     path: "/ide",
     title: "IDE extensions",
-    description: "Open OpenCode in VS Code, Cursor, Windsurf, Zed and JetBrains IDEs.",
-    shows: "the OpenCode terminal UI that the extensions open beside your code, at an angle",
+    description: "Open Warcode in VS Code, Cursor, Windsurf, Zed and JetBrains IDEs.",
+    shows: "the Warcode terminal UI that the extensions open beside your code, at an angle",
     shot: angled("public/product-videos/heroes/terminal-landscape-dark.webp", [430, 380, 1100, 560], 270),
   },
   {
     path: "/mini",
     title: "Mini",
     description: "A minimal terminal interface. Replies print into your own scrollback.",
-    shows: "OpenCode Mini in a terminal with Claude Opus 5.5, at an angle",
+    shows: "Warcode Mini in a terminal with Claude Opus 5.5, at an angle",
     shot: angled(`${covers}/mini.webp`, [250, 540, 680, 260], 150),
   },
   {
@@ -121,35 +121,35 @@ const cards: Card[] = [
   {
     path: "/docs",
     title: "Docs",
-    description: "Install OpenCode, connect a provider and find your way around.",
+    description: "Install Warcode, connect a provider and find your way around.",
     shows: "the docs intro page with its sidebar and install commands, at an angle",
     shot: angled(`${stills}/docs.jpg`, [0, 0, 1100, 900], 470),
   },
   {
     path: "/press",
     title: "Press",
-    description: "Facts, brand assets and contacts for writing about OpenCode.",
+    description: "Facts, brand assets and contacts for writing about Warcode.",
     shows: "the press kit's media section with stills of each app, at an angle",
     shot: angled(`${stills}/press.jpg`, [290, 0, 1000, 900], 470),
   },
   {
     path: "/brand",
     title: "Brand",
-    description: "Logos, wordmarks, colors and the rules for using the OpenCode brand.",
+    description: "Logos, wordmarks, colors and the rules for using the Warcode brand.",
     shows: "the brand page's light and dark logo files, at an angle",
     shot: angled(`${stills}/brand.jpg`, [290, 20, 820, 700], 470),
   },
   {
     path: "/font",
-    title: "OpenCode Font",
-    description: "A typeface cut from the OpenCode wordmark, on a grid of modules.",
-    shows: "the OpenCode Font specimen, the wordmark set large, at an angle",
+    title: "Warcode Font",
+    description: "A typeface cut from the Warcode wordmark, on a grid of modules.",
+    shows: "the Warcode Font specimen, the wordmark set large, at an angle",
     shot: angled(`${stills}/font.jpg`, [250, 250, 1000, 400], 300),
   },
   {
     path: "/changelog",
     title: "Changelog",
-    description: "New features and fixes in every OpenCode release.",
+    description: "New features and fixes in every Warcode release.",
     shows: "the changelog timeline with the latest release and its video, at an angle",
     shot: angled(`${stills}/changelog.jpg`, [540, 60, 900, 840], 470),
   },
@@ -157,28 +157,28 @@ const cards: Card[] = [
   {
     path: "/changelog/[tag]",
     title: "Release notes",
-    description: "What changed in each OpenCode release, with notes and videos.",
+    description: "What changed in each Warcode release, with notes and videos.",
     shows: "a changelog release page with its notes and video, at an angle",
     shot: angled(`${stills}/release.jpg`, [540, 120, 900, 780], 470),
   },
   {
     path: "/legal",
     title: "Legal",
-    description: "The privacy policy, terms of use and updates to OpenCode's legal documents.",
+    description: "The privacy policy, terms of use and updates to Warcode's legal documents.",
     shows: "the legal page listing the privacy policy and terms, at an angle",
     shot: angled(`${stills}/legal.jpg`, [290, 40, 1000, 800], 470),
   },
   {
     path: "/legal/privacy-policy",
     title: "Privacy Policy",
-    description: "How OpenCode collects, uses, shares and protects your personal data.",
+    description: "How Warcode collects, uses, shares and protects your personal data.",
     shows: "the Privacy Policy document with its summary, at an angle",
     shot: angled(`${stills}/privacy-policy.jpg`, [290, 0, 1000, 900], 470),
   },
   {
     path: "/legal/terms-of-service",
     title: "Terms of Use",
-    description: "The rules for using the OpenCode website and hosted services.",
+    description: "The rules for using the Warcode website and hosted services.",
     shows: "the Terms of Use document with its summary, at an angle",
     shot: angled(`${stills}/terms-of-service.jpg`, [290, 0, 1000, 900], 470),
   },
@@ -213,7 +213,7 @@ for (const card of cards) {
   await Bun.write(path.join(out, file), png)
   manifest[card.path] = {
     src: `/og/${file}`,
-    alt: `OpenCode link card: “${card.title}” and “${card.description}” beside ${card.shows}.`,
+    alt: `Warcode link card: “${card.title}” and “${card.description}” beside ${card.shows}.`,
   }
 }
 const keep = new Set(Object.values(manifest).map((card) => path.basename(card.src)))

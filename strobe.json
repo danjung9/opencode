@@ -2,32 +2,32 @@
   "build": { "command": "bun run build", "cwd": "packages/app", "output": "packages/app/dist" },
   "serve": { "command": "bun e2e/utils/serve.ts --host 127.0.0.1 --port {port}", "cwd": "packages/app" },
   "apps": {
-    "opencode": {
+    "warcode": {
       "exe": {
-        "windows": "%LOCALAPPDATA%/Programs/ai.opencode.desktop/OpenCode.exe",
-        "macos": "/Applications/OpenCode.app/Contents/MacOS/OpenCode"
+        "windows": "%LOCALAPPDATA%/Programs/ai.warcode.desktop/Warcode.exe",
+        "macos": "/Applications/Warcode.app/Contents/MacOS/Warcode"
       },
-      "unset": ["OPENCODE_*", "OTEL_*", "SENTRY_*"],
+      "unset": ["WARCODE_*", "OTEL_*", "SENTRY_*"],
       "env": {
-        "OPENCODE_DB": "{home}/.local/share/opencode/opencode.db",
-        "OPENCODE_CONFIG_DIR": "{home}/.config/opencode",
+        "WARCODE_DB": "{home}/.local/share/warcode/warcode.db",
+        "WARCODE_CONFIG_DIR": "{home}/.config/warcode",
         "HTTP_PROXY": "http://127.0.0.1:9",
         "HTTPS_PROXY": "http://127.0.0.1:9",
         "NO_PROXY": "localhost,127.0.0.1,::1"
       },
-      "dirs": [".local/share/opencode"],
+      "dirs": [".local/share/warcode"],
       "files": {
-        ".config/opencode/service.json": { "port": "{port}" },
-        "AppData/Local/@opencodedesktop-updater": "a file, not a folder: the updater cannot stage a download while strobe measures"
+        ".config/warcode/service.json": { "port": "{port}" },
+        "AppData/Local/@warcodedesktop-updater": "a file, not a folder: the updater cannot stage a download while strobe measures"
       },
-      "guard": [{ "file": "~/.local/state/opencode/service.json", "pid": "pid", "url": "url" }],
-      "protocols": ["opencode"]
+      "guard": [{ "file": "~/.local/state/warcode/service.json", "pid": "pid", "url": "url" }],
+      "protocols": ["warcode"]
     },
-    "opencode-beta": {
-      "extends": "opencode",
+    "warcode-beta": {
+      "extends": "warcode",
       "exe": {
-        "windows": "%LOCALAPPDATA%/Programs/ai.opencode.desktop.beta/OpenCode Beta.exe",
-        "macos": "/Applications/OpenCode Beta.app/Contents/MacOS/OpenCode Beta"
+        "windows": "%LOCALAPPDATA%/Programs/ai.warcode.desktop.beta/Warcode Beta.exe",
+        "macos": "/Applications/Warcode Beta.app/Contents/MacOS/Warcode Beta"
       }
     }
   }

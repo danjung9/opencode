@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import { QueryClient } from "@tanstack/solid-query"
-import { OpenCode, type LocationGetInput } from "@opencode/client/promise"
+import { Warcode, type LocationGetInput } from "@warcode/client/promise"
 import { createStore } from "solid-js/store"
 import { bootstrapGlobal, inferHomeDirectory, loadPathQuery, loadProjectsQuery } from "./bootstrap"
 import { ServerScope } from "@/runtime/server/scope"
@@ -10,7 +10,7 @@ import type { ServerSync } from "@/runtime/server/sync"
 import { worktreeInventoryKey } from "@/workspaces/inventory"
 
 test("bootstraps projects through the native store setter and preserves subsequent updates", async () => {
-  const api = OpenCode.make({
+  const api = Warcode.make({
     baseUrl: "http://opencode.local",
     fetch: Object.assign(
       async (input: RequestInfo | URL, init?: RequestInit) => {
@@ -132,7 +132,7 @@ describe("query keys", () => {
 
     expect(calls).toEqual([{ location: { directory: "/repo/subpath" } }])
     expect(result).toMatchObject({ directory: "/repo/subpath", worktree: "/repo" })
-    expect(inferHomeDirectory("/Users/kamil/Developer/opencode")).toBe("/Users/kamil")
+    expect(inferHomeDirectory("/Users/kamil/Developer/warcode")).toBe("/Users/kamil")
     expect(inferHomeDirectory("/home/ubuntu/workspace/repo")).toBe("/home/ubuntu")
     expect(inferHomeDirectory("C:\\Users\\luke\\repo")).toBe("C:\\Users\\luke")
     expect(inferHomeDirectory("/repo/subpath")).toBe("")
@@ -141,7 +141,7 @@ describe("query keys", () => {
   test("loads project metadata in server order without enumerating any project's worktrees", async () => {
     const requests: string[] = []
 
-    const api = OpenCode.make({
+    const api = Warcode.make({
       baseUrl: "http://localhost:3000",
       fetch: Object.assign(
         async (input: RequestInfo | URL, init?: RequestInit) => {
@@ -159,7 +159,7 @@ describe("query keys", () => {
             })),
             { id: "b", canonical: "/b", time: { created: 1, updated: 1 }, sandboxes: [] },
             { id: "a", canonical: "/a", time: { created: 1, updated: 1 }, sandboxes: ["/a/legacy"] },
-            { id: "test", canonical: "/tmp/opencode-test-1", time: { created: 1, updated: 1 }, sandboxes: [] },
+            { id: "test", canonical: "/tmp/warcode-test-1", time: { created: 1, updated: 1 }, sandboxes: [] },
           ])
         },
         { preconnect() {} },
@@ -173,7 +173,7 @@ describe("query keys", () => {
     expect(result.slice(300)).toMatchObject([
       { id: "b", worktree: "/b", sandboxes: [], worktrees: [{ directory: "/b" }] },
       { id: "a", worktree: "/a", sandboxes: ["/a/legacy"], worktrees: [{ directory: "/a" }] },
-      { id: "test", worktree: "/tmp/opencode-test-1" },
+      { id: "test", worktree: "/tmp/warcode-test-1" },
     ])
   })
 })

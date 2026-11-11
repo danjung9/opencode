@@ -14,7 +14,7 @@ describe("media in the files bucket", () => {
     for (const path of [
       "/",
       "/product",
-      "/brand/files/opencode-logo-dark.png",
+      "/brand/files/warcode-logo-dark.png",
       "https://github.com/user-attachments/assets/clip.mp4",
       "/files/site/2026-11/arcade3d/cabinet.glb",
     ])

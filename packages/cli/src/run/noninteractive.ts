@@ -6,19 +6,19 @@ import {
   type JsonValue,
   type LocationRef,
   type ModelRef,
-  type OpenCodeClient,
+  type WarcodeClient,
   type PermissionRequest,
   type SessionMessageAssistantTool,
   type SessionMessageIdle,
   type SessionMessageInfo,
-} from "@opencode/client/promise"
-import { SessionMessage } from "@opencode/schema/session-message"
+} from "@warcode/client/promise"
+import { SessionMessage } from "@warcode/schema/session-message"
 import { EOL } from "node:os"
-import { toolOutputText, type MiniToolPart } from "@opencode/tui/mini/tool"
+import { toolOutputText, type MiniToolPart } from "@warcode/tui/mini/tool"
 import { UI } from "./ui"
 
 type Input = {
-  client: OpenCodeClient
+  client: WarcodeClient
   sessionID: string
   location: LocationRef
   message: string
@@ -126,7 +126,7 @@ export async function runNonInteractivePrompt(input: Input) {
         { sessionID: form.sessionID, formID: form.id, ...(question ? { message: QUESTION_CANCELLED_FEEDBACK } : {}) },
         // A global form is found through its location.
         ...(form.sessionID === "global"
-          ? [{ headers: { "x-opencode-directory": encodeURIComponent(input.location.directory) } }]
+          ? [{ headers: { "x-warcode-directory": encodeURIComponent(input.location.directory) } }]
           : []),
       )
       .catch((error) => {
@@ -337,7 +337,7 @@ function terminalOutcome(event: Event): Outcome | undefined {
   }
 }
 
-async function projectedMessages(client: OpenCodeClient, sessionID: string, messageID: string) {
+async function projectedMessages(client: WarcodeClient, sessionID: string, messageID: string) {
   const messages: SessionMessageInfo[] = []
   let cursor: string | undefined
   while (true) {

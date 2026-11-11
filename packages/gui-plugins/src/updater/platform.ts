@@ -14,7 +14,7 @@ const restartTimeout = 10_000
 const unpackTimeout = 120_000
 
 export const make = Effect.fn("Updater.platform")(function* (channel: string) {
-  const userAgent = `opencode/${channel === "prod" ? "latest" : channel}/${app.getVersion()}/desktop`
+  const userAgent = `warcode/${channel === "prod" ? "latest" : channel}/${app.getVersion()}/desktop`
   const runFork = Effect.runForkWith(yield* Effect.context())
   updateClient.logger = {
     info: (...args) => runFork(Effect.logInfo(...args)),
@@ -22,6 +22,8 @@ export const make = Effect.fn("Updater.platform")(function* (channel: string) {
     error: (...args) => runFork(Effect.logError(...args)),
     debug: (...args) => runFork(Effect.logDebug(...args)),
   }
+  if (process.env.WARCODE_UPDATE_URL)
+    updateClient.setFeedURL({ provider: "generic", url: process.env.WARCODE_UPDATE_URL })
   updateClient.channel = "latest"
   updateClient.requestHeaders = { "User-Agent": userAgent }
   updateClient.allowPrerelease = false

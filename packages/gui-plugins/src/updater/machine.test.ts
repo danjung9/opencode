@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test } from "bun:test"
 import { Effect, Exit, Scope } from "effect"
-import type { UpdaterState } from "@opencode/plugin/gui/updater"
+import type { UpdaterState } from "@warcode/plugin/gui/updater"
 import {
   initUpdaterMachine,
   make,

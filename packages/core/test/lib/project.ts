@@ -1,7 +1,7 @@
-import { Database } from "@opencode/core/database/database"
-import { Project } from "@opencode/core/project"
-import { upsertProject } from "@opencode/core/project/sql"
-import { makeGlobalNode } from "@opencode/util/effect/app-node"
+import { Database } from "@warcode/core/database/database"
+import { Project } from "@warcode/core/project"
+import { upsertProject } from "@warcode/core/project/sql"
+import { makeGlobalNode } from "@warcode/util/effect/app-node"
 import { Effect, Layer } from "effect"
 
 export const globalProjectNode = makeGlobalNode({

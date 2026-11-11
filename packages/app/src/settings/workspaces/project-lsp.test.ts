@@ -1,10 +1,10 @@
 import { describe, expect, test } from "bun:test"
-import type { ConfigEntry } from "@opencode/client/promise"
+import type { ConfigEntry } from "@warcode/client/promise"
 import { configuredLanguageServers } from "./project-lsp"
 
 const global: ConfigEntry = {
   type: "document",
-  path: "/config/opencode.json",
+  path: "/config/warcode.json",
   info: {
     lsp: {
       typescript: { command: ["typescript-language-server", "--stdio"], extensions: [".ts", ".tsx"] },
@@ -18,10 +18,10 @@ describe("configuredLanguageServers", () => {
     expect(
       configuredLanguageServers([
         global,
-        { type: "directory", path: "/project/.opencode" },
+        { type: "directory", path: "/project/.warcode" },
         {
           type: "document",
-          path: "/project/opencode.jsonc",
+          path: "/project/warcode.jsonc",
           info: {
             lsp: {
               typescript: { disabled: true },

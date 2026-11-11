@@ -1,28 +1,28 @@
-import { App } from "@opencode/core/app"
-import { Agent } from "@opencode/schema/agent"
-import { Session } from "@opencode/core/session"
-import { Location } from "@opencode/core/location"
+import { App } from "@warcode/core/app"
+import { Agent } from "@warcode/schema/agent"
+import { Session } from "@warcode/core/session"
+import { Location } from "@warcode/core/location"
 import { describe, expect, test } from "bun:test"
 import { Effect } from "effect"
 import { FetchHttpClient, HttpClient, HttpClientResponse } from "effect/http"
 import { TestClock } from "effect/testing"
-import { Model } from "@opencode/core/model"
-import { ModelResolver } from "@opencode/core/model-resolver"
-import { Plugin } from "@opencode/core/plugin"
-import { PluginHost } from "@opencode/core/plugin/host"
-import { PluginHooks } from "@opencode/core/plugin/hooks"
+import { Model } from "@warcode/core/model"
+import { ModelResolver } from "@warcode/core/model-resolver"
+import { Plugin } from "@warcode/core/plugin"
+import { PluginHost } from "@warcode/core/plugin/host"
+import { PluginHooks } from "@warcode/core/plugin/hooks"
 import {
   copilotBaseURL,
   copilotEntitlementError,
   GithubCopilotPlugin,
   utilityTitle,
-} from "@opencode/core/plugin/provider/github-copilot"
-import { Message, SystemPart } from "@opencode/ai/effect"
-import { Provider } from "@opencode/core/provider"
-import { Integration } from "@opencode/core/integration"
-import { Credential } from "@opencode/core/credential"
+} from "@warcode/core/plugin/provider/github-copilot"
+import { Message, SystemPart } from "@warcode/ai/effect"
+import { Provider } from "@warcode/core/provider"
+import { Integration } from "@warcode/core/integration"
+import { Credential } from "@warcode/core/credential"
 import { advance, drain } from "../lib/clock"
-import type { SessionRequestKind } from "@opencode/plugin/effect/session"
+import type { SessionRequestKind } from "@warcode/plugin/effect/session"
 import { testEffect } from "../lib/effect"
 import { PluginTestLayer } from "./fixture"
 
@@ -205,7 +205,7 @@ describe("GithubCopilotPlugin", () => {
     const requests: string[] = []
     yield* providers.transform((editor) => {
       editor.models.update(Provider.ID.githubCopilot, Model.ID.make("gpt-4o"), (model) => {
-        model.package = "@opencode/ai/providers/openai-compatible"
+        model.package = "@warcode/ai/providers/openai-compatible"
       })
     })
     yield* connect(metadata)
@@ -607,15 +607,15 @@ describe("GithubCopilotPlugin", () => {
       const providers = yield* Provider.Service
       const models = yield* Model.Service
       const fallback = {
-        "claude-sonnet-4.5": "@opencode/ai/providers/anthropic",
-        "gpt-4.1": "@opencode/ai/providers/openai",
-        "gpt-5": "@opencode/ai/providers/openai-compatible",
-        "gpt-5.1-codex": "@opencode/ai/providers/openai-compatible",
-        "gpt-5-mini": "@opencode/ai/providers/openai-compatible",
-        "gpt-4o": "@opencode/ai/providers/openai-compatible",
-        "grok-4.5": "@opencode/ai/providers/openai-compatible",
-        "mai-code-1.1-flash": "@opencode/ai/providers/openai-compatible",
-        "gemini-3.8-flash": "@opencode/ai/providers/openai-compatible",
+        "claude-sonnet-4.5": "@warcode/ai/providers/anthropic",
+        "gpt-4.1": "@warcode/ai/providers/openai",
+        "gpt-5": "@warcode/ai/providers/openai-compatible",
+        "gpt-5.1-codex": "@warcode/ai/providers/openai-compatible",
+        "gpt-5-mini": "@warcode/ai/providers/openai-compatible",
+        "gpt-4o": "@warcode/ai/providers/openai-compatible",
+        "grok-4.5": "@warcode/ai/providers/openai-compatible",
+        "mai-code-1.1-flash": "@warcode/ai/providers/openai-compatible",
+        "gemini-3.8-flash": "@warcode/ai/providers/openai-compatible",
       }
       yield* providers.transform((editor) => {
         editor.update(Provider.ID.githubCopilot, (provider) => {
@@ -627,7 +627,7 @@ describe("GithubCopilotPlugin", () => {
           })
         editor.models.update(Provider.ID.githubCopilot, Model.ID.make("small"), (model) => {
           model.modelID = Model.ID.make("gpt-5-mini")
-          model.package = "@opencode/ai/providers/openai-compatible"
+          model.package = "@warcode/ai/providers/openai-compatible"
         })
       })
       yield* addPlugin()
@@ -635,12 +635,12 @@ describe("GithubCopilotPlugin", () => {
         const model = required(yield* models.get(Provider.ID.githubCopilot, Model.ID.make(id)))
         return { package: model.package, baseURL: model.settings?.baseURL }
       })
-      const messages = { package: "@opencode/ai/providers/anthropic", baseURL: "https://api.githubcopilot.com/v1" }
+      const messages = { package: "@warcode/ai/providers/anthropic", baseURL: "https://api.githubcopilot.com/v1" }
       const responses = {
-        package: "@opencode/ai/providers/openai-compatible-responses",
+        package: "@warcode/ai/providers/openai-compatible-responses",
         baseURL: "https://api.githubcopilot.com",
       }
-      const chat = { package: "@opencode/ai/providers/openai-compatible", baseURL: "https://api.githubcopilot.com" }
+      const chat = { package: "@warcode/ai/providers/openai-compatible", baseURL: "https://api.githubcopilot.com" }
       expect(yield* route("claude-sonnet-4.5")).toEqual(messages)
       expect(yield* route("gpt-4.1")).toEqual(responses)
       expect(yield* route("gpt-5")).toEqual(responses)

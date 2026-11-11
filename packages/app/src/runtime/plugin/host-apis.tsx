@@ -13,12 +13,12 @@ import {
 } from "solid-js"
 import { createStore, produce, type Store } from "solid-js/store"
 import type { Schema } from "effect"
-import { useDialog } from "@opencode/ui/context/dialog"
-import { useTheme } from "@opencode/ui/theme/context"
-import { toaster } from "@opencode/ui/toast"
-import { writeClipboard } from "@opencode/session-ui/copy"
-import { base64Encode } from "@opencode/util/encode"
-import { uuid } from "@opencode/util/uuid"
+import { useDialog } from "@warcode/ui/context/dialog"
+import { useTheme } from "@warcode/ui/theme/context"
+import { toaster } from "@warcode/ui/toast"
+import { writeClipboard } from "@warcode/session-ui/copy"
+import { base64Encode } from "@warcode/util/encode"
+import { uuid } from "@warcode/util/uuid"
 import {
   type App,
   type Layout,
@@ -35,8 +35,8 @@ import {
   type Storage,
   type StorageScope,
   type Tabs,
-} from "@opencode/plugin/gui"
-import { BuiltinPanel, type BuiltinStoreFrom, type BuiltinStoreOptions } from "@opencode/plugin/gui/builtin"
+} from "@warcode/plugin/gui"
+import { BuiltinPanel, type BuiltinStoreFrom, type BuiltinStoreOptions } from "@warcode/plugin/gui/builtin"
 import { usePlatform } from "@/runtime/platform/platform"
 import { same } from "@/runtime/persistence/equality"
 import { Persist, persisted, removePersisted } from "@/runtime/persistence/storage"
@@ -349,10 +349,10 @@ export function createHostApis() {
           }
         : undefined,
     app: () => ({
-      name: "opencode",
+      name: "warcode",
       version: platform.version ?? "",
-      // SAFETY: the build sets VITE_OPENCODE_CHANNEL to one of the release channels, or leaves it unset locally.
-      channel: (import.meta.env.VITE_OPENCODE_CHANNEL ?? "local") as App["channel"],
+      // SAFETY: the build sets VITE_WARCODE_CHANNEL to one of the release channels, or leaves it unset locally.
+      channel: (import.meta.env.VITE_WARCODE_CHANNEL ?? "local") as App["channel"],
       platform: platform.platform,
       packaged: platform.plugins?.packaged ?? false,
     }),

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import type { ChangeKind } from "@opencode/plugin/gui/review"
-import type { FileNode } from "@opencode/plugin/gui"
+import type { ChangeKind } from "@warcode/plugin/gui/review"
+import type { FileNode } from "@warcode/plugin/gui"
 import {
   createPierreTreeState,
   runPierreTreeSync,

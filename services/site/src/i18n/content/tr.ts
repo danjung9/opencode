@@ -16,7 +16,7 @@ export const content = {
     },
     "steer-your-sessions-from-your-phone": {
       text: "Oturumlarınızı telefonunuzdan yönetin.",
-      link: "OpenCode Mobile ile tanışın",
+      link: "Warcode Mobile ile tanışın",
     },
     "a-refreshed-desktop-app": {
       text: "Yenilenmiş masaüstü uygulaması.",
@@ -41,12 +41,12 @@ export const content = {
     },
     sdk: {
       name: "SDK",
-      body: "OpenCode'u kendi betiklerinizden, CI işlerinizden ve araçlarınızdan yönetin.",
+      body: "Warcode'u kendi betiklerinizden, CI işlerinizden ve araçlarınızdan yönetin.",
       action: "Dokümanlar",
     },
     ide: {
       name: "IDE eklentileri",
-      body: "OpenCode'u VS Code, Cursor ve Windsurf'te ya da ACP ile Zed ve JetBrains IDE'lerinde açın.",
+      body: "Warcode'u VS Code, Cursor ve Windsurf'te ya da ACP ile Zed ve JetBrains IDE'lerinde açın.",
       action: "Kur",
     },
     mini: {
@@ -57,9 +57,9 @@ export const content = {
   },
   productDetails: {
     desktop: {
-      title: "OpenCode | macOS, Windows ve Linux için masaüstü uygulaması",
+      title: "Warcode | macOS, Windows ve Linux için masaüstü uygulaması",
       description:
-        "İstediğiniz kadar OpenCode ajanını paralel çalıştırın, her değişikliği yanlarındaki tarayıcıda görün ve her cihazdan devam edin. macOS, Windows ve Linux için.",
+        "İstediğiniz kadar Warcode ajanını paralel çalıştırın, her değişikliği yanlarındaki tarayıcıda görün ve her cihazdan devam edin. macOS, Windows ve Linux için.",
       intro:
         "Birden fazla ajanı aynı anda, her oturumu kendi sekmesinde çalıştırın. Her değişikliği diff olarak inceleyin, istediğiniz satıra yorum yapın ve sonucu yerleşik tarayıcıda kontrol edin. macOS, Windows ve Linux için.",
       showcase: {
@@ -77,16 +77,16 @@ export const content = {
         },
         "extend-it": {
           title: "Genişletin",
-          body: "Araçlarınızı ve hizmetlerinizi bağlayın, ajan her şeyle çalışabilsin. Ya da OpenCode'un kendisi için kenar çubuğunda kendi arayüzü olan eklentiler yapmasını sağlayın.",
+          body: "Araçlarınızı ve hizmetlerinizi bağlayın, ajan her şeyle çalışabilsin. Ya da Warcode'un kendisi için kenar çubuğunda kendi arayüzü olan eklentiler yapmasını sağlayın.",
         },
       },
     },
     mobile: {
-      title: "OpenCode | Mobile, kodlama oturumlarınız telefonunuzda",
+      title: "Warcode | Mobile, kodlama oturumlarınız telefonunuzda",
       description:
-        "OpenCode oturumlarını telefonunuzdan başlatın ve yönetin. Ajan bilgisayarınızda çalışırken onunla konuşun.",
+        "Warcode oturumlarını telefonunuzdan başlatın ve yönetin. Ajan bilgisayarınızda çalışırken onunla konuşun.",
       intro:
-        "Nerede olursanız olun oturumları telefonunuzdan başlatın ve yönetin. Bir oturumu arayıp ajanla konuşun ya da bir oturum açıp kaldığınız yerden devam edin, hepsi kendi bilgisayarınızdaki OpenCode üzerinde.",
+        "Nerede olursanız olun oturumları telefonunuzdan başlatın ve yönetin. Bir oturumu arayıp ajanla konuşun ya da bir oturum açıp kaldığınız yerden devam edin, hepsi kendi bilgisayarınızdaki Warcode üzerinde.",
       features: {
         "notify-when-done": {
           title: "Bitince haber ver",
@@ -94,7 +94,7 @@ export const content = {
         },
         "pair-from-anywhere": {
           title: "Her yerden eşle",
-          body: "opencode pair --remote ile her ağdan bağlanın.",
+          body: "warcode pair --remote ile her ağdan bağlanın.",
         },
         "every-computer": {
           title: "Her bilgisayar",
@@ -110,7 +110,7 @@ export const content = {
         },
         "your-computer": {
           title: "Bilgisayarınız",
-          body: "Kendi makinenizde çalışan OpenCode'a bağlanır.",
+          body: "Kendi makinenizde çalışan Warcode'a bağlanır.",
         },
         "share-sheet": {
           title: "Paylaşım menüsü",
@@ -141,9 +141,9 @@ export const content = {
       },
     },
     terminal: {
-      title: "OpenCode | Açık kaynaklı kodlama ajanı için terminal arayüzü",
+      title: "Warcode | Açık kaynaklı kodlama ajanı için terminal arayüzü",
       description:
-        "OpenCode için her kabukta, editörde ya da uzak sunucuda çalışan hızlı bir terminal arayüzü. Ne istediğinizi anlatın, her düzenlemeyi diff olarak görün ve komutları onaylayın.",
+        "Warcode için her kabukta, editörde ya da uzak sunucuda çalışan hızlı bir terminal arayüzü. Ne istediğinizi anlatın, her düzenlemeyi diff olarak görün ve komutları onaylayın.",
       intro:
         "Her kabukta, editörde ya da uzak sunucuda çalışan hızlı bir terminal arayüzü. Ne istediğinizi sade bir dille anlatın, her düzenlemenin diff olarak gelişini izleyin ve hangi komutların kendiliğinden çalışacağını seçin.",
       features: {
@@ -161,7 +161,7 @@ export const content = {
         },
         "one-off-runs": {
           title: "Tek seferlik",
-          body: "opencode run tek bir mesaj gönderir ve yanıtı yazdırır.",
+          body: "warcode run tek bir mesaj gönderir ve yanıtı yazdırır.",
         },
         "agents-and-commands": {
           title: "Ajan ve komutlar",
@@ -173,11 +173,11 @@ export const content = {
         },
         "any-server": {
           title: "Her sunucu",
-          body: "--server ile bir OpenCode sunucusuna URL üzerinden bağlanın.",
+          body: "--server ile bir Warcode sunucusuna URL üzerinden bağlanın.",
         },
         "usage-stats": {
           title: "İstatistikler",
-          body: "opencode stats paylaşılabilir kullanım istatistikleri gösterir.",
+          body: "warcode stats paylaşılabilir kullanım istatistikleri gösterir.",
         },
       },
       showcase: {
@@ -195,20 +195,20 @@ export const content = {
         },
         mini: {
           title: "Mini",
-          body: "opencode mini'yi çalıştırın, yanıtlar kaydırma geçmişinize yazılır.",
+          body: "warcode mini'yi çalıştırın, yanıtlar kaydırma geçmişinize yazılır.",
         },
       },
     },
     sdk: {
-      title: "OpenCode | Betikler, CI işleri ve araçlar için TypeScript SDK",
+      title: "Warcode | Betikler, CI işleri ve araçlar için TypeScript SDK",
       description:
-        "OpenCode'u kendi betiklerinizden, CI işlerinizden ve araçlarınızdan yönetin. Tipli TypeScript istemcisi oturum oluşturur, prompt gönderir ve her olayı anında aktarır.",
+        "Warcode'u kendi betiklerinizden, CI işlerinizden ve araçlarınızdan yönetin. Tipli TypeScript istemcisi oturum oluşturur, prompt gönderir ve her olayı anında aktarır.",
       intro:
-        "OpenCode'u kendi betiklerinizden, CI işlerinizden ve araçlarınızdan yönetin. SDK, OpenCode'u kendi yapılandırmanız ve modellerinizle sürecinizin içinde çalıştırır. Tipli istemcisi oturum oluşturur, prompt gönderir ve her olayı aktarır.",
+        "Warcode'u kendi betiklerinizden, CI işlerinizden ve araçlarınızdan yönetin. SDK, Warcode'u kendi yapılandırmanız ve modellerinizle sürecinizin içinde çalıştırır. Tipli istemcisi oturum oluşturur, prompt gönderir ve her olayı aktarır.",
       features: {
         "typescript-client": {
           title: "TypeScript istemcisi",
-          body: "@opencode/client ile aynı değerlere sahip tipli istekler ve olaylar.",
+          body: "@warcode/client ile aynı değerlere sahip tipli istekler ve olaylar.",
         },
         "sessions-from-code": {
           title: "Koddan oturumlar",
@@ -216,15 +216,15 @@ export const content = {
         },
         "any-model": {
           title: "Her model",
-          body: "OpenCode kurulumunuzdaki modelleri kullanır.",
+          body: "Warcode kurulumunuzdaki modelleri kullanır.",
         },
         "npm-or-bun": {
           title: "npm ya da bun",
-          body: "npm i @opencode/sdk ya da bun add @opencode/sdk ile kurun.",
+          body: "npm i @warcode/sdk ya da bun add @warcode/sdk ile kurun.",
         },
         "in-process-host": {
           title: "Süreç içi host",
-          body: "OpenCode'u ağ adımı olmadan bellekte çalıştırır.",
+          body: "Warcode'u ağ adımı olmadan bellekte çalıştırır.",
         },
         "your-plugins": {
           title: "Eklentileriniz",
@@ -236,13 +236,13 @@ export const content = {
         },
         "cloudflare-workers": {
           title: "Cloudflare Workers",
-          body: "OpenCode'u Workers üzerinde bir Cloudflare Durable Object içinde çalıştırın.",
+          body: "Warcode'u Workers üzerinde bir Cloudflare Durable Object içinde çalıştırın.",
         },
       },
       showcase: {
         "fix-ci-from-code": {
           title: "CI'ı koddan düzelt",
-          body: "Kısa bir betik OpenCode'dan başarısız testleri düzeltmesini ister ve testleri yeniden çalıştırır.",
+          body: "Kısa bir betik Warcode'dan başarısız testleri düzeltmesini ister ve testleri yeniden çalıştırır.",
         },
         "follow-every-step": {
           title: "Her adımı izle",
@@ -250,24 +250,24 @@ export const content = {
         },
         "build-your-own-tools": {
           title: "Kendi araçların",
-          body: "OpenCode'u birkaç satırla botlara, panolara ve iş akışlarına bağlayın.",
+          body: "Warcode'u birkaç satırla botlara, panolara ve iş akışlarına bağlayın.",
         },
         "in-your-process": {
           title: "Kendi sürecinizde",
-          body: "OpenCode'u kendi yapılandırmanız ve modellerinizle sürecinizin içinde çalıştırır.",
+          body: "Warcode'u kendi yapılandırmanız ve modellerinizle sürecinizin içinde çalıştırır.",
         },
       },
     },
     ide: {
-      title: "OpenCode | VS Code, Cursor ve Zed için editör entegrasyonları",
+      title: "Warcode | VS Code, Cursor ve Zed için editör entegrasyonları",
       description:
-        "OpenCode'u editörünüzde kullanın. VS Code, Cursor, Windsurf ve VSCodium için eklenti, Zed, JetBrains IDE'leri ve diğer ACP editörleri için opencode acp.",
+        "Warcode'u editörünüzde kullanın. VS Code, Cursor, Windsurf ve VSCodium için eklenti, Zed, JetBrains IDE'leri ve diğer ACP editörleri için warcode acp.",
       intro:
-        "OpenCode'u editörünüzün içinde kullanın. VS Code, Cursor, Windsurf ve VSCodium'da entegre terminalde opencode çalıştırın, eklenti kendini kursun. Zed, JetBrains IDE'leri ve Agent Client Protocol destekleyen diğer editörler OpenCode'u opencode acp ile çalıştırır.",
+        "Warcode'u editörünüzün içinde kullanın. VS Code, Cursor, Windsurf ve VSCodium'da entegre terminalde warcode çalıştırın, eklenti kendini kursun. Zed, JetBrains IDE'leri ve Agent Client Protocol destekleyen diğer editörler Warcode'u warcode acp ile çalıştırır.",
       features: {
         "quick-launch": {
           title: "Hızlı açılış",
-          body: "Cmd+Esc ya da Ctrl+Esc, OpenCode'u bölünmüş bir terminalde açar.",
+          body: "Cmd+Esc ya da Ctrl+Esc, Warcode'u bölünmüş bir terminalde açar.",
         },
         "new-session": {
           title: "Yeni oturum",
@@ -275,7 +275,7 @@ export const content = {
         },
         context: {
           title: "Bağlam",
-          body: "Geçerli seçiminizi ya da sekmenizi OpenCode ile paylaşır.",
+          body: "Geçerli seçiminizi ya da sekmenizi Warcode ile paylaşır.",
         },
         "file-references": {
           title: "Dosya referansı",
@@ -283,7 +283,7 @@ export const content = {
         },
         "installs-itself": {
           title: "Kendini kurar",
-          body: "Eklemek için entegre terminalde opencode çalıştırın.",
+          body: "Eklemek için entegre terminalde warcode çalıştırın.",
         },
         "acp-editors": {
           title: "ACP editörleri",
@@ -295,16 +295,16 @@ export const content = {
         },
         "same-agent": {
           title: "Aynı ajan",
-          body: "Terminalde çalıştırdığınız OpenCode, kodunuzun yanında.",
+          body: "Terminalde çalıştırdığınız Warcode, kodunuzun yanında.",
         },
       },
     },
     mini: {
-      title: "OpenCode | Mini, ajan için minimal bir terminal arayüzü",
+      title: "Warcode | Mini, ajan için minimal bir terminal arayüzü",
       description:
-        "Mini, OpenCode'u minimal bir terminal arayüzünde çalıştırır. Yanıtlar terminalin kendi kaydırma geçmişine yazılır, altta yalnızca bir prompt ve bir durum satırı kalır.",
+        "Mini, Warcode'u minimal bir terminal arayüzünde çalıştırır. Yanıtlar terminalin kendi kaydırma geçmişine yazılır, altta yalnızca bir prompt ve bir durum satırı kalır.",
       intro:
-        "OpenCode için minimal bir terminal arayüzü. opencode mini'yi çalıştırın, yanıtlar doğrudan terminalinizin kaydırma geçmişine yazılsın. Onları diğer çıktılar gibi kaydırır, arar ve kopyalarsınız. Altta yalnızca prompt ve bir durum satırı kalır.",
+        "Warcode için minimal bir terminal arayüzü. warcode mini'yi çalıştırın, yanıtlar doğrudan terminalinizin kaydırma geçmişine yazılsın. Onları diğer çıktılar gibi kaydırır, arar ve kopyalarsınız. Altta yalnızca prompt ve bir durum satırı kalır.",
       features: {
         "your-scrollback": {
           title: "Kaydırma geçmişi",
@@ -326,8 +326,8 @@ export const content = {
           title: "Sonra devam et",
           body: "Son oturuma -c ile, herhangi birine -s ile devam edin.",
         },
-        "same-opencode": {
-          title: "Aynı OpenCode",
+        "same-warcode": {
+          title: "Aynı Warcode",
           body: "Diğer uygulamalarla aynı sunucu, ajanlar ve modeller.",
         },
         agents: {
@@ -343,16 +343,16 @@ export const content = {
   },
   extensionCard: {
     name: "Eklentiler",
-    body: "OpenCode'u VS Code'da ya da ACP ile Zed ve diğer editörlerde kullanın.",
+    body: "Warcode'u VS Code'da ya da ACP ile Zed ve diğer editörlerde kullanın.",
     action: "Kur",
   },
   extensions: {
     browse: {
       name: "Browse",
       body: "Ajanlar gerçek tarayıcınızı kullansın.",
-      title: "OpenCode | Browse, kodlama ajanları için gerçek tarayıcınız",
+      title: "Warcode | Browse, kodlama ajanları için gerçek tarayıcınız",
       description:
-        "Browse, OpenCode'un ve diğer MCP istemcilerinin gerçek tarayıcınızı kullanmasını sağlar. Ajanlar arka plan sekmelerini Playwright ile yönetir, girişleri ve 2FA'yı size bırakır.",
+        "Browse, Warcode'un ve diğer MCP istemcilerinin gerçek tarayıcınızı kullanmasını sağlar. Ajanlar arka plan sekmelerini Playwright ile yönetir, girişleri ve 2FA'yı size bırakır.",
       intro:
         "Ajanlarınızın gerçek tarayıcınızı, yani sekmelerinizi, oturum açmış hesaplarınızı ve eklentilerinizi kullanmasını sağlayan bir MCP sunucusu ve bir Chromium eklentisi. Sekmeleri Playwright ile açıp yönetir, ekran görüntüsü alır ve ekranı kaydederler. Bunu yolunuza çıkmayan, gruplanmış arka plan sekmelerinde yaparlar. Sıra size geldiğinde, örneğin bir giriş, 2FA istemi ya da ödeme için, sekmeyi size verirler ve siz Continue'ya tıklayınca devam ederler.",
       features: {
@@ -378,7 +378,7 @@ export const content = {
         },
         "any-mcp-client": {
           title: "Her MCP istemcisi",
-          body: "OpenCode, Claude Code, Cursor, Codex, Zed ve çok daha fazlası.",
+          body: "Warcode, Claude Code, Cursor, Codex, Zed ve çok daha fazlası.",
         },
         "all-your-logins": {
           title: "Tüm oturum açmalarınız",
@@ -413,10 +413,10 @@ export const content = {
   },
   getStarted: {
     title: "Başlayın",
-    lead: "Başlamanın en kolay yolu OpenCode'u indirip ücretsiz modelleri kullanmak. Hesap gerekmez. Daha fazlası için kendi aboneliğinizi getirin ya da OpenCode Go kullanın.",
+    lead: "Başlamanın en kolay yolu Warcode'u indirip ücretsiz modelleri kullanmak. Hesap gerekmez. Daha fazlası için kendi aboneliğinizi getirin ya da Warcode Go kullanın.",
     phrases: {
-      "download-opencode": {
-        text: "OpenCode'u indirip",
+      "download-warcode": {
+        text: "Warcode'u indirip",
       },
       "free-models": {
         text: "ücretsiz modelleri",
@@ -427,8 +427,8 @@ export const content = {
       "a-subscription-you-already-have": {
         text: "zaten sahip olduğunuz bir abonelik",
       },
-      "opencode-go": {
-        text: "OpenCode Go",
+      "warcode-go": {
+        text: "Warcode Go",
       },
     },
     subscriptions: {
@@ -440,11 +440,11 @@ export const content = {
       },
     },
     plans: {
-      "opencode-go": {
-        name: "OpenCode Go",
+      "warcode-go": {
+        name: "Warcode Go",
       },
-      "opencode-go-plus": {
-        name: "OpenCode Go Plus",
+      "warcode-go-plus": {
+        name: "Warcode Go Plus",
       },
     },
     steps: {
@@ -454,20 +454,20 @@ export const content = {
       },
       "use-free-models": {
         title: "Ücretsiz modeller",
-        line: "OpenCode bir dizi ücretsiz modelle gelir. Hesap gerekmez.",
+        line: "Warcode bir dizi ücretsiz modelle gelir. Hesap gerekmez.",
       },
       "add-more-models": {
         title: "Model ekle",
-        line: "Kendi aboneliğinizi getirin ya da aylık 10 $'dan başlayan OpenCode Go seçkisini kullanın.",
+        line: "Kendi aboneliğinizi getirin ya da aylık 10 $'dan başlayan Warcode Go seçkisini kullanın.",
       },
     },
     sentence:
-      "OpenCode'u indirin, ücretsiz modellerle başlayın, daha fazlasını istediğinizde kendi aboneliğinizi ya da OpenCode Go'yu kullanın.",
+      "Warcode'u indirin, ücretsiz modellerle başlayın, daha fazlasını istediğinizde kendi aboneliğinizi ya da Warcode Go'yu kullanın.",
   },
   byos: {
     title: "Kendi aboneliğinizi getirin",
     headline: "Zaten sahip olduğunuz abonelikleri kullanın.",
-    line: "ChatGPT Plus ya da Pro veya GitHub Copilot ile giriş yapın. Ya da bir OpenCode aboneliği kullanın.",
+    line: "ChatGPT Plus ya da Pro veya GitHub Copilot ile giriş yapın. Ya da bir Warcode aboneliği kullanın.",
     yours: {
       label: "Aboneliğiniz",
       items: {
@@ -479,9 +479,9 @@ export const content = {
         },
       },
     },
-    planLinks: ["OpenCode aboneliği", "OpenCode Go"],
+    planLinks: ["Warcode aboneliği", "Warcode Go"],
     ours: {
-      label: "OpenCode planları",
+      label: "Warcode planları",
     },
   },
   brand: {
@@ -493,8 +493,8 @@ export const content = {
     },
     naming: {
       title: "Ad",
-      body: "OpenCode'u büyük O ve büyük C ile tek kelime olarak yazın. Opencode, Open Code, OpenCode AI ya da Open-Code yazmayın.",
-      code: "Küçük harfli `opencode` adını yalnızca kodda ve `opencode-figma` ya da `@acme/opencode-plugin` gibi paket adlarında kullanın.",
+      body: "Warcode'u büyük O ve büyük C ile tek kelime olarak yazın. Warcode, Open Code, Warcode AI ya da Open-Code yazmayın.",
+      code: "Küçük harfli `warcode` adını yalnızca kodda ve `warcode-figma` ya da `@acme/warcode-plugin` gibi paket adlarında kullanın.",
     },
     families: {
       logo: {
@@ -517,7 +517,7 @@ export const content = {
       },
       wordmark: {
         title: "Yazı logosu",
-        body: "OpenCode harf biçimleriyle yazılmış tam ad. Adı tam yazacak yer olan her yerde kullanın.",
+        body: "Warcode harf biçimleriyle yazılmış tam ad. Adı tam yazacak yer olan her yerde kullanın.",
         assets: {
           light: {
             name: "Açık",
@@ -722,21 +722,21 @@ export const content = {
     },
     integrations: {
       title: "Entegrasyonlar",
-      body: "OpenCode ile çalışan eklentiler, sağlayıcılar ve araçlar ile onunla yapılmış projeler bunu belirtebilir. Bir rozet ya da ortaklık logosu kullanın ve projenize sizin olduğu açıkça anlaşılacak bir ad verin.",
+      body: "Warcode ile çalışan eklentiler, sağlayıcılar ve araçlar ile onunla yapılmış projeler bunu belirtebilir. Bir rozet ya da ortaklık logosu kullanın ve projenize sizin olduğu açıkça anlaşılacak bir ad verin.",
       badges: {
-        body: "README'nize, dokümanlarınıza ya da sitenize bir rozet koyun ve opencode.ai'ye bağlayın. Arka planınıza göre açık ya da koyu dosyayı seçin (HTML kendiliğinden geçiş yapar) ve renkleri ya da metni değiştirmeyin.",
+        body: "README'nize, dokümanlarınıza ya da sitenize bir rozet koyun ve warcode.ai'ye bağlayın. Arka planınıza göre açık ya da koyu dosyayı seçin (HTML kendiliğinden geçiş yapar) ve renkleri ya da metni değiştirmeyin.",
         sizes: "Her stil 20, 32 ve 44px boyutlarında (Shields yalnızca 20px), SVG ve 2× PNG olarak gelir.",
-        mono: "Her dosyanın OpenTUI Mono metinli bir sürümü de var. Uzantıdan önce -mono ekleyin, örneğin opencode-works-with-a-light-20-mono.svg, ya da büyük harfli OpenTUI Mono için -mono-caps.",
+        mono: "Her dosyanın OpenTUI Mono metinli bir sürümü de var. Uzantıdan önce -mono ekleyin, örneğin warcode-works-with-a-light-20-mono.svg, ya da büyük harfli OpenTUI Mono için -mono-caps.",
         groups: {
           "works-with": {
             title: "Uyumlu",
-            alt: "OpenCode ile uyumlu",
-            body: "OpenCode ile çalışan eklentiler, sağlayıcılar ve araçlar için.",
+            alt: "Warcode ile uyumlu",
+            body: "Warcode ile çalışan eklentiler, sağlayıcılar ve araçlar için.",
           },
           "built-with": {
             title: "Yapıldı",
-            alt: "OpenCode ile yapıldı",
-            body: "OpenCode ile yapılmış projeler için.",
+            alt: "Warcode ile yapıldı",
+            body: "Warcode ile yapılmış projeler için.",
           },
         },
         styles: {
@@ -756,7 +756,7 @@ export const content = {
       },
       lockup: {
         title: "Ortak logo",
-        body: "OpenCode logosunu ve ortak logosunu aralarında bir × ile yan yana koyun. ×'in her iki yanında 3 çizgi boşluk bırakın, ortak logosunu OpenCode logosu kadar yüksek görünecek şekilde boyutlandırın ve tüm bileşimin çevresinde boş alan bırakın.",
+        body: "Warcode logosunu ve ortak logosunu aralarında bir × ile yan yana koyun. ×'in her iki yanında 3 çizgi boşluk bırakın, ortak logosunu Warcode logosu kadar yüksek görünecek şekilde boyutlandırın ve tüm bileşimin çevresinde boş alan bırakın.",
         partners: {
           github: {
             name: "GitHub",
@@ -766,12 +766,12 @@ export const content = {
       naming: {
         title: "Projenizi adlandırma",
         body: "Projenin size ait olduğu anlaşılsın diye kendi adınızla başlayın.",
-        rule: "`Linear for OpenCode` yazın ya da paketi `opencode-linear` olarak adlandırın. `OpenCode Linear` ya da `Linear by OpenCode` yazmayın.",
+        rule: "`Linear for Warcode` yazın ya da paketi `warcode-linear` olarak adlandırın. `Warcode Linear` ya da `Linear by Warcode` yazmayın.",
       },
     },
     trademarks: {
       title: "Markalar",
-      body: "OpenCode ve OpenCode logosu Anomaly'nin ticari markalarıdır. Bunları Anomaly'nin sizi desteklediğini ya da sponsorluğunu yaptığını ima edecek şekilde, ürün ya da şirket adınızda ya da izinsiz ürünlerde kullanmayın.",
+      body: "Warcode ve Warcode logosu Anomaly'nin ticari markalarıdır. Bunları Anomaly'nin sizi desteklediğini ya da sponsorluğunu yaptığını ima edecek şekilde, ürün ya da şirket adınızda ya da izinsiz ürünlerde kullanmayın.",
       contact: {
         before: "Sorularınız için e-posta gönderin, ",
         after: ".",
@@ -779,21 +779,21 @@ export const content = {
     },
   },
   press: {
-    title: "OpenCode | Şirket bilgileri ve marka dosyalarıyla basın kiti",
+    title: "Warcode | Şirket bilgileri ve marka dosyalarıyla basın kiti",
     description:
-      "OpenCode basın kiti. OpenCode ve onu geliştiren şirket Anomaly hakkında bilgiler, indirilebilir logolar ve yazı logoları, basın soruları için bir iletişim adresi.",
+      "Warcode basın kiti. Warcode ve onu geliştiren şirket Anomaly hakkında bilgiler, indirilebilir logolar ve yazı logoları, basın soruları için bir iletişim adresi.",
     hero: {
       title: "Basın",
-      body: "OpenCode ve Anomaly hakkında yazmak için bilgiler, marka dosyaları ve iletişim.",
+      body: "Warcode ve Anomaly hakkında yazmak için bilgiler, marka dosyaları ve iletişim.",
     },
     company: {
       title: "Anomaly hakkında",
-      lead: "Anomaly, OpenCode'u geliştiren şirkettir. Geliştiriciler için açık kaynak araçlar yapar.",
+      lead: "Anomaly, Warcode'u geliştiren şirkettir. Geliştiriciler için açık kaynak araçlar yapar.",
       more: "Diğer projeler arasında SST ve OpenTUI var, hepsi [GitHub](github) üzerinde açık kaynak.",
       learnMore: "Daha fazlası için [anoma.ly](site) adresine gidin.",
       projects: {
-        opencode: {
-          name: "OpenCode",
+        warcode: {
+          name: "Warcode",
           body: "Masaüstü, terminal ve mobil uygulamaları ile bir SDK'sı olan açık kaynaklı kodlama ajanı. MIT lisanslı, 220.000'den fazla GitHub yıldızı.",
         },
         sst: {
@@ -802,7 +802,7 @@ export const content = {
         },
         opentui: {
           name: "OpenTUI",
-          body: "Zig ile yazılmış bir çekirdekle TypeScript, React ya da Solid'de terminal arayüzleri için bir kitaplık. OpenCode onu üretimde kullanır. 13.000'den fazla GitHub yıldızı.",
+          body: "Zig ile yazılmış bir çekirdekle TypeScript, React ya da Solid'de terminal arayüzleri için bir kitaplık. Warcode onu üretimde kullanır. 13.000'den fazla GitHub yıldızı.",
         },
         "models-dev": {
           name: "Models.dev",
@@ -819,31 +819,31 @@ export const content = {
       },
     },
     about: {
-      title: "OpenCode hakkında",
-      body: "OpenCode ve ürünleri için uzun ve kısa sürümlerde, kopyalanmaya hazır tanıtım metinleri.",
+      title: "Warcode hakkında",
+      body: "Warcode ve ürünleri için uzun ve kısa sürümlerde, kopyalanmaya hazır tanıtım metinleri.",
       boilerplate: {
-        long: "OpenCode açık kaynaklı bir kodlama ajanıdır. Masaüstü uygulaması, terminal arayüzü, mobil uygulama ve SDK olarak gelir ve Claude, GPT ve Gemini dahil her sağlayıcının modelleriyle çalışır. OpenCode MIT lisanslıdır ve Anomaly tarafından geliştirilir. 220.000'den fazla GitHub yıldızı ve 1.000'den fazla katkıcısı vardır, her ay 22 milyondan fazla geliştirici onu kullanır.",
+        long: "Warcode açık kaynaklı bir kodlama ajanıdır. Masaüstü uygulaması, terminal arayüzü, mobil uygulama ve SDK olarak gelir ve Claude, GPT ve Gemini dahil her sağlayıcının modelleriyle çalışır. Warcode MIT lisanslıdır ve Anomaly tarafından geliştirilir. 220.000'den fazla GitHub yıldızı ve 1.000'den fazla katkıcısı vardır, her ay 22 milyondan fazla geliştirici onu kullanır.",
         short:
-          "OpenCode, Anomaly'nin masaüstü, terminal ve mobil uygulamaları ile bir SDK'sı olan açık kaynaklı kodlama ajanıdır.",
+          "Warcode, Anomaly'nin masaüstü, terminal ve mobil uygulamaları ile bir SDK'sı olan açık kaynaklı kodlama ajanıdır.",
       },
       products: {
-        "opencode-console": {
-          name: "OpenCode Console",
-          long: "OpenCode Console, geliştiricilerin ve ekiplerin OpenCode ve diğer kodlama ajanları için AI model erişimi satın alıp yönettiği web uygulamasıdır. Sınır modeller ve açık ağırlıklı modeller için ön ödemeli kredilerden istek başına ücretlendirilen kullandıkça öde çıkarımı ve OpenCode Go abonelikleri sunar. Ekipler Member, Admin ve Owner rollerine sahip çalışma alanları, çalışma alanı ve kullanıcı başına harcama limitleri, Okta, Microsoft Entra ID ya da Google Workspace ile tek oturum açma ve SCIM elde eder. Console 30'dan fazla sağlayıcıyı destekler, böylece ekipler mevcut sağlayıcı hesaplarını bağlayabilir ve Console'un kendi çıkarımı isteğe bağlıdır. Adresi opencode.ai/console.",
+        "warcode-console": {
+          name: "Warcode Console",
+          long: "Warcode Console, geliştiricilerin ve ekiplerin Warcode ve diğer kodlama ajanları için AI model erişimi satın alıp yönettiği web uygulamasıdır. Sınır modeller ve açık ağırlıklı modeller için ön ödemeli kredilerden istek başına ücretlendirilen kullandıkça öde çıkarımı ve Warcode Go abonelikleri sunar. Ekipler Member, Admin ve Owner rollerine sahip çalışma alanları, çalışma alanı ve kullanıcı başına harcama limitleri, Okta, Microsoft Entra ID ya da Google Workspace ile tek oturum açma ve SCIM elde eder. Console 30'dan fazla sağlayıcıyı destekler, böylece ekipler mevcut sağlayıcı hesaplarını bağlayabilir ve Console'un kendi çıkarımı isteğe bağlıdır. Adresi warcode.ai/console.",
           short:
-            "OpenCode Console, Anomaly'nin kullandıkça öde AI model erişimi, OpenCode Go abonelikleri ve bütçe ile tek oturum açma gibi ekip denetimleri sunan web uygulamasıdır.",
+            "Warcode Console, Anomaly'nin kullandıkça öde AI model erişimi, Warcode Go abonelikleri ve bütçe ile tek oturum açma gibi ekip denetimleri sunan web uygulamasıdır.",
         },
-        "opencode-go": {
-          name: "OpenCode Go",
-          long: "OpenCode Go, kodlama modelleri için sabit aylık fiyat isteyen geliştiricilere yönelik bir aboneliktir. Go aylık 10 $, daha yüksek limitli Go Plus aylık 40 $, Go Teams ise üye başına aylık 20 $'dır. Her plan, ajanlı kodlama için test edilmiş seçkin bir model kümesi içerir. Kullanım limitleri her model için aylık dolar tutarlarıdır, aylık limitin %20'si ve %50'si olan kayan 5 saatlik ve haftalık paylarla birlikte. Aboneler kredi yükleyebilir, kullandıkça öde bakiyesine geçebilir ve istedikleri zaman iptal edebilir. Go, OpenCode ve diğer ajanlarla çalışır. Adresi opencode.ai/console/go.",
+        "warcode-go": {
+          name: "Warcode Go",
+          long: "Warcode Go, kodlama modelleri için sabit aylık fiyat isteyen geliştiricilere yönelik bir aboneliktir. Go aylık 10 $, daha yüksek limitli Go Plus aylık 40 $, Go Teams ise üye başına aylık 20 $'dır. Her plan, ajanlı kodlama için test edilmiş seçkin bir model kümesi içerir. Kullanım limitleri her model için aylık dolar tutarlarıdır, aylık limitin %20'si ve %50'si olan kayan 5 saatlik ve haftalık paylarla birlikte. Aboneler kredi yükleyebilir, kullandıkça öde bakiyesine geçebilir ve istedikleri zaman iptal edebilir. Go, Warcode ve diğer ajanlarla çalışır. Adresi warcode.ai/console/go.",
           short:
-            "OpenCode Go, Anomaly'nin geliştiricilere seçkin kodlama modellerinde aylık kullanım limitleri veren, aylık 10 $'dan başlayan aboneliğidir.",
+            "Warcode Go, Anomaly'nin geliştiricilere seçkin kodlama modellerinde aylık kullanım limitleri veren, aylık 10 $'dan başlayan aboneliğidir.",
         },
-        "opencode-data": {
-          name: "OpenCode Data",
-          long: "OpenCode Data, geliştiricilerin OpenCode'da hangi AI modellerini kullandığını ve bu dağılımın zamanla nasıl değiştiğini gösteren herkese açık bir panodur. En çok kullanılan modellerin sıralamasını, token kullanımını, oturum ve token maliyetlerini, önbellek oranlarını, pazar payını ve ülkelere göre dağılımı yayımlar. Rakamlar saatte bir toplanır, günler ve haftalar UTC'ye göredir. Kullanıcı ve oturum sayıları yaklaşıktır, maliyetler OpenCode model kataloğundaki liste fiyatlarını kullanır. Gazeteciler, sayfada gösterilen güncelleme saatiyle birlikte OpenCode Data (opencode.ai/data) olarak kaynak gösterebilir.",
+        "warcode-data": {
+          name: "Warcode Data",
+          long: "Warcode Data, geliştiricilerin Warcode'da hangi AI modellerini kullandığını ve bu dağılımın zamanla nasıl değiştiğini gösteren herkese açık bir panodur. En çok kullanılan modellerin sıralamasını, token kullanımını, oturum ve token maliyetlerini, önbellek oranlarını, pazar payını ve ülkelere göre dağılımı yayımlar. Rakamlar saatte bir toplanır, günler ve haftalar UTC'ye göredir. Kullanıcı ve oturum sayıları yaklaşıktır, maliyetler Warcode model kataloğundaki liste fiyatlarını kullanır. Gazeteciler, sayfada gösterilen güncelleme saatiyle birlikte Warcode Data (warcode.ai/data) olarak kaynak gösterebilir.",
           short:
-            "OpenCode Data, opencode.ai/data adresinde AI modellerini OpenCode'daki gerçek kullanıma göre sıralayan, token, maliyet ve pazar payını saatlik güncelleyen herkese açık bir panodur.",
+            "Warcode Data, warcode.ai/data adresinde AI modellerini Warcode'daki gerçek kullanıma göre sıralayan, token, maliyet ve pazar payını saatlik güncelleyen herkese açık bir panodur.",
         },
       },
     },
@@ -872,9 +872,9 @@ export const content = {
           date: "Eki 2025",
           text: "1 milyon+ indirme",
         },
-        "opencode-1-0": {
+        "warcode-1-0": {
           date: "Eki 2025",
-          text: "OpenCode 1.0",
+          text: "Warcode 1.0",
         },
         "desktop-app-ships": {
           date: "Ara 2025",
@@ -884,9 +884,9 @@ export const content = {
           date: "Oca 2026",
           text: "10 milyon+ indirme",
         },
-        "opencode-2-0": {
+        "warcode-2-0": {
           date: "Eyl 2026",
-          text: "OpenCode 2.0",
+          text: "Warcode 2.0",
         },
         "220-000-github-stars": {
           date: "Kas 2026",
@@ -896,7 +896,7 @@ export const content = {
     },
     news: {
       title: "Son sürümler",
-      intro: "OpenCode sık sık sürüm çıkarır. Yeni özellikler içeren en yeni sürümler bunlar.",
+      intro: "Warcode sık sık sürüm çıkarır. Yeni özellikler içeren en yeni sürümler bunlar.",
       changelog: {
         text: "Tüm sürüm notları",
       },
@@ -907,7 +907,7 @@ export const content = {
     media: {
       title: "Medya",
       intro:
-        "Her uygulamanın gerçek üründen kaydedilmiş görselleri ve kısa videoları. OpenCode hakkında yazarken kullanabilirsiniz.",
+        "Her uygulamanın gerçek üründen kaydedilmiş görselleri ve kısa videoları. Warcode hakkında yazarken kullanabilirsiniz.",
       note: "Tüm kayıtlar koyu temayı kullanır. Görseller ve kapaklar en fazla 1920 × 1080, dikeyde 1080 × 1350 boyutunda JPG'lerdir. Videolar sessiz MP4 kliplerdir.",
       products: {
         desktop: {
@@ -1067,13 +1067,13 @@ export const content = {
     brand: {
       title: "Marka",
       before:
-        "OpenCode logolarını ve yazı logolarını tek bir ZIP dosyasında indirin. Tek tek dosyalar, varyantlar ve kullanım kuralları için ",
+        "Warcode logolarını ve yazı logolarını tek bir ZIP dosyasında indirin. Tek tek dosyalar, varyantlar ve kullanım kuralları için ",
       link: {
         text: "Marka",
       },
       after: " sayfasına gidin.",
       usage:
-        "Bu dosyaları OpenCode hakkında yazmak için kullanabilirsiniz. Onları değiştirmeyin ve OpenCode'un çalışmanızı desteklediğini ima etmeyin.",
+        "Bu dosyaları Warcode hakkında yazmak için kullanabilirsiniz. Onları değiştirmeyin ve Warcode'un çalışmanızı desteklediğini ima etmeyin.",
     },
     product: {
       title: "Ürün",
@@ -1084,7 +1084,7 @@ export const content = {
         },
         mobile: {
           name: "Mobile",
-          body: "En yeni OpenCode uygulaması. Ajanla konuşmak için bir oturumu arayın, ardından değişikliklerini her yerden telefonunuzla inceleyip onaylayın.",
+          body: "En yeni Warcode uygulaması. Ajanla konuşmak için bir oturumu arayın, ardından değişikliklerini her yerden telefonunuzla inceleyip onaylayın.",
         },
         terminal: {
           name: "Terminal",
@@ -1105,7 +1105,7 @@ export const content = {
         },
         support: {
           title: "Destek",
-          body: "OpenCode ile ilgili yardım için bir issue açın ya da topluluğa sorun. Hesap ve faturalama soruları için bize e-posta gönderin.",
+          body: "Warcode ile ilgili yardım için bir issue açın ya da topluluğa sorun. Hesap ve faturalama soruları için bize e-posta gönderin.",
           links: {
             "github-issues": {
               text: "GitHub issue'ları",
@@ -1190,13 +1190,13 @@ export const content = {
           label: "Open VSX (Cursor, Windsurf, VSCodium)",
         },
       },
-      lead: "Editörünüzün entegre terminalinde opencode çalıştırın, eklenti kendini kursun ya da kendiniz kurun.",
+      lead: "Editörünüzün entegre terminalinde warcode çalıştırın, eklenti kendini kursun ya da kendiniz kurun.",
       more: {
         label: "Zed, JetBrains IDE'leri ve diğer ACP editörlerini kurun",
       },
     },
     mini: {
-      lead: "Mini, OpenCode CLI ile gelir. Bunlardan biriyle kurun, sonra opencode mini çalıştırın.",
+      lead: "Mini, Warcode CLI ile gelir. Bunlardan biriyle kurun, sonra warcode mini çalıştırın.",
       commands: {
         curl: {
           name: "Betik",
@@ -1215,11 +1215,11 @@ export const content = {
     title: "Telefonunuzu bağlayın",
     cardTitle: "Telefonunuzu tek komutla eşleyin",
     intro:
-      "OpenCode Mobile, bilgisayarınızdaki OpenCode için bir uzaktan kumandadır. Oturumlarınız orada çalışmaya devam eder, uygulama onları gösterir ve yönlendirmenizi sağlar.",
+      "Warcode Mobile, bilgisayarınızdaki Warcode için bir uzaktan kumandadır. Oturumlarınız orada çalışmaya devam eder, uygulama onları gösterir ve yönlendirmenizi sağlar.",
     steps: {
       "get-the-app": {
         title: "Uygulamayı edinin",
-        body: "OpenCode betasını TestFlight üzerinden iPhone'unuza kurun. Android uygulaması çok yakında.",
+        body: "Warcode betasını TestFlight üzerinden iPhone'unuza kurun. Android uygulaması çok yakında.",
       },
       "run-this-on-your-computer": {
         title: "Bunu bilgisayarda çalıştırın",
@@ -1230,12 +1230,12 @@ export const content = {
         body: "QR kodunu uygulamayla okutun ya da bağlantıyı yapıştırın. Bilgisayarınızın son oturumları telefonunuzda açılır.",
       },
     },
-    note: "--remote bir OpenTunnel adresi üzerinden bağlanır, bu yüzden her ağdan çalışır. Aynı Wi-Fi'daysanız bir kez opencode service set hostname 0.0.0.0, ardından opencode pair çalıştırın.",
+    note: "--remote bir OpenTunnel adresi üzerinden bağlanır, bu yüzden her ağdan çalışır. Aynı Wi-Fi'daysanız bir kez warcode service set hostname 0.0.0.0, ardından warcode pair çalıştırın.",
     facts: [
       "Eşleme her ağdan çalışır, çünkü --remote bir OpenTunnel adresi üzerinden bağlanır.",
       "Bağlantı ve kod bir kez çalışır ve 5 dakikada sona erer.",
       "Bilgisayarı açık tutun, çünkü ajan telefonda değil, orada çalışır.",
-      "Aynı Wi-Fi'daysanız bir kez opencode service set hostname 0.0.0.0, ardından opencode pair çalıştırın.",
+      "Aynı Wi-Fi'daysanız bir kez warcode service set hostname 0.0.0.0, ardından warcode pair çalıştırın.",
     ],
   },
 } satisfies ContentOverlay

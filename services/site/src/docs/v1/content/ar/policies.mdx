@@ -1,15 +1,15 @@
 ---
 title: السياسات
-description: تحكّم في الموارد المُعدّة التي يُسمح لـ OpenCode باستخدامها.
+description: تحكّم في الموارد المُعدّة التي يُسمح لـ Warcode باستخدامها.
 ---
 
-:::caution[يتطلب OpenCode 2]
-لا تُطبَّق السياسات في OpenCode 1. تتطلب الأمثلة في هذه الصفحة OpenCode 2. في OpenCode 1، استخدم [`disabled_providers`](/docs/config#disabled-providers) أو [`enabled_providers`](/docs/config#enabled-providers) للتحكم في إتاحة المزوّدين. راجع [توثيق السياسات في OpenCode 2](https://opencode.ai/docs/policies/) لمعرفة طريقة الاستخدام الحالية.
+:::caution[يتطلب Warcode 2]
+لا تُطبَّق السياسات في Warcode 1. تتطلب الأمثلة في هذه الصفحة Warcode 2. في Warcode 1، استخدم [`disabled_providers`](/docs/config#disabled-providers) أو [`enabled_providers`](/docs/config#enabled-providers) للتحكم في إتاحة المزوّدين. راجع [توثيق السياسات في Warcode 2](https://opencode.ai/docs/policies/) لمعرفة طريقة الاستخدام الحالية.
 :::
 
-تحدد السياسات ما إذا كان يُسمح لـ OpenCode بتنفيذ إجراء على مورد مُسمّى. هذه الميزة في OpenCode 2 تجريبية، وتُضبط عبر المصفوفة `experimental.policies` في `opencode.json`.
+تحدد السياسات ما إذا كان يُسمح لـ Warcode بتنفيذ إجراء على مورد مُسمّى. هذه الميزة في Warcode 2 تجريبية، وتُضبط عبر المصفوفة `experimental.policies` في `warcode.json`.
 
-السياسات منفصلة عن [الأذونات](/docs/permissions). تتحكم الأذونات فيما يمكن للأدوات فعله أثناء الجلسة، بينما تتحكم السياسات في ما إذا كان يُسمح لـ OpenCode باستخدام مورد مثل مزوّد LLM.
+السياسات منفصلة عن [الأذونات](/docs/permissions). تتحكم الأذونات فيما يمكن للأدوات فعله أثناء الجلسة، بينما تتحكم السياسات في ما إذا كان يُسمح لـ Warcode باستخدام مورد مثل مزوّد LLM.
 
 ---
 
@@ -23,7 +23,7 @@ description: تحكّم في الموارد المُعدّة التي يُسمح
 
 على سبيل المثال، لحظر استخدام المزوّد `openai`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -44,7 +44,7 @@ description: تحكّم في الموارد المُعدّة التي يُسمح
 
 ## السياسات المتاحة
 
-يدعم OpenCode حاليًا إجراء سياسة واحدًا:
+يدعم Warcode حاليًا إجراء سياسة واحدًا:
 
 | الإجراء        | المورد                      | الوصف                              |
 | -------------- | --------------------------- | ---------------------------------- |
@@ -58,7 +58,7 @@ description: تحكّم في الموارد المُعدّة التي يُسمح
 
 يدعم الحقل `resource` المطابقة بأحرف البدل. استخدم `*` لمطابقة صفر أو أكثر من الأحرف، و`?` لمطابقة حرف واحد.
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -83,7 +83,7 @@ description: تحكّم في الموارد المُعدّة التي يُسمح
 
 على سبيل المثال، للسماح بـ Anthropic فقط:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -111,11 +111,11 @@ description: تحكّم في الموارد المُعدّة التي يُسمح
 
 ## قوائم المزوّدين
 
-في OpenCode 2، استخدم السياسات بدلًا من الإعدادين الأقدم `disabled_providers` و`enabled_providers` عند التحكم في الوصول إلى المزوّدين. واصل استخدام قوائم المزوّدين هذه في OpenCode 1.
+في Warcode 2، استخدم السياسات بدلًا من الإعدادين الأقدم `disabled_providers` و`enabled_providers` عند التحكم في الوصول إلى المزوّدين. واصل استخدام قوائم المزوّدين هذه في Warcode 1.
 
 لاستبدال `disabled_providers`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [
@@ -128,7 +128,7 @@ description: تحكّم في الموارد المُعدّة التي يُسمح
 
 لاستبدال `enabled_providers`، احظر جميع المزوّدين أولًا ثم اسمح بالمزوّدين المختارين بعد ذلك:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [

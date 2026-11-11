@@ -1,5 +1,5 @@
-import { Button } from "@opencode/ui/button"
-import { useDialog } from "@opencode/ui/context/dialog"
+import { Button } from "@warcode/ui/button"
+import { useDialog } from "@warcode/ui/context/dialog"
 import { onMount } from "solid-js"
 import { createStore } from "solid-js/store"
 import { DialogStoryRuntime, STORY_DIRECTORY, STORY_SERVER } from "@/components-lab/dialog-story-runtime"

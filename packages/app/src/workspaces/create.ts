@@ -1,8 +1,8 @@
-import type { LocationGetOutput, OpenCodeClient } from "@opencode/client/promise"
-import type { Data } from "@opencode/client/solid"
+import type { LocationGetOutput, WarcodeClient } from "@warcode/client/promise"
+import type { Data } from "@warcode/client/solid"
 
 export async function createWorktree(input: {
-  api: Pick<OpenCodeClient, "location" | "worktree">
+  api: Pick<WarcodeClient, "location" | "worktree">
   data: Pick<Data, "location">
   directory: string
   project?: LocationGetOutput["project"]

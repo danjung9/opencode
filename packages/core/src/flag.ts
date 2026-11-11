@@ -1,9 +1,9 @@
 export * as Flag from "./flag.js"
 
 import { Context, Effect, Layer, Record } from "effect"
-import { makeLocationNode } from "@opencode/util/effect/app-node"
-import { ConfigFlag } from "@opencode/schema/config/flag"
-import type { Document, Entry } from "@opencode/schema/config"
+import { makeLocationNode } from "@warcode/util/effect/app-node"
+import { ConfigFlag } from "@warcode/schema/config/flag"
+import type { Document, Entry } from "@warcode/schema/config"
 import { App } from "./app.js"
 import { Config } from "./config.js"
 
@@ -21,25 +21,25 @@ export interface Interface {
   readonly enabled: (key: Key) => Effect.Effect<boolean>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode/Flag") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/Flag") {}
 
 /**
- * `OPENCODE_FLAGS`, a comma-separated list such as `schedules,-media_blob`; a leading `-` turns a flag off, and
+ * `WARCODE_FLAGS`, a comma-separated list such as `schedules,-media_blob`; a leading `-` turns a flag off, and
  * `all` turns every flag on unless the same list opts one out, as in `all,-media_blob`.
  */
-export const Overrides = Context.Reference<string | undefined>("@opencode/Flag/Overrides", {
-  defaultValue: () => process.env.OPENCODE_FLAGS,
+export const Overrides = Context.Reference<string | undefined>("@warcode/Flag/Overrides", {
+  defaultValue: () => process.env.WARCODE_FLAGS,
 })
 
 // Any other channel, such as a release or a branch preview build, keeps flags off so none turns on by accident.
 const onByDefault = (channel: string) => channel === "local" || channel === "dev"
 
 /**
- * Resolves every flag: `OPENCODE_FLAGS` (`-key`, then `all`), then `experimental.<key>` from the highest-priority
+ * Resolves every flag: `WARCODE_FLAGS` (`-key`, then `all`), then `experimental.<key>` from the highest-priority
  * document that sets `experimental` (the same document every other `experimental` setting reads), then `all_flags: true`
  * from the highest-priority document that sets `all_flags`, so a global switch survives a project's own `experimental`
  * block, then on for local and dev builds. `all_flags: false` falls through rather than turning flags off.
- * A remote kill switch belongs above `OPENCODE_FLAGS` here.
+ * A remote kill switch belongs above `WARCODE_FLAGS` here.
  */
 export function resolve(input: {
   readonly entries: readonly Entry[]

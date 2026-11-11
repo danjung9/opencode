@@ -1,4 +1,4 @@
-# Contributing to OpenCode
+# Contributing to Warcode
 
 The changes most likely to be accepted are:
 
@@ -18,11 +18,11 @@ Want to take on an issue? Leave a comment and a maintainer may assign it unless 
 
 ## Adding Providers
 
-New providers should rarely require OpenCode changes. Add the provider to [models.dev](https://github.com/anomalyco/models.dev) first.
+New providers should rarely require Warcode changes. Add the provider to [models.dev](https://github.com/anomalyco/models.dev) first.
 
 ## Development
 
-OpenCode requires the Bun version in the `packageManager` field of [`package.json`](./package.json) or newer. From the repository root:
+Warcode requires the Bun version in the `packageManager` field of [`package.json`](./package.json) or newer. From the repository root:
 
 ```bash
 bun install
@@ -31,7 +31,7 @@ bun dev [directory]
 
 `bun dev` runs the V2 CLI and TUI. Pass a directory to open another project, or `.` to open this repository.
 
-To test a development TUI against your installed OpenCode V2 background service and live sessions:
+To test a development TUI against your installed Warcode V2 background service and live sessions:
 
 ```bash
 bun run dev:live [directory]
@@ -79,7 +79,7 @@ Follow the repository [style guide](./AGENTS.md).
 
 Bug fixes, chores, and tests must reference an existing issue. Documentation, refactor, and feature PRs are exempt from the automated linked-issue check. When required, use `Fixes #123` or `Closes #123` in the PR description.
 
-Before implementing new functionality, open a feature request describing the problem, why it belongs in OpenCode, and your proposed approach if you have one. Wait for design approval before opening the implementation PR.
+Before implementing new functionality, open a feature request describing the problem, why it belongs in Warcode, and your proposed approach if you have one. Wait for design approval before opening the implementation PR.
 
 Base branches on `dev` and complete the provided pull request template.
 

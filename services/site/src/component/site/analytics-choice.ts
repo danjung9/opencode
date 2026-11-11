@@ -56,7 +56,7 @@ function setAnalytics(on: boolean) {
     document.cookie = cookie
   })
   try {
-    localStorage.removeItem("opencode-console.funnel.seen")
+    localStorage.removeItem("warcode-console.funnel.seen")
   } catch {
     // Storage the browser refuses holds nothing to clear.
   }

@@ -1,4 +1,4 @@
-import { define } from "@opencode/plugin/effect/plugin"
+import { define } from "@warcode/plugin/effect/plugin"
 import { Effect } from "effect"
 import { Integration } from "../../integration.js"
 import { Provider } from "../../provider.js"
@@ -15,7 +15,7 @@ const legacyInput = 272_000
 const currentInput = 500_000
 
 export const OpenAIContextCapsPlugin = define({
-  id: "opencode.provider.openai-context-caps",
+  id: "warcode.provider.openai-context-caps",
   effect: Effect.fn(function* (ctx) {
     let signedIn = false
 

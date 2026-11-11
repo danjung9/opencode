@@ -1,13 +1,13 @@
 import { createMemo, createSignal, onCleanup, Show, untrack } from "solid-js"
-import { Icon } from "@opencode/ui/icon"
-import { IconButton } from "@opencode/ui/icon-button"
-import { showToast } from "@opencode/ui/toast"
-import { Tooltip } from "@opencode/ui/tooltip"
-import { usePlugin } from "@opencode/plugin/gui"
-import { motionGlobals, motionTuning } from "@opencode/ui/motion-tuning"
-import { duration } from "@opencode/util/duration"
-import { SessionTurn } from "@opencode/util/session-turn"
-import { builtinContext } from "@opencode/plugin/gui/builtin"
+import { Icon } from "@warcode/ui/icon"
+import { IconButton } from "@warcode/ui/icon-button"
+import { showToast } from "@warcode/ui/toast"
+import { Tooltip } from "@warcode/ui/tooltip"
+import { usePlugin } from "@warcode/plugin/gui"
+import { motionGlobals, motionTuning } from "@warcode/ui/motion-tuning"
+import { duration } from "@warcode/util/duration"
+import { SessionTurn } from "@warcode/util/session-turn"
+import { builtinContext } from "@warcode/plugin/gui/builtin"
 import {
   initialFocusToggleState,
   isFocusToggleActive,
@@ -348,7 +348,7 @@ export default function DebugBar(props: {
         <Show when={props.motion}>
           <div class="ms-auto flex items-center gap-[9px]">
             {/* The lab's route exists only on the dev server and in Beta. */}
-            {(import.meta.env.DEV || import.meta.env.VITE_OPENCODE_CHANNEL === "beta") && (
+            {(import.meta.env.DEV || import.meta.env.VITE_WARCODE_CHANNEL === "beta") && (
               <Tooltip appearance="compact" value={ctx.t("components.tip")} placement="top">
                 <a
                   href="/components"

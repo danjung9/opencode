@@ -101,8 +101,8 @@ function clearHighlightFind() {
   const api = globalThis.CSS?.highlights
 
   if (!api) return
-  api.delete("opencode-find")
-  api.delete("opencode-find-current")
+  api.delete("warcode-find")
+  api.delete("warcode-find-current")
 }
 
 function supportsHighlights() {
@@ -438,16 +438,16 @@ export function createFileFind(opts: CreateFileFindOptions) {
 
     if (!api || !("Highlight" in globalThis)) return false
 
-    api.delete("opencode-find")
-    api.delete("opencode-find-current")
+    api.delete("warcode-find")
+    api.delete("warcode-find-current")
 
     const active = ranges[currentIndex]
 
-    if (active) api.set("opencode-find-current", new Highlight(active))
+    if (active) api.set("warcode-find-current", new Highlight(active))
 
     const rest = ranges.filter((_, i) => i !== currentIndex)
 
-    if (rest.length > 0) api.set("opencode-find", new Highlight(...rest))
+    if (rest.length > 0) api.set("warcode-find", new Highlight(...rest))
 
     return true
   }

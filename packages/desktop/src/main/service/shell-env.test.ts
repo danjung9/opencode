@@ -35,7 +35,7 @@ describe("shell env", () => {
   test.skipIf(process.platform === "win32")(
     "loadShellEnv falls back to -l without blocking the event loop",
     async () => {
-      const root = mkdtempSync(path.join(tmpdir(), "opencode-shell-env-"))
+      const root = mkdtempSync(path.join(tmpdir(), "warcode-shell-env-"))
       const shell = path.join(root, "shell")
       const release = path.join(root, "release")
 

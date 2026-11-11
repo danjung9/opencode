@@ -2,7 +2,7 @@ import { expect, test } from "bun:test"
 import { Deferred, Effect, Exit, Fiber, Scope } from "effect"
 import { DesktopCliState } from "./desktop-cli-state"
 
-const cli = { version: "2.0.0", command: ["opencode-cli"], binary: "opencode-cli" }
+const cli = { version: "2.0.0", command: ["warcode-cli"], binary: "warcode-cli" }
 
 const eperm = new Error("EPERM: operation not permitted, copyfile")
 

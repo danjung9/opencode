@@ -69,8 +69,8 @@ story("copies the shell command and its output separately", async ({ mount, page
   expect(await clipboard()).toBe(output)
   await shell.locator('[data-slot="bash-command"]').getByRole("button", { name: "Copy", exact: true }).click()
   expect(await clipboard()).toBe(command)
-  expect(command).toContain("opencode api get /openapi.json")
-  expect(output).toContain('"name":"OpenCode"')
+  expect(command).toContain("warcode api get /openapi.json")
+  expect(output).toContain('"name":"Warcode"')
 })
 
 story("keeps Copied for two seconds after the latest click", async ({ mount, page }) => {

@@ -9,7 +9,7 @@ export const announcements = [
   // v2.2.1: "Generate Images".
   { text: "Agents can now generate images.", link: "See v2.2.1", href: "/changelog/v2.2.1" },
   // The Mobile product page (the carousel marks it new).
-  { text: "Steer your sessions from your phone.", link: "Meet OpenCode Mobile", href: "/mobile" },
+  { text: "Steer your sessions from your phone.", link: "Meet Warcode Mobile", href: "/mobile" },
   // v2.2.0: "Refreshed the desktop app experience".
   { text: "A refreshed desktop app.", link: "See what's new in 2.2", href: "/changelog/v2.2.0" },
 ] as const

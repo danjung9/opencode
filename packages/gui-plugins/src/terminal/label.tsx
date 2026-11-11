@@ -1,7 +1,7 @@
 import { Show, type JSX } from "solid-js"
-import { Icon } from "@opencode/ui/icon"
-import { Menu } from "@opencode/ui/menu"
-import { usePlugin } from "@opencode/plugin/gui"
+import { Icon } from "@warcode/ui/icon"
+import { Menu } from "@warcode/ui/menu"
+import { usePlugin } from "@warcode/plugin/gui"
 import { createInlineRename } from "./inline-rename"
 
 /**

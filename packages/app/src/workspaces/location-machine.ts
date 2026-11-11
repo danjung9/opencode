@@ -1,4 +1,4 @@
-import type { LocationRef } from "@opencode/client/promise"
+import type { LocationRef } from "@warcode/client/promise"
 
 export const LOCATION_SYNC_RETRIES = 2
 

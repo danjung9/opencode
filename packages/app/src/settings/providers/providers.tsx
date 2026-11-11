@@ -1,10 +1,10 @@
-import { Button } from "@opencode/ui/button"
-import { Badge } from "@opencode/ui/badge"
-import { useDialog } from "@opencode/ui/context/dialog"
-import { Icon } from "@opencode/ui/icon"
-import { IconButton } from "@opencode/ui/icon-button"
-import { Menu } from "@opencode/ui/menu"
-import { OpenCodeLogo } from "@/providers/opencode-logo"
+import { Button } from "@warcode/ui/button"
+import { Badge } from "@warcode/ui/badge"
+import { useDialog } from "@warcode/ui/context/dialog"
+import { Icon } from "@warcode/ui/icon"
+import { IconButton } from "@warcode/ui/icon-button"
+import { Menu } from "@warcode/ui/menu"
+import { WarcodeLogo } from "@/providers/warcode-logo"
 import { showToast } from "@/shell/notifications/toast"
 import { popularProviders, useProviders } from "@/providers/catalog/providers"
 import { consoleProviderGroup } from "@/providers/catalog/console"
@@ -36,8 +36,8 @@ type ProviderSource = "env" | "api" | "account" | "config" | "custom"
 type ProviderItem = ReturnType<ReturnType<typeof useProviders>["connected"]>[number]
 
 const PROVIDER_NOTES = [
-  { match: (id: string) => id === "opencode", key: "dialog.provider.opencode.note" },
-  { match: (id: string) => id === "opencode-go", key: "dialog.provider.opencodeGo.tagline" },
+  { match: (id: string) => id === "warcode", key: "dialog.provider.warcode.note" },
+  { match: (id: string) => id === "warcode-go", key: "dialog.provider.warcodeGo.tagline" },
   { match: (id: string) => id === "anthropic", key: "dialog.provider.anthropic.note" },
   { match: (id: string) => id === "claude-agent", key: "dialog.provider.claudeAgent.note" },
   { match: (id: string) => id.startsWith("github-copilot"), key: "dialog.provider.copilot.note" },
@@ -169,7 +169,7 @@ export const SettingsProviders: Component<{
     })
   }
 
-  // Console-managed providers (`opencode-go`, `console-*`) connect through the `opencode`
+  // Console-managed providers (`warcode-go`, `console-*`) connect through the `warcode`
   // integration, so the lookup must follow `integrationID` rather than the provider id.
   const integration = (item: ProviderItem) => {
     const id = item.integrationID ?? item.id
@@ -193,12 +193,12 @@ export const SettingsProviders: Component<{
     return connected
       .filter(
         (provider) =>
-          provider.id !== "opencode" ||
+          provider.id !== "warcode" ||
           managedConsole !== undefined ||
           consoleConnected ||
           Object.values(provider.models).some((model) => model.cost.input > 0),
       )
-      .toSorted((a, b) => Number(b.id === "opencode-go") - Number(a.id === "opencode-go"))
+      .toSorted((a, b) => Number(b.id === "warcode-go") - Number(a.id === "warcode-go"))
   })
 
   const available = createMemo(() => availableProviders(pageState(), liveAvailable()))
@@ -227,7 +227,7 @@ export const SettingsProviders: Component<{
 
   const popular = createMemo(() => {
     const connectedIDs = new Set(connected().map((p) => p.id))
-    // The Console account (integration `opencode`) shares its id with the Zen provider. A stored API
+    // The Console account (integration `warcode`) shares its id with the Zen provider. A stored API
     // key, including one imported from a v1 auth.json, makes Zen "connected" without any account, so
     // the Popular list keeps the sign-in row until the active credential is an OAuth grant. Until the
     // integration list arrives the row is still the models.dev Zen provider, so dedupe it as before.
@@ -517,11 +517,11 @@ export const SettingsProviders: Component<{
                         <div class="settings-provider-console group">
                           <div class="settings-provider-console-header">
                             <div class="settings-provider-lead">
-                              <OpenCodeLogo class="settings-provider-icon size-4 shrink-0" />
+                              <WarcodeLogo class="settings-provider-icon size-4 shrink-0" />
                               <div class="settings-provider-console-summary">
                                 <div class="settings-provider-main">
                                   <span class="settings-provider-name truncate">
-                                    {language.t("provider.connect.opencode.name")}
+                                    {language.t("provider.connect.warcode.name")}
                                   </span>
                                   <Badge>{group().workspace}</Badge>
                                 </div>
@@ -557,13 +557,13 @@ export const SettingsProviders: Component<{
                                 <Button
                                   size="normal"
                                   variant="ghost-muted"
-                                  onClick={() => disconnect(item, language.t("provider.connect.opencode.name"))}
+                                  onClick={() => disconnect(item, language.t("provider.connect.warcode.name"))}
                                 >
                                   {language.t("common.disconnect")}
                                 </Button>
                               }
                             >
-                              <AccountMenu provider={item} name={language.t("provider.connect.opencode.name")} />
+                              <AccountMenu provider={item} name={language.t("provider.connect.warcode.name")} />
                             </Show>
                           </div>
                           <Show when={consoleExpanded()}>
@@ -609,7 +609,7 @@ export const SettingsProviders: Component<{
                     <div class="settings-provider-copy">
                       <div class="settings-provider-main">
                         <span class="settings-provider-name">{item.name}</span>
-                        <Show when={item.id === "opencode" || item.id === "opencode-go"}>
+                        <Show when={item.id === "genai-mil"}>
                           <Badge>{language.t("dialog.provider.tag.recommended")}</Badge>
                         </Show>
                       </div>

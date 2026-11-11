@@ -1,6 +1,6 @@
 import { expect } from "bun:test"
-import { Generate } from "@opencode/core/generate"
-import { makeLocationNode } from "@opencode/util/effect/app-node"
+import { Generate } from "@warcode/core/generate"
+import { makeLocationNode } from "@warcode/util/effect/app-node"
 import { Effect, Layer } from "effect"
 import { it } from "../../core/test/lib/effect"
 import { ServerFetch } from "../src/fetch"

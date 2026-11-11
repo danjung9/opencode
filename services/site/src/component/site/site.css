@@ -91,7 +91,7 @@ html:has([data-site][data-theme="dark"]) {
   --text-inverted: light-dark(hsl(0, 0%, 100%), #0c0c0c);
   --border: light-dark(hsl(0, 0%, 88%), hsl(0, 0%, 18%));
   --border-strong: light-dark(hsl(0, 0%, 78%), hsl(0, 0%, 28%));
-  /* The OpenCode Console accent blue; dark mode uses a lighter blue from Settings › Dark blue. */
+  /* The Warcode Console accent blue; dark mode uses a lighter blue from Settings › Dark blue. */
   --link-dark: #4f8bff;
   --link: light-dark(#3b5cf6, var(--link-dark));
   --status-ok: light-dark(hsl(142, 64%, 38%), hsl(142, 60%, 58%));
@@ -200,7 +200,7 @@ html:has([data-site][data-theme="dark"]) {
   --mono-size: var(--fs-ui);
   /* Body copy. Phones raise it (see the mobile type scale near the end of this file). */
   --body-size: var(--fs-body);
-  /* Section titles ("What is OpenCode?", "FAQ") and product names. The site serves OpenTUI Mono
+  /* Section titles ("What is Warcode?", "FAQ") and product names. The site serves OpenTUI Mono
      in Regular and Bold only, so a hairline stroke adds the "medium" weight; drop it for a real medium face. */
   --title-size: var(--fs-title);
   --title-stroke: 0.2px currentColor;
@@ -2172,7 +2172,7 @@ html:has([data-site][data-theme="dark"]) {
         stroke: color-mix(in srgb, var(--link) 45%, transparent);
       }
 
-      /* Out of the "opencode" order, the whole mark is blue (a lighter hatch) until it is put back. */
+      /* Out of the "warcode" order, the whole mark is blue (a lighter hatch) until it is put back. */
       &[data-ready][data-reordered] {
         --wm-line: var(--link);
         --wm-node: var(--link);
@@ -3934,7 +3934,7 @@ html:has([data-site][data-light-bg="fefefe"]) {
     translate: 0 -2px;
   }
 
-  /* The status link opens status.opencode.ai in a new tab: the same arrow after its label. */
+  /* The status link opens status.warcode.ai in a new tab: the same arrow after its label. */
   &[data-component="status"]:focus-visible [data-slot="external"] {
     opacity: 1;
     translate: 0 -2px;

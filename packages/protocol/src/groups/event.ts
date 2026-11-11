@@ -1,7 +1,7 @@
-import { Event } from "@opencode/schema/event"
-import { EventManifest } from "@opencode/schema/event-manifest"
-import { Location } from "@opencode/schema/location"
-import type { Definition } from "@opencode/schema/event"
+import { Event } from "@warcode/schema/event"
+import { EventManifest } from "@warcode/schema/event-manifest"
+import { Location } from "@warcode/schema/location"
+import type { Definition } from "@warcode/schema/event"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, HttpApiSchema, OpenApi } from "effect/http-api"
 
@@ -79,8 +79,8 @@ export const makeEventGroup = <const Definitions extends ReadonlyArray<Definitio
 
 const event = make(EventManifest.ServerDefinitions)
 export const EventGroup = event.group
-export const OpenCodeEvent = event.schema
-export type OpenCodeEvent = typeof OpenCodeEvent.Type
-export type OpenCodeEventEncoded = typeof OpenCodeEvent.Encoded
-export const isOpenCodeEvent = (event: { readonly type: string }): event is OpenCodeEvent =>
+export const WarcodeEvent = event.schema
+export type WarcodeEvent = typeof WarcodeEvent.Type
+export type WarcodeEventEncoded = typeof WarcodeEvent.Encoded
+export const isWarcodeEvent = (event: { readonly type: string }): event is WarcodeEvent =>
   event.type === "server.connected" || EventManifest.isServer(event) || event.type.startsWith("rpc.")

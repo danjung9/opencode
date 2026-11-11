@@ -1,18 +1,18 @@
 export * as ConfigAgentPlugin from "./agent.js"
 
-import { define } from "@opencode/plugin/effect/plugin"
-import { Document, Info, type Entry } from "@opencode/schema/config"
-import { ConfigAgent } from "@opencode/schema/config/agent"
+import { define } from "@warcode/plugin/effect/plugin"
+import { Document, Info, type Entry } from "@warcode/schema/config"
+import { ConfigAgent } from "@warcode/schema/config/agent"
 import path from "path"
 import { Effect, Result, SchemaIssue, SchemaParser } from "effect"
 import { Agent } from "../../agent.js"
 import { Config } from "../../config.js"
 import { ConfigMarkdown } from "../markdown.js"
 import { ConfigEntryObserver } from "./entry-observer.js"
-import { FSUtil } from "@opencode/util/fs-util"
+import { FSUtil } from "@warcode/util/fs-util"
 import { ConfigAgentV1 } from "../../v1/config/agent.js"
 import { ConfigMigrateV1 } from "../../v1/config/migrate.js"
-import { Global } from "@opencode/util/global"
+import { Global } from "@warcode/util/global"
 import { Permission } from "../../permission.js"
 import type { FileAccess } from "../../file-access.js"
 import type { ReadTool } from "../../tool/plugin/read.js"
@@ -35,7 +35,7 @@ const agentKeys = new Set(["variant", ...Object.keys(ConfigAgent.Info.fields)])
 const nativeKeys = ["permissions", "request", "system", "disabled"]
 
 export const Plugin = define({
-  id: "opencode.config.agent",
+  id: "warcode.config.agent",
   effect: Effect.fn(function* (ctx) {
     const config = yield* Config.Service
     const fs = yield* FSUtil.Service

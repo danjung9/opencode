@@ -1,54 +1,54 @@
 import { describe, expect } from "bun:test"
-import type { FileSystem } from "@opencode/core/filesystem"
+import type { FileSystem } from "@warcode/core/filesystem"
 import { DateTime, Effect, Fiber, Layer, LayerMap, Schema, Stream } from "effect"
 import path from "path"
 import { pathToFileURL } from "url"
 import { eq } from "drizzle-orm"
-import { Database } from "@opencode/core/database/database"
-import { Agent } from "@opencode/core/agent"
-import { App } from "@opencode/core/app"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { makeGlobalNode } from "@opencode/util/effect/app-node"
-import { Bus } from "@opencode/core/bus"
-import { EventTable } from "@opencode/core/event/sql"
-import { Location } from "@opencode/schema/location"
-import { SessionEvent } from "@opencode/core/session/event"
-import { Model } from "@opencode/core/model"
-import { Provider } from "@opencode/core/provider"
-import { Project } from "@opencode/core/project"
-import { ProjectTable } from "@opencode/core/project/sql"
-import { AbsolutePath } from "@opencode/core/schema"
-import { Session } from "@opencode/core/session"
-import { SessionMessage } from "@opencode/core/session/message"
-import { SessionProjector } from "@opencode/core/session/projector"
-import { SessionExecution } from "@opencode/core/session/execution"
-import { SessionInbox } from "@opencode/core/session/inbox"
+import { Database } from "@warcode/core/database/database"
+import { Agent } from "@warcode/core/agent"
+import { App } from "@warcode/core/app"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { makeGlobalNode } from "@warcode/util/effect/app-node"
+import { Bus } from "@warcode/core/bus"
+import { EventTable } from "@warcode/core/event/sql"
+import { Location } from "@warcode/schema/location"
+import { SessionEvent } from "@warcode/core/session/event"
+import { Model } from "@warcode/core/model"
+import { Provider } from "@warcode/core/provider"
+import { Project } from "@warcode/core/project"
+import { ProjectTable } from "@warcode/core/project/sql"
+import { AbsolutePath } from "@warcode/core/schema"
+import { Session } from "@warcode/core/session"
+import { SessionMessage } from "@warcode/core/session/message"
+import { SessionProjector } from "@warcode/core/session/projector"
+import { SessionExecution } from "@warcode/core/session/execution"
+import { SessionInbox } from "@warcode/core/session/inbox"
 import {
   BlobRefTable,
   BlobTable,
   SessionInboxTable,
   SessionMessageTable,
   SessionTable,
-} from "@opencode/core/session/sql"
-import { SessionStore } from "@opencode/core/session/store"
-import { LocationServiceMap } from "@opencode/core/location-service-map"
-import type { LocationServices } from "@opencode/core/location-services"
-import { Image } from "@opencode/core/image"
-import { Plugin } from "@opencode/core/plugin"
-import { PluginHooks } from "@opencode/core/plugin/hooks"
-import { Snapshot } from "@opencode/core/snapshot"
-import { Skill } from "@opencode/core/skill"
+} from "@warcode/core/session/sql"
+import { SessionStore } from "@warcode/core/session/store"
+import { LocationServiceMap } from "@warcode/core/location-service-map"
+import type { LocationServices } from "@warcode/core/location-services"
+import { Image } from "@warcode/core/image"
+import { Plugin } from "@warcode/core/plugin"
+import { PluginHooks } from "@warcode/core/plugin/hooks"
+import { Snapshot } from "@warcode/core/snapshot"
+import { Skill } from "@warcode/core/skill"
 import { tmpdirScoped } from "./fixture/tmpdir"
 import { testEffect } from "./lib/effect"
-import { Config } from "@opencode/core/config"
-import { Flag } from "@opencode/core/flag"
-import { Document, Info } from "@opencode/schema/config"
-import { ConfigExperimental } from "@opencode/schema/config/experimental"
-import { SessionStored } from "@opencode/core/session/stored"
-import { SessionBlob } from "@opencode/core/session/blob"
-import { SessionTransfer } from "@opencode/core/session/transfer"
-import { PromptInput } from "@opencode/schema/prompt-input"
+import { Config } from "@warcode/core/config"
+import { Flag } from "@warcode/core/flag"
+import { Document, Info } from "@warcode/schema/config"
+import { ConfigExperimental } from "@warcode/schema/config/experimental"
+import { SessionStored } from "@warcode/core/session/stored"
+import { SessionBlob } from "@warcode/core/session/blob"
+import { SessionTransfer } from "@warcode/core/session/transfer"
+import { PromptInput } from "@warcode/schema/prompt-input"
 
 const executionCalls: Session.ID[] = []
 const interruptCalls: Session.ID[] = []
@@ -519,7 +519,7 @@ describe("Session.prompt", () => {
     Effect.gen(function* () {
       yield* setup
       const session = yield* Session.Service
-      const directory = yield* tmpdirScoped("opencode-session-prompt-")
+      const directory = yield* tmpdirScoped("warcode-session-prompt-")
       const source = path.join(directory.path, "image.png")
       const bytes = Buffer.from(
         "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
@@ -551,7 +551,7 @@ describe("Session.prompt", () => {
     Effect.gen(function* () {
       yield* setup
       const session = yield* Session.Service
-      const directory = yield* tmpdirScoped("opencode-session-prompt-")
+      const directory = yield* tmpdirScoped("warcode-session-prompt-")
       const source = path.join(directory.path, "screenshot.png")
       yield* Effect.promise(() => Bun.write(source, Buffer.from(pngBase64, "base64")))
       const bytes = yield* Effect.promise(() => Bun.file(source).arrayBuffer())

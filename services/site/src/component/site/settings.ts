@@ -62,7 +62,7 @@ export const linkBlues = ["console", "classic", "open", "azure", "sky", "ocean",
 export const logoScales = ["current", "28×35", "24×30", "20×25", "16×20"] as const
 // How menus mark the current item (the language picker, the docs lockup and the product switcher in
 // public/nav-demo/switcher.js, which reads it from localStorage). Compared side by side in the
-// active-item mock (opencode/active-item, port 3279).
+// active-item mock (warcode/active-item, port 3279).
 // "check" is gone: a saved "check" falls back to the bar.
 export const menuActives = ["bar", "brackets", "square", "tint", "text"] as const
 // The menus' hover tint and hover bar: grey (a light grey tint and a mid-grey bar, keyboard focus
@@ -110,7 +110,7 @@ export const cardVideoCuts = ["cinematic", "angled"] as const
 // of the hover video that starts on the product UI); "continue" plays the hover video from the
 // loop's framing, so the loop seems to open out into the product.
 export const cardHoverEntries = ["demo", "continue"] as const
-// The Mobile card's animated cover: OpenCode Mobile's Living Orb in a call, in neutral greys
+// The Mobile card's animated cover: Warcode Mobile's Living Orb in a call, in neutral greys
 // (card-loops/mobile-orb-<shade>, rendered from voice/wisp-orb.ts), or the earlier loop of the call
 // bar (card-loops/mobile). Each shade, the strength of the sphere shading over the lens, is its own
 // rendered loop: 0 is the WispOrb lens as it is.
@@ -314,7 +314,7 @@ export const logoAnimations = [
 // The contributor avatars' reveal (open source proof): the logo row's styles, or whichever it uses.
 export const avatarAnimations = ["same as logos", ...logoAnimations] as const
 // Where each contributor avatar links: their GitHub profile (the default), their commits to
-// OpenCode, their merged pull requests, or nowhere (a decorative, greyscale wall).
+// Warcode, their merged pull requests, or nowhere (a decorative, greyscale wall).
 export const avatarLinks = ["profile", "commits", "pull requests", "off"] as const
 // The "Bring your own tools" tiles' entrance: none (the default), the logo row's style, or one of its styles.
 export const toolsAnimations = ["off", "same as logos", ...logoAnimations] as const
@@ -335,7 +335,7 @@ export const brandAssetActionStyles = [
   "text links",
   "hover reveal",
 ] as const
-// The /font film plate's poster: white "opencode" on black (default) or the light grid frame.
+// The /font film plate's poster: white "warcode" on black (default) or the light grid frame.
 export const filmPosters = ["inverted", "light"] as const
 // The agent rules button once it has copied: the same label with a check (default), or "Rules copied".
 export const agentButtonCopiedStyles = ["check only", "copied text"] as const
@@ -399,7 +399,7 @@ export const architectPatterns = [
   "grid",
   "aligned-grid",
   "lines",
-  "opencode-grid",
+  "warcode-grid",
   "molnar-squares",
   "rotating-ticks",
   "moire-grids",
@@ -490,18 +490,18 @@ export const announcementStyles = ["text", "chip", "bar", "banner"] as const
 // The banner announcement's "NEW": a white badge with blue text and the message at 70% white, or
 // plain white caps with the message at 60%.
 export const bannerLabels = ["badge", "plain"] as const
-// "What is OpenCode?": the model providers' marks, as explorations: none, a quiet row, inline in
+// "What is Warcode?": the model providers' marks, as explorations: none, a quiet row, inline in
 // a sentence, a dense grid with the count, or a slow marquee.
 export const providerLogoStyles = ["none", "row", "inline", "grid", "marquee"] as const
 // "Bring your own subs": the providers' grid then the plans, your subscriptions beside the plans,
-// or tabs between the two. A, B and C (byos-options.tsx) explore showing that OpenCode works with
+// or tabs between the two. A, B and C (byos-options.tsx) explore showing that Warcode works with
 // nearly every subscription, provider and model: a ruled row per way in, a wall of every provider's
 // mark, or the names set as one run of text.
 export const subsStyles = ["grid", "split", "tabs", "A rows", "B wall", "C names"] as const
 // "Get started": a numbered path, a price ladder, one large sentence, a terminal transcript, or two
 // cells in the tools grid's borders.
 export const getStartedStyles = ["steps", "ladder", "sentence", "terminal", "cards"] as const
-// "What is OpenCode?" on phones: an accordion of titles (the FAQ's rows, all closed), the first
+// "What is Warcode?" on phones: an accordion of titles (the FAQ's rows, all closed), the first
 // four in full and the rest as a list of links, the first five and a "Show all" button, the first
 // four and a line of the rest, or a swipe deck of cards.
 export const phoneFeatureLists = ["accordion", "highlights + list", "show more", "highlights", "swipe deck"] as const
@@ -833,13 +833,13 @@ function createSchema() {
     // Footer wordmark: gap between hatch lines (drawing units) and corner node points.
     wordmarkHatch: z.number().min(1).max(8).catch(1),
     wordmarkNodes: z.enum(toggles).catch("on"),
-    // The large OpenCode wordmark at the bottom of the footer.
+    // The large Warcode wordmark at the bottom of the footer.
     footerWordmark: z.enum(toggles).catch("on"),
     footerWordmarkAnimation: z.enum(footerWordmarkAnimations).catch("draw"),
     // A multiplier on the entrance's timing: 2 plays it in half the time.
     footerWordmarkSpeed: z.number().min(0.5).max(2).catch(1),
     footerWordmarkPlay: z.enum(footerWordmarkPlays).catch("drag"),
-    // window.opencode, its one-line DevTools hint and OpenCode Lite starting when DevTools opens
+    // window.warcode, its one-line DevTools hint and Warcode Lite starting when DevTools opens
     // (lib/console-stub.ts, lib/console-api.ts).
     consoleApi: z.enum(toggles).catch("on"),
     // The light, dark and system switch at the bottom of the footer.
@@ -899,7 +899,7 @@ function createSchema() {
     copyrightMark: z.enum(copyrightMarks).catch("text"),
     brandPalette: z.enum(brandPalettes).catch("blue + clay"),
     variantBackground: z.enum(variantBackgrounds).catch("mesh"),
-    // Brand page judgement calls: the "Works with OpenCode" badge.
+    // Brand page judgement calls: the "Works with Warcode" badge.
     brandBadge: z.enum(toggles).catch("on"),
     badgeFont: z.enum(badgeFonts).catch("sans"),
     badgeLayout: z.enum(badgeLayouts).catch("tabs"),
@@ -1110,7 +1110,7 @@ function withPreset(settings: SiteSettings): SiteSettings {
 }
 
 // Bump the version when defaults change so old saved values do not mask them.
-const key = "opencode-site-settings-v3"
+const key = "warcode-site-settings-v3"
 let schema: ReturnType<typeof createSchema> | undefined
 // For tests that walk every setting (test/preload-settings.test.ts).
 export function siteSettingsSchema() {

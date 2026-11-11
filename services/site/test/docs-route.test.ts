@@ -131,7 +131,7 @@ describe("V1 docs routes", () => {
       expect(route(path)).toEqual({ type: "missing" })
   })
 
-  test("send docs.opencode.ai's addresses to the same path on the V1 docs", () => {
+  test("send docs.warcode.ai's addresses to the same path on the V1 docs", () => {
     const host = (url: string) => docsHostRedirect(new URL(url))
     expect(host("https://docs.opencode.ai/")).toBe("https://opencode.ai/v1/docs/")
     expect(host("https://docs.opencode.ai/docs")).toBe("https://opencode.ai/v1/docs/")

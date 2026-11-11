@@ -1056,7 +1056,7 @@
     }
   }
 
-  /* Partner lockups: OpenCode × a partner in light and dark tiles. */
+  /* Partner lockups: Warcode × a partner in light and dark tiles. */
   [data-slot="lockups"] [data-slot="preview"] svg {
     display: block;
     max-width: 100%;

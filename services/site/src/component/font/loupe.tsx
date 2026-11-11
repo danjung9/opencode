@@ -3,7 +3,7 @@ import { fontContent, isLetter, modules } from "~/lib/font-content"
 import { Word } from "./glyph"
 import { Plate, prefersReducedMotion } from "./plate"
 
-const WORD = "opencode"
+const WORD = "warcode"
 const WORD_UNITS = WORD.length * 30 - 6
 const ZOOM = 5
 // Each 6-unit module is drawn as 12 × 12 micro-squares.
@@ -11,7 +11,7 @@ const MICRO = 0.5
 const HOLD_MS = 280
 
 /**
- * Plate: a large white "opencode" on a dark field. Hovering (or pressing and holding on touch)
+ * Plate: a large white "warcode" on a dark field. Hovering (or pressing and holding on touch)
  * shows a round blue loupe that reveals each module as a grid of 144 white micro-squares,
  * with a faint reticle and a readout in font units. The loupe trails the pointer with a lerp.
  */

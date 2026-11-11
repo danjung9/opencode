@@ -1,6 +1,6 @@
 import { Popover } from "@kobalte/core/popover"
-import { Badge } from "@opencode/ui/badge"
-import { MenuScroll } from "@opencode/ui/menu-scroll"
+import { Badge } from "@warcode/ui/badge"
+import { MenuScroll } from "@warcode/ui/menu-scroll"
 import { createEffect, createMemo, For, Match, on, Show, Switch } from "solid-js"
 import { createStore } from "solid-js/store"
 import { useLanguage } from "@/runtime/i18n/language"

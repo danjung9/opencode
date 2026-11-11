@@ -1,7 +1,7 @@
-import type { PluginInfo, SessionMessageInfo } from "@opencode/client/promise"
-import { DialogProvider, useDialog } from "@opencode/ui/context/dialog"
-import { Menu } from "@opencode/ui/menu"
-import { Toast } from "@opencode/ui/toast"
+import type { PluginInfo, SessionMessageInfo } from "@warcode/client/promise"
+import { DialogProvider, useDialog } from "@warcode/ui/context/dialog"
+import { Menu } from "@warcode/ui/menu"
+import { Toast } from "@warcode/ui/toast"
 import {
   Panel,
   type Appearance,
@@ -18,8 +18,8 @@ import {
   type Storage,
   type StoreOptions,
   type Workspaces,
-} from "@opencode/plugin/gui"
-import type { BuiltinLayout, BuiltinLocale } from "@opencode/plugin/gui/builtin"
+} from "@warcode/plugin/gui"
+import type { BuiltinLayout, BuiltinLocale } from "@warcode/plugin/gui/builtin"
 import {
   createComponent,
   createMemo,
@@ -40,14 +40,14 @@ import { Persist, persisted } from "@/runtime/persistence/storage"
 import { ServerScope } from "@/runtime/server/scope"
 import { PluginHostProvider, usePluginHost, type HostApiFactories, type PluginInput } from "../src/runtime/plugin/host"
 import { createHostApis } from "../src/runtime/plugin/host-apis"
-import type { Bridge, Entry } from "@opencode/plugin/gui/host"
+import type { Bridge, Entry } from "@warcode/plugin/gui/host"
 import { createRegion, RegionContent } from "../src/runtime/plugin/panels"
 import { createSessionScreenLayout } from "../src/session/screen-layout"
 import type { SessionModel } from "../src/session/model"
 import { createClosedTabs } from "../src/runtime/plugin/closed-tabs"
 import { PluginLinks, PluginSlot, PluginThemes } from "../src/runtime/plugin/render"
-import { Markdown } from "@opencode/session-ui/markdown"
-import { ThemeProvider, useTheme, type ColorScheme } from "@opencode/ui/theme/context"
+import { Markdown } from "@warcode/session-ui/markdown"
+import { ThemeProvider, useTheme, type ColorScheme } from "@warcode/ui/theme/context"
 import { persistedHandle } from "../src/runtime/plugin/stores"
 import { LanguageProvider } from "../src/runtime/i18n/language"
 import { ExtensionPlugins } from "../src/runtime/plugin/extension-plugins"
@@ -67,7 +67,7 @@ export {
   Slot,
   Store,
   Theme,
-} from "@opencode/plugin/gui"
+} from "@warcode/plugin/gui"
 
 export { Schema }
 
@@ -102,7 +102,7 @@ const layout: BuiltinLayout = {
   command() {},
 }
 
-const about: App = { name: "opencode", version: "", channel: "dev", platform: "desktop", packaged: false }
+const about: App = { name: "warcode", version: "", channel: "dev", platform: "desktop", packaged: false }
 
 const locale: BuiltinLocale = { locale: () => "en", direction: () => "ltr", setDirection() {} }
 

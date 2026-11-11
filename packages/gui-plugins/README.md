@@ -1,11 +1,11 @@
 # Built-in GUI plugins
 
-Every feature of the desktop and web app that is not the core shell is a built-in GUI plugin: the terminal, review, files, the browser, SSH, WSL, the updater and more. Each one builds only on the GUI plugin SDK in [`packages/plugin/src/gui`](../plugin/src/gui), the same `@opencode/plugin/gui` that third-party plugins use. The SDK is typed so that the common bugs fail to compile or fail the lint, and every declaration has TSDoc, so editor hovers answer most questions. This guide shows how the parts fit, with code from the plugins that ship. [Build your first plugin](#build-your-first-plugin) walks through [`src/pairing`](src/pairing), a small built-in that uses both processes. `bun run lint` checks every code block marked with its source against that source.
+Every feature of the desktop and web app that is not the core shell is a built-in GUI plugin: the terminal, review, files, the browser, SSH, WSL, the updater and more. Each one builds only on the GUI plugin SDK in [`packages/plugin/src/gui`](../plugin/src/gui), the same `@warcode/plugin/gui` that third-party plugins use. The SDK is typed so that the common bugs fail to compile or fail the lint, and every declaration has TSDoc, so editor hovers answer most questions. This guide shows how the parts fit, with code from the plugins that ship. [Build your first plugin](#build-your-first-plugin) walks through [`src/pairing`](src/pairing), a small built-in that uses both processes. `bun run lint` checks every code block marked with its source against that source.
 
-- Window SDK: `@opencode/plugin/gui` ([`index.ts`](../plugin/src/gui/index.ts))
-- Main-process SDK: `@opencode/plugin/gui/main` ([`main.ts`](../plugin/src/gui/main.ts))
-- Host-only, never published: `@opencode/plugin/gui/host` ([`host.ts`](../plugin/src/gui/host.ts)): `compose`, the bridge protocol and the plugin bundle evaluator
-- Built-ins only, never published: `@opencode/plugin/gui/builtin` ([`builtin.ts`](../plugin/src/gui/builtin.ts)): `onIdle`, store migrations, lazily loaded locales (`builtinCatalog`), and the registry fields and host abilities no third-party plugin needs (see [Built-in only](#built-in-only))
+- Window SDK: `@warcode/plugin/gui` ([`index.ts`](../plugin/src/gui/index.ts))
+- Main-process SDK: `@warcode/plugin/gui/main` ([`main.ts`](../plugin/src/gui/main.ts))
+- Host-only, never published: `@warcode/plugin/gui/host` ([`host.ts`](../plugin/src/gui/host.ts)): `compose`, the bridge protocol and the plugin bundle evaluator
+- Built-ins only, never published: `@warcode/plugin/gui/builtin` ([`builtin.ts`](../plugin/src/gui/builtin.ts)): `onIdle`, store migrations, lazily loaded locales (`builtinCatalog`), and the registry fields and host abilities no third-party plugin needs (see [Built-in only](#built-in-only))
 - Rules for agents: [`AGENTS.md`](AGENTS.md)
 
 ```mermaid
@@ -45,7 +45,7 @@ Unit tests of logic that carries a contract sit beside the code as `*.test.ts`, 
 
 Contracts are not declared: a plugin provides its own with `ctx.provide` and reads others' with `ctx.use` at runtime.
 
-- [`src/renderer.ts`](src/renderer.ts) and [`src/main.ts`](src/main.ts) list the built-ins, each through `compose` from `@opencode/plugin/gui/host`. These are the only files that name built-ins. "Built-in" is the host's flag for what these lists load, as the TUI marks its built-ins; the definitions themselves are ordinary `Plugin.define` calls.
+- [`src/renderer.ts`](src/renderer.ts) and [`src/main.ts`](src/main.ts) list the built-ins, each through `compose` from `@warcode/plugin/gui/host`. These are the only files that name built-ins. "Built-in" is the host's flag for what these lists load, as the TUI marks its built-ins; the definitions themselves are ordinary `Plugin.define` calls.
 - Another plugin imports only your `contract.ts`.
 - A window entry loads with the app. Keep it small and put heavy UI behind `lazy()`.
 
@@ -208,7 +208,7 @@ It then falls back to the quote's composer tile without closing the editor or di
 // Forget a selection when the user goes Home and back.
 const [selected, setSelected] = createVisitState<string | undefined>(undefined)
 
-// Compile the settings page while the app idles, not when settings opens. Import `onIdle` from `@opencode/plugin/gui/builtin`.
+// Compile the settings page while the app idles, not when settings opens. Import `onIdle` from `@warcode/plugin/gui/builtin`.
 const Page = lazy(() => import("./page"))
 onCleanup(onIdle(() => void Page.preload()))
 ```
@@ -248,7 +248,7 @@ const runScreen = (effect: Extract<PairingEffect, { type: "read-screen" | "set-s
 
 Each line links to the file whose TSDoc covers every field.
 
-SDK icon fields take an `IconName` from `@opencode/plugin/gui`: the names of the app's icon catalog (`@opencode/ui/icons/catalog`), which `bun run generate` in `packages/plugin` copies into `packages/plugin/src/gui/icon-name.ts`. `src/icon-name.typecheck.ts` fails the typecheck when the two drift. A plugin bundle cannot require `@opencode/ui`, so it renders an icon with `ctx.ui.Icon`, and the app's buttons, menus, menu rows, dialog frame, fields, selects, settings pages and rows, Markdown and code with the other `ctx.ui` components. Built-ins use them too where they need nothing more, such as the settings rows of pairing, updates and review.
+SDK icon fields take an `IconName` from `@warcode/plugin/gui`: the names of the app's icon catalog (`@warcode/ui/icons/catalog`), which `bun run generate` in `packages/plugin` copies into `packages/plugin/src/gui/icon-name.ts`. `src/icon-name.typecheck.ts` fails the typecheck when the two drift. A plugin bundle cannot require `@warcode/ui`, so it renders an icon with `ctx.ui.Icon`, and the app's buttons, menus, menu rows, dialog frame, fields, selects, settings pages and rows, Markdown and code with the other `ctx.ui` components. Built-ins use them too where they need nothing more, such as the settings rows of pairing, updates and review.
 
 ### Registries
 
@@ -322,11 +322,11 @@ to the displayed repository or worktree instead of adding a second menu item.
 | `ctx.serverEndpoints` (main) | `ServerEndpoints`                                                                  | URL and credentials of a server the windows use                  |
 | `ctx.windows` (main)         | `Windows`                                                                          | The app's main windows                                           |
 | `ctx.embeds` (main)          | `Embeds`                                                                           | `create(view, window)` places a web page                         |
-| `ctx.cli` (main)             | `Cli`                                                                              | The opencode CLI the app runs                                    |
+| `ctx.cli` (main)             | `Cli`                                                                              | The warcode CLI the app runs                                    |
 
 ### Built-in only
 
-`@opencode/plugin/gui/builtin` holds what only the built-ins use. It is never published and is not in the modules a plugin bundle may require; a public SDK module never imports it.
+`@warcode/plugin/gui/builtin` holds what only the built-ins use. It is never published and is not in the modules a plugin bundle may require; a public SDK module never imports it.
 
 | Export                                                  | What it adds                                                                                   |
 | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
@@ -420,7 +420,7 @@ Desktop windows load storage over IPC; the web reads it synchronously. A read be
 | `ctx.storage.store(key, options)`       | window `value`: undefined until loaded                          | When opened; for runtime keys |
 | main `ctx.storage.store(key, options)`  | `value`: always defined                                         | Synchronously                 |
 
-A public `from` names older keys of the same storage. Built-ins also import parts of the app's own keys, which they replaced: `BuiltinStore.global` and `BuiltinStore.session` from `@opencode/plugin/gui/builtin` take `{ key, sessions?, pick }`, and `builtinMainContext(ctx).storage` takes main's older homes.
+A public `from` names older keys of the same storage. Built-ins also import parts of the app's own keys, which they replaced: `BuiltinStore.global` and `BuiltinStore.session` from `@warcode/plugin/gui/builtin` take `{ key, sessions?, pick }`, and `builtinMainContext(ctx).storage` takes main's older homes.
 
 Review imports one session's slice of an app key that holds every session:
 
@@ -500,7 +500,7 @@ Pairing connects another device to this machine's server from anywhere, and keep
 
 ```ts
 import { Schema } from "effect"
-import { Ipc } from "@opencode/plugin/gui"
+import { Ipc } from "@warcode/plugin/gui"
 
 /**
  * Turns on remote access and keeps this machine's display awake while another device uses it. The window asks the
@@ -530,13 +530,13 @@ export const Pairing = Ipc.define({
 <!-- source: src/pairing/index.ts -->
 
 ```ts
-import { Plugin } from "@opencode/plugin/gui"
+import { Plugin } from "@warcode/plugin/gui"
 import en from "./i18n/en"
 
 export default Plugin.define({ i18n: { en } })
 ```
 
-3. **Provide it from main.** Whether main keeps the display awake is a main store, read synchronously and imported once from the key the desktop kept it under before; a built-in names that older home through `builtinMainContext`. Remote access runs `opencode service` through `ctx.cli`, one command at a time through the machine in `main-machine.ts`, with the same `createDispatch` loop as the settings page: a read stops when its caller goes away, a change goes on when the window closes, and every command has a timeout, so a hung one never holds the queue. `ctx.onCleanup` disposes the machine, which releases the blocker.
+3. **Provide it from main.** Whether main keeps the display awake is a main store, read synchronously and imported once from the key the desktop kept it under before; a built-in names that older home through `builtinMainContext`. Remote access runs `warcode service` through `ctx.cli`, one command at a time through the machine in `main-machine.ts`, with the same `createDispatch` loop as the settings page: a read stops when its caller goes away, a change goes on when the window closes, and every command has a timeout, so a hung one never holds the queue. `ctx.onCleanup` disposes the machine, which releases the blocker.
 
 <!-- source: src/pairing/main.ts -->
 
@@ -544,8 +544,8 @@ export default Plugin.define({ i18n: { en } })
 import { execFile } from "node:child_process"
 import { powerSaveBlocker } from "electron"
 import { Schema } from "effect"
-import { builtinMainContext } from "@opencode/plugin/gui/builtin"
-import type { Plugin } from "@opencode/plugin/gui/main"
+import { builtinMainContext } from "@warcode/plugin/gui/builtin"
+import type { Plugin } from "@warcode/plugin/gui/main"
 import { Pairing } from "./contract"
 import { createDispatch } from "./dispatch"
 import {
@@ -564,7 +564,7 @@ const setup: Plugin.MainSetup = (ctx) => {
   const stored = builtinMainContext(ctx).storage.store("keepScreenActive", {
     schema: Schema.Boolean,
     initial: false,
-    from: { state: ["opencode.settings", "keepScreenActive"] },
+    from: { state: ["warcode.settings", "keepScreenActive"] },
   })
 
   const cli = ctx.cli
@@ -621,13 +621,13 @@ const setup: Plugin.MainSetup = (ctx) => {
     }
 
     // Remote access is a setting of the background service, so it changes through the CLI the app runs, as with
-    // `opencode pair --remote`. A hung command ends at its timeout, so the next one always runs.
+    // `warcode pair --remote`. A hung command ends at its timeout, so the next one always runs.
     const attempt = effect.attempt
     const controller = new AbortController()
 
     commands.set(attempt, controller)
     execFile(
-      cli.command[0] ?? "opencode",
+      cli.command[0] ?? "warcode",
       [...cli.command.slice(1), "service", ...effect.args],
       { signal: AbortSignal.any([ctx.signal, controller.signal]), timeout: effect.timeoutMs, windowsHide: true },
       (error, stdout, stderr) => {
@@ -679,8 +679,8 @@ export default setup
 
 ```tsx
 import { lazy, onCleanup, Suspense } from "solid-js"
-import { Command, SettingsPage, type Plugin } from "@opencode/plugin/gui"
-import { onIdle } from "@opencode/plugin/gui/builtin"
+import { Command, SettingsPage, type Plugin } from "@warcode/plugin/gui"
+import { onIdle } from "@warcode/plugin/gui/builtin"
 import { Pairing } from "./contract"
 import type definition from "./index"
 

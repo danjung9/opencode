@@ -2,16 +2,16 @@ import type {
   EventSubscribeOutput,
   FormInfo,
   LocationRef,
-  OpenCodeClient,
+  WarcodeClient,
   PermissionRequest,
   SessionMessageAssistantTool,
   SessionMessageInfo,
   SessionMessageUser,
   SessionInboxInfo,
-} from "@opencode/client/promise"
-import { ClientError } from "@opencode/client/promise"
-import { Event } from "@opencode/schema/event"
-import { SessionMessage } from "@opencode/schema/session-message"
+} from "@warcode/client/promise"
+import { ClientError } from "@warcode/client/promise"
+import { Event } from "@warcode/schema/event"
+import { SessionMessage } from "@warcode/schema/session-message"
 import { blockerStatus, pickBlockerView } from "./session-data"
 import { writeSessionOutput } from "./stream"
 import { createFragmentReconciler, fragmentRef, type FragmentReconciler } from "./stream-v2.fragment"
@@ -41,9 +41,9 @@ type Trace = {
 }
 
 type StreamInput = {
-  sdk: OpenCodeClient
-  reconnect?: (signal: AbortSignal) => Promise<OpenCodeClient>
-  onClient?: (sdk: OpenCodeClient) => void
+  sdk: WarcodeClient
+  reconnect?: (signal: AbortSignal) => Promise<WarcodeClient>
+  onClient?: (sdk: WarcodeClient) => void
   readTextFile?: (url: string) => Promise<string>
   location?: LocationRef
   sessionID: string
@@ -111,7 +111,7 @@ type RunV2Event = EventSubscribeOutput
 type PromptFilePart = Extract<RunPromptPart, { type: "file" }>
 
 type Attempt = {
-  client: OpenCodeClient
+  client: WarcodeClient
   signal: AbortSignal
   generation: number
 }
@@ -450,7 +450,7 @@ function compactionError(messageID: string, text: string): StreamCommit {
 
 async function resolveSelectedModel(
   input: StreamInput,
-  sdk: OpenCodeClient,
+  sdk: WarcodeClient,
   next: Pick<SessionTurnInput, "model" | "variant" | "signal">,
 ) {
   if (next.model) return { providerID: next.model.providerID, id: next.model.modelID, variant: next.variant }
@@ -482,7 +482,7 @@ export async function createSessionTransport(input: StreamInput): Promise<Sessio
   let sdk = input.sdk
   let generation = 0
   let activeAttempt: Attempt | undefined
-  let settlementClient: OpenCodeClient | undefined
+  let settlementClient: WarcodeClient | undefined
   input.signal?.addEventListener("abort", () => controller.abort(), { once: true })
   const state: State = {
     permissions: [],
@@ -899,7 +899,7 @@ export async function createSessionTransport(input: StreamInput): Promise<Sessio
     }
   }
 
-  const projectedMessages = async (client: OpenCodeClient, signal: AbortSignal) =>
+  const projectedMessages = async (client: WarcodeClient, signal: AbortSignal) =>
     (
       await client.message.list(
         { sessionID: input.sessionID, limit: input.replayLimit ?? 200, order: "desc" },
@@ -907,7 +907,7 @@ export async function createSessionTransport(input: StreamInput): Promise<Sessio
       )
     ).data.toReversed()
 
-  const waitForSession = async (initial: OpenCodeClient) => {
+  const waitForSession = async (initial: WarcodeClient) => {
     let client = initial
     while (true) {
       try {
@@ -925,7 +925,7 @@ export async function createSessionTransport(input: StreamInput): Promise<Sessio
     }
   }
 
-  const settleSession = async (initial: OpenCodeClient) => {
+  const settleSession = async (initial: WarcodeClient) => {
     const client = await waitForSession(initial)
     for (const message of await projectedMessages(client, controller.signal)) renderMessage(message, true)
     paintIdle(blockerStatus(state.view))
@@ -933,7 +933,7 @@ export async function createSessionTransport(input: StreamInput): Promise<Sessio
   }
 
   const resolvePermissionSources = async (
-    client: OpenCodeClient,
+    client: WarcodeClient,
     permissions: PermissionRequest[],
     attempt: Attempt,
   ) => {
@@ -1618,7 +1618,7 @@ export async function createSessionTransport(input: StreamInput): Promise<Sessio
   const runTurnWait = async (
     next: SessionTurnInput,
     messageID: string,
-    client: OpenCodeClient,
+    client: WarcodeClient,
     send: () => Promise<SessionInboxInfo | void>,
     onAdmitted?: () => void,
   ) => {
@@ -1745,7 +1745,7 @@ export async function createSessionTransport(input: StreamInput): Promise<Sessio
   let queuedResizeReplay: SessionResizeReplayInput | undefined
   let closing: Promise<void> | undefined
 
-  const admitPrompt = async (next: SessionTurnInput, client: OpenCodeClient, delivery: RunDelivery) => {
+  const admitPrompt = async (next: SessionTurnInput, client: WarcodeClient, delivery: RunDelivery) => {
     const messageID = next.prompt.messageID
     if (!messageID) throw new Error("Prompt message ID is required")
     const command = next.prompt.command

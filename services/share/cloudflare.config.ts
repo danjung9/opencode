@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
     // Anomaly
     accountId: "15d29c8639fd3733b1b5486a2acfd968",
     worker: {
-      name: dev ? "opencode-share-dev" : "opencode-share-production",
+      name: dev ? "warcode-share-dev" : "warcode-share-production",
       compatibilityDate: "2026-07-25",
       entrypoint: "./src/index.ts",
       domains: [dev ? "dev.opncd.ai" : "opncd.ai"],

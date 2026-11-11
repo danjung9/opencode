@@ -1,0 +1,70 @@
+Window: "Warcode", App: electron.exe.
+	0 window Warcode Secondary Actions: Raise
+		52 pane (disabled)
+		19 region Warcode
+			20 region
+				21 region
+					22 region
+						23 button Minimize
+						24 button Maximize
+						25 button Close
+					26 region
+						27 region
+							28 region
+								29 region
+									487 document Warcode Value: http://localhost:5173/index.html ID: RootWebArea
+										540 header
+											541 button Warcode menu ID: dropdownmenu-cl-28-trigger
+											542 button Toggle sidebar
+										492 complementary ID: vertical-tabs-sidebar
+											543 graphic Warcode
+											544 toggle button Home
+											545 button Search sessions
+											546 button New session ID: contextmenu-cl-30-trigger
+											547 link D Session Close tab
+												548 link D Session Value: http://localhost:5173/server/c2lkZWNhcg/session/ses_e37ba4885ffe1fKnS1fpgKM5WD ID: contextmenu-cl-32-trigger
+												549 button Close tab
+										497 main
+											508 button Toggle review
+											509 region scrollable content
+												510 button Default Project ID: dropdownmenu-cl-15-trigger
+													511 text Default Project
+												512 heading Session
+												513 button More options ID: dropdownmenu-cl-18-trigger
+												514 button Toggle session context
+													515 graphic
+												516 button Session details
+												517 group
+												518 group
+													519 group
+														520 text hello
+													521 button More actions ID: dropdownmenu-cl-21-trigger
+													550 text Big Pickle
+												523 status
+													524 text You've used today's free messages. They reset at Nov 11, 2026, 7:00 PM.
+												525 text Switched to DeepSeek V4.1 Flash Free
+												526 group
+													527 button Updates
+														528 group Updates
+												529 group
+													530 group
+														531 text hello
+													532 button More actions ID: dropdownmenu-cl-24-trigger
+													551 text DeepSeek V4.1 Flash Free
+												534 status
+													535 text You've used today's free messages. They reset at Nov 11, 2026, 7:00 PM.
+											502 edit (settable, string) Prompt Value: hello
+												503 text hello
+											504 group
+												505 button Add images and files ID: dropdownmenu-cl-11-trigger
+											506 group
+												536 button DeepSeek V4.1 Flash Free
+												537 button Choose model variant ID: dropdownmenu-cl-26-trigger
+											507 button Send
+										498 region Notifications alt+T
+										488 group ID: sessions
+								30 region
+
+Document text: ```
+hello
+```

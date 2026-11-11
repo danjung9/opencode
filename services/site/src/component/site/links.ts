@@ -16,7 +16,7 @@ export function siteLinks(t: Translate, route: (path: string) => string) {
       // Data lives on this site under /data, so no arrow. Settings › Product nav demo sends Data and
       // Console to their header demos instead.
       { id: "data", label: t("nav.data"), href: route("/data"), demo: route("/data-demo") },
-      // Anomaly's commercial products: the Console, its models list, its subscriptions page (OpenCode
+      // Anomaly's commercial products: the Console, its models list, its subscriptions page (Warcode
       // Go, which the home page's subscriptions section links) and its enterprise page ("Talk to our
       // team"). Settings › Nav groups moves them under an "Anomaly" label.
       {
@@ -87,7 +87,7 @@ export function siteLinks(t: Translate, route: (path: string) => string) {
         title: "Anomaly",
         links: [
           { label: t("site.nav.console"), href: "/console" },
-          { label: "OpenCode Models", href: "/console/models" },
+          { label: "Warcode Models", href: "/console/models" },
           { label: t("site.nav.subscriptions"), href: "/console/go" },
           { label: t("nav.enterprise"), href: "/console/enterprise" },
           { label: t("legal.privacy"), href: route("/legal/privacy-policy") },

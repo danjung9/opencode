@@ -8,6 +8,7 @@ import { CloudflareWorkersAIPlugin } from "./provider/cloudflare-workers-ai.js"
 import { DatabricksPlugin } from "./provider/databricks.js"
 import { DigitalOceanPlugin } from "./provider/digitalocean.js"
 import { GithubCopilotPlugin } from "./provider/github-copilot.js"
+import { GenAIMilPlugin } from "./provider/genai-mil.js"
 import { GitLabPlugin } from "./provider/gitlab.js"
 import { GoogleVertexPlugin } from "./provider/google-vertex.js"
 import { KiloPlugin } from "./provider/kilo.js"
@@ -20,7 +21,7 @@ import { OllamaPlugin } from "./provider/ollama.js"
 import { OpenAIPlugin } from "./provider/openai.js"
 import { OpenAIContextCapsPlugin } from "./provider/openai-context-caps.js"
 import { SnowflakeCortexPlugin } from "./provider/snowflake-cortex.js"
-import { OpencodePlugin } from "./provider/opencode.js"
+import { WarcodePlugin } from "./provider/warcode.js"
 import { OpenRouterPlugin } from "./provider/openrouter.js"
 import { PoePlugin } from "./provider/poe.js"
 import { PromptCacheKeyPlugin } from "./provider/prompt-cache-key.js"
@@ -41,6 +42,7 @@ export const ProviderPlugins: PluginInternal.InternalPlugin[] = [
   DigitalOceanPlugin,
   GithubCopilotPlugin,
   GitLabPlugin,
+  GenAIMilPlugin,
   GoogleVertexPlugin,
   KiloPlugin,
   LLMGatewayPlugin,
@@ -49,7 +51,7 @@ export const ProviderPlugins: PluginInternal.InternalPlugin[] = [
   NeonPlugin,
   NvidiaPlugin,
   OllamaPlugin,
-  OpencodePlugin,
+  WarcodePlugin,
   SnowflakeCortexPlugin,
   OpenAIPlugin,
   OpenAIContextCapsPlugin,

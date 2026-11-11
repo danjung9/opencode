@@ -7,7 +7,7 @@ const server: ServerConnection.HttpBase = {
 }
 
 const info = (version = "1.2.3") =>
-  Response.json({ version, pid: 1, urls: [server.url], paths: { tmp: "/tmp/opencode" } })
+  Response.json({ version, pid: 1, urls: [server.url], paths: { tmp: "/tmp/warcode" } })
 
 // SAFETY: `checkServerHealth` only calls `fetch(input, init)`, which these fakes implement; none reads `preconnect`.
 const fakeFetch = (handler: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>) =>
@@ -42,7 +42,7 @@ describe("checkServerHealth", () => {
 
     expect(await checkServerHealth({ ...server, password }, fetch)).toEqual({ type: "healthy", version: "2.0.0" })
     expect(requests).toEqual([
-      { path: "/api/info", authorization: password ? `Basic ${btoa(`opencode:${password}`)}` : null },
+      { path: "/api/info", authorization: password ? `Basic ${btoa(`warcode:${password}`)}` : null },
     ])
   })
 

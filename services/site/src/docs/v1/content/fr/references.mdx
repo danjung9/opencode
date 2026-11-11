@@ -3,11 +3,11 @@ title: Références
 description: Ajoutez des répertoires locaux et des dépôts Git comme références de projet.
 ---
 
-Les références donnent à OpenCode accès à des répertoires en dehors du projet actuel. Utilisez-les pour rendre disponibles de la documentation, des bibliothèques partagées, des exemples ou un autre dépôt pendant que vous travaillez.
+Les références donnent à Warcode accès à des répertoires en dehors du projet actuel. Utilisez-les pour rendre disponibles de la documentation, des bibliothèques partagées, des exemples ou un autre dépôt pendant que vous travaillez.
 
-Les références se configurent par alias dans `opencode.json` ou `opencode.jsonc`.
+Les références se configurent par alias dans `warcode.json` ou `warcode.jsonc`.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
   "references": {
@@ -16,7 +16,7 @@ Les références se configurent par alias dans `opencode.json` ou `opencode.json
       "description": "Use for product behavior and documentation conventions",
     },
     "sdk": {
-      "repository": "anomalyco/opencode-sdk-js",
+      "repository": "anomalyco/warcode-sdk-js",
       "branch": "main",
       "description": "Use for JavaScript SDK implementation details",
     },
@@ -30,7 +30,7 @@ Les références se configurent par alias dans `opencode.json` ou `opencode.json
 
 Utilisez `path` pour référencer un répertoire local.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": {
@@ -48,7 +48,7 @@ Les chemins peuvent être :
 
 Vous pouvez également utiliser une forme abrégée sous forme de chaîne :
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": "../docs",
@@ -60,9 +60,9 @@ Vous pouvez également utiliser une forme abrégée sous forme de chaîne :
 
 ## Dépôts Git
 
-Utilisez `repository` pour référencer un dépôt Git. OpenCode matérialise le dépôt dans son cache local de dépôts et rend les sources extraites disponibles comme répertoire de référence.
+Utilisez `repository` pour référencer un dépôt Git. Warcode matérialise le dépôt dans son cache local de dépôts et rend les sources extraites disponibles comme répertoire de référence.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": {
@@ -73,11 +73,11 @@ Utilisez `repository` pour référencer un dépôt Git. OpenCode matérialise le
 }
 ```
 
-`repository` accepte les URL Git, les références hôte/chemin et la forme abrégée GitHub `owner/repo`. Le champ facultatif `branch` sélectionne une branche ou une ref. Sans `branch`, OpenCode utilise la branche par défaut du dépôt.
+`repository` accepte les URL Git, les références hôte/chemin et la forme abrégée GitHub `owner/repo`. Le champ facultatif `branch` sélectionne une branche ou une ref. Sans `branch`, Warcode utilise la branche par défaut du dépôt.
 
 Vous pouvez utiliser la forme abrégée sous forme de chaîne lorsque vous n'avez pas besoin de branche, de description ou d'autres options :
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": "Effect-TS/effect",
@@ -95,7 +95,7 @@ Les références Git sont actualisées de manière asynchrone. Le clonage ou la 
 
 Ajoutez `description` pour expliquer quand un agent doit utiliser une référence.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "design-system": {
@@ -106,7 +106,7 @@ Ajoutez `description` pour expliquer quand un agent doit utiliser une référenc
 }
 ```
 
-OpenCode inclut les références dotées d'une description dans le contexte des agents. Les descriptions doivent être courtes et assez précises pour distinguer les références au contenu similaire. Les références sans description restent disponibles via la saisie semi-automatique et l'utilisation directe, mais ne sont pas présentées aux agents.
+Warcode inclut les références dotées d'une description dans le contexte des agents. Les descriptions doivent être courtes et assez précises pour distinguer les références au contenu similaire. Les références sans description restent disponibles via la saisie semi-automatique et l'utilisation directe, mais ne sont pas présentées aux agents.
 
 ---
 
@@ -114,7 +114,7 @@ OpenCode inclut les références dotées d'une description dans le contexte des 
 
 Définissez `hidden` sur `true` pour exclure une référence de la saisie semi-automatique `@` dans le TUI.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "internal": {
@@ -140,7 +140,7 @@ Compare this implementation with @sdk/src/client.ts
 
 Les agents reçoivent également dans leur contexte système les chemins résolus et les descriptions des références configurées qui ont une description, afin de pouvoir inspecter une référence lorsqu'elle est pertinente sans que vous ayez à la joindre manuellement.
 
-OpenCode autorise automatiquement les répertoires de référence à travers sa limite d'autorisation des répertoires externes. Les autorisations normales des outils s'appliquent toujours ; par exemple, un agent qui ne peut pas modifier de fichiers n'obtient pas le droit de modification parce qu'un répertoire est configuré comme référence.
+Warcode autorise automatiquement les répertoires de référence à travers sa limite d'autorisation des répertoires externes. Les autorisations normales des outils s'appliquent toujours ; par exemple, un agent qui ne peut pas modifier de fichiers n'obtient pas le droit de modification parce qu'un répertoire est configuré comme référence.
 
 ---
 

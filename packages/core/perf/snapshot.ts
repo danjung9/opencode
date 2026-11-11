@@ -11,9 +11,9 @@ import fs from "fs/promises"
 import { mkdirSync, realpathSync, rmSync } from "fs"
 import os from "os"
 import path from "path"
-import type { LLMEvent } from "@opencode/ai/effect"
-import { Global } from "@opencode/util/global"
-import { AppProcess } from "@opencode/util/process"
+import type { LLMEvent } from "@warcode/ai/effect"
+import { Global } from "@warcode/util/global"
+import { AppProcess } from "@warcode/util/process"
 import { Effect, Layer, Logger, ManagedRuntime, Stream } from "effect"
 import { AppNodeBuilder } from "../src/effect/app-node-builder"
 import { Git } from "../src/git"
@@ -25,7 +25,7 @@ import { Snapshot } from "../src/snapshot"
 // (/var/folders/… is /private/var/folders/…), so a fixture under it would read as outside its own project.
 const base = process.env.SNAPSHOT_BENCH_ROOT ?? os.tmpdir()
 mkdirSync(base, { recursive: true })
-const root = path.join(realpathSync(base), "opencode-snapshot-bench")
+const root = path.join(realpathSync(base), "warcode-snapshot-bench")
 
 const fixtures: Record<string, { tracked: number; ignored: number; dirs: number }> = {
   small: { tracked: 1_000, ignored: 0, dirs: 20 },
@@ -235,11 +235,11 @@ const trace = [
 export async function session(snapshots: "on" | "off", ttft: number) {
   // Loaded here, not at the top: the snapshot cases then load at git refs whose session and model
   // APIs differ, and the first session call (a warmup run) pays for the import.
-  const { ai, LanguageModel } = await import("@opencode/ai/effect")
-  const { OpenAIChat } = await import("@opencode/ai/protocols/openai-chat")
-  const { TestLLM } = await import("@opencode/ai/testing")
-  const { LayerNode } = await import("@opencode/util/effect/layer-node")
-  const { Money } = await import("@opencode/schema/money")
+  const { ai, LanguageModel } = await import("@warcode/ai/effect")
+  const { OpenAIChat } = await import("@warcode/ai/protocols/openai-chat")
+  const { TestLLM } = await import("@warcode/ai/testing")
+  const { LayerNode } = await import("@warcode/util/effect/layer-node")
+  const { Money } = await import("@warcode/schema/money")
   const { Agent } = await import("../src/agent")
   const { Bus } = await import("../src/bus")
   const { Database } = await import("../src/database/database")
@@ -346,12 +346,12 @@ export const resetFixture = () => reset(state.dir)
 // ---------- fixtures ----------
 
 // Generated once, outside any benchmark: tens of thousands of files and their first commit take minutes on a
-// machine that scans every new file. `bun packages/core/perf/snapshot.ts medium opencode`
+// machine that scans every new file. `bun packages/core/perf/snapshot.ts medium warcode`
 if (import.meta.main) {
   await fs.mkdir(root, { recursive: true })
   for (const name of process.argv.slice(2).length ? process.argv.slice(2) : ["medium"]) {
     const started = performance.now()
-    const dir = name === "opencode" ? await cloneOpencode() : await generate(name)
+    const dir = name === "warcode" ? await cloneWarcode() : await generate(name)
     console.log(`${name}: ${dir} (${((performance.now() - started) / 1000).toFixed(0)} s)`)
   }
 }
@@ -365,7 +365,7 @@ async function writeMany(files: Array<[string, string]>) {
 
 async function generate(name: string) {
   const fixture = fixtures[name]
-  if (!fixture) throw new Error(`unknown fixture ${name}: small, medium, large or opencode`)
+  if (!fixture) throw new Error(`unknown fixture ${name}: small, medium, large or warcode`)
   const dir = path.join(root, "fixtures", name)
   if (await Bun.file(path.join(dir, ".bench-ready")).exists()) return dir
   await fs.rm(dir, { recursive: true, force: true })
@@ -385,12 +385,12 @@ async function generate(name: string) {
 }
 
 // This repository, cloned, with a realistic ignored dependency tree instead of a full install.
-async function cloneOpencode() {
-  const dir = path.join(root, "fixtures", "opencode")
+async function cloneWarcode() {
+  const dir = path.join(root, "fixtures", "warcode")
   if (await Bun.file(path.join(dir, ".bench-ready")).exists()) return dir
   await fs.rm(dir, { recursive: true, force: true })
   const source = (await $`git rev-parse --show-toplevel`.cwd(import.meta.dir).text()).trim()
-  console.error(`cloning ${source} into fixture opencode`)
+  console.error(`cloning ${source} into fixture warcode`)
   await $`git clone --quiet --local --no-hardlinks ${source} ${dir}`.quiet()
   await writeMany(
     Array.from({ length: 30_000 }, (_, index) => [
@@ -407,7 +407,7 @@ async function gitInit(dir: string) {
   await $`git init -q`.cwd(dir).quiet()
   await Bun.write(path.join(dir, ".git", "info", "exclude"), ".bench-ready\n")
   await $`git -c core.fsmonitor=false -c core.fscache=true -c core.preloadindex=true add -A`.cwd(dir).quiet()
-  await $`git -c user.email=bench@opencode.test -c user.name=Bench commit -q --no-gpg-sign -m initial`.cwd(dir).quiet()
+  await $`git -c user.email=bench@warcode.test -c user.name=Bench commit -q --no-gpg-sign -m initial`.cwd(dir).quiet()
 }
 
 async function reset(dir: string) {

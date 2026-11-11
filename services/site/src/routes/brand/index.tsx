@@ -724,7 +724,7 @@ export default function Brand() {
         <PageTitle title={content().hero.title} />
         <p>{content().hero.body}</p>
         <div data-slot="hero-actions">
-          <a href={content().hero.all.href} download="opencode-brand-assets.zip" data-component="site-button">
+          <a href={content().hero.all.href} download="warcode-brand-assets.zip" data-component="site-button">
             {content().hero.all.text}
             <DownloadIcon />
           </a>
@@ -773,7 +773,7 @@ export default function Brand() {
                           // The files' own sizes: the logo 240 × 300 (square 300 × 300), the wordmarks 640 × 115.
                           width={family.kind === "logo" ? (asset.file.endsWith("-square") ? 300 : 240) : 640}
                           height={family.kind === "logo" ? 300 : 115}
-                          alt={`OpenCode ${lower(family.title)}, ${lower(asset.name)}`}
+                          alt={`Warcode ${lower(family.title)}, ${lower(asset.name)}`}
                         />
                       </div>
                       <div data-slot="meta">
@@ -863,7 +863,7 @@ export default function Brand() {
                                   src={tile.svg}
                                   width={tile.file.includes("-logo-") ? 240 : 640}
                                   height={tile.file.includes("-logo-") ? 300 : 115}
-                                  alt={`OpenCode ${lower(row.title)}, ${lower(group.name)}, ${lower(tile.name)}`}
+                                  alt={`Warcode ${lower(row.title)}, ${lower(group.name)}, ${lower(tile.name)}`}
                                 />
                               </div>
                               <div data-slot="meta">
@@ -1136,7 +1136,7 @@ export default function Brand() {
                         <Match when={example.id === "lockup"}>
                           <div data-slot="lockup">
                             <Mark code="var(--logo-code)" inner="var(--logo-inner)" />
-                            <span>OpenCode Pro</span>
+                            <span>Warcode Pro</span>
                           </div>
                         </Match>
                         <Match when={example.id === "color"}>
@@ -1198,7 +1198,7 @@ export default function Brand() {
                           <PartnerLockup partner={partner.name} />
                         </div>
                         <span data-slot="name">
-                          OpenCode × {partner.name}, {themeName(tone)}
+                          Warcode × {partner.name}, {themeName(tone)}
                         </span>
                       </li>
                     )}
@@ -1254,7 +1254,7 @@ const partnerMarks: Record<string, { path: string; size: number }> = {
 }
 
 /**
- * The OpenCode logo at 32 × 40px (an 8px stroke), a 12px ×, and a partner's logo, with 3 strokes (24px)
+ * The Warcode logo at 32 × 40px (an 8px stroke), a 12px ×, and a partner's logo, with 3 strokes (24px)
  * on each side of the ×.
  */
 function PartnerLockup(props: { partner: string }) {
@@ -1303,7 +1303,7 @@ function DownloadIcon() {
 const markInner = "M180 240H60V120H180V240Z"
 const markOuter = "M180 60H60V240H180V60ZM240 300H0V0H240V300Z"
 
-// The wordmark letters from opencode-wordmark-light.svg: [inner shade, outer shape]. The first four spell "open".
+// The wordmark letters from warcode-wordmark-light.svg: [inner shade, outer shape]. The first four spell "open".
 const letters = [
   [
     "M49.2346 82.1433H16.4141V49.2861H49.2346V82.1433Z",

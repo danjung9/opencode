@@ -6,8 +6,8 @@
 //   bun ./script/upload-media.ts [--mode dev]          print the uploads (dry run)
 //   bun ./script/upload-media.ts [--mode dev] --run    upload with `cf r2 objects put`
 //
-// `--mode dev` targets opencode-dev-files (dev.opencode.ai/files); any other mode targets
-// opencode-production-files (opencode.ai/files). The prefix must match mediaBase in src/lib/media.ts.
+// `--mode dev` targets warcode-dev-files (dev.warcode.ai/files); any other mode targets
+// warcode-production-files (warcode.ai/files). The prefix must match mediaBase in src/lib/media.ts.
 import { createHash } from "node:crypto"
 import path from "node:path"
 import { Glob } from "bun"
@@ -16,7 +16,7 @@ import { mediaBase, mediaFile } from "../src/lib/media"
 const root = path.resolve(import.meta.dir, "..")
 const publicDir = path.join(root, "public")
 const mode = process.argv[process.argv.indexOf("--mode") + 1]
-const bucket = process.argv.includes("--mode") && mode === "dev" ? "opencode-dev-files" : "opencode-production-files"
+const bucket = process.argv.includes("--mode") && mode === "dev" ? "warcode-dev-files" : "warcode-production-files"
 const prefix = mediaBase.replace(/^\/files\//, "")
 const run = process.argv.includes("--run")
 const writeManifest = process.argv.includes("--manifest")

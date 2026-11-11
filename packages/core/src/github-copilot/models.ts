@@ -1,6 +1,6 @@
 export * as CopilotModels from "./models.js"
 
-import { Money } from "@opencode/schema/money"
+import { Money } from "@warcode/schema/money"
 import { Effect, Option, Schema } from "effect"
 import { Headers, HttpClient, HttpClientRequest, HttpClientResponse } from "effect/http"
 import { Model } from "../model.js"
@@ -169,7 +169,7 @@ function build(id: Model.ID, remote: UsableModel, baseURL: string, previous?: Mo
   if (image) input.push("image")
   if (pdf) input.push("pdf")
   const prices = remote.billing?.token_prices
-  // Copilot reports AIC per billing batch; OpenCode stores USD per million tokens.
+  // Copilot reports AIC per billing batch; Warcode stores USD per million tokens.
   const usdPerMillion = prices && prices.batch_size > 0 ? 10_000 / prices.batch_size : 0
   const version = remote.version.startsWith(`${remote.id}-`)
     ? remote.version.slice(remote.id.length + 1)
@@ -219,9 +219,9 @@ function build(id: Model.ID, remote: UsableModel, baseURL: string, previous?: Mo
 type Endpoint = "messages" | "responses" | "chat"
 
 const PACKAGES = {
-  messages: "@opencode/ai/providers/anthropic",
-  responses: "@opencode/ai/providers/openai-compatible-responses",
-  chat: "@opencode/ai/providers/openai-compatible",
+  messages: "@warcode/ai/providers/anthropic",
+  responses: "@warcode/ai/providers/openai-compatible-responses",
+  chat: "@warcode/ai/providers/openai-compatible",
 } as const satisfies Record<Endpoint, string>
 
 /** The native package and base URL for the Copilot API that serves a model. */

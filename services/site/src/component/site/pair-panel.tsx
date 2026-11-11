@@ -11,7 +11,7 @@ import { Still, stillSizes } from "./media"
 
 /**
  * "Connect your phone" on the Mobile page's Download section: what pairing is and how to do it, from
- * `opencode pair` (packages/cli/src/commands/handlers/pair.ts) and the iOS app. Settings › Pair style
+ * `warcode pair` (packages/cli/src/commands/handlers/pair.ts) and the iOS app. Settings › Pair style
  * (Design mode) shows it as numbered steps, an explanation beside what you'll see, or one callout card.
  */
 export function PairPanel() {

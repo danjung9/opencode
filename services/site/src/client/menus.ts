@@ -40,7 +40,7 @@ export function startMenus() {
   })
   const closeNav = () => navMenus.close()
   onCloseMenus(closeNav)
-  on("opencode-nav-menu-open" as keyof DocumentEventMap, () => runMenuClosers(closeNav))
+  on("warcode-nav-menu-open" as keyof DocumentEventMap, () => runMenuClosers(closeNav))
 
   // One highlighted row per menu: keyboard focus follows the pointer into another row (as Site and the
   // docs' lockup do, src/docs/client.ts).

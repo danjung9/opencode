@@ -1,9 +1,9 @@
 import { describe, expect } from "bun:test"
 import { Effect, Layer } from "effect"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { AbsolutePath } from "@opencode/core/schema"
-import { Reference } from "@opencode/core/reference"
-import { ReferenceInstructions } from "@opencode/core/reference/instructions"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { AbsolutePath } from "@warcode/core/schema"
+import { Reference } from "@warcode/core/reference"
+import { ReferenceInstructions } from "@warcode/core/reference/instructions"
 import { it } from "./lib/effect"
 import { readInitial, readUpdate } from "./lib/instructions"
 

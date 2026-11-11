@@ -1,5 +1,5 @@
 import { Cause, Deferred, Effect, Exit, Fiber } from "effect"
-import type { UpdaterState } from "@opencode/plugin/gui/updater"
+import type { UpdaterState } from "@warcode/plugin/gui/updater"
 
 export type UpdateTarget =
   | { readonly mode: "restart"; readonly version: string }

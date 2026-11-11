@@ -1,8 +1,8 @@
 import type { createMiddleware } from "@solidjs/start/middleware"
 import { Resource } from "#resource"
 
-// dev.opencode.ai runs every merge to dev, and search engines must never list it in place of
-// opencode.ai. Every response there asks them not to index it: the Worker's (pages, Markdown,
+// dev.warcode.ai runs every merge to dev, and search engines must never list it in place of
+// warcode.ai. Every response there asks them not to index it: the Worker's (pages, Markdown,
 // redirects, errors) through this middleware, and the static assets the Worker never sees through
 // the rule script/build.ts adds to dev's _headers. robots.txt keeps allowing the crawl, or crawlers
 // would never see the header and dev pages already in an index would stay there.

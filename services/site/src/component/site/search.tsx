@@ -26,7 +26,7 @@ export type SiteSearchProps = {
 }
 
 /** Dispatched on the document to open the search, such as from Settings › Search › Preview. */
-export const searchOpenEvent = "opencode-site-search-open"
+export const searchOpenEvent = "warcode-site-search-open"
 // Whether the search is open, for triggers outside it to show their open state (aria-expanded).
 const [shown, setShown] = createSignal(false)
 export const searchShown = shown

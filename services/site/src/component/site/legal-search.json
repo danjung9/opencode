@@ -2,12 +2,12 @@
   {
     "title": "Privacy Policy",
     "path": "/legal/privacy-policy",
-    "description": "How OpenCode collects, uses, shares and protects your personal data when you use the OpenCode website, apps and hosted services, and the choices you have.",
+    "description": "How Warcode collects, uses, shares and protects your personal data when you use the Warcode website, apps and hosted services, and the choices you have.",
     "headings": [
       {
         "id": "privacy-policy-table-of-contents",
         "title": "Privacy Policy Table of Contents",
-        "body": " What this Privacy Policy CoversPersonal DataCategories of Personal Data We CollectOur Commercial or Business Purposes for Collecting Personal DataOther Permitted Purposes for Processing Personal DataCategories of Sources of Personal DataHow We Disclose Your Personal DataIntegrations with Third-Party ServicesTracking Tools and Opt-OutProduct Analytics on opencode.aiData SecurityPersonal Data of ChildrenCalifornia Resident Rights (\"CCPA\")Colorado Resident Rights (\"CPA\")Connecticut Resident Rights (\"CTDPA\")Delaware Resident Rights (\"DPDPA\")Iowa Resident Rights (\"ICDPA\")Montana Resident Rights (\"",
+        "body": " What this Privacy Policy CoversPersonal DataCategories of Personal Data We CollectOur Commercial or Business Purposes for Collecting Personal DataOther Permitted Purposes for Processing Personal DataCategories of Sources of Personal DataHow We Disclose Your Personal DataIntegrations with Third-Party ServicesTracking Tools and Opt-OutProduct Analytics on warcode.aiData SecurityPersonal Data of ChildrenCalifornia Resident Rights (\"CCPA\")Colorado Resident Rights (\"CPA\")Connecticut Resident Rights (\"CTDPA\")Delaware Resident Rights (\"DPDPA\")Iowa Resident Rights (\"ICDPA\")Montana Resident Rights (\"",
         "path": "/legal/privacy-policy",
         "document": "Privacy Policy"
       },
@@ -42,7 +42,7 @@
       {
         "id": "other-permitted-purposes",
         "title": "Other Permitted Purposes for Processing Personal Data",
-        "body": " In addition, each of the above referenced categories of Personal Data may be collected, used, and disclosed with the government, including law enforcement, or other parties to meet certain legal requirements and enforcing legal terms including: fulfilling our legal obligations under applicable law, regulation, court order or other legal process, such as preventing, detecting and investigating security incidents and potentially illegal or prohibited activities; protecting the rights, property or safety of you, OpenCode or another party; enforcing any agreements with you; responding to claims t",
+        "body": " In addition, each of the above referenced categories of Personal Data may be collected, used, and disclosed with the government, including law enforcement, or other parties to meet certain legal requirements and enforcing legal terms including: fulfilling our legal obligations under applicable law, regulation, court order or other legal process, such as preventing, detecting and investigating security incidents and potentially illegal or prohibited activities; protecting the rights, property or safety of you, Warcode or another party; enforcing any agreements with you; responding to claims t",
         "path": "/legal/privacy-policy",
         "document": "Privacy Policy"
       },
@@ -105,7 +105,7 @@
       {
         "id": "integrations",
         "title": "Integrations with Third-Party Services",
-        "body": " OpenCode Console lets a workspace connect third-party services (\"Connected Services\"), such as Slack, Zoom, HubSpot, GitHub, Google Workspace and Microsoft 365, so that its members' OpenCode agents can use them. This section explains how we handle data from Connected Services. It supplements the rest of this Privacy Policy and controls where they conflict. What we receive and store. To connect a Connected Service, you sign in with that service and authorize OpenCode Console, or you or a workspace administrator enter an API key. We encrypt and store the access and refresh tokens or API keys, a",
+        "body": " Warcode Console lets a workspace connect third-party services (\"Connected Services\"), such as Slack, Zoom, HubSpot, GitHub, Google Workspace and Microsoft 365, so that its members' Warcode agents can use them. This section explains how we handle data from Connected Services. It supplements the rest of this Privacy Policy and controls where they conflict. What we receive and store. To connect a Connected Service, you sign in with that service and authorize Warcode Console, or you or a workspace administrator enter an API key. We encrypt and store the access and refresh tokens or API keys, a",
         "path": "/legal/privacy-policy",
         "document": "Privacy Policy"
       },
@@ -118,8 +118,8 @@
       },
       {
         "id": "product-analytics",
-        "title": "Product Analytics on opencode.ai",
-        "body": " When you visit opencode.ai, including the docs and the Console, we record the pages you view, how long each page is visible, how long you're active on it, how far you scroll and how quickly it loads. We also record the links and buttons you click, when you download an app or copy a command, when you search (but not what you search for), and the type of any sign-in error. We record each click under a fixed name we give that link or button, so text you or your team entered, such as workspace names or email addresses, isn't recorded even when it appears on the page. We record account and workspa",
+        "title": "Product Analytics on warcode.ai",
+        "body": " When you visit warcode.ai, including the docs and the Console, we record the pages you view, how long each page is visible, how long you're active on it, how far you scroll and how quickly it loads. We also record the links and buttons you click, when you download an app or copy a command, when you search (but not what you search for), and the type of any sign-in error. We record each click under a fixed name we give that link or button, so text you or your team entered, such as workspace names or email addresses, isn't recorded even when it appears on the page. We record account and workspa",
         "path": "/legal/privacy-policy",
         "document": "Privacy Policy"
       },
@@ -877,26 +877,26 @@
   {
     "title": "Terms of Use",
     "path": "/legal/terms-of-service",
-    "description": "The rules that govern your use of the OpenCode website, inference product and hosted software, including your account, payments and acceptable use.",
+    "description": "The rules that govern your use of the Warcode website, inference product and hosted software, including your account, payments and acceptable use.",
     "headings": [
       {
-        "id": "what-is-opencode",
-        "title": "What is OpenCode?",
-        "body": " OpenCode is an AI-powered coding agent that helps you write, understand, and modify code using large language models. Certain of these large language models are provided by third parties (\"Third Party Models\") and certain of these models are provided directly by us if you use the OpenCode Models paid offering (\"OpenCode Models\"). Regardless of whether you use Third Party Models or OpenCode Models, OpenCode enables you to access the functionality of models through a coding agent running within your terminal.",
+        "id": "what-is-warcode",
+        "title": "What is Warcode?",
+        "body": " Warcode is an AI-powered coding agent that helps you write, understand, and modify code using large language models. Certain of these large language models are provided by third parties (\"Third Party Models\") and certain of these models are provided directly by us if you use the Warcode Models paid offering (\"Warcode Models\"). Regardless of whether you use Third Party Models or Warcode Models, Warcode enables you to access the functionality of models through a coding agent running within your terminal.",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
       {
         "id": "will-these-terms-ever-change",
         "title": "Will these Terms ever change?",
-        "body": " We are constantly trying to improve our Services, so these Terms may need to change along with our Services. We reserve the right to change the Terms at any time, but if we do, we will place a notice on our site located at opencode.ai, send you an email, and/or notify you by some other means. If you don't agree with the new Terms, you are free to reject them; unfortunately, that means you will no longer be able to use the Services. If you use the Services in any way after a change to the Terms is effective, that means you agree to all of the changes. Except for changes by us as described here",
+        "body": " We are constantly trying to improve our Services, so these Terms may need to change along with our Services. We reserve the right to change the Terms at any time, but if we do, we will place a notice on our site located at warcode.ai, send you an email, and/or notify you by some other means. If you don't agree with the new Terms, you are free to reject them; unfortunately, that means you will no longer be able to use the Services. If you use the Services in any way after a change to the Terms is effective, that means you agree to all of the changes. Except for changes by us as described here",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
       {
         "id": "what-about-my-privacy",
         "title": "What about my privacy?",
-        "body": " OpenCode takes the privacy of its users very seriously. For the current OpenCode Privacy Policy, please click here https://opencode.ai/legal/privacy-policy.",
+        "body": " Warcode takes the privacy of its users very seriously. For the current Warcode Privacy Policy, please click here https://opencode.ai/legal/privacy-policy.",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
@@ -909,7 +909,7 @@
       },
       {
         "id": "what-are-the-basics",
-        "title": "What are the basics of using OpenCode?",
+        "title": "What are the basics of using Warcode?",
         "body": " You represent and warrant that you are an individual of legal age to form a binding contract (or if not, you've received your parent's or guardian's permission to use the Services and have gotten your parent or guardian to agree to these Terms on your behalf). If you're agreeing to these Terms on behalf of an organization or entity, you represent and warrant that you are authorized to agree to these Terms on that organization's or entity's behalf and bind them to these Terms (in which case, the references to \"you\" and \"your\" in these Terms, except for in this sentence, refer to that organizat",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
@@ -917,7 +917,7 @@
       {
         "id": "are-there-restrictions",
         "title": "Are there restrictions in how I can use the Services?",
-        "body": " You represent, warrant, and agree that you will not provide or contribute anything, including any Content (as that term is defined below), to the Services, or otherwise use or interact with the Services, in a manner that: infringes or violates the intellectual property rights or any other rights of anyone else (including OpenCode);violates any law or regulation, including, without limitation, any applicable export control laws, privacy laws or any other purpose not reasonably intended by OpenCode;is dangerous, harmful, fraudulent, deceptive, threatening, harassing, defamatory, obscene, or oth",
+        "body": " You represent, warrant, and agree that you will not provide or contribute anything, including any Content (as that term is defined below), to the Services, or otherwise use or interact with the Services, in a manner that: infringes or violates the intellectual property rights or any other rights of anyone else (including Warcode);violates any law or regulation, including, without limitation, any applicable export control laws, privacy laws or any other purpose not reasonably intended by Warcode;is dangerous, harmful, fraudulent, deceptive, threatening, harassing, defamatory, obscene, or oth",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
@@ -945,13 +945,13 @@
       {
         "id": "what-about-third-party-models",
         "title": "What about Third Party Models?",
-        "body": " The Services enable you to access and use Third Party Models, which are not owned or controlled by OpenCode. Your ability to access Third Party Models is contingent on you having API keys or otherwise having the right to access such Third Party Models. OpenCode has no control over, and assumes no responsibility for, the content, accuracy, privacy policies, or practices of any providers of Third Party Models. We encourage you to read the terms and conditions and privacy policy of each provider of a Third Party Model that you choose to utilize. By using the Services, you release and hold us har",
+        "body": " The Services enable you to access and use Third Party Models, which are not owned or controlled by Warcode. Your ability to access Third Party Models is contingent on you having API keys or otherwise having the right to access such Third Party Models. Warcode has no control over, and assumes no responsibility for, the content, accuracy, privacy policies, or practices of any providers of Third Party Models. We encourage you to read the terms and conditions and privacy policy of each provider of a Third Party Model that you choose to utilize. By using the Services, you release and hold us har",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
       {
-        "id": "will-opencode-ever-change-the-services",
-        "title": "Will OpenCode ever change the Services?",
+        "id": "will-warcode-ever-change-the-services",
+        "title": "Will Warcode ever change the Services?",
         "body": " We're always trying to improve our Services, so they may change over time. We may suspend or discontinue any part of the Services, or we may introduce new features or impose limits on certain features or restrict access to parts or all of the Services.",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
@@ -966,7 +966,7 @@
       {
         "id": "paid-services",
         "title": "Paid Services",
-        "body": " Certain of our Services, including OpenCode Models, may be subject to payments now or in the future (the \"Paid Services\"). Please see our Paid Services page https://opencode.ai/console/models for a description of the current Paid Services. Please note that any payment terms presented to you in the process of using or signing up for a Paid Service are deemed part of these Terms.",
+        "body": " Certain of our Services, including Warcode Models, may be subject to payments now or in the future (the \"Paid Services\"). Please see our Paid Services page https://opencode.ai/console/models for a description of the current Paid Services. Please note that any payment terms presented to you in the process of using or signing up for a Paid Service are deemed part of these Terms.",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
@@ -1001,7 +1001,7 @@
       {
         "id": "what-if-i-want-to-stop",
         "title": "What if I want to stop using the Services?",
-        "body": " You're free to do that at any time; please refer to our Privacy Policy https://opencode.ai/legal/privacy-policy, as well as the licenses above, to understand how we treat information you provide to us after you have stopped using our Services. OpenCode is also free to terminate (or suspend access to) your use of the Services for any reason in our discretion, including your breach of these Terms. OpenCode has the sole right to decide whether you are in violation of any of the restrictions set forth in these Terms. Provisions that, by their nature, should survive termination of these Terms shal",
+        "body": " You're free to do that at any time; please refer to our Privacy Policy https://opencode.ai/legal/privacy-policy, as well as the licenses above, to understand how we treat information you provide to us after you have stopped using our Services. Warcode is also free to terminate (or suspend access to) your use of the Services for any reason in our discretion, including your breach of these Terms. Warcode has the sole right to decide whether you are in violation of any of the restrictions set forth in these Terms. Provisions that, by their nature, should survive termination of these Terms shal",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
@@ -1015,28 +1015,28 @@
       {
         "id": "warranty-disclaimer",
         "title": "Warranty Disclaimer",
-        "body": " OpenCode and its licensors, suppliers, partners, parent, subsidiaries or affiliated entities, and each of their respective officers, directors, members, employees, consultants, contract employees, representatives and agents, and each of their respective successors and assigns (OpenCode and all such parties together, the \"OpenCode Parties\") make no representations or warranties concerning the Services, including without limitation regarding any Content contained in or accessed through the Services, and the OpenCode Parties will not be responsible or liable for the accuracy, copyright complianc",
+        "body": " Warcode and its licensors, suppliers, partners, parent, subsidiaries or affiliated entities, and each of their respective officers, directors, members, employees, consultants, contract employees, representatives and agents, and each of their respective successors and assigns (Warcode and all such parties together, the \"Warcode Parties\") make no representations or warranties concerning the Services, including without limitation regarding any Content contained in or accessed through the Services, and the Warcode Parties will not be responsible or liable for the accuracy, copyright complianc",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
       {
         "id": "limitation-of-liability",
         "title": "Limitation of Liability",
-        "body": " TO THE FULLEST EXTENT ALLOWED BY APPLICABLE LAW, UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, TORT, CONTRACT, STRICT LIABILITY, OR OTHERWISE) SHALL ANY OF THE OPENCODE PARTIES BE LIABLE TO YOU OR TO ANY OTHER PERSON FOR (A) ANY INDIRECT, SPECIAL, INCIDENTAL, PUNITIVE OR CONSEQUENTIAL DAMAGES OF ANY KIND, INCLUDING DAMAGES FOR LOST PROFITS, BUSINESS INTERRUPTION, LOSS OF DATA, LOSS OF GOODWILL, WORK STOPPAGE, ACCURACY OF RESULTS, OR COMPUTER FAILURE OR MALFUNCTION, (B) ANY SUBSTITUTE GOODS, SERVICES OR TECHNOLOGY, (C) ANY AMOUNT, IN THE AGGREGATE, IN EXCESS ",
+        "body": " TO THE FULLEST EXTENT ALLOWED BY APPLICABLE LAW, UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, TORT, CONTRACT, STRICT LIABILITY, OR OTHERWISE) SHALL ANY OF THE WARCODE PARTIES BE LIABLE TO YOU OR TO ANY OTHER PERSON FOR (A) ANY INDIRECT, SPECIAL, INCIDENTAL, PUNITIVE OR CONSEQUENTIAL DAMAGES OF ANY KIND, INCLUDING DAMAGES FOR LOST PROFITS, BUSINESS INTERRUPTION, LOSS OF DATA, LOSS OF GOODWILL, WORK STOPPAGE, ACCURACY OF RESULTS, OR COMPUTER FAILURE OR MALFUNCTION, (B) ANY SUBSTITUTE GOODS, SERVICES OR TECHNOLOGY, (C) ANY AMOUNT, IN THE AGGREGATE, IN EXCESS ",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
       {
         "id": "indemnity",
         "title": "Indemnity",
-        "body": " You agree to indemnify and hold the OpenCode Parties harmless from and against any and all claims, liabilities, damages (actual and consequential), losses and expenses (including attorneys' fees) arising from or in any way related to any claims relating to (a) your use of the Services, and (b) your violation of these Terms. In the event of such a claim, suit, or action (\"Claim\"), we will attempt to provide notice of the Claim to the contact information we have for your account (provided that failure to deliver such notice shall not eliminate or reduce your indemnification obligations hereunde",
+        "body": " You agree to indemnify and hold the Warcode Parties harmless from and against any and all claims, liabilities, damages (actual and consequential), losses and expenses (including attorneys' fees) arising from or in any way related to any claims relating to (a) your use of the Services, and (b) your violation of these Terms. In the event of such a claim, suit, or action (\"Claim\"), we will attempt to provide notice of the Claim to the contact information we have for your account (provided that failure to deliver such notice shall not eliminate or reduce your indemnification obligations hereunde",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
       {
         "id": "assignment",
         "title": "Assignment",
-        "body": " You may not assign, delegate or transfer these Terms or your rights or obligations hereunder, or your Services account, in any way (by operation of law or otherwise) without OpenCode's prior written consent. We may transfer, assign, or delegate these Terms and our rights and obligations without consent.",
+        "body": " You may not assign, delegate or transfer these Terms or your rights or obligations hereunder, or your Services account, in any way (by operation of law or otherwise) without Warcode's prior written consent. We may transfer, assign, or delegate these Terms and our rights and obligations without consent.",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
@@ -1050,14 +1050,14 @@
       {
         "id": "arbitration-agreement",
         "title": "Arbitration Agreement",
-        "body": " Please read the following ARBITRATION AGREEMENT carefully because it requires you to arbitrate certain disputes and claims with OpenCode and limits the manner in which you can seek relief from OpenCode. Both you and OpenCode acknowledge and agree that for the purposes of any dispute arising out of or relating to the subject matter of these Terms, OpenCode's officers, directors, employees and independent contractors (\"Personnel\") are third-party beneficiaries of these Terms, and that upon your acceptance of these Terms, Personnel will have the right (and will be deemed to have accepted the rig",
+        "body": " Please read the following ARBITRATION AGREEMENT carefully because it requires you to arbitrate certain disputes and claims with Warcode and limits the manner in which you can seek relief from Warcode. Both you and Warcode acknowledge and agree that for the purposes of any dispute arising out of or relating to the subject matter of these Terms, Warcode's officers, directors, employees and independent contractors (\"Personnel\") are third-party beneficiaries of these Terms, and that upon your acceptance of these Terms, Personnel will have the right (and will be deemed to have accepted the rig",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       },
       {
         "id": "miscellaneous",
         "title": "Miscellaneous",
-        "body": " You will be responsible for paying, withholding, filing, and reporting all taxes, duties, and other governmental assessments associated with your activity in connection with the Services, provided that the OpenCode may, in its sole discretion, do any of the foregoing on your behalf or for itself as it sees fit. The failure of either you or us to exercise, in any way, any right herein shall not be deemed a waiver of any further rights hereunder. If any provision of these Terms are found to be unenforceable or invalid, that provision will be limited or eliminated, to the minimum extent necessar",
+        "body": " You will be responsible for paying, withholding, filing, and reporting all taxes, duties, and other governmental assessments associated with your activity in connection with the Services, provided that the Warcode may, in its sole discretion, do any of the foregoing on your behalf or for itself as it sees fit. The failure of either you or us to exercise, in any way, any right herein shall not be deemed a waiver of any further rights hereunder. If any provision of these Terms are found to be unenforceable or invalid, that provision will be limited or eliminated, to the minimum extent necessar",
         "path": "/legal/terms-of-service",
         "document": "Terms of Use"
       }

@@ -1,7 +1,7 @@
 {
   "name": "@opencode/pty",
   "version": "0.5.0",
-  "description": "Persistent PTY service for OpenCode",
+  "description": "Persistent PTY service for Warcode",
   "type": "module",
   "license": "MIT",
   "repository": {
@@ -17,7 +17,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "opencode-pty": "./bin/opencode-pty.js"
+    "warcode-pty": "./bin/warcode-pty.js"
   },
   "files": [
     "bin",

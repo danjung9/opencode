@@ -4,36 +4,36 @@ import { absoluteUrl, blocks, link, type MarkdownContext } from "~/lib/markdown"
 import { brandAssets, mediaUrl } from "~/lib/media"
 // Brand files at stable public URLs (public/brand/files), so links in /brand.md and the page never
 // change between builds. The sources stay in src/asset/brand.
-const logoLightPng = "/brand/files/opencode-logo-light.png"
-const logoDarkPng = "/brand/files/opencode-logo-dark.png"
-const logoLightSquarePng = "/brand/files/opencode-logo-light-square.png"
-const logoDarkSquarePng = "/brand/files/opencode-logo-dark-square.png"
-const wordmarkLightPng = "/brand/files/opencode-wordmark-light.png"
-const wordmarkDarkPng = "/brand/files/opencode-wordmark-dark.png"
-const wordmarkSimpleLightPng = "/brand/files/opencode-wordmark-simple-light.png"
-const wordmarkSimpleDarkPng = "/brand/files/opencode-wordmark-simple-dark.png"
-const logoLightSvg = "/brand/files/opencode-logo-light.svg"
-const logoDarkSvg = "/brand/files/opencode-logo-dark.svg"
-const logoLightSquareSvg = "/brand/files/opencode-logo-light-square.svg"
-const logoDarkSquareSvg = "/brand/files/opencode-logo-dark-square.svg"
-const wordmarkLightSvg = "/brand/files/opencode-wordmark-light.svg"
-const wordmarkDarkSvg = "/brand/files/opencode-wordmark-dark.svg"
-const wordmarkSimpleLightSvg = "/brand/files/opencode-wordmark-simple-light.svg"
-const wordmarkSimpleDarkSvg = "/brand/files/opencode-wordmark-simple-dark.svg"
-const logoTransparentLightPng = "/brand/files/opencode-logo-transparent-light.png"
-const logoTransparentDarkPng = "/brand/files/opencode-logo-transparent-dark.png"
-const wordmarkTransparentLightPng = "/brand/files/opencode-wordmark-transparent-light.png"
-const wordmarkTransparentDarkPng = "/brand/files/opencode-wordmark-transparent-dark.png"
-const wordmarkSolidLightPng = "/brand/files/opencode-wordmark-solid-light.png"
-const wordmarkSolidDarkPng = "/brand/files/opencode-wordmark-solid-dark.png"
-const logoTransparentLightSvg = "/brand/files/opencode-logo-transparent-light.svg"
-const logoTransparentDarkSvg = "/brand/files/opencode-logo-transparent-dark.svg"
-const wordmarkTransparentLightSvg = "/brand/files/opencode-wordmark-transparent-light.svg"
-const wordmarkTransparentDarkSvg = "/brand/files/opencode-wordmark-transparent-dark.svg"
-const wordmarkSolidLightSvg = "/brand/files/opencode-wordmark-solid-light.svg"
-const wordmarkSolidDarkSvg = "/brand/files/opencode-wordmark-solid-dark.svg"
-const avatarDark1024Png = "/brand/files/opencode-avatar-dark-1024.png"
-const avatarLight1024Png = "/brand/files/opencode-avatar-light-1024.png"
+const logoLightPng = "/brand/files/warcode-logo-light.png"
+const logoDarkPng = "/brand/files/warcode-logo-dark.png"
+const logoLightSquarePng = "/brand/files/warcode-logo-light-square.png"
+const logoDarkSquarePng = "/brand/files/warcode-logo-dark-square.png"
+const wordmarkLightPng = "/brand/files/warcode-wordmark-light.png"
+const wordmarkDarkPng = "/brand/files/warcode-wordmark-dark.png"
+const wordmarkSimpleLightPng = "/brand/files/warcode-wordmark-simple-light.png"
+const wordmarkSimpleDarkPng = "/brand/files/warcode-wordmark-simple-dark.png"
+const logoLightSvg = "/brand/files/warcode-logo-light.svg"
+const logoDarkSvg = "/brand/files/warcode-logo-dark.svg"
+const logoLightSquareSvg = "/brand/files/warcode-logo-light-square.svg"
+const logoDarkSquareSvg = "/brand/files/warcode-logo-dark-square.svg"
+const wordmarkLightSvg = "/brand/files/warcode-wordmark-light.svg"
+const wordmarkDarkSvg = "/brand/files/warcode-wordmark-dark.svg"
+const wordmarkSimpleLightSvg = "/brand/files/warcode-wordmark-simple-light.svg"
+const wordmarkSimpleDarkSvg = "/brand/files/warcode-wordmark-simple-dark.svg"
+const logoTransparentLightPng = "/brand/files/warcode-logo-transparent-light.png"
+const logoTransparentDarkPng = "/brand/files/warcode-logo-transparent-dark.png"
+const wordmarkTransparentLightPng = "/brand/files/warcode-wordmark-transparent-light.png"
+const wordmarkTransparentDarkPng = "/brand/files/warcode-wordmark-transparent-dark.png"
+const wordmarkSolidLightPng = "/brand/files/warcode-wordmark-solid-light.png"
+const wordmarkSolidDarkPng = "/brand/files/warcode-wordmark-solid-dark.png"
+const logoTransparentLightSvg = "/brand/files/warcode-logo-transparent-light.svg"
+const logoTransparentDarkSvg = "/brand/files/warcode-logo-transparent-dark.svg"
+const wordmarkTransparentLightSvg = "/brand/files/warcode-wordmark-transparent-light.svg"
+const wordmarkTransparentDarkSvg = "/brand/files/warcode-wordmark-transparent-dark.svg"
+const wordmarkSolidLightSvg = "/brand/files/warcode-wordmark-solid-light.svg"
+const wordmarkSolidDarkSvg = "/brand/files/warcode-wordmark-solid-dark.svg"
+const avatarDark1024Png = "/brand/files/warcode-avatar-dark-1024.png"
+const avatarLight1024Png = "/brand/files/warcode-avatar-light-1024.png"
 
 
 /** The brand page copy, shared by the page and its Markdown version. */
@@ -53,9 +53,9 @@ export function brandContent(t: Translate) {
     },
     naming: {
       title: "Naming",
-      body: "Write OpenCode as one word, with a capital O and a capital C. Do not write Opencode, Open Code, OpenCode AI or Open-Code.",
+      body: "Write Warcode as one word, with a capital O and a capital C. Do not write Warcode, Open Code, Warcode AI or Open-Code.",
       // Names between backticks show as code.
-      code: "Use the lowercase `opencode` only in code and package names, such as `opencode-figma` or `@acme/opencode-plugin`.",
+      code: "Use the lowercase `warcode` only in code and package names, such as `warcode-figma` or `@acme/warcode-plugin`.",
     },
     families: [
       {
@@ -63,18 +63,18 @@ export function brandContent(t: Translate) {
         body: "The logo on its own, for app icons, avatars and other small spaces. The square versions add padding for places that crop to a square.",
         kind: "logo",
         assets: [
-          { name: "Light", file: "opencode-logo-light", tone: "light", png: logoLightPng, svg: logoLightSvg },
-          { name: "Dark", file: "opencode-logo-dark", tone: "dark", png: logoDarkPng, svg: logoDarkSvg },
+          { name: "Light", file: "warcode-logo-light", tone: "light", png: logoLightPng, svg: logoLightSvg },
+          { name: "Dark", file: "warcode-logo-dark", tone: "dark", png: logoDarkPng, svg: logoDarkSvg },
           {
             name: "Square, light",
-            file: "opencode-logo-light-square",
+            file: "warcode-logo-light-square",
             tone: "light",
             png: logoLightSquarePng,
             svg: logoLightSquareSvg,
           },
           {
             name: "Square, dark",
-            file: "opencode-logo-dark-square",
+            file: "warcode-logo-dark-square",
             tone: "dark",
             png: logoDarkSquarePng,
             svg: logoDarkSquareSvg,
@@ -83,17 +83,17 @@ export function brandContent(t: Translate) {
       },
       {
         title: "Wordmark",
-        body: "The full name in the OpenCode letterforms. Use it wherever there is room to spell out the name.",
+        body: "The full name in the Warcode letterforms. Use it wherever there is room to spell out the name.",
         kind: "wordmark",
         assets: [
           {
             name: "Light",
-            file: "opencode-wordmark-light",
+            file: "warcode-wordmark-light",
             tone: "light",
             png: wordmarkLightPng,
             svg: wordmarkLightSvg,
           },
-          { name: "Dark", file: "opencode-wordmark-dark", tone: "dark", png: wordmarkDarkPng, svg: wordmarkDarkSvg },
+          { name: "Dark", file: "warcode-wordmark-dark", tone: "dark", png: wordmarkDarkPng, svg: wordmarkDarkSvg },
         ],
       },
       {
@@ -103,14 +103,14 @@ export function brandContent(t: Translate) {
         assets: [
           {
             name: "Light",
-            file: "opencode-wordmark-simple-light",
+            file: "warcode-wordmark-simple-light",
             tone: "light",
             png: wordmarkSimpleLightPng,
             svg: wordmarkSimpleLightSvg,
           },
           {
             name: "Dark",
-            file: "opencode-wordmark-simple-dark",
+            file: "warcode-wordmark-simple-dark",
             tone: "dark",
             png: wordmarkSimpleDarkPng,
             svg: wordmarkSimpleDarkSvg,
@@ -125,14 +125,14 @@ export function brandContent(t: Translate) {
         {
           name: "Dark",
           tone: "light",
-          file: "opencode-avatar-dark",
+          file: "warcode-avatar-dark",
           png: avatarDark1024Png,
           kind: "avatar",
         },
         {
           name: "Light",
           tone: "dark",
-          file: "opencode-avatar-light",
+          file: "warcode-avatar-light",
           png: avatarLight1024Png,
           kind: "avatar",
         },
@@ -177,11 +177,11 @@ export function brandContent(t: Translate) {
                 tile(
                   "Dark",
                   "light",
-                  "opencode-logo-transparent-light",
+                  "warcode-logo-transparent-light",
                   logoTransparentLightPng,
                   logoTransparentLightSvg,
                 ),
-                tile("Light", "dark", "opencode-logo-transparent-dark", logoTransparentDarkPng, logoTransparentDarkSvg),
+                tile("Light", "dark", "warcode-logo-transparent-dark", logoTransparentDarkPng, logoTransparentDarkSvg),
               ],
             },
             {
@@ -190,14 +190,14 @@ export function brandContent(t: Translate) {
                 tile(
                   "Dark",
                   "light",
-                  "opencode-wordmark-transparent-light",
+                  "warcode-wordmark-transparent-light",
                   wordmarkTransparentLightPng,
                   wordmarkTransparentLightSvg,
                 ),
                 tile(
                   "Light",
                   "dark",
-                  "opencode-wordmark-transparent-dark",
+                  "warcode-wordmark-transparent-dark",
                   wordmarkTransparentDarkPng,
                   wordmarkTransparentDarkSvg,
                 ),
@@ -213,8 +213,8 @@ export function brandContent(t: Translate) {
             {
               title: "Wordmark",
               tiles: [
-                tile("Dark", "light", "opencode-wordmark-solid-light", wordmarkSolidLightPng, wordmarkSolidLightSvg),
-                tile("Light", "dark", "opencode-wordmark-solid-dark", wordmarkSolidDarkPng, wordmarkSolidDarkSvg),
+                tile("Dark", "light", "warcode-wordmark-solid-light", wordmarkSolidLightPng, wordmarkSolidLightSvg),
+                tile("Light", "dark", "warcode-wordmark-solid-dark", wordmarkSolidDarkPng, wordmarkSolidDarkSvg),
               ],
             },
           ],
@@ -300,23 +300,23 @@ export function brandContent(t: Translate) {
     },
     integrations: {
       title: "Integrations",
-      body: "Plugins, providers and tools that work with OpenCode, and projects built with it, can say so. Use a badge or a partner lockup, and name your project so it is clear that it is yours.",
+      body: "Plugins, providers and tools that work with Warcode, and projects built with it, can say so. Use a badge or a partner lockup, and name your project so it is clear that it is yours.",
       badges: {
-        body: "Put a badge in your README, docs or website and link it to opencode.ai. Pick the light or dark file for your background (the HTML switches by itself), and do not change the colors or the text.",
+        body: "Put a badge in your README, docs or website and link it to warcode.ai. Pick the light or dark file for your background (the HTML switches by itself), and do not change the colors or the text.",
         sizes: "Every style comes in 20, 32 and 44px (Shields only in 20px), as SVG and as PNG at 2×.",
-        mono: "Each file also comes with OpenTUI Mono text. Add -mono before the extension, as in opencode-works-with-a-light-20-mono.svg, or -mono-caps for uppercase OpenTUI Mono.",
+        mono: "Each file also comes with OpenTUI Mono text. Add -mono before the extension, as in warcode-works-with-a-light-20-mono.svg, or -mono-caps for uppercase OpenTUI Mono.",
         groups: [
           {
             label: "works-with",
             title: "Works with",
-            alt: "Works with OpenCode",
-            body: "For plugins, providers and tools that run with OpenCode.",
+            alt: "Works with Warcode",
+            body: "For plugins, providers and tools that run with Warcode.",
           },
           {
             label: "built-with",
             title: "Built with",
-            alt: "Built with OpenCode",
-            body: "For projects made with OpenCode.",
+            alt: "Built with Warcode",
+            body: "For projects made with Warcode.",
           },
         ],
         // The styles David picked from the badge options (A, C, F, G); G is shields.io "flat", 20px only.
@@ -329,19 +329,19 @@ export function brandContent(t: Translate) {
       },
       lockup: {
         title: "Partner lockup",
-        body: "Put the OpenCode logo and the partner logo side by side, with a × between them. Leave 3 strokes of space on each side of the ×, size the partner logo to look as tall as the OpenCode logo, and keep clear space around the whole lockup.",
+        body: "Put the Warcode logo and the partner logo side by side, with a × between them. Leave 3 strokes of space on each side of the ×, size the partner logo to look as tall as the Warcode logo, and keep clear space around the whole lockup.",
         partners: [{ name: "GitHub", tones: ["light", "dark"] }],
       },
       naming: {
         title: "Naming your project",
         body: "Lead with your own name, so it is clear that the project is yours.",
         // Names between backticks show as code.
-        rule: "Write `Linear for OpenCode` or name the package `opencode-linear`. Do not write `OpenCode Linear` or `Linear by OpenCode`.",
+        rule: "Write `Linear for Warcode` or name the package `warcode-linear`. Do not write `Warcode Linear` or `Linear by Warcode`.",
       },
     },
     trademarks: {
       title: "Trademarks",
-      body: "OpenCode and the OpenCode logo are trademarks of Anomaly. Do not use them to suggest that Anomaly endorses or sponsors you, in your product or company name, or on merchandise without permission.",
+      body: "Warcode and the Warcode logo are trademarks of Anomaly. Do not use them to suggest that Anomaly endorses or sponsors you, in your product or company name, or on merchandise without permission.",
       contact: { before: "For questions, email ", email: pressEmail, after: "." },
     },
   }
@@ -384,7 +384,7 @@ export function badgeFile(
   extension: "svg" | "png",
   font: BadgeFont = "sans",
 ) {
-  return `/brand/badges/opencode-${label}-${style}-${theme}-${size}${fontSuffix(font)}.${extension}`
+  return `/brand/badges/warcode-${label}-${style}-${theme}-${size}${fontSuffix(font)}.${extension}`
 }
 
 /**
@@ -393,11 +393,11 @@ export function badgeFile(
  */
 export function badgeZip(label: string, style?: string, font: BadgeFont = "sans", theme?: string) {
   return mediaUrl(
-    `/brand/badges/opencode-${label}${style ? `-${style}` : ""}${theme ? `-${theme}` : ""}${fontSuffix(font)}.zip`,
+    `/brand/badges/warcode-${label}${style ? `-${style}` : ""}${theme ? `-${theme}` : ""}${fontSuffix(font)}.zip`,
   )
 }
 
-/** The Markdown for a README: one badge (light by default), linked to opencode.ai. */
+/** The Markdown for a README: one badge (light by default), linked to warcode.ai. */
 export function badgeMarkdown(
   label: string,
   alt: string,

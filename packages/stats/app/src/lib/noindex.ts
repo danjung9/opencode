@@ -1,8 +1,8 @@
 import type { createMiddleware } from "@solidjs/start/middleware"
 import { Resource } from "sst/resource"
 
-// Only production may be indexed: dev.opencode.ai and the personal stages run unreleased builds, and
-// search engines must never list them in place of opencode.ai. Every response there asks them not
+// Only production may be indexed: dev.warcode.ai and the personal stages run unreleased builds, and
+// search engines must never list them in place of warcode.ai. Every response there asks them not
 // to index it: the Worker's through this middleware, and the static assets the Worker never sees
 // through the rule vite.config.ts adds to those stages' _headers.
 

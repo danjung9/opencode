@@ -1,7 +1,7 @@
 export * as WebFetchTool from "./webfetch.js"
 
-import type { Context } from "@opencode/plugin/effect/plugin"
-import { ToolFailure } from "@opencode/ai/effect"
+import type { Context } from "@warcode/plugin/effect/plugin"
+import { ToolFailure } from "@warcode/ai/effect"
 import { Duration, Effect, Schema } from "effect"
 import { FetchHttpClient, HttpClient, HttpClientError, HttpClientRequest, HttpClientResponse } from "effect/http"
 import { Parser } from "htmlparser2"
@@ -57,7 +57,7 @@ const headers = (format: Format, userAgent: string) => ({
 })
 
 const openCodeUserAgent =
-  "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; OpenCode-User/1.0; +https://opencode.ai"
+  "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; Warcode-User/1.0; +https://opencode.ai"
 
 const isCloudflareChallenge = (error: unknown) => {
   if (!HttpClientError.isHttpClientError(error) || error.reason._tag !== "StatusCodeError") return false
@@ -126,7 +126,7 @@ const convert = (content: string, contentType: string, format: Format) => {
 }
 
 export const Plugin = {
-  id: "opencode.tool.webfetch",
+  id: "warcode.tool.webfetch",
   effect: Effect.fn("WebFetchTool.Plugin")(function* (ctx: Context) {
     const http = yield* HttpClient.HttpClient
     const permission = yield* Permission.Service
@@ -166,7 +166,7 @@ export const Plugin = {
                     ...Permission.invocation(context),
                   })
                 const response = yield* execute(http, check, url, input.format).pipe(
-                  Effect.catchIf(isCloudflareChallenge, () => execute(http, check, url, input.format, "opencode")),
+                  Effect.catchIf(isCloudflareChallenge, () => execute(http, check, url, input.format, "warcode")),
                 )
                 const contentType = response.headers["content-type"] || ""
                 const mime = mimeFrom(contentType)

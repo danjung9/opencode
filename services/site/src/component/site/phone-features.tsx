@@ -9,7 +9,7 @@ import { siteSettings } from "./settings"
 type Feature = { title: string; body: string; href: string }
 
 /**
- * Settings › Phone feature list: shorter takes on "What is OpenCode?"'s feature list for phones (40rem
+ * Settings › Phone feature list: shorter takes on "What is Warcode?"'s feature list for phones (40rem
  * and narrower; the grid above stays as it is on wider screens). Every option's parts render and the
  * section's data-phone-features (set before first paint for a saved value) shows one, so nothing
  * moves after load. "show more", "highlights" and "highlights + list" trim the grid itself (its

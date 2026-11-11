@@ -1,4 +1,4 @@
-import { statModel } from "@opencode/stats-core/domain/model-normalization"
+import { statModel } from "@warcode/stats-core/domain/model-normalization"
 
 const glmFlashModel = "glm-5.3-flash"
 

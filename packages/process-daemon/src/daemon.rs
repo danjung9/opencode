@@ -17,7 +17,7 @@ pub struct Registration {
     pub features: Vec<String>,
 }
 
-/// Shared parent of runtime directories, inside OpenCode's state directory.
+/// Shared parent of runtime directories, inside Warcode's state directory.
 /// Registration files must not live in temporary directories, which macOS purges
 /// while daemons run.
 pub fn default_runtime_root() -> PathBuf {
@@ -32,7 +32,7 @@ fn resolve_runtime_root(state: Option<PathBuf>, home: Option<PathBuf>) -> PathBu
         .filter(|path| path.is_absolute())
         .or_else(|| home.map(|home| home.join(".local").join("state")))
         .unwrap_or_else(std::env::temp_dir)
-        .join("opencode")
+        .join("warcode")
         .join("pty")
 }
 
@@ -65,8 +65,8 @@ pub fn read_registration(directory: &Path) -> Result<Registration> {
     {
         use anyhow::Context;
         let data = std::fs::read(registration_path(directory))
-            .context("opencode-pty registration is unavailable")?;
-        serde_json::from_slice(&data).context("invalid opencode-pty registration")
+            .context("warcode-pty registration is unavailable")?;
+        serde_json::from_slice(&data).context("invalid warcode-pty registration")
     }
 }
 
@@ -93,7 +93,7 @@ pub use crate::transport::windows::Connection as PipeConnection;
 
 #[cfg(not(any(unix, windows)))]
 pub fn run(_directory: &Path) -> Result<()> {
-    anyhow::bail!("persistent opencode-pty transport is not implemented on this platform")
+    anyhow::bail!("persistent warcode-pty transport is not implemented on this platform")
 }
 
 #[cfg(test)]
@@ -106,15 +106,15 @@ mod tests {
         let home = Some(PathBuf::from("/home/user"));
         assert_eq!(
             resolve_runtime_root(Some("/state".into()), home.clone()),
-            PathBuf::from("/state/opencode/pty")
+            PathBuf::from("/state/warcode/pty")
         );
         assert_eq!(
             resolve_runtime_root(Some("relative".into()), home.clone()),
-            PathBuf::from("/home/user/.local/state/opencode/pty")
+            PathBuf::from("/home/user/.local/state/warcode/pty")
         );
         assert_eq!(
             resolve_runtime_root(None, home),
-            PathBuf::from("/home/user/.local/state/opencode/pty")
+            PathBuf::from("/home/user/.local/state/warcode/pty")
         );
     }
 

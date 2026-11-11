@@ -1,5 +1,5 @@
-import type { OpenCodeEvent } from "@opencode/client/promise"
-import { createClientConnection, type ClientConnectionStatus } from "@opencode/client/solid"
+import type { WarcodeEvent } from "@warcode/client/promise"
+import { createClientConnection, type ClientConnectionStatus } from "@warcode/client/solid"
 import { createGlobalEmitter } from "@solid-primitives/event-bus"
 import { type Accessor, createEffect, on, onCleanup } from "solid-js"
 import { createApiForServer, type ServerApi } from "@/runtime/server/api"
@@ -13,21 +13,21 @@ import { ServerScope } from "@/runtime/server/scope"
 import { useServer } from "./current"
 import { createEndpointSyncState, transitionEndpointSync, type EndpointSyncEvent } from "./server-sync/endpoint-machine"
 
-type OpenCodeEventMap = { [Type in OpenCodeEvent["type"]]: Extract<OpenCodeEvent, { type: Type }> }
+type WarcodeEventMap = { [Type in WarcodeEvent["type"]]: Extract<WarcodeEvent, { type: Type }> }
 
-export type OpenCodeEventStream = {
-  on<Type extends OpenCodeEvent["type"]>(type: Type, handler: (event: OpenCodeEventMap[Type]) => void): VoidFunction
-  listen(handler: (event: OpenCodeEvent) => void): VoidFunction
+export type WarcodeEventStream = {
+  on<Type extends WarcodeEvent["type"]>(type: Type, handler: (event: WarcodeEventMap[Type]) => void): VoidFunction
+  listen(handler: (event: WarcodeEvent) => void): VoidFunction
 }
 
-type OpenCodeEventSource = OpenCodeEventStream & {
-  location(directory: string): OpenCodeEventStream
+type WarcodeEventSource = WarcodeEventStream & {
+  location(directory: string): WarcodeEventStream
 }
 
-export function createOpenCodeEventSource() {
-  const emitter = createGlobalEmitter<OpenCodeEventMap>()
+export function createWarcodeEventSource() {
+  const emitter = createGlobalEmitter<WarcodeEventMap>()
 
-  function stream(directory?: string): OpenCodeEventStream {
+  function stream(directory?: string): WarcodeEventStream {
     return {
       on(type, handler) {
         return emitter.on(type, (event) => {
@@ -44,7 +44,7 @@ export function createOpenCodeEventSource() {
     }
   }
 
-  const event: OpenCodeEventSource = {
+  const event: WarcodeEventSource = {
     ...stream(),
     location: (directory) => stream(directory),
   }
@@ -53,7 +53,7 @@ export function createOpenCodeEventSource() {
 
   return {
     event,
-    publish(event: OpenCodeEvent) {
+    publish(event: WarcodeEvent) {
       emitter.emit(event.type, event)
     },
   }
@@ -74,7 +74,7 @@ type ServerSDKBase = {
     attempt: Accessor<number>
     error: Accessor<string | undefined>
   }
-  event: OpenCodeEventSource
+  event: WarcodeEventSource
 }
 
 // Where a plugin server's transport points until the plugin reports the server ready; it never answers. The server has
@@ -92,7 +92,7 @@ function createServerSdkContextBase(server: ServerConnection.Any, scope: ServerS
     media.dispose()
   })
 
-  const events = createOpenCodeEventSource()
+  const events = createWarcodeEventSource()
   const reconnect = resolveEndpoint(server)
   // Read only by `dispatchEndpoint`, the transport's only writer.
   let endpoint = createEndpointSyncState(transport.http)
@@ -281,7 +281,7 @@ export const useServerSDK = () => {
 
 export type LocationContext = {
   directory: string
-  event: OpenCodeEventStream
+  event: WarcodeEventStream
 }
 
 function createDirSdkContext(directory: string, serverSDK: ServerSDKBase): LocationContext {

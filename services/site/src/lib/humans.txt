@@ -61,7 +61,7 @@
     Hosting .......... Cloudflare via SST 4
     Text face ....................... Inter
     Code face ................ OpenTUI Mono
-    opencode.try() ................ Text.js
+    warcode.try() ................ Text.js
     Data ............... GitHub, models.dev
 
 
@@ -72,7 +72,7 @@
      the open source projects we build on
 
 
-            opencode.ai/contribute
+            warcode.ai/contribute
 
          last updated 4 November 2026
 

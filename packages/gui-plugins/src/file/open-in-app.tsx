@@ -1,11 +1,11 @@
 import { createMemo, createSignal, For, onCleanup, Show, type JSX, type ParentProps } from "solid-js"
-import { AppIcon } from "@opencode/ui/app-icon"
-import { Icon } from "@opencode/ui/icon"
-import { Menu } from "@opencode/ui/menu"
-import { Loader } from "@opencode/ui/loader"
-import { SplitButton, SplitButtonAction, SplitButtonMenuTrigger } from "@opencode/ui/split-button"
-import { showToast } from "@opencode/ui/toast"
-import { Tooltip } from "@opencode/ui/tooltip"
+import { AppIcon } from "@warcode/ui/app-icon"
+import { Icon } from "@warcode/ui/icon"
+import { Menu } from "@warcode/ui/menu"
+import { Loader } from "@warcode/ui/loader"
+import { SplitButton, SplitButtonAction, SplitButtonMenuTrigger } from "@warcode/ui/split-button"
+import { showToast } from "@warcode/ui/toast"
+import { Tooltip } from "@warcode/ui/tooltip"
 import {
   createKeyed,
   usePlugin,
@@ -13,7 +13,7 @@ import {
   type OS,
   type MountedSession,
   type SessionScreen,
-} from "@opencode/plugin/gui"
+} from "@warcode/plugin/gui"
 import type { OpenApp } from "./apps"
 import { useShared } from "./context"
 

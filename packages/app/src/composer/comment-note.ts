@@ -1,7 +1,7 @@
-import type { SessionMessageUser } from "@opencode/client/promise"
+import type { SessionMessageUser } from "@warcode/client/promise"
 import { Option, Schema } from "effect"
 import { Persistence } from "@/runtime/persistence/schema"
-import { uuid } from "@opencode/util/uuid"
+import { uuid } from "@warcode/util/uuid"
 import { FileSelection } from "@/workspaces/files/types"
 import { durableNote, LegacyBrowserNote, NoteComment, QuoteComment, type ContextItem } from "./schema"
 

@@ -1,7 +1,7 @@
 export * as GlobTool from "./glob.js"
 
-import { ToolFailure } from "@opencode/ai/effect"
-import type { Context } from "@opencode/plugin/effect/plugin"
+import { ToolFailure } from "@warcode/ai/effect"
+import type { Context } from "@warcode/plugin/effect/plugin"
 import { Effect, Schema } from "effect"
 import path from "path"
 import { toolFailure } from "../runtime.js"
@@ -45,7 +45,7 @@ export const toModelContent = (entries: EncodedOutput, truncated = false) => {
 
 /** Glob leaf that defaults its filesystem root to the active Location. */
 export const Plugin = {
-  id: "opencode.tool.glob",
+  id: "warcode.tool.glob",
   effect: Effect.fn("GlobTool.Plugin")(function* (ctx: Context) {
     const environment = yield* Environment.Service
     const ripgrep = yield* Ripgrep.Service

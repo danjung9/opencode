@@ -13,7 +13,7 @@ import {
 
 const apollo = { key: "http://apollo.test:4096", name: "apollo", kind: "remote" } as const
 
-const opencode: PromptProject = { id: "proj_opencode", worktree: "/home/dax/opencode", vcs: "git", server: apollo }
+const warcode: PromptProject = { id: "proj_warcode", worktree: "/home/dax/warcode", vcs: "git", server: apollo }
 
 const sst: PromptProject = { id: "proj_sst", worktree: "/home/dax/sst", vcs: "git", server: apollo }
 
@@ -56,16 +56,16 @@ const back: LocationDialogEvent = { type: "back" }
 describe("location dialog steps", () => {
   // Mod+O used to save the worktree search as the projects search and drop the worktree step on the way back.
   test("Open project from a worktree step steps back through the worktree step, then the projects", () => {
-    const servers = run([query("open"), { type: "drilled", project: opencode }, query("feat"), openProject("create")])
+    const servers = run([query("open"), { type: "drilled", project: warcode }, query("feat"), openProject("create")])
     expect(servers.state).toMatchObject({ type: "servers", query: "" })
 
     const worktrees = transitionLocationDialog(servers.state, back)
-    expect(worktrees.state).toMatchObject({ type: "worktrees", project: opencode, direct: false, query: "feat" })
+    expect(worktrees.state).toMatchObject({ type: "worktrees", project: warcode, direct: false, query: "feat" })
     expect(worktrees.effects).toEqual([{ type: "focus", active: "create" }])
 
     const projects = transitionLocationDialog(worktrees.state, back)
     expect(projects.state).toEqual({ type: "projects", query: "open", history: [] })
-    expect(projects.effects).toEqual([{ type: "focus", active: projectEntryID(opencode) }])
+    expect(projects.effects).toEqual([{ type: "focus", active: projectEntryID(warcode) }])
   })
 
   // Pressing Mod+O again on the server step used to wipe its search and its way back.
@@ -96,8 +96,8 @@ describe("location dialog steps", () => {
   })
 
   test("a dialog opened on a worktree step closes on Escape and steps back on Backspace", () => {
-    const direct = createLocationDialogState(opencode)
-    expect(locationDialogView(direct).drilled).toBe(opencode)
+    const direct = createLocationDialogState(warcode)
+    expect(locationDialogView(direct).drilled).toBe(warcode)
 
     const escape = transitionLocationDialog(direct, key("Escape"))
     expect(escape).toMatchObject({ state: direct, effects: [{ type: "close" }], handled: true, stop: true })
@@ -105,12 +105,12 @@ describe("location dialog steps", () => {
     for (const event of [key("Backspace"), key("ArrowLeft"), back]) {
       const next = transitionLocationDialog(direct, event)
       expect(next.state).toEqual({ type: "projects", query: "", history: [] })
-      expect(next.effects).toEqual([{ type: "focus", active: projectEntryID(opencode) }])
+      expect(next.effects).toEqual([{ type: "focus", active: projectEntryID(warcode) }])
     }
   })
 
   test("a typed worktree search keeps Backspace for the input", () => {
-    const state = transitionLocationDialog(createLocationDialogState(opencode), query("feat")).state
+    const state = transitionLocationDialog(createLocationDialogState(warcode), query("feat")).state
     expect(transitionLocationDialog(state, key("Backspace"))).toEqual({
       state,
       effects: [],
@@ -148,15 +148,15 @@ describe("location dialog steps", () => {
   })
 
   test("choosing a row selects it without leaving the step", () => {
-    const state = createLocationDialogState(opencode)
+    const state = createLocationDialogState(warcode)
     expect(
       transitionLocationDialog(state, {
         type: "chosen",
-        entry: { id: "create", type: "workspace", project: opencode, value: "create", directory: opencode.worktree },
+        entry: { id: "create", type: "workspace", project: warcode, value: "create", directory: warcode.worktree },
         active: "create",
         choosesServer: true,
       }),
-    ).toMatchObject({ state, effects: [{ type: "workspace.select", project: opencode, value: "create" }] })
+    ).toMatchObject({ state, effects: [{ type: "workspace.select", project: warcode, value: "create" }] })
 
     expect(
       transitionLocationDialog(createLocationDialogState(), { ...openProject("add"), choosesServer: false }),

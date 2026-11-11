@@ -3,7 +3,7 @@
     <picture>
       <source srcset=".github/assets/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset=".github/assets/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src=".github/assets/logo-ornate-light.svg" alt="OpenCode logo">
+      <img src=".github/assets/logo-ornate-light.svg" alt="Warcode logo">
     </picture>
   </a>
 </p>
@@ -39,7 +39,7 @@
   <a href="README.vi.md">Tiếng Việt</a>
 </p>
 
-[![OpenCode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
+[![Warcode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
 
 ---
 
@@ -50,13 +50,13 @@
 curl -fsSL https://opencode.ai/v2/install | bash
 
 # Các trình quản lý gói (Package managers)
-npm i -g @opencode/cli@latest      # hoặc bun/pnpm/yarn
-brew install anomalyco/tap/opencode-v2 # macOS và Linux (khuyên dùng, luôn cập nhật)
-brew install opencode              # macOS và Linux (công thức brew chính thức, ít cập nhật hơn)
-sudo pacman -S opencode            # Arch Linux (Bản ổn định)
-paru -S opencode-beta              # Arch Linux (Bản mới nhất từ AUR)
-mise use -g opencode               # Mọi hệ điều hành
-nix run github:anomalyco/opencode  # Nix
+npm i -g @warcode/cli@latest      # hoặc bun/pnpm/yarn
+brew install anomalyco/tap/warcode-v2 # macOS và Linux (khuyên dùng, luôn cập nhật)
+brew install warcode              # macOS và Linux (công thức brew chính thức, ít cập nhật hơn)
+sudo pacman -S warcode            # Arch Linux (Bản ổn định)
+paru -S warcode-beta              # Arch Linux (Bản mới nhất từ AUR)
+mise use -g warcode               # Mọi hệ điều hành
+nix run github:anomalyco/warcode  # Nix
 ```
 
 > [!TIP]
@@ -64,27 +64,27 @@ nix run github:anomalyco/opencode  # Nix
 
 ### Ứng dụng Desktop (BETA)
 
-OpenCode cũng có sẵn dưới dạng ứng dụng desktop. Tải từ [opencode.ai/download](https://opencode.ai/download).
+Warcode cũng có sẵn dưới dạng ứng dụng desktop. Tải từ [warcode.ai/download](https://opencode.ai/download).
 
 | Nền tảng              | Tải xuống                          |
 | --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `opencode-desktop-mac-x64.dmg`     |
-| Windows               | `opencode-desktop-win-x64.exe`     |
+| macOS (Apple Silicon) | `warcode-desktop-mac-arm64.dmg`   |
+| macOS (Intel)         | `warcode-desktop-mac-x64.dmg`     |
+| Windows               | `warcode-desktop-win-x64.exe`     |
 | Linux                 | `.deb`, `.rpm`, hoặc AppImage      |
 
 ```bash
 # macOS (Homebrew)
-brew install --cask opencode-desktop
+brew install --cask warcode-desktop
 ```
 
 #### Thư mục cài đặt
 
-Tập lệnh cài đặt sẽ cài OpenCode vào `$HOME/.opencode/bin`.
+Tập lệnh cài đặt sẽ cài Warcode vào `$HOME/.warcode/bin`.
 
 ### Agents (Đại diện)
 
-OpenCode bao gồm hai agent được tích hợp sẵn mà bạn có thể chuyển đổi bằng phím `Tab`.
+Warcode bao gồm hai agent được tích hợp sẵn mà bạn có thể chuyển đổi bằng phím `Tab`.
 
 - **build** - Agent mặc định, có toàn quyền truy cập cho công việc lập trình
 - **plan** - Agent chỉ đọc dùng để phân tích và khám phá mã nguồn
@@ -99,15 +99,15 @@ Tìm hiểu thêm về [agents](https://opencode.ai/docs/agents).
 
 ### Tài liệu
 
-Để biết thêm thông tin về cách cấu hình OpenCode, [**hãy truy cập tài liệu của chúng tôi**](https://opencode.ai/docs).
+Để biết thêm thông tin về cách cấu hình Warcode, [**hãy truy cập tài liệu của chúng tôi**](https://opencode.ai/docs).
 
 ### Đóng góp
 
-Nếu bạn muốn đóng góp cho OpenCode, vui lòng đọc [tài liệu hướng dẫn đóng góp](./CONTRIBUTING.md) trước khi gửi pull request.
+Nếu bạn muốn đóng góp cho Warcode, vui lòng đọc [tài liệu hướng dẫn đóng góp](./CONTRIBUTING.md) trước khi gửi pull request.
 
-### Xây dựng trên nền tảng OpenCode
+### Xây dựng trên nền tảng Warcode
 
-Nếu bạn đang làm việc trên một dự án liên quan đến OpenCode và sử dụng "opencode" như một phần của tên dự án, ví dụ "opencode-dashboard" hoặc "opencode-mobile", vui lòng thêm một ghi chú vào README của bạn để làm rõ rằng dự án đó không được xây dựng bởi đội ngũ OpenCode và không liên kết với chúng tôi dưới bất kỳ hình thức nào.
+Nếu bạn đang làm việc trên một dự án liên quan đến Warcode và sử dụng "warcode" như một phần của tên dự án, ví dụ "warcode-dashboard" hoặc "warcode-mobile", vui lòng thêm một ghi chú vào README của bạn để làm rõ rằng dự án đó không được xây dựng bởi đội ngũ Warcode và không liên kết với chúng tôi dưới bất kỳ hình thức nào.
 
 ---
 

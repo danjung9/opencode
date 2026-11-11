@@ -5,45 +5,45 @@ import path from "path"
 import { describe, expect } from "bun:test"
 import { Cause, Deferred, Duration, Effect, Exit, Fiber, Layer, Queue, Scope, Stream, Tracer } from "effect"
 import { TestClock } from "effect/testing"
-import { Money } from "@opencode/schema/money"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { makeGlobalNode, makeLocationNode } from "@opencode/util/effect/app-node"
-import { filesystem } from "@opencode/util/effect/app-node-platform"
-import { Database } from "@opencode/core/database/database"
-import { Bus } from "@opencode/core/bus"
-import { Config } from "@opencode/core/config"
-import { Environment } from "@opencode/core/environment/index"
-import { FSUtil } from "@opencode/util/fs-util"
-import { Global } from "@opencode/util/global"
-import { Location } from "@opencode/core/location"
-import { FileAccess } from "@opencode/core/file-access"
-import { Flag } from "@opencode/core/flag"
-import { LocationServiceMap } from "@opencode/core/location-service-map"
-import { Model } from "@opencode/core/model"
-import { Provider } from "@opencode/core/provider"
-import { AbsolutePath } from "@opencode/core/schema"
-import { Agent } from "@opencode/core/agent"
-import { Job } from "@opencode/core/job"
-import { Session } from "@opencode/core/session"
-import { SessionEvent } from "@opencode/core/session/event"
-import { SessionExecution } from "@opencode/core/session/execution"
-import { SessionMessage } from "@opencode/core/session/message"
-import { SessionStore } from "@opencode/core/session/store"
-import { Permission } from "@opencode/core/permission"
-import { PermissionSaved } from "@opencode/core/permission/saved"
-import { Plugin } from "@opencode/core/plugin"
-import { PluginSupervisor } from "@opencode/core/plugin/supervisor"
-import { Shell } from "@opencode/core/shell"
-import { ShellSelect } from "@opencode/core/shell/select"
-import { ShellResult } from "@opencode/core/shell/result"
-import { ID } from "@opencode/schema/shell"
-import { ShellTool } from "@opencode/core/tool/plugin/shell"
-import { ToolOutput } from "@opencode/core/tool-output"
-import { Tool } from "@opencode/core/tool"
-import { PluginHooks } from "@opencode/core/plugin/hooks"
-import { SessionStep } from "@opencode/core/session/runner/step"
-import { PersistentPty } from "@opencode/core/persistent-pty"
+import { Money } from "@warcode/schema/money"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { makeGlobalNode, makeLocationNode } from "@warcode/util/effect/app-node"
+import { filesystem } from "@warcode/util/effect/app-node-platform"
+import { Database } from "@warcode/core/database/database"
+import { Bus } from "@warcode/core/bus"
+import { Config } from "@warcode/core/config"
+import { Environment } from "@warcode/core/environment/index"
+import { FSUtil } from "@warcode/util/fs-util"
+import { Global } from "@warcode/util/global"
+import { Location } from "@warcode/core/location"
+import { FileAccess } from "@warcode/core/file-access"
+import { Flag } from "@warcode/core/flag"
+import { LocationServiceMap } from "@warcode/core/location-service-map"
+import { Model } from "@warcode/core/model"
+import { Provider } from "@warcode/core/provider"
+import { AbsolutePath } from "@warcode/core/schema"
+import { Agent } from "@warcode/core/agent"
+import { Job } from "@warcode/core/job"
+import { Session } from "@warcode/core/session"
+import { SessionEvent } from "@warcode/core/session/event"
+import { SessionExecution } from "@warcode/core/session/execution"
+import { SessionMessage } from "@warcode/core/session/message"
+import { SessionStore } from "@warcode/core/session/store"
+import { Permission } from "@warcode/core/permission"
+import { PermissionSaved } from "@warcode/core/permission/saved"
+import { Plugin } from "@warcode/core/plugin"
+import { PluginSupervisor } from "@warcode/core/plugin/supervisor"
+import { Shell } from "@warcode/core/shell"
+import { ShellSelect } from "@warcode/core/shell/select"
+import { ShellResult } from "@warcode/core/shell/result"
+import { ID } from "@warcode/schema/shell"
+import { ShellTool } from "@warcode/core/tool/plugin/shell"
+import { ToolOutput } from "@warcode/core/tool-output"
+import { Tool } from "@warcode/core/tool"
+import { PluginHooks } from "@warcode/core/plugin/hooks"
+import { SessionStep } from "@warcode/core/session/runner/step"
+import { PersistentPty } from "@warcode/core/persistent-pty"
 import { disabledPersistentPtyLayer } from "./fixture/persistent-pty"
 import { fakeDaemon } from "./fixture/persistent-pty-daemon"
 import { tmpdir, tmpdirScoped, withTempDir } from "./fixture/tmpdir"
@@ -289,7 +289,7 @@ const withSession = <A, E, R>(
     if (autoBackground !== undefined)
       yield* Effect.promise(() =>
         Bun.write(
-          path.join(directory, "opencode.json"),
+          path.join(directory, "warcode.json"),
           JSON.stringify({ experimental: { shell_timeout_background: autoBackground } }),
         ),
       )
@@ -966,11 +966,11 @@ describe("ShellTool", () => {
             const sessions = yield* Session.Service
             yield* sessions.environment({
               sessionID,
-              variables: { OPENCODE_SESSION_ENV_TEST: "from-session" },
+              variables: { WARCODE_SESSION_ENV_TEST: "from-session" },
             })
             const command = isWindows
-              ? "[Console]::Out.Write($env:OPENCODE_SESSION_ENV_TEST)"
-              : 'printf %s "$OPENCODE_SESSION_ENV_TEST"'
+              ? "[Console]::Out.Write($env:WARCODE_SESSION_ENV_TEST)"
+              : 'printf %s "$WARCODE_SESSION_ENV_TEST"'
 
             const settled = yield* executeTool(registry, call({ command }))
 
@@ -992,15 +992,15 @@ describe("ShellTool", () => {
             const sessions = yield* Session.Service
             yield* sessions.environment({
               sessionID,
-              variables: { AGENT: "0", OPENCODE: "0", AI_AGENT: "", OPENCODE_SESSION_ID: "stale" },
+              variables: { AGENT: "0", WARCODE: "0", AI_AGENT: "", WARCODE_SESSION_ID: "stale" },
             })
             const command = isWindows
-              ? '[Console]::Out.Write("$env:AGENT|$env:OPENCODE|$env:AI_AGENT|$env:OPENCODE_SESSION_ID")'
-              : 'printf %s "$AGENT|$OPENCODE|$AI_AGENT|$OPENCODE_SESSION_ID"'
+              ? '[Console]::Out.Write("$env:AGENT|$env:WARCODE|$env:AI_AGENT|$env:WARCODE_SESSION_ID")'
+              : 'printf %s "$AGENT|$WARCODE|$AI_AGENT|$WARCODE_SESSION_ID"'
             const settled = yield* executeTool(registry, call({ command }))
 
             expect(settled.status).toBe("completed")
-            expect(settled.content?.[0]).toEqual({ type: "text", text: `1|1|opencode|${sessionID}` })
+            expect(settled.content?.[0]).toEqual({ type: "text", text: `1|1|warcode|${sessionID}` })
           }),
         )
       }),
@@ -1250,7 +1250,7 @@ describe("ShellTool", () => {
           name: `test/shell-plugins-${channel}`,
           layer: Layer.effectDiscard(
             registerToolPlugin(ShellTool.Plugin, {
-              app: { name: "opencode", version: "test", channel },
+              app: { name: "warcode", version: "test", channel },
             }),
           ),
           deps: [
@@ -1627,7 +1627,7 @@ describe("ShellTool", () => {
       return Effect.gen(function* () {
         yield* Effect.promise(() =>
           Bun.write(
-            path.join(tmp.path, "opencode.json"),
+            path.join(tmp.path, "warcode.json"),
             JSON.stringify({ tool_output: { max_lines: 2, max_bytes: 1_000 } }),
           ),
         )
@@ -1790,14 +1790,14 @@ describe("ShellTool", () => {
                 .filter((span) => span.name === name && span.attributes.get("gen_ai.tool.call.id") === callID)
                 .map((span) => Object.fromEntries(span.attributes))
             expect(attributes("Shell.create", "call-traced")).toEqual([
-              expect.objectContaining({ "session.id": sessionID, "opencode.shell.command": bodyExitCommand }),
+              expect.objectContaining({ "session.id": sessionID, "warcode.shell.command": bodyExitCommand }),
             ])
-            expect(attributes("Shell.create", "call-traced")[0]).not.toHaveProperty("opencode.shell.background")
+            expect(attributes("Shell.create", "call-traced")[0]).not.toHaveProperty("warcode.shell.background")
             expect(attributes("Shell.result", "call-traced")).toEqual([
               expect.objectContaining({ "session.id": sessionID, "process.exit.code": 7 }),
             ])
             expect(attributes("Shell.create", "call-traced-background")).toEqual([
-              expect.objectContaining({ "session.id": sessionID, "opencode.shell.background": true }),
+              expect.objectContaining({ "session.id": sessionID, "warcode.shell.background": true }),
             ])
           }),
         ),

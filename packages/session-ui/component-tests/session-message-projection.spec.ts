@@ -403,7 +403,7 @@ story("marks pending metadata without badging delivered, starting, or queued pro
   await expect(indicator).toHaveText("Pending")
   await expect(indicator.locator("svg")).toHaveCount(0)
 
-  await expect(voice.locator("use")).toHaveAttribute("href", "#opencode-v2-icon-outline-wave-audio")
+  await expect(voice.locator("use")).toHaveAttribute("href", "#warcode-v2-icon-outline-wave-audio")
   await expect(voice).toHaveCSS("width", "20px")
   await expect(voice).toHaveCSS("height", "20px")
   await expect(voice.locator('[data-slot="icon-svg"]')).toHaveCSS("width", "14px")

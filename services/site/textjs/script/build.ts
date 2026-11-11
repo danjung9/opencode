@@ -1,11 +1,11 @@
-// Builds the Text.js console apps that window.opencode loads on demand into the site's
+// Builds the Text.js console apps that window.warcode loads on demand into the site's
 // public/textjs/, with a manifest.json that maps each app to its hashed entry file.
 //
-// - picker: opencode.install.pick(), from src/picker.tsx.
-// - lite: OpenCode Lite, which starts when DevTools opens or from opencode.try(). Its source is the
-//   opencode-console app in anomalyco/textjs (MIT), which isn't published to npm; it is downloaded
+// - picker: warcode.install.pick(), from src/picker.tsx.
+// - lite: Warcode Lite, which starts when DevTools opens or from warcode.try(). Its source is the
+//   warcode-console app in anomalyco/textjs (MIT), which isn't published to npm; it is downloaded
 //   at the pinned commit into .upstream/. If the download fails the build still writes the picker,
-//   and try() falls back to a link to textjs.org/opencode.
+//   and try() falls back to a link to textjs.org/warcode.
 import { createHash } from "node:crypto"
 import { mkdir, rm } from "node:fs/promises"
 import path from "node:path"
@@ -25,7 +25,7 @@ const yogaName = `yoga-${createHash("sha256").update(yoga).digest("hex").slice(0
 const lite = await fetchUpstream().then(
   () => true,
   (error) => {
-    console.warn(`textjs: OpenCode Lite skipped, couldn't fetch anomalyco/textjs@${commit.slice(0, 7)}: ${error}`)
+    console.warn(`textjs: Warcode Lite skipped, couldn't fetch anomalyco/textjs@${commit.slice(0, 7)}: ${error}`)
     return false
   },
 )
@@ -96,7 +96,7 @@ async function fetchUpstream() {
   await mkdir(upstream, { recursive: true })
   const archive = path.join(upstream, "textjs.tar.gz")
   await Bun.write(archive, response)
-  const folder = `textjs-${commit}/apps/opencode-console`
+  const folder = `textjs-${commit}/apps/warcode-console`
   const tar = Bun.spawnSync(["tar", "-xzf", archive, "-C", upstream, "--strip-components=2", folder])
   if (tar.exitCode !== 0) throw new Error(tar.stderr.toString())
   await rm(archive)

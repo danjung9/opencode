@@ -6,7 +6,7 @@ type Ripple = { x: number; y: number; born: number; strength: number; life: numb
 type Palette = { bg: string; faint: string; ink: string; blue: string }
 
 // The word spelled across the middle of the resting field.
-const ACCENT = "opencode"
+const ACCENT = "warcode"
 
 /**
  * Plate: a field of the six letters on a canvas. It rests as a quiet grid; the pointer leaves a
@@ -263,7 +263,7 @@ export function Field() {
         <canvas
           ref={canvas}
           role="img"
-          aria-label="A grid of the six letters o, p, e, n, c and d with opencode spelled across the middle. Moving the pointer turns the letters around it over; clicking sends out a pulse."
+          aria-label="A grid of the six letters o, p, e, n, c and d with warcode spelled across the middle. Moving the pointer turns the letters around it over; clicking sends out a pulse."
         />
       </div>
     </Plate>

@@ -1,11 +1,11 @@
 import { createSignal, Index, Show } from "solid-js"
 import { Effect, Option, Predicate, Schema } from "effect"
-import { Button } from "@opencode/ui/button"
-import { Dialog } from "@opencode/ui/dialog"
-import { usePlugin, type DialogHandle, type SetupContext } from "@opencode/plugin/gui"
+import { Button } from "@warcode/ui/button"
+import { Dialog } from "@warcode/ui/dialog"
+import { usePlugin, type DialogHandle, type SetupContext } from "@warcode/plugin/gui"
 import type definition from "./index"
 
-const CHANGELOG_URL = "https://opencode.ai/changelog.json"
+const CHANGELOG_URL = "https://api.github.com/repos/danjung9/opencode/releases"
 
 export type Highlight = {
   title: string

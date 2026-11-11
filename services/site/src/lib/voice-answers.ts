@@ -26,9 +26,9 @@ export const hexUrl = "https://anoma.ly/hex"
 export const voiceAnswers: VoiceAnswer[] = [
   {
     id: "what-is",
-    asks: ["what is opencode", "what does opencode do", "tell me about opencode", "what is this", "explain opencode"],
-    keys: ["what", "opencode", "about", "explain", "overview"],
-    text: "OpenCode is an open source coding agent. It runs on your computer, works with any model, and you can use it from the desktop app, the terminal, your phone or your own code with the SDK.",
+    asks: ["what is warcode", "what does warcode do", "tell me about warcode", "what is this", "explain warcode"],
+    keys: ["what", "warcode", "about", "explain", "overview"],
+    text: "Warcode is an open source coding agent. It runs on your computer, works with any model, and you can use it from the desktop app, the terminal, your phone or your own code with the SDK.",
     links: [
       { label: "Home", href: "/" },
       { label: "Docs", href: docsUrl("/") },
@@ -36,12 +36,12 @@ export const voiceAnswers: VoiceAnswer[] = [
   },
   {
     id: "install",
-    asks: ["how do i install opencode", "how do i get started", "how do i download it", "install command", "set it up"],
+    asks: ["how do i install warcode", "how do i get started", "how do i download it", "install command", "set it up"],
     keys: ["install", "download", "setup", "started", "start", "get", "curl", "npm", "brew", "homebrew"],
     text: `In a terminal, run ${installs[0].command}. You can also install with npm, bun or Homebrew, or download the desktop app.`,
     speech:
-      "In a terminal, run the install script from opencode dot A I slash v2 slash install. You can also install with npm, bun or Homebrew, or download the desktop app.",
-    // public/voice/install.mp3 still reads the OpenCode 1 address (opencode.ai/install).
+      "In a terminal, run the install script from warcode dot A I slash v2 slash install. You can also install with npm, bun or Homebrew, or download the desktop app.",
+    // public/voice/install.mp3 still reads the Warcode 1 address (warcode.ai/install).
     unrecorded: true,
     links: [
       { label: "Product", href: "/product" },
@@ -71,7 +71,7 @@ export const voiceAnswers: VoiceAnswer[] = [
       "ollama",
       "local",
     ],
-    text: "Any model you like. OpenCode connects to more than 200 providers through Models.dev, including Anthropic, OpenAI, Google and xAI, and to local models with Ollama or LM Studio. It also includes free models.",
+    text: "Any model you like. Warcode connects to more than 200 providers through Models.dev, including Anthropic, OpenAI, Google and xAI, and to local models with Ollama or LM Studio. It also includes free models.",
     links: [
       { label: "Models", href: docsUrl("/models/") },
       { label: "Providers", href: docsUrl("/providers/") },
@@ -79,38 +79,38 @@ export const voiceAnswers: VoiceAnswer[] = [
   },
   {
     id: "cost",
-    asks: ["how much does it cost", "is opencode free", "what is the price", "do i have to pay", "pricing"],
+    asks: ["how much does it cost", "is warcode free", "what is the price", "do i have to pay", "pricing"],
     keys: ["cost", "free", "price", "pricing", "pay", "money", "expensive", "cheap"],
-    text: "OpenCode is free and MIT licensed, and it comes with free models you can use without an account. If you connect another provider, you pay that provider. OpenCode Go is from $10/month, and OpenCode Models are pay as you go.",
+    text: "Warcode is free and MIT licensed, and it comes with free models you can use without an account. If you connect another provider, you pay that provider. Warcode Go is from $10/month, and Warcode Models are pay as you go.",
     speech:
-      "OpenCode is free and MIT licensed, and it comes with free models you can use without an account. If you connect another provider, you pay that provider. OpenCode Go is from ten dollars a month, and OpenCode Models are pay as you go.",
-    // public/voice/cost.mp3 still says Zen, the old name of OpenCode Models.
+      "Warcode is free and MIT licensed, and it comes with free models you can use without an account. If you connect another provider, you pay that provider. Warcode Go is from ten dollars a month, and Warcode Models are pay as you go.",
+    // public/voice/cost.mp3 still says Zen, the old name of Warcode Models.
     unrecorded: true,
     links: [
       { label: "Free models", href: docsUrl("/console/models/#free-models") },
       { label: "Subscriptions", href: "/console/go" },
-      { label: "OpenCode Models", href: "/console/models" },
+      { label: "Warcode Models", href: "/console/models" },
     ],
   },
   {
     id: "go",
-    asks: ["what is opencode go", "tell me about go", "go subscription", "what do i get with go"],
+    asks: ["what is warcode go", "tell me about go", "go subscription", "what do i get with go"],
     keys: ["go", "subscription", "subscribe", "plan", "monthly"],
-    text: "OpenCode Go is a low cost subscription from $10/month, with generous limits and reliable access to capable open source coding models. You can use it with OpenCode or any agent, and cancel any time.",
+    text: "Warcode Go is a low cost subscription from $10/month, with generous limits and reliable access to capable open source coding models. You can use it with Warcode or any agent, and cancel any time.",
     speech:
-      "OpenCode Go is a low cost subscription from ten dollars a month, with generous limits and reliable access to capable open source coding models. You can use it with OpenCode or any agent, and cancel any time.",
-    links: [{ label: "OpenCode Go", href: "/console/go" }],
+      "Warcode Go is a low cost subscription from ten dollars a month, with generous limits and reliable access to capable open source coding models. You can use it with Warcode or any agent, and cancel any time.",
+    links: [{ label: "Warcode Go", href: "/console/go" }],
   },
   {
     id: "zen",
     // Still matches "zen", the old name, so people who ask for it get this answer.
-    asks: ["what are opencode models", "what is zen", "tell me about zen", "opencode zen", "what is the console"],
+    asks: ["what are warcode models", "what is zen", "tell me about zen", "warcode zen", "what is the console"],
     keys: ["zen", "gateway", "credit", "credits", "console", "balance"],
-    text: "OpenCode Models gives you coding models that the OpenCode team has tested and benchmarked for coding agents. It's pay as you go, so you add credit and pay only for what you use.",
-    // public/voice/zen.mp3 still says Zen, the old name of OpenCode Models.
+    text: "Warcode Models gives you coding models that the Warcode team has tested and benchmarked for coding agents. It's pay as you go, so you add credit and pay only for what you use.",
+    // public/voice/zen.mp3 still says Zen, the old name of Warcode Models.
     unrecorded: true,
     links: [
-      { label: "OpenCode Models", href: "/console/models" },
+      { label: "Warcode Models", href: "/console/models" },
       { label: "Console docs", href: docsUrl("/console/") },
     ],
   },
@@ -150,21 +150,21 @@ export const voiceAnswers: VoiceAnswer[] = [
       "can i use it on my phone",
       "iphone app",
       "android app",
-      "can i talk to opencode from my phone",
+      "can i talk to warcode from my phone",
     ],
     keys: ["mobile", "phone", "iphone", "android", "ios", "pocket", "call"],
     // public/voice/mobile.mp3 reads the "available" text, so it is left out while Android is coming soon.
     text: androidSoon
-      ? "Yes. With the mobile app for iPhone, now a public beta on TestFlight, you can start, steer and approve sessions from your phone. You can even call a session and talk to the agent. It connects to OpenCode on your own computer. The Android app is coming soon."
-      : "Yes. With the mobile app for iPhone and Android, you can start, steer and approve sessions from your phone. You can even call a session and talk to the agent. It connects to OpenCode on your own computer.",
+      ? "Yes. With the mobile app for iPhone, now a public beta on TestFlight, you can start, steer and approve sessions from your phone. You can even call a session and talk to the agent. It connects to Warcode on your own computer. The Android app is coming soon."
+      : "Yes. With the mobile app for iPhone and Android, you can start, steer and approve sessions from your phone. You can even call a session and talk to the agent. It connects to Warcode on your own computer.",
     links: [{ label: "Mobile", href: "/mobile" }],
     unrecorded: androidSoon,
   },
   {
     id: "sdk",
-    asks: ["is there an sdk", "can i use it from code", "api", "automate opencode", "ci"],
+    asks: ["is there an sdk", "can i use it from code", "api", "automate warcode", "ci"],
     keys: ["sdk", "api", "code", "script", "scripts", "automate", "ci", "javascript", "typescript", "programmatic"],
-    text: "Yes. The SDK lets you drive OpenCode from your own scripts, CI jobs and tools. Create a session, send a prompt, and read the result from JavaScript or TypeScript.",
+    text: "Yes. The SDK lets you drive Warcode from your own scripts, CI jobs and tools. Create a session, send a prompt, and read the result from JavaScript or TypeScript.",
     links: [
       { label: "SDK", href: "/sdk" },
       { label: "SDK docs", href: docsUrl("/build/sdk/") },
@@ -174,7 +174,7 @@ export const voiceAnswers: VoiceAnswer[] = [
     id: "privacy",
     asks: ["is my code private", "what about privacy", "do you store my code", "data privacy", "is it secure"],
     keys: ["privacy", "private", "data", "store", "secure", "security", "safe", "train", "training"],
-    text: "OpenCode runs on your computer and doesn't store your code or context data, so it works in privacy sensitive environments. Your code goes to the model provider you choose. If you use OpenCode's own models, their data terms are in the docs.",
+    text: "Warcode runs on your computer and doesn't store your code or context data, so it works in privacy sensitive environments. Your code goes to the model provider you choose. If you use Warcode's own models, their data terms are in the docs.",
     links: [
       { label: "Privacy", href: docsUrl("/policies/") },
       { label: "Model data terms", href: docsUrl("/console/models/#privacy") },
@@ -182,16 +182,16 @@ export const voiceAnswers: VoiceAnswer[] = [
   },
   {
     id: "open-source",
-    asks: ["is opencode open source", "where is the source code", "github", "license", "can i contribute"],
+    asks: ["is warcode open source", "where is the source code", "github", "license", "can i contribute"],
     keys: ["open", "source", "github", "license", "mit", "contribute", "stars", "repo"],
-    text: "Yes. OpenCode is fully open source under the MIT license. It has over 220,000 GitHub stars and more than 1,000 contributors, and anyone can file issues or send pull requests.",
+    text: "Yes. Warcode is fully open source under the MIT license. It has over 220,000 GitHub stars and more than 1,000 contributors, and anyone can file issues or send pull requests.",
     links: [{ label: "GitHub", href: "https://github.com/anomalyco/opencode" }],
   },
   {
     id: "extensions",
     asks: ["does it support mcp", "plugins", "can i add tools", "skills", "extensions"],
     keys: ["mcp", "plugin", "plugins", "skill", "skills", "extension", "extensions", "tools", "lsp", "integrations"],
-    text: "Yes. Connect MCP servers for services like GitHub, Linear and Figma, hook into OpenCode with plugins, and teach agents your workflows with skills. In the desktop app you manage them all from the Extensions menu.",
+    text: "Yes. Connect MCP servers for services like GitHub, Linear and Figma, hook into Warcode with plugins, and teach agents your workflows with skills. In the desktop app you manage them all from the Extensions menu.",
     links: [
       { label: "Extensions", href: "/extensions" },
       { label: "MCP servers", href: docsUrl("/mcp-servers/") },
@@ -216,9 +216,9 @@ export const voiceAnswers: VoiceAnswer[] = [
   },
   {
     id: "who",
-    asks: ["who makes opencode", "who is behind opencode", "what is anomaly", "which company"],
+    asks: ["who makes warcode", "who is behind warcode", "what is anomaly", "which company"],
     keys: ["who", "company", "anomaly", "team", "behind", "makes", "made", "built"],
-    text: "OpenCode is made by Anomaly, a company that builds open source tools for developers. Anomaly also makes Hex, a voice dictation app.",
+    text: "Warcode is made by Anomaly, a company that builds open source tools for developers. Anomaly also makes Hex, a voice dictation app.",
     links: [{ label: "Press", href: "/press" }],
   },
   {
@@ -232,28 +232,28 @@ export const voiceAnswers: VoiceAnswer[] = [
     id: "enterprise",
     asks: ["enterprise", "can my company use it", "teams", "business"],
     keys: ["enterprise", "company", "teams", "team", "business", "organization", "sso"],
-    text: "Yes. OpenCode works for teams and companies, with organizational controls in the Console when you need them. For an enterprise plan, contact the team from the enterprise page.",
+    text: "Yes. Warcode works for teams and companies, with organizational controls in the Console when you need them. For an enterprise plan, contact the team from the enterprise page.",
     links: [{ label: "Enterprise", href: "/console/enterprise" }],
   },
   {
     id: "changelog",
     asks: ["what's new", "latest release", "changelog", "release notes", "updates"],
     keys: ["new", "latest", "release", "changelog", "updates", "version", "changes"],
-    text: "OpenCode ships often. The changelog has the notes for every release, for the desktop app, the terminal and the SDK.",
+    text: "Warcode ships often. The changelog has the notes for every release, for the desktop app, the terminal and the SDK.",
     links: [{ label: "Changelog", href: "/changelog" }],
   },
   {
     id: "demo",
     asks: ["how does this work", "how does this voice assistant work", "who am i talking to", "are you an ai"],
     keys: ["this", "work", "works", "assistant", "demo", "you", "orb"],
-    text: "I'm a small voice demo on the OpenCode website. Your browser turns your speech into text, I answer from the site's own pages, and an ElevenLabs voice reads the answer out loud.",
+    text: "I'm a small voice demo on the Warcode website. Your browser turns your speech into text, I answer from the site's own pages, and an ElevenLabs voice reads the answer out loud.",
     links: [{ label: "llms.txt", href: "/llms.txt" }],
   },
   {
     id: "hello",
     asks: ["hello", "hi there", "hey", "good morning", "thanks", "thank you"],
     keys: ["hello", "hi", "hey", "thanks", "thank", "morning"],
-    text: "Hi! Ask me anything about OpenCode: what it is, which models it works with, how to install it, or what it costs.",
+    text: "Hi! Ask me anything about Warcode: what it is, which models it works with, how to install it, or what it costs.",
     links: [],
   },
 ]
@@ -262,7 +262,7 @@ export const fallbackAnswer: VoiceAnswer = {
   id: "fallback",
   asks: [],
   keys: [],
-  text: "I'm not sure about that one. I can tell you what OpenCode is, which models it works with, how to install it, what it costs, and about the desktop, terminal and mobile apps.",
+  text: "I'm not sure about that one. I can tell you what Warcode is, which models it works with, how to install it, what it costs, and about the desktop, terminal and mobile apps.",
   links: [{ label: "Docs", href: docsUrl("/") }],
 }
 
@@ -275,7 +275,7 @@ const stop = new Set(
 const words = (text: string) =>
   text
     .toLowerCase()
-    .replace(/open ?code/g, "opencode")
+    .replace(/open ?code/g, "warcode")
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
     .filter(Boolean)

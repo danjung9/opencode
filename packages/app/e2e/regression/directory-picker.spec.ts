@@ -5,7 +5,7 @@ import { fileNode, openSettings } from "../utils/workspace"
 
 test.use({ viewport: { width: 1440, height: 900 } })
 
-const directory = "C:/OpenCode/Picker"
+const directory = "C:/Warcode/Picker"
 
 // Opens the folder picker from Settings > Projects once its root has listed.
 async function openPicker(page: Page, input: Pick<MockServerConfig, "fileList" | "findFiles">) {
@@ -28,7 +28,7 @@ test("Tab and Enter while suggestions load act on the typed folder, not the prev
   const input = picker.getByRole("combobox")
 
   await input.fill("alp")
-  await expect(picker.getByRole("option")).toHaveText(["C:\\OpenCode\\Picker\\alpha/"])
+  await expect(picker.getByRole("option")).toHaveText(["C:\\Warcode\\Picker\\alpha/"])
 
   const search = await holdRoute(page, /\/api\/fs\/find\?(.*&)?query=beta(&|$)/)
   await input.fill("beta")
@@ -39,7 +39,7 @@ test("Tab and Enter while suggestions load act on the typed folder, not the prev
   await expect(input).toHaveValue("beta")
 
   await input.press("Enter")
-  await expect(input).toHaveValue("C:\\OpenCode\\Picker\\beta\\")
+  await expect(input).toHaveValue("C:\\Warcode\\Picker\\beta\\")
   await expect(picker.locator(".directory-picker-selection-text")).toHaveText("C:\\…\\Picker\\beta")
   search.release()
 })

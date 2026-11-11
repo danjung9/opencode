@@ -1,7 +1,7 @@
 import { batch, createSignal, onCleanup, untrack } from "solid-js"
-import { showToast } from "@opencode/ui/toast"
-import { uuid } from "@opencode/util/uuid"
-import type { MountedSession, SetupContext } from "@opencode/plugin/gui"
+import { showToast } from "@warcode/ui/toast"
+import { uuid } from "@warcode/util/uuid"
+import type { MountedSession, SetupContext } from "@warcode/plugin/gui"
 import type Btw from "./index"
 import { btwChatView, btwTabView, createBtwState, transitionBtw, type BtwEffect, type BtwEvent } from "./machine"
 

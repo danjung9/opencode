@@ -27,7 +27,7 @@ function orderRules(order: readonly string[], scope: string, ids: readonly strin
  * Design mode's, so the script is empty outside the development server.
  */
 export const productsOrderScript = import.meta.env.DEV
-  ? `(()=>{try{const s=JSON.parse(localStorage.getItem("opencode-site-settings-v3")||"null");const o=s&&Array.isArray(s.productsOrder)?s.productsOrder:[];const ids=${JSON.stringify(productIds)};const k=o.filter((id,i)=>ids.includes(id)&&o.indexOf(id)===i);const e=document.getElementById("${styleId}")||document.head.appendChild(Object.assign(document.createElement("style"),{id:"${styleId}"}));e.textContent=(${String(orderRules)})([...k,...ids.filter((id)=>!k.includes(id))],${JSON.stringify(scope)},ids)}catch{}})()`
+  ? `(()=>{try{const s=JSON.parse(localStorage.getItem("warcode-site-settings-v3")||"null");const o=s&&Array.isArray(s.productsOrder)?s.productsOrder:[];const ids=${JSON.stringify(productIds)};const k=o.filter((id,i)=>ids.includes(id)&&o.indexOf(id)===i);const e=document.getElementById("${styleId}")||document.head.appendChild(Object.assign(document.createElement("style"),{id:"${styleId}"}));e.textContent=(${String(orderRules)})([...k,...ids.filter((id)=>!k.includes(id))],${JSON.stringify(scope)},ids)}catch{}})()`
   : ""
 
 // While a card is being dragged, the draft order drives the grid instead of the saved one.

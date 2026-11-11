@@ -1,5 +1,5 @@
 /** @jsxImportSource @opentui/solid */
-import type { OpenCodeEvent } from "@opencode/client"
+import type { WarcodeEvent } from "@warcode/client"
 import { InputRenderable, TextareaRenderable } from "@opentui/core"
 import { testRender } from "@opentui/solid"
 import { expect, test } from "bun:test"
@@ -822,7 +822,7 @@ async function mountDialogForm(root: string) {
   app.renderer.start()
   await app.waitForFrame((frame) => frame.includes("Composer ready"))
 
-  const ask = (fields: Extract<OpenCodeEvent, { type: "form.created" }>["data"]["form"]["fields"]) =>
+  const ask = (fields: Extract<WarcodeEvent, { type: "form.created" }>["data"]["form"]["fields"]) =>
     events.emit({
       id: "evt_form_created",
       created: 1,

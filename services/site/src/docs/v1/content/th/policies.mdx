@@ -1,15 +1,15 @@
 ---
 title: นโยบาย
-description: ควบคุมว่า OpenCode สามารถใช้ทรัพยากรที่กำหนดค่าไว้ใดได้บ้าง
+description: ควบคุมว่า Warcode สามารถใช้ทรัพยากรที่กำหนดค่าไว้ใดได้บ้าง
 ---
 
-:::caution[ต้องใช้ OpenCode 2]
-OpenCode 1 ไม่บังคับใช้นโยบาย ตัวอย่างในหน้านี้ต้องใช้ OpenCode 2 ใน OpenCode 1 ให้ใช้ [`disabled_providers`](/docs/config#disabled-providers) หรือ [`enabled_providers`](/docs/config#enabled-providers) เพื่อควบคุมว่าผู้ให้บริการใดใช้งานได้ ดูวิธีใช้งานปัจจุบันได้ที่ [เอกสารนโยบายของ OpenCode 2](https://opencode.ai/docs/policies/)
+:::caution[ต้องใช้ Warcode 2]
+Warcode 1 ไม่บังคับใช้นโยบาย ตัวอย่างในหน้านี้ต้องใช้ Warcode 2 ใน Warcode 1 ให้ใช้ [`disabled_providers`](/docs/config#disabled-providers) หรือ [`enabled_providers`](/docs/config#enabled-providers) เพื่อควบคุมว่าผู้ให้บริการใดใช้งานได้ ดูวิธีใช้งานปัจจุบันได้ที่ [เอกสารนโยบายของ Warcode 2](https://opencode.ai/docs/policies/)
 :::
 
-นโยบายควบคุมว่า OpenCode สามารถดำเนินการกับทรัพยากรที่ระบุชื่อได้หรือไม่ ฟีเจอร์นี้ของ OpenCode 2 ยังอยู่ในขั้นทดลอง และกำหนดค่าผ่านอาร์เรย์ `experimental.policies` ใน `opencode.json`
+นโยบายควบคุมว่า Warcode สามารถดำเนินการกับทรัพยากรที่ระบุชื่อได้หรือไม่ ฟีเจอร์นี้ของ Warcode 2 ยังอยู่ในขั้นทดลอง และกำหนดค่าผ่านอาร์เรย์ `experimental.policies` ใน `warcode.json`
 
-นโยบายแยกจาก [สิทธิ์](/docs/permissions) สิทธิ์ควบคุมว่าเครื่องมือทำอะไรได้บ้างระหว่างเซสชัน ส่วนนโยบายควบคุมว่า OpenCode สามารถใช้ทรัพยากร เช่น ผู้ให้บริการ LLM ได้หรือไม่
+นโยบายแยกจาก [สิทธิ์](/docs/permissions) สิทธิ์ควบคุมว่าเครื่องมือทำอะไรได้บ้างระหว่างเซสชัน ส่วนนโยบายควบคุมว่า Warcode สามารถใช้ทรัพยากร เช่น ผู้ให้บริการ LLM ได้หรือไม่
 
 ---
 
@@ -23,7 +23,7 @@ OpenCode 1 ไม่บังคับใช้นโยบาย ตัวอ�
 
 ตัวอย่างเช่น ปฏิเสธการใช้ผู้ให้บริการ `openai`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -44,7 +44,7 @@ OpenCode 1 ไม่บังคับใช้นโยบาย ตัวอ�
 
 ## นโยบายที่ใช้ได้
 
-ปัจจุบัน OpenCode รองรับการดำเนินการของนโยบายหนึ่งรายการ:
+ปัจจุบัน Warcode รองรับการดำเนินการของนโยบายหนึ่งรายการ:
 
 | การดำเนินการ   | ทรัพยากร                      | คำอธิบาย                               |
 | -------------- | ----------------------------- | -------------------------------------- |
@@ -58,7 +58,7 @@ OpenCode 1 ไม่บังคับใช้นโยบาย ตัวอ�
 
 ฟิลด์ `resource` รองรับการจับคู่ไวด์การ์ด ใช้ `*` เพื่อจับคู่อักขระตั้งแต่ศูนย์ตัวขึ้นไป และใช้ `?` เพื่อจับคู่อักขระหนึ่งตัว
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -83,7 +83,7 @@ OpenCode 1 ไม่บังคับใช้นโยบาย ตัวอ�
 
 ตัวอย่างเช่น อนุญาตเฉพาะ Anthropic:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -111,11 +111,11 @@ OpenCode 1 ไม่บังคับใช้นโยบาย ตัวอ�
 
 ## รายการผู้ให้บริการ
 
-ใน OpenCode 2 ให้ใช้นโยบายแทนการตั้งค่า `disabled_providers` และ `enabled_providers` แบบเดิมเมื่อควบคุมการเข้าถึงผู้ให้บริการ ใน OpenCode 1 ให้ใช้รายการผู้ให้บริการเหล่านั้นต่อไป
+ใน Warcode 2 ให้ใช้นโยบายแทนการตั้งค่า `disabled_providers` และ `enabled_providers` แบบเดิมเมื่อควบคุมการเข้าถึงผู้ให้บริการ ใน Warcode 1 ให้ใช้รายการผู้ให้บริการเหล่านั้นต่อไป
 
 เพื่อแทนที่ `disabled_providers`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [
@@ -128,7 +128,7 @@ OpenCode 1 ไม่บังคับใช้นโยบาย ตัวอ�
 
 เพื่อแทนที่ `enabled_providers` ให้ปฏิเสธผู้ให้บริการทั้งหมดก่อน แล้วจึงอนุญาตผู้ให้บริการที่เลือกไว้หลังจากนั้น:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [

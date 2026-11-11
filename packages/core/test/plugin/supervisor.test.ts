@@ -2,22 +2,22 @@ import { describe, expect } from "bun:test"
 import { Deferred, Duration, Effect, Layer, LayerMap, Stream } from "effect"
 import { TestClock } from "effect/testing"
 import type { LanguageModelV3 } from "@ai-sdk/provider"
-import { define } from "@opencode/plugin/effect/plugin"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Global } from "@opencode/util/global"
-import { Npm } from "@opencode/util/npm"
-import { AISDK } from "@opencode/core/aisdk"
-import { Command } from "@opencode/core/command"
-import { ConfigPluginSource } from "@opencode/core/config/plugin/source"
-import { Instance } from "@opencode/core/instance"
-import { LocationServiceMap } from "@opencode/core/location-services"
-import { Location } from "@opencode/core/location"
-import { Model } from "@opencode/core/model"
-import { Plugin } from "@opencode/core/plugin"
-import { Provider } from "@opencode/core/provider"
-import { SdkPlugins } from "@opencode/core/plugin/sdk"
-import { AbsolutePath } from "@opencode/core/schema"
+import { define } from "@warcode/plugin/effect/plugin"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Global } from "@warcode/util/global"
+import { Npm } from "@warcode/util/npm"
+import { AISDK } from "@warcode/core/aisdk"
+import { Command } from "@warcode/core/command"
+import { ConfigPluginSource } from "@warcode/core/config/plugin/source"
+import { Instance } from "@warcode/core/instance"
+import { LocationServiceMap } from "@warcode/core/location-services"
+import { Location } from "@warcode/core/location"
+import { Model } from "@warcode/core/model"
+import { Plugin } from "@warcode/core/plugin"
+import { Provider } from "@warcode/core/provider"
+import { SdkPlugins } from "@warcode/core/plugin/sdk"
+import { AbsolutePath } from "@warcode/core/schema"
 import { Database } from "../../src/database/database"
 import { Bus } from "../../src/bus"
 import { tempGlobalLayer } from "../fixture/global"
@@ -142,7 +142,7 @@ describe("PluginSupervisor", () => {
       expect(state.instance).toBeUndefined()
       // Builtins stay active: the duplicate is a plugin failure, not a generation defect.
       expect(
-        state.inventory.some((plugin) => plugin.id?.startsWith("opencode.") && plugin.state.status === "active"),
+        state.inventory.some((plugin) => plugin.id?.startsWith("warcode.") && plugin.state.status === "active"),
       ).toBe(true)
     }),
   )
@@ -233,7 +233,7 @@ describe("PluginSupervisor", () => {
     }),
   )
 
-  for (const targets of [["opencode.config.policy", "opencode.provider.opencode", "opencode.config.agent"], ["*"]]) {
+  for (const targets of [["warcode.config.policy", "warcode.provider.warcode", "warcode.config.agent"], ["*"]]) {
     it.effect(`keeps policy enforcement and the Console connection through plugin removals: ${targets}`, () =>
       Effect.gen(function* () {
         source.operations = targets.map((target) => ({ type: "remove", target }))
@@ -248,10 +248,10 @@ describe("PluginSupervisor", () => {
           Effect.provide(locations.get(Location.Ref.make({ directory: AbsolutePath.make(directory.path) }))),
         )
         const status = (id: string) => inventory.find((plugin) => plugin.id === id)?.state.status
-        expect(status("opencode.config.policy")).toBe("active")
-        expect(status("opencode.provider.opencode")).toBe("active")
+        expect(status("warcode.config.policy")).toBe("active")
+        expect(status("warcode.provider.warcode")).toBe("active")
         // Removals still apply to everything else, including instance and builtin plugins.
-        expect(status("opencode.config.agent")).toBeUndefined()
+        expect(status("warcode.config.agent")).toBeUndefined()
         expect(inventory.some((plugin) => plugin.id === id)).toBe(targets[0] !== "*")
       }).pipe(
         Effect.ensuring(
@@ -350,7 +350,7 @@ describe("PluginSupervisor", () => {
               .hook(
                 "sdk",
                 (evt) => {
-                  if (evt.package !== "agents/models/opencode") return Effect.void
+                  if (evt.package !== "agents/models/warcode") return Effect.void
                   evt.sdk = { languageModel: () => fakeLanguageModel }
                   return Effect.void
                 },
@@ -369,7 +369,7 @@ describe("PluginSupervisor", () => {
           Model.Info.make({
             ...Model.Info.default(providerID, Model.ID.make("workers-ai")),
             modelID: Model.ID.make("workers-ai"),
-            package: "aisdk:agents/models/opencode",
+            package: "aisdk:agents/models/warcode",
           }),
         )
       }).pipe(

@@ -1,6 +1,6 @@
-import type { FileDiffInfo } from "@opencode/client/promise"
-import type { ChangeKind } from "@opencode/plugin/gui/review"
-import { artifactKind } from "@opencode/util/artifact"
+import type { FileDiffInfo } from "@warcode/client/promise"
+import type { ChangeKind } from "@warcode/plugin/gui/review"
+import { artifactKind } from "@warcode/util/artifact"
 import { Match, Predicate } from "effect"
 
 export type RenderDiff = FileDiffInfo

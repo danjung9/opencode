@@ -18,12 +18,12 @@ if (!semver.satisfies(process.versions.bun, expectedBunVersionRange)) {
 }
 
 const env = {
-  OPENCODE_CHANNEL: process.env["OPENCODE_CHANNEL"],
-  OPENCODE_VERSION: process.env["OPENCODE_VERSION"],
+  WARCODE_CHANNEL: process.env["WARCODE_CHANNEL"],
+  WARCODE_VERSION: process.env["WARCODE_VERSION"],
 }
 const CHANNEL = await (async () => {
-  if (env.OPENCODE_CHANNEL) return env.OPENCODE_CHANNEL
-  if (env.OPENCODE_VERSION && !env.OPENCODE_VERSION.startsWith("0.0.0-")) return "latest"
+  if (env.WARCODE_CHANNEL) return env.WARCODE_CHANNEL
+  if (env.WARCODE_VERSION && !env.WARCODE_VERSION.startsWith("0.0.0-")) return "latest"
   const branch = await $`git branch --show-current`.text().then((x) => x.trim())
   if (!branch) return "detached"
   const channel = branch.replace(/[^a-zA-Z0-9._-]/g, "-")
@@ -34,8 +34,8 @@ const IS_PREVIEW = CHANNEL !== "latest"
 
 // The release workflow's plan job owns release versions; builds only read them.
 const VERSION = (() => {
-  if (env.OPENCODE_VERSION) return env.OPENCODE_VERSION
-  if (!IS_PREVIEW) throw new Error("OPENCODE_VERSION is required for latest-channel builds")
+  if (env.WARCODE_VERSION) return env.WARCODE_VERSION
+  if (!IS_PREVIEW) throw new Error("WARCODE_VERSION is required for latest-channel builds")
   return `0.0.0-${CHANNEL}-${previewBuildNumber()}`
 })()
 
@@ -47,7 +47,7 @@ function previewBuildNumber() {
   return runNumber
 }
 
-const bot = ["actions-user", "opencode", "opencode-agent[bot]"]
+const bot = ["actions-user", "warcode", "warcode-agent[bot]"]
 const teamPath = path.resolve(import.meta.dir, "../../../.github/TEAM_MEMBERS")
 const team = [
   ...(await Bun.file(teamPath)
@@ -71,4 +71,4 @@ export const Script = {
     return team
   },
 }
-console.log(`opencode script`, JSON.stringify(Script, null, 2))
+console.log(`warcode script`, JSON.stringify(Script, null, 2))

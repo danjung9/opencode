@@ -1,9 +1,9 @@
 import { EOL } from "os"
 import { Effect } from "effect"
-import { OpenCode } from "@opencode/client"
+import { Warcode } from "@warcode/client"
 import { Commands } from "../../commands"
 import { Runtime } from "../../../framework/runtime"
-import { Service } from "@opencode/client/effect/service"
+import { Service } from "@warcode/client/effect/service"
 import { ServerConnection } from "../../../services/server-connection"
 import { waitForPlugins } from "../../../services/plugin-startup"
 
@@ -11,7 +11,7 @@ export default Runtime.handler(
   Commands.commands.debug.commands.agents,
   Effect.fn("cli.debug.agents")(function* () {
     const { endpoint } = yield* ServerConnection.resolve()
-    const client = OpenCode.make({ baseUrl: endpoint.url, headers: Service.headers(endpoint) })
+    const client = Warcode.make({ baseUrl: endpoint.url, headers: Service.headers(endpoint) })
     yield* waitForPlugins(client, process.cwd())
     const response = yield* Effect.promise(() => client.agent.list({ location: { directory: process.cwd() } }))
     process.stdout.write(

@@ -3,11 +3,11 @@ title: 참조
 description: 로컬 디렉터리와 Git 저장소를 프로젝트 참조로 추가합니다.
 ---
 
-참조를 사용하면 OpenCode가 현재 프로젝트 외부의 디렉터리에 접근할 수 있습니다. 작업 중에 문서, 공유 라이브러리, 예제 또는 다른 저장소를 사용할 수 있게 하려면 참조를 활용하세요.
+참조를 사용하면 Warcode가 현재 프로젝트 외부의 디렉터리에 접근할 수 있습니다. 작업 중에 문서, 공유 라이브러리, 예제 또는 다른 저장소를 사용할 수 있게 하려면 참조를 활용하세요.
 
-참조는 `opencode.json` 또는 `opencode.jsonc`에서 alias별로 설정합니다.
+참조는 `warcode.json` 또는 `warcode.jsonc`에서 alias별로 설정합니다.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
   "references": {
@@ -16,7 +16,7 @@ description: 로컬 디렉터리와 Git 저장소를 프로젝트 참조로 추�
       "description": "Use for product behavior and documentation conventions",
     },
     "sdk": {
-      "repository": "anomalyco/opencode-sdk-js",
+      "repository": "anomalyco/warcode-sdk-js",
       "branch": "main",
       "description": "Use for JavaScript SDK implementation details",
     },
@@ -30,7 +30,7 @@ description: 로컬 디렉터리와 Git 저장소를 프로젝트 참조로 추�
 
 로컬 디렉터리를 참조하려면 `path`를 사용하세요.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": {
@@ -48,7 +48,7 @@ description: 로컬 디렉터리와 Git 저장소를 프로젝트 참조로 추�
 
 문자열 축약형도 사용할 수 있습니다.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": "../docs",
@@ -60,9 +60,9 @@ description: 로컬 디렉터리와 Git 저장소를 프로젝트 참조로 추�
 
 ## Git 저장소
 
-Git 저장소를 참조하려면 `repository`를 사용하세요. OpenCode는 저장소를 로컬 저장소 캐시에 구성하고, 체크아웃된 소스를 참조 디렉터리로 사용할 수 있게 합니다.
+Git 저장소를 참조하려면 `repository`를 사용하세요. Warcode는 저장소를 로컬 저장소 캐시에 구성하고, 체크아웃된 소스를 참조 디렉터리로 사용할 수 있게 합니다.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": {
@@ -73,11 +73,11 @@ Git 저장소를 참조하려면 `repository`를 사용하세요. OpenCode는 �
 }
 ```
 
-`repository`는 Git URL, host/path 참조, GitHub `owner/repo` 축약형을 지원합니다. 선택 사항인 `branch` 필드로 branch 또는 ref를 선택합니다. `branch`가 없으면 OpenCode는 저장소의 기본 branch를 사용합니다.
+`repository`는 Git URL, host/path 참조, GitHub `owner/repo` 축약형을 지원합니다. 선택 사항인 `branch` 필드로 branch 또는 ref를 선택합니다. `branch`가 없으면 Warcode는 저장소의 기본 branch를 사용합니다.
 
 branch, 설명 또는 기타 옵션이 필요 없으면 문자열 축약형을 사용할 수 있습니다.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": "Effect-TS/effect",
@@ -95,7 +95,7 @@ Git 참조는 비동기로 새로 고쳐집니다. 새로 설정한 저장소는
 
 에이전트가 언제 참조를 사용해야 하는지 설명하려면 `description`을 추가하세요.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "design-system": {
@@ -106,7 +106,7 @@ Git 참조는 비동기로 새로 고쳐집니다. 새로 설정한 저장소는
 }
 ```
 
-OpenCode는 설명이 있는 참조를 에이전트 컨텍스트에 포함합니다. 설명은 짧게 작성하되, 내용이 비슷한 참조를 구분할 수 있을 만큼 구체적이어야 합니다. 설명이 없는 참조는 자동완성과 직접 사용으로 계속 사용할 수 있지만 에이전트에게 안내되지는 않습니다.
+Warcode는 설명이 있는 참조를 에이전트 컨텍스트에 포함합니다. 설명은 짧게 작성하되, 내용이 비슷한 참조를 구분할 수 있을 만큼 구체적이어야 합니다. 설명이 없는 참조는 자동완성과 직접 사용으로 계속 사용할 수 있지만 에이전트에게 안내되지는 않습니다.
 
 ---
 
@@ -114,7 +114,7 @@ OpenCode는 설명이 있는 참조를 에이전트 컨텍스트에 포함합니
 
 TUI의 `@` 자동완성에서 참조를 제외하려면 `hidden`을 `true`로 설정하세요.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "internal": {
@@ -140,7 +140,7 @@ Compare this implementation with @sdk/src/client.ts
 
 설명이 있는 설정된 참조의 경우 에이전트는 확인된 경로와 설명을 시스템 컨텍스트로도 받습니다. 따라서 직접 첨부하지 않아도 관련이 있을 때 에이전트가 참조를 살펴볼 수 있습니다.
 
-OpenCode는 외부 디렉터리 권한 경계에서 참조 디렉터리를 자동으로 허용합니다. 일반 도구 권한은 그대로 적용됩니다. 예를 들어, 파일을 편집할 수 없는 에이전트는 디렉터리가 참조로 설정되어 있어도 편집 권한을 얻지 못합니다.
+Warcode는 외부 디렉터리 권한 경계에서 참조 디렉터리를 자동으로 허용합니다. 일반 도구 권한은 그대로 적용됩니다. 예를 들어, 파일을 편집할 수 없는 에이전트는 디렉터리가 참조로 설정되어 있어도 편집 권한을 얻지 못합니다.
 
 ---
 

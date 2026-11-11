@@ -5,5 +5,5 @@ import { inlineThemePreload } from "../vite.js"
 test.each(["/oc-theme-preload.js", "./oc-theme-preload.js"])("inlines %s before the renderer runs", (path) => {
   const html = inlineThemePreload(`<script id="oc-theme-preload-script" src="${path}"></script>`)
   expect(html).not.toContain(" src=")
-  expect(html).toContain("opencode-color-scheme")
+  expect(html).toContain("warcode-color-scheme")
 })

@@ -2,9 +2,9 @@ import { onCleanup } from "solid-js"
 import { Predicate } from "effect"
 import { INITIAL_FOCUS_LOCK_STATE, transitionFocusLock, type FocusLockEvent } from "./focus-lock-machine"
 
-const FOCUS_LOCK = "opencode:notification-focus"
+const FOCUS_LOCK = "warcode:notification-focus"
 
-const DELIVERY_LOCK = "opencode:notification-delivery"
+const DELIVERY_LOCK = "warcode:notification-delivery"
 
 const MAX_CLAIMED = 500
 
@@ -71,7 +71,7 @@ export function createNotificationCoordinator() {
     }
 
     if (!locks) return execute()
-    await locks.request(`opencode:notification:${key}`, execute)
+    await locks.request(`warcode:notification:${key}`, execute)
   }
 
   return {
@@ -100,7 +100,7 @@ function claim(kind: "sound" | "system", eventID: string, claimed: Set<string>) 
 
   if (typeof localStorage !== "undefined") {
     try {
-      const storageKey = `opencode:notification-${kind}`
+      const storageKey = `warcode:notification-${kind}`
       const value: unknown = JSON.parse(localStorage.getItem(storageKey) ?? "[]")
       const events = Array.isArray(value) ? value.filter(Predicate.isString) : []
 

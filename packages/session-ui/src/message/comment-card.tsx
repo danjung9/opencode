@@ -1,9 +1,9 @@
 import { createSignal, Match, onCleanup, onMount, Show, Switch } from "solid-js"
-import { FileIcon } from "@opencode/ui/file-icon"
-import { Icon } from "@opencode/ui/icon"
-import { useI18n } from "@opencode/ui/context/i18n"
-import { getFilenameTruncated } from "@opencode/util/path"
-import { Tooltip } from "@opencode/ui/tooltip"
+import { FileIcon } from "@warcode/ui/file-icon"
+import { Icon } from "@warcode/ui/icon"
+import { useI18n } from "@warcode/ui/context/i18n"
+import { getFilenameTruncated } from "@warcode/util/path"
+import { Tooltip } from "@warcode/ui/tooltip"
 import { AttachmentCard } from "./attachment-card"
 
 /**

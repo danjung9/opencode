@@ -1,6 +1,6 @@
 export * as WebSearchExa from "./exa.js"
 
-import { define } from "@opencode/plugin/effect/plugin"
+import { define } from "@warcode/plugin/effect/plugin"
 import { Effect, Schema, Scope } from "effect"
 import { HttpClient } from "effect/http"
 import { WebSearchMcp } from "./mcp.js"
@@ -24,7 +24,7 @@ const McpOutput = Schema.Struct({
 })
 
 export const Plugin = define<HttpClient.HttpClient | Scope.Scope>({
-  id: "opencode.websearch.exa",
+  id: "warcode.websearch.exa",
   effect: Effect.fn("WebSearchExa.Plugin")(function* (ctx) {
     const http = yield* HttpClient.HttpClient
     yield* WebSearchProvider.register(ctx, {

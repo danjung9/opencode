@@ -29,9 +29,9 @@ import {
   type VersionNegotiationOptions,
 } from "@modelcontextprotocol/client"
 import { Cause, Clock, Duration, Effect, Exit, PlatformError, Schedule, Schema } from "effect"
-import { ConfigMCP } from "@opencode/schema/config/mcp"
-import type { Session } from "@opencode/schema/session"
-import { isRecord } from "@opencode/util/record"
+import { ConfigMCP } from "@warcode/schema/config/mcp"
+import type { Session } from "@warcode/schema/session"
+import { isRecord } from "@warcode/util/record"
 import { McpStdio } from "./stdio.js"
 
 const DEFAULT_STARTUP_TIMEOUT = 30_000
@@ -256,7 +256,7 @@ export const connect = Effect.fnUntraced(function* (options: ConnectOptions) {
     const context = yield* Effect.context()
     const runFork = Effect.runForkWith(context)
     const runPromise = Effect.runPromiseWith(context)
-    const client = new Client(options.clientInfo ?? { name: "opencode", version: "unknown" }, {
+    const client = new Client(options.clientInfo ?? { name: "warcode", version: "unknown" }, {
       capabilities: {
         ...(elicitation ? { elicitation: { form: {}, url: {} } } : {}),
         // Legacy era only: roots are deprecated as of 2026-07-28 and modern servers cannot request them.
@@ -334,7 +334,7 @@ export const connect = Effect.fnUntraced(function* (options: ConnectOptions) {
         args,
         cwd: McpStdio.resolveCwd(options.directory, config.cwd),
         environment: {
-          ...(command === "opencode" ? { BUN_BE_BUN: "1" } : {}),
+          ...(command === "warcode" ? { BUN_BE_BUN: "1" } : {}),
           ...config.environment,
         },
       })
@@ -514,7 +514,7 @@ export const connect = Effect.fnUntraced(function* (options: ConnectOptions) {
               {
                 name: input.name,
                 arguments: input.args ?? {},
-                ...(input.sessionID === undefined ? {} : { _meta: { "ai.opencode/sessionID": input.sessionID } }),
+                ...(input.sessionID === undefined ? {} : { _meta: { "ai.warcode/sessionID": input.sessionID } }),
               },
               {
                 signal: claim(signal, input),

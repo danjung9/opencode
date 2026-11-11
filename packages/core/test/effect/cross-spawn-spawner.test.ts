@@ -5,9 +5,9 @@ import path from "node:path"
 import { inspect } from "node:util"
 import { Cause, Deferred, Effect, Exit, PlatformError, Redacted, Stream } from "effect"
 import { ChildProcess, ChildProcessSpawner } from "effect/process"
-import { CrossSpawnSpawner } from "@opencode/util/cross-spawn-spawner"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Teardown } from "@opencode/util/teardown"
+import { CrossSpawnSpawner } from "@warcode/util/cross-spawn-spawner"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Teardown } from "@warcode/util/teardown"
 import { appExecutionAlias } from "../fixture/app-execution-alias"
 import { testEffect } from "../lib/effect"
 
@@ -33,7 +33,7 @@ function alive(pid: number) {
 }
 
 async function tmpdir() {
-  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "opencode-core-test-"))
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "warcode-core-test-"))
   return {
     path: dir,
     async [Symbol.asyncDispose]() {
@@ -543,14 +543,14 @@ describe("cross-spawn spawner", () => {
 
         const out = yield* ChildProcessSpawner.ChildProcessSpawner.use((svc) =>
           svc.string(
-            ChildProcess.make("set", ["OPENCODE_TEST_SHELL"], {
+            ChildProcess.make("set", ["WARCODE_TEST_SHELL"], {
               shell: true,
               extendEnv: true,
-              env: { OPENCODE_TEST_SHELL: "ok" },
+              env: { WARCODE_TEST_SHELL: "ok" },
             }),
           ),
         )
-        expect(out).toContain("OPENCODE_TEST_SHELL=ok")
+        expect(out).toContain("WARCODE_TEST_SHELL=ok")
       }),
     )
 

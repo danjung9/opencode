@@ -27,15 +27,15 @@ export function DocsSamples(props: {
     <>
       <props.Section id="typography">
         <props.Sample variant="typography">
-          <h1>Heading 1 · Configure OpenCode</h1>
+          <h1>Heading 1 · Configure Warcode</h1>
           <h2>Heading 2 · Providers</h2>
           <h3>Heading 3 · Local models</h3>
           <h4>Heading 4 · Ollama</h4>
           <h5>Heading 5 · Context limits</h5>
           <h6>Heading 6 · Notes</h6>
-          <p data-slot="lead">Lead · OpenCode is an open source coding agent for the terminal, desktop and web.</p>
+          <p data-slot="lead">Lead · Warcode is an open source coding agent for the terminal, desktop and web.</p>
           <p>
-            Body · Run <code>opencode</code> in a project to open the terminal interface. See{" "}
+            Body · Run <code>warcode</code> in a project to open the terminal interface. See{" "}
             <a href="#config">Config</a> for every option, or read the{" "}
             <a href="https://github.com/anomalyco/opencode" target="_blank">
               source on GitHub
@@ -43,7 +43,7 @@ export function DocsSamples(props: {
             .
           </p>
           <p>
-            <small>Small · Requires OpenCode 2.0 or later.</small> The <abbr title="Agent Client Protocol">ACP</abbr>{" "}
+            <small>Small · Requires Warcode 2.0 or later.</small> The <abbr title="Agent Client Protocol">ACP</abbr>{" "}
             server speaks JSON-RPC.
           </p>
         </props.Sample>
@@ -55,7 +55,7 @@ export function DocsSamples(props: {
         </props.Sample>
         <props.Sample variant="inlineCode">
           <p>
-            Set <code>model</code> in <code>opencode.jsonc</code>, then run <code>opencode run "fix the tests"</code>.
+            Set <code>model</code> in <code>warcode.jsonc</code>, then run <code>warcode run "fix the tests"</code>.
           </p>
         </props.Sample>
       </props.Section>
@@ -78,7 +78,7 @@ export function DocsSamples(props: {
             <li>Sessions are saved, so you can come back to them.</li>
           </ul>
           <ol>
-            <li>Install OpenCode.</li>
+            <li>Install Warcode.</li>
             <li>
               Connect a provider with <code>/connect</code>.
             </li>
@@ -107,8 +107,8 @@ export function DocsSamples(props: {
         <props.Sample variant="blockquote">
           <blockquote>
             <p>
-              Homebrew's own <code>brew install opencode</code> formula also installs OpenCode 2. Each release publishes
-              first to the <code>anomalyco/tap/opencode-v2</code> formula.
+              Homebrew's own <code>brew install warcode</code> formula also installs Warcode 2. Each release publishes
+              first to the <code>anomalyco/tap/warcode-v2</code> formula.
             </p>
           </blockquote>
         </props.Sample>
@@ -124,7 +124,7 @@ export function DocsSamples(props: {
                   "tip",
                   "Tip",
                   <>
-                    Run <code>opencode auth login</code> to store a provider key once for every project.
+                    Run <code>warcode auth login</code> to store a provider key once for every project.
                   </>,
                 ],
                 ["caution", "Warning", "Plugins run with your permissions. Install only plugins you trust."],
@@ -147,13 +147,13 @@ export function DocsSamples(props: {
                 variant="terminal"
                 kind="terminal"
                 label="Terminal"
-                copy="$ OPENCODE_DISABLE_PROJECT_CONFIG=1 opencode"
+                copy="$ WARCODE_DISABLE_PROJECT_CONFIG=1 warcode"
               >
                 <pre data-component="code-block">
                   <code>
                     <span data-token="prompt">$ </span>
-                    <span data-token="flag">OPENCODE_DISABLE_PROJECT_CONFIG=1</span>{" "}
-                    <span data-token="command">opencode</span>
+                    <span data-token="flag">WARCODE_DISABLE_PROJECT_CONFIG=1</span>{" "}
+                    <span data-token="command">warcode</span>
                   </code>
                 </pre>
               </CodeFrame>
@@ -197,8 +197,8 @@ export function DocsSamples(props: {
                 {
                   [
                     "curl -fsSL https://opencode.ai/v2/install | bash",
-                    "npm install -g @opencode/cli",
-                    "brew install anomalyco/tap/opencode-v2",
+                    "npm install -g @warcode/cli",
+                    "brew install anomalyco/tap/warcode-v2",
                   ][tab()]
                 }
               </code>
@@ -207,8 +207,8 @@ export function DocsSamples(props: {
                 text={
                   [
                     "curl -fsSL https://opencode.ai/v2/install | bash",
-                    "npm install -g @opencode/cli",
-                    "brew install anomalyco/tap/opencode-v2",
+                    "npm install -g @warcode/cli",
+                    "brew install anomalyco/tap/warcode-v2",
                   ][tab()]
                 }
               />
@@ -216,7 +216,7 @@ export function DocsSamples(props: {
           </div>
           <div data-component="code-tabs" data-files="">
             <div data-slot="tabs" role="tablist" aria-label="Files">
-              <For each={["opencode.jsonc", "AGENTS.md"]}>
+              <For each={["warcode.jsonc", "AGENTS.md"]}>
                 {(label, index) => (
                   <button
                     type="button"
@@ -281,13 +281,13 @@ export function DocsSamples(props: {
             variant="terminal"
             kind="terminal"
             label="Terminal"
-            copy={`$ opencode run --model opencode/claude-opus-5-5 "Explain the session runner and list every place that schedules a wake, with file paths"`}
+            copy={`$ warcode run --model warcode/claude-opus-5-5 "Explain the session runner and list every place that schedules a wake, with file paths"`}
           >
             <pre data-component="code-block">
               <code>
                 <span data-token="prompt">$ </span>
-                <span data-token="command">opencode</span> <span data-token="plain">run</span>{" "}
-                <span data-token="flag">--model</span> <span data-token="string">opencode/claude-opus-5-5</span>{" "}
+                <span data-token="command">warcode</span> <span data-token="plain">run</span>{" "}
+                <span data-token="flag">--model</span> <span data-token="string">warcode/claude-opus-5-5</span>{" "}
                 <span data-token="string">
                   "Explain the session runner and list every place that schedules a wake, with file paths"
                 </span>
@@ -302,11 +302,11 @@ export function DocsSamples(props: {
             variant="code"
             kind="code"
             label="TypeScript"
-            copy={`export default {\n  model: "opencode/claude-opus-5-5",\n}`}
+            copy={`export default {\n  model: "warcode/claude-opus-5-5",\n}`}
           >
             <pre>
               <code>{`export default {
-  model: "opencode/claude-opus-5-5",
+  model: "warcode/claude-opus-5-5",
 }`}</code>
             </pre>
           </CodeFrame>
@@ -315,15 +315,15 @@ export function DocsSamples(props: {
           <CodeFrame
             variant="codeTitle"
             kind="file"
-            label="opencode.jsonc"
-            copy={`{\n  "$schema": "https://opencode.ai/config.json",\n  "model": "opencode/claude-opus-5-5",\n  "permission": { "bash": "ask" }\n}`}
+            label="warcode.jsonc"
+            copy={`{\n  "$schema": "https://opencode.ai/config.json",\n  "model": "warcode/claude-opus-5-5",\n  "permission": { "bash": "ask" }\n}`}
           >
             <figure data-component="code-figure">
-              <figcaption>opencode.jsonc</figcaption>
+              <figcaption>warcode.jsonc</figcaption>
               <pre>
                 <code>{`{
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode/claude-opus-5-5",
+  "model": "warcode/claude-opus-5-5",
   "permission": { "bash": "ask" }
 }`}</code>
               </pre>
@@ -334,7 +334,7 @@ export function DocsSamples(props: {
           <CodeFrame
             variant="codeLines"
             kind="file"
-            label=".opencode/tools/count-lines.ts"
+            label=".warcode/tools/count-lines.ts"
             copy={countLines.join("\n")}
           >
             <pre data-component="code-lines">
@@ -353,14 +353,14 @@ export function DocsSamples(props: {
           <CodeFrame
             variant="codeDiff"
             kind="file"
-            label="opencode.jsonc"
-            copy={'{\n  "model": "opencode/claude-opus-5-5",\n  "permission": { "bash": "ask" },\n}'}
+            label="warcode.jsonc"
+            copy={'{\n  "model": "warcode/claude-opus-5-5",\n  "permission": { "bash": "ask" },\n}'}
           >
             <pre data-component="code-diff">
               <For
                 each={[
                   [" ", "  {"],
-                  [" ", '    "model": "opencode/claude-opus-5-5",'],
+                  [" ", '    "model": "warcode/claude-opus-5-5",'],
                   ["-", '    "permission": { "bash": "allow" },'],
                   ["+", '    "permission": { "bash": "ask" },'],
                   [" ", "  }"],
@@ -383,7 +383,7 @@ export function DocsSamples(props: {
         <props.Sample variant="fileTree">
           <CodeFrame variant="fileTree" kind="tree" label="Files">
             <FileTree
-              tree={`.opencode/
+              tree={`.warcode/
 └── plugins/
     ├── concise.ts
     ├── reviewer.js
@@ -398,9 +398,9 @@ export function DocsSamples(props: {
           <ol data-component="steps">
             <li>
               <p>
-                <strong>Create the plugin.</strong> Add <code>.opencode/plugins/notify.ts</code>.
+                <strong>Create the plugin.</strong> Add <code>.warcode/plugins/notify.ts</code>.
               </p>
-              <CodeFrame variant="codeTitle" kind="file" label=".opencode/plugins/notify.ts" copy={notifyPlugin}>
+              <CodeFrame variant="codeTitle" kind="file" label=".warcode/plugins/notify.ts" copy={notifyPlugin}>
                 <pre>
                   <code>{notifyPlugin}</code>
                 </pre>
@@ -413,13 +413,13 @@ export function DocsSamples(props: {
             </li>
             <li>
               <p>
-                <strong>Restart OpenCode.</strong> Plugins load on start.
+                <strong>Restart Warcode.</strong> Plugins load on start.
               </p>
-              <CodeFrame variant="terminal" kind="terminal" label="Terminal" copy="$ opencode service restart">
+              <CodeFrame variant="terminal" kind="terminal" label="Terminal" copy="$ warcode service restart">
                 <pre data-component="code-block">
                   <code>
                     <span data-token="prompt">$ </span>
-                    <span data-token="command">opencode</span> service restart
+                    <span data-token="command">warcode</span> service restart
                   </code>
                 </pre>
               </CodeFrame>
@@ -434,8 +434,8 @@ export function DocsSamples(props: {
             <For
               each={[
                 ["Plugins", "Hook into sessions, tools and events."],
-                ["Client", "Talk to a running OpenCode server from JavaScript."],
-                ["SDK", "Embed OpenCode in your own app."],
+                ["Client", "Talk to a running Warcode server from JavaScript."],
+                ["SDK", "Embed Warcode in your own app."],
               ]}
             >
               {([title, body]) => (
@@ -528,7 +528,7 @@ export function DocsSamples(props: {
       <props.Section id="details">
         <props.Sample variant="details">
           <details>
-            <summary>Why does OpenCode ask before running commands?</summary>
+            <summary>Why does Warcode ask before running commands?</summary>
             <p>
               The default <code>bash</code> permission is <code>ask</code>, so nothing runs without your approval.
             </p>
@@ -543,8 +543,8 @@ export function DocsSamples(props: {
       <props.Section id="media">
         <props.Sample variant="media" label="image and video">
           <figure>
-            <img src={ogImage("/docs").src} alt="The OpenCode docs" width="1200" height="630" />
-            <figcaption>The OpenCode terminal interface.</figcaption>
+            <img src={ogImage("/docs").src} alt="The Warcode docs" width="1200" height="630" />
+            <figcaption>The Warcode terminal interface.</figcaption>
           </figure>
           <figure>
             <video controls muted playsinline preload="none" poster={ogImage("/docs").src} width="1200" height="630" />
@@ -561,7 +561,7 @@ export function DocsSamples(props: {
 
       <props.Section id="config">
         <props.Sample variant="config">
-          <CodeFrame variant="config" kind="config" label="opencode.jsonc options">
+          <CodeFrame variant="config" kind="config" label="warcode.jsonc options">
             <dl data-component="config-reference">
               <dt>
                 <code>model</code> <span data-component="badge">string</span>
@@ -581,12 +581,12 @@ export function DocsSamples(props: {
       <props.Section id="cli">
         <props.Sample variant="cli">
           <div data-component="cli-command">
-            <CodeFrame variant="cli" kind="usage" label="Usage" copy="opencode run [message..]">
+            <CodeFrame variant="cli" kind="usage" label="Usage" copy="warcode run [message..]">
               <pre>
-                <code>opencode run [message..]</code>
+                <code>warcode run [message..]</code>
               </pre>
             </CodeFrame>
-            <p>Run OpenCode with a message, without the terminal interface.</p>
+            <p>Run Warcode with a message, without the terminal interface.</p>
             <table>
               <thead>
                 <tr>
@@ -741,7 +741,7 @@ export const docsSampleSections = [
 ] as const satisfies readonly { id: string; title: string; source: string; components: readonly DocsVariantKey[] }[]
 
 const countLines = [
-  'import { tool } from "@opencode-ai/plugin"',
+  'import { tool } from "@warcode-ai/plugin"',
   "",
   "export default tool({",
   '  description: "Count lines in a file",',

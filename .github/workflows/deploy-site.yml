@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   deploy:
-    if: github.repository == 'anomalyco/opencode' && (github.ref_name == 'dev' || github.ref_name == 'production')
+    if: github.repository == 'anomalyco/warcode' && (github.ref_name == 'dev' || github.ref_name == 'production')
     runs-on: blacksmith-4vcpu-ubuntu-2404
     environment: ${{ github.ref_name }}
     permissions:
@@ -38,14 +38,14 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
         with:
-          role-to-assume: arn:aws:iam::604439173067:role/github/opencode-${{ github.ref_name }}
-          role-session-name: opencode-${{ github.run_id }}
+          role-to-assume: arn:aws:iam::604439173067:role/github/warcode-${{ github.ref_name }}
+          role-session-name: warcode-${{ github.run_id }}
           aws-region: us-east-1
 
       - name: Read deploy secrets
         uses: aws-actions/aws-secretsmanager-get-secrets@2297f9a879480a9e3af9b293ed15c70caf8e1c88 # v3.0.2
         with:
-          secret-ids: CLOUDFLARE_API_TOKEN,opencode/${{ github.ref_name }}/CLOUDFLARE_API_TOKEN
+          secret-ids: CLOUDFLARE_API_TOKEN,warcode/${{ github.ref_name }}/CLOUDFLARE_API_TOKEN
           parse-json-secrets: false
 
       - name: Deploy

@@ -1,7 +1,7 @@
 import { GLYPHS } from './glyphs.mjs';
 
-export const FONT_FAMILY = 'OpenCode';
-export const FONT_FILENAME = 'OpenCode.otf';
+export const FONT_FAMILY = 'Warcode';
+export const FONT_FILENAME = 'Warcode.otf';
 const LETTERS = Object.keys(GLYPHS);
 const INVISIBLE = [0, 9, 10, 13, 0x200b, 0x200c, 0x200d, 0x2060, 0xfe0e, 0xfe0f, 0xfeff];
 const RANGES = [
@@ -71,20 +71,20 @@ export function createLogoFont(opentype, mapCharacter = defaultFontMapping) {
   const font = new opentype.Font({
     familyName: FONT_FAMILY,
     styleName: 'Regular',
-    postScriptName: `OpenCode-${signature}-Regular`,
+    postScriptName: `Warcode-${signature}-Regular`,
     unitsPerEm: 1000,
     ascender: 800,
     descender: -200,
     weightClass: 400,
     version: 'Version 1.001',
-    description: 'A single-color, six-letter OpenCode logo alphabet. Other characters have fixed substitutions. Original text is preserved.',
+    description: 'A single-color, six-letter Warcode logo alphabet. Other characters have fixed substitutions. Original text is preserved.',
     manufacturer: 'OpenType',
-    designer: 'OpenCode wordmark',
+    designer: 'Warcode wordmark',
     designerURL: 'https://opencode.ai',
     glyphs,
   });
   for (const names of Object.values(font.names)) {
-    names.uniqueID = { en: `OpenCode-1.001-${signature}` };
+    names.uniqueID = { en: `Warcode-1.001-${signature}` };
   }
   return font;
 }

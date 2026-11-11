@@ -297,7 +297,7 @@
 
   /* The section after the accordion: no divider of its own, whatever Settings › Spacer draws (the
      border keeps its width, so the spacing is the same). Doubled to outrank the shared spacer rules. */
-  [data-component="block"]:has(#about-opencode) + [data-component="block"][data-component="block"] {
+  [data-component="block"]:has(#about-warcode) + [data-component="block"][data-component="block"] {
     border-top-color: transparent;
     border-image: none;
     background-image: none;

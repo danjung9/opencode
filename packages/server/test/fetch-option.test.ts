@@ -1,7 +1,7 @@
 import { expect } from "bun:test"
-import { Location } from "@opencode/core/location"
-import { LocationServiceMap } from "@opencode/core/location-service-map"
-import { Mcp } from "@opencode/core/mcp/index"
+import { Location } from "@warcode/core/location"
+import { LocationServiceMap } from "@warcode/core/location-service-map"
+import { Mcp } from "@warcode/core/mcp/index"
 import { Context, Effect, Layer } from "effect"
 import { HttpEffect, HttpRouter, HttpServer } from "effect/http"
 import { echoMcpHandler } from "../../core/test/fixture/mcp-echo"
@@ -16,7 +16,7 @@ const mcpServer = "https://mcp.invalid/mcp"
 
 it.live("sends Console config and remote MCP requests through the embedder's fetch", () =>
   Effect.gen(function* () {
-    const tmp = yield* tmpdirScoped("opencode-fetch-option-")
+    const tmp = yield* tmpdirScoped("warcode-fetch-option-")
     const requested: string[] = []
     const methods: string[] = []
     const mcp = echoMcpHandler()
@@ -57,7 +57,7 @@ it.live("sends Console config and remote MCP requests through the embedder's fet
           new Request(url, {
             method,
             headers: {
-              authorization: `Basic ${btoa("opencode:secret")}`,
+              authorization: `Basic ${btoa("warcode:secret")}`,
               ...(body === undefined ? {} : { "content-type": "application/json" }),
             },
             body: body === undefined ? undefined : JSON.stringify(body),
@@ -78,7 +78,7 @@ it.live("sends Console config and remote MCP requests through the embedder's fet
 
     expect(
       yield* request("POST", "/api/credential", {
-        integrationID: "opencode",
+        integrationID: "warcode",
         value: { type: "key", key: "secret", metadata: { server: consoleServer } },
       }),
     ).toBe(200)

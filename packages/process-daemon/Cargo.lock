@@ -183,7 +183,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "opencode-pty"
+name = "warcode-pty"
 version = "0.5.0"
 dependencies = [
  "anyhow",

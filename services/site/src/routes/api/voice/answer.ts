@@ -3,7 +3,7 @@ import { z } from "zod"
 import { matchAnswer, voiceAnswers, type VoiceLink } from "~/lib/voice-answers"
 import { voiceMode } from "~/component/site/voice/flag"
 
-// Answers a question for the voice assistant. With OPENCODE_API_KEY set (an OpenCode Models key), a
+// Answers a question for the voice assistant. With WARCODE_API_KEY set (an Warcode Models key), a
 // model answers from the site's own Markdown; otherwise, and whenever the model fails, the closest
 // curated answer does. Curated answers have pre-generated audio in public/voice.
 
@@ -15,7 +15,7 @@ export async function POST(event: APIEvent) {
   const parsed = body.safeParse(await event.request.json().catch(() => undefined))
   if (!parsed.success) return Response.json({ error: "Ask a question." }, { status: 400 })
   const curated = matchAnswer(parsed.data.question)
-  const key = process.env.OPENCODE_API_KEY
+  const key = process.env.WARCODE_API_KEY
   const model = key
     ? await askModel(key, parsed.data.question, parsed.data.page, new URL(event.request.url).origin).catch(
         () => undefined,
@@ -61,7 +61,7 @@ async function askModel(key: string, question: string, current: string | undefin
         {
           role: "system",
           content: [
-            "You are the voice assistant on opencode.ai. Answer questions about OpenCode and the website in one to three short spoken sentences, using only the facts and pages below. If they don't cover it, say so and suggest the docs.",
+            "You are the voice assistant on warcode.ai. Answer questions about Warcode and the website in one to three short spoken sentences, using only the facts and pages below. If they don't cover it, say so and suggest the docs.",
             'Reply with JSON: {"text": "the answer", "links": [{"label": "short label", "href": "a path or URL from the pages"}]} with at most two links.',
             `Facts:\n${facts}`,
             ...pages.filter(Boolean),

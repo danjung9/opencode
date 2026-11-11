@@ -8,10 +8,10 @@ import { serveRoutes } from "./fixture/routes"
 
 it.live("lists configured models filtered by type", () =>
   Effect.gen(function* () {
-    const tmp = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("opencode-model-endpoint-")))
+    const tmp = yield* Effect.acquireDisposable(Effect.promise(() => tmpdir("warcode-model-endpoint-")))
     yield* Effect.promise(() =>
       fs.writeFile(
-        path.join(tmp.path, "opencode.json"),
+        path.join(tmp.path, "warcode.json"),
         JSON.stringify({
           providers: {
             custom: {

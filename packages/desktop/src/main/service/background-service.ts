@@ -1,5 +1,5 @@
 import { app } from "electron"
-import type { Endpoint } from "@opencode/client/service"
+import type { Endpoint } from "@warcode/client/service"
 import { Context, Effect, FileSystem, Layer, Option, Path, Schema } from "effect"
 import { SidecarChanged } from "../../shared/ipc-rpc/events"
 import { CHANNEL } from "../constants"
@@ -21,7 +21,7 @@ export interface Interface {
   readonly reconnect: Effect.Effect<SidecarCredentials.Data>
 }
 
-export class Service extends Context.Service<Service, Interface>()("opencode/desktop/BackgroundService") {}
+export class Service extends Context.Service<Service, Interface>()("warcode/desktop/BackgroundService") {}
 
 export const layer = Layer.effect(
   Service,
@@ -68,7 +68,7 @@ const ensure = Effect.fn("BackgroundService.ensure")(function* (mode: Background
         ...setup.cli.command,
         "serve",
         "--service",
-        ...(setup.isolated ? ["--hostname", "0.0.0.0", "--port", String(0x0c0c)] : []),
+        ...(setup.isolated ? ["--hostname", "0.0.0.0", "--port", String(0x0c0d)] : []),
       ],
       onStart: (reason, previousVersion) =>
         runFork(Effect.logInfo("v2 CLI background service starting", { reason, previousVersion })),
@@ -101,18 +101,18 @@ const prepare = Effect.fn("BackgroundService.prepare")(function* (mode: Backgrou
   yield* Effect.logInfo("starting v2 background service")
   const path = yield* Path.Path
   const desktopCli = yield* DesktopCli.Service
-  const isolated = !app.isPackaged && process.env.OPENCODE_DESKTOP_ISOLATED_SERVER === "1"
+  const isolated = !app.isPackaged && process.env.WARCODE_DESKTOP_ISOLATED_SERVER === "1"
   const cli = yield* desktopCli.resolve
   const version = serviceVersion({ channel: CHANNEL, isolated, mode, version: cli.version })
 
   if (isolated) process.env.XDG_STATE_HOME = app.getPath("userData")
-  const client = yield* Effect.promise(() => import("@opencode/client/service"))
+  const client = yield* Effect.promise(() => import("@warcode/client/service"))
 
   const file =
-    process.env.OPENCODE_DESKTOP_SERVER_CHANNEL === "local"
+    process.env.WARCODE_DESKTOP_SERVER_CHANNEL === "local"
       ? path.join(
           process.env.XDG_STATE_HOME ?? path.join(app.getPath("home"), ".local", "state"),
-          "opencode",
+          "warcode",
           "service-local.json",
         )
       : undefined

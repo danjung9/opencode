@@ -1,7 +1,7 @@
 import { blocks } from "~/lib/markdown"
 
 /**
- * The OpenCode font: the six letters of the wordmark, cut on a 24 × 42 cell from the official SVG
+ * The Warcode font: the six letters of the wordmark, cut on a 24 × 42 cell from the official SVG
  * logo. `ink` is the letter, `shadow` the lighter shade in its counter. The same outlines live in
  * public/font/glyphs.mjs, which the font download and the GIF worker load at runtime.
  */
@@ -75,7 +75,7 @@ export const words = [
   "depended",
   "conceded",
   "condoned",
-  "opencode",
+  "warcode",
   "encoded",
   "decoded",
   "condone",
@@ -229,9 +229,9 @@ export const bigrams = Object.fromEntries(
   ),
 ) as Record<string, number>
 
-/** Words that fit inside the letters of "opencode". */
+/** Words that fit inside the letters of "warcode". */
 export const subAnagrams = words.filter((word) => {
-  const pool = [..."opencode"]
+  const pool = [..."warcode"]
   return [...word].every((char) => {
     const index = pool.indexOf(char)
     if (index === -1) return false
@@ -278,16 +278,16 @@ export const performance = {
 export const versions = [
   { version: "0.1", date: "2025-11-14", note: "The wordmark's outlines land in logo.tsx" },
   { version: "0.2", date: "2026-01-17", note: "The splash logo is redrawn on the same grid" },
-  { version: "1.000", date: "—", note: "The typewriter at opencode.ai/font" },
+  { version: "1.000", date: "—", note: "The typewriter at warcode.ai/font" },
   { version: "1.001", date: "—", note: "Installable OTF with a per-visit substitution map" },
 ]
 
 /** The page copy, shared by the page, its Markdown version and the ⌘K search. */
 export const fontContent = {
-  title: "OpenCode Font",
-  metaTitle: "OpenCode | Font, a typeface cut from the wordmark",
+  title: "Warcode Font",
+  metaTitle: "Warcode | Font, a typeface cut from the wordmark",
   description:
-    "A six-letter typeface cut from the OpenCode wordmark on a 4 × 7 grid. Type with it, see how every letter is built, then download your own installable font.",
+    "A six-letter typeface cut from the Warcode wordmark on a 4 × 7 grid. Type with it, see how every letter is built, then download your own installable font.",
   combinations: { base: "6", exponent: "3,591" },
   download: "Download",
   plates: [
@@ -309,7 +309,7 @@ export const fontContent = {
     { id: "colophon", title: "Colophon" },
   ],
   cover: {
-    lead: "Six letters cut from the OpenCode wordmark. No curves, no diagonals, no exceptions: every edge falls on a grid of 120-unit modules.",
+    lead: "Six letters cut from the Warcode wordmark. No curves, no diagonals, no exceptions: every edge falls on a grid of 120-unit modules.",
   },
   construction: {
     lead: "Each letter, rebuilt from nothing: the grid, the metrics, one module at a time, the shade, the outline, and the measurements that prove it.",
@@ -333,22 +333,22 @@ export const fontContent = {
     lead: "A font small enough to read in one sitting.",
   },
   anagrams: {
-    lead: "The letters of opencode can be arranged 10,080 ways. Try them all.",
+    lead: "The letters of warcode can be arranged 10,080 ways. Try them all.",
   },
   field: {
     lead: "A field of the six letters.",
   },
   loupe: {
     lead: "Look closer. Every module of every letter is a grid of 144 smaller squares.",
-    label: "opencode, set large in the OpenCode font. Hover or press and hold to look through a loupe.",
+    label: "warcode, set large in the Warcode font. Hover or press and hold to look through a loupe.",
   },
   tester: {
     lead: "Type with the six letters. Other characters stay empty.",
-    label: "Text to preview in the OpenCode font",
+    label: "Text to preview in the Warcode font",
     initial: "open code node done",
   },
   colophon: {
-    lead: "Download the font, install it, then choose OpenCode in any app. Every copy carries its own substitution map.",
+    lead: "Download the font, install it, then choose Warcode in any app. Every copy carries its own substitution map.",
   },
 }
 

@@ -1,6 +1,6 @@
 import { Effect } from "effect"
-import { OpenCode, type IntegrationInfo, type IntegrationMethod, type OpenCodeClient } from "@opencode/client"
-import { Service } from "@opencode/client/effect/service"
+import { Warcode, type IntegrationInfo, type IntegrationMethod, type WarcodeClient } from "@warcode/client"
+import { Service } from "@warcode/client/effect/service"
 import { ServerConnection } from "../../../services/server-connection"
 import { waitForPlugins } from "../../../services/plugin-startup"
 
@@ -8,18 +8,18 @@ export const location = { directory: process.cwd() }
 
 export const createClient = Effect.fn("cli.auth.client")(function* (input: ServerConnection.Args = {}) {
   const server = yield* ServerConnection.resolve(input)
-  return OpenCode.make({ baseUrl: server.endpoint.url, headers: Service.headers(server.endpoint) })
+  return Warcode.make({ baseUrl: server.endpoint.url, headers: Service.headers(server.endpoint) })
 })
 
 export function request<A>(run: (signal: AbortSignal) => Promise<A>) {
   return Effect.tryPromise({ try: run, catch: (cause) => cause })
 }
 
-export const loadIntegrations = Effect.fn("cli.auth.integrations")(function* (client: OpenCodeClient) {
+export const loadIntegrations = Effect.fn("cli.auth.integrations")(function* (client: WarcodeClient) {
   yield* waitForPlugins(client, location.directory)
   return yield* request((signal) => client.integration.list({ location }, { signal })).pipe(
     Effect.map((response) =>
-      response.data.toSorted((a, b) => Number(b.id === "opencode-go") - Number(a.id === "opencode-go")),
+      response.data.toSorted((a, b) => Number(b.id === "warcode-go") - Number(a.id === "warcode-go")),
     ),
   )
 })

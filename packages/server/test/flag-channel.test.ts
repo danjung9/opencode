@@ -1,22 +1,22 @@
 import { expect } from "bun:test"
-import { Agent } from "@opencode/core/agent"
-import { App } from "@opencode/core/app"
-import { Database } from "@opencode/core/database/database"
-import { llmClient } from "@opencode/core/effect/app-node-platform"
-import { Flag } from "@opencode/core/flag"
-import { Image } from "@opencode/core/image"
-import { LocationServiceMap } from "@opencode/core/location-service-map"
-import { Plugin } from "@opencode/core/plugin"
-import { Session } from "@opencode/core/session"
-import { SessionBlob } from "@opencode/core/session/blob"
-import { SessionRunnerModel } from "@opencode/core/session/runner/model"
-import { BlobTable, SessionMessageTable } from "@opencode/core/session/sql"
-import { SessionStored } from "@opencode/core/session/stored"
-import { Tool } from "@opencode/core/tool"
-import { McpTool } from "@opencode/core/tool/mcp"
-import { Location } from "@opencode/schema/location"
-import { AbsolutePath } from "@opencode/schema/schema"
-import { Global } from "@opencode/util/global"
+import { Agent } from "@warcode/core/agent"
+import { App } from "@warcode/core/app"
+import { Database } from "@warcode/core/database/database"
+import { llmClient } from "@warcode/core/effect/app-node-platform"
+import { Flag } from "@warcode/core/flag"
+import { Image } from "@warcode/core/image"
+import { LocationServiceMap } from "@warcode/core/location-service-map"
+import { Plugin } from "@warcode/core/plugin"
+import { Session } from "@warcode/core/session"
+import { SessionBlob } from "@warcode/core/session/blob"
+import { SessionRunnerModel } from "@warcode/core/session/runner/model"
+import { BlobTable, SessionMessageTable } from "@warcode/core/session/sql"
+import { SessionStored } from "@warcode/core/session/stored"
+import { Tool } from "@warcode/core/tool"
+import { McpTool } from "@warcode/core/tool/mcp"
+import { Location } from "@warcode/schema/location"
+import { AbsolutePath } from "@warcode/schema/schema"
+import { Global } from "@warcode/util/global"
 import { Context, Effect, Layer } from "effect"
 import { HttpServer } from "effect/http"
 import { LanguageModel, LLMClient } from "../../ai/src/effect"
@@ -33,7 +33,7 @@ const pngHash = SessionBlob.hashBytes(Buffer.from(pngBase64, "base64"))
 
 const runChannel = (channel: "dev" | "latest") =>
   Effect.gen(function* () {
-    const dir = yield* tmpdirScoped(`opencode-flag-channel-${channel}-`)
+    const dir = yield* tmpdirScoped(`warcode-flag-channel-${channel}-`)
     const location = Location.Ref.make({ directory: AbsolutePath.make(dir.path) })
     const llm = yield* TestLLM.Test.pipe(Effect.provide(TestLLM.testLayer()))
     const model = SessionRunnerModel.resolved(
@@ -69,7 +69,7 @@ const runChannel = (channel: "dev" | "latest") =>
     const sessions = Context.get(context, Session.Service)
     const locations = Context.get(context, LocationServiceMap.Service)
     const { db } = Context.get(context, Database.Service)
-    expect(Context.get(context, App.Service)).toEqual({ name: "opencode", version: "test", channel })
+    expect(Context.get(context, App.Service)).toEqual({ name: "warcode", version: "test", channel })
 
     const session = yield* sessions.create({
       title: `channel-${channel}`,
@@ -81,7 +81,7 @@ const runChannel = (channel: "dev" | "latest") =>
     // Pre-warm Tool.snapshot() after MCP tools settle so the legacy catalog runtime is already cached on the inventory;
     // a conversion during the session step's execute call then happens if and only if the VM runtime is built and run.
     yield* Effect.gen(function* () {
-      expect(yield* App.Service).toEqual({ name: "opencode", version: "test", channel })
+      expect(yield* App.Service).toEqual({ name: "warcode", version: "test", channel })
       yield* Plugin.awaitActivation
       const mcp = yield* McpTool.Service
       yield* mcp.flush

@@ -26,7 +26,7 @@ export function Wordmark(props: {
   entrance?: "draw" | "hatch only" | "off"
   speed?: number
   play?: boolean
-  /** Called with whether the letters are out of their "opencode" order, once each move settles. */
+  /** Called with whether the letters are out of their "warcode" order, once each move settles. */
   onOrder?: (reordered: boolean) => void
 }) {
   let svg!: SVGSVGElement

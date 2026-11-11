@@ -8,13 +8,13 @@ import {
   getProjectAvatarSource,
   getProjectAvatarVariant,
   ProjectAvatar,
-} from "@opencode/ui/project-avatar"
-import { Icon } from "@opencode/ui/icon"
-import { IconButton } from "@opencode/ui/icon-button"
-import { Button } from "@opencode/ui/button"
-import { Loader } from "@opencode/ui/loader"
-import { Menu } from "@opencode/ui/menu"
-import { Tooltip } from "@opencode/ui/tooltip"
+} from "@warcode/ui/project-avatar"
+import { Icon } from "@warcode/ui/icon"
+import { IconButton } from "@warcode/ui/icon-button"
+import { Button } from "@warcode/ui/button"
+import { Loader } from "@warcode/ui/loader"
+import { Menu } from "@warcode/ui/menu"
+import { Tooltip } from "@warcode/ui/tooltip"
 import type { HomeProjectSelection, LocalProject } from "@/shell/state/layout"
 import { ServerConnection } from "@/runtime/server/registry"
 import { useLanguage } from "@/runtime/i18n/language"

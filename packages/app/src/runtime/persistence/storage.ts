@@ -1,6 +1,6 @@
 import { Platform, usePlatform } from "@/runtime/platform/platform"
 import { messageSync, type AsyncStorage, type SyncStorage } from "@solid-primitives/storage"
-import { checksum } from "@opencode/util/encode"
+import { checksum } from "@warcode/util/encode"
 import { createSignal, onCleanup, untrack, type Accessor } from "solid-js"
 import { createStore, type SetStoreFunction, type Store } from "solid-js/store"
 import { Option, Predicate, Schema } from "effect"
@@ -48,11 +48,11 @@ type PickPart = (value: unknown) => unknown
 
 type CopyFrom = { key: string; storage?: string; pick?: PickPart }
 
-const GLOBAL_STORAGE = "opencode.global.dat"
+const GLOBAL_STORAGE = "warcode.global.dat"
 
-const WINDOW_STORAGE = "opencode.window"
+const WINDOW_STORAGE = "warcode.window"
 
-const LOCAL_PREFIX = "opencode."
+const LOCAL_PREFIX = "warcode."
 
 const [localStorageState, setLocalStorageState] = createSignal(INITIAL_LOCAL_STORAGE_STATE)
 
@@ -183,7 +183,7 @@ function write(key: string, value: string) {
 }
 
 /**
- * Removes the key's own old value, then other opencode values largest first, until `value` fits. When
+ * Removes the key's own old value, then other warcode values largest first, until `value` fits. When
  * nothing makes room, every removed value is put back so a failed write loses no saved state.
  */
 function evict(storage: Storage, keep: string, value: string) {
@@ -353,14 +353,14 @@ function workspaceStorage(dir: string) {
   const head = (dir.slice(0, 12) || "workspace").replace(/[^a-zA-Z0-9._-]/g, "-")
   const sum = checksum(dir) ?? "0"
 
-  return `opencode.workspace.${head}.${sum}.dat`
+  return `warcode.workspace.${head}.${sum}.dat`
 }
 
 function draftStorage(draftID: string) {
   const head = (draftID.slice(0, 12) || "draft").replace(/[^a-zA-Z0-9._-]/g, "-")
   const sum = checksum(draftID) ?? "0"
 
-  return `opencode.draft.${head}.${sum}.dat`
+  return `warcode.draft.${head}.${sum}.dat`
 }
 
 function windowStorage(windowID: string) {
@@ -677,7 +677,7 @@ export function persisted<S extends Schema.ConstraintCodec<object, unknown>>(
 
   const channel =
     config.sync && typeof BroadcastChannel !== "undefined"
-      ? new BroadcastChannel(`opencode.persist:${config.storage ?? "default"}:${config.key}`)
+      ? new BroadcastChannel(`warcode.persist:${config.storage ?? "default"}:${config.key}`)
       : undefined
 
   if (channel) onCleanup(() => channel.close())

@@ -1,13 +1,13 @@
-import { Pty } from "@opencode/schema/pty"
-import { PtyTicket } from "@opencode/schema/pty-ticket"
-import { Location } from "@opencode/schema/location"
+import { Pty } from "@warcode/schema/pty"
+import { PtyTicket } from "@warcode/schema/pty-ticket"
+import { Location } from "@warcode/schema/location"
 import { Context, Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, HttpApiMiddleware, HttpApiSchema, OpenApi } from "effect/http-api"
 import { ForbiddenError, LocationNotFoundError, PtyNotFoundError } from "../errors.js"
 import { LocationQuery, locationQueryOpenApi } from "./location.js"
 
 export const PTY_CONNECT_TICKET_QUERY = "ticket"
-export const PTY_CONNECT_TOKEN_HEADER = "x-opencode-ticket"
+export const PTY_CONNECT_TOKEN_HEADER = "x-warcode-ticket"
 export const PTY_CONNECT_TOKEN_HEADER_VALUE = "1"
 export const PTY_CONNECT_PATH = "/api/pty/:ptyID/connect"
 

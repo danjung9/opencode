@@ -16,7 +16,7 @@ import { useMutation, useQueries, useQuery, useQueryClient } from "@tanstack/sol
 import { normalizeProjectInfo, updateProjectInfo } from "./global-sync/utils"
 import { persisted } from "@/runtime/persistence/storage"
 import { createConnectionSync } from "./server-sync/connection"
-import type { Data } from "@opencode/client/solid"
+import type { Data } from "@warcode/client/solid"
 import { createWorktreeInventory, withWorktreeInventory, worktreeInventoryViewKey } from "@/workspaces/inventory"
 
 function createServerSyncContextInner(serverSDK: ServerSDK, data: Data) {

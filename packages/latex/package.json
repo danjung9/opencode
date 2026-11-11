@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode/latex",
+  "name": "@warcode/latex",
   "version": "2.2.7",
   "private": true,
   "type": "module",
@@ -14,7 +14,7 @@
     "typecheck:tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "@opencode/plugin": "workspace:*",
+    "@warcode/plugin": "workspace:*",
     "@opentui/core": "catalog:",
     "string-width": "catalog:"
   },

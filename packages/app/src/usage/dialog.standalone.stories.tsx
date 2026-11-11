@@ -1,6 +1,6 @@
-import type { UsageLimitsBudget, UsageLimitsInfo } from "@opencode/client/promise"
-import { Button } from "@opencode/ui/button"
-import { useDialog } from "@opencode/ui/context/dialog"
+import type { UsageLimitsBudget, UsageLimitsInfo } from "@warcode/client/promise"
+import { Button } from "@warcode/ui/button"
+import { useDialog } from "@warcode/ui/context/dialog"
 import { onMount } from "solid-js"
 import { DialogStoryRuntime, STORY_DIRECTORY } from "@/components-lab/dialog-story-runtime"
 import { DialogUsage, UsageDialogContent } from "./dialog"
@@ -10,9 +10,9 @@ const resetsAt = Date.UTC(2026, 10, 1)
 
 const hour = 3_600_000
 
-const opus = { providerID: "opencode", modelID: "claude-opus-5", name: "Claude Opus 5" }
+const opus = { providerID: "warcode", modelID: "claude-opus-5", name: "Claude Opus 5" }
 
-const sonnet = { providerID: "opencode", modelID: "claude-sonnet-5", name: "Claude Sonnet 5" }
+const sonnet = { providerID: "warcode", modelID: "claude-sonnet-5", name: "Claude Sonnet 5" }
 
 const budget = (input: Partial<UsageLimitsBudget> & Pick<UsageLimitsBudget, "id">): UsageLimitsBudget => ({
   limit: 150,

@@ -14,7 +14,7 @@ export function ShareMeta(props: { title: string; description: string; image: Og
   return (
     <>
       <Meta property="og:type" content="website" />
-      <Meta property="og:site_name" content="OpenCode" />
+      <Meta property="og:site_name" content="Warcode" />
       <Meta property="og:locale" content={OG_LOCALE[props.englishOnly ? "en" : language.locale()]} />
       <Meta property="og:title" content={props.title} />
       <Meta property="og:description" content={props.description} />

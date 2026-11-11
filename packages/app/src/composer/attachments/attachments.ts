@@ -1,7 +1,7 @@
 import { onCleanup, onMount } from "solid-js"
 import { makeEventListener } from "@solid-primitives/event-listener"
 import { createBlobReference } from "@/runtime/persistence/drafts"
-import { uuid } from "@opencode/util/uuid"
+import { uuid } from "@warcode/util/uuid"
 import type { ComposerPrompt } from "../types"
 import type { ImageAttachmentPart, PathAttachmentPart } from "../state"
 import type { AttachmentDestination } from "./destination"

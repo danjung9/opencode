@@ -1,12 +1,12 @@
 export * as Tool from "./tool.js"
-export { CallID, Content, Error, FileContent, TextContent } from "@opencode/schema/tool"
-export type { Context, Metadata, Namespace, Options, Result } from "@opencode/schema/tool"
+export { CallID, Content, Error, FileContent, TextContent } from "@warcode/schema/tool"
+export type { Context, Metadata, Namespace, Options, Result } from "@warcode/schema/tool"
 
-import { ToolDefinition, type ToolCall } from "@opencode/ai/effect"
-import type { CodeMode } from "@opencode/codemode"
-import { Tool } from "@opencode/schema/tool"
+import { ToolDefinition, type ToolCall } from "@warcode/ai/effect"
+import type { CodeMode } from "@warcode/codemode"
+import { Tool } from "@warcode/schema/tool"
 import { Context, Effect, Layer, Ref, Result, Schema, SchemaIssue, Types } from "effect"
-import { makeLocationNode } from "@opencode/util/effect/app-node"
+import { makeLocationNode } from "@warcode/util/effect/app-node"
 import type { Agent } from "./agent.js"
 import { CodeModeCatalog } from "./codemode/catalog.js"
 import { CodeModeTool } from "./codemode/tool.js"
@@ -82,7 +82,7 @@ export interface Snapshot {
   }) => Effect.Effect<NormalizedResult, Tool.Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode/Tool") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/Tool") {}
 
 const layer = Layer.effect(
   Service,

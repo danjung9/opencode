@@ -14,7 +14,7 @@ import { docsHostRedirect, docsRoute } from "./route"
 // runWorkerFirst), so one URL can answer with the page or, to `Accept: text/markdown`, its Markdown.
 // The development server has no assets and renders instead. The docs' own files (config.ts `files`)
 // are plain assets. A /docs URL without a page here goes to the V1 docs (route.ts), and the V1 docs'
-// old host, docs.opencode.ai, to the same path here.
+// old host, docs.warcode.ai, to the same path here.
 
 const pageHeaders = {
   "Cache-Control": "public, max-age=300, stale-while-revalidate=3600",

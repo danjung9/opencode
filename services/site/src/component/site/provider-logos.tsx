@@ -22,7 +22,7 @@ export function ProviderLogo(props: { provider: ProviderMark; decorative?: boole
 }
 
 /**
- * Settings › Provider logos, in "What is OpenCode?": the model providers' marks as a quiet row, inline
+ * Settings › Provider logos, in "What is Warcode?": the model providers' marks as a quiet row, inline
  * in a sentence, a dense grid with the count, or a slow marquee. Every exploration renders;
  * data-variant (set before first paint for a saved value) shows one, so the section never jumps.
  * Production renders none while the default is "none" (index.tsx, script/fold-settings.ts).

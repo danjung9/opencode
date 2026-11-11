@@ -93,7 +93,7 @@ function timeAt(share: number) {
 // The word's letters: each one's two paths (counter, then shape), its contours for the entrance,
 // and its corners for the optional node points (each with the share of the entrance at which the
 // outline reaches it). Letters sit every 30 units: 24 wide with a one-module gap.
-const WORD = "opencode"
+const WORD = "warcode"
 export const SLOT = 30
 export const letters = [...WORD].map((char, index) => {
   const own = contours.filter((contour) => contour.letter === index)

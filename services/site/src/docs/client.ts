@@ -111,11 +111,11 @@ phone.addEventListener("change", () => {
   closeLockup()
 })
 
-// The logo menu and the product menu (on DOCS), shared with the site and the other OpenCode sites (packages/nav-menus),
+// The logo menu and the product menu (on DOCS), shared with the site and the other Warcode sites (packages/nav-menus),
 // loaded on first use (nav-intent.ts). Opening one closes the lockup's own menus, as the static pages' script closes
 // the site's (src/client/menus.ts).
 const navMenus = navMenusOnIntent({ link: (path) => path })
-on("opencode-nav-menu-open" as keyof DocumentEventMap, () => closeLockup())
+on("warcode-nav-menu-open" as keyof DocumentEventMap, () => closeLockup())
 
 // The sections menu and its V2/V1 flyout come in as one panel with the nav menus' motion (packages/nav-menus).
 // Reduced motion shows them at once.

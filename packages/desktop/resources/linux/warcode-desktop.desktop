@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Warcode
+Exec=/opt/Warcode/ai.warcode %U
+Terminal=false
+Type=Application
+Icon=ai.warcode
+StartupWMClass=ai.warcode.desktop
+NoDisplay=true
+Comment=Open source AI coding agent
+Categories=Development;

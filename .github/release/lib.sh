@@ -2,7 +2,7 @@
 #
 # These scripts run in sign and publish jobs that hold secrets. They must never execute repository code
 # or artifact contents: artifacts are data, and every value that names a destination comes from the
-# environment the workflow sets (OPENCODE_VERSION, OPENCODE_CHANNEL, OPENCODE_DRY_RUN, ...).
+# environment the workflow sets (WARCODE_VERSION, WARCODE_CHANNEL, WARCODE_DRY_RUN, ...).
 
 set -euo pipefail
 # Without this, set -e does not apply inside $(...), so a failing command in a function called as
@@ -20,7 +20,7 @@ die() {
 }
 
 dry_run() {
-  [ "${OPENCODE_DRY_RUN:-false}" = true ]
+  [ "${WARCODE_DRY_RUN:-false}" = true ]
 }
 
 sha256() {
@@ -36,7 +36,7 @@ size() {
   wc -c < "$1" | tr -d ' '
 }
 
-# Uploads files to opencode.ai/files/bin/<version>/ and prints the update-server file map.
+# Uploads files to warcode.ai/files/bin/<version>/ and prints the update-server file map.
 upload_files() {
   local credentials=false
   for file in "$@"; do
@@ -49,7 +49,7 @@ upload_files() {
       *) type=application/octet-stream ;;
     esac
     if dry_run; then
-      echo "dry-run upload: bin/$OPENCODE_VERSION/$name" >&2
+      echo "dry-run upload: bin/$WARCODE_VERSION/$name" >&2
     else
       if [ "$credentials" = false ]; then
         r2_credentials
@@ -66,12 +66,12 @@ upload_files() {
 # Uploads one file to R2 and confirms the stored object has the local size: upload_file <file> <name> <type>.
 # R2 intermittently rejects CompleteMultipartUpload with InvalidPart, so failed uploads are retried.
 upload_file() {
-  local key="bin/$OPENCODE_VERSION/$2" endpoint="https://$CLOUDFLARE_ACCOUNT_ID.r2.cloudflarestorage.com" attempt
+  local key="bin/$WARCODE_VERSION/$2" endpoint="https://$CLOUDFLARE_ACCOUNT_ID.r2.cloudflarestorage.com" attempt
   for attempt in 1 2 3; do
-    if aws s3 cp "$1" "s3://opencode-production-files/$key" --only-show-errors --endpoint-url "$endpoint" \
+    if aws s3 cp "$1" "s3://warcode-production-files/$key" --only-show-errors --endpoint-url "$endpoint" \
       --content-type "$3" --content-disposition "attachment; filename=\"$2\"" \
       --cache-control "public, max-age=31536000, immutable" >&2 &&
-      [ "$(aws s3api head-object --bucket opencode-production-files --key "$key" --endpoint-url "$endpoint" \
+      [ "$(aws s3api head-object --bucket warcode-production-files --key "$key" --endpoint-url "$endpoint" \
         --query ContentLength --output text)" = "$(size "$1")" ]; then
       return
     fi
@@ -102,7 +102,7 @@ r2_credentials() {
 # Registers one artifact with the update server: publish_update <name> <distribution> <metadata json>.
 publish_update() {
   local body status token attempt
-  body=$(jq -n --arg channel "$OPENCODE_CHANNEL" --arg version "$OPENCODE_VERSION" --arg name "$1" --arg distribution "$2" \
+  body=$(jq -n --arg channel "$WARCODE_CHANNEL" --arg version "$WARCODE_VERSION" --arg name "$1" --arg distribution "$2" \
     --argjson metadata "$3" '{channel: $channel, name: $name, distribution: $distribution, version: $version, metadata: $metadata}')
   echo "$body" | jq .
   if dry_run; then return; fi

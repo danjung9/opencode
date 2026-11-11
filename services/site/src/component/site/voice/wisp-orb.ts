@@ -1,4 +1,4 @@
-// The voice orb from OpenCode Mobile's Living Orb call (opencode-ios `OpenCode/Voice/WispOrb.metal`
+// The voice orb from Warcode Mobile's Living Orb call (warcode-ios `Warcode/Voice/WispOrb.metal`
 // and `WispOrbSim.swift`, themselves a port of Wisp's `wisp-orb` crate): a dark glass lens over a
 // lattice of LED dots, lit by the wave traces of both voices with a fast and a slow phosphor per dot.
 // The 240 Hz simulation and the per-dot light are ported line for line where they are kept; the

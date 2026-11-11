@@ -63,7 +63,7 @@ await cp(path.join(root, ".output", "public"), assets, {
   filter: (file) => !mediaFile.test(file),
 })
 const shipped = await Array.fromAsync(new Bun.Glob("**/*").scan({ cwd: assets, dot: true }))
-// Every opencode.json and V1 TUI config names these as its $schema; /openapi.json is the protocol's.
+// Every warcode.json and V1 TUI config names these as its $schema; /openapi.json is the protocol's.
 // The V2 config names /v2/cli.json, and the docs link /docs/openapi.json.
 const fixed = ["config.json", "tui.json", "openapi.json", "v2/cli.json", "docs/openapi.json"].filter(
   (file) => !shipped.includes(file),

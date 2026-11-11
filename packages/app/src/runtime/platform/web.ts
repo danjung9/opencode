@@ -28,7 +28,10 @@ export function createWebPlatform(version: string) {
 
       const notification = new Notification(title, {
         body: description ?? "",
-        icon: "https://opencode.ai/favicon-96x96-v3.png",
+        icon: new URL(
+          document.querySelector<HTMLLinkElement>('link[rel="icon"]')?.href ?? "/favicon.ico",
+          location.href,
+        ).href,
       })
 
       notification.onclick = () => {
@@ -46,15 +49,15 @@ export function createWebPlatform(version: string) {
 }
 
 function getCurrentServerUrl() {
-  if (import.meta.env.VITE_OPENCODE_SERVER_MODE === "none") return undefined
+  if (import.meta.env.VITE_WARCODE_SERVER_MODE === "none") return undefined
 
   if (import.meta.env.DEV) {
     const loopback =
       location.hostname === "localhost" || location.hostname === "[::1]" || location.hostname.startsWith("127.")
 
-    const host = import.meta.env.VITE_OPENCODE_SERVER_HOST ?? (loopback ? location.hostname : "localhost")
+    const host = import.meta.env.VITE_WARCODE_SERVER_HOST ?? (loopback ? location.hostname : "localhost")
 
-    return `http://${host}:${import.meta.env.VITE_OPENCODE_SERVER_PORT ?? "4096"}`
+    return `http://${host}:${import.meta.env.VITE_WARCODE_SERVER_PORT ?? "4096"}`
   }
 
   return location.origin

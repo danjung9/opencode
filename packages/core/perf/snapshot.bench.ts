@@ -26,7 +26,7 @@ const timed = { primary: "run.duration", metrics: ["count.git"] }
 export default bench({
   targets: { core: script("./snapshot.ts") },
   // Generated repositories: 1,000, 20,000 or 100,000 tracked files, or this repository cloned.
-  params: { fixture: { run: ["medium"], more: ["small", "large", "opencode"] } },
+  params: { fixture: { run: ["medium"], more: ["small", "large", "warcode"] } },
   async setup(ctx) {
     await ctx.call("prepare", ctx.params.fixture)
     await before[ctx.case]?.(ctx)

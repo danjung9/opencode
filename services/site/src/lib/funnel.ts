@@ -1,4 +1,4 @@
-// Reports the site's and the docs' pages to the Console's funnel (opencode-console docs/features/funnel.md). The
+// Reports the site's and the docs' pages to the Console's funnel (warcode-console docs/features/funnel.md). The
 // tracker the Console serves at /console/funnel/v1.js reads views, sections, clicks, copies, downloads, page speed and
 // chunk errors from the page's markup (`data-section`, `data-funnel`, `data-funnel-copy`, `data-funnel-surface`).
 // This module is the only part in a page's first JavaScript: it loads the tracker, with the page's config, on the first

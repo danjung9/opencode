@@ -4,38 +4,38 @@ import fs from "fs/promises"
 import path from "path"
 import { DateTime, Effect, Layer, Stream } from "effect"
 import { TestClock } from "effect/testing"
-import { Money } from "@opencode/schema/money"
-import { Shell } from "@opencode/schema/shell"
-import { Skill } from "@opencode/schema/skill"
-import { Agent } from "@opencode/core/agent"
+import { Money } from "@warcode/schema/money"
+import { Shell } from "@warcode/schema/shell"
+import { Skill } from "@warcode/schema/skill"
+import { Agent } from "@warcode/core/agent"
 import { and, asc, eq } from "drizzle-orm"
-import { Database } from "@opencode/core/database/database"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Hash } from "@opencode/util/hash"
-import { Bus } from "@opencode/core/bus"
-import { EventTable } from "@opencode/core/event/sql"
-import { Instructions } from "@opencode/core/instructions/index"
-import { Location } from "@opencode/core/location"
-import { Model } from "@opencode/core/model"
-import { Project } from "@opencode/core/project"
-import { ProjectTable } from "@opencode/core/project/sql"
-import { Provider } from "@opencode/core/provider"
-import { AbsolutePath, RelativePath } from "@opencode/core/schema"
-import { Session } from "@opencode/core/session"
-import { SessionMessage } from "@opencode/core/session/message"
-import { SessionProjector } from "@opencode/core/session/projector"
-import { SessionExecution } from "@opencode/core/session/execution"
-import { SessionInbox } from "@opencode/core/session/inbox"
-import { InstructionEntry } from "@opencode/core/session/instruction-entry"
-import { SessionEvent } from "@opencode/core/session/event"
-import { SessionTable } from "@opencode/core/session/sql"
-import { SessionStore } from "@opencode/core/session/store"
-import { SessionTransfer } from "@opencode/core/session/transfer"
-import { Workspace } from "@opencode/core/workspace"
+import { Database } from "@warcode/core/database/database"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Hash } from "@warcode/util/hash"
+import { Bus } from "@warcode/core/bus"
+import { EventTable } from "@warcode/core/event/sql"
+import { Instructions } from "@warcode/core/instructions/index"
+import { Location } from "@warcode/core/location"
+import { Model } from "@warcode/core/model"
+import { Project } from "@warcode/core/project"
+import { ProjectTable } from "@warcode/core/project/sql"
+import { Provider } from "@warcode/core/provider"
+import { AbsolutePath, RelativePath } from "@warcode/core/schema"
+import { Session } from "@warcode/core/session"
+import { SessionMessage } from "@warcode/core/session/message"
+import { SessionProjector } from "@warcode/core/session/projector"
+import { SessionExecution } from "@warcode/core/session/execution"
+import { SessionInbox } from "@warcode/core/session/inbox"
+import { InstructionEntry } from "@warcode/core/session/instruction-entry"
+import { SessionEvent } from "@warcode/core/session/event"
+import { SessionTable } from "@warcode/core/session/sql"
+import { SessionStore } from "@warcode/core/session/store"
+import { SessionTransfer } from "@warcode/core/session/transfer"
+import { Workspace } from "@warcode/core/workspace"
 import { Expected } from "./lib/session-message"
 import { testEffect } from "./lib/effect"
-import { LocationServiceMap } from "@opencode/core/location-service-map"
+import { LocationServiceMap } from "@warcode/core/location-service-map"
 import { initGit } from "./fixture/git"
 import { countingSpawner } from "./fixture/spawn"
 import { offlineModels } from "./fixture/models"
@@ -43,7 +43,7 @@ import { promptLocationNode } from "./fixture/prompt-location"
 import { globalProjectNode } from "./lib/project"
 import { tmpdirScoped } from "./fixture/tmpdir"
 import { makeDurableObjectStorage } from "./fixture/durable-object-storage"
-import { sqliteLayer } from "@opencode/core/database/sqlite.workerd"
+import { sqliteLayer } from "@warcode/core/database/sqlite.workerd"
 
 const it = testEffect(
   AppNodeBuilder.build(
@@ -137,7 +137,7 @@ describe("Session.create", () => {
         const clone = AbsolutePath.make(path.join(directory, "other-clone"))
         yield* Effect.promise(async () => {
           await $`git init -q ${main}`.cwd(directory)
-          await $`git -c user.name=Test -c user.email=test@opencode.test -c commit.gpgsign=false commit --allow-empty -qm root`
+          await $`git -c user.name=Test -c user.email=test@warcode.test -c commit.gpgsign=false commit --allow-empty -qm root`
             .cwd(main)
             .quiet()
           await $`git remote add origin git@github.com:owner/repo.git`.cwd(main)
@@ -1157,12 +1157,12 @@ describe("Session.create", () => {
         const created = yield* session.create({
           location: Location.Ref.make({ directory: AbsolutePath.make(directory) }),
         })
-        yield* session.environment({ sessionID: created.id, variables: { OPENCODE_SESSION_ENV_TEST: "attached" } })
+        yield* session.environment({ sessionID: created.id, variables: { WARCODE_SESSION_ENV_TEST: "attached" } })
 
         const command =
           process.platform === "win32"
-            ? "[Console]::Out.Write($env:OPENCODE_SESSION_ENV_TEST)"
-            : 'printf %s "$OPENCODE_SESSION_ENV_TEST"'
+            ? "[Console]::Out.Write($env:WARCODE_SESSION_ENV_TEST)"
+            : 'printf %s "$WARCODE_SESSION_ENV_TEST"'
         yield* session.shell({ sessionID: created.id, command })
 
         const messages = yield* session.messages({ sessionID: created.id, order: "asc" })

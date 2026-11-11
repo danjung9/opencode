@@ -11,7 +11,7 @@ export interface Interface {
   ) => Effect.Effect<EmbeddingResponse, AIError>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode/AI/EmbeddingClient") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/AI/EmbeddingClient") {}
 
 export const generate = <Options extends EmbeddingOptions>(
   request: EmbeddingRequest<EmbeddingModel<Options>>,

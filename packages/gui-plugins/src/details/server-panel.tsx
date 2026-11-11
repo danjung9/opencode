@@ -1,16 +1,16 @@
-import type { PluginInfo } from "@opencode/client"
-import { Button } from "@opencode/ui/button"
-import { Dialog, DialogBody, DialogHeader, DialogTitleGroup } from "@opencode/ui/dialog"
-import { ErrorDetails } from "@opencode/ui/error-details"
-import { Icon } from "@opencode/ui/icon"
-import { Loader } from "@opencode/ui/loader"
-import { createMcpSignIn, type McpSignInFailure } from "@opencode/ui/mcp-sign-in"
-import { MenuScroll } from "@opencode/ui/menu-scroll"
-import { Switch } from "@opencode/ui/switch"
-import { TextInput } from "@opencode/ui/text-input"
-import { showToast } from "@opencode/ui/toast"
-import { Tooltip } from "@opencode/ui/tooltip"
-import { TruncatedText } from "@opencode/ui/truncated-text"
+import type { PluginInfo } from "@warcode/client"
+import { Button } from "@warcode/ui/button"
+import { Dialog, DialogBody, DialogHeader, DialogTitleGroup } from "@warcode/ui/dialog"
+import { ErrorDetails } from "@warcode/ui/error-details"
+import { Icon } from "@warcode/ui/icon"
+import { Loader } from "@warcode/ui/loader"
+import { createMcpSignIn, type McpSignInFailure } from "@warcode/ui/mcp-sign-in"
+import { MenuScroll } from "@warcode/ui/menu-scroll"
+import { Switch } from "@warcode/ui/switch"
+import { TextInput } from "@warcode/ui/text-input"
+import { showToast } from "@warcode/ui/toast"
+import { Tooltip } from "@warcode/ui/tooltip"
+import { TruncatedText } from "@warcode/ui/truncated-text"
 import {
   children,
   createMemo,
@@ -27,9 +27,9 @@ import {
   type JSX,
 } from "solid-js"
 import { createStore } from "solid-js/store"
-import { createKeyed, useDrawer, usePlugin, type MountedSession, type ServerRef } from "@opencode/plugin/gui"
+import { createKeyed, useDrawer, usePlugin, type MountedSession, type ServerRef } from "@warcode/plugin/gui"
 import { globalConfigDirectory, serviceConfigFile } from "./config-file"
-import { builtinContext } from "@opencode/plugin/gui/builtin"
+import { builtinContext } from "@warcode/plugin/gui/builtin"
 import { createFlyoutMotion } from "./flyout-motion"
 import {
   configActionView,
@@ -996,7 +996,7 @@ function ServiceConfigLink(props: { owner: ServiceProps; service: Service }) {
   )
 }
 
-// Starts a draft session in the global configuration's directory that asks OpenCode to set the service up.
+// Starts a draft session in the global configuration's directory that asks Warcode to set the service up.
 function ServiceSetup(props: { owner: ServiceProps; service: Service }) {
   const ctx = usePlugin()
 

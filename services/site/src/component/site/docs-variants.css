@@ -1137,7 +1137,7 @@
 }
 
 /* ───────────── Terminal (the dark command block) ─────────────
-   1 is the OpenCode dark theme. 2 · v2's bordered pre, monochrome · 3 · dark with v2's caption row
+   1 is the Warcode dark theme. 2 · v2's bordered pre, monochrome · 3 · dark with v2's caption row
    4 · the code surface with a ">_ Terminal" header row (Vercel, Tailwind) · 5 · dark with v1's
    Expressive Code terminal frame */
 
@@ -2765,7 +2765,7 @@
   --code-add: light-dark(#1a9347, #2dd269);
   --code-del-tint: light-dark(#fceded, #351e1e);
   --code-add-tint: light-dark(#e8f4ed, #192d20);
-  /* The OpenCode syntax colours, darkened for 4.5:1 on white; dark keeps the theme's values. */
+  /* The Warcode syntax colours, darkened for 4.5:1 on white; dark keeps the theme's values. */
   --token-command: light-dark(#a64b14, #fab283);
   --token-flag: light-dark(#7a3fc4, #9d7cd8);
   --token-string: light-dark(#2b7a3d, #7fd88f);

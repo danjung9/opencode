@@ -73,12 +73,12 @@ const heroScript: Script = (frame, setCursor) => {
     input.dispatchEvent(new Event("input", { bubbles: true }))
   }
   const steps = [
-    typing(900, "opencode", "", apply, 55),
+    typing(900, "warcode", "", apply, 55),
     typing(1500, "", "node done", apply, 115),
     typing(4300, "node done", "", apply, 50),
     typing(4900, "", "codeopen", apply, 120),
     typing(8300, "codeopen", "", apply, 45),
-    typing(8700, "", "opencode", apply, 95),
+    typing(8700, "", "warcode", apply, 95),
   ]
   return timeline(frame, setCursor, {
     cursor: false,
@@ -288,7 +288,7 @@ const waterfallScript: Script = (frame, setCursor) =>
   })
 
 const anagramsScript: Script = (frame, setCursor) => {
-  // The controls are hidden on the canvas: Play, then back to opencode, pressed by the script.
+  // The controls are hidden on the canvas: Play, then back to warcode, pressed by the script.
   const button = (index: number) => `[data-slot="anagram-controls"] button:nth-of-type(${index})`
   return timeline(frame, setCursor, {
     actions: [
@@ -371,8 +371,8 @@ const tester = (() => {
       input.value = text
       input.dispatchEvent(new Event("input", { bubbles: true }))
     }
-    const out = typing(1100, initial, "opencode", apply, 60)
-    const back = typing(9600, "opencode", initial, apply, 55)
+    const out = typing(1100, initial, "warcode", apply, 60)
+    const back = typing(9600, "warcode", initial, apply, 55)
     let value = 10
     let ctx!: Context
     const knob: Target = () => thumb(ctx, size, value)
@@ -423,7 +423,7 @@ const tester = (() => {
       ],
     })
   }
-  return { script, duration: typing(9600, "opencode", initial, () => {}, 55).end + 1600 }
+  return { script, duration: typing(9600, "warcode", initial, () => {}, 55).end + 1600 }
 })()
 
 const colophonScript: Script = (frame, setCursor) => {

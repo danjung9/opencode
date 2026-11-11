@@ -257,7 +257,7 @@
       background: var(--card-media-bg);
     }
 
-    /* OpenCode dark theme syntax colors. */
+    /* Warcode dark theme syntax colors. */
     [data-product="sdk"] {
       container-type: inline-size;
       background: var(--card-media-bg);
@@ -427,7 +427,7 @@
     }
   }
 
-  /* OpenCode dark theme syntax colors for the SDK snippet, in the card and on its page. */
+  /* Warcode dark theme syntax colors for the SDK snippet, in the card and on its page. */
   [data-product="sdk"] [data-slot="code"] {
     [data-c] {
       color: #808080;

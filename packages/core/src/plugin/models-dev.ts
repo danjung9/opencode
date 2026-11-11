@@ -1,6 +1,6 @@
-import { define } from "@opencode/plugin/effect/plugin"
-import { Integration } from "@opencode/schema/integration"
-import { Provider } from "@opencode/schema/provider"
+import { define } from "@warcode/plugin/effect/plugin"
+import { Integration } from "@warcode/schema/integration"
+import { Provider } from "@warcode/schema/provider"
 import { Effect, Stream } from "effect"
 import { Bus } from "../bus.js"
 import { Model } from "../model.js"
@@ -31,7 +31,7 @@ const BEDROCK_PROFILE_ONLY_IDS = [
 ]
 
 export const ModelsDevPlugin = define({
-  id: "opencode.models.dev",
+  id: "warcode.models.dev",
   effect: Effect.fn(function* (ctx) {
     const modelsDev = yield* ModelsDev.Service
     const bus = yield* Bus.Service
@@ -96,6 +96,9 @@ function snapshots(data: readonly ModelsDev.Snapshot[]) {
       models: provider.models.filter(
         (model) =>
           model.status !== "deprecated" &&
+          // Remove advertised free tiers and the bundled keyless catalog. Other providers may omit pricing.
+          !/(?:^|[-:/\s(])free(?:$|[-:/\s)])/i.test(`${model.id} ${model.name}`) &&
+          (provider.info.id !== Provider.ID.warcode || model.cost.some((cost) => cost.input > 0 || cost.output > 0)) &&
           // Non-chat models are kept for lookups; the Model service never offers them for sessions.
           ((model.type ?? "chat") !== "chat" || Model.supportsText(model)) &&
           !(

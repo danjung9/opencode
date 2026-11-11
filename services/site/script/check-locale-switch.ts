@@ -125,7 +125,7 @@ const context = await browser.newContext({ viewport: { width: 1440, height: 900 
 const page = await context.newPage()
 await page.goto(`${base}/`, { waitUntil: "networkidle" })
 await page.evaluate(() => {
-  const key = "opencode-site-settings-v3"
+  const key = "warcode-site-settings-v3"
   const saved = JSON.parse(localStorage.getItem(key) || "{}")
   localStorage.setItem(key, JSON.stringify({ ...saved, navConfig: [{ id: "docs", visible: true, label: "Handbook" }] }))
 })

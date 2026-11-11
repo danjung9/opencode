@@ -5,7 +5,7 @@ import { Menu } from "../../navigation/menu/menu"
 import { Popover } from "../../components/popover"
 
 const docs = `### Overview
-Line comment **display** and **editor** cards aligned with OpenCode line-comment specs (raised \`#FAFAFA\` surface, small \`Button\` ghost + contrast actions).
+Line comment **display** and **editor** cards aligned with Warcode line-comment specs (raised \`#FAFAFA\` surface, small \`Button\` ghost + contrast actions).
 
 ### Display
 - \`LineComment\`: column stack (body + optional meta) beside optional \`actions\` (overflow). The body keeps its line breaks. \`onOpen\` makes a click anywhere on the card open it.

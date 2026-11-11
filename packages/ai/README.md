@@ -1,14 +1,14 @@
-# @opencode/ai
+# @warcode/ai
 
 Schema-first APIs for text, images, decisions, and embeddings, built with Effect. Video, speech, transcription, extraction, and
 realtime voice are [experimental](#experimental).
 
-`@opencode/ai` is the Promise API: one managed runtime behind the LLM and media methods, plus asset helpers. `ai.file`
+`@warcode/ai` is the Promise API: one managed runtime behind the LLM and media methods, plus asset helpers. `ai.file`
 and `ai.write` load `node:fs/promises` on first use, so no Effect `FileSystem` is needed:
 
 ```ts
-import { ai } from "@opencode/ai"
-import { OpenAI } from "@opencode/ai/providers"
+import { ai } from "@warcode/ai"
+import { OpenAI } from "@warcode/ai/providers"
 
 const openai = OpenAI.configure({ apiKey: process.env.OPENAI_API_KEY })
 
@@ -22,13 +22,13 @@ for await (const event of ai.stream(ai.request(input))) {
 }
 ```
 
-The Effect API lives at `@opencode/ai/effect`. Its `ai` has the same namespaces and methods, returning `Effect` or
+The Effect API lives at `@warcode/ai/effect`. Its `ai` has the same namespaces and methods, returning `Effect` or
 `Stream`:
 
 ```ts
 import { Effect } from "effect"
-import { ai, AIClient } from "@opencode/ai/effect"
-import { OpenAI } from "@opencode/ai/providers"
+import { ai, AIClient } from "@warcode/ai/effect"
+import { OpenAI } from "@warcode/ai/providers"
 
 const openai = OpenAI.configure({ apiKey: process.env.OPENAI_API_KEY })
 
@@ -66,12 +66,12 @@ a plain `async` execute; a throw or rejection goes back to the model as an error
 loop is interrupted.
 `input` is an Effect Schema that decodes and types the arguments, or a raw JSON Schema object, such as an MCP tool's,
 whose arguments arrive as `unknown` (pair it with an optional JSON Schema `outputSchema`). `tool` from
-`@opencode/ai/effect` takes the same options (including an optional `success` schema) with an Effect execute:
+`@warcode/ai/effect` takes the same options (including an optional `success` schema) with an Effect execute:
 
 ```ts
 import { readFile } from "node:fs/promises"
 import { Schema } from "effect"
-import { ai, tool } from "@opencode/ai"
+import { ai, tool } from "@warcode/ai"
 
 const read_file = tool({
   name: "read_file",
@@ -163,7 +163,7 @@ frame with a stream map:
 
 ```ts
 import { Effect, Stream } from "effect"
-import { ai, AIError, ContentPolicyError } from "@opencode/ai/effect"
+import { ai, AIError, ContentPolicyError } from "@warcode/ai/effect"
 
 const flagged = (data: unknown) =>
   typeof data === "object" && data !== null && "type" in data && data.type === "moderation.flagged"
@@ -182,10 +182,10 @@ const events = ai
 ### Google Interactions
 
 `Google.configure({ apiKey }).interactions(modelID)` selects the Interactions API; `.model(modelID)` still selects
-GenerateContent. The package entrypoint is `@opencode/ai/providers/google/interactions`.
+GenerateContent. The package entrypoint is `@warcode/ai/providers/google/interactions`.
 
 For Vertex AI, use `GoogleVertexInteractions.configure({ project, location: "global" }).model(modelID)` or
-`@opencode/ai/providers/google-vertex/interactions`. It uses Application Default Credentials by default, accepts
+`@warcode/ai/providers/google-vertex/interactions`. It uses Application Default Credentials by default, accepts
 an explicit `accessToken` or `auth` override, and supports Express mode with `apiKey`. Vertex metadata and raw usage
 live under `providerMetadata.vertex`. The default is still full-history replay with `store: false`.
 
@@ -216,7 +216,7 @@ The same configured facade names image models (and the experimental video, speec
 
 ```ts
 import { NodeFileSystem } from "@effect/platform-node"
-import { ai, Media } from "@opencode/ai/effect"
+import { ai, Media } from "@warcode/ai/effect"
 
 const image = Effect.gen(function* () {
   const response = yield* ai.image.generate({
@@ -240,7 +240,7 @@ executor too, and hiding it fails type-checking with `RequestExecutorService` le
 To share a policy such as logging across every client, wrap the executor once with `RequestExecutor.middleware`:
 
 ```ts
-import { RequestExecutor } from "@opencode/ai/route"
+import { RequestExecutor } from "@warcode/ai/route"
 
 const logged = RequestExecutor.middleware((request, next) =>
   Effect.log(`${request.method} ${request.url}`).pipe(Effect.andThen(next(request))),
@@ -255,8 +255,8 @@ const everything = AIClient.layerWith(logged) // or AI.make({ layer: logged })
 select the same API, and `responses` selects its Responses API; credentials default to `VENICE_API_KEY`.
 
 ```ts
-import { ai } from "@opencode/ai/effect"
-import { Venice } from "@opencode/ai/providers"
+import { ai } from "@warcode/ai/effect"
+import { Venice } from "@warcode/ai/providers"
 import { Effect } from "effect"
 
 const program = Effect.gen(function* () {
@@ -274,14 +274,14 @@ const program = Effect.gen(function* () {
 
 Effort lowers to `reasoning.effort`; `reasoning.enabled` and `reasoning.summary` are also available.
 Supported effort levels and toggles depend on the selected model. Omitted controls preserve its defaults.
-Venice's added system prompt is disabled by default, matching the previous OpenCode Venice SDK behavior.
+Venice's added system prompt is disabled by default, matching the previous Warcode Venice SDK behavior.
 
 Replay complete `response.message` values to retain signed/encrypted reasoning and Gemini thought
 signatures, including per-tool signatures. Venice's encrypted scalar trailers are excluded from visible
 reasoning but retained in provider metadata for replay. Cache affinity uses `promptCacheKey`, and cache-write
 usage reads Venice's `cache_creation_input_tokens` field.
 
-The native package entrypoints are `@opencode/ai/providers/venice` and `@opencode/ai/providers/venice/responses`.
+The native package entrypoints are `@warcode/ai/providers/venice` and `@warcode/ai/providers/venice/responses`.
 Image generation, embeddings, and client-side E2EE are not implemented by this provider.
 
 ## Decisions
@@ -291,8 +291,8 @@ values, or a `score` on ordered levels, each with the probability of every optio
 
 ```ts
 import { Effect } from "effect"
-import { ai, DecisionClient, Media } from "@opencode/ai/effect"
-import { OpenAI } from "@opencode/ai/providers"
+import { ai, DecisionClient, Media } from "@warcode/ai/effect"
+import { OpenAI } from "@warcode/ai/providers"
 
 const program = ai.decision.generate({
   model: OpenAI.configure().decision("gpt-6-luna"),
@@ -338,14 +338,14 @@ import {
   CloudflareAIGateway,
   CloudflareWorkersAI,
   DigitalOcean,
-  OpenCode,
+  Warcode,
   OpenRouter,
   TypeSafeAI,
   VercelAIGateway,
-} from "@opencode/ai/providers"
+} from "@warcode/ai/providers"
 
 TypeSafeAI.configure().decision("jev-latest")
-OpenCode.configure().decision("jev-1.13")
+Warcode.configure().decision("jev-1.13")
 OpenRouter.configure().decision("typesafe/jev-1.13")
 VercelAIGateway.configure().decision("typesafe-ai/jev")
 Baseten.configure().decision("decision-models/baseten-elephant-9b-latest")
@@ -354,7 +354,7 @@ CloudflareWorkersAI.configure({ accountId }).decision("@cf/cloudflare/clef")
 CloudflareAIGateway.configure({ accountId }).decision("typesafe/jev")
 ```
 
-OpenAI and Vercel AI Gateway use OpenAI's `/v1/decisions` API. TypeSafe, OpenCode, OpenRouter, Baseten and
+OpenAI and Vercel AI Gateway use OpenAI's `/v1/decisions` API. TypeSafe, Warcode, OpenRouter, Baseten and
 DigitalOcean use System One (`/systemone`), and Cloudflare sends the System One body through `/ai/run`.
 
 ## Embeddings
@@ -362,8 +362,8 @@ DigitalOcean use System One (`/systemone`), and Cloudflare sends the System One 
 Embedding models turn each value into a vector, returned in value order.
 
 ```ts
-import { ai } from "@opencode/ai"
-import { OpenAI } from "@opencode/ai/providers"
+import { ai } from "@warcode/ai"
+import { OpenAI } from "@warcode/ai/providers"
 
 const response = await ai.embedding.generate({
   model: OpenAI.configure().embedding("text-embedding-3-small"),
@@ -391,7 +391,7 @@ import {
   OpenAICompatible,
   OpenRouter,
   VercelAIGateway,
-} from "@opencode/ai/providers"
+} from "@warcode/ai/providers"
 
 OpenRouter.configure().embedding("openai/text-embedding-3-small")
 VercelAIGateway.configure().embedding("openai/text-embedding-3-small")
@@ -407,7 +407,7 @@ OpenAICompatible.configure({ provider: "nvidia", baseURL: "https://integrate.api
 ```
 
 Every host here uses OpenAI's `/embeddings` API; Cohere through its compatibility API
-(`https://api.cohere.ai/compatibility/v1`). Package entry points are `@opencode/ai/providers/<provider>/embeddings`.
+(`https://api.cohere.ai/compatibility/v1`). Package entry points are `@warcode/ai/providers/<provider>/embeddings`.
 
 Google embeds through `embedContent`, which also takes images, audio, video and PDFs on `gemini-embedding-2`. Each
 value is its own content and gets its own vector (several parts in one content would be averaged into one). `dimensions`
@@ -416,7 +416,7 @@ is `outputDimensionality`, `inputType` becomes `taskType` `RETRIEVAL_QUERY` or `
 task into the text instead (`task: search result | query: …`, `title: none | text: …`).
 
 ```ts
-import { Google, GoogleVertex } from "@opencode/ai/providers"
+import { Google, GoogleVertex } from "@warcode/ai/providers"
 
 const response = await ai.embedding.generate({
   model: Google.configure().embedding("gemini-embedding-2"),
@@ -444,7 +444,7 @@ sends one request per value, four at a time, and needs project credentials: Vert
 `embedContent`. `gemini-embedding-2` runs in the `global`, `us` and `eu` Vertex locations. When a call
 is split into several requests, the vectors stay in value order, `usage.inputTokens` is their sum, and each request's
 metadata is listed in order under `providerMetadata.<provider>.responses`. The package entry points are
-`@opencode/ai/providers/google/embeddings` and `@opencode/ai/providers/google-vertex/embeddings`.
+`@warcode/ai/providers/google/embeddings` and `@warcode/ai/providers/google-vertex/embeddings`.
 
 ## Alibaba Cloud Model Studio
 
@@ -453,8 +453,8 @@ Chat Completions (`.model` or `.chat`), Anthropic-compatible Messages (`.message
 Responses (`.responses`). These routes use HTTP/SSE.
 
 ```ts
-import { ai } from "@opencode/ai/effect"
-import { Alibaba } from "@opencode/ai/providers"
+import { ai } from "@warcode/ai/effect"
+import { Alibaba } from "@warcode/ai/providers"
 
 const alibaba = Alibaba.configure({
   region: "ap-southeast-1", // Singapore
@@ -514,7 +514,7 @@ shared host; the entry above follows the base URL table. Dedicated hosts can be 
 Omitted options preserve provider defaults. Effort values pass through unchanged and accept future
 strings. Qwen 3.8 Chat rejects requests combining a thinking budget with effort.
 
-Package entrypoints are `@opencode/ai/providers/alibaba`, `alibaba/chat`, `alibaba/messages`,
+Package entrypoints are `@warcode/ai/providers/alibaba`, `alibaba/chat`, `alibaba/messages`,
 and `alibaba/responses`. Live recordings cover all three APIs in Singapore; regional URL construction
 is unit-tested for all six regions.
 
@@ -533,8 +533,8 @@ hours. A complete `baseURL` for images includes `/api/v1`.
 the existing `.image(...)` selector provides image generation.
 
 ```ts
-import { ai } from "@opencode/ai/effect"
-import { ZAI, ZAICodingPlan } from "@opencode/ai/providers"
+import { ai } from "@warcode/ai/effect"
+import { ZAI, ZAICodingPlan } from "@warcode/ai/providers"
 
 const zai = ZAI.configure({ apiKey: process.env.ZAI_API_KEY })
 const request = ai.request({
@@ -591,7 +591,7 @@ a subsequent user follow-up, GLM-5.2 efforts, older-model thinking toggles, GLM-
 GLM-5.3-Flash image input, and JSON output. Coding Plan has unit coverage for routing,
 request options, and reasoning replay; successful live recordings are pending.
 
-Package entrypoints are `@opencode/ai/providers/zai`, `zai/chat`, `zai-coding-plan`,
+Package entrypoints are `@warcode/ai/providers/zai`, `zai/chat`, `zai-coding-plan`,
 `zai-coding-plan/chat`, `zai-coding-plan/messages`, and `zai-coding-plan/responses`.
 
 ## Moonshot
@@ -599,8 +599,8 @@ Package entrypoints are `@opencode/ai/providers/zai`, `zai/chat`, `zai-coding-pl
 Moonshot defaults to Chat Completions, with Messages and Responses selectors for Kimi K3:
 
 ```ts
-import { ai } from "@opencode/ai/effect"
-import { Moonshot } from "@opencode/ai/providers"
+import { ai } from "@warcode/ai/effect"
+import { Moonshot } from "@warcode/ai/providers"
 
 const moonshot = Moonshot.configure({ apiKey: process.env.MOONSHOT_API_KEY })
 
@@ -652,7 +652,7 @@ K3 Chat and Messages accept required and disabled tool choice. Responses support
 choice only; explicit `required` and `none` produce a provider `InvalidRequest` error, also covered by recordings.
 The provider targets the Moonshot Open Platform; Kimi Code is a separate product and endpoint.
 
-Package entrypoints are `@opencode/ai/providers/moonshot`, `moonshot/chat`, `moonshot/messages`,
+Package entrypoints are `@warcode/ai/providers/moonshot`, `moonshot/chat`, `moonshot/messages`,
 and `moonshot/responses`; each exports `model(modelID, settings)`.
 
 ## MiniMax
@@ -661,8 +661,8 @@ MiniMax defaults to its Messages API and reads `MINIMAX_API_KEY` when `apiKey` i
 
 ```ts
 import { Effect } from "effect"
-import { ai, AIClient } from "@opencode/ai/effect"
-import { MiniMax } from "@opencode/ai/providers"
+import { ai, AIClient } from "@warcode/ai/effect"
+import { MiniMax } from "@warcode/ai/providers"
 
 const minimax = MiniMax.configure({ apiKey: process.env.MINIMAX_API_KEY })
 const request = ai.request({
@@ -677,8 +677,8 @@ console.log(response.text)
 ```
 
 Select `minimax.chat("MiniMax-M3")` or `minimax.responses("MiniMax-M3")` for MiniMax's native Chat Completions
-and Responses APIs. The matching package entrypoints are `@opencode/ai/providers/minimax/messages`,
-`@opencode/ai/providers/minimax/chat`, and `@opencode/ai/providers/minimax/responses`.
+and Responses APIs. The matching package entrypoints are `@warcode/ai/providers/minimax/messages`,
+`@warcode/ai/providers/minimax/chat`, and `@warcode/ai/providers/minimax/responses`.
 
 - **Messages:** M3 thinking defaults off. Set `thinking: { type: "adaptive" }` to enable it or
   `thinking: { type: "disabled" }` to disable it.
@@ -693,14 +693,14 @@ M2.x models always think, even when a disabling option is supplied. For tool con
 The default API bases are `https://api.minimax.io/anthropic/v1` for Messages and `https://api.minimax.io/v1` for
 Chat, Responses and Images. `configure({ baseURL })` replaces the selected API's base, including its version prefix;
 use `https://api.minimax.cn/v1` for the mainland China platform. `minimax.image("image-01")` (also
-`@opencode/ai/providers/minimax/images`) generates images; see [MiniMax images](#minimax-images).
+`@warcode/ai/providers/minimax/images`) generates images; see [MiniMax images](#minimax-images).
 
 ## Meta
 
 Use Meta's direct [Model API](https://dev.meta.ai/docs/overview) with `META_API_KEY`:
 
 ```ts
-import { Meta } from "@opencode/ai/providers"
+import { Meta } from "@warcode/ai/providers"
 
 const meta = Meta.configure() // or Meta.configure({ apiKey })
 const request = ai.request({
@@ -713,7 +713,7 @@ const request = ai.request({
 
 `meta.chat("muse-spark-1.3")` selects Chat Completions; `meta.messages("muse-spark-1.3")` selects
 the Anthropic-compatible Messages API. All use `https://api.meta.ai/v1`. The package entrypoints
-`@opencode/ai/providers/meta/responses`, `meta/chat`, and `meta/messages` expose `model(modelID, settings)`.
+`@warcode/ai/providers/meta/responses`, `meta/chat`, and `meta/messages` expose `model(modelID, settings)`.
 
 [Muse Spark](https://dev.meta.ai/docs/models) supports `minimal`, `low`, `medium`, `high`, and
 `xhigh` reasoning effort; standard-tier 1.3 also supports `max`. Omitting effort uses the model's
@@ -740,7 +740,7 @@ citations or separate result blocks. Retain `response.message` for either API's 
 Use `ai.image.generate` for one-off generation or editing:
 
 ```ts
-import { ai, Media } from "@opencode/ai/effect"
+import { ai, Media } from "@warcode/ai/effect"
 
 const generation = ai.image.generate({
   model: meta.image("muse-image-1.0"),
@@ -776,8 +776,8 @@ selected model. `aspect` is a ratio such as `"16:9"`; `resolution` is a size tie
 at that ratio, `"2K"` about 2048×2048). Exact sizes, seeds, masks, and output formats are provider options:
 
 ```ts
-import { ai, Media } from "@opencode/ai/effect"
-import { OpenAI } from "@opencode/ai/providers"
+import { ai, Media } from "@warcode/ai/effect"
+import { OpenAI } from "@warcode/ai/providers"
 
 const openai = OpenAI.configure({ apiKey: process.env.OPENAI_API_KEY })
 
@@ -904,7 +904,7 @@ const medium = ai.image.generate({
 xAI image models use the same request API with xAI-native controls:
 
 ```ts
-import { XAI } from "@opencode/ai/providers"
+import { XAI } from "@warcode/ai/providers"
 
 const xai = ai.image.generate({
   model: XAI.configure({ apiKey }).image("any-model-id"),
@@ -923,7 +923,7 @@ const xai = ai.image.generate({
 Google's current Gemini image models use the same direct API:
 
 ```ts
-import { Google } from "@opencode/ai/providers"
+import { Google } from "@warcode/ai/providers"
 
 const googleProgram = Effect.gen(function* () {
   const response = yield* ai.image.generate({
@@ -952,7 +952,7 @@ their mapped aliases, and `http.body` is the final deep overlay. The selected mo
 Z.ai image models infer open Z.ai-native options from the selected model:
 
 ```ts
-import { ZAI } from "@opencode/ai/providers"
+import { ZAI } from "@warcode/ai/providers"
 
 const zai = ai.image.generate({
   model: ZAI.configure({ apiKey }).image("any-model-id"),
@@ -973,7 +973,7 @@ persist the bytes promptly if they must remain available.
 ### MiniMax images
 
 ```ts
-import { MiniMax } from "@opencode/ai/providers"
+import { MiniMax } from "@warcode/ai/providers"
 
 const minimax = ai.image.generate({
   model: MiniMax.configure({ apiKey }).image("image-01"),
@@ -997,7 +997,7 @@ and emits `image-partial` events before each final `image`; `ai.image.generate` 
 
 ```ts
 import { Stream } from "effect"
-import { ImageEvent } from "@opencode/ai/effect"
+import { ImageEvent } from "@warcode/ai/effect"
 
 const previews = ai.image
   .stream({
@@ -1033,7 +1033,7 @@ The hosted result is represented as a provider-executed tool call and a tool res
 
 ## Public API
 
-Everything below is exported from `@opencode/ai/effect` unless noted.
+Everything below is exported from `@warcode/ai/effect` unless noted.
 
 - **`ai.request({...})`** — build a provider-neutral `LLMRequest`, a plain object. Accepts ergonomic inputs (`system: string`, `prompt: string`) and normalizes them into `system`, `messages` and `tools` arrays. Edit it with a spread, or pass the edited object back to `ai.request`.
 - **`ai.generate` / `ai.stream`** — run direct input or an `LLMRequest` through `LLMClient` for one-import use.
@@ -1049,12 +1049,12 @@ Everything below is exported from `@opencode/ai/effect` unless noted.
 - **`ai.decision.request` / `ai.decision.generate`** — typed predicate, choice, and score questions over text, JSON, and media input; `DecisionClient` is its Effect service and layer.
 - **`ai.embedding.request` / `ai.embedding.generate`** — one vector per text or media value, with optional `dimensions` and `inputType`; `EmbeddingClient` is its Effect service and layer.
 - **`AIClient.layer` / `AIClient.layerWith(executor)`** — every modality client plus the request executor in one layer.
-- **`@opencode/ai`** (Promise root) — a default `ai` with the text calls (`request`, `generate`, `stream`, `loop`, `compact`, `canCompact`) at the top level plus `image`, `decision` and `embedding` (plus `experimental.video`, `experimental.speech`, and `experimental.transcription`) as Promise / `AsyncIterable` APIs, `run(effect)` for any package Effect, plus `file`, `write`, `bytes`, `base64`, and `materialize` for assets. `AI.make({ layer? })` builds a client over a custom executor. The same `ai` from `@opencode/ai/effect` returns `Effect` and `Stream`.
-- **`@opencode/ai/experimental`** — APIs that may change without compatibility guarantees: `Video`, `Speech`, `Transcription`, `Extraction`, and `Realtime`. See [Experimental](#experimental).
+- **`@warcode/ai`** (Promise root) — a default `ai` with the text calls (`request`, `generate`, `stream`, `loop`, `compact`, `canCompact`) at the top level plus `image`, `decision` and `embedding` (plus `experimental.video`, `experimental.speech`, and `experimental.transcription`) as Promise / `AsyncIterable` APIs, `run(effect)` for any package Effect, plus `file`, `write`, `bytes`, `base64`, and `materialize` for assets. `AI.make({ layer? })` builds a client over a custom executor. The same `ai` from `@warcode/ai/effect` returns `Effect` and `Stream`.
+- **`@warcode/ai/experimental`** — APIs that may change without compatibility guarantees: `Video`, `Speech`, `Transcription`, `Extraction`, and `Realtime`. See [Experimental](#experimental).
 
 ## Experimental
 
-These APIs may change without compatibility guarantees. The Effect API is exported from `@opencode/ai/experimental`,
+These APIs may change without compatibility guarantees. The Effect API is exported from `@warcode/ai/experimental`,
 and the Promise client exposes it under `ai.experimental`.
 
 - **`Video`**, **`Speech`**, and **`Transcription`** — media generation and speech-to-text, with `VideoClient`,
@@ -1065,7 +1065,7 @@ and the Promise client exposes it under `ai.experimental`.
   a short-lived WebSocket URL and token.
 
 The provider selectors for these modalities (`.video(...)`, `.speech(...)`, `.transcription(...)`,
-`.experimental.extraction(...)`) and their protocol entrypoints (such as `@opencode/ai/protocols/openai-speech`) are
+`.experimental.extraction(...)`) and their protocol entrypoints (such as `@warcode/ai/protocols/openai-speech`) are
 part of the same experimental surface.
 
 ### Video generation
@@ -1077,8 +1077,8 @@ Common fields (`frames`, `references`, `video`, `durationSeconds`, `aspect`, `re
 under `providerOptions`, inferred from the selected model.
 
 ```ts
-import { Video } from "@opencode/ai/experimental"
-import { Google, Runway } from "@opencode/ai/providers"
+import { Video } from "@warcode/ai/experimental"
+import { Google, Runway } from "@warcode/ai/providers"
 
 const google = Google.configure({ apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY })
 
@@ -1147,7 +1147,7 @@ aborting rejects the Promise or throws from the `for await` loop with `signal.re
 unless `abort(reason)` passed one), while `break` stops a stream without throwing.
 
 ```ts
-import { ai } from "@opencode/ai"
+import { ai } from "@warcode/ai"
 
 const generation = await ai.experimental.video.start({ model, prompt })
 for await (const event of generation.events({ poll: { interval: 10_000 } })) console.log(event.type)
@@ -1164,9 +1164,9 @@ selectors on the `OpenAI`, `Google` (Gemini TTS), `ElevenLabs`, `Cartesia`, and 
 before any network call; provider-native controls live under `providerOptions`, inferred from the selected model.
 
 ```ts
-import { Media } from "@opencode/ai/effect"
-import { Speech, SpeechEvent } from "@opencode/ai/experimental"
-import { ElevenLabs, OpenAI } from "@opencode/ai/providers"
+import { Media } from "@warcode/ai/effect"
+import { Speech, SpeechEvent } from "@warcode/ai/experimental"
+import { ElevenLabs, OpenAI } from "@warcode/ai/providers"
 
 const openai = OpenAI.configure({ apiKey: process.env.OPENAI_API_KEY })
 
@@ -1174,7 +1174,7 @@ const openai = OpenAI.configure({ apiKey: process.env.OPENAI_API_KEY })
 const program = Effect.gen(function* () {
   const response = yield* Speech.generate({
     model: openai.speech("gpt-4o-mini-tts"),
-    text: "Hello from OpenCode.",
+    text: "Hello from Warcode.",
     voice: "coral",
     format: "mp3",
     instructions: "Warm and unhurried.",
@@ -1187,7 +1187,7 @@ const program = Effect.gen(function* () {
 // Chunks as they arrive: audio-delta* (interleaved with timestamps) then one finish carrying the assembled asset.
 const events = Speech.stream({
   model: ElevenLabs.configure({ apiKey }).speech("eleven_flash_v2_5"),
-  text: "Hello from OpenCode.",
+  text: "Hello from Warcode.",
   voice: "JBFqnCBsd6RMkjVDRZzb",
   format: "pcm",
   timestamps: true,
@@ -1230,12 +1230,12 @@ Provider notes:
 The promise client mirrors the Effect API; `ai.experimental.speech.stream` is an `AsyncIterable`.
 
 ```ts
-import { ai } from "@opencode/ai"
+import { ai } from "@warcode/ai"
 
-const response = await ai.experimental.speech.generate({ model, text: "Hello from OpenCode.", voice: "coral" })
+const response = await ai.experimental.speech.generate({ model, text: "Hello from Warcode.", voice: "coral" })
 await ai.write(response.audio, "hello.mp3")
 
-for await (const event of ai.experimental.speech.stream({ model, text: "Hello from OpenCode.", voice: "coral" })) {
+for await (const event of ai.experimental.speech.stream({ model, text: "Hello from Warcode.", voice: "coral" })) {
   if (event.type === "audio-delta") player.write(event.chunk)
 }
 ```
@@ -1252,9 +1252,9 @@ any network call; a route may return more than asked.
 
 ```ts
 import { Console, Effect, Stream } from "effect"
-import { Media } from "@opencode/ai/effect"
-import { Transcription, TranscriptionEvent } from "@opencode/ai/experimental"
-import { AssemblyAI, Deepgram, OpenAI } from "@opencode/ai/providers"
+import { Media } from "@warcode/ai/effect"
+import { Transcription, TranscriptionEvent } from "@warcode/ai/experimental"
+import { AssemblyAI, Deepgram, OpenAI } from "@warcode/ai/providers"
 
 const openai = OpenAI.configure({ apiKey: process.env.OPENAI_API_KEY })
 
@@ -1268,7 +1268,7 @@ const program = Effect.gen(function* () {
     diarize: true,
     timestamps: "word",
   })
-  response.text // "Hello from OpenCode."
+  response.text // "Hello from Warcode."
   response.segments // [{ text, startSeconds, endSeconds, speaker: "0" }]
   response.words // [{ text, startSeconds, endSeconds, speaker, confidence }]
   response.language // the provider's own value, lowercased ("en", "eng", "english", "en_us")
@@ -1320,9 +1320,9 @@ Extraction models read typed values out of text instead of answering questions w
 match; other types are sent and answered as-is. Only Cloudflare's Clairic serves it today.
 
 ```ts
-import { ai } from "@opencode/ai"
-import { Extraction } from "@opencode/ai/experimental"
-import { CloudflareWorkersAI } from "@opencode/ai/providers"
+import { ai } from "@warcode/ai"
+import { Extraction } from "@warcode/ai/experimental"
+import { CloudflareWorkersAI } from "@warcode/ai/providers"
 
 const response = await ai.run(
   Extraction.generate({
@@ -1346,12 +1346,12 @@ yet.
 
 ## Testing
 
-Use the deterministic test client from `@opencode/ai/testing` to script provider-neutral responses and inspect
+Use the deterministic test client from `@warcode/ai/testing` to script provider-neutral responses and inspect
 the requests sent by code under test:
 
 ```ts
 import { Effect } from "effect"
-import { TestLLM } from "@opencode/ai/testing"
+import { TestLLM } from "@warcode/ai/testing"
 
 const programWithTestClient = Effect.gen(function* () {
   const test = yield* TestLLM.Test
@@ -1393,7 +1393,7 @@ Response helpers build common event arrays: `TestLLM.text(value, id)`, `textWith
 `complete({ reason, usage?, providerMetadata? }, ...events)`. `failAfter(error, ...events)` and `hangAfter(...events)`
 return streams that fail or never finish after the given events.
 
-`compileRequest`, also from `@opencode/ai/testing`, compiles an `LLMRequest` through its route without sending it, so
+`compileRequest`, also from `@warcode/ai/testing`, compiles an `LLMRequest` through its route without sending it, so
 tests can assert the provider payload.
 
 Other modalities and the Promise client have no test double. Test them over a custom executor layer, such as
@@ -1474,8 +1474,8 @@ Enable OpenAI compaction with typed provider options:
 
 ```ts
 import { Effect } from "effect"
-import { ai, LLMClient, Message } from "@opencode/ai/effect"
-import { OpenAI } from "@opencode/ai/providers"
+import { ai, LLMClient, Message } from "@warcode/ai/effect"
+import { OpenAI } from "@warcode/ai/providers"
 
 const request = ai.request({
   model: OpenAI.configure({ apiKey }).responses("gpt-5.3-codex"),
@@ -1495,7 +1495,7 @@ const continued = Effect.gen(function* () {
 A compaction part has `provider` and exactly one representation: `encrypted` for Responses, or `text` for Anthropic. Responses also preserves the optional checkpoint `id`. These fields survive message serialization without becoming visible assistant text. Sending a checkpoint to another provider or an incompatible API fails rather than silently losing context.
 
 ```ts
-import { CompactionPart, ProviderID } from "@opencode/ai/effect"
+import { CompactionPart, ProviderID } from "@warcode/ai/effect"
 
 CompactionPart.make({ provider: ProviderID.make("openai"), id: "cmp_123", encrypted: "..." })
 CompactionPart.make({ provider: ProviderID.make("anthropic"), text: "Summary of the conversation..." })
@@ -1621,7 +1621,7 @@ Normalized cache usage is read back into `response.usage.cacheReadInputTokens` a
 Provider facades configure endpoint/auth/deployment details first, then expose model selectors that take only a model or deployment id. The selected model carries the executable route value used at runtime.
 
 ```ts
-import { OpenAI, CloudflareAIGateway } from "@opencode/ai/providers"
+import { OpenAI, CloudflareAIGateway } from "@warcode/ai/providers"
 
 const openai = OpenAI.configure({ apiKey: process.env.OPENAI_API_KEY }).responses("gpt-4o-mini")
 const gateway = CloudflareAIGateway.configure({
@@ -1632,12 +1632,12 @@ const gateway = CloudflareAIGateway.configure({
 
 For a provider that needs no key, such as a local server, pass `apiKey: false`: the package skips the environment lookup and sends no auth header (Amazon Bedrock and Google Vertex keep their own auth).
 
-Included LLM providers: OpenAI, Anthropic, Google (Gemini), Google Vertex, Amazon Bedrock (Converse and Mantle), Azure OpenAI, Alibaba, Baseten, Cerebras, Cohere, Cloudflare AI Gateway, Cloudflare Workers AI, DeepInfra, DeepSeek, DigitalOcean, Fireworks, Groq, Meta, MiniMax, Mistral, Moonshot, OpenRouter, TogetherAI, Venice, Vercel AI Gateway, xAI, Z.ai, and Z.ai Coding Plan. TypeSafe AI and OpenCode expose decision models only. Generic Chat Completions, Responses, and Anthropic Messages-compatible entrypoints support custom endpoints.
+Included LLM providers: OpenAI, Anthropic, Google (Gemini), Google Vertex, Amazon Bedrock (Converse and Mantle), Azure OpenAI, Alibaba, Baseten, Cerebras, Cohere, Cloudflare AI Gateway, Cloudflare Workers AI, DeepInfra, DeepSeek, DigitalOcean, Fireworks, Groq, Meta, MiniMax, Mistral, Moonshot, OpenRouter, TogetherAI, Venice, Vercel AI Gateway, xAI, Z.ai, and Z.ai Coding Plan. TypeSafe AI and Warcode expose decision models only. Generic Chat Completions, Responses, and Anthropic Messages-compatible entrypoints support custom endpoints.
 
 Each named provider owns its module, endpoint, authentication, and route setup. Providers with the same wire format compose the shared protocol directly:
 
 ```ts
-import { DeepSeek, Fireworks } from "@opencode/ai/providers"
+import { DeepSeek, Fireworks } from "@warcode/ai/providers"
 
 const deepseek = DeepSeek.configure({ apiKey }).model("deepseek-chat")
 const fireworks = Fireworks.configure({ apiKey }).model("accounts/fireworks/models/my-model")
@@ -1647,10 +1647,10 @@ The former `OpenAICompatible.baseten`, `.cerebras`, `.deepinfra`, `.deepseek`, `
 
 ### Provider entrypoints
 
-Provider modules are available through dedicated exports from `@opencode/ai`. Each LLM entrypoint exports `model(modelID, settings)`, where `settings` contains provider configuration plus common `headers` and `body` overlays.
+Provider modules are available through dedicated exports from `@warcode/ai`. Each LLM entrypoint exports `model(modelID, settings)`, where `settings` contains provider configuration plus common `headers` and `body` overlays.
 
 ```ts
-import { model } from "@opencode/ai/providers/openai/responses"
+import { model } from "@warcode/ai/providers/openai/responses"
 
 const selected = model("gpt-5", {
   apiKey: process.env.OPENAI_API_KEY,
@@ -1660,15 +1660,15 @@ const selected = model("gpt-5", {
 
 APIs have separate entrypoints:
 
-- `@opencode/ai/providers/openai/chat`
-- `@opencode/ai/providers/openai/responses`
-- `@opencode/ai/providers/openai-compatible/responses`
-- `@opencode/ai/providers/anthropic-compatible`
-- `@opencode/ai/providers/google-vertex/gemini`
-- `@opencode/ai/providers/google-vertex/interactions`
-- `@opencode/ai/providers/google-vertex/chat`
-- `@opencode/ai/providers/google-vertex/responses`
-- `@opencode/ai/providers/google-vertex/messages`
+- `@warcode/ai/providers/openai/chat`
+- `@warcode/ai/providers/openai/responses`
+- `@warcode/ai/providers/openai-compatible/responses`
+- `@warcode/ai/providers/anthropic-compatible`
+- `@warcode/ai/providers/google-vertex/gemini`
+- `@warcode/ai/providers/google-vertex/interactions`
+- `@warcode/ai/providers/google-vertex/chat`
+- `@warcode/ai/providers/google-vertex/responses`
+- `@warcode/ai/providers/google-vertex/messages`
 
 OpenAI Responses has one semantic route and uses HTTP by default. Advanced callers may supply a per-call WebSocket channel executor through `StreamOptions`; transport policy does not change provider settings, model identity, or route identity. The provider-neutral Open Responses implementation owns the reusable WebSocket request and event contract, while each provider opts in with its own handshake and connection policy. Azure follows the same Chat/Responses split at `providers/azure/chat` and `providers/azure/responses`. Generic OpenAI-compatible Chat remains at `providers/openai-compatible`; the Responses adapter at `providers/openai-compatible/responses` uses the provider-neutral Open Responses protocol. OpenAI Responses extends that baseline with OpenAI tools, event variants, metadata, and defaults. Generic Anthropic Messages-compatible providers use `providers/anthropic-compatible`, which the named Anthropic provider composes. Google Gemini and Amazon Bedrock expose their single native API through their existing provider paths.
 
@@ -1677,36 +1677,36 @@ Vertex Gemini, Vertex Interactions, Vertex Chat, Vertex Responses, and Vertex Me
 Tuned Vertex Gemini deployments use model ids shaped like `endpoints/1234567890` and require OAuth or ADC; Vertex express-mode API keys support publisher models only.
 
 ```ts
-import { model } from "@opencode/ai/providers/google-vertex/gemini"
+import { model } from "@warcode/ai/providers/google-vertex/gemini"
 
 model("gemini-3.5-flash", { project: "my-project", location: "global" })
 ```
 
 ```ts
-import { model } from "@opencode/ai/providers/google-vertex/chat"
+import { model } from "@warcode/ai/providers/google-vertex/chat"
 
 model("deepseek-ai/deepseek-v3.2-maas", { project: "my-project", location: "global" })
 ```
 
 ```ts
-import { model } from "@opencode/ai/providers/google-vertex/responses"
+import { model } from "@warcode/ai/providers/google-vertex/responses"
 
 model("xai/grok-4.20-reasoning", { project: "my-project", location: "global" })
 ```
 
 ```ts
-import { model } from "@opencode/ai/providers/google-vertex/messages"
+import { model } from "@warcode/ai/providers/google-vertex/messages"
 
 model("claude-sonnet-4-6", { project: "my-project", location: "global" })
 ```
 
 Additional provider entrypoints include:
 
-- `@opencode/ai/providers/baseten`
-- `@opencode/ai/providers/deepseek`
-- `@opencode/ai/providers/fireworks`
-- `@opencode/ai/providers/cloudflare-ai-gateway`
-- `@opencode/ai/providers/cloudflare-workers-ai`
+- `@warcode/ai/providers/baseten`
+- `@warcode/ai/providers/deepseek`
+- `@warcode/ai/providers/fireworks`
+- `@warcode/ai/providers/cloudflare-ai-gateway`
+- `@warcode/ai/providers/cloudflare-workers-ai`
 
 ## Provider options & HTTP overlays
 
@@ -1737,7 +1737,7 @@ Compose a route with `Route.make({ protocol, endpoint, auth, framing, ... })`. T
 
 ## Effect
 
-This package is built on Effect. Public methods in `@opencode/ai/effect` return `Effect` or `Stream`; provide `AIClient.layer` (or `AIClient.layerWith(executor)`) for every modality, then import the provider/protocol modules for the routes you use. The example at `example/tutorial.ts` is a runnable walkthrough.
+This package is built on Effect. Public methods in `@warcode/ai/effect` return `Effect` or `Stream`; provide `AIClient.layer` (or `AIClient.layerWith(executor)`) for every modality, then import the provider/protocol modules for the routes you use. The example at `example/tutorial.ts` is a runnable walkthrough.
 
 ## See also
 

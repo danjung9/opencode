@@ -11,10 +11,10 @@ export function GET() {
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-<title>OpenCode legal updates</title>
+<title>Warcode legal updates</title>
 <link>${config.baseUrl}/legal</link>
 <atom:link href="${config.baseUrl}/legal/feed.xml" rel="self" type="application/rss+xml"/>
-<description>Changes to the OpenCode Privacy Policy and Terms of Use.</description>
+<description>Changes to the Warcode Privacy Policy and Terms of Use.</description>
 <language>en</language>
 ${entries[0] ? `<lastBuildDate>${new Date(`${entries[0].date}T00:00:00Z`).toUTCString()}</lastBuildDate>\n` : ""}${entries
     .map(

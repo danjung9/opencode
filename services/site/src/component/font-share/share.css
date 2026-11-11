@@ -136,7 +136,7 @@ html:has([data-component="font-share"]) body {
     }
   }
 
-  /* Cover: the plotter drawing "opencode", across the full measure. */
+  /* Cover: the plotter drawing "warcode", across the full measure. */
   &[data-share="cover"] {
     [data-slot="cover"] {
       flex: 1;

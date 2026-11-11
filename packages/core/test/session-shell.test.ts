@@ -2,17 +2,17 @@ import { describe, expect, setDefaultTimeout } from "bun:test"
 import fs from "fs/promises"
 import path from "path"
 import { Cause, Context, Deferred, Effect, Exit, Fiber, Layer, Option, Schedule, Stream, Tracer } from "effect"
-import { Bus } from "@opencode/core/bus"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { Location } from "@opencode/core/location"
-import { LocationServiceMap } from "@opencode/core/location-service-map"
-import { AbsolutePath } from "@opencode/core/schema"
-import { Session } from "@opencode/core/session"
-import { SessionEvent } from "@opencode/core/session/event"
-import { SessionExecution } from "@opencode/core/session/execution"
-import { SessionRunCoordinator } from "@opencode/core/session/run-coordinator"
-import { Shell } from "@opencode/core/shell"
-import { LayerNode } from "@opencode/util/effect/layer-node"
+import { Bus } from "@warcode/core/bus"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { Location } from "@warcode/core/location"
+import { LocationServiceMap } from "@warcode/core/location-service-map"
+import { AbsolutePath } from "@warcode/core/schema"
+import { Session } from "@warcode/core/session"
+import { SessionEvent } from "@warcode/core/session/event"
+import { SessionExecution } from "@warcode/core/session/execution"
+import { SessionRunCoordinator } from "@warcode/core/session/run-coordinator"
+import { Shell } from "@warcode/core/shell"
+import { LayerNode } from "@warcode/util/effect/layer-node"
 import { location } from "./fixture/location"
 import { offlineModels } from "./fixture/models"
 import { tmpdirScoped } from "./fixture/tmpdir"
@@ -350,21 +350,21 @@ describe("Session.shell", () => {
 
       const create = spans.find((span) => span.name === "Shell.create")
       const result = spans.find((span) => span.name === "Shell.result")
-      const shellID = create?.attributes.get("opencode.shell.id")
+      const shellID = create?.attributes.get("warcode.shell.id")
       expect(shellID).toBeString()
       expect(truncated.isWellFormed()).toBe(true)
       expect(Object.fromEntries(create?.attributes ?? [])).toEqual({
-        "opencode.shell.id": shellID,
-        "opencode.shell.command": truncated,
+        "warcode.shell.id": shellID,
+        "warcode.shell.command": truncated,
         "session.id": fixture.created.id,
-        "opencode.shell.background": true,
+        "warcode.shell.background": true,
       })
       expect(Object.fromEntries(result?.attributes ?? [])).toEqual({
-        "opencode.shell.id": shellID,
-        "opencode.shell.command": truncated,
+        "warcode.shell.id": shellID,
+        "warcode.shell.command": truncated,
         "session.id": fixture.created.id,
-        "opencode.shell.background": true,
-        "opencode.shell.status": "exited",
+        "warcode.shell.background": true,
+        "warcode.shell.status": "exited",
         "process.exit.code": 3,
       })
     }),

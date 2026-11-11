@@ -2,8 +2,8 @@ export * as SessionRestart from "./restart.js"
 
 import { Context, Effect, Layer, Option, Schema } from "effect"
 import { isReadonlyArrayNonEmpty } from "effect/Array"
-import { makeGlobalNode } from "@opencode/util/effect/app-node"
-import { Shell as ShellSchema } from "@opencode/schema/shell"
+import { makeGlobalNode } from "@warcode/util/effect/app-node"
+import { Shell as ShellSchema } from "@warcode/schema/shell"
 import { Bus } from "../../bus.js"
 import { Database } from "../../database/database.js"
 import { Instance } from "../../instance/service.js"
@@ -69,7 +69,7 @@ export interface Interface {
  * — the managed server invokes it at boot; embedders may call it from their
  * own start-up.
  */
-export class Service extends Context.Service<Service, Interface>()("@opencode/SessionRestart") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/SessionRestart") {}
 
 export const layer = (options?: Options) =>
   Layer.effect(

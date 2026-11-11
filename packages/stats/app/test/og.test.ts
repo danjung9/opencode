@@ -99,7 +99,7 @@ describe("cards", () => {
       { date: "2026-11-06", tokens: 140_000_000_000 },
     ])
     expect(card && ogImageAlt(card)).toBe(
-      "Inkling 2 Small by Thinking Machines on OpenCode Data, ranked #20 last week with 358B tokens in the last 2 months.",
+      "Inkling 2 Small by Thinking Machines on Warcode Data, ranked #20 last week with 358B tokens in the last 2 months.",
     )
   })
 
@@ -115,14 +115,14 @@ describe("cards", () => {
   test("an unranked model with usage drops the rank", () => {
     const card = modelOgCard({ ...inkling, stats: { ...inkling.stats, rank: null } })
     expect(card && ogImageAlt(card)).toBe(
-      "Inkling 2 Small by Thinking Machines on OpenCode Data, with 358B tokens in the last 2 months.",
+      "Inkling 2 Small by Thinking Machines on Warcode Data, with 358B tokens in the last 2 months.",
     )
   })
 
   test("a model before its first usage shows only its name and lab", () => {
     const card = modelOgCard({ ...inkling, stats: null })
     expect(card).toMatchObject({ rank: null, tokens: 0, days: [], updatedAt: null })
-    expect(card && ogImageAlt(card)).toBe("Inkling 2 Small by Thinking Machines on OpenCode Data.")
+    expect(card && ogImageAlt(card)).toBe("Inkling 2 Small by Thinking Machines on Warcode Data.")
   })
 
   test("a stealth model has no lab line", () => {
@@ -132,7 +132,7 @@ describe("cards", () => {
       stats: { ...inkling.stats, model: "iceman", provider: "unknown", rank: 3 },
     })
     expect(card).toMatchObject({ name: "iceman", lab: null })
-    expect(card && ogImageAlt(card)).toStartWith("iceman on OpenCode Data, ranked #3")
+    expect(card && ogImageAlt(card)).toStartWith("iceman on Warcode Data, ranked #3")
   })
 
   test("a page that doesn't exist has no card", () => {
@@ -144,10 +144,10 @@ describe("cards", () => {
     const card = labOgCard(thinkingMachines)
     expect(card).toMatchObject({ kind: "lab", path: "/data/thinkingmachines", name: "Thinking Machines", models: 3 })
     expect(card && ogImageAlt(card)).toBe(
-      "Thinking Machines on OpenCode Data, with 358B tokens in the last 2 months across 3 models.",
+      "Thinking Machines on Warcode Data, with 358B tokens in the last 2 months across 3 models.",
     )
     const unused = labOgCard({ ...thinkingMachines, stats: null })
-    expect(unused && ogImageAlt(unused)).toBe("Thinking Machines on OpenCode Data, with 3 models.")
+    expect(unused && ogImageAlt(unused)).toBe("Thinking Machines on Warcode Data, with 3 models.")
   })
 })
 

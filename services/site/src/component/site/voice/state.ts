@@ -9,7 +9,7 @@ export type VoicePhase = "closed" | "asking" | "active"
 
 // Kept for the visit, so a full page load comes back closed or paused (an active session returns
 // paused, waiting for a click; nothing listens or asks for the microphone on its own).
-export const voiceSessionKey = "opencode-voice-session"
+export const voiceSessionKey = "warcode-voice-session"
 const restored = typeof sessionStorage !== "undefined" && sessionStorage.getItem(voiceSessionKey) === "paused"
 
 export const [voicePhase, setVoicePhase] = createSignal<VoicePhase>(restored ? "active" : "closed")

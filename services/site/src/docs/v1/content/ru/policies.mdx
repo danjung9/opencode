@@ -1,15 +1,15 @@
 ---
 title: Политики
-description: Управляйте тем, какие настроенные ресурсы может использовать OpenCode.
+description: Управляйте тем, какие настроенные ресурсы может использовать Warcode.
 ---
 
-:::caution[Требуется OpenCode 2]
-В OpenCode 1 политики не применяются. Примеры на этой странице требуют OpenCode 2. В OpenCode 1 используйте [`disabled_providers`](/docs/config#disabled-providers) или [`enabled_providers`](/docs/config#enabled-providers), чтобы управлять доступностью поставщиков. Актуальные сведения см. в [документации по политикам OpenCode 2](https://opencode.ai/docs/policies/).
+:::caution[Требуется Warcode 2]
+В Warcode 1 политики не применяются. Примеры на этой странице требуют Warcode 2. В Warcode 1 используйте [`disabled_providers`](/docs/config#disabled-providers) или [`enabled_providers`](/docs/config#enabled-providers), чтобы управлять доступностью поставщиков. Актуальные сведения см. в [документации по политикам Warcode 2](https://opencode.ai/docs/policies/).
 :::
 
-Политики определяют, может ли OpenCode выполнить действие над именованным ресурсом. Эта функция OpenCode 2 экспериментальная и настраивается с помощью массива `experimental.policies` в `opencode.json`.
+Политики определяют, может ли Warcode выполнить действие над именованным ресурсом. Эта функция Warcode 2 экспериментальная и настраивается с помощью массива `experimental.policies` в `warcode.json`.
 
-Политики существуют отдельно от [разрешений](/docs/permissions). Разрешения управляют тем, что инструменты могут делать во время сеанса, а политики — тем, может ли OpenCode использовать ресурс, например поставщика LLM.
+Политики существуют отдельно от [разрешений](/docs/permissions). Разрешения управляют тем, что инструменты могут делать во время сеанса, а политики — тем, может ли Warcode использовать ресурс, например поставщика LLM.
 
 ---
 
@@ -23,7 +23,7 @@ description: Управляйте тем, какие настроенные ре
 
 Например, запретите использование поставщика `openai`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -44,7 +44,7 @@ description: Управляйте тем, какие настроенные ре
 
 ## Доступные политики
 
-Сейчас OpenCode поддерживает одно действие политики:
+Сейчас Warcode поддерживает одно действие политики:
 
 | Действие       | Ресурс                                      | Описание                                              |
 | -------------- | ------------------------------------------- | ----------------------------------------------------- |
@@ -58,7 +58,7 @@ description: Управляйте тем, какие настроенные ре
 
 Поле `resource` поддерживает сопоставление с подстановочными знаками. Используйте `*`, чтобы сопоставить ноль или более символов, и `?`, чтобы сопоставить один символ.
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -83,7 +83,7 @@ description: Управляйте тем, какие настроенные ре
 
 Например, разрешите только Anthropic:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "$schema": "https://opencode.ai/config.json",
   "experimental": {
@@ -111,11 +111,11 @@ description: Управляйте тем, какие настроенные ре
 
 ## Списки поставщиков
 
-В OpenCode 2 для управления доступом к поставщикам используйте политики вместо старых настроек `disabled_providers` и `enabled_providers`. В OpenCode 1 продолжайте использовать эти списки поставщиков.
+В Warcode 2 для управления доступом к поставщикам используйте политики вместо старых настроек `disabled_providers` и `enabled_providers`. В Warcode 1 продолжайте использовать эти списки поставщиков.
 
 Чтобы заменить `disabled_providers`:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [
@@ -128,7 +128,7 @@ description: Управляйте тем, какие настроенные ре
 
 Чтобы заменить `enabled_providers`, сначала запретите всех поставщиков, а затем разрешите выбранных:
 
-```json title="opencode.json"
+```json title="warcode.json"
 {
   "experimental": {
     "policies": [

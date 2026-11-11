@@ -1,7 +1,7 @@
 import { createEffect, createMemo, For, on, onCleanup, onMount, Show, type JSX } from "solid-js"
 import { createStore } from "solid-js/store"
 import { Icon as Glyph } from "../../icons/icon/icon"
-import oc2 from "../../theme/themes/oc-2.json"
+import oc2 from "../../theme/themes/workroom.json"
 import type { DesktopTheme } from "../../theme/types"
 import { resolveThemeV2, themeV2ToCss } from "../../theme/v2/resolve"
 import { PROJECT_ICON_FAMILIES, PROJECT_ICON_STYLES, projectIconStyle, type ProjectIconStyle } from "./procedural"
@@ -57,7 +57,7 @@ const SESSIONS = [
 
 const SIZES = [32, 20, 16]
 
-const STARS_KEY = "opencode.lab.project-icon-styles.starred"
+const STARS_KEY = "warcode.lab.project-icon-styles.starred"
 
 const SURFACES = {
   dark: {

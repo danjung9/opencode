@@ -3,11 +3,11 @@ title: Referenzen
 description: Fügen Sie lokale Verzeichnisse und Git-Repositories als Projektreferenzen hinzu.
 ---
 
-Referenzen geben OpenCode Zugriff auf Verzeichnisse außerhalb des aktuellen Projekts. Verwenden Sie sie, um Dokumentation, gemeinsam genutzte Bibliotheken, Beispiele oder ein anderes Repository während der Arbeit verfügbar zu machen.
+Referenzen geben Warcode Zugriff auf Verzeichnisse außerhalb des aktuellen Projekts. Verwenden Sie sie, um Dokumentation, gemeinsam genutzte Bibliotheken, Beispiele oder ein anderes Repository während der Arbeit verfügbar zu machen.
 
-Referenzen werden über einen Alias in `opencode.json` oder `opencode.jsonc` konfiguriert.
+Referenzen werden über einen Alias in `warcode.json` oder `warcode.jsonc` konfiguriert.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
   "references": {
@@ -16,7 +16,7 @@ Referenzen werden über einen Alias in `opencode.json` oder `opencode.jsonc` kon
       "description": "Use for product behavior and documentation conventions",
     },
     "sdk": {
-      "repository": "anomalyco/opencode-sdk-js",
+      "repository": "anomalyco/warcode-sdk-js",
       "branch": "main",
       "description": "Use for JavaScript SDK implementation details",
     },
@@ -30,7 +30,7 @@ Referenzen werden über einen Alias in `opencode.json` oder `opencode.jsonc` kon
 
 Verwenden Sie `path`, um auf ein lokales Verzeichnis zu verweisen.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": {
@@ -48,7 +48,7 @@ Pfade können sein:
 
 Sie können auch eine Kurzschreibweise als String verwenden:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": "../docs",
@@ -60,9 +60,9 @@ Sie können auch eine Kurzschreibweise als String verwenden:
 
 ## Git-Repositories
 
-Verwenden Sie `repository`, um auf ein Git-Repository zu verweisen. OpenCode legt das Repository in seinem lokalen Repository-Cache an und stellt den ausgecheckten Quellcode als Referenzverzeichnis bereit.
+Verwenden Sie `repository`, um auf ein Git-Repository zu verweisen. Warcode legt das Repository in seinem lokalen Repository-Cache an und stellt den ausgecheckten Quellcode als Referenzverzeichnis bereit.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": {
@@ -73,11 +73,11 @@ Verwenden Sie `repository`, um auf ein Git-Repository zu verweisen. OpenCode leg
 }
 ```
 
-`repository` akzeptiert Git-URLs, host/path-Referenzen und die GitHub-Kurzform `owner/repo`. Das optionale Feld `branch` wählt einen Branch oder Ref aus. Ohne `branch` verwendet OpenCode den Standard-Branch des Repositorys.
+`repository` akzeptiert Git-URLs, host/path-Referenzen und die GitHub-Kurzform `owner/repo`. Das optionale Feld `branch` wählt einen Branch oder Ref aus. Ohne `branch` verwendet Warcode den Standard-Branch des Repositorys.
 
 Sie können die Kurzschreibweise als String verwenden, wenn Sie keinen Branch, keine Beschreibung und keine weiteren Optionen benötigen:
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": "Effect-TS/effect",
@@ -95,7 +95,7 @@ Git-Referenzen werden asynchron aktualisiert. Bei einem neu konfigurierten Repos
 
 Fügen Sie `description` hinzu, um zu erklären, wann ein Agent eine Referenz verwenden soll.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "design-system": {
@@ -106,7 +106,7 @@ Fügen Sie `description` hinzu, um zu erklären, wann ein Agent eine Referenz ve
 }
 ```
 
-OpenCode nimmt Referenzen mit Beschreibungen in den Agentenkontext auf. Beschreibungen sollten kurz und so spezifisch sein, dass sich Referenzen mit ähnlichem Inhalt unterscheiden lassen. Referenzen ohne Beschreibung bleiben über die Autovervollständigung und direkte Verwendung verfügbar, werden Agenten aber nicht angeboten.
+Warcode nimmt Referenzen mit Beschreibungen in den Agentenkontext auf. Beschreibungen sollten kurz und so spezifisch sein, dass sich Referenzen mit ähnlichem Inhalt unterscheiden lassen. Referenzen ohne Beschreibung bleiben über die Autovervollständigung und direkte Verwendung verfügbar, werden Agenten aber nicht angeboten.
 
 ---
 
@@ -114,7 +114,7 @@ OpenCode nimmt Referenzen mit Beschreibungen in den Agentenkontext auf. Beschrei
 
 Setzen Sie `hidden` auf `true`, um eine Referenz aus der `@`-Autovervollständigung in der TUI auszublenden.
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "internal": {
@@ -140,7 +140,7 @@ Compare this implementation with @sdk/src/client.ts
 
 Agenten erhalten in ihrem Systemkontext außerdem die aufgelösten Pfade und Beschreibungen konfigurierter Referenzen, die eine Beschreibung haben. So können sie eine Referenz untersuchen, wenn sie relevant ist, ohne dass Sie sie manuell anhängen müssen.
 
-OpenCode erlaubt Referenzverzeichnisse automatisch über seine Berechtigungsgrenze für externe Verzeichnisse. Die normalen Tool-Berechtigungen gelten weiterhin; ein Agent, der keine Dateien bearbeiten darf, erhält zum Beispiel keinen Bearbeitungszugriff, nur weil ein Verzeichnis als Referenz konfiguriert ist.
+Warcode erlaubt Referenzverzeichnisse automatisch über seine Berechtigungsgrenze für externe Verzeichnisse. Die normalen Tool-Berechtigungen gelten weiterhin; ein Agent, der keine Dateien bearbeiten darf, erhält zum Beispiel keinen Bearbeitungszugriff, nur weil ein Verzeichnis als Referenz konfiguriert ist.
 
 ---
 

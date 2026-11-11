@@ -1,5 +1,5 @@
 /**
- * The edit of "OpenCode. Six letters.", the film on /font. Every cue comes from the narration,
+ * The edit of "Warcode. Six letters.", the film on /font. Every cue comes from the narration,
  * David's takes cut into one file per line: each line's length and the onsets of its phrases
  * (`beats`, seconds from the line's start), measured by font-film/segment.ts. Lines have ids, so
  * scenes and the mixer find their cues by name. To re-time the film for a new take, paste the new

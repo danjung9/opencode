@@ -7,9 +7,9 @@ import { mediaUrl } from "~/lib/media"
 
 // The published cut. Files are versioned so a new cut never plays from a cached old one.
 const FILM = {
-  wide: "/font/film/opencode-font-film-v3-1080p.mp4",
-  tall: "/font/film/opencode-font-film-v3-4x5.mp4",
-  captions: "/font/film/opencode-font-film-v3.en.vtt",
+  wide: "/font/film/warcode-font-film-v3-1080p.mp4",
+  tall: "/font/film/warcode-font-film-v3-4x5.mp4",
+  captions: "/font/film/warcode-font-film-v3.en.vtt",
 }
 
 /**
@@ -65,7 +65,7 @@ export function FilmPlate() {
           playsinline
           width="1920"
           height="1080"
-          aria-label="A film about the OpenCode font."
+          aria-label="A film about the Warcode font."
           onPlay={() => {
             setStarted(true)
             setPlaying(true)
@@ -86,7 +86,7 @@ export function FilmPlate() {
           </span>
         </button>
         <figcaption data-anno>
-          <a href={mediaUrl(FILM.tall)} download="opencode-font-film-4x5.mp4">
+          <a href={mediaUrl(FILM.tall)} download="warcode-font-film-4x5.mp4">
             4:5 cut
           </a>
         </figcaption>

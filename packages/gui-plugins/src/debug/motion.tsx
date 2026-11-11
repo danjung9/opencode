@@ -3,10 +3,10 @@ import { Portal } from "solid-js/web"
 import { Option, Schema } from "effect"
 import { createRemoteControls, type ControlDescriptor, type State, type Value } from "knobs"
 import { KnobsPanel } from "knobs/solid"
-import { Icon } from "@opencode/ui/icon"
-import { IconButton } from "@opencode/ui/icon-button"
-import { springStyle } from "@opencode/ui/motion/solid"
-import { motionPresets, motionTuning, type MotionKnob } from "@opencode/ui/motion-tuning"
+import { Icon } from "@warcode/ui/icon"
+import { IconButton } from "@warcode/ui/icon-button"
+import { springStyle } from "@warcode/ui/motion/solid"
+import { motionPresets, motionTuning, type MotionKnob } from "@warcode/ui/motion-tuning"
 import {
   activeFeaturePreset,
   applyFeaturePreset,
@@ -17,9 +17,9 @@ import {
   reset,
   resetFeature,
   type MotionFeature,
-} from "@opencode/ui/motion-tuning-features"
-import { applyMotion } from "@opencode/ui/motion-tuning-fields"
-import { usePlugin } from "@opencode/plugin/gui"
+} from "@warcode/ui/motion-tuning-features"
+import { applyMotion } from "@warcode/ui/motion-tuning-fields"
+import { usePlugin } from "@warcode/plugin/gui"
 import {
   createMotionState,
   MOTION_WIDE_AT,
@@ -37,7 +37,7 @@ import {
 
 // Where the panel was dragged to, as an offset from its bottom-right home, its width, and the feature it last showed;
 // kept per device.
-const key = "opencode.motion.panel"
+const key = "warcode.motion.panel"
 
 const SavedPanel = Schema.fromJsonString(
   Schema.Struct({
@@ -516,7 +516,7 @@ function FeatureKnobs(props: {
     applyMotion(item, value as MotionKnob["value"])
   }
 
-  const controls = createRemoteControls(`opencode-motion-${group}`, descriptors, {
+  const controls = createRemoteControls(`warcode-motion-${group}`, descriptors, {
     values: values(),
     // Beta is a production build, where knobs resolves its production entry: the panel mounts only when shipped.
     ship: () => import("knobs/panel"),

@@ -1,6 +1,6 @@
-import { Browser } from "@opencode/plugin-browser/rpc"
-import { DialogProvider } from "@opencode/ui/context/dialog"
-import { ResizeHandle } from "@opencode/ui/resize-handle"
+import { Browser } from "@warcode/plugin-browser/rpc"
+import { DialogProvider } from "@warcode/ui/context/dialog"
+import { ResizeHandle } from "@warcode/ui/resize-handle"
 import {
   batch,
   createSignal,
@@ -21,7 +21,7 @@ import {
   type Bridge,
   type BridgeLayout,
   type Entry,
-} from "@opencode/plugin/gui/host"
+} from "@warcode/plugin/gui/host"
 import {
   type Appearance,
   type App,
@@ -44,7 +44,7 @@ import {
   type SetupContext,
   type Storage,
   type Workspaces,
-} from "@opencode/plugin/gui"
+} from "@warcode/plugin/gui"
 import barStyles from "./bar.css?inline"
 import type { History } from "./history"
 import browserEn from "./i18n/en"
@@ -54,7 +54,7 @@ import SessionBrowserPane from "./panel"
 import { BrowserPane, type PaneEvent } from "./ipc"
 import { pageShortcut } from "./keys"
 import { refusal } from "./policy"
-import { type BuiltinLayout } from "@opencode/plugin/gui/builtin"
+import { type BuiltinLayout } from "@warcode/plugin/gui/builtin"
 
 /** The renderer host pieces the pane runs on, passed in by `packages/app/component-tests/browser-pane.spec.ts`. */
 type PaneHost = {
@@ -931,7 +931,7 @@ export function mountBrowserRegion(input: RegionHost) {
       remove() {},
     })
 
-    const about: App = { name: "opencode", version: "", channel: "dev", platform: "desktop", packaged: false }
+    const about: App = { name: "warcode", version: "", channel: "dev", platform: "desktop", packaged: false }
     const locale: Locale = { locale: () => "en", direction: () => "ltr" }
     const appearance: Appearance = { font: () => "monospace", mode: () => "light" }
     const router: Router = { routing: () => false, path: () => "/" }

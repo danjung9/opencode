@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import { Schema } from "effect"
-import { Goal } from "@opencode/schema/goal"
+import { Goal } from "@warcode/schema/goal"
 import {
   createGoalState,
   selectGoal,

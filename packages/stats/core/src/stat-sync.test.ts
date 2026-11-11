@@ -4,7 +4,7 @@ import { catalogIdentity, type CatalogSnapshot } from "./domain/catalog-identity
 import type { StatPeriodScope } from "./domain/stat"
 import type { R2SqlData } from "./r2-sql"
 
-process.env.SST_RESOURCE_App = JSON.stringify({ name: "opencode", stage: "test" })
+process.env.SST_RESOURCE_App = JSON.stringify({ name: "warcode", stage: "test" })
 process.env.SST_RESOURCE_R2Sql = JSON.stringify({
   accountId: "account",
   bucket: "bucket",
@@ -23,12 +23,12 @@ const { CatalogUnavailableError, deterministicFailureAsResult, planStatsSync, sy
   await import("./stat-sync")
 const { DatabaseError } = await import("./database")
 
-const catalog: CatalogSnapshot = { offerings: [["opencode/model-a", "lab"]], models: [["model-a", "lab"]] }
+const catalog: CatalogSnapshot = { offerings: [["warcode/model-a", "lab"]], models: [["model-a", "lab"]] }
 const loadCatalog = () =>
   Promise.resolve({
     catalog: catalogIdentity({
       models: { "lab/model-a": {} },
-      providers: { opencode: { models: { "model-a": { canonical_model_id: "lab/model-a" } } } },
+      providers: { warcode: { models: { "model-a": { canonical_model_id: "lab/model-a" } } } },
     }),
     stale: false,
   })
@@ -53,7 +53,7 @@ describe("stats sync plan", () => {
       )
 
     const hourly = await plan(false)
-    expect(hourly.catalog).toEqual({ offerings: [["opencode/model-a", "lab"]], models: [["model-a", "lab"]] })
+    expect(hourly.catalog).toEqual({ offerings: [["warcode/model-a", "lab"]], models: [["model-a", "lab"]] })
     expect(hourly.periods.map((period) => `${period.grain} ${period.key}`)).toEqual([
       "week 2026-W43",
       "day 2026-10-19",

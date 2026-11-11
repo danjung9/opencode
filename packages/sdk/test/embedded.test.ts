@@ -1,20 +1,20 @@
 import fs from "fs/promises"
 import path from "path"
 import { expect } from "bun:test"
-import { LanguageModel, LLMClient } from "@opencode/ai/effect"
-import { OpenAIChat } from "@opencode/ai/protocols"
-import { TestLLM } from "@opencode/ai/testing"
-import { llmClient } from "@opencode/core/effect/app-node-platform"
-import { makeMemoryDriver } from "@opencode/core/environment/index"
-import { SessionRunnerModel } from "@opencode/core/session/runner/model"
-import { WorkspaceDriver } from "@opencode/core/workspace/driver"
-import { Plugin } from "@opencode/plugin/effect"
+import { LanguageModel, LLMClient } from "@warcode/ai/effect"
+import { OpenAIChat } from "@warcode/ai/protocols"
+import { TestLLM } from "@warcode/ai/testing"
+import { llmClient } from "@warcode/core/effect/app-node-platform"
+import { makeMemoryDriver } from "@warcode/core/environment/index"
+import { SessionRunnerModel } from "@warcode/core/session/runner/model"
+import { WorkspaceDriver } from "@warcode/core/workspace/driver"
+import { Plugin } from "@warcode/plugin/effect"
 import { makeDurableObjectStorage } from "../../core/test/fixture/durable-object-storage"
-import { OpenCodeWorkerd } from "../src/effect/workerd"
+import { WarcodeWorkerd } from "../src/effect/workerd"
 import { Deferred, Effect, Fiber, Latch, Layer, Option, Schedule, Stream } from "effect"
 import { testEffect } from "../../core/test/lib/effect"
 import { tmpdir } from "../../core/test/fixture/tmpdir"
-import type { OpenCodeEvent } from "../src/effect"
+import type { WarcodeEvent } from "../src/effect"
 
 const it = testEffect(Layer.empty)
 type Sdk = typeof import("../src/effect")
@@ -48,12 +48,12 @@ const loaded = <A, E, R>(name: string, read: Effect.Effect<A, E, R>, ready: (val
 
 for (const selection of ["explicit", "default"] as const) {
   it.live(`generate.text uses configured providers with ${selection} model selection`, () =>
-    withEmbedded("opencode-embedded-generate-", (fixture) =>
+    withEmbedded("warcode-embedded-generate-", (fixture) =>
       Effect.gen(function* () {
         const llm = yield* TestLLM.Test.pipe(
           Effect.provide(TestLLM.testLayer({ fallback: TestLLM.text("ready", "answer") })),
         )
-        const opencode = yield* fixture.sdk.OpenCode.create(
+        const warcode = yield* fixture.sdk.Warcode.create(
           {
             config: {
               directory: fixture.directory,
@@ -76,11 +76,11 @@ for (const selection of ["explicit", "default"] as const) {
             overrides: [llmClient.replace(Layer.succeed(LLMClient.Service, llm))],
           },
         )
-        yield* loaded("custom/fictional-chat", opencode.model.list({ location: location(fixture) }), (models) =>
+        yield* loaded("custom/fictional-chat", warcode.model.list({ location: location(fixture) }), (models) =>
           models.data.some((model) => model.providerID === "custom" && model.id === "fictional-chat"),
         )
 
-        const result = yield* opencode.experimental.generate.text({
+        const result = yield* warcode.experimental.generate.text({
           prompt: "Say ready",
           ...(selection === "explicit"
             ? {
@@ -102,7 +102,7 @@ for (const selection of ["explicit", "default"] as const) {
 }
 
 it.live("seeds host plugins from CreateOptions and loads delayed model plugins without self-deadlock", () =>
-  withEmbedded("opencode-embedded-seeded-plugin-", (fixture) =>
+  withEmbedded("warcode-embedded-seeded-plugin-", (fixture) =>
     Effect.gen(function* () {
       const llm = yield* TestLLM.Test.pipe(
         Effect.provide(TestLLM.testLayer({ fallback: TestLLM.text("ready", "answer") })),
@@ -119,7 +119,7 @@ it.live("seeds host plugins from CreateOptions and loads delayed model plugins w
               providers.update(fixture.sdk.Provider.ID.make("seeded"), (provider) => {
                 provider.name = "Seeded Provider"
                 provider.activation = "enabled"
-                provider.package = "@opencode/ai/providers/openai-compatible"
+                provider.package = "@warcode/ai/providers/openai-compatible"
                 provider.settings = { baseURL: "https://provider.example/v1", apiKey: "secret" }
               })
               providers.models.update(
@@ -132,7 +132,7 @@ it.live("seeds host plugins from CreateOptions and loads delayed model plugins w
             })
           }).pipe(Effect.orDie),
       })
-      const opencode = yield* fixture.sdk.OpenCode.create(
+      const warcode = yield* fixture.sdk.Warcode.create(
         {
           config: {
             directory: fixture.directory,
@@ -150,10 +150,10 @@ it.live("seeds host plugins from CreateOptions and loads delayed model plugins w
 
       const defaultModel = yield* loaded(
         "seeded model",
-        opencode.model.default({ location: location(fixture) }),
+        warcode.model.default({ location: location(fixture) }),
         (model) => model.data?.providerID === "seeded",
       )
-      const generated = yield* opencode.experimental.generate.text({ prompt: "Say ready" })
+      const generated = yield* warcode.experimental.generate.text({ prompt: "Say ready" })
 
       expect(listedDuringSetup.length).toBeGreaterThan(0)
       expect(defaultModel.data).toMatchObject({
@@ -166,10 +166,10 @@ it.live("seeds host plugins from CreateOptions and loads delayed model plugins w
   ),
 )
 
-it.live("OpenCodeWorkerd seeds plugins before cold model resolution", () =>
-  withEmbedded("opencode-workerd-seeded-plugin-", (fixture) =>
+it.live("WarcodeWorkerd seeds plugins before cold model resolution", () =>
+  withEmbedded("warcode-workerd-seeded-plugin-", (fixture) =>
     Effect.gen(function* () {
-      const opencode = yield* OpenCodeWorkerd.create({
+      const warcode = yield* WarcodeWorkerd.create({
         storage: makeDurableObjectStorage(),
         models: { fetch: false },
         config: { model: "workerd-seeded/fictional-chat" },
@@ -184,7 +184,7 @@ it.live("OpenCodeWorkerd seeds plugins before cold model resolution", () =>
                   providers.update(fixture.sdk.Provider.ID.make("workerd-seeded"), (provider) => {
                     provider.name = "Workerd Seeded"
                     provider.activation = "enabled"
-                    provider.package = "@opencode/ai/providers/openai-compatible"
+                    provider.package = "@warcode/ai/providers/openai-compatible"
                     provider.settings = { baseURL: "https://provider.example/v1", apiKey: "secret" }
                   })
                   providers.models.update(
@@ -200,7 +200,7 @@ it.live("OpenCodeWorkerd seeds plugins before cold model resolution", () =>
 
       const selected = yield* loaded(
         "workerd-seeded model",
-        opencode.model.default({
+        warcode.model.default({
           location: fixture.sdk.Location.Ref.make({ directory: fixture.sdk.AbsolutePath.make("/workspace") }),
         }),
         (model) => model.data?.providerID === "workerd-seeded",
@@ -216,49 +216,49 @@ it.live("OpenCodeWorkerd seeds plugins before cold model resolution", () =>
 it.live(
   "embedded client uses the real router and handlers",
   () =>
-    withEmbedded("opencode-embedded-", (fixture) =>
+    withEmbedded("warcode-embedded-", (fixture) =>
       Effect.gen(function* () {
-        const opencode = yield* fixture.sdk.OpenCode.create({ events: { persist: true } })
+        const warcode = yield* fixture.sdk.Warcode.create({ events: { persist: true } })
         const id = sessionID(fixture)
         const model = fixture.sdk.Model.Ref.make({
           id: fixture.sdk.Model.ID.make("embedded"),
           providerID: fixture.sdk.Provider.ID.make("test"),
         })
 
-        const created = yield* opencode.sessions.create({
+        const created = yield* warcode.sessions.create({
           id,
           agent: fixture.sdk.Agent.ID.make("build"),
           location: location(fixture),
         })
-        yield* opencode.sessions.switchModel({ sessionID: id, model })
-        const selected = yield* opencode.sessions.get({ sessionID: id })
-        const page = yield* opencode.sessions.list({ directory: fixture.sdk.AbsolutePath.make(fixture.directory) })
-        const active = yield* opencode.sessions.active()
-        const admitted = yield* opencode.sessions.prompt({
+        yield* warcode.sessions.switchModel({ sessionID: id, model })
+        const selected = yield* warcode.sessions.get({ sessionID: id })
+        const page = yield* warcode.sessions.list({ directory: fixture.sdk.AbsolutePath.make(fixture.directory) })
+        const active = yield* warcode.sessions.active()
+        const admitted = yield* warcode.sessions.prompt({
           sessionID: id,
           text: "Do not run",
           resume: false,
         })
-        const context = yield* opencode.sessions.context({ sessionID: id })
-        const pendingAfterAdmit = yield* opencode.sessions.inbox.list({ sessionID: id })
-        yield* opencode.experimental.session.instructions.entry.put({ sessionID: id, key: "deploy-target", value: "production" })
-        yield* opencode.experimental.session.instructions.entry.put({ sessionID: id, key: "flags", value: { beta: true } })
-        const contextEntries = yield* opencode.experimental.session.instructions.entry.list({ sessionID: id })
-        yield* opencode.experimental.session.instructions.entry.remove({ sessionID: id, key: "flags" })
-        const remainingContextEntries = yield* opencode.experimental.session.instructions.entry.list({ sessionID: id })
-        const wake = yield* opencode.sessions.prompt({
+        const context = yield* warcode.sessions.context({ sessionID: id })
+        const pendingAfterAdmit = yield* warcode.sessions.inbox.list({ sessionID: id })
+        yield* warcode.experimental.session.instructions.entry.put({ sessionID: id, key: "deploy-target", value: "production" })
+        yield* warcode.experimental.session.instructions.entry.put({ sessionID: id, key: "flags", value: { beta: true } })
+        const contextEntries = yield* warcode.experimental.session.instructions.entry.list({ sessionID: id })
+        yield* warcode.experimental.session.instructions.entry.remove({ sessionID: id, key: "flags" })
+        const remainingContextEntries = yield* warcode.experimental.session.instructions.entry.list({ sessionID: id })
+        const wake = yield* warcode.sessions.prompt({
           sessionID: id,
           text: "Promote this input",
         })
-        const prompted = yield* opencode.experimental.session.log({ sessionID: id, follow: true }).pipe(
+        const prompted = yield* warcode.experimental.session.log({ sessionID: id, follow: true }).pipe(
           Stream.filter((event) => event.type === "session.inbox.delivered" && event.data.inboxID === wake.id),
           Stream.runHead,
           Effect.timeout("10 seconds"),
           Effect.map(Option.getOrThrow),
         )
-        const wakeContext = yield* opencode.sessions.context({ sessionID: id })
-        const pendingAfterPromote = yield* opencode.sessions.inbox.list({ sessionID: id })
-        const event = yield* opencode.experimental.session.log({ sessionID: id }).pipe(
+        const wakeContext = yield* warcode.sessions.context({ sessionID: id })
+        const pendingAfterPromote = yield* warcode.sessions.inbox.list({ sessionID: id })
+        const event = yield* warcode.experimental.session.log({ sessionID: id }).pipe(
           Stream.filter((item) => item.type === "session.model.selected"),
           Stream.take(1),
           Stream.runHead,
@@ -267,22 +267,22 @@ it.live(
         const modelMessage = Option.fromNullishOr(context.find((message) => message.type === "model-switched")).pipe(
           Option.getOrThrow,
         )
-        const message = yield* opencode.sessions.message.get({ sessionID: id, messageID: modelMessage.id })
-        yield* opencode.sessions.interrupt({ sessionID: id })
-        const other = yield* opencode.sessions.create({ location: location(fixture) })
+        const message = yield* warcode.sessions.message.get({ sessionID: id, messageID: modelMessage.id })
+        yield* warcode.sessions.interrupt({ sessionID: id })
+        const other = yield* warcode.sessions.create({ location: location(fixture) })
         const missingSessionID = fixture.sdk.Session.ID.create()
         const missing = yield* Effect.all(
           [
-            opencode.experimental.session.log({ sessionID: missingSessionID }).pipe(Stream.runHead, Effect.flip),
-            opencode.sessions.interrupt({ sessionID: missingSessionID }).pipe(Effect.flip),
-            opencode.sessions.message.get({ sessionID: missingSessionID, messageID: modelMessage.id }).pipe(Effect.flip),
-            opencode.experimental.session.instructions.entry.list({ sessionID: missingSessionID }).pipe(Effect.flip),
-            opencode.sessions.inbox.list({ sessionID: missingSessionID }).pipe(Effect.flip),
+            warcode.experimental.session.log({ sessionID: missingSessionID }).pipe(Stream.runHead, Effect.flip),
+            warcode.sessions.interrupt({ sessionID: missingSessionID }).pipe(Effect.flip),
+            warcode.sessions.message.get({ sessionID: missingSessionID, messageID: modelMessage.id }).pipe(Effect.flip),
+            warcode.experimental.session.instructions.entry.list({ sessionID: missingSessionID }).pipe(Effect.flip),
+            warcode.sessions.inbox.list({ sessionID: missingSessionID }).pipe(Effect.flip),
           ],
           { concurrency: "unbounded" },
         )
         const missingMessage = yield* Effect.flip(
-          opencode.sessions.message.get({
+          warcode.sessions.message.get({
             sessionID: other.id,
             messageID: modelMessage.id,
           }),
@@ -322,11 +322,11 @@ it.live(
 )
 
 it.live("embedded client exposes plugin-backed web search", () =>
-  withEmbedded("opencode-embedded-websearch-", (fixture) =>
+  withEmbedded("warcode-embedded-websearch-", (fixture) =>
     Effect.gen(function* () {
-      const opencode = yield* fixture.sdk.OpenCode.create()
+      const warcode = yield* fixture.sdk.Warcode.create()
       const providerID = fixture.sdk.WebSearch.ID.make("embedded-websearch")
-      yield* opencode.plugin({
+      yield* warcode.plugin({
         id: `embedded-websearch-${crypto.randomUUID()}`,
         effect: (ctx) =>
           ctx.websearch.transform((editor) => {
@@ -340,19 +340,19 @@ it.live("embedded client exposes plugin-backed web search", () =>
       })
       yield* loaded(
         "embedded-websearch provider",
-        opencode.websearch.providers({ location: location(fixture) }),
+        warcode.websearch.providers({ location: location(fixture) }),
         (providers) => providers.data.some((provider) => provider.id === providerID),
       )
 
-      const result = yield* opencode.websearch.query({
-        query: "opencode",
+      const result = yield* warcode.websearch.query({
+        query: "warcode",
         providerID,
         location: location(fixture),
       })
 
       expect(result.data).toEqual({
         providerID,
-        results: [{ url: "https://example.com", content: "Found opencode", time: {} }],
+        results: [{ url: "https://example.com", content: "Found warcode", time: {} }],
       })
     }),
   ),
@@ -361,14 +361,14 @@ it.live("embedded client exposes plugin-backed web search", () =>
 it.live(
   "Location-owned runner events reach the ready global client",
   () =>
-    withEmbedded("opencode-embedded-events-", (fixture) =>
+    withEmbedded("warcode-embedded-events-", (fixture) =>
       Effect.gen(function* () {
-        const opencode = yield* fixture.sdk.OpenCode.create()
+        const warcode = yield* fixture.sdk.Warcode.create()
         const id = sessionID(fixture)
         const connected = yield* Latch.make(false)
-        const prompted = yield* Deferred.make<Extract<OpenCodeEvent, { type: "session.inbox.delivered" }>>()
+        const prompted = yield* Deferred.make<Extract<WarcodeEvent, { type: "session.inbox.delivered" }>>()
 
-        yield* opencode.events.subscribe().pipe(
+        yield* warcode.events.subscribe().pipe(
           Stream.runForEach((event) =>
             event.type === "server.connected"
               ? connected.open
@@ -379,8 +379,8 @@ it.live(
           Effect.forkScoped,
         )
         yield* connected.await
-        yield* opencode.sessions.create({ id, location: location(fixture) })
-        yield* opencode.sessions.prompt({
+        yield* warcode.sessions.create({ id, location: location(fixture) })
+        yield* warcode.sessions.prompt({
           sessionID: id,
           text: "Observe this input",
         })
@@ -395,17 +395,17 @@ it.live(
 it.live(
   "independent embedded hosts do not share live notifications",
   () =>
-    withEmbedded("opencode-embedded-hosts-", (fixture) =>
+    withEmbedded("warcode-embedded-hosts-", (fixture) =>
       Effect.gen(function* () {
-        const first = yield* fixture.sdk.OpenCode.create()
-        const second = yield* fixture.sdk.OpenCode.create()
+        const first = yield* fixture.sdk.Warcode.create()
+        const second = yield* fixture.sdk.Warcode.create()
         const id = sessionID(fixture)
         const firstReady = yield* Latch.make(false)
         const secondReady = yield* Latch.make(false)
         const firstEvent = yield* Latch.make(false)
         const secondEvent = yield* Latch.make(false)
         const observe = (ready: Latch.Latch, event: Latch.Latch) =>
-          Stream.runForEach((notification: OpenCodeEvent) =>
+          Stream.runForEach((notification: WarcodeEvent) =>
             notification.type === "server.connected"
               ? ready.open
               : notification.type === "session.agent.selected" && notification.data.sessionID === id
@@ -427,18 +427,18 @@ it.live(
 )
 
 it.live("embedded client is available as a Layer service", () =>
-  withEmbedded("opencode-embedded-layer-", (fixture) => {
+  withEmbedded("warcode-embedded-layer-", (fixture) => {
     const id = sessionID(fixture)
     return Effect.gen(function* () {
-      const opencode = yield* fixture.sdk.OpenCode.Service
-      const created = yield* opencode.sessions.create({ id, location: location(fixture) })
+      const warcode = yield* fixture.sdk.Warcode.Service
+      const created = yield* warcode.sessions.create({ id, location: location(fixture) })
       expect(created.id).toBe(id)
-    }).pipe(Effect.provide(fixture.sdk.OpenCode.layer()))
+    }).pipe(Effect.provide(fixture.sdk.Warcode.layer()))
   }),
 )
 
 it.live("configures workspace providers through the SDK facade", () =>
-  withEmbedded("opencode-embedded-workspace-", (fixture) =>
+  withEmbedded("warcode-embedded-workspace-", (fixture) =>
     Effect.gen(function* () {
       const calls: Array<{ readonly operation: string; readonly workspaceID: string }> = []
       const driver = WorkspaceDriver.make({
@@ -456,15 +456,15 @@ it.live("configures workspace providers through the SDK facade", () =>
           return Effect.void
         },
       })
-      const opencode = yield* fixture.sdk.OpenCode.create({ workspaceProviders: { fake: driver } })
+      const warcode = yield* fixture.sdk.Warcode.create({ workspaceProviders: { fake: driver } })
       const requestedID = fixture.sdk.Workspace.ID.create()
-      const workspaceID = yield* opencode.workspace.create({ id: requestedID, provider: "fake" })
+      const workspaceID = yield* warcode.workspace.create({ id: requestedID, provider: "fake" })
 
       expect(workspaceID).toBe(requestedID)
-      expect(yield* opencode.workspace.create({ id: requestedID, provider: "fake" })).toBe(requestedID)
+      expect(yield* warcode.workspace.create({ id: requestedID, provider: "fake" })).toBe(requestedID)
       expect(calls).toEqual([])
 
-      const workspace = yield* opencode.workspace.provision({ workspaceID })
+      const workspace = yield* warcode.workspace.provision({ workspaceID })
 
       expect(workspace.provider).toBe("fake")
       expect(workspace.binding).toEqual({ externalID: workspace.id })
@@ -474,12 +474,12 @@ it.live("configures workspace providers through the SDK facade", () =>
         directory: fixture.sdk.AbsolutePath.make("/"),
         workspaceID: workspace.id,
       })
-      const session = yield* opencode.sessions.create({ location: workspaceLocation })
+      const session = yield* warcode.sessions.create({ location: workspaceLocation })
       expect(session.location.workspaceID).toBe(workspace.id)
 
-      expect(yield* opencode.workspace.destroy({ workspaceID: workspace.id })).toEqual({ destroyed: true })
+      expect(yield* warcode.workspace.destroy({ workspaceID: workspace.id })).toEqual({ destroyed: true })
       expect(calls.map((call) => call.operation)).toEqual(["create", "destroy"])
-      expect(yield* opencode.workspace.destroy({ workspaceID: workspace.id })).toEqual({ destroyed: false })
+      expect(yield* warcode.workspace.destroy({ workspaceID: workspace.id })).toEqual({ destroyed: false })
       expect(calls.map((call) => call.operation)).toEqual(["create", "destroy"])
     }),
   ),
@@ -527,7 +527,7 @@ const workspaceModelScenario = (fixture: Fixture, policy: "eager" | "lazy") =>
     })
     const configDirectory = path.join(fixture.directory, "config")
     yield* Effect.promise(() => fs.mkdir(configDirectory))
-    const opencode = yield* fixture.sdk.OpenCode.create(
+    const warcode = yield* fixture.sdk.Warcode.create(
       {
         config: { directory: configDirectory, project: false, content: "{}" },
         workspaceProviders: { fake: driver },
@@ -536,10 +536,10 @@ const workspaceModelScenario = (fixture: Fixture, policy: "eager" | "lazy") =>
         overrides: [llmClient.replace(client), SessionRunnerModel.node.replace(models)],
       },
     )
-    const workspaceID = yield* opencode.workspace.create({ provider: "fake" })
+    const workspaceID = yield* warcode.workspace.create({ provider: "fake" })
     const provisioning =
       policy === "eager"
-        ? yield* opencode.workspace.provision({ workspaceID }).pipe(Effect.forkScoped({ startImmediately: true }))
+        ? yield* warcode.workspace.provision({ workspaceID }).pipe(Effect.forkScoped({ startImmediately: true }))
         : undefined
     if (provisioning) {
       yield* Deferred.await(createStarted).pipe(
@@ -547,13 +547,13 @@ const workspaceModelScenario = (fixture: Fixture, policy: "eager" | "lazy") =>
       )
     }
 
-    const session = yield* opencode.sessions.create({
+    const session = yield* warcode.sessions.create({
       location: fixture.sdk.Location.Ref.make({
         directory: fixture.sdk.AbsolutePath.make(fixture.directory),
         workspaceID,
       }),
     })
-    yield* opencode.sessions.prompt({ sessionID: session.id, text: "Answer without using tools" })
+    yield* warcode.sessions.prompt({ sessionID: session.id, text: "Answer without using tools" })
     yield* Deferred.await(modelStarted).pipe(
       Effect.timeoutOrElse({ duration: "8 seconds", orElse: () => Effect.die("model stream did not start") }),
     )
@@ -571,20 +571,20 @@ const workspaceModelScenario = (fixture: Fixture, policy: "eager" | "lazy") =>
 
 it.live(
   "starts model execution while eager workspace provisioning is blocked",
-  () => withEmbedded("opencode-embedded-workspace-eager-", (fixture) => workspaceModelScenario(fixture, "eager")),
+  () => withEmbedded("warcode-embedded-workspace-eager-", (fixture) => workspaceModelScenario(fixture, "eager")),
   15_000,
 )
 
 it.live(
   "starts model execution without provisioning a lazy workspace",
-  () => withEmbedded("opencode-embedded-workspace-lazy-", (fixture) => workspaceModelScenario(fixture, "lazy")),
+  () => withEmbedded("warcode-embedded-workspace-lazy-", (fixture) => workspaceModelScenario(fixture, "lazy")),
   15_000,
 )
 
 it.live(
   "blocks the model-selected first tool on lazy provisioning",
   () =>
-    withEmbedded("opencode-embedded-workspace-tool-", (fixture) =>
+    withEmbedded("warcode-embedded-workspace-tool-", (fixture) =>
       Effect.gen(function* () {
         const calls: string[] = []
         const createStarted = yield* Deferred.make<void>()
@@ -628,7 +628,7 @@ it.live(
         })
         const configDirectory = path.join(fixture.directory, "config")
         yield* Effect.promise(() => fs.mkdir(configDirectory))
-        const opencode = yield* fixture.sdk.OpenCode.create(
+        const warcode = yield* fixture.sdk.Warcode.create(
           {
             config: { directory: configDirectory, project: false, content: "{}" },
             workspaceProviders: { fake: driver },
@@ -640,8 +640,8 @@ it.live(
             ],
           },
         )
-        const workspaceID = yield* opencode.workspace.create({ provider: "fake" })
-        const session = yield* opencode.sessions.create({
+        const workspaceID = yield* warcode.workspace.create({ provider: "fake" })
+        const session = yield* warcode.sessions.create({
           location: fixture.sdk.Location.Ref.make({
             directory: fixture.sdk.AbsolutePath.make(fixture.directory),
             workspaceID,
@@ -649,7 +649,7 @@ it.live(
         })
         expect(calls).toEqual([])
 
-        yield* opencode.sessions.prompt({ sessionID: session.id, text: "Run echo" })
+        yield* warcode.sessions.prompt({ sessionID: session.id, text: "Run echo" })
         // The model-selected shell tool is the first execution-plane demand: it alone
         // starts provisioning and blocks inside the tool call until the provider is ready.
         yield* Deferred.await(createStarted).pipe(
@@ -658,7 +658,7 @@ it.live(
         expect(calls).toEqual(["create"])
 
         yield* Deferred.succeed(createRelease, undefined)
-        yield* opencode.experimental.session.wait({ sessionID: session.id })
+        yield* warcode.experimental.session.wait({ sessionID: session.id })
         // Provisioning settled, the workspace connected, and the turn completed. The
         // memory driver rejects the actual spawn, which surfaces to the model as an
         // ordinary tool error before the final text response.
@@ -670,10 +670,10 @@ it.live(
 )
 
 it.live("preserves unknown workspace provider errors", () =>
-  withEmbedded("opencode-embedded-workspace-provider-", (fixture) =>
+  withEmbedded("warcode-embedded-workspace-provider-", (fixture) =>
     Effect.gen(function* () {
-      const opencode = yield* fixture.sdk.OpenCode.create()
-      const error = yield* opencode.workspace.create({ provider: "missing" }).pipe(Effect.flip)
+      const warcode = yield* fixture.sdk.Warcode.create()
+      const error = yield* warcode.workspace.create({ provider: "missing" }).pipe(Effect.flip)
       expect(error).toEqual(new WorkspaceDriver.ProviderNotFound({ provider: "missing" }))
     }),
   ),

@@ -9,32 +9,32 @@ import {
   SystemPart,
   TransportError,
   type LLMRequest,
-} from "@opencode/ai/effect"
-import { OpenAIChat, OpenAIResponses } from "@opencode/ai/protocols"
-import { Agent } from "@opencode/core/agent"
-import { Database } from "@opencode/core/database/database"
-import { AppNodeBuilder } from "@opencode/core/effect/app-node-builder"
-import { llmClient } from "@opencode/core/effect/app-node-platform"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { Bus } from "@opencode/core/bus"
-import { SessionEvent } from "@opencode/core/session/event"
-import { SessionMessage } from "@opencode/core/session/message"
-import { SessionProjector } from "@opencode/core/session/projector"
-import { SessionRunnerModel } from "@opencode/core/session/runner/model"
-import { SessionTable } from "@opencode/core/session/sql"
-import { SessionStore } from "@opencode/core/session/store"
-import { SessionTitle } from "@opencode/core/session/title"
-import { PluginHooks } from "@opencode/core/plugin/hooks"
-import { PluginSupervisor } from "@opencode/core/plugin/supervisor"
-import { Location } from "@opencode/core/location"
-import { Session } from "@opencode/core/session"
-import { Project } from "@opencode/core/project"
-import { ProjectTable } from "@opencode/core/project/sql"
-import { App } from "@opencode/core/app"
-import { Model } from "@opencode/core/model"
-import { Provider } from "@opencode/core/provider"
-import { AbsolutePath } from "@opencode/core/schema"
-import { Money } from "@opencode/schema/money"
+} from "@warcode/ai/effect"
+import { OpenAIChat, OpenAIResponses } from "@warcode/ai/protocols"
+import { Agent } from "@warcode/core/agent"
+import { Database } from "@warcode/core/database/database"
+import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
+import { llmClient } from "@warcode/core/effect/app-node-platform"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { Bus } from "@warcode/core/bus"
+import { SessionEvent } from "@warcode/core/session/event"
+import { SessionMessage } from "@warcode/core/session/message"
+import { SessionProjector } from "@warcode/core/session/projector"
+import { SessionRunnerModel } from "@warcode/core/session/runner/model"
+import { SessionTable } from "@warcode/core/session/sql"
+import { SessionStore } from "@warcode/core/session/store"
+import { SessionTitle } from "@warcode/core/session/title"
+import { PluginHooks } from "@warcode/core/plugin/hooks"
+import { PluginSupervisor } from "@warcode/core/plugin/supervisor"
+import { Location } from "@warcode/core/location"
+import { Session } from "@warcode/core/session"
+import { Project } from "@warcode/core/project"
+import { ProjectTable } from "@warcode/core/project/sql"
+import { App } from "@warcode/core/app"
+import { Model } from "@warcode/core/model"
+import { Provider } from "@warcode/core/provider"
+import { AbsolutePath } from "@warcode/core/schema"
+import { Money } from "@warcode/schema/money"
 import { Deferred, Effect, Fiber, Layer, Schema, Stream } from "effect"
 import { testEffect } from "./lib/effect"
 
@@ -218,13 +218,13 @@ it.effect("generates a title from the sole user message and renames the session"
 
     expect(requests).toHaveLength(1)
     expect(requests[0]?.headers).toEqual({
-      "x-opencode-session-id": sessionID,
+      "x-warcode-session-id": sessionID,
       "x-session-affinity": sessionID,
       "X-Session-Id": sessionID,
       "User-Agent": App.useragent(App.make()),
-      "x-opencode-project": Project.ID.global,
-      "x-opencode-session": sessionID,
-      "x-opencode-client": "opencode",
+      "x-warcode-project": Project.ID.global,
+      "x-warcode-session": sessionID,
+      "x-warcode-client": "warcode",
     })
     expect(requests[0]?.promptCacheKey).toBe(sessionID)
     expect(requests[0]?.tools).toEqual([])

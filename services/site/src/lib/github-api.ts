@@ -9,7 +9,7 @@ export async function githubFetch(url: string, init?: RequestInit) {
     ...init,
     headers: {
       Accept: "application/vnd.github+json",
-      "User-Agent": "OpenCode-Website",
+      "User-Agent": "Warcode-Website",
     },
     signal: AbortSignal.timeout(8000),
   }).catch(() => undefined)
@@ -45,5 +45,5 @@ export const githubDevCache = {
 
 async function cachePath(key: string) {
   const { tmpdir } = await import("node:os")
-  return `${tmpdir()}/opencode-site-github/${key}.json`
+  return `${tmpdir()}/warcode-site-github/${key}.json`
 }

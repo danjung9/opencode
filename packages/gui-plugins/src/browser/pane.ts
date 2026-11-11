@@ -1,12 +1,12 @@
 import { NodeHttpClient } from "@effect/platform-node"
-import { Browser } from "@opencode/plugin-browser/rpc"
-import { OpenCode } from "@opencode/client/effect"
-import { SessionID } from "@opencode/schema/session-id"
+import { Browser } from "@warcode/plugin-browser/rpc"
+import { Warcode } from "@warcode/client/effect"
+import { SessionID } from "@warcode/schema/session-id"
 import electron, { type BrowserWindow } from "electron"
 import { Cause, Deferred, Effect, ManagedRuntime, Option, Queue, Schedule, Schema, Stream } from "effect"
 import { HttpClient, HttpClientRequest } from "effect/http"
-import type { BuiltinMainStorage } from "@opencode/plugin/gui/builtin"
-import type { Embeds, Persisted, ServerEndpoints, Windows } from "@opencode/plugin/gui/main"
+import type { BuiltinMainStorage } from "@warcode/plugin/gui/builtin"
+import type { Embeds, Persisted, ServerEndpoints, Windows } from "@warcode/plugin/gui/main"
 import { createBrowserPage, type BrowserPage, type Shared } from "./chromium"
 import { browserFailure } from "./errors"
 import { createBrowserNetwork, type BrowserNetwork } from "./network"
@@ -96,7 +96,7 @@ export function createBrowserPane(input: {
       if (win.isDestroyed() || win.webContents.isDestroyed()) throw new Error("browser.pane.owner.unavailable")
       const sessionID = SessionID.make(target.session)
       const storageKey = `${target.server}\n${sessionID}`
-      const partition = `opencode-browser-${crypto.randomUUID()}`
+      const partition = `warcode-browser-${crypto.randomUUID()}`
 
       // Navigation guards cover documents; subresources (img, script, fetch) also must not read
       // file: URLs outside the roots. One listener per partition covers every page in this attachment.
@@ -146,7 +146,7 @@ export function createBrowserPane(input: {
 
             // The renderer never holds the managed sidecar's password; Node requests bypass
             // the webRequest header injection, so the host resolves the credential here in main.
-            const client = yield* OpenCode.make({ baseUrl: server.url }).pipe(
+            const client = yield* Warcode.make({ baseUrl: server.url }).pipe(
               Effect.provideService(
                 HttpClient.HttpClient,
                 Object.keys(server.headers).length

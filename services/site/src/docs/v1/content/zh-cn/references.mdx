@@ -3,11 +3,11 @@ title: 引用
 description: 将本地目录和 Git 仓库添加为项目引用。
 ---
 
-引用让 OpenCode 可以访问当前项目之外的目录。你可以用它在工作时提供文档、共享库、示例或其他仓库。
+引用让 Warcode 可以访问当前项目之外的目录。你可以用它在工作时提供文档、共享库、示例或其他仓库。
 
-引用在 `opencode.json` 或 `opencode.jsonc` 中按别名配置。
+引用在 `warcode.json` 或 `warcode.jsonc` 中按别名配置。
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
   "references": {
@@ -16,7 +16,7 @@ description: 将本地目录和 Git 仓库添加为项目引用。
       "description": "Use for product behavior and documentation conventions",
     },
     "sdk": {
-      "repository": "anomalyco/opencode-sdk-js",
+      "repository": "anomalyco/warcode-sdk-js",
       "branch": "main",
       "description": "Use for JavaScript SDK implementation details",
     },
@@ -30,7 +30,7 @@ description: 将本地目录和 Git 仓库添加为项目引用。
 
 使用 `path` 引用本地目录。
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": {
@@ -48,7 +48,7 @@ description: 将本地目录和 Git 仓库添加为项目引用。
 
 你也可以使用字符串简写：
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "docs": "../docs",
@@ -60,9 +60,9 @@ description: 将本地目录和 Git 仓库添加为项目引用。
 
 ## Git 仓库
 
-使用 `repository` 引用 Git 仓库。OpenCode 会将该仓库放入本地仓库缓存中，并将检出的源代码作为引用目录提供。
+使用 `repository` 引用 Git 仓库。Warcode 会将该仓库放入本地仓库缓存中，并将检出的源代码作为引用目录提供。
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": {
@@ -73,11 +73,11 @@ description: 将本地目录和 Git 仓库添加为项目引用。
 }
 ```
 
-`repository` 接受 Git URL、host/path 形式的引用以及 GitHub `owner/repo` 简写。可选的 `branch` 字段用于选择分支或 ref。未设置 `branch` 时，OpenCode 使用仓库的默认分支。
+`repository` 接受 Git URL、host/path 形式的引用以及 GitHub `owner/repo` 简写。可选的 `branch` 字段用于选择分支或 ref。未设置 `branch` 时，Warcode 使用仓库的默认分支。
 
 如果不需要指定分支、描述或其他选项，可以使用字符串简写：
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "effect": "Effect-TS/effect",
@@ -95,7 +95,7 @@ Git 引用会异步刷新。新配置的仓库可能需要一点时间才能完�
 
 添加 `description` 来说明代理应在何时使用某个引用。
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "design-system": {
@@ -106,7 +106,7 @@ Git 引用会异步刷新。新配置的仓库可能需要一点时间才能完�
 }
 ```
 
-OpenCode 会将带有描述的引用加入代理上下文。描述应简短、具体，足以区分内容相似的引用。没有描述的引用仍可通过自动补全和直接使用来访问，但不会告知代理。
+Warcode 会将带有描述的引用加入代理上下文。描述应简短、具体，足以区分内容相似的引用。没有描述的引用仍可通过自动补全和直接使用来访问，但不会告知代理。
 
 ---
 
@@ -114,7 +114,7 @@ OpenCode 会将带有描述的引用加入代理上下文。描述应简短、�
 
 将 `hidden` 设置为 `true`，即可在 TUI 的 `@` 自动补全中隐藏某个引用。
 
-```jsonc title="opencode.jsonc"
+```jsonc title="warcode.jsonc"
 {
   "references": {
     "internal": {
@@ -140,7 +140,7 @@ Compare this implementation with @sdk/src/client.ts
 
 对于带有描述的已配置引用，代理还会在系统上下文中收到它们的解析路径和描述，因此在相关时可以自行查看引用，无需你手动附加。
 
-OpenCode 会自动允许引用目录通过其外部目录权限边界。常规的工具权限仍然适用；例如，无法编辑文件的代理不会因为某个目录被配置为引用而获得编辑权限。
+Warcode 会自动允许引用目录通过其外部目录权限边界。常规的工具权限仍然适用；例如，无法编辑文件的代理不会因为某个目录被配置为引用而获得编辑权限。
 
 ---
 

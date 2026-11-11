@@ -61,7 +61,7 @@ export function ExtensionPage(props: { slug: ExtensionSlug; path?: string }) {
       <Meta name="description" content={extension().description} />
       <JsonLd
         data={softwareData({
-          name: `OpenCode ${extension().name}`,
+          name: `Warcode ${extension().name}`,
           description: extension().description,
           path: language.route(path()),
           image: ogImage(path()).src,

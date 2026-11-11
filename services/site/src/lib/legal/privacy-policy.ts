@@ -3,15 +3,15 @@ import type { LegalDocumentContent } from "~/lib/legal"
 export const privacyPolicy: LegalDocumentContent = {
   path: "/legal/privacy-policy",
   title: "Privacy Policy",
-  metaTitle: "OpenCode | Privacy Policy for the website and services",
+  metaTitle: "Warcode | Privacy Policy for the website and services",
   effective: "Effective date: Nov 9, 2026",
   description:
-    "How OpenCode collects, uses, shares and protects your personal data when you use the OpenCode website, apps and hosted services, and the choices you have.",
+    "How Warcode collects, uses, shares and protects your personal data when you use the Warcode website, apps and hosted services, and the choices you have.",
   body: [
     [
       "p",
       {},
-      'OpenCode is provided by Anomaly Innovations, Inc. ("Anomaly," "OpenCode," "we," "us" or "our"). We take your privacy seriously. Please read this Privacy Policy to learn how we treat your personal data. ',
+      'Warcode is provided by Anomaly Innovations, Inc. ("Anomaly," "Warcode," "we," "us" or "our"). We take your privacy seriously. Please read this Privacy Policy to learn how we treat your personal data. ',
       [
         "strong",
         {},
@@ -22,7 +22,7 @@ export const privacyPolicy: LegalDocumentContent = {
     [
       "p",
       {},
-      "Remember that your use of OpenCode is at all times subject to our Terms of Use, ",
+      "Remember that your use of Warcode is at all times subject to our Terms of Use, ",
       ["a", { href: "/legal/terms-of-service" }, "https://opencode.ai/legal/terms-of-service"],
       ", which incorporates this Privacy Policy. Any terms we use in this Policy without defining them have the definitions given to them in the Terms of Use.",
     ],
@@ -30,7 +30,7 @@ export const privacyPolicy: LegalDocumentContent = {
     [
       "p",
       {},
-      "As we continually work to improve our Services, we may need to change this Privacy Policy from time to time. We will alert you of material changes by placing a notice on the OpenCode website, by sending you an email and/or by some other means. Please note that if you've opted not to receive legal notice emails from us (or you haven't provided us with your email address), those legal notices will still govern your use of the Services, and you are still responsible for reading and understanding them. If you use the Services after any changes to the Privacy Policy have been posted, that means you agree to all of the changes.",
+      "As we continually work to improve our Services, we may need to change this Privacy Policy from time to time. We will alert you of material changes by placing a notice on the Warcode website, by sending you an email and/or by some other means. Please note that if you've opted not to receive legal notice emails from us (or you haven't provided us with your email address), those legal notices will still govern your use of the Services, and you are still responsible for reading and understanding them. If you use the Services after any changes to the Privacy Policy have been posted, that means you agree to all of the changes.",
     ],
     ["h2", { id: "privacy-policy-table-of-contents" }, "Privacy Policy Table of Contents"],
     [
@@ -64,7 +64,7 @@ export const privacyPolicy: LegalDocumentContent = {
         "li",
         {},
         ["a", { href: "#tracking-tools" }, "Tracking Tools and Opt-Out"],
-        ["ul", {}, ["li", {}, ["a", { href: "#product-analytics" }, "Product Analytics on opencode.ai"]]],
+        ["ul", {}, ["li", {}, ["a", { href: "#product-analytics" }, "Product Analytics on warcode.ai"]]],
       ],
       ["li", {}, ["a", { href: "#data-security" }, "Data Security"]],
       ["li", {}, ["a", { href: "#personal-data-of-children" }, "Personal Data of Children"]],
@@ -281,7 +281,7 @@ export const privacyPolicy: LegalDocumentContent = {
       [
         "li",
         {},
-        "Responding to correspondence that we receive from you, contacting you when necessary or requested, and sending you information about OpenCode.",
+        "Responding to correspondence that we receive from you, contacting you when necessary or requested, and sending you information about Warcode.",
       ],
       ["li", {}, "Sending emails and other communications according to your preferences."],
     ],
@@ -289,7 +289,7 @@ export const privacyPolicy: LegalDocumentContent = {
     [
       "p",
       {},
-      "In addition, each of the above referenced categories of Personal Data may be collected, used, and disclosed with the government, including law enforcement, or other parties to meet certain legal requirements and enforcing legal terms including: fulfilling our legal obligations under applicable law, regulation, court order or other legal process, such as preventing, detecting and investigating security incidents and potentially illegal or prohibited activities; protecting the rights, property or safety of you, OpenCode or another party; enforcing any agreements with you; responding to claims that any posting or other content violates third-party rights; and resolving disputes.",
+      "In addition, each of the above referenced categories of Personal Data may be collected, used, and disclosed with the government, including law enforcement, or other parties to meet certain legal requirements and enforcing legal terms including: fulfilling our legal obligations under applicable law, regulation, court order or other legal process, such as preventing, detecting and investigating security incidents and potentially illegal or prohibited activities; protecting the rights, property or safety of you, Warcode or another party; enforcing any agreements with you; responding to claims that any posting or other content violates third-party rights; and resolving disputes.",
     ],
     [
       "p",
@@ -404,19 +404,19 @@ export const privacyPolicy: LegalDocumentContent = {
     [
       "p",
       {},
-      'OpenCode Console lets a workspace connect third-party services ("Connected Services"), such as Slack, Zoom, HubSpot, GitHub, Google Workspace and Microsoft 365, so that its members\' OpenCode agents can use them. This section explains how we handle data from Connected Services. It supplements the rest of this Privacy Policy and controls where they conflict.',
+      'Warcode Console lets a workspace connect third-party services ("Connected Services"), such as Slack, Zoom, HubSpot, GitHub, Google Workspace and Microsoft 365, so that its members\' Warcode agents can use them. This section explains how we handle data from Connected Services. It supplements the rest of this Privacy Policy and controls where they conflict.',
     ],
     [
       "p",
       {},
       ["strong", {}, "What we receive and store."],
-      " To connect a Connected Service, you sign in with that service and authorize OpenCode Console, or you or a workspace administrator enter an API key. We encrypt and store the access and refresh tokens or API keys, and any OAuth client secret your workspace provides, and we record the permissions you granted, so that your OpenCode agent can act for you within them. Where a service gives us your user or workspace identifier when you sign in, as Slack and Zoom do, we store it too, so we can recognize your connection and act when the service tells us you removed our app. We store information about the service's tools and instructions, such as their names, descriptions and inputs, and the status of your connection. When you run OpenCode on your own device, OpenCode Console doesn't store the content you access through a Connected Service, such as messages, files, meetings, recordings or CRM records.",
+      " To connect a Connected Service, you sign in with that service and authorize Warcode Console, or you or a workspace administrator enter an API key. We encrypt and store the access and refresh tokens or API keys, and any OAuth client secret your workspace provides, and we record the permissions you granted, so that your Warcode agent can act for you within them. Where a service gives us your user or workspace identifier when you sign in, as Slack and Zoom do, we store it too, so we can recognize your connection and act when the service tells us you removed our app. We store information about the service's tools and instructions, such as their names, descriptions and inputs, and the status of your connection. When you run Warcode on your own device, Warcode Console doesn't store the content you access through a Connected Service, such as messages, files, meetings, recordings or CRM records.",
     ],
     [
       "p",
       {},
       ["strong", {}, "Hosted agents."],
-      " When your workspace runs an OpenCode agent hosted by OpenCode Console, such as in Slack, GitHub, Discord, email or the Console itself, we store the content of each session (one conversation with the agent, such as a Slack thread). This includes the messages and files shared with the agent, the files in its sandbox (the isolated environment where it runs commands), and the results of its tool calls, including content it retrieves from Connected Services. We store this so the agent can finish its work and continue the conversation later. We delete a session and its sandbox 30 days after its last activity, such as a message to the agent, a scheduled run or a response it finishes. Reading a session doesn't count as activity. We delete them sooner when the agent, its service account or the workspace is deleted. We also delete them sooner when the Slack, GitHub or email inbox connection the session came through is disconnected or removed, such as by uninstalling OpenCode from Slack, or when the agent no longer has a trigger (the setting that lets a Slack workspace, Discord server, GitHub repository, inbox, webhook or schedule start the agent) for the place the session came from. Pausing an agent or turning a trigger off doesn't delete its sessions. For emails sent to an inbox connected to your workspace's agent, we delete the full messages after 90 days, or sooner when the inbox is disconnected or the workspace is deleted. While the inbox is connected, we keep each email's sender, recipient, subject and a preview of up to 200 characters, along with the agent's draft and sent replies and its notes to your team, in the workspace's review queue, and delete them after the inbox is disconnected or the workspace is deleted. If someone schedules a task with the agent in Slack, we keep its instructions until 30 days after the schedule ends, or until Slack is disconnected or the workspace is deleted. To ask us to delete a session or email thread sooner, email ",
+      " When your workspace runs an Warcode agent hosted by Warcode Console, such as in Slack, GitHub, Discord, email or the Console itself, we store the content of each session (one conversation with the agent, such as a Slack thread). This includes the messages and files shared with the agent, the files in its sandbox (the isolated environment where it runs commands), and the results of its tool calls, including content it retrieves from Connected Services. We store this so the agent can finish its work and continue the conversation later. We delete a session and its sandbox 30 days after its last activity, such as a message to the agent, a scheduled run or a response it finishes. Reading a session doesn't count as activity. We delete them sooner when the agent, its service account or the workspace is deleted. We also delete them sooner when the Slack, GitHub or email inbox connection the session came through is disconnected or removed, such as by uninstalling Warcode from Slack, or when the agent no longer has a trigger (the setting that lets a Slack workspace, Discord server, GitHub repository, inbox, webhook or schedule start the agent) for the place the session came from. Pausing an agent or turning a trigger off doesn't delete its sessions. For emails sent to an inbox connected to your workspace's agent, we delete the full messages after 90 days, or sooner when the inbox is disconnected or the workspace is deleted. While the inbox is connected, we keep each email's sender, recipient, subject and a preview of up to 200 characters, along with the agent's draft and sent replies and its notes to your team, in the workspace's review queue, and delete them after the inbox is disconnected or the workspace is deleted. If someone schedules a task with the agent in Slack, we keep its instructions until 30 days after the schedule ends, or until Slack is disconnected or the workspace is deleted. To ask us to delete a session or email thread sooner, email ",
       ["a", { href: "mailto:help@anoma.ly" }, "help@anoma.ly"],
       ".",
     ],
@@ -424,13 +424,13 @@ export const privacyPolicy: LegalDocumentContent = {
       "p",
       {},
       ["strong", {}, "How we use it."],
-      " When your OpenCode agent uses a Connected Service, OpenCode Console sends the request to the service with your credentials and returns the service's response to your OpenCode agent. We use data from Connected Services only to provide these features to you, keep them secure and comply with the law. Our request logs record limited information about each request, such as the service, the tool used and whether it succeeded, but not what was sent or returned. We keep these logs for up to 30 days. These logs don't include the content of hosted agent sessions. See \"Hosted agents\" above for what they store and how long we keep it.",
+      " When your Warcode agent uses a Connected Service, Warcode Console sends the request to the service with your credentials and returns the service's response to your Warcode agent. We use data from Connected Services only to provide these features to you, keep them secure and comply with the law. Our request logs record limited information about each request, such as the service, the tool used and whether it succeeded, but not what was sent or returned. We keep these logs for up to 30 days. These logs don't include the content of hosted agent sessions. See \"Hosted agents\" above for what they store and how long we keep it.",
     ],
     [
       "p",
       {},
       ["strong", {}, "AI models."],
-      " Your OpenCode agent sends what it receives from a Connected Service to the AI model you or your workspace chose, to complete your request. When a third party provides that model, that third party's terms and retention policies apply. We don't use data from Connected Services to train, develop or improve artificial intelligence or machine learning models, and we don't sell it or use it for advertising.",
+      " Your Warcode agent sends what it receives from a Connected Service to the AI model you or your workspace chose, to complete your request. When a third party provides that model, that third party's terms and retention policies apply. We don't use data from Connected Services to train, develop or improve artificial intelligence or machine learning models, and we don't sell it or use it for advertising.",
     ],
     [
       "p",
@@ -442,7 +442,7 @@ export const privacyPolicy: LegalDocumentContent = {
       "p",
       {},
       ["strong", {}, "Retention and deletion."],
-      ' We keep your tokens or API keys for a Connected Service until you disconnect it, a workspace administrator removes it, you leave the workspace, your account is deleted, the workspace is deleted in OpenCode Console or the service tells us you removed our app. We then delete them and any user identifier we stored. Where the service supports it, we also ask the service to revoke your OAuth tokens, unless another of your connections still relies on the same authorization. Hosted agent sessions are deleted as described under "Hosted agents" above. Disconnecting any other Connected Service, such as Zoom or HubSpot, doesn\'t delete what a session already received from it. That content stays until the session is deleted. To ask for access to or deletion of your data, email ',
+      ' We keep your tokens or API keys for a Connected Service until you disconnect it, a workspace administrator removes it, you leave the workspace, your account is deleted, the workspace is deleted in Warcode Console or the service tells us you removed our app. We then delete them and any user identifier we stored. Where the service supports it, we also ask the service to revoke your OAuth tokens, unless another of your connections still relies on the same authorization. Hosted agent sessions are deleted as described under "Hosted agents" above. Disconnecting any other Connected Service, such as Zoom or HubSpot, doesn\'t delete what a session already received from it. That content stays until the session is deleted. To ask for access to or deletion of your data, email ',
       ["a", { href: "mailto:help@anoma.ly" }, "help@anoma.ly"],
       ".",
     ],
@@ -450,13 +450,13 @@ export const privacyPolicy: LegalDocumentContent = {
       "p",
       {},
       ["strong", {}, "Your choices."],
-      " You can disconnect a Connected Service at any time in OpenCode Console. You can also remove our app in the service's own settings, such as Slack's app management, Zoom's Added Apps, HubSpot's Connected Apps, GitHub's Applications settings, your Google Account's third-party connections or Microsoft's My Apps.",
+      " You can disconnect a Connected Service at any time in Warcode Console. You can also remove our app in the service's own settings, such as Slack's app management, Zoom's Added Apps, HubSpot's Connected Apps, GitHub's Applications settings, your Google Account's third-party connections or Microsoft's My Apps.",
     ],
     [
       "p",
       {},
       ["strong", {}, "Google user data."],
-      " OpenCode's use and transfer to any other app of information received from Google APIs will adhere to the ",
+      " Warcode's use and transfer to any other app of information received from Google APIs will adhere to the ",
       [
         "a",
         { href: "https://developers.google.com/terms/api-services-user-data-policy" },
@@ -510,13 +510,13 @@ export const privacyPolicy: LegalDocumentContent = {
       ["a", { href: "http://www.allaboutcookies.org/" }, "http://www.allaboutcookies.org/"],
       ".",
     ],
-    ["h3", { id: "product-analytics" }, "Product Analytics on opencode.ai"],
+    ["h3", { id: "product-analytics" }, "Product Analytics on warcode.ai"],
     [
       "p",
       {},
-      "When you visit opencode.ai, including the docs and the Console, we record the pages you view, how long each page is visible, how long you're active on it, how far you scroll and how quickly it loads. We also record the links and buttons you click, when you download an app or copy a command, when you search (but not what you search for), and the type of any sign-in error. We record each click under a fixed name we give that link or button, so text you or your team entered, such as workspace names or email addresses, isn't recorded even when it appears on the page. We record account and workspace events: when you sign up, sign in, verify your email, approve a device, create or delete a workspace, invite or remove members, create API keys, connect providers or clients, and start or complete a checkout or payment, including its amount and any decline reason. We use these records to understand how people find OpenCode and where they stop before signing up or subscribing, so we can improve the Services.",
+      "When you visit warcode.ai, including the docs and the Console, we record the pages you view, how long each page is visible, how long you're active on it, how far you scroll and how quickly it loads. We also record the links and buttons you click, when you download an app or copy a command, when you search (but not what you search for), and the type of any sign-in error. We record each click under a fixed name we give that link or button, so text you or your team entered, such as workspace names or email addresses, isn't recorded even when it appears on the page. We record account and workspace events: when you sign up, sign in, verify your email, approve a device, create or delete a workspace, invite or remove members, create API keys, connect providers or clients, and start or complete a checkout or payment, including its amount and any decline reason. We use these records to understand how people find Warcode and where they stop before signing up or subscribing, so we can improve the Services.",
     ],
-    ["p", {}, "We collect these records ourselves and don't use third-party analytics services on opencode.ai."],
+    ["p", {}, "We collect these records ourselves and don't use third-party analytics services on warcode.ai."],
     [
       "p",
       {},
@@ -525,7 +525,7 @@ export const privacyPolicy: LegalDocumentContent = {
     [
       "p",
       {},
-      "We set the following first-party Cookies. Your browser sends them only to opencode.ai. We also keep a list in your browser's local storage of which events it has already reported that day.",
+      "We set the following first-party Cookies. Your browser sends them only to warcode.ai. We also keep a list in your browser's local storage of which events it has already reported that day.",
     ],
     [
       "div",

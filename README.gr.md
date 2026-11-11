@@ -3,7 +3,7 @@
     <picture>
       <source srcset=".github/assets/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset=".github/assets/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src=".github/assets/logo-ornate-light.svg" alt="OpenCode logo">
+      <img src=".github/assets/logo-ornate-light.svg" alt="Warcode logo">
     </picture>
   </a>
 </p>
@@ -39,7 +39,7 @@
   <a href="README.vi.md">Tiếng Việt</a>
 </p>
 
-[![OpenCode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
+[![Warcode Terminal UI](services/site/public/v1/docs/assets/lander/screenshot.png)](https://opencode.ai)
 
 ---
 
@@ -50,13 +50,13 @@
 curl -fsSL https://opencode.ai/v2/install | bash
 
 # Διαχειριστές πακέτων
-npm i -g @opencode/cli@latest      # ή bun/pnpm/yarn
-brew install anomalyco/tap/opencode-v2 # macOS και Linux (προτείνεται, πάντα ενημερωμένο)
-brew install opencode              # macOS και Linux (επίσημος τύπος brew, λιγότερο συχνές ενημερώσεις)
-sudo pacman -S opencode            # Arch Linux (Σταθερό)
-paru -S opencode-beta              # Arch Linux (Τελευταία έκδοση από AUR)
-mise use -g opencode               # Οποιοδήποτε λειτουργικό σύστημα
-nix run github:anomalyco/opencode  # Nix
+npm i -g @warcode/cli@latest      # ή bun/pnpm/yarn
+brew install anomalyco/tap/warcode-v2 # macOS και Linux (προτείνεται, πάντα ενημερωμένο)
+brew install warcode              # macOS και Linux (επίσημος τύπος brew, λιγότερο συχνές ενημερώσεις)
+sudo pacman -S warcode            # Arch Linux (Σταθερό)
+paru -S warcode-beta              # Arch Linux (Τελευταία έκδοση από AUR)
+mise use -g warcode               # Οποιοδήποτε λειτουργικό σύστημα
+nix run github:anomalyco/warcode  # Nix
 ```
 
 > [!TIP]
@@ -64,27 +64,27 @@ nix run github:anomalyco/opencode  # Nix
 
 ### Εφαρμογή Desktop (BETA)
 
-Το OpenCode είναι επίσης διαθέσιμο ως εφαρμογή. Κατέβασε το από το [opencode.ai/download](https://opencode.ai/download).
+Το Warcode είναι επίσης διαθέσιμο ως εφαρμογή. Κατέβασε το από το [warcode.ai/download](https://opencode.ai/download).
 
 | Πλατφόρμα             | Λήψη                               |
 | --------------------- | ---------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-mac-arm64.dmg`   |
-| macOS (Intel)         | `opencode-desktop-mac-x64.dmg`     |
-| Windows               | `opencode-desktop-win-x64.exe`     |
+| macOS (Apple Silicon) | `warcode-desktop-mac-arm64.dmg`   |
+| macOS (Intel)         | `warcode-desktop-mac-x64.dmg`     |
+| Windows               | `warcode-desktop-win-x64.exe`     |
 | Linux                 | `.deb`, `.rpm`, ή AppImage         |
 
 ```bash
 # macOS (Homebrew)
-brew install --cask opencode-desktop
+brew install --cask warcode-desktop
 ```
 
 #### Κατάλογος Εγκατάστασης
 
-Το script εγκατάστασης εγκαθιστά το OpenCode στο `$HOME/.opencode/bin`.
+Το script εγκατάστασης εγκαθιστά το Warcode στο `$HOME/.warcode/bin`.
 
 ### Πράκτορες
 
-Το OpenCode περιλαμβάνει δύο ενσωματωμένους πράκτορες μεταξύ των οποίων μπορείτε να εναλλάσσεστε με το πλήκτρο `Tab`.
+Το Warcode περιλαμβάνει δύο ενσωματωμένους πράκτορες μεταξύ των οποίων μπορείτε να εναλλάσσεστε με το πλήκτρο `Tab`.
 
 - **build** - Προεπιλεγμένος πράκτορας με πλήρη πρόσβαση για εργασία πάνω σε κώδικα
 - **plan** - Πράκτορας μόνο ανάγνωσης για ανάλυση και εξερεύνηση κώδικα
@@ -99,15 +99,15 @@ brew install --cask opencode-desktop
 
 ### Οδηγός Χρήσης
 
-Για περισσότερες πληροφορίες σχετικά με τη ρύθμιση του OpenCode, [**πλοηγήσου στον οδηγό χρήσης μας**](https://opencode.ai/docs).
+Για περισσότερες πληροφορίες σχετικά με τη ρύθμιση του Warcode, [**πλοηγήσου στον οδηγό χρήσης μας**](https://opencode.ai/docs).
 
 ### Συνεισφορά
 
-Εάν ενδιαφέρεσαι να συνεισφέρεις στο OpenCode, διαβάστε τα [οδηγό χρήσης συνεισφοράς](./CONTRIBUTING.md) πριν υποβάλεις ένα pull request.
+Εάν ενδιαφέρεσαι να συνεισφέρεις στο Warcode, διαβάστε τα [οδηγό χρήσης συνεισφοράς](./CONTRIBUTING.md) πριν υποβάλεις ένα pull request.
 
-### Δημιουργία πάνω στο OpenCode
+### Δημιουργία πάνω στο Warcode
 
-Εάν εργάζεσαι σε ένα έργο σχετικό με το OpenCode και χρησιμοποιείτε το "opencode" ως μέρος του ονόματός του, για παράδειγμα "opencode-dashboard" ή "opencode-mobile", πρόσθεσε μια σημείωση στο README σας για να διευκρινίσεις ότι δεν είναι κατασκευασμένο από την ομάδα του OpenCode και δεν έχει καμία σχέση με εμάς.
+Εάν εργάζεσαι σε ένα έργο σχετικό με το Warcode και χρησιμοποιείτε το "warcode" ως μέρος του ονόματός του, για παράδειγμα "warcode-dashboard" ή "warcode-mobile", πρόσθεσε μια σημείωση στο README σας για να διευκρινίσεις ότι δεν είναι κατασκευασμένο από την ομάδα του Warcode και δεν έχει καμία σχέση με εμάς.
 
 ---
 

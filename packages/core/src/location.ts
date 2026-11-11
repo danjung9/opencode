@@ -1,9 +1,9 @@
 import { Context, Effect, Layer } from "effect"
-import { Info, Ref, response } from "@opencode/schema/location"
-import { FSUtil } from "@opencode/util/fs-util"
+import { Info, Ref, response } from "@warcode/schema/location"
+import { FSUtil } from "@warcode/util/fs-util"
 import { Project } from "./project.js"
-import { LayerNode } from "@opencode/util/effect/layer-node"
-import { makeLocationNode, tags } from "@opencode/util/effect/app-node"
+import { LayerNode } from "@warcode/util/effect/layer-node"
+import { makeLocationNode, tags } from "@warcode/util/effect/app-node"
 
 export * as Location from "./location.js"
 
@@ -13,7 +13,7 @@ export interface Interface extends Info {
   readonly vcs?: Project.Vcs
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode/Location") {}
+export class Service extends Context.Service<Service, Interface>()("@warcode/Location") {}
 
 export const node = LayerNode.unbound(Service, tags.values.location)
 

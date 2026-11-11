@@ -40,7 +40,7 @@ export type DocsV1 = {
 
 // Before first paint, inside the site root: the saved theme, as on the site (preload-settings.ts),
 // after taking over a choice saved by the docs before they shared the site's theme ("docs-theme").
-const themeMigration = `try{const o=localStorage.getItem("docs-theme");if(o){if(!localStorage.getItem("opencode-theme")&&(o==="light"||o==="dark"))localStorage.setItem("opencode-theme",o);localStorage.removeItem("docs-theme")}}catch{}`
+const themeMigration = `try{const o=localStorage.getItem("docs-theme");if(o){if(!localStorage.getItem("warcode-theme")&&(o==="light"||o==="dark"))localStorage.setItem("warcode-theme",o);localStorage.removeItem("docs-theme")}}catch{}`
 
 // Pages load as plain documents (no client router). The browser prerenders a docs link once the
 // pointer rests on it, and docs.css turns on cross-document view transitions, so a click shows the
@@ -78,7 +78,7 @@ export function DocsLayout(props: {
   const previous = at > 0 ? pages[at - 1] : undefined
   const next = at >= 0 ? pages[at + 1] : undefined
   const current = pages[at]
-  const description = props.description ?? `${props.title} documentation for OpenCode.`
+  const description = props.description ?? `${props.title} documentation for Warcode.`
   const canonical = new URL(docsHref(props.currentSlug, props.set), "https://opencode.ai").href
   const contents = props.headings
     .filter((heading) => heading.depth === 2 || heading.depth === 3)
@@ -124,7 +124,7 @@ export function DocsLayout(props: {
         <link rel="canonical" href={canonical} />
         <link rel="icon" type="image/svg+xml" href={`${latestDocs.base}favicon.svg`} />
         <Show when={props.markdown}>{(href) => <link rel="alternate" type="text/markdown" href={href()} />}</Show>
-        <title>{`${props.title} | OpenCode${props.set.id === "v1" ? " V1" : ""}`}</title>
+        <title>{`${props.title} | Warcode${props.set.id === "v1" ? " V1" : ""}`}</title>
         <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin="anonymous" />
         <link rel="preload" href={monoFontLatin} as="font" type="font/woff2" crossorigin="anonymous" />
         <link rel="stylesheet" href={props.assets.stylesheet} />
