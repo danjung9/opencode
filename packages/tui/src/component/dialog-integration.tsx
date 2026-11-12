@@ -47,6 +47,7 @@ import {
 } from "../util/form"
 
 const INTEGRATION_PRIORITY: Record<string, number> = {
+  advana: -1,
   warcode: 0,
   "warcode-go": 1,
   openai: 2,
