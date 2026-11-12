@@ -453,6 +453,28 @@ describe("ModelsDev Service", () => {
     }),
   )
 
+  it.effect("omits removed direct providers while keeping their models at other hosts", () =>
+    Effect.gen(function* () {
+      const catalog = yield* ModelsDev.decodeSnapshot(
+        JSON.stringify({
+          deepseek: { ...fixture.acme, id: "deepseek" },
+          alibaba: { ...fixture.acme, id: "alibaba" },
+          "minimax-cn-coding-plan": { ...fixture.acme, id: "minimax-cn-coding-plan" },
+          "moonshotai-cn": { ...fixture.acme, id: "moonshotai-cn" },
+          "zhipuai-coding-plan": { ...fixture.acme, id: "zhipuai-coding-plan" },
+          siliconflow: { ...fixture.acme, id: "siliconflow" },
+          volcengine: { ...fixture.acme, id: "volcengine" },
+          acme: {
+            ...fixture.acme,
+            models: { "deepseek-chat": sourceModel("deepseek-chat") },
+          },
+        }),
+      )
+      expect(catalog.map((provider) => provider.info.id)).toEqual([Provider.ID.make("acme")])
+      expect(catalog[0]?.models.map((model) => model.id)).toEqual([Model.ID.make("deepseek-chat")])
+    }),
+  )
+
   it.effect("skips APIs whose warcode entrypoint this build doesn't have", () =>
     Effect.gen(function* () {
       const unknown = (path: string) => ({

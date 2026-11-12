@@ -184,7 +184,7 @@ const normalize = Effect.fnUntraced(function* (catalog: Record<string, unknown>)
   const unknown = new Set<string>()
   const snapshots = Object.values(isV1(catalog) ? toV2(catalog) : catalog).flatMap((value) => {
     const item = Option.getOrUndefined(decodeProvider(value))
-    if (!item) return []
+    if (!item || !ModelsDev.supportsProvider(item.id)) return []
     const providerID = Provider.ID.make(item.id.replace(/^opencode(?=-|$)/, "warcode"))
     const sources = Object.entries(item.models).flatMap(([key, value]) => {
       const decoded = decodeModel(value)

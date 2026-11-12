@@ -18,20 +18,17 @@ import { AI } from "@warcode/ai"
 import { Speech, SpeechClient, SpeechEvent, TranscriptionClient, Video, VideoClient } from "@warcode/ai/experimental"
 import { Route, Protocol, RequestExecutor, WebSocketTransport } from "@warcode/ai/route"
 import {
-  Alibaba,
   AssemblyAI,
   Baseten,
   Cartesia,
   CloudflareAIGateway,
   CloudflareWorkersAI,
   Deepgram,
-  DeepSeek,
   DigitalOcean,
   ElevenLabs,
   Fireworks,
   Google,
   Meta,
-  MiniMax,
   Warcode,
   OpenAI,
   OpenAICompatible,
@@ -40,7 +37,6 @@ import {
   TypeSafeAI,
   VercelAIGateway,
   XAI,
-  ZAI,
 } from "@warcode/ai/providers"
 import {
   AnthropicMessages,
@@ -137,7 +133,7 @@ describe("public exports", () => {
     expect(OpenAI.embedding).toBeFunction()
     expect(OpenAI.provider.responses).toBe(OpenAI.responses)
     expect(OpenAI.configure({ apiKey: "fixture" }).responses).toBeFunction()
-    for (const provider of [Baseten, DeepSeek, Fireworks]) {
+    for (const provider of [Baseten, Fireworks]) {
       expect(provider.configure).toBeFunction()
       expect(provider.model).toBeFunction()
     }
@@ -172,13 +168,6 @@ describe("public exports", () => {
     expect(XAI.provider.image).toBe(XAI.image)
     expect(Meta.configure({ apiKey: "fixture" }).image("muse-image").route.id).toBe("meta-images")
     expect(Meta.provider.image).toBe(Meta.image)
-    expect(ZAI.configure({ apiKey: "fixture" }).image("glm-image").route.id).toBe("zai-images")
-    expect(ZAI.provider.image).toBe(ZAI.image)
-    expect(MiniMax.configure({ apiKey: "fixture" }).image("image-01").route.id).toBe("minimax-images")
-    expect(MiniMax.provider.image).toBe(MiniMax.image)
-    expect(Alibaba.configure({ region: "ap-southeast-1", apiKey: "fixture" }).image("qwen-image-2.0").route.id).toBe(
-      "alibaba-images",
-    )
     expect(VercelAIGateway.configure({ apiKey: "fixture" }).image("meta/muse-image-1.0").route.id).toBe("openai-images")
     expect(VercelAIGateway.provider.image).toBe(VercelAIGateway.image)
     expect(

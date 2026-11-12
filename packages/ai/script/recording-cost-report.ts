@@ -62,7 +62,6 @@ const providerFromUrl = (url: string) => {
   if (url.includes("openrouter.ai")) return "openrouter"
   if (url.includes("api.x.ai")) return "xai"
   if (url.includes("api.groq.com")) return "groq"
-  if (url.includes("api.deepseek.com")) return "deepseek"
   if (url.includes("api.together.xyz")) return "togetherai"
   return "unknown"
 }
@@ -75,7 +74,6 @@ const providerAliases: Record<string, ReadonlyArray<string>> = {
   openrouter: ["openrouter", "openai", "anthropic", "google"],
   xai: ["xai"],
   groq: ["groq"],
-  deepseek: ["deepseek"],
   togetherai: ["togetherai"],
 }
 

@@ -14,11 +14,11 @@ const decodeJson = Schema.decodeUnknownSync(Json)
 
 const model = OpenAICompatibleChat.route
   .with({
-    provider: "deepseek",
-    endpoint: { baseURL: "https://api.deepseek.test/v1/", query: { "api-version": "2026-01-01" } },
+    provider: "custom",
+    endpoint: { baseURL: "https://api.custom.test/v1/", query: { "api-version": "2026-01-01" } },
     auth: Auth.bearer("test-key"),
   })
-  .model({ id: "deepseek-chat" })
+  .model({ id: "deepseek-chat", compatibility: { maxTokensField: "max_tokens" } })
 
 const request = ai.request({
   id: "req_1",
@@ -98,11 +98,11 @@ describe("OpenAI-compatible Chat route", () => {
       expect(prepared.route).toBe("openai-compatible-chat")
       expect(prepared.model).toMatchObject({
         id: "deepseek-chat",
-        provider: "deepseek",
+        provider: "custom",
         route: { id: "openai-compatible-chat" },
       })
       expect(prepared.model.route.endpoint).toMatchObject({
-        baseURL: "https://api.deepseek.test/v1/",
+        baseURL: "https://api.custom.test/v1/",
         query: { "api-version": "2026-01-01" },
       })
       expect(prepared.body).toMatchObject({
@@ -199,26 +199,24 @@ describe("OpenAI-compatible Chat route", () => {
     }),
   )
 
-  it.effect("enables ZAI tool streaming except for GLM 4.5 models", () =>
+  it.effect("enables tool streaming with an explicit compatibility setting", () =>
     Effect.gen(function* () {
-      const prepare = (provider: string, baseURL: string, id: string) =>
+      const prepare = (enabled: boolean) =>
         compileRequest(
           ai.request({
-            model: OpenAICompatibleChat.route.with({ provider, endpoint: { baseURL } }).model({ id }),
+            model: OpenAICompatibleChat.route
+              .with({ provider: "custom", endpoint: { baseURL: "https://api.custom.test/v1" } })
+              .model({ id: "glm-4.7", compatibility: { zaiToolStream: enabled } }),
             prompt: "Use a tool.",
             tools: [ToolDefinition.make({ name: "lookup", description: "Lookup data", inputSchema: {} })],
           }),
         )
 
-      const current = yield* prepare("zai", "https://api.z.ai/api/paas/v4", "glm-4.7")
+      const current = yield* prepare(true)
       expect(current.body).toMatchObject({ tool_stream: true })
 
-      const legacy = yield* Effect.all(
-        ["glm-4.5", "glm-4.5-air", "glm-4.5-flash", "glm-4.5v"].map((id) =>
-          prepare("zhipuai", "https://open.bigmodel.cn/api/paas/v4", id),
-        ),
-      )
-      legacy.forEach((item) => expect(item.body).not.toHaveProperty("tool_stream"))
+      const disabled = yield* prepare(false)
+      expect(disabled.body).not.toHaveProperty("tool_stream")
     }),
   )
 
@@ -358,12 +356,10 @@ describe("OpenAI-compatible Chat route", () => {
     }),
   )
 
-  it.effect("requires reasoning for DeepSeek models, providers, and endpoints unless explicitly overridden", () =>
+  it.effect("requires reasoning for DeepSeek models unless explicitly overridden", () =>
     Effect.gen(function* () {
       const cases = [
         { id: "DeepSeek-V3", provider: "custom", baseURL: "https://api.custom.test/v1", required: true },
-        { id: "custom-model", provider: "deepseek", baseURL: "https://api.custom.test/v1", required: true },
-        { id: "custom-model", provider: "custom", baseURL: "https://API.DeepSeek.COM/v1", required: true },
         { id: "ordinary-model", provider: "custom", baseURL: "https://api.custom.test/v1", required: false },
         {
           id: "ordinary-model",
@@ -375,8 +371,8 @@ describe("OpenAI-compatible Chat route", () => {
         },
         {
           id: "deepseek-chat",
-          provider: "deepseek",
-          baseURL: "https://api.deepseek.com/v1",
+          provider: "custom",
+          baseURL: "https://api.custom.test/v1",
           compatibility: { requireReasoning: false },
           required: false,
         },
@@ -415,7 +411,7 @@ describe("OpenAI-compatible Chat route", () => {
           dynamicResponse((input) =>
             Effect.gen(function* () {
               const web = yield* HttpClientRequest.toWeb(input.request).pipe(Effect.orDie)
-              expect(web.url).toBe("https://api.deepseek.test/v1/chat/completions?api-version=2026-01-01")
+              expect(web.url).toBe("https://api.custom.test/v1/chat/completions?api-version=2026-01-01")
               expect(web.headers.get("authorization")).toBe("Bearer test-key")
               expect(decodeJson(input.text)).toMatchObject({
                 model: "deepseek-chat",
@@ -512,7 +508,7 @@ describe("OpenAI-compatible Chat route", () => {
         outputTokens: undefined,
         totalTokens: undefined,
         providerMetadata: {
-          deepseek: {
+          custom: {
             prompt_tokens: null,
             completion_tokens: null,
             total_tokens: null,

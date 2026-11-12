@@ -1073,21 +1073,21 @@ describe("Anthropic Messages route", () => {
     }),
   )
 
-  it.effect("infers empty-signature compatibility across Kimi providers", () =>
+  it.effect("infers empty-signature compatibility for hosted model families", () =>
     Effect.gen(function* () {
       const coding = AnthropicMessages.route.with({
-        provider: "kimi-for-coding",
+        provider: "custom",
         endpoint: { baseURL: "https://compatible.test/v1/" },
         auth: Auth.header("x-api-key", "test"),
       })
       const moonshot = AnthropicMessages.route
         .with({
-          provider: "moonshotai",
-          endpoint: { baseURL: "https://api.moonshot.ai/anthropic" },
+          provider: "custom",
+          endpoint: { baseURL: "https://compatible.test/v1/" },
           auth: Auth.bearer("test"),
         })
         .model({ id: "kimi-k2.6" })
-      const codingPrepared = yield* compileUnsignedReasoning(coding.model({ id: "k3" }))
+      const codingPrepared = yield* compileUnsignedReasoning(coding.model({ id: "kimi-k3" }))
       const moonshotPrepared = yield* compileUnsignedReasoning(moonshot)
       const qwenPrepared = yield* compileUnsignedReasoning(
         coding.with({ provider: "warcode" }).model({ id: "qwen3.8-flash" }),
@@ -1111,11 +1111,11 @@ describe("Anthropic Messages route", () => {
     Effect.gen(function* () {
       const compatible = AnthropicMessages.route
         .with({
-          provider: "kimi-for-coding",
-          endpoint: { baseURL: "https://api.kimi.com/coding/v1/" },
+          provider: "custom",
+          endpoint: { baseURL: "https://compatible.test/v1/" },
           auth: Auth.header("x-api-key", "test"),
         })
-        .model({ id: "k3", compatibility: { requireSignature: true } })
+        .model({ id: "kimi-k3", compatibility: { requireSignature: true } })
       const prepared = yield* compileUnsignedReasoning(compatible)
 
       expect(prepared.body.messages).toEqual([])

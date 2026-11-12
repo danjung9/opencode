@@ -836,6 +836,7 @@
         "@tsconfig/node22": "catalog:",
         "@types/bun": "catalog:",
         "@typescript/native": "catalog:",
+        "@warcode/schema": "workspace:*",
         "solid-js": "catalog:",
         "tailwindcss": "catalog:",
         "typescript": "catalog:",

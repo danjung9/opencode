@@ -131,20 +131,6 @@ const cloudflareAIGateway: Protocol = (model, support) => {
   return openaiChat(model, support)
 }
 
-const deepseekChat: Protocol = (_, support) => {
-  switch (support.type) {
-    case "effort":
-      return efforts(support.values ?? ["low", "high", "max"], (effort) => {
-        if (effort === "none") return { body: { thinking: { type: "disabled" } } }
-        return { settings: { reasoningEffort: effort }, body: { thinking: { type: "enabled" } } }
-      })
-    case "toggle":
-      return toggle({ body: { thinking: { type: "disabled" } } }, { body: { thinking: { type: "enabled" } } })
-    case "budget_tokens":
-      return []
-  }
-}
-
 const nvidiaTemplate = (chat_template_kwargs: Record<string, unknown>): Overlay => ({
   body: { chat_template_kwargs },
 })
@@ -259,69 +245,6 @@ const veniceChat: Protocol = (_, support) => {
   return []
 }
 
-const moonshotChat: Protocol = (model, support) => {
-  const id = modelID(model).toLowerCase()
-  const toggleable = id.includes("k2.5") || id.includes("k2-5") || id.includes("k2.6") || id.includes("k2-6")
-  const fixed = id.includes("k2-thinking") || id.includes("k2.7-code") || id.includes("k2-7-code")
-  if (fixed) return []
-  if (toggleable && (support.type === "toggle" || (support.type === "effort" && support.values === undefined)))
-    return toggle({ settings: { thinking: { type: "disabled" } } }, { settings: { thinking: { type: "enabled" } } })
-  if (toggleable || support.type !== "effort") return []
-  return efforts(support.values ?? ["low", "high", "max"], (effort) => ({
-    settings: { reasoningEffort: effort },
-  }))
-}
-
-const alibabaChat: Protocol = (model, support) => {
-  const id = modelID(model).toLowerCase()
-  const fixed =
-    id.includes("-thinking") || id.includes("qwq") || id.includes("deepseek-r1") || id.includes("minimax-m2")
-  switch (support.type) {
-    case "effort": {
-      if (fixed && support.values === undefined) return []
-      const hosted = id.includes("glm") || id.includes("deepseek")
-      const values = support.values ?? (hosted ? ["high", "max"] : ["low", "medium", "xhigh"])
-      return efforts(values, (effort) => {
-        if (effort === "none") return { settings: { enableThinking: false } }
-        return { settings: { enableThinking: true, reasoningEffort: effort } }
-      })
-    }
-    case "toggle":
-      return toggle({ settings: { enableThinking: false } }, { settings: { enableThinking: true } })
-    case "budget_tokens":
-      return budgets(
-        model,
-        support,
-        (tokens) => ({ settings: { enableThinking: true, thinkingBudget: tokens } }),
-        ALIBABA_THINKING_BUDGET_MAX,
-      )
-  }
-}
-
-const zaiChat: Protocol = (model, support) => {
-  const id = modelID(model).toLowerCase()
-  const version = /glm-?(\d+)(?:(?:[.-]|p)(\d+))?/.exec(id)
-  const major = Number(version?.[1])
-  const minor = Number(version?.[2] ?? 0)
-  const coding = model.package?.includes("zai-coding-plan") ?? false
-  const latest = coding || !Number.isFinite(major) || major > 5 || (major === 5 && minor >= 3)
-  const effort = major === 5 && minor === 2
-  if (support.type === "toggle" || (!latest && !effort && support.type === "effort" && support.values === undefined)) {
-    if (latest) return []
-    return toggle(
-      { settings: { thinking: { type: "disabled" } } },
-      { settings: { thinking: { type: "enabled", clear_thinking: false } } },
-    )
-  }
-  if (support.type !== "effort") return []
-  return efforts(support.values ?? (latest ? ["low", "high", "max"] : ["high", "max"]), (value) => {
-    if (value === "none" || value === "minimal") return { settings: { thinking: { type: "disabled" } } }
-    return {
-      settings: { thinking: { type: "enabled", clear_thinking: false }, reasoningEffort: value },
-    }
-  })
-}
-
 const anthropicMessages: Protocol = (model, support) => {
   const info = claudeInfo(model)
   const opus45 = info.family === "opus" && info.major === 4 && info.minor === 5
@@ -351,61 +274,6 @@ const anthropicMessages: Protocol = (model, support) => {
         (tokens) => ({ settings: { thinking: { type: "enabled", budgetTokens: tokens } } }),
         ANTHROPIC_OUTPUT_TOKEN_MAX,
       )
-  }
-}
-
-const minimaxMessages: Protocol = (model, support) => {
-  if (/minimax[-.]?m2(?:[.-]|$)/i.test(modelID(model))) return []
-  const configurable = support.type === "toggle" || (support.type === "effort" && support.values === undefined)
-  if (!configurable) return []
-  return toggle({ settings: { thinking: { type: "disabled" } } }, { settings: { thinking: { type: "adaptive" } } })
-}
-
-const moonshotMessages: Protocol = (model, support) => {
-  if (support.type !== "effort" || /kimi[-.]?k2/i.test(modelID(model))) return []
-  return efforts(support.values ?? ["low", "high", "max"], (effort) => ({ settings: { effort } }))
-}
-
-const alibabaMessages: Protocol = (model, support) => {
-  const id = modelID(model).toLowerCase()
-  switch (support.type) {
-    case "effort": {
-      const hosted = id.includes("glm") || id.includes("deepseek")
-      const values = support.values ?? (hosted ? ["high", "max"] : ["low", "medium", "xhigh"])
-      return efforts(values, (effort) => {
-        if (effort === "none") return { settings: { thinking: { type: "disabled" } } }
-        return { settings: { thinking: { type: "enabled" }, effort } }
-      })
-    }
-    case "toggle":
-      return toggle({ settings: { thinking: { type: "disabled" } } }, { settings: { thinking: { type: "enabled" } } })
-    case "budget_tokens":
-      return budgets(
-        model,
-        support,
-        (tokens) => ({ settings: { thinking: { type: "enabled", budgetTokens: tokens } } }),
-        ALIBABA_THINKING_BUDGET_MAX,
-      )
-  }
-}
-
-const zaiMessages: Protocol = (model, support) => {
-  const id = modelID(model).toLowerCase()
-  const forced = id.includes("glm-5.3") || id.includes("glm-5-3") || id.includes("glm-5p3")
-  switch (support.type) {
-    case "effort":
-      return efforts(support.values ?? (forced ? ["low", "high", "max"] : ["high", "max"]), (effort) => ({
-        settings: {
-          thinking: { type: effort === "none" || effort === "minimal" ? "disabled" : "enabled" },
-          effort,
-        },
-      }))
-    case "toggle":
-      return forced
-        ? []
-        : toggle({ settings: { thinking: { type: "disabled" } } }, { settings: { thinking: { type: "enabled" } } })
-    case "budget_tokens":
-      return []
   }
 }
 
@@ -610,12 +478,8 @@ const PROTOCOLS: Readonly<Record<string, Protocol>> = {
   "@warcode/ai/providers/azure/responses": openaiResponses,
   "@warcode/ai/providers/amazon-bedrock/mantle": openaiResponses,
   "@warcode/ai/providers/amazon-bedrock/mantle/responses": openaiResponses,
-  "@warcode/ai/providers/alibaba/responses": openaiResponses,
   "@warcode/ai/providers/meta": openaiResponses,
   "@warcode/ai/providers/meta/responses": openaiResponses,
-  "@warcode/ai/providers/minimax/responses": openaiResponses,
-  "@warcode/ai/providers/moonshot/responses": openaiResponses,
-  "@warcode/ai/providers/zai-coding-plan/responses": openaiResponses,
 
   "@warcode/ai/providers/openai-compatible/responses": openResponses,
   "@warcode/ai/providers/openai-compatible-responses": openResponses,
@@ -630,29 +494,19 @@ const PROTOCOLS: Readonly<Record<string, Protocol>> = {
   "@warcode/ai/providers/azure/chat": openaiChat,
   "@warcode/ai/providers/amazon-bedrock/mantle/chat": openaiChat,
   "@warcode/ai/providers/google-vertex/chat": vertexChat,
-  "@warcode/ai/providers/alibaba": alibabaChat,
-  "@warcode/ai/providers/alibaba/chat": alibabaChat,
   "@warcode/ai/providers/baseten": basetenChat,
   "@warcode/ai/providers/cerebras": openaiChat,
   "@warcode/ai/providers/cloudflare-workers-ai": workersAIChat,
   "@warcode/ai/providers/cohere/chat": openaiChat,
   "@warcode/ai/providers/deepinfra": deepinfraChat,
-  "@warcode/ai/providers/deepseek": deepseekChat,
   "@warcode/ai/providers/digitalocean": openaiChat,
   "@warcode/ai/providers/fireworks": openaiChat,
   "@warcode/ai/providers/groq": openaiChat,
   "@warcode/ai/providers/meta/chat": openaiChat,
-  "@warcode/ai/providers/minimax/chat": openaiChat,
   "@warcode/ai/providers/mistral": openaiChat,
   "@warcode/ai/providers/google-vertex/mistral": openaiChat,
-  "@warcode/ai/providers/moonshot": moonshotChat,
-  "@warcode/ai/providers/moonshot/chat": moonshotChat,
   "@warcode/ai/providers/togetherai": openaiChat,
   "@warcode/ai/providers/venice": veniceChat,
-  "@warcode/ai/providers/zai": zaiChat,
-  "@warcode/ai/providers/zai/chat": zaiChat,
-  "@warcode/ai/providers/zai-coding-plan": zaiChat,
-  "@warcode/ai/providers/zai-coding-plan/chat": zaiChat,
 
   "@warcode/ai/providers/anthropic": anthropicMessages,
   "@warcode/ai/providers/anthropic-compatible": anthropicMessages,
@@ -660,12 +514,7 @@ const PROTOCOLS: Readonly<Record<string, Protocol>> = {
   "@warcode/ai/providers/azure/messages": anthropicMessages,
   "@warcode/ai/providers/google-vertex/messages": anthropicMessages,
   "@warcode/ai/providers/google-vertex-messages": anthropicMessages,
-  "@warcode/ai/providers/alibaba/messages": alibabaMessages,
   "@warcode/ai/providers/meta/messages": anthropicMessages,
-  "@warcode/ai/providers/minimax": minimaxMessages,
-  "@warcode/ai/providers/minimax/messages": minimaxMessages,
-  "@warcode/ai/providers/moonshot/messages": moonshotMessages,
-  "@warcode/ai/providers/zai-coding-plan/messages": zaiMessages,
 
   "@warcode/ai/providers/google": gemini,
   "@warcode/ai/providers/google-vertex": gemini,

@@ -1,6 +1,7 @@
 import { defineConfig } from "vite"
 import solidPlugin from "vite-plugin-solid"
 import { iconsSpritesheet } from "vite-plugin-icons-spritesheet"
+import { ModelsDev } from "@warcode/schema/models-dev"
 import fs from "fs"
 
 export default defineConfig({
@@ -49,7 +50,7 @@ async function fetchProviderIcons() {
 
   const providers = await fetch(`${url}/api.json`)
     .then((res) => res.json())
-    .then((json) => Object.keys(json))
+    .then((json) => Object.keys(json).filter(ModelsDev.supportsProvider))
 
   await Promise.all(
     providers.map((provider) =>

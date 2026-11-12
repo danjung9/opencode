@@ -29,12 +29,6 @@ export class LoadError extends Schema.TaggedError<LoadError>()("Provider.LoadErr
 
 const packages = new Map<string, Promise<unknown>>()
 const builtins = new Map<string, () => Promise<unknown>>([
-  ["@warcode/ai/providers/alibaba", () => import("@warcode/ai/providers/alibaba")],
-  ["@warcode/ai/providers/alibaba/chat", () => import("@warcode/ai/providers/alibaba/chat")],
-  ["@warcode/ai/providers/alibaba/messages", () => import("@warcode/ai/providers/alibaba/messages")],
-  ["@warcode/ai/providers/alibaba/responses", () => import("@warcode/ai/providers/alibaba/responses")],
-  ["@warcode/ai/providers/alibaba/images", () => import("@warcode/ai/providers/alibaba/images")],
-  ["@warcode/ai/providers/alibaba/embeddings", () => import("@warcode/ai/providers/alibaba/embeddings")],
   ["@warcode/ai/providers/amazon-bedrock", () => import("@warcode/ai/providers/amazon-bedrock")],
   ["@warcode/ai/providers/amazon-bedrock/mantle", () => import("@warcode/ai/providers/amazon-bedrock/mantle")],
   [
@@ -79,7 +73,6 @@ const builtins = new Map<string, () => Promise<unknown>>([
   ["@warcode/ai/providers/cohere/embeddings", () => import("@warcode/ai/providers/cohere/embeddings")],
   ["@warcode/ai/providers/deepinfra", () => import("@warcode/ai/providers/deepinfra")],
   ["@warcode/ai/providers/deepinfra/embeddings", () => import("@warcode/ai/providers/deepinfra/embeddings")],
-  ["@warcode/ai/providers/deepseek", () => import("@warcode/ai/providers/deepseek")],
   ["@warcode/ai/providers/digitalocean", () => import("@warcode/ai/providers/digitalocean")],
   ["@warcode/ai/providers/digitalocean/decisions", () => import("@warcode/ai/providers/digitalocean/decisions")],
   ["@warcode/ai/providers/digitalocean/embeddings", () => import("@warcode/ai/providers/digitalocean/embeddings")],
@@ -110,16 +103,7 @@ const builtins = new Map<string, () => Promise<unknown>>([
   ["@warcode/ai/providers/meta/images", () => import("@warcode/ai/providers/meta/images")],
   ["@warcode/ai/providers/meta/messages", () => import("@warcode/ai/providers/meta/messages")],
   ["@warcode/ai/providers/meta/responses", () => import("@warcode/ai/providers/meta/responses")],
-  ["@warcode/ai/providers/minimax", () => import("@warcode/ai/providers/minimax")],
-  ["@warcode/ai/providers/minimax/chat", () => import("@warcode/ai/providers/minimax/chat")],
-  ["@warcode/ai/providers/minimax/images", () => import("@warcode/ai/providers/minimax/images")],
-  ["@warcode/ai/providers/minimax/messages", () => import("@warcode/ai/providers/minimax/messages")],
-  ["@warcode/ai/providers/minimax/responses", () => import("@warcode/ai/providers/minimax/responses")],
   ["@warcode/ai/providers/mistral", () => import("@warcode/ai/providers/mistral")],
-  ["@warcode/ai/providers/moonshot", () => import("@warcode/ai/providers/moonshot")],
-  ["@warcode/ai/providers/moonshot/chat", () => import("@warcode/ai/providers/moonshot/chat")],
-  ["@warcode/ai/providers/moonshot/messages", () => import("@warcode/ai/providers/moonshot/messages")],
-  ["@warcode/ai/providers/moonshot/responses", () => import("@warcode/ai/providers/moonshot/responses")],
   ["@warcode/ai/providers/openai", () => import("@warcode/ai/providers/openai")],
   ["@warcode/ai/providers/openai/chat", () => import("@warcode/ai/providers/openai/chat")],
   ["@warcode/ai/providers/openai/responses", () => import("@warcode/ai/providers/openai/responses")],
@@ -170,16 +154,6 @@ const builtins = new Map<string, () => Promise<unknown>>([
   ],
   ["@warcode/ai/providers/xai", () => import("@warcode/ai/providers/xai")],
   ["@warcode/ai/providers/xai/images", () => import("@warcode/ai/providers/xai/images")],
-  ["@warcode/ai/providers/zai", () => import("@warcode/ai/providers/zai")],
-  ["@warcode/ai/providers/zai/chat", () => import("@warcode/ai/providers/zai/chat")],
-  ["@warcode/ai/providers/zai/images", () => import("@warcode/ai/providers/zai/images")],
-  ["@warcode/ai/providers/zai-coding-plan", () => import("@warcode/ai/providers/zai-coding-plan")],
-  ["@warcode/ai/providers/zai-coding-plan/chat", () => import("@warcode/ai/providers/zai-coding-plan/chat")],
-  ["@warcode/ai/providers/zai-coding-plan/messages", () => import("@warcode/ai/providers/zai-coding-plan/messages")],
-  [
-    "@warcode/ai/providers/zai-coding-plan/responses",
-    () => import("@warcode/ai/providers/zai-coding-plan/responses"),
-  ],
 ])
 
 /** Native `@warcode/ai/providers/*` entrypoints bundled with Core and loadable by name from config. */

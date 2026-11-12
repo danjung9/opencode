@@ -165,37 +165,6 @@ const images: ReadonlyArray<Case<ImageModel>> = [
     auth: ["authorization", "Bearer xai-key"],
   },
   {
-    name: "zai",
-    load: async () => {
-      const { model } = await import("@warcode/ai/providers/zai/images")
-      return model("glm-image", { ...shared, apiKey: "zai-key", baseURL: "https://open.bigmodel.test/api/paas/v4" })
-    },
-    url: "https://open.bigmodel.test/api/paas/v4/images/generations",
-    auth: ["authorization", "Bearer zai-key"],
-  },
-  {
-    name: "minimax",
-    load: async () => {
-      const { model } = await import("@warcode/ai/providers/minimax/images")
-      return model("image-01", { ...shared, apiKey: "minimax-key", baseURL: "https://api.minimax.cn/v1" })
-    },
-    url: "https://api.minimax.cn/v1/image_generation",
-    auth: ["authorization", "Bearer minimax-key"],
-  },
-  {
-    name: "alibaba",
-    load: async () => {
-      const { model } = await import("@warcode/ai/providers/alibaba/images")
-      return model("qwen-image-2.0", {
-        ...shared,
-        apiKey: "dashscope-key",
-        baseURL: "https://dashscope-intl.aliyuncs.com/api/v1",
-      })
-    },
-    url: "https://dashscope-intl.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
-    auth: ["authorization", "Bearer dashscope-key"],
-  },
-  {
     name: "google",
     load: async () => {
       const { model } = await import("@warcode/ai/providers/google/images")
@@ -410,16 +379,6 @@ const embeddings: ReadonlyArray<Case<EmbeddingModel>> = [
     url: "https://inference.do-ai.run/v1/embeddings",
     auth: ["authorization", "Bearer do-key"],
     provider: "digitalocean",
-  },
-  {
-    name: "alibaba",
-    load: async () => {
-      const { model } = await import("@warcode/ai/providers/alibaba/embeddings")
-      return model("text-embedding-v4", { ...shared, apiKey: "dashscope-key", region: "ap-southeast-1" })
-    },
-    url: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/embeddings",
-    auth: ["authorization", "Bearer dashscope-key"],
-    provider: "alibaba",
   },
   {
     name: "azure",

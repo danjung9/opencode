@@ -573,7 +573,6 @@ const API_KEY_AUTH_PACKAGES: ReadonlySet<string> = new Set([
   "@warcode/ai/providers/cloudflare-ai-gateway",
   "@warcode/ai/providers/cloudflare-workers-ai",
   "@warcode/ai/providers/deepinfra",
-  "@warcode/ai/providers/deepseek",
   "@warcode/ai/providers/fireworks",
   "@warcode/ai/providers/openai-compatible",
   "@warcode/ai/providers/google",

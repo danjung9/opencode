@@ -725,20 +725,8 @@ const lowerToolResultContent = Effect.fnUntraced(function* (part: ToolResultPart
 
 const requireThinkingSignature = (request: LLMRequest) => {
   if (request.model.compatibility?.requireSignature !== undefined) return request.model.compatibility.requireSignature
-  const provider = request.model.provider.toLowerCase()
   const model = request.model.id.toLowerCase()
-  const baseURL = (request.model.route.endpoint.baseURL ?? "").toLowerCase()
-  if (
-    provider === "kimi-for-coding" ||
-    provider === "moonshotai" ||
-    provider === "moonshotai-cn" ||
-    model.startsWith("kimi-") ||
-    baseURL.includes("api.kimi.com/coding") ||
-    baseURL.includes("api.moonshot.ai/anthropic") ||
-    baseURL.includes("api.moonshot.cn/anthropic")
-  )
-    return false
-  if (provider.includes("xiaomi") || model.includes("mimo") || baseURL.includes("xiaomimimo.com")) return false
+  if (model.startsWith("kimi-") || model.includes("mimo")) return false
   if (model.startsWith("qwen") || model.startsWith("minimax-")) return false
   return true
 }

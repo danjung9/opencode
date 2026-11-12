@@ -205,32 +205,12 @@ const PROVIDERS: ReadonlyArray<Provider> = [
       }),
   },
   {
-    id: "deepseek",
-    label: "DeepSeek",
-    tier: "compatible",
-    note: "Existing OpenAI-compatible recorded tests",
-    vars: [{ name: "DEEPSEEK_API_KEY" }],
-    validate: (env) => validateBearer("https://api.deepseek.com/models", Redacted.make(env.DEEPSEEK_API_KEY)),
-  },
-  {
     id: "togetherai",
     label: "TogetherAI",
     tier: "compatible",
     note: "Native Together AI text/tool recorded tests",
     vars: [{ name: "TOGETHER_API_KEY" }],
     validate: (env) => validateBearer("https://api.together.xyz/v1/models", Redacted.make(env.TOGETHER_API_KEY)),
-  },
-  {
-    id: "minimax",
-    label: "MiniMax",
-    tier: "compatible",
-    note: "Anthropic-compatible Messages text/tool recorded tests",
-    vars: [{ name: "MINIMAX_API_KEY" }],
-    validate: (env) =>
-      HttpClientRequest.get("https://api.minimax.io/anthropic/v1/models").pipe(
-        HttpClientRequest.setHeader("x-api-key", Redacted.value(Redacted.make(env.MINIMAX_API_KEY))),
-        executeRequest,
-      ),
   },
   {
     id: "mistral",

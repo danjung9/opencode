@@ -288,9 +288,10 @@ describe("image and decision generation", () => {
       package: "@warcode/ai/providers/openai/images",
     }),
     Info.make({
-      ...Info.default(Provider.ID.make("zai"), ID.make("glm-image")),
+      ...Info.default(Provider.ID.make("custom-images"), ID.make("image-model")),
       type: "image",
-      package: "@warcode/ai/providers/zai/images",
+      package: "@warcode/ai/providers/openai-compatible/images",
+      settings: { baseURL: "https://images.example/v1" },
     }),
     Info.make({
       ...Info.default(Provider.ID.openai, ID.make("gpt-5")),
@@ -384,7 +385,7 @@ describe("image and decision generation", () => {
         const text = request.body._tag === "Uint8Array" ? new TextDecoder().decode(request.body.body) : ""
         requests.push({ url: request.url, headers: request.headers, body: text ? JSON.parse(text) : undefined })
         if (request.url === "https://images.example/fox") return HttpClientResponse.fromWeb(request, new Response(PNG))
-        if (request.url === "https://api.z.ai/api/paas/v4/images/generations")
+        if (request.url === "https://images.example/v1/images/generations")
           return HttpClientResponse.fromWeb(
             request,
             Response.json({ created: 1, data: [{ url: "https://images.example/fox" }] }),
@@ -464,7 +465,7 @@ describe("image and decision generation", () => {
   mediaIt.effect("downloads URL images and detects their type from the bytes", () =>
     Effect.gen(function* () {
       const generate = yield* Generate.Service
-      const result = yield* generate.image({ model: ref("zai", "glm-image"), prompt: "A fox" })
+      const result = yield* generate.image({ model: ref("custom-images", "image-model"), prompt: "A fox" })
       expect(result.images).toEqual([{ type: "image", data: Buffer.from(PNG).toString("base64"), mime: "image/png" }])
     }),
   )

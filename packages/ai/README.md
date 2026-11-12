@@ -382,7 +382,6 @@ token count, and its raw usage stays in `providerMetadata`. Media values fail th
 
 ```ts
 import {
-  Alibaba,
   Azure,
   Cohere,
   DeepInfra,
@@ -399,7 +398,6 @@ Cohere.configure().embedding("embed-v4.0")
 DeepInfra.configure().embedding("BAAI/bge-m3")
 Fireworks.configure().embedding("nomic-ai/nomic-embed-text-v1.5")
 DigitalOcean.configure().embedding("bge-m3")
-Alibaba.configure({ region: "ap-southeast-1" }).embedding("text-embedding-v4")
 Azure.configure({ resourceName }).embedding("text-embedding-3-small")
 OpenAICompatible.configure({ provider: "nvidia", baseURL: "https://integrate.api.nvidia.com/v1" }).embedding(
   "nvidia/nemotron-3.5-embed-1b",
@@ -445,255 +443,6 @@ sends one request per value, four at a time, and needs project credentials: Vert
 is split into several requests, the vectors stay in value order, `usage.inputTokens` is their sum, and each request's
 metadata is listed in order under `providerMetadata.<provider>.responses`. The package entry points are
 `@warcode/ai/providers/google/embeddings` and `@warcode/ai/providers/google-vertex/embeddings`.
-
-## Alibaba Cloud Model Studio
-
-`Alibaba` provides standard Model Studio inference. Configure a region explicitly, then select
-Chat Completions (`.model` or `.chat`), Anthropic-compatible Messages (`.messages`), or OpenAI-compatible
-Responses (`.responses`). These routes use HTTP/SSE.
-
-```ts
-import { ai } from "@warcode/ai/effect"
-import { Alibaba } from "@warcode/ai/providers"
-
-const alibaba = Alibaba.configure({
-  region: "ap-southeast-1", // Singapore
-  apiKey: process.env.DASHSCOPE_API_KEY,
-  // workspaceID: "llm-your-workspace", // use a workspace-dedicated endpoint
-})
-
-const request = ai.request({
-  model: alibaba.model("qwen3.8-max"),
-  prompt: "Explain this design.",
-  providerOptions: { reasoningEffort: "medium" },
-})
-```
-
-### Regions and credentials
-
-| Region              | `region`         | Shared host when `workspaceID` is omitted |
-| ------------------- | ---------------- | ----------------------------------------- |
-| Singapore           | `ap-southeast-1` | `dashscope-intl.aliyuncs.com`             |
-| China (Beijing)     | `cn-beijing`     | `dashscope.aliyuncs.com`                  |
-| China (Hong Kong)   | `cn-hongkong`    | `cn-hongkong.dashscope.aliyuncs.com`      |
-| US (Virginia)       | `us-east-1`      | `dashscope-us.aliyuncs.com`               |
-| Germany (Frankfurt) | `eu-central-1`   | Supply `workspaceID` or `baseURL`         |
-| Japan (Tokyo)       | `ap-northeast-1` | Supply `workspaceID` or `baseURL`         |
-
-With `workspaceID`, the host is `{workspaceID}.{region}.maas.aliyuncs.com`. A complete `baseURL`
-overrides regional setup, including the API prefix: `/compatible-mode/v1` for Chat/Responses,
-or `/apps/anthropic/v1` for Messages. The selector appends its operation path.
-
-Keys and model availability are region-specific. Auth resolves from explicit `auth` or `apiKey`,
-then `DASHSCOPE_API_KEY`, then `ALIBABA_API_KEY`.
-
-The access region and inference scope differ: Virginia's `-us` model IDs request US-only inference;
-some regions select scope through their workspace. Model IDs pass through unchanged.
-Alibaba's [regional guide](https://www.alibabacloud.com/help/en/model-studio/regions) and
-[base URL table](https://www.alibabacloud.com/help/en/model-studio/base-url) disagree about Virginia's
-shared host; the entry above follows the base URL table. Dedicated hosts can be copied from the console.
-
-### Native options
-
-- **Chat:** `reasoningEffort` → `reasoning_effort`, `enableThinking` → `enable_thinking`,
-  `thinkingBudget` → `thinking_budget`, and `preserveThinking` → `preserve_thinking`.
-  Replay complete `response.message` values to retain `reasoning_content` separately from answer text.
-  Qwen 3.8 defaults to preserving thinking; older models have different defaults.
-  Additional options include `toolStream`, `parallelToolCalls`, `repetitionPenalty`, `responseFormat`,
-  `enableSearch`, and native `searchOptions`. `topK` lowers to `top_k`.
-  `clearThinking` is a hosted GLM control, and `thinking.type` is available for hosted MiniMax models.
-- **Messages:** `effort` → `output_config.effort`. `thinking.type` accepts enabled/disabled with an
-  optional `budgetTokens` (or native `budget_tokens`). `outputConfig.format` accepts a JSON schema.
-  Model Studio's empty thinking signatures are accepted; supplied signatures are replayed unchanged.
-- **Responses:** `reasoningEffort` → `reasoning.effort`, plus `enableThinking`, `store`,
-  `previousResponseId`, and `conversation`. Omitted `store` retains the API's default (`true`);
-  set it to `false` for client-managed history. `previousResponseId` requires a stored response.
-  Hosted tools are `Alibaba.webSearch()`, `Alibaba.webExtractor()`, and `Alibaba.codeInterpreter()`.
-  Web extraction is used together with web search. Hosted calls/results carry `providerExecuted: true`.
-
-Omitted options preserve provider defaults. Effort values pass through unchanged and accept future
-strings. Qwen 3.8 Chat rejects requests combining a thinking budget with effort.
-
-Package entrypoints are `@warcode/ai/providers/alibaba`, `alibaba/chat`, `alibaba/messages`,
-and `alibaba/responses`. Live recordings cover all three APIs in Singapore; regional URL construction
-is unit-tested for all six regions.
-
-### Images
-
-`alibaba.image(...)` uses the native multimodal generation API (`/api/v1/services/aigc/multimodal-generation/generation`)
-for Qwen-Image (`qwen-image-2.0`, `qwen-image-2.0-pro`) and Wan (`wan2.7-image`, `wan2.7-image-pro`). `aspect` and
-`resolution` lower to a `W*H` size, `providerOptions.size` sets it exactly, and `images` are sent as URLs or data URLs
-for editing. Native `parameters` include `size`, `seed`, `negativePrompt`, `promptExtend`, `watermark`, `thinkingMode`,
-and `enableSequential`; raw keys such as `bbox_list` pass through. Results are URLs that Model Studio keeps for 24
-hours. A complete `baseURL` for images includes `/api/v1`.
-
-## Z.AI
-
-`ZAI` uses the standard API. Chat Completions is the default language-model API;
-the existing `.image(...)` selector provides image generation.
-
-```ts
-import { ai } from "@warcode/ai/effect"
-import { ZAI, ZAICodingPlan } from "@warcode/ai/providers"
-
-const zai = ZAI.configure({ apiKey: process.env.ZAI_API_KEY })
-const request = ai.request({
-  model: zai.model("glm-5.3"), // also zai.chat("glm-5.3")
-  prompt: "Explain this design.",
-  providerOptions: {
-    reasoningEffort: "high",
-    thinking: { type: "enabled", clear_thinking: false },
-  },
-})
-
-const coding = ZAICodingPlan.configure({ apiKey: process.env.ZAI_API_KEY })
-const messages = ai.request({
-  model: coding.messages("glm-5.3"),
-  prompt: "Explain this design.",
-  providerOptions: { effort: "high" },
-})
-```
-
-The products have distinct provider identities and endpoints:
-
-| Provider                            | Selector                    | Default base URL                      |
-| ----------------------------------- | --------------------------- | ------------------------------------- |
-| `ZAI` (`zai`)                       | `.model`, `.chat`, `.image` | `https://api.z.ai/api/paas/v4`        |
-| `ZAICodingPlan` (`zai-coding-plan`) | `.model`, `.chat`           | `https://api.z.ai/api/coding/paas/v4` |
-| `ZAICodingPlan`                     | `.messages`                 | `https://api.z.ai/api/anthropic/v1`   |
-| `ZAICodingPlan`                     | `.responses`                | `https://api.z.ai/api/v1`             |
-
-Both read `ZAI_API_KEY` when `apiKey` is omitted and support an explicit `auth` override.
-Coding Plan requires an active subscription. `baseURL` overrides the selected API's
-complete base, including its version prefix. Language-model routes use HTTP/SSE.
-
-Options retain the selected API's native semantics:
-
-- Chat `reasoningEffort` lowers to `reasoning_effort`; Responses lowers it to `reasoning.effort`.
-  Messages `effort` lowers to `output_config.effort`. Omission preserves provider defaults.
-- Chat `thinking` passes `type` and `clear_thinking` through unchanged. Set
-  `clear_thinking: false` and replay complete `response.message` values to preserve reasoning
-  across user messages and tool loops. The standard API defaults to clearing historical thinking;
-  Coding Plan documents preservation by default.
-- Messages accepts `thinking: { type: "enabled" | "adaptive" | "disabled" }` without requiring
-  an Anthropic token budget. Coding Plan documents a disabled toggle as low-effort thinking
-  for GLM-5.3, with explicit effort taking precedence.
-- Chat also offers `toolStream`, `doSample`, `responseFormat`, `requestID`, and `userID`.
-  Tool-argument streaming is enabled when tools are present on GLM-4.6/4.7/5.x;
-  `toolStream: false` explicitly disables it. Older model families omit the opt-in.
-- Effort and thinking values remain forward-compatible strings. Their meaning is model-specific:
-  GLM-5.3 accepts `low`, `high`, and `max` effort and rejects disabled thinking with HTTP 400;
-  the direct GLM-5.2 recordings returned reasoning even with `none` and `minimal` effort,
-  whereas explicit `thinking.type: "disabled"` disabled it on GLM-5.2 and GLM-4.7.
-
-Standard API recordings cover GLM-5.3 efforts and a full preserved-reasoning tool loop with
-a subsequent user follow-up, GLM-5.2 efforts, older-model thinking toggles, GLM-4.5 tool calls,
-GLM-5.3-Flash image input, and JSON output. Coding Plan has unit coverage for routing,
-request options, and reasoning replay; successful live recordings are pending.
-
-Package entrypoints are `@warcode/ai/providers/zai`, `zai/chat`, `zai-coding-plan`,
-`zai-coding-plan/chat`, `zai-coding-plan/messages`, and `zai-coding-plan/responses`.
-
-## Moonshot
-
-Moonshot defaults to Chat Completions, with Messages and Responses selectors for Kimi K3:
-
-```ts
-import { ai } from "@warcode/ai/effect"
-import { Moonshot } from "@warcode/ai/providers"
-
-const moonshot = Moonshot.configure({ apiKey: process.env.MOONSHOT_API_KEY })
-
-const request = ai.request({
-  model: moonshot.model("kimi-k3"), // also moonshot.chat("kimi-k3")
-  prompt: "Explain the tradeoffs in this design.",
-  providerOptions: { reasoningEffort: "high" },
-})
-
-const messages = ai.request({
-  model: moonshot.messages("kimi-k3"),
-  prompt: "Explain the tradeoffs in this design.",
-  providerOptions: { effort: "high" },
-})
-
-const responses = ai.request({
-  model: moonshot.responses("kimi-k3"),
-  prompt: "Explain the tradeoffs in this design.",
-  providerOptions: { reasoningEffort: "high" },
-})
-```
-
-When `apiKey` is omitted, authentication reads `MOONSHOT_API_KEY`, then `MOONSHOTAI_API_KEY`.
-Chat and Responses use `https://api.moonshot.ai/v1`; Messages uses
-`https://api.moonshot.ai/anthropic/v1`. `baseURL` overrides the selected API's complete base,
-including the version prefix, for regional endpoints or gateways. Each endpoint requires its own valid credentials.
-All three routes use HTTP/SSE.
-
-Reasoning options stay native to the selected API and model:
-
-| Model/API                   | Provider options                                                                        |
-| --------------------------- | --------------------------------------------------------------------------------------- |
-| K3 Chat / Responses         | `reasoningEffort: "low" \| "high" \| "max"`; default is `max`                           |
-| K3 Messages                 | `effort: "low" \| "high" \| "max"`; default is `max`                                    |
-| K2.6 Chat                   | `thinking: { type: "enabled" \| "disabled", keep?: "all" \| null }`; default is enabled |
-| K2.7 Code / high-speed Chat | Omit `thinking` to use always-on, preserved reasoning                                   |
-
-Omitting options preserves the model's defaults. K3 uses effort rather than the K2.x `thinking`
-parameter. Known effort values have autocomplete while future strings remain accepted.
-For K2.6, `thinking.keep: "all"` enables preservation of reasoning across user messages.
-K3 and both K2.7 Code variants always preserve reasoning. Continue with the returned
-`response.message` and matching tool results so reasoning content and any Messages signatures are retained.
-Leave sampling options such as `temperature` unset to use these models' fixed defaults.
-
-The recorded suite covers all three K3 APIs, default and explicit efforts, K2.6 thinking modes,
-both K2.7 Code variants, generated tool loops with a subsequent user follow-up, required/disabled
-tool choice, image-byte input, and native structured output through `http.body` overlays.
-K3 Chat and Messages accept required and disabled tool choice. Responses supports automatic tool
-choice only; explicit `required` and `none` produce a provider `InvalidRequest` error, also covered by recordings.
-The provider targets the Moonshot Open Platform; Kimi Code is a separate product and endpoint.
-
-Package entrypoints are `@warcode/ai/providers/moonshot`, `moonshot/chat`, `moonshot/messages`,
-and `moonshot/responses`; each exports `model(modelID, settings)`.
-
-## MiniMax
-
-MiniMax defaults to its Messages API and reads `MINIMAX_API_KEY` when `apiKey` is omitted:
-
-```ts
-import { Effect } from "effect"
-import { ai, AIClient } from "@warcode/ai/effect"
-import { MiniMax } from "@warcode/ai/providers"
-
-const minimax = MiniMax.configure({ apiKey: process.env.MINIMAX_API_KEY })
-const request = ai.request({
-  model: minimax.model("MiniMax-M3"), // also minimax.messages("MiniMax-M3")
-  prompt: "What is 173 multiplied by 219?",
-  providerOptions: { thinking: { type: "adaptive" } },
-  maxTokens: 1536,
-})
-
-const response = await Effect.runPromise(ai.generate(request).pipe(Effect.provide(AIClient.layer)))
-console.log(response.text)
-```
-
-Select `minimax.chat("MiniMax-M3")` or `minimax.responses("MiniMax-M3")` for MiniMax's native Chat Completions
-and Responses APIs. The matching package entrypoints are `@warcode/ai/providers/minimax/messages`,
-`@warcode/ai/providers/minimax/chat`, and `@warcode/ai/providers/minimax/responses`.
-
-- **Messages:** M3 thinking defaults off. Set `thinking: { type: "adaptive" }` to enable it or
-  `thinking: { type: "disabled" }` to disable it.
-- **Chat:** M3 thinking defaults on and uses the same `thinking` control. The provider enables `reasoning_split`
-  by default so reasoning is separate from answer text; `reasoningSplit: false` selects native `<think>`-tagged text.
-- **Responses:** M3 reasoning defaults off. `reasoningEffort: "none"` disables it; `"minimal"`, `"low"`,
-  `"medium"`, and `"high"` enable reasoning without changing its depth.
-
-M2.x models always think, even when a disabling option is supplied. For tool continuations, retain the complete
-`response.message` in history before adding `Message.tool(...)` results; this preserves reasoning and any signatures.
-
-The default API bases are `https://api.minimax.io/anthropic/v1` for Messages and `https://api.minimax.io/v1` for
-Chat, Responses and Images. `configure({ baseURL })` replaces the selected API's base, including its version prefix;
-use `https://api.minimax.cn/v1` for the mainland China platform. `minimax.image("image-01")` (also
-`@warcode/ai/providers/minimax/images`) generates images; see [MiniMax images](#minimax-images).
 
 ## Meta
 
@@ -809,11 +558,8 @@ table before swapping only the `model`:
 | Google (Gemini)       | 1   | ✓                  | ✓ (`0.5K` as `512`) | ✓ (no public URLs)   | `seed`                                    |
 | xAI                   | ✓   | ✓                  | `1k`/`2k`           | ✓                    | none                                      |
 | Meta                  | ✓   | ✓ (hint)           | ignored             | ✓                    | `size`, `outputFormat`                    |
-| Z.ai                  | ✗   | width × height     | width × height      | ✗                    | `size`                                    |
-| Alibaba               | ✓   | width × height     | width × height      | ✓                    | `size`, `seed`                            |
-| MiniMax               | ✓   | preset or w × h⁴   | preset or w × h⁴    | 1 (portrait subject) | `aspect_ratio`, `width`, `height`, `seed` |
 | Vercel AI Gateway     | ✓   | as OpenAI³         | as OpenAI³          | per model            | as OpenAI                                 |
-| OpenRouter            | ✓   | ✓ (`aspect_ratio`) | tier⁵               | per model⁵           | `size`, `outputFormat` (no `mask`)        |
+| OpenRouter            | ✓   | ✓ (`aspect_ratio`) | tier⁴               | per model⁴           | `size`, `outputFormat` (no `mask`)        |
 | Cloudflare Workers AI | 1   | width × height²    | width × height²     | ✗                    | `width`, `height`, `seed`                 |
 
 ✓ lowers natively; ✗ fails whenever the field is set (including `n: 1`); `1` means `n > 1` fails. "width × height"
@@ -824,9 +570,8 @@ forwards `outputFormat` but does not apply it, so the returned bytes keep the up
 `@cf/black-forest-labs/flux-1-schnell` takes no size, and the provider rejects it. ³ Non-OpenAI gateway models
 (`bfl/flux-2-pro`) get a computed width × height, which the gateway passes through; models with a fixed list, such as
 Recraft, reject sizes outside it. Grok (`spacexai/*`, `xai/*`) ignores `size`, so it gets `providerOptions.xai`
-`aspect_ratio` and `1k`/`2k` instead. ⁴ MiniMax sends its `aspect_ratio` preset for a preset aspect at about `1K` and an
-exact width × height (512–2048 px, steps of 8) otherwise; `image-01-live` takes only the presets, minus `21:9`.
-⁵ OpenRouter takes `512`, `768`, `1K`, `1.5K`, `2K` or `4K` rather than pixels; other values are left out. It has no
+`aspect_ratio` and `1k`/`2k` instead.
+⁴ OpenRouter takes `512`, `768`, `1K`, `1.5K`, `2K` or `4K` rather than pixels; other values are left out. It has no
 edits endpoint, so input images go to `/images/generations` as `input_references` (data URLs or http(s) URLs).
 
 `Media.Asset` is the one asset type shared by image requests, image responses, LLM messages, and tool results.
@@ -948,47 +693,6 @@ Google image options are request-scoped and inferred from the selected model. Kn
 future string values and arbitrary native Gemini `generationConfig` fields remain available. Native fields override
 their mapped aliases, and `http.body` is the final deep overlay. The selected model ID is sent to Gemini
 `generateContent` without a local allowlist.
-
-Z.ai image models infer open Z.ai-native options from the selected model:
-
-```ts
-import { ZAI } from "@warcode/ai/providers"
-
-const zai = ai.image.generate({
-  model: ZAI.configure({ apiKey }).image("any-model-id"),
-  prompt,
-  providerOptions: {
-    quality: "hd",
-    userID: "user-123",
-    future_option: true,
-  },
-  http,
-})
-```
-
-Z.ai does not include trustworthy MIME metadata for output URLs, so generated images use
-`application/octet-stream` until materialized. Output URLs expire after 30 days; call `asset.materialize()` and
-persist the bytes promptly if they must remain available.
-
-### MiniMax images
-
-```ts
-import { MiniMax } from "@warcode/ai/providers"
-
-const minimax = ai.image.generate({
-  model: MiniMax.configure({ apiKey }).image("image-01"),
-  prompt,
-  n: 2,
-  aspect: "16:9",
-  images: [Media.url("https://example.com/portrait.jpg")], // optional subject reference
-  providerOptions: { promptOptimizer: true, seed: 42 },
-})
-```
-
-The reference image is sent as a `character` subject, so it should be a single front-facing portrait. Images come
-back inline (`responseFormat: "base64"` by default); `responseFormat: "url"` returns links that expire after 24 hours
-and carry no MIME type until materialized. MiniMax status codes map to typed errors; code 1026 is a `ContentPolicy`
-error.
 
 ### Partial images
 
@@ -1584,9 +1288,9 @@ ai.request({ model, system, prompt, cache: { ttl: "1h" } })
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Anthropic Messages family, Meta Messages                                  | `ttl` on every `cache_control` marker                                                      |
 | Bedrock Converse                                                          | `ttl` on every `cachePoint`; older Claude releases that only cache for 5m drop `"1h"`      |
-| OpenRouter, DigitalOcean, Alibaba Chat markers                            | `ttl` on every `cache_control` marker                                                      |
+| OpenRouter, DigitalOcean Chat markers                            | `ttl` on every `cache_control` marker                                                      |
 | OpenAI Responses (OpenAI, Azure, Cloudflare AI Gateway)                   | `"24h"` → `prompt_cache_retention: "24h"`; anything else → `prompt_cache_options: { ttl }` |
-| Chat Completions without markers (OpenAI-compatible, Moonshot, DeepInfra) | same mapping as OpenAI Responses                                                           |
+| Chat Completions without markers (OpenAI-compatible, DeepInfra) | same mapping as OpenAI Responses                                                           |
 
 OpenAI's two fields cover different models: `prompt_cache_retention` (`"in_memory"` or `"24h"`) is the only control before GPT-5.6, and GPT-5.6+ reads `prompt_cache_options.ttl` (`"30m"` or `"12h"`). Sending `prompt_cache_options` to an older model returns a 400. `"in_memory"` is not a duration; send it with an HTTP body overlay.
 
@@ -1632,18 +1336,18 @@ const gateway = CloudflareAIGateway.configure({
 
 For a provider that needs no key, such as a local server, pass `apiKey: false`: the package skips the environment lookup and sends no auth header (Amazon Bedrock and Google Vertex keep their own auth).
 
-Included LLM providers: OpenAI, Anthropic, Google (Gemini), Google Vertex, Amazon Bedrock (Converse and Mantle), Azure OpenAI, Alibaba, Baseten, Cerebras, Cohere, Cloudflare AI Gateway, Cloudflare Workers AI, DeepInfra, DeepSeek, DigitalOcean, Fireworks, Groq, Meta, MiniMax, Mistral, Moonshot, OpenRouter, TogetherAI, Venice, Vercel AI Gateway, xAI, Z.ai, and Z.ai Coding Plan. TypeSafe AI and Warcode expose decision models only. Generic Chat Completions, Responses, and Anthropic Messages-compatible entrypoints support custom endpoints.
+Included LLM providers: OpenAI, Anthropic, Google (Gemini), Google Vertex, Amazon Bedrock (Converse and Mantle), Azure OpenAI, Baseten, Cerebras, Cohere, Cloudflare AI Gateway, Cloudflare Workers AI, DeepInfra, DigitalOcean, Fireworks, Groq, Meta, Mistral, OpenRouter, TogetherAI, Venice, Vercel AI Gateway, xAI, and Z.ai Coding Plan. TypeSafe AI and Warcode expose decision models only. Generic Chat Completions, Responses, and Anthropic Messages-compatible entrypoints support custom endpoints.
 
 Each named provider owns its module, endpoint, authentication, and route setup. Providers with the same wire format compose the shared protocol directly:
 
 ```ts
-import { DeepSeek, Fireworks } from "@warcode/ai/providers"
+import { Baseten, Fireworks } from "@warcode/ai/providers"
 
-const deepseek = DeepSeek.configure({ apiKey }).model("deepseek-chat")
+const baseten = Baseten.configure({ apiKey }).model("my-model")
 const fireworks = Fireworks.configure({ apiKey }).model("accounts/fireworks/models/my-model")
 ```
 
-The former `OpenAICompatible.baseten`, `.cerebras`, `.deepinfra`, `.deepseek`, `.fireworks`, `.groq`, and `.togetherai` presets are replaced by the top-level `Baseten`, `Cerebras`, `DeepInfra`, `DeepSeek`, `Fireworks`, `Groq`, and `TogetherAI` exports. Use `CloudflareAIGateway` and `CloudflareWorkersAI` directly; each has its own module. `OpenAICompatible` configures generic endpoints with an explicit `baseURL`.
+The former `OpenAICompatible.baseten`, `.cerebras`, `.deepinfra`, `.fireworks`, `.groq`, and `.togetherai` presets are replaced by the top-level `Baseten`, `Cerebras`, `DeepInfra`, `Fireworks`, `Groq`, and `TogetherAI` exports. Use `CloudflareAIGateway` and `CloudflareWorkersAI` directly; each has its own module. `OpenAICompatible` configures generic endpoints with an explicit `baseURL`.
 
 ### Provider entrypoints
 
@@ -1703,7 +1407,6 @@ model("claude-sonnet-4-6", { project: "my-project", location: "global" })
 Additional provider entrypoints include:
 
 - `@warcode/ai/providers/baseten`
-- `@warcode/ai/providers/deepseek`
 - `@warcode/ai/providers/fireworks`
 - `@warcode/ai/providers/cloudflare-ai-gateway`
 - `@warcode/ai/providers/cloudflare-workers-ai`
