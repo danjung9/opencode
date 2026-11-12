@@ -1,0 +1,50 @@
+import { describe, expect, test } from "bun:test"
+import { catalogIdentity } from "./catalog-identity"
+
+describe("stats catalog identity", () => {
+  test("resolves Warcode offerings to canonical labs", () => {
+    const identity = catalogIdentity({
+      models: { "meituan/longcat-2.5-preview": {} },
+      providers: {
+        warcode: { models: { "longcat-2.5-preview-free": { canonical_model_id: "meituan/longcat-2.5-preview" } } },
+        "warcode-go": {
+          models: { "longcat-2.5-preview-free": { canonical_model_id: "meituan/longcat-2.5-preview" } },
+        },
+      },
+    })
+
+    expect(identity.offerings.get("warcode/longcat-2.5-preview-free")).toBe("meituan")
+    expect(identity.offerings.get("warcode-go/longcat-2.5-preview-free")).toBe("meituan")
+    expect(identity.models.get("longcat-2.5-preview")).toBe("meituan")
+  })
+
+  test("does not guess a lab for a name shared by different canonical models", () => {
+    const identity = catalogIdentity({
+      models: { "lab-a/model": {}, "lab-b/model": {} },
+      providers: {
+        warcode: { models: { "model-free": { canonical_model_id: "lab-a/model" } } },
+        "warcode-go": { models: { model: { canonical_model_id: "lab-b/model" } } },
+      },
+    })
+
+    expect(identity.offerings.get("warcode/model-free")).toBe("lab-a")
+    expect(identity.offerings.get("warcode-go/model")).toBe("lab-b")
+    expect(identity.models.has("model")).toBe(false)
+  })
+
+  test("accepts provider IDs that are already canonical catalog IDs", () => {
+    const identity = catalogIdentity({
+      models: { "warcode/direct-model": {} },
+      providers: { warcode: { models: { "direct-model": {} } } },
+    })
+
+    expect(identity.offerings.get("warcode/direct-model")).toBe("warcode")
+    expect(identity.models.get("direct-model")).toBe("warcode")
+  })
+
+  test("rejects a catalog without published canonical identities", () => {
+    expect(() => catalogIdentity({ models: {}, providers: { warcode: { models: { model: {} } } } })).toThrow(
+      "Model catalog has no canonical Warcode offerings",
+    )
+  })
+})

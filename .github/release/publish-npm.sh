@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+# publish-npm.sh <build-npm dir> <signed dir>...: publishes every release tarball to npm with WARCODE_NPM_TAG.
+# Names, the version and the package set come from this script, never from the tarballs: each tarball's
+# package.json is read as data and must match. macOS and Windows CLI packages must come from a signed dir.
+. "$(dirname "$0")/lib.sh"
+
+npm_dir=$1
+shift
+targets="linux-arm64 linux-x64 linux-x64-baseline linux-arm64-musl linux-x64-musl linux-x64-baseline-musl darwin-arm64 darwin-x64 darwin-x64-baseline windows-arm64 windows-x64 windows-x64-baseline"
+expected="@warcode/cli"
+for target in $targets; do expected="$expected @warcode/cli-$target"; done
+for lib in schema codemode theme ai util protocol client plugin plugin-browser core simulation server sdk ui; do expected="$expected @warcode/$lib"; done
+if [ "$WARCODE_CHANNEL" != latest ]; then
+  expected="$expected @warcode/cli-node"
+  for target in linux-arm64 linux-x64 darwin-arm64 windows-arm64 windows-x64; do expected="$expected @warcode/cli-node-$target"; done
+fi
+
+if ! dry_run; then
+  for file in "$npm_dir"/*.tgz; do
+    gh attestation verify "$file" --repo anomalyco/warcode --signer-workflow anomalyco/warcode/.github/workflows/release.yml > /dev/null
+  done
+fi
+
+shopt -s nullglob
+files=()
+for dir in "$@"; do files+=("$dir"/*.tgz); done
+files+=("$npm_dir"/*.tgz)
+list=$(mktemp)
+for file in "${files[@]}"; do
+  IFS=$'\t' read -r name version config install < <(tar -xzOf "$file" package/package.json |
+    jq -r '[.name, .version, ((.publishConfig // {}) | keys - ["access"] | length > 0),
+      ((.scripts // {}) | (has("preinstall") or has("install") or has("postinstall")))] | @tsv')
+  # shellcheck disable=SC2086 # $expected is a word list
+  printf '%s\n' $expected | grep -qxF -- "$name" || die "Unexpected package $name in $file"
+  # The signed copy of a macOS or Windows CLI package replaces the unsigned one from the build.
+  if cut -f1 "$list" | grep -qxF -- "$name"; then continue; fi
+  case "$name:$file" in
+    @warcode/cli-darwin-*:"$npm_dir"/* | @warcode/cli-windows-*:"$npm_dir"/*) die "$name is not signed" ;;
+  esac
+  [ "$version" = "$WARCODE_VERSION" ] || die "$name has version $version, expected $WARCODE_VERSION"
+  [ "$config" = false ] || die "$name sets publishConfig beyond access"
+  [ "$install" = false ] || [ "$name" = @warcode/cli ] || [ "$name" = @warcode/cli-node ] || die "$name has an install script"
+  printf '%s\t%s\n' "$name" "$file" >> "$list"
+done
+for name in $expected; do cut -f1 "$list" | grep -qxF -- "$name" || die "Missing package $name"; done
+
+# The CLI wrappers resolve their platform packages from postinstall, so they publish last.
+packages=$(mktemp)
+wrappers=$(mktemp)
+grep -vP '^@warcode/cli(-node)?\t' "$list" > "$packages" || true
+grep -P '^@warcode/cli(-node)?\t' "$list" > "$wrappers" || true
+cat "$packages" "$wrappers"
+
+# A clean directory and config, so nothing from an artifact can redirect the registry.
+printf 'registry=https://registry.npmjs.org/\n' > "$RUNNER_TEMP/npmrc"
+export NPM_CONFIG_USERCONFIG="$RUNNER_TEMP/npmrc"
+cd "$(mktemp -d)"
+flags=(--tag "$WARCODE_NPM_TAG" --access public --ignore-scripts)
+if dry_run; then flags+=(--dry-run); else flags+=(--provenance); fi
+
+publish() {
+  while IFS=$'\t' read -r name file; do
+    if ! dry_run && npm view "$name@$WARCODE_VERSION" version > /dev/null 2>&1; then
+      echo "already published $name@$WARCODE_VERSION"
+      continue
+    fi
+    npm publish "$file" "${flags[@]}"
+  done < "$1"
+}
+
+# npm publish returns while the registry is still processing the version: a large platform tarball can take ten
+# minutes to become available, and versions appear out of publish order. A wrapper published in that window makes
+# its postinstall fail with ETARGET, and rolling the dist-tag back does not repair an install that already failed,
+# so wait for every other package to resolve at this version before publishing the wrappers.
+wait_for_registry() {
+  if dry_run; then return; fi
+  while IFS= read -r name; do
+    for attempt in $(seq 1 180); do
+      if npm view --prefer-online "$name@$WARCODE_VERSION" version > /dev/null 2>&1; then break; fi
+      if [ "$attempt" = 180 ]; then die "$name@$WARCODE_VERSION did not appear in the registry"; fi
+      echo "waiting for $name@$WARCODE_VERSION"
+      sleep 10
+    done
+  done < <(cut -f1 "$1")
+}
+
+publish "$packages"
+wait_for_registry "$packages"
+publish "$wrappers"

@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "warcode-files",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "env": {
+    "dev": {
+      "name": "warcode-dev-files",
+      "vars": { "STAGE": "dev" },
+      "routes": [{ "pattern": "dev.warcode.ai/files/*", "zone_name": "warcode.ai" }],
+      "r2_buckets": [{ "binding": "FILES", "bucket_name": "warcode-dev-files" }],
+    },
+    "production": {
+      "name": "warcode-production-files",
+      "vars": { "STAGE": "production" },
+      "routes": [{ "pattern": "warcode.ai/files/*", "zone_name": "warcode.ai" }],
+      "r2_buckets": [{ "binding": "FILES", "bucket_name": "warcode-production-files" }],
+    },
+  },
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {},
+  "permission": {},
+  "references": {
+    "effect": {
+      "repository": "github.com/Effect-TS/effect-smol",
+      "description": "Use for Effect v4 and effect-smol implementation details",
+    },
+    "warcode-local": {
+      "path": "~/.local/share/warcode",
+      "description": "Contains warcode logs and data",
+    },
+  },
+  "mcp": {},
+  "tools": {
+    "github-pr-search": false,
+  },
+  "experimental": {
+    "part_rows": true,
+  },
+}

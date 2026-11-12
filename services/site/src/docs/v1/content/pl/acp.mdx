@@ -1,0 +1,161 @@
+---
+title: ACP
+description: Używanie Warcode z protokołem Agent Client Protocol (ACP).
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components"
+
+Warcode obsługuje [Agent Client Protocol](https://agentclientprotocol.com) (ACP), który umożliwia korzystanie z Warcode bezpośrednio w edytorach i środowiskach IDE.
+
+:::tip
+Listę edytorów i narzędzi obsługujących ACP znajdziesz w [raporcie postępu ACP](https://zed.dev/blog/acp-progress-report#available-now).
+:::
+
+ACP to otwarty standard, który ujednolica komunikację między edytorami kodu a agentami kodującymi AI.
+
+---
+
+## Konfiguracja
+
+Aby używać Warcode przez ACP, skonfiguruj swój edytor tak, aby uruchamiał polecenie `warcode acp`.
+
+Uruchamia to Warcode jako podproces zgodny z ACP, który komunikuje się z edytorem za pomocą JSON-RPC przez stdio.
+
+Poniżej znajdują się przykłady dla edytorów obsługujących ACP.
+
+---
+
+### Zed
+
+Zainstaluj Warcode z [rejestru ACP Zed](https://zed.dev/docs/ai/external-agents#registry), uruchamiając `zed: acp registry` w palecie poleceń.
+
+Aby zamiast tego użyć niestandardowego pliku wykonywalnego Warcode, dodaj go do konfiguracji [Zed](https://zed.dev) (`~/.config/zed/settings.json`):
+
+```json title="~/.config/zed/settings.json"
+{
+  "agent_servers": {
+    "Warcode": {
+      "type": "custom",
+      "command": "warcode",
+      "args": ["acp"]
+    }
+  }
+}
+```
+
+Aby użyć, wybierz `agent: new thread` w **Palecie poleceń** (Command Palette).
+
+Możesz także przypisać skrót klawiszowy, edytując `keymap.json`:
+
+```json title="keymap.json"
+[
+  {
+    "bindings": {
+      "cmd-alt-o": [
+        "agent::NewExternalAgentThread",
+        {
+          "agent": {
+            "custom": {
+              "name": "Warcode",
+              "command": {
+                "command": "warcode",
+                "args": ["acp"]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+]
+```
+
+---
+
+### JetBrains IDE
+
+Dodaj do swojego [JetBrains IDE](https://www.jetbrains.com/) plik `acp.json` zgodnie z [dokumentacją](https://www.jetbrains.com/help/ai-assistant/acp.html):
+
+```json title="acp.json"
+{
+  "agent_servers": {
+    "Warcode": {
+      "command": "/absolute/path/bin/warcode",
+      "args": ["acp"]
+    }
+  }
+}
+```
+
+Następnie wybierz „Warcode” w selektorze agentów AI Chat.
+
+---
+
+### Avante.nvim
+
+Dodaj do konfiguracji [Avante.nvim](https://github.com/yetone/avante.nvim):
+
+```lua
+{
+  acp_providers = {
+    ["warcode"] = {
+      command = "warcode",
+      args = { "acp" }
+    }
+  }
+}
+```
+
+Jeśli potrzebujesz przekazać klucz API:
+
+```lua {6-8}
+{
+  acp_providers = {
+    ["warcode"] = {
+      command = "warcode",
+      args = { "acp" },
+      env = {
+        WARCODE_API_KEY = os.getenv("WARCODE_API_KEY")
+      }
+    }
+  }
+}
+```
+
+---
+
+### CodeCompanion.nvim
+
+Aby używać Warcode jako agenta ACP w [CodeCompanion.nvim](https://github.com/olimorris/codecompanion.nvim), dodaj następującą konfigurację do Neovim:
+
+```lua
+require("codecompanion").setup({
+  interactions = {
+    chat = {
+      adapter = {
+        name = "warcode",
+        model = "claude-sonnet-5-5",
+      },
+    },
+  },
+})
+```
+
+Ta konfiguracja sprawia, że CodeCompanion używa Warcode jako agenta ACP do czatu.
+
+Jeśli wymagany jest `WARCODE_API_KEY`, zapoznaj się z sekcją [Konfigurowanie adapterów: Zmienne środowiskowe](https://codecompanion.olimorris.dev/getting-started#setting-an-api-key) w dokumentacji CodeCompanion.nvim, aby uzyskać szczegółowe informacje.
+
+## Wsparcie
+
+Warcode działa przez ACP tak samo, jak w terminalu. Obsługiwane są wszystkie główne funkcje:
+
+:::note
+Niektóre polecenia z ukośnikiem, takie jak `/undo` i `/redo`, nie są obecnie obsługiwane przez ACP.
+:::
+
+- Narzędzia wbudowane (operacje na plikach, terminal itp.)
+- Niestandardowe narzędzia i polecenia z ukośnikiem
+- Serwery MCP zdefiniowane w konfiguracji Warcode
+- Zasady projektu z `AGENTS.md`
+- Niestandardowe formatery i lintery
+- Agenci systemowi i uprawnienia

@@ -1,0 +1,97 @@
+import { Config } from "@warcode/core/config"
+import { ConfigIntegration } from "@warcode/core/config/integration"
+import { ConfigPolicyPlugin } from "@warcode/core/config/plugin/policy"
+import { Integration } from "@warcode/core/integration"
+import { Mcp } from "@warcode/core/mcp/index"
+import { Skill } from "@warcode/core/skill"
+import { Info } from "@warcode/schema/config"
+import { ConfigPolicy } from "@warcode/schema/config/policy"
+import { ID } from "@warcode/schema/event"
+import { Credential } from "@warcode/core/credential"
+import { WebSearch } from "@warcode/core/websearch"
+import { Effect, Schema, Stream } from "effect"
+import { host } from "../plugin/host"
+
+/** A connected organization's policy as the Warcode Console delivers it: an integration config document. */
+export function organizationPolicy(policies: ConfigPolicy.Info[], organization?: string) {
+  return new ConfigIntegration.Document({
+    type: "document",
+    integrationID: Integration.ID.make("warcode"),
+    connection: { type: "env", name: "WARCODE_API_KEY" },
+    organization,
+    info: Schema.decodeUnknownSync(Info)({ policies }),
+  })
+}
+
+/** Replaces the connected organization's policy, or removes it; publish `Event.Updated` to make plugins reload. */
+export const setOrganizationPolicy = Effect.fn(function* (policies: ConfigPolicy.Info[] | undefined) {
+  const config = yield* Config.Service
+  yield* config.integration?.(Integration.ID.make("warcode"), policies && organizationPolicy(policies)) ?? Effect.void
+})
+
+// Exercise the real policy plugin against supplied catalogs without unrelated provider/permission setup.
+export const registerIntegrationPolicy = Effect.fn(function* (input: {
+  mcp?: Mcp.Interface
+  skill?: Skill.Interface
+  events?: Stream.Stream<{ readonly type: string }, unknown>
+}) {
+  yield* ConfigPolicyPlugin.Plugin.effect(
+    host({
+      event: {
+        subscribe: () =>
+          (input.events ?? Stream.never).pipe(
+            Stream.filter((event) => event.type === "config.updated"),
+            Stream.map(() => ({ id: ID.create(), created: Date.now(), type: "config.updated" as const, data: {} })),
+          ),
+      },
+      provider: {
+        list: () => Effect.die("unused provider.list"),
+        get: () => Effect.die("unused provider.get"),
+        transform: () => Effect.succeed({ dispose: Effect.void }),
+        reload: () => Effect.void,
+      },
+      mcp: {
+        list: () => Effect.die("unused mcp.list"),
+        transform: (callback) => input.mcp?.transform(callback) ?? Effect.succeed({ dispose: Effect.void }),
+        reload: () => input.mcp?.reload() ?? Effect.void,
+      },
+      skill: {
+        list: () => Effect.die("unused skill.list"),
+        transform: (callback) => input.skill?.transform(callback) ?? Effect.succeed({ dispose: Effect.void }),
+        reload: () => input.skill?.reload() ?? Effect.void,
+      },
+      permission: {
+        hook: () => Effect.succeed({ dispose: Effect.void }),
+        list: () => Effect.die("unused permission.list"),
+        get: () => Effect.die("unused permission.get"),
+        reply: () => Effect.die("unused permission.reply"),
+        assert: () => Effect.die("unused permission.assert"),
+      },
+    }),
+  ).pipe(
+    Effect.provideService(
+      Credential.Service,
+      Credential.Service.of({
+        all: () => Effect.succeed([]),
+        list: () => Effect.succeed([]),
+        get: () => Effect.succeed(undefined),
+        refresh: () => Effect.die("unused Credential.refresh"),
+        create: () => Effect.die("unused Credential.create"),
+        activate: () => Effect.die("unused Credential.activate"),
+        update: () => Effect.die("unused Credential.update"),
+        remove: () => Effect.die("unused Credential.remove"),
+      }),
+    ),
+    Effect.provideService(
+      WebSearch.Service,
+      WebSearch.Service.of({
+        providers: () => Effect.die("unused WebSearch.providers"),
+        default: () => Effect.die("unused WebSearch.default"),
+        select: () => Effect.die("unused WebSearch.select"),
+        query: () => Effect.die("unused WebSearch.query"),
+        transform: () => Effect.succeed({ dispose: Effect.void }),
+        reload: () => Effect.void,
+      }),
+    ),
+  )
+})

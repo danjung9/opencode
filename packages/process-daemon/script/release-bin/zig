@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+
+if [ -z "${WARCODE_REAL_ZIG:-}" ]; then
+  echo "WARCODE_REAL_ZIG is required" >&2
+  exit 1
+fi
+
+if [ "${1:-}" = "build" ]; then
+  exec "$WARCODE_REAL_ZIG" "$@" -Dcpu=baseline
+fi
+
+exec "$WARCODE_REAL_ZIG" "$@"

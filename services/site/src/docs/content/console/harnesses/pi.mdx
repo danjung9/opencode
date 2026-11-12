@@ -1,0 +1,65 @@
+---
+title: "Pi"
+description: "Use Console and Go models from the Pi coding agent."
+---
+
+[Pi](https://pi.dev) includes Warcode providers for pay-as-you-go and Go. It picks the right API for each paid or Go
+model. Free-tier chat models require Warcode and return HTTP `403` from Pi.
+
+| Provider      | Plan          |
+| ------------- | ------------- |
+| `warcode`    | Pay-as-you-go |
+| `warcode-go` | Go            |
+
+## Configure
+
+Both providers read the key from `WARCODE_API_KEY`. Create a [personal API key](/console/harnesses#get-an-api-key).
+
+```bash
+export WARCODE_API_KEY="oc_sk_..."
+pi --model warcode/claude-sonnet-5-5
+```
+
+You can also run `/login` in Pi and select the provider. Pi stores the key in `~/.pi/agent/auth.json`.
+
+```text
+/login warcode
+```
+
+## Go
+
+Use the `warcode-go` provider with a key from a workspace with a [Go](/console/go) subscription.
+
+```bash
+pi --model warcode-go/kimi-k3
+```
+
+## Models
+
+Select a model as `<provider>/<model-id>`, using IDs from the [Console](/console/models#endpoints) or
+[Go](/console/go#endpoints) table. List the models Pi knows about with `--list-models`.
+
+```bash
+pi --list-models warcode-go
+```
+
+Set a default in `~/.pi/agent/settings.json`, or press `Ctrl+S` in the `/model` picker.
+
+```json title="~/.pi/agent/settings.json"
+{
+  "defaultProvider": "warcode-go",
+  "defaultModel": "kimi-k3"
+}
+```
+
+Run `pi update --models` when a new Console model doesn't appear yet.
+
+## Console MCP
+
+Pi v0.99.0 and later support MCP. Add the [Console MCP](/console/harnesses#console-mcp) server, then sign in from the
+browser.
+
+```bash
+pi mcp add warcode-console --url https://opencode.ai/console/mcp
+pi mcp login warcode-console
+```
