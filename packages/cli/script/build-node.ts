@@ -115,6 +115,7 @@ for (const target of targets) {
   if (bundleOnly) {
     await verifyArtifact(path.join(bundleDir, "warcode.mjs"))
     await copyFile(path.join(dir, "script/start-vscode.ps1"), path.join(bundleDir, "start-vscode.ps1"))
+    await copyFile(path.join(dir, "script/start-vscode.bat"), path.join(bundleDir, "start-vscode.bat"))
     await copyFile(path.join(dir, "script/portable-readme.txt"), path.join(bundleDir, "README.txt"))
   }
 
