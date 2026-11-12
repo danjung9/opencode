@@ -22,6 +22,8 @@ import { McpEvent } from "@warcode/schema/mcp-event"
 import { ConfigPolicy } from "@warcode/schema/config/policy"
 import { Config } from "@warcode/core/config"
 import { ConfigMcpPlugin } from "@warcode/core/config/plugin/mcp"
+import { BuiltinMcpPlugin } from "@warcode/core/plugin/builtin-mcp"
+import { Flag } from "@warcode/core/flag"
 import { Credential } from "@warcode/core/credential"
 import { AppNodeBuilder } from "@warcode/core/effect/app-node-builder"
 import { LayerNode } from "@warcode/util/effect/layer-node"
@@ -462,6 +464,51 @@ function resourceMcpLayer(
     ),
   )
 }
+
+testEffect(resourceMcpLayer(new ConfigMCP.Local({ type: "local", command: ["unused"], disabled: true }))).live(
+  "built-in MCP servers stay disabled until explicitly connected and respect the feature flag",
+  () =>
+    Effect.gen(function* () {
+      const service = yield* Mcp.Service
+      yield* BuiltinMcpPlugin.Plugin.effect(host()).pipe(
+        Effect.provide(Flag.testLayer([], { overrides: "-builtin_mcp" })),
+      )
+      expect((yield* service.servers()).map((server) => server.name)).toEqual(["resources"])
+      yield* BuiltinMcpPlugin.Plugin.effect(host()).pipe(
+        Effect.provide(Flag.testLayer([], { overrides: "builtin_mcp" })),
+      )
+      expect((yield* service.servers()).map((server) => [server.name, server.status.status])).toEqual([
+        ["open-computer-use", "disabled"],
+        ["palantir-mcp", "disabled"],
+        ["resources", "disabled"],
+      ])
+    }),
+)
+
+testEffect(
+  resourceMcpLayer(
+    new ConfigMCP.Local({ type: "local", command: ["custom-palantir"], disabled: true }),
+    undefined,
+    undefined,
+    {
+      name: "palantir-mcp",
+    },
+  ),
+).live("built-in MCP defaults preserve configured servers on every reload", () =>
+  Effect.gen(function* () {
+    const service = yield* Mcp.Service
+    yield* BuiltinMcpPlugin.Plugin.effect(host()).pipe(Effect.provide(Flag.testLayer([], { overrides: "builtin_mcp" })))
+    yield* service.transform((editor) => {
+      expect(editor.get("palantir-mcp")).toMatchObject({
+        type: "local",
+        command: ["custom-palantir"],
+        disabled: true,
+      })
+    })
+    yield* service.reload()
+    expect((yield* service.servers()).filter((server) => server.name === "palantir-mcp")).toHaveLength(1)
+  }),
+)
 
 const connect = (server: string, config: typeof ConfigMCP.Server.Type, directory: string) =>
   McpClient.connect({ server, config, directory }).pipe(Effect.provide(hostEnvironmentLayer))

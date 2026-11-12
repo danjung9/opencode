@@ -28,6 +28,7 @@ target
 .scripts
 .cache
 .direnv/
+packages
 
 # Local dev files
 warcode-dev

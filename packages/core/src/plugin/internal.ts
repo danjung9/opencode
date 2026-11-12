@@ -105,6 +105,7 @@ import { PlanPlugin } from "./plan.js"
 import { GoalPlugin } from "./goal.js"
 import { ModelsDevPlugin } from "./models-dev.js"
 import { McpCodeModeDefaultsPlugin } from "./mcp-codemode-defaults.js"
+import { BuiltinMcpPlugin } from "./builtin-mcp.js"
 import { ProviderPlugins } from "./provider.js"
 import { DynamicProviderPlugin } from "./provider/dynamic.js"
 import { WarcodePlugin } from "./provider/warcode.js"
@@ -246,6 +247,7 @@ const pre = [
   ToolInputRepairPlugin.Plugin,
   ConfigWorktreePlugin.Plugin,
   ConfigMcpPlugin.Plugin,
+  BuiltinMcpPlugin.Plugin,
   McpCodeModeDefaultsPlugin.Plugin,
   WellKnownPlugin.Plugin,
   VcsGitPlugin.Plugin,

@@ -222,7 +222,7 @@ if (__ocIsSea()) {
     __ocMkdir(__ocPath.dirname(__ocTarget), { recursive: true })
     const __ocTemporary = \`${"${__ocTarget}"}.${"${process.pid}"}.${"${crypto.randomUUID()}"}.tmp\`
     __ocWrite(__ocTemporary, new Uint8Array(__ocRawAsset(__ocKey)))
-    if ((__ocKey === __ocPtySpawnHelper || __ocKey === __ocPersistentPty) && process.platform !== "win32")
+    if ((__ocKey === __ocPtySpawnHelper || __ocKey === __ocPersistentPty || __ocKey.endsWith("/open-computer-use") || __ocKey.endsWith("/MacOS/OpenComputerUse")) && process.platform !== "win32")
       __ocChmod(__ocTemporary, 0o755)
     try {
       __ocRename(__ocTemporary, __ocTarget)
@@ -233,6 +233,9 @@ if (__ocIsSea()) {
   }
 }
 process.env.WARCODE_NODE_ASSETS_DIR = __ocAssetRoot
+process.env.WARCODE_NODE_ENTRY = __ocIsSea() ? "" : import.meta.filename
+process.env.WARCODE_BUNDLED_COMPUTER_USE = __ocPath.join(__ocAssetRoot, "mcp/open-computer-use", ${JSON.stringify(input.target.platform === "darwin" ? "Open Computer Use.app/Contents/MacOS/OpenComputerUse" : `open-computer-use${input.target.platform === "win32" ? ".exe" : ""}`)})
+process.env.WARCODE_BUNDLED_PALANTIR = __ocExists(__ocPath.join(__ocAssetRoot, "mcp/palantir.mjs")) ? "1" : ""
 process.env.OTUI_ASSET_ROOT = __ocAssetRoot
 process.env.WARCODE_NODE_PTY_PATH = __ocPath.join(__ocAssetRoot, ${JSON.stringify(input.target.nodePtyEntryAsset)})
 process.env.WARCODE_PARCEL_WATCHER_PATH = __ocPath.join(__ocAssetRoot, ${JSON.stringify(input.target.parcelWatcherAsset)})

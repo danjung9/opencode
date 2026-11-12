@@ -770,7 +770,7 @@ export function Titlebar(props: { verticalTabs?: { mount?: HTMLElement } }) {
                                 class="flex h-12 w-full shrink-0 items-center gap-2.5 px-2"
                                 data-slot="warcode-brand"
                               >
-                                <Mark class="h-6 w-5 shrink-0" />
+                                <Mark class="size-7 shrink-0" />
                                 <Logo class="h-7 w-auto max-w-[140px]" />
                               </div>
                             </Show>
@@ -805,7 +805,8 @@ export function Titlebar(props: { verticalTabs?: { mount?: HTMLElement } }) {
                                 <Show
                                   when={homeInSidebarHeader()}
                                   fallback={
-                                    <div class="flex min-w-0 flex-1 items-center px-2">
+                                    <div class="flex min-w-0 flex-1 items-center gap-2 px-2">
+                                      <Mark class="size-6 shrink-0" />
                                       <Logo class="h-5 w-auto max-w-full" />
                                     </div>
                                   }

@@ -80,7 +80,9 @@
     "@parcel/watcher-win32-x64": "2.5.1",
     "solid-refresh": "0.6.3",
     "vite": "catalog:",
-    "vite-plugin-solid": "catalog:"
+    "vite-plugin-solid": "catalog:",
+    "@modelcontextprotocol/client": "2.4.0",
+    "open-computer-use": "1.1.4"
   },
   "repository": {
     "type": "git",

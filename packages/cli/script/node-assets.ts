@@ -6,6 +6,7 @@ import { getNodeAssets } from "@opentui/core/node-assets"
 import { attentionSoundAssets, type NodeTarget, photonWasmAsset } from "../src/node/target"
 import { collectFiles } from "./files"
 import { resolveWarcodePty } from "./warcode-pty"
+import { collectMcpAssets } from "./mcp-assets"
 
 const dir = path.resolve(import.meta.dirname, "..")
 
@@ -27,6 +28,7 @@ export async function collectNodeAssets(target: NodeTarget) {
   const ptyEntry = fileURLToPath(import.meta.resolve(target.nodePtyPackage))
   const ptyRoot = path.resolve(path.dirname(ptyEntry), "..")
   const assets: NodeAsset[] = [
+    ...(await collectMcpAssets(target)),
     ...getNodeAssets({
       platform: target.platform,
       arch: target.arch,
@@ -65,8 +67,8 @@ export async function hashNodeAssets(assets: readonly NodeAsset[]) {
   return hash.digest("hex").slice(0, 16)
 }
 
-export async function copyNodeAssets(assets: readonly NodeAsset[]) {
-  const root = path.join(dir, "dist-node", "assets")
+export async function copyNodeAssets(assets: readonly NodeAsset[], directory = path.join(dir, "dist-node")) {
+  const root = path.join(directory, "assets")
   await Promise.all(
     assets.map(async (asset) => {
       const target = path.join(root, asset.key)

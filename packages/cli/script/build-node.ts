@@ -28,6 +28,8 @@ if (outdir === path.join(dir, "dist-node")) {
   throw new Error("--outdir must not be dist-node because it contains temporary files")
 }
 const bundleOnly = process.argv.includes("--bundle-only")
+const bundleDir =
+  bundleOnly && process.argv.some((arg) => arg.startsWith("--outdir=")) ? outdir : path.join(dir, "dist-node")
 const single = process.argv.includes("--single")
 const skipInstall = process.argv.includes("--skip-install")
 const appArchiveOnly = process.argv.includes("--app-archive-only")
@@ -64,7 +66,9 @@ if (!bundleOnly && targets.some((target) => target.platform === "darwin" && targ
   throw new Error("Node 26.4 SEA does not support macOS x64")
 }
 const modelsSnapshot = await bundledModelsSnapshot()
-const appArchive = archivePath ? await Bun.file(archivePath).bytes() : await buildAppArchive(Script.channel, Script.version)
+const appArchive = archivePath
+  ? await Bun.file(archivePath).bytes()
+  : await buildAppArchive(Script.channel, Script.version)
 if (!bundleOnly) await rm(outdir, { recursive: true, force: true })
 const builder =
   !bundleOnly || targets.some((target) => target.platform === process.platform && target.arch === process.arch)
@@ -93,7 +97,7 @@ async function assertTextImportsInlined(bundlePath: string) {
 for (const target of targets) {
   console.log(`building cli-node-${targetName(target)}`)
   const assets = await collectNodeAssets(target)
-  await rm("dist-node", { recursive: true, force: true })
+  await rm(bundleDir, { recursive: true, force: true })
   const assetHash = await hashNodeAssets(assets)
   const input = {
     version: Script.version,
@@ -103,17 +107,22 @@ for (const target of targets) {
     assetHash,
     target,
   }
-  await copyNodeAssets(assets)
-  await writeFile(path.join("dist-node", "assets", appArchiveAsset), appArchive)
-  await build(mainConfig(input))
-  await assertTextImportsInlined("dist-node/warcode.mjs")
-  if (bundleOnly) await verifyArtifact("dist-node/warcode.mjs")
+  await copyNodeAssets(assets, bundleDir)
+  await writeFile(path.join(bundleDir, "assets", appArchiveAsset), appArchive)
+  const viteConfig = mainConfig(input)
+  await build({ ...viteConfig, build: { ...viteConfig.build, outDir: bundleDir } })
+  await assertTextImportsInlined(path.join(bundleDir, "warcode.mjs"))
+  if (bundleOnly) {
+    await verifyArtifact(path.join(bundleDir, "warcode.mjs"))
+    await copyFile(path.join(dir, "script/start-vscode.ps1"), path.join(bundleDir, "start-vscode.ps1"))
+    await copyFile(path.join(dir, "script/portable-readme.txt"), path.join(bundleDir, "README.txt"))
+  }
 
   const host = target.platform === process.platform && target.arch === process.arch
   if (host) {
     if (!builder) throw new Error("Node SEA builder is unavailable")
-    run(builder, [...nodeExecArgv, "dist-node/warcode.mjs", "--version"])
-    run(builder, [...nodeExecArgv, "dist-node/warcode.mjs", "--help"])
+    run(builder, [...nodeExecArgv, path.join(bundleDir, "warcode.mjs"), "--version"])
+    run(builder, [...nodeExecArgv, path.join(bundleDir, "warcode.mjs"), "--help"])
   }
   if (bundleOnly) continue
 

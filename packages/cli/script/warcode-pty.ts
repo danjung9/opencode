@@ -32,7 +32,7 @@ export async function resolveWarcodePty(target: Target): Promise<WarcodePtyAsset
     throw new Error("WARCODE_PTY_BIN can only be embedded in a build for the current platform and architecture")
   const source = local
     ? path.resolve(local)
-    : pty.resolve(`${name}/bin/${target.platform === "win32" ? "warcode-pty.exe" : "warcode-pty"}`)
+    : pty.resolve(`${name}/bin/${target.platform === "win32" ? "opencode-pty.exe" : "opencode-pty"}`)
   const manifest: unknown = local
     ? { version: "local" }
     : JSON.parse(await readFile(pty.resolve(`${name}/package.json`), "utf8"))
