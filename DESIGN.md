@@ -24,15 +24,15 @@ colors:
   info: "#446A7A"
   diff-add: "#C6DFBF"
   diff-delete: "#F0C8BF"
-  dark-base: "#211F1B"
-  dark-sidebar: "#191814"
-  dark-layer-one: "#2B2822"
-  dark-layer-two: "#373229"
-  dark-ink: "#F0EADD"
-  dark-body: "#D7D0C4"
-  dark-muted: "#B4AC9E"
-  dark-primary: "#DD865D"
-  dark-accent-text: "#EEA17B"
+  dark-base: "#121313"
+  dark-sidebar: "#1B1D1C"
+  dark-layer-one: "#1B1D1C"
+  dark-layer-two: "#292D2A"
+  dark-ink: "#E4E3DD"
+  dark-body: "#E4E3DD"
+  dark-muted: "#999C98"
+  dark-primary: "#6F9FC8"
+  dark-accent-text: "#6F9FC8"
 typography:
   body:
     fontFamily: '"Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
@@ -149,7 +149,7 @@ The default light palette combines warm paper neutrals with orange actions. Fron
 
 Success, warning, error, information, and diff tokens are functional status colors rather than additional identity accents. Workroom provides palette seeds and explicit overrides; the theme engine generates remaining semantic values. Do not assume that a palette seed is the resolved color of every status component.
 
-Dark mode uses warm charcoal (`dark-base`, `dark-sidebar`), two lifted layers, pale ink, and a peach-orange action (`dark-primary`) with dark contrast text. It is a complementary theme, not a literal inversion. Accent text uses `dark-accent-text`. The theme source also contains dark status and diff seeds. Existing theme selection remains available.
+Dark mode uses the requested graphite and steel-blue palette: #121313 canvas, #1B1D1C navigation and raised surfaces, #E4E3DD primary text, #999C98 secondary text, and #6F9FC8 actions and focus. Additional tonal steps support hover and elevation. Actions use dark contrast text. It is a complementary theme, not a literal inversion. Accent text uses `dark-accent-text`. The theme source also contains dark status and diff seeds. Existing theme selection remains available.
 
 **The Semantic Roles Rule.** Use the relevant semantic token in each namespace; preserve status, code syntax, diff, action, and focus roles independently.
 

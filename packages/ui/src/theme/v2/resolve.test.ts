@@ -18,7 +18,7 @@ describe("icon emphasis", () => {
 describe("contrast icon-button tokens", () => {
   test.each([
     { mode: "light", background: "#B94C2C", foreground: "#FFFFFF" },
-    { mode: "dark", background: "#DD865D", foreground: "#211F1B" },
+    { mode: "dark", background: "#6F9FC8", foreground: "#121313" },
   ] as const)("Workroom $mode action icons and text retain readable contrast", ({ mode, background, foreground }) => {
     const tokens = resolveThemeV2(theme)[mode]
     expect(tokens["v2-background-bg-icon-button-contrast"]).toBe(background)
@@ -48,10 +48,21 @@ describe("contrast icon-button tokens", () => {
     )
 
     expect(tokens["v2-background-bg-icon-button-contrast"]).toBe("#dddddd")
-    expect(tokens["v2-background-bg-contrast"]).toBe("#DD865D")
+    expect(tokens["v2-background-bg-contrast"]).toBe("#6F9FC8")
   })
 })
 
+describe("Workroom graphite reading contrast", () => {
+  test.each(["v2-background-bg-base", "v2-background-bg-layer-01", "v2-background-bg-layer-02"])(
+    "body, secondary text, and actions remain readable on %s",
+    (surface) => {
+      const tokens = resolveThemeV2(theme).dark
+      for (const role of ["v2-text-text-base", "v2-text-text-muted", "v2-text-text-faint", "v2-text-text-accent"]) {
+        expect(contrastRatio(tokens[role] as HexColor, tokens[surface] as HexColor)).toBeGreaterThanOrEqual(4.5)
+      }
+    },
+  )
+})
 describe("input elevation", () => {
   test.each([
     {
